@@ -1,52 +1,143 @@
-<!-- এই অংশটি আপনার 'কাজ' পেজের কার্ডের ভেতরে বসান -->
-<div class="card">
-    <h3>📢 চ্যানেল জয়েন বোনাস</h3>
-    <p>প্রতিটি চ্যানেল বা ইউটিউবে সাবস্ক্রাইব করে <b style="color: #10b981;">৳ ৫০.০০</b> বোনাস নিন!</p>
-    
-    <button class="btn-action btn-success" id="btn-bonus1" onclick="claimBonus('bonus1', 'https://t.me/AK26269', 50)">টিজি চ্যানেল ১-এ জয়েন করুন (+৫০৳)</button>
-    <button class="btn-action btn-success" id="btn-bonus2" onclick="claimBonus('bonus2', 'https://t.me/ma162699', 50)">টিজি চ্যানেল ২-এ জয়েন করুন (+৫০৳)</button>
-    <button class="btn-action" style="background-color: #ff0000;" id="btn-bonus3" onclick="claimBonus('bonus3', 'https://youtube.com/@ad16269a?si=I5bdhNM4rPJdvMpS', 50)">ইউটিউব সাবস্ক্রাইব করুন (+৫০৳)</button>
-</div>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>টাকা ইনকাম সেন্টার</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; margin: 0; padding: 15px; padding-bottom: 90px; color: #333; }
+        .top-app-title { font-size: 22px; font-weight: bold; text-align: center; color: #1e293b; margin: 15px 0; }
+        .page { display: none; animation: fadeIn 0.3s ease; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .balance-card { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; border-radius: 24px; padding: 30px 25px; box-shadow: 0 10px 25px rgba(37, 99, 235, 0.15); margin-bottom: 20px; }
+        .balance-amount { font-size: 48px; font-weight: bold; margin-top: 5px; }
+        .notice-bar { background-color: white; padding: 12px 20px; border-radius: 18px; font-size: 14px; font-weight: bold; color: #4b5563; margin-bottom: 15px; overflow: hidden; white-space: nowrap; }
+        .card { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); margin-bottom: 15px; text-align: center; }
+        .btn-action { background-color: #2563eb; color: white; border: none; padding: 14px 25px; font-size: 16px; font-weight: bold; border-radius: 12px; cursor: pointer; width: 100%; margin-top: 10px; }
+        .btn-success { background-color: #10b981; }
+        .input-field { width: 100%; padding: 14px; margin: 10px 0; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 15px; background-color: #f8fafc; text-align: center; }
+        .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #e2e8f0; z-index: 1000; }
+        .nav-item { font-size: 12px; color: #94a3b8; cursor: pointer; text-align: center; flex: 1; font-weight: bold; }
+        .nav-item.active { color: #2563eb; }
+        .ad-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.95); z-index: 9999; flex-direction: column; justify-content: center; align-items: center; color: white; padding: 20px; }
+        .ad-modal-content { text-align: center; background: #1e293b; padding: 30px; border-radius: 20px; width: 90%; max-width: 400px; position: relative; }
+        .timer-circle { font-size: 50px; font-weight: bold; color: #38bdf8; margin: 20px 0; }
+    </style>
+</head>
+<body>
 
-<script>
-    // বোনাস ক্লেইম করার ফাংশন
-    function claimBonus(id, url, amount) {
-        // চেক করা হচ্ছে ইউজার আগে এটি নিয়েছে কি না
-        if (localStorage.getItem(id) === 'claimed') {
-            tg.showAlert("⚠️ আপনি এই বোনাসটি আগেই নিয়ে নিয়েছেন!");
-            window.open(url, '_blank');
-            return;
+    <div class="top-app-title">🚀 টাকা ইনকাম সেন্টার 🚀</div>
+
+    <div id="page-home" class="page active">
+        <div class="balance-card">
+            <div class="balance-title">মোট ব্যালেন্স</div>
+            <div class="balance-amount">৳ <span id="main-balance">0.00</span></div>
+        </div>
+        <div class="notice-bar"><span id="live-notice">পেমেন্ট আপডেট চলছে...</span></div>
+        <div class="card">
+            <h3>⚡ স্ট্যাটাস</h3>
+            <div id="dash-task">মোট টাস্ক: 0</div>
+            <div id="dash-refer">মোট রেফার: 0</div>
+        </div>
+    </div>
+
+    <div id="page-work" class="page">
+        <div class="card">
+            <h3>📺 ভিডিও বিজ্ঞাপন টাস্ক</h3>
+            <button class="btn-action" onclick="watchRealAd()">বিজ্ঞাপন দেখুন (১০৳)</button>
+        </div>
+        <div class="card">
+            <h3>🎁 বোনাস টাস্ক (৫০৳ প্রতিটিতে)</h3>
+            <button class="btn-action btn-success" id="btn-bonus1" onclick="claimBonus('bonus1', 'https://t.me/AK26269', 50)">চ্যানেল ১-এ জয়েন করুন</button>
+            <button class="btn-action btn-success" id="btn-bonus2" onclick="claimBonus('bonus2', 'https://t.me/ma162699', 50)">চ্যানেল ২-এ জয়েন করুন</button>
+            <button class="btn-action btn-success" id="btn-bonus3" onclick="claimBonus('bonus3', 'https://youtube.com/@ad16269a?si=I5bdhNM4rPJdvMpS', 50)">ইউটিউব সাবস্ক্রাইব</button>
+        </div>
+    </div>
+
+    <div id="adModal" class="ad-modal">
+        <div class="ad-modal-content">
+            <div id="closeAdBtn" style="display:none; cursor:pointer; color:red; font-size:24px;" onclick="claimAdReward()">✕ বন্ধ করুন</div>
+            <div class="timer-circle" id="adTimer">১৫</div>
+        </div>
+    </div>
+
+    <div class="nav-bar">
+        <div class="nav-item active" onclick="switchPage('home', this)">🏠 হোম</div>
+        <div class="nav-item" onclick="switchPage('work', this)">📋 কাজ</div>
+        <div class="nav-item" onclick="switchPage('wallet', this)">💳 ওয়ালেট</div>
+    </div>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        let userBalance = parseFloat(localStorage.getItem('userBalance')) || 0;
+        let totalTasks = parseInt(localStorage.getItem('totalTasks')) || 0;
+
+        function updateUI() {
+            document.getElementById('main-balance').innerText = userBalance.toFixed(2);
+            document.getElementById('dash-task').innerText = "মোট টাস্ক: " + totalTasks;
+            localStorage.setItem('userBalance', userBalance);
+            localStorage.setItem('totalTasks', totalTasks);
         }
 
-        // লিংকে পাঠানো হচ্ছে
-        try {
-            tg.openLink(url);
-        } catch(e) {
+        function claimBonus(id, url, amount) {
+            if (localStorage.getItem(id) === 'claimed') {
+                tg.showAlert("আপনি এই বোনাস আগেই নিয়েছেন!");
+                window.open(url, '_blank');
+                return;
+            }
+            userBalance += amount;
+            localStorage.setItem(id, 'claimed');
+            document.getElementById('btn-' + id).innerText = "✅ বোনাস গৃহীত";
+            document.getElementById('btn-' + id).style.opacity = "0.5";
+            updateUI();
+            tg.showAlert("অভিনন্দন! ৫০ টাকা বোনাস পেয়েছেন।");
             window.open(url, '_blank');
         }
 
-        // বোনাস ব্যালেন্সে যোগ করা
-        userBalance += amount;
-        localStorage.setItem(id, 'claimed'); // স্টোরেজে সেভ করা হলো
-        
-        // বাটনটি ডিসেবল করা
-        document.getElementById('btn-' + id).innerText = "✅ বোনাস গৃহীত";
-        document.getElementById('btn-' + id).style.opacity = "0.5";
-        
-        updateUI(true); // ডেটা সেভ ও আপডেট
-        tg.showAlert(`🎉 অভিনন্দন! আপনি সফলভাবে ${amount} টাকা বোনাস পেয়েছেন।`);
-    }
+        function watchRealAd() {
+            const modal = document.getElementById("adModal");
+            modal.style.display = "flex";
+            let timeLeft = 15;
+            document.getElementById("adTimer").innerText = timeLeft;
+            document.getElementById("closeAdBtn").style.display = "none";
+            
+            let timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById("adTimer").innerText = timeLeft;
+                if(timeLeft <= 0) {
+                    clearInterval(timer);
+                    document.getElementById("adTimer").innerText = "শেষ!";
+                    document.getElementById("closeAdBtn").style.display = "block";
+                }
+            }, 1000);
+            window.open("https://www.effectivecpmnetwork.com/yhhcrkxvyn?key=bc517386f86c6bf30508cdb97a797752", '_blank');
+        }
 
-    // পেজ লোড হওয়ার সময় বাটনগুলোর স্ট্যাটাস আপডেট করা
-    window.onload = function() {
+        function claimAdReward() {
+            document.getElementById("adModal").style.display = "none";
+            userBalance += 10;
+            totalTasks += 1;
+            updateUI();
+            tg.showAlert("১০ টাকা যোগ হয়েছে!");
+        }
+
+        function switchPage(pageId, element) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-' + pageId).classList.add('active');
+        }
+
+        // লোড হওয়ার সময় বাটন চেক
         ['bonus1', 'bonus2', 'bonus3'].forEach(id => {
             if (localStorage.getItem(id) === 'claimed') {
                 const btn = document.getElementById('btn-' + id);
-                if(btn) {
-                    btn.innerText = "✅ বোনাস গৃহীত";
-                    btn.style.opacity = "0.5";
-                }
+                if(btn) { btn.innerText = "✅ বোনাস গৃহীত"; btn.style.opacity = "0.5"; }
             }
         });
-    };
-</script>
+        updateUI();
+    </script>
+</body>
+</html>
