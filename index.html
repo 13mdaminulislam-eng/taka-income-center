@@ -25,7 +25,7 @@
             margin: 15px 0;
         }
         
-        /* পেজ অ্যানিমেশন */
+        /* পেজ ট্রানজিশন */
         .page { display: none; animation: fadeIn 0.3s ease; }
         .page.active { display: block; }
         
@@ -70,7 +70,7 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* নোটিশের নিচের বিশেষ ঘোষণা কার্ড */
+        /* নোটিশের নিচের ঘোষণা বক্স */
         .info-notice-box {
             background-color: #eff6ff;
             border-left: 5px solid #2563eb;
@@ -83,7 +83,7 @@
             text-align: center;
         }
 
-        /* স্ট্যাটাস বক্স গ্রিড লেআউট */
+        /* স্ট্যাটাস বক্স গ্রিড */
         .grid-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -109,7 +109,7 @@
         }
         .stat-value { font-size: 26px; font-weight: bold; color: #0f172a; }
 
-        /* সাধারণ কার্ড ও বাটন স্টাইল */
+        /* কার্ড ও বাটন স্টাইল */
         .card {
             background: white;
             padding: 25px;
@@ -145,7 +145,7 @@
             text-align: center;
         }
 
-        /* নিচের ফিক্সড নেভিগেশন বার */
+        /* নিচের নেভিগেশন বার */
         .nav-bar {
             position: fixed;
             bottom: 0;
@@ -170,12 +170,12 @@
         .nav-item.active { color: #2563eb; }
         .nav-icon { font-size: 22px; margin-bottom: 4px; }
 
-        /* 📺 ১৫ সেকেন্ডের কাস্টম ভিডিও পপআপ স্টাইল */
+        /* 📺 ১৫ সেকেন্ড ভিডিও বিজ্ঞাপন পপআপ উইন্ডো */
         .ad-modal {
             display: none;
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.95);
             z-index: 9999;
             flex-direction: column;
             justify-content: center;
@@ -210,7 +210,7 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         .timer-circle {
-            font-size: 40px;
+            font-size: 50px;
             font-weight: bold;
             color: #38bdf8;
             margin: 20px 0;
@@ -221,7 +221,6 @@
 
     <div class="top-app-title">🚀 টাকা ইনকাম সেন্টার 🚀</div>
 
-    <!-- ================= ১. হোম পেজ ================= -->
     <div id="page-home" class="page active">
         <div class="balance-card">
             <div class="balance-title">মোট ব্যালেন্স</div>
@@ -232,12 +231,10 @@
             <span class="marquee-text">🎉 <span id="live-notice">বিকাশ এর মাধ্যমে Joy*** সবেমাত্র ৳৫০০ উত্তোলন করেছেন!</span></span>
         </div>
 
-        <!-- আপনার কথামতো লেখাটি পরিবর্তন করা হলো -->
         <div class="info-notice-box">
             📢 প্রতি ভিডিও ১০ টাকা
         </div>
 
-        <!-- প্রথম গ্রিড: মোট টাস্ক এবং মোট রেফার -->
         <div class="grid-container">
             <div class="stat-card">
                 <div class="stat-title">⚡ মোট টাস্ক</div>
@@ -249,7 +246,6 @@
             </div>
         </div>
 
-        <!-- দ্বিতীয় গ্রিড: নতুন ২টি অপশন (কয়টা দেখা হয়েছে এবং কটা দেখতে পারবে) -->
         <div class="grid-container">
             <div class="stat-card">
                 <div class="stat-title">📺 দেখা হয়েছে</div>
@@ -262,7 +258,6 @@
         </div>
     </div>
 
-    <!-- ================= ২. কাজ পেজ ================= -->
     <div id="page-work" class="page">
         <div class="card">
             <h3>📺 ভিডিও বিজ্ঞাপন টাস্ক</h3>
@@ -272,7 +267,6 @@
         </div>
     </div>
 
-    <!-- 📺 কাস্টম ১৫ সেকেন্ডের অ্যাড টাইমার পপআপ উইন্ডো -->
     <div id="adModal" class="ad-modal">
         <div class="ad-modal-content">
             <div id="closeAdBtn" class="ad-close-btn" onclick="claimAdReward()">✕</div>
@@ -283,7 +277,6 @@
         </div>
     </div>
 
-    <!-- ================= ৩. সাপোর্ট পেজ ================= -->
     <div id="page-support" class="page">
         <div class="card">
             <h3>🎧 কাস্টমার সাপোর্ট</h3>
@@ -299,7 +292,6 @@
         </div>
     </div>
 
-    <!-- ================= ৪. রেফার পেজ ================= -->
     <div id="page-refer" class="page">
         <div class="card">
             <h3>👥 বন্ধুকে রেফার করুন</h3>
@@ -310,11 +302,10 @@
         </div>
     </div>
 
-    <!-- ================= ৫. ওয়ালেট পেজ ================= -->
     <div id="page-wallet" class="page">
         <div class="card">
             <h3>💳 টাকা উত্তোলন (Withdraw)</h3>
-            <p>आपका ওয়ালেট ব্যালেন্স: <b style="color: #2563eb;">৳ <span id="wallet-balance">0.00</span></b></p>
+            <p>আপনার ওয়ালেট ব্যালেন্স: <b style="color: #2563eb;">৳ <span id="wallet-balance">0.00</span></b></p>
             <p>সর্বনিম্ন উত্তোলন ব্যালেন্স: <b>৳ ৫০০.০০</b></p> 
             
             <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
@@ -332,7 +323,6 @@
         </div>
     </div>
 
-    <!-- নিচের ফিক্সড নেভিগেশন বার -->
     <div class="nav-bar">
         <div class="nav-item active" onclick="switchPage('home', this)">
             <div class="nav-icon">🏠</div><div>হোম</div>
@@ -356,14 +346,15 @@
         tg.ready();
         tg.expand();
 
-        let userBalance = 0;
-        let totalTasks = 0;
-        let totalRefers = 0; 
+        // 💾 লোকাল স্টোরেজ থেকে পূর্বের সেভ করা ডেটা লোড করা হচ্ছে (যাতে রিফ্রেশে শূন্য না হয়)
+        let userBalance = parseFloat(localStorage.getItem('userBalance')) || 0;
+        let totalTasks = parseInt(localStorage.getItem('totalTasks')) || 0;
+        let totalRefers = parseInt(localStorage.getItem('totalRefers')) || 0; 
 
-        // 🔗 আপনার Adsterra স্মার্টলিংক
+        // 🔗 Adsterra স্মার্টলিংক
         const AD_NETWORK_LINK = "https://www.effectivecpmnetwork.com/yhhcrkxvyn?key=bc517386f86c6bf30508cdb97a797752"; 
 
-        // লাইভ পেমেন্ট মেথড নোটিশ স্ক্রিপ্ট
+        // লাইভ পেমেন্ট নোটিশ স্ক্রিপ্ট
         const names = ["Anik", "Nusrat", "Joy", "Rakib", "Sumi", "Mitu", "Robiul"];
         const methods = ["বিকাশ", "নগদ"];
         setInterval(() => {
@@ -382,22 +373,29 @@
             updateUI();
         }
 
+        // ডাটাবেস এবং স্ক্রিন একসাথে আপডেট করার ফাংশন
         function updateUI() {
+            // ডেটা লোকাল স্টোরেজে চিরতরে সেভ করা হচ্ছে
+            localStorage.setItem('userBalance', userBalance);
+            localStorage.setItem('totalTasks', totalTasks);
+            localStorage.setItem('totalRefers', totalRefers);
+
             let remainingTasks = 30 - totalTasks;
             if(remainingTasks < 0) remainingTasks = 0;
 
+            // স্ক্রিন টেক্সট আপডেট
             document.getElementById('main-balance').innerText = userBalance.toFixed(2);
             document.getElementById('wallet-balance').innerText = userBalance.toFixed(2);
             document.getElementById('dash-task').innerText = totalTasks;
             document.getElementById('dash-refer').innerText = totalRefers;
             document.getElementById('task-count').innerText = totalTasks;
             
-            // নতুন হোম স্ক্রিন অপশন আপডেট
+            // হোমের ৪টি বাটনের লাইভ ভ্যালু আপডেট
             document.getElementById('dash-watched').innerText = totalTasks;
             document.getElementById('dash-remaining').innerText = remainingTasks;
         }
 
-        // 📺 ১৫ সেকেন্ড লাইভ টাইমার সহ বিজ্ঞাপন দেখার ফাংশন
+        // 📺 ১৫ সেকেন্ড লাইভ টাইমার সহ ভিডিও বিজ্ঞাপন দেখার কোড
         let countdown;
         function watchRealAd() {
             if(totalTasks >= 30) {
@@ -405,18 +403,21 @@
                 return;
             }
 
+            // নতুন ট্যাবে বিজ্ঞাপন ওপেন হবে
             window.open(AD_NETWORK_LINK, '_blank');
 
+            // অ্যাপের স্ক্রিনে ১৫ সেকেন্ডের টাইমার পপআপ সচল হবে
             const modal = document.getElementById("adModal");
             const timerDisplay = document.getElementById("adTimer");
             const closeBtn = document.getElementById("closeAdBtn");
             
             modal.style.display = "flex";
-            closeBtn.style.display = "none";
+            closeBtn.style.display = "none"; // শুরুতে ক্রস বাটন বন্ধ থাকবে
             
             let timeLeft = 15;
             timerDisplay.innerText = timeLeft;
 
+            // লাইভ ১ সেকেন্ড পর পর কমতে থাকবে
             countdown = setInterval(() => {
                 timeLeft--;
                 timerDisplay.innerText = timeLeft;
@@ -424,16 +425,17 @@
                 if(timeLeft <= 0) {
                     clearInterval(countdown);
                     timerDisplay.innerText = "সম্পন্ন!";
-                    closeBtn.style.display = "block";
+                    closeBtn.style.display = "block"; // ১৫ সেকেন্ড পূর্ণ হলে (✕) আসবে
                 }
             }, 1000);
         }
 
+        // টাস্ক সম্পূর্ণ করে টাকা নেওয়ার ফাংশন
         function claimAdReward() {
             document.getElementById("adModal").style.display = "none";
             userBalance += 10;
             totalTasks += 1;
-            updateUI();
+            updateUI(); // ডেটা সেভ ও আপডেট হবে
             tg.showAlert("✅ অভিনন্দন! ১৫ সেকেন্ড সফলভাবে দেখার জন্য আপনি ১০ টাকা পেয়েছেন।");
         }
 
@@ -461,6 +463,7 @@
                 return;
             }
             
+            // ১১ রেফার চেক এবং কাস্টম কন্টাক্ট বটের লিংক (@ks162699bot)
             if (totalRefers < 11) {
                 tg.showPopup({
                     title: 'রেফার কমপ্লিট হয়নি',
@@ -490,6 +493,7 @@
             tg.showAlert(`✅ আপনার ৳${amount} উত্তোলনের অনুরোধটি সফল হয়েছে।`);
         }
 
+        // প্রথমবার ওপেন হওয়ার সময় স্টোরেজ থেকে ডেটা লোড করার জন্য কল
         updateUI();
     </script>
 </body>
