@@ -1,175 +1,141 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>টাকা ইনকাম সেন্টার</title>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>🚀 টাকা ইনকাম সেন্টার 🚀</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        .main-container { width: 100%; max-width: 450px; background: #f4f6f9; min-height: 100vh; padding: 15px 15px 80px 15px; box-sizing: border-box; position: relative; }
+        .app-title { font-size: 24px; font-weight: bold; color: #6a1b9a; margin: 15px 0 20px 0; text-align: center; }
+        
+        .app-page { display: none; width: 100%; animation: fadeIn 0.3s ease; }
+        .app-page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-<style>
+        .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 25px; width: 100%; }
+        .card { background: white; padding: 15px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.04); text-align: left; box-sizing: border-box; border: 1px solid #edf2f7; }
+        .card h3 { margin: 0 0 6px 0; font-size: 13px; color: #718096; font-weight: 600; }
+        .card p { margin: 0; font-size: 18px; font-weight: bold; color: #1a202c; }
+        
+        .welcome-box { background: white; padding: 15px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.04); margin-bottom: 20px; text-align: left; border: 1px solid #edf2f7; font-weight: 600; color: #4a5568; }
 
-body{
-margin:0;
-background:#f5f6fa;
-font-family:sans-serif;
-}
+        .primary-btn { width: 100%; background: #6a1b9a; color: white; border: none; padding: 16px; font-size: 16px; font-weight: bold; border-radius: 16px; cursor: pointer; box-shadow: 0 4px 12px rgba(106, 27, 154, 0.2); transition: all 0.2s ease; margin-top: 15px; text-align: center; box-sizing: border-box; }
+        .primary-btn:active { transform: scale(0.98); }
 
-.header{
-background:white;
-padding:20px;
-text-align:center;
-font-size:28px;
-font-weight:bold;
-color:#0d1b4c;
-}
-
-.profile{
-background:white;
-padding:20px;
-display:flex;
-align-items:center;
-gap:15px;
-}
-
-.logo{
-width:60px;
-height:60px;
-border-radius:50%;
-background:#2563ff;
-}
-
-.balance{
-margin:20px;
-padding:30px;
-border-radius:25px;
-background:linear-gradient(90deg,#4f7cff,#2163ff);
-color:white;
-}
-
-.balance h1{
-font-size:55px;
-margin:10px 0;
-}
-
-.notice{
-margin:20px;
-padding:15px;
-background:white;
-border-radius:15px;
-}
-
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:15px;
-padding:20px;
-}
-
-.card{
-background:white;
-padding:25px;
-border-radius:20px;
-text-align:center;
-box-shadow:0 2px 10px rgba(0,0,0,.08);
-cursor:pointer;
-}
-
-.card h3{
-margin:10px 0;
-}
-
-.card p{
-font-size:35px;
-font-weight:bold;
-margin:0;
-}
-
-.bottom{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-background:white;
-display:flex;
-justify-content:space-around;
-padding:15px 0;
-box-shadow:0 -2px 10px rgba(0,0,0,.1);
-}
-
-.menu{
-text-align:center;
-font-size:14px;
-}
-
-</style>
+        .cond-box { background: #fff5f5; border: 1px solid #fed7d7; border-radius: 12px; padding: 15px; margin-bottom: 18px; font-size: 13px; color: #c53030; text-align: left; }
+        .cond-title { font-weight: bold; color: #9b2c2c; margin-bottom: 6px; font-size: 14px; }
+        .cond-item { font-weight: bold; margin-top: 5px; }
+        .green { color: #38a169 !important; }
+        .red { color: #e53e3e !important; }
+        
+        .method-container { display: flex; gap: 10px; margin-bottom: 15px; }
+        .method-option { flex: 1; padding: 12px; border: 2px solid #cbd5e0; border-radius: 12px; text-align: center; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s ease; background: white; }
+        .method-bkash.active { border-color: #e2136e; color: #e2136e; background: #fff0f5; }
+        .method-nagad.active { border-color: #f7941d; color: #f7941d; background: #fff5ec; }
+        
+        .form-group { margin-bottom: 15px; text-align: left; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 14px; color: #4a5568; }
+        .form-group input { width: 100%; padding: 12px; border: 1px solid #cbd5e0; border-radius: 10px; box-sizing: border-box; font-size: 14px; background: white; }
+        
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; height: 65px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); z-index: 999; max-width: 450px; margin: 0 auto; border-top: 1px solid #edf2f7; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; color: #a0aec0; cursor: pointer; text-decoration: none; font-size: 11px; font-weight: 600; flex: 1; height: 100%; }
+        .nav-item span { font-size: 20px; margin-bottom: 2px; }
+        .nav-item.active { color: #6a1b9a; }
+    </style>
 </head>
-
 <body>
 
-<div class="header">
-🚀 টাকা ইনকাম সেন্টার 🚀
-</div>
+    <div class="main-container">
+        <div class="app-title">🚀 টাকা ইনকাম সেন্টার 🚀</div>
+        
+        <!-- ================= 🏠 হোম পেজ সেকশন ================= -->
+        <div id="page-home" class="app-page active">
+            <div class="welcome-box">🎉 নতুন আপডেট! স্বাগতম আমাদের অ্যাপে। নিচে মেনু থেকে কাজ সিলেক্ট করুন।</div>
+            <div class="grid-container">
+                <div class="card"><h3>মোট ব্যালেন্স</h3><p class="display-balance">৳০.০০</p></div>
+                <div class="card"><h3>মোট রেফার</h3><p class="display-refers">০</p></div>
+                <div class="card"><h3>টাস্ক কমপ্লিট</h3><p class="display-tasks">০/৩০</p></div>
+                <div class="card"><h3>রেফার বোনাস</h3><p>৳১১১</p></div>
+            </div>
+        </div>
 
-<div class="profile">
-<div class="logo"></div>
-<h2>অনুমতি ✓</h2>
-</div>
+        <!-- ================= 📋 কাজ পেজ সেকশন ================= -->
+        <div id="page-task" class="app-page">
+            <div class="welcome-box">🎬 প্রতিটি বিজ্ঞাপন দেখার জন্য আপনি ২০ টাকা করে পাবেন। প্রতিদিন সর্বোচ্চ ৩০টি কাজ করতে পারবেন।</div>
+            <div class="grid-container">
+                <div class="card"><h3>টাস্ক লিমিট</h3><p class="display-tasks">০/৩০</p></div>
+                <div class="card"><h3>প্রতি কাজের মূল্য</h3><p>৳২০.০০</p></div>
+            </div>
+            <button class="primary-btn" onclick="watchAdTask()">📺 বিজ্ঞাপন দেখুন (প্রতিটি ৳২০)</button>
+        </div>
 
-<div class="balance">
-<p>মোট ব্যালেন্স</p>
-<h1>৳0.00</h1>
-</div>
+        <!-- ================= 👥 রেফার পেজ সেকশন ================= -->
+        <div id="page-refer" class="app-page">
+            <div class="welcome-box">👥 প্রতি সফল রেফারেল অ্যাকাউন্টের জন্য আপনি পাবেন ১১১ টাকা।</div>
+            <div class="grid-container">
+                <div class="card"><h3>আপনার মোট রেফার</h3><p class="display-refers">০</p></div>
+                <div class="card"><h3>রেফার কমিশন</h3><p>৳১১১.০০</p></div>
+            </div>
+            <button class="primary-btn" onclick="generateReferLink()">🔗 আপনার রেফার লিংক তৈরি করুন</button>
+        </div>
 
-<div class="notice">
-🎉 নতুন আপডেট স্বাগতম
-</div>
+        <!-- ================= 💳 ওয়ালেট পেজ সেকশন ================= -->
+        <div id="page-wallet" class="app-page">
+            <div class="cond-box">
+                <div class="cond-title">⚠️ উত্তোলনের শর্তাবলী</div>
+                <div>টাকা উত্তোলনের জন্য নিচের দুটি শর্তই পূরণ করতে হবে:</div>
+                <div class="cond-item red" id="cond-ref">• অন্তত ১২টি সফল রেফার কমপ্লিট করুন। (আপনার বর্তমান: ০/১২)</div>
+                <div class="cond-item red" id="cond-bal">• মিনিমাম ব্যালেন্স ৳৫০০ হতে হবে। (আপনার বর্তমান: ৳০/৫০০)</div>
+            </div>
 
-<div class="grid">
+            <div class="form-group">
+                <label>পেমেন্ট মেথড সিলেক্ট করুন</label>
+                <div class="method-container">
+                    <div class="method-option method-bkash active" id="btn-bkash" onclick="selectPaymentMethod('বিকাশ')">💖 বিকাশ</div>
+                    <div class="method-option method-nagad" id="btn-nagad" onclick="selectPaymentMethod('নগদ')">🧡 নগদ</div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>উত্তোলন নাম্বার দেন</label>
+                <input id="input-phone" placeholder="আপনার বিকাশ বা নগদ পার্সোনাল নম্বর লিখুন" type="text"/>
+            </div>
+            <div class="form-group">
+                <label>অ্যামাউন্ট (৳)</label>
+                <input id="input-amount" placeholder="মিনিমাম ৫০০ টাকা" type="number"/>
+            </div>
 
-<div class="card">
-<h3>⚡ মোট টাস্ক</h3>
-<p>0</p>
-</div>
+            <button class="primary-btn" onclick="submitWithdrawRequest()">📤 অনুরোধ পাঠান</button>
+        </div>
 
-<div class="card">
-<h3>👥 মোট রেফার</h3>
-<p>0</p>
-</div>
+    </div>
 
-<div class="card">
-<h3>📺 বিজ্ঞাপন দেখা</h3>
-<p>0</p>
-</div>
+    <!-- ================= নিচের ৫টি ফিক্সড নেভিগেশন বার ================= -->
+    <div class="bottom-nav">
+        <div class="nav-item active" id="nav-home" onclick="switchPage('home')"><span>🏠</span>হোম</div>
+        <div class="nav-item" id="nav-task" onclick="switchPage('task')"><span>📋</span>কাজ</div>
+        <a class="nav-item" href="https://t.me" target="_blank"><span>🎧</span>সাপোর্ট</a>
+        <div class="nav-item" id="nav-refer" onclick="switchPage('refer')"><span>👥</span>রেফার</div>
+        <div class="nav-item" id="nav-wallet" onclick="switchPage('wallet')"><span>💳</span>ওয়ালেট</div>
+    </div>
 
-<div class="card">
-<h3>💰 বোনাস ব্যালেন্স</h3>
-<p>৳0.00</p>
-</div>
-
-</div>
-
-<div class="bottom">
-
-<div class="menu">
-🏠<br>হোম
-</div>
-
-<div class="menu">
-📋<br>কাজ
-</div>
-
-<div class="menu">
-🎧<br>সাপোর্ট
-</div>
-
-<div class="menu">
-👥<br>রেফার
-</div>
-
-<div class="menu">
-💳<br>ওয়ালেট
-</div>
-
-</div>
-
-</body>
-</html>
+    <script type="text/javascript">
+        //<![CDATA[
+        let userBalance = 0.00; let userRefers = 0; let userTasks = 0; let selectedMethod = 'বিকাশ';
+        function refreshAppView() {
+            let allBalanceElements = document.getElementsByClassName("display-balance");
+            for(let i=0; i<allBalanceElements.length; i++) { allBalanceElements[i].innerText = "৳" + userBalance.toFixed(2); }
+            let allReferElements = document.getElementsByClassName("display-refers");
+            for(let i=0; i<allReferElements.length; i++) { allReferElements[i].innerText = userRefers; }
+            let allTaskElements = document.getElementsByClassName("display-tasks");
+            for(let i=0; i<allTaskElements.length; i++) { allTaskElements[i].innerText = userTasks + "/30"; }
+            let refCond = document.getElementById("cond-ref"); let balCond = document.getElementById("cond-bal");
+            refCond.innerText = "• অন্তত ১২টি সফল রেফার কমপ্লিট করুন। (আপনার বর্তমান: " + userRefers + "/১২)";
+            balCond.innerText = "• মিনিমাম ব্যালেন্স ৳৫০০ হতে হবে। (আপনার বর্তমান: ৳" + userBalance.toFixed(0) + "/৫০০)";
+            if(userRefers >= 12) { refCond.className = "cond-item green"; } else { refCond.className = "cond-item red"; }
+            if(userBalance >= 500) { balCond.className = "cond-item green"; } else { balCond.className = "cond-item red"; }
+        }
+        function switchPage(pageName) {
+            document.getElementById("page-home").classList.remove("active"); document.getElementById("page-task").classList.remove("active"); document.getElementById("page-refer").classList.remove("active"); document.getElementById("page-wallet").classList.remove("active");
+      
