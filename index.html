@@ -11,15 +11,18 @@
         .top-app-title { font-size: 22px; font-weight: bold; text-align: center; color: #1e293b; margin: 15px 0; }
         .page { display: none; animation: fadeIn 0.3s ease; }
         .page.active { display: block; }
-        .balance-card { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; border-radius: 24px; padding: 30px 25px; margin-bottom: 20px; }
-        .balance-amount { font-size: 48px; font-weight: bold; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .balance-card { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; border-radius: 24px; padding: 30px 25px; box-shadow: 0 10px 25px rgba(37, 99, 235, 0.15); margin-bottom: 20px; }
+        .balance-amount { font-size: 48px; font-weight: bold; margin-top: 5px; }
         .card { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); margin-bottom: 15px; text-align: center; }
         .btn-action { background-color: #2563eb; color: white; border: none; padding: 14px 25px; font-size: 16px; font-weight: bold; border-radius: 12px; cursor: pointer; width: 100%; margin-top: 10px; }
         .btn-success { background-color: #10b981; }
+        .input-field { width: 100%; padding: 14px; margin: 10px 0; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 15px; background-color: #f8fafc; text-align: center; }
         .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #e2e8f0; z-index: 1000; }
         .nav-item { font-size: 12px; color: #94a3b8; cursor: pointer; text-align: center; flex: 1; font-weight: bold; }
         .nav-item.active { color: #2563eb; }
-        .ad-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.95); z-index: 9999; flex-direction: column; justify-content: center; align-items: center; color: white; }
+        .ad-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.95); z-index: 9999; flex-direction: column; justify-content: center; align-items: center; color: white; padding: 20px; }
+        .timer-circle { font-size: 50px; font-weight: bold; color: #38bdf8; margin: 20px 0; }
     </style>
 </head>
 <body>
@@ -41,23 +44,30 @@
             <button class="btn-action" onclick="watchRealAd()">বিজ্ঞাপন দেখুন (১০৳)</button>
         </div>
         <div class="card">
-            <h3>🎁 বোনাস টাস্ক</h3>
-            <button class="btn-action btn-success" id="btn-bonus1" onclick="claimBonus('bonus1', 'https://t.me/AK26269', 50)">চ্যানেল ১ (৫০৳)</button>
-            <button class="btn-action btn-success" id="btn-bonus2" onclick="claimBonus('bonus2', 'https://t.me/ma162699', 50)">চ্যানেল ২ (৫০৳)</button>
-            <button class="btn-action btn-success" id="btn-bonus3" onclick="claimBonus('bonus3', 'https://youtube.com/@ad16269a', 50)">ইউটিউব (৫০৳)</button>
+            <h3>🎁 বোনাস টাস্ক (৫০৳ প্রতিটিতে)</h3>
+            <button class="btn-action btn-success" id="btn-bonus1" onclick="claimBonus('bonus1', 'https://t.me/AK26269', 50)">চ্যানেল ১-এ জয়েন করুন</button>
+            <button class="btn-action btn-success" id="btn-bonus2" onclick="claimBonus('bonus2', 'https://t.me/ma162699', 50)">চ্যানেল ২-এ জয়েন করুন</button>
+            <button class="btn-action btn-success" id="btn-bonus3" onclick="claimBonus('bonus3', 'https://youtube.com/@ad16269a', 50)">ইউটিউব সাবস্ক্রাইব</button>
         </div>
     </div>
 
-    <!-- রেফার পেজ (১১১ টাকা আপডেট করা হয়েছে) -->
+    <!-- রেফার পেজ -->
     <div id="page-refer" class="page">
         <div class="card">
             <h3>👥 বন্ধুকে রেফার করুন</h3>
             <p>প্রতিটি সফল রেফারে আপনি পাবেন <b>৳ ১১১.০০</b> বোনাস!</p>
-            <input type="text" class="btn-action" value="https://t.me/TakaInkam1626_bot?start=user123" readonly>
+            <input type="text" class="input-field" value="https://t.me/TakaInkam1626_bot?start=user123" readonly>
         </div>
     </div>
 
-    <!-- নেভিগেশন -->
+    <!-- বিজ্ঞাপন পপআপ -->
+    <div id="adModal" class="ad-modal">
+        <div style="text-align:center; background:#1e293b; padding:30px; border-radius:20px; width:90%;">
+            <div class="timer-circle" id="adTimer">১৫</div>
+            <div id="closeAdBtn" style="display:none; cursor:pointer; color:red; font-size:24px;" onclick="claimAdReward()">✕ বন্ধ করুন</div>
+        </div>
+    </div>
+
     <div class="nav-bar">
         <div class="nav-item active" onclick="switchPage('home', this)">🏠 হোম</div>
         <div class="nav-item" onclick="switchPage('work', this)">📋 কাজ</div>
@@ -74,6 +84,7 @@
             localStorage.setItem('userBalance', userBalance);
         }
 
+        // বোনাস ফাংশন
         function claimBonus(id, url, amount) {
             if (localStorage.getItem(id) === 'claimed') {
                 tg.showAlert("আপনি এই বোনাস আগেই নিয়েছেন!");
@@ -83,26 +94,51 @@
             userBalance += amount;
             localStorage.setItem(id, 'claimed');
             document.getElementById('btn-' + id).innerText = "✅ বোনাস গৃহীত";
+            document.getElementById('btn-' + id).style.opacity = "0.5";
             updateUI();
             tg.showAlert("অভিনন্দন! " + amount + " টাকা বোনাস পেয়েছেন।");
             window.open(url, '_blank');
         }
 
+        // ভিডিও অ্যাড ফাংশন
         function watchRealAd() {
-            alert("ভিডিও দেখার সময় ১৫ সেকেন্ড অপেক্ষা করুন!");
+            const modal = document.getElementById("adModal");
+            modal.style.display = "flex";
+            let timeLeft = 15;
+            document.getElementById("adTimer").innerText = timeLeft;
+            document.getElementById("closeAdBtn").style.display = "none";
+            
+            let timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById("adTimer").innerText = timeLeft;
+                if(timeLeft <= 0) {
+                    clearInterval(timer);
+                    document.getElementById("adTimer").innerText = "শেষ!";
+                    document.getElementById("closeAdBtn").style.display = "block";
+                }
+            }, 1000);
             window.open("https://www.effectivecpmnetwork.com/yhhcrkxvyn?key=bc517386f86c6bf30508cdb97a797752", '_blank');
-            setTimeout(() => {
-                userBalance += 10;
-                updateUI();
-                tg.showAlert("১০ টাকা যোগ হয়েছে!");
-            }, 15000);
+        }
+
+        function claimAdReward() {
+            document.getElementById("adModal").style.display = "none";
+            userBalance += 10;
+            updateUI();
+            tg.showAlert("১০ টাকা যোগ হয়েছে!");
         }
 
         function switchPage(pageId, element) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-' + pageId).classList.add('active');
         }
-        
+
+        // বাটন চেক
+        ['bonus1', 'bonus2', 'bonus3'].forEach(id => {
+            if (localStorage.getItem(id) === 'claimed') {
+                const btn = document.getElementById('btn-' + id);
+                if(btn) { btn.innerText = "✅ বোনাস গৃহীত"; btn.style.opacity = "0.5"; }
+            }
+        });
         updateUI();
     </script>
 </body>
