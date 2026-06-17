@@ -73,22 +73,22 @@
         tg.ready(); tg.expand();
         let userBalance = 0, totalTasks = 0, totalRefers = 0;
         const AD_NETWORK_LINK = "https://www.effectivecpmnetwork.com/yhhcrkxvyn?key=bc517386f86c6bf30508cdb97a797752";
+
         function loadAllData() {
             userBalance = parseFloat(localStorage.getItem('userBalance')) || 0;
-            totalTasks = parseInt(localStorage.getItem('totalTasks')) || 0;
             totalRefers = parseInt(localStorage.getItem('totalRefers')) || 0;
-            if (tg.CloudStorage) {
-                tg.CloudStorage.getItems(['userBalance', 'totalTasks', 'totalRefers'], (err, values) => {
-                    if (!err && values) {
-                        if (values.userBalance) userBalance = parseFloat(values.userBalance);
-                        if (values.totalTasks) totalTasks = parseInt(values.totalTasks);
-                        if (values.totalRefers) totalRefers = parseInt(values.totalRefers);
-                        updateUI(false);
-                    }
-                });
+            const lastReset = localStorage.getItem('lastReset');
+            const now = new Date().getTime();
+            if (!lastReset || (now - lastReset) > 86400000) {
+                totalTasks = 0;
+                localStorage.setItem('totalTasks', '0');
+                localStorage.setItem('lastReset', now.toString());
+            } else {
+                totalTasks = parseInt(localStorage.getItem('totalTasks')) || 0;
             }
-            checkBonusStatus(); updateUI(false);
+            updateUI(false); checkBonusStatus();
         }
+
         function saveAllData() {
             localStorage.setItem('userBalance', userBalance);
             localStorage.setItem('totalTasks', totalTasks);
@@ -96,9 +96,9 @@
             if (tg.CloudStorage) {
                 tg.CloudStorage.setItem('userBalance', userBalance.toString());
                 tg.CloudStorage.setItem('totalTasks', totalTasks.toString());
-                tg.CloudStorage.setItem('totalRefers', totalRefers.toString());
             }
         }
+
         function updateUI(shouldSave = true) {
             if (shouldSave) saveAllData();
             let remaining = 30 - totalTasks;
@@ -111,6 +111,7 @@
             if(document.getElementById('dash-watched')) document.getElementById('dash-watched').innerText = totalTasks;
             if(document.getElementById('dash-remaining')) document.getElementById('dash-remaining').innerText = remaining;
         }
+
         function checkBonusStatus() {
             ['chan1', 'chan2', 'yt'].forEach(id => {
                 if (localStorage.getItem('bonus_' + id) === 'true') {
@@ -119,11 +120,13 @@
                 }
             });
         }
+
         function claimChannelBonus(id, url) {
             if (localStorage.getItem('bonus_' + id) === 'true') { tg.showAlert("⚠️ বোনাস নেওয়া হয়েছে!"); window.open(url, '_blank'); return; }
             userBalance += 50; localStorage.setItem('bonus_' + id, 'true');
             updateUI(true); tg.showAlert("🎉 ৫০ টাকা বোনাস পেয়েছেন!"); window.open(url, '_blank'); checkBonusStatus();
         }
+
         function watchRealAd() {
             if(totalTasks >= 30) { tg.showAlert("লিমিট শেষ!"); return; }
             try { tg.openLink(AD_NETWORK_LINK); } catch(e) { window.open(AD_NETWORK_LINK, '_blank'); }
@@ -137,24 +140,29 @@
                 if(timeLeft <= 0) { clearInterval(countdown); document.getElementById("adTimer").innerText = "সম্পন্ন!"; document.getElementById("closeAdBtn").style.display = "block"; }
             }, 1000);
         }
+
         function claimAdReward() {
             document.getElementById("adModal").style.display = "none";
             userBalance += 10; totalTasks++; updateUI(true);
             tg.showAlert("১০ টাকা যোগ হয়েছে!");
         }
+
         function switchPage(id, el) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-' + id).classList.add('active');
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
             el.classList.add('active');
         }
+
         function copyRefer() { const copyText = document.getElementById("refer-link"); copyText.select(); document.execCommand("copy"); tg.showAlert("লিংক কপি হয়েছে!"); }
+
         function processWithdraw() {
             const amount = parseFloat(document.getElementById("withdraw-amount").value);
             if (amount < 500) { tg.showAlert("সর্বনিম্ন ৫০০ টাকা!"); return; }
             if (amount > userBalance) { tg.showAlert("ব্যালেন্স নেই!"); return; }
             userBalance -= amount; updateUI(true); tg.showAlert("অনুরোধ সফল!");
         }
+
         window.onload = loadAllData;
     </script>
 </body>
