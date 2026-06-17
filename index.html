@@ -46,14 +46,21 @@
         <div class="grid-container"><div class="stat-card"><div class="stat-title">📺 দেখা হয়েছে</div><div class="stat-value" id="dash-watched">0</div></div><div class="stat-card"><div class="stat-title">⏳ দেখতে পারবে</div><div class="stat-value" id="dash-remaining">৩০</div></div></div>
     </div>
     
+    <!-- প্রফেশনাল ডিজাইন করা কাজ পেজ -->
     <div id="page-work" class="page">
         <div class="card">
-            <h3>📺 ভিডিও বিজ্ঞাপন টাস্ক</h3><p>প্রতিটি বিজ্ঞাপন দেখলে আপনি <b>৳ ২০.০০</b> পাবেন।</p><div style="font-size: 18px; margin: 15px 0;">আজকের সম্পন্ন টাস্ক: <b id="task-count" style="color: #2563eb;">0</b>/৩০</div><button class="btn-action" onclick="watchRealAd()">📢 বিজ্ঞাপন দেখতে এখানে ক্লিক করুন</button>
-            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
-            <p><b>অফিসিয়াল চ্যানেলে জয়েন করুন (প্রতিটিতে ৳৫০ বোনাস):</b></p>
-            <button class="btn-action" id="btn-chan1" onclick="claimChannelBonus('chan1', 'https://t.me/ad16269')" style="background-color: #0284c7; margin-bottom: 8px;">📢 জয়েন করুন: চ্যানেল ১</button>
-            <button class="btn-action" id="btn-chan2" onclick="claimChannelBonus('chan2', 'https://t.me/AK26269')" style="background-color: #0284c7; margin-bottom: 8px;">📢 জয়েন করুন: চ্যানেল ২</button>
-            <button class="btn-action" id="btn-yt" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')" style="background-color: #ef4444;">📺 সাবস্ক্রাইব করুন: ইউটিউব</button>
+            <h3 style="color: #334155; margin-bottom: 5px;">📺 ভিডিও বিজ্ঞাপন টাস্ক</h3>
+            <p style="color: #64748b; font-size: 14px; margin-bottom: 15px;">প্রতিটি বিজ্ঞাপন দেখলে আপনি <b>৳ ২০.০০</b> পাবেন।</p>
+            <div style="font-size: 16px; font-weight: bold; color: #1e293b; margin-bottom: 20px;">আজকের সম্পন্ন টাস্ক: <span id="task-count" style="color: #2563eb;">0</span>/৩০</div>
+            
+            <button class="btn-action" onclick="watchRealAd()" style="background-color: #2563eb; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);">📢 বিজ্ঞাপন দেখতে এখানে ক্লিক করুন</button>
+            
+            <hr style="border: 0; border-top: 1px solid #f1f5f9; margin: 30px 0;">
+            
+            <p style="font-weight: bold; color: #1e293b; margin-bottom: 15px; text-align: left;">অফিসিয়াল চ্যানেলে জয়েন করুন (প্রতিটিতে ৳৫০ বোনাস):</p>
+            <button onclick="claimChannelBonus('chan1', 'https://t.me/ad16269')" class="btn-action" style="background-color: #0284c7; margin-bottom: 10px;">📢 জয়েন করুন: চ্যানেল ১</button>
+            <button onclick="claimChannelBonus('chan2', 'https://t.me/AK26269')" class="btn-action" style="background-color: #0284c7; margin-bottom: 10px;">📢 জয়েন করুন: চ্যানেল ২</button>
+            <button onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')" class="btn-action" style="background-color: #ef4444;">📺 সাবস্ক্রাইব করুন: ইউটিউব</button>
         </div>
     </div>
     
@@ -92,7 +99,6 @@
         const userId = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.id : "guest";
         let userBalance = 0, totalTasks = 0, totalRefers = 0;
 
-        // আপনার আগের সকল লজিক এবং ফাংশন একই থাকবে
         function loadAllData() {
             tg.CloudStorage.getItem('bal_' + userId, (err, val) => { if(!err && val) { userBalance = parseFloat(val); updateUI(false); } });
             tg.CloudStorage.getItem('refers_' + userId, (err, val) => { if(!err && val) { totalRefers = parseInt(val); updateUI(false); } });
@@ -127,6 +133,9 @@
             if(document.getElementById('dash-refer')) document.getElementById('dash-refer').innerText = totalRefers;
             if(document.getElementById('ref-count-display')) document.getElementById('ref-count-display').innerText = totalRefers;
             if(document.getElementById('task-count')) document.getElementById('task-count').innerText = totalTasks;
+            if(document.getElementById('dash-task')) document.getElementById('dash-task').innerText = totalTasks;
+            if(document.getElementById('dash-watched')) document.getElementById('dash-watched').innerText = totalTasks;
+            if(document.getElementById('dash-remaining')) document.getElementById('dash-remaining').innerText = (30 - totalTasks);
         }
 
         function watchRealAd() {
@@ -136,6 +145,10 @@
                     userBalance += 20; totalTasks++; saveAllData(); updateUI(true);
                 });
             }
+        }
+        
+        function claimChannelBonus(id, url) {
+            window.open(url, '_blank');
         }
 
         function switchPage(id, el) {
@@ -148,8 +161,8 @@
         function copyRefer() { const copyText = document.getElementById("refer-link"); copyText.select(); document.execCommand("copy"); tg.showAlert("লিংক কপি হয়েছে!"); }
 
         function processWithdraw() {
-            if (totalRefers < 11) { tg.showAlert("১১টি রেফার প্রয়োজন!"); return; }
-            tg.showPopup({ title: 'অ্যাকাউন্ট অ্যাক্টিভ করুন', message: '৳১১১ পেমেন্ট করুন', buttons: [{id: 'support', type: 'default', text: 'পেমেন্ট করুন'}] });
+            if (totalRefers < 11) { tg.showAlert("উত্তোলনের জন্য ১১টি রেফার প্রয়োজন!"); return; }
+            tg.showPopup({ title: 'পেমেন্ট', message: '১১১ টাকা পেমেন্ট করার জন্য সাপোর্ট এ যোগাযোগ করুন।', buttons: [{type: 'default', text: 'ওকে'}] });
         }
         
         window.onload = loadAllData;
