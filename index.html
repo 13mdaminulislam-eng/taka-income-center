@@ -33,8 +33,6 @@
         .nav-item { font-size: 12px; color: #94a3b8; cursor: pointer; text-align: center; flex: 1; font-weight: bold; }
         .nav-item.active { color: #2563eb; }
         .nav-icon { font-size: 22px; margin-bottom: 4px; }
-        
-        /* New Refer Styles */
         .refer-card { background: #1e293b; color: white; border-radius: 20px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); margin-bottom: 20px; }
         .refer-link-box { background: #0f172a; padding: 15px; border-radius: 12px; margin: 15px 0; display: flex; align-items: center; justify-content: space-between; font-size: 14px; }
         .btn-refer-action { background: #ec4899; color: white; border: none; padding: 14px; border-radius: 12px; width: 48%; font-weight: bold; cursor: pointer; }
@@ -53,13 +51,24 @@
     </div>
     
     <div id="page-work" class="page">
-        <div class="card">
-            <h3>📺 ভিডিও বিজ্ঞাপন টাস্ক</h3><p>প্রতিটি বিজ্ঞাপন দেখলে আপনি <b>৳ ২০.০০</b> পাবেন।</p><div style="font-size: 18px; margin: 15px 0;">আজকের সম্পন্ন টাস্ক: <b id="task-count" style="color: #2563eb;">0</b>/৩০</div><button class="btn-action" onclick="watchRealAd()">📢 বিজ্ঞাপন দেখতে এখানে ক্লিক করুন</button>
-            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
-            <p><b>অফিসিয়াল চ্যানেলে জয়েন করুন (প্রতিটিতে ৳৫০ বোনাস):</b></p>
-            <button class="btn-action" id="btn-chan1" onclick="claimChannelBonus('chan1', 'https://t.me/ad16269')" style="background-color: #0284c7; margin-bottom: 8px;">📢 জয়েন করুন: চ্যানেল ১</button>
-            <button class="btn-action" id="btn-chan2" onclick="claimChannelBonus('chan2', 'https://t.me/AK26269')" style="background-color: #0284c7; margin-bottom: 8px;">📢 জয়েন করুন: চ্যানেল ২</button>
-            <button class="btn-action" id="btn-yt" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')" style="background-color: #ef4444;">📺 সাবস্ক্রাইব করুন: ইউটিউব</button>
+        <div style="background: #f8f9ff; border: 1px solid #e0e7ff; padding: 25px; border-radius: 24px; text-align: center; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <div style="font-size: 40px; margin-bottom: 10px;">📢</div>
+            <h3 style="margin: 0; color: #1e293b;">বিজ্ঞাপন দেখুন</h3>
+            <p style="color: #64748b; margin: 5px 0 15px; font-size: 14px;">প্রতি বিজ্ঞাপন দেখে ৳১০.০০ ইনকাম করুন</p>
+            <div style="background: #e0e7ff; color: #4338ca; padding: 12px; border-radius: 16px; font-weight: bold; margin-bottom: 20px; display: inline-block; width: 100%;">💵 রিওয়ার্ড: ৳১০.০০ টাকা</div>
+            <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: bold; color: #475569; margin-bottom: 8px;"><span>আজকের সম্পন্ন</span><span><span id="task-count">0</span> / 15</span></div>
+            <div style="background: #e2e8f0; height: 8px; border-radius: 10px; margin-bottom: 20px; overflow: hidden;"><div id="progress-bar" style="background: #ef4444; height: 100%; width: 0%; border-radius: 10px; transition: width 0.3s;"></div></div>
+            <button class="btn-action" style="background-color: #ef4444; border-radius: 16px; padding: 16px; border: none; color: white; font-weight: bold; cursor: pointer; width: 100%;" onclick="watchRealAd()">বিজ্ঞাপন দেখুন</button>
+        </div>
+        <div class="card" style="padding: 15px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+                <div style="display: flex; align-items: center; gap: 12px;"><div style="background: #f0fdf4; padding: 12px; border-radius: 15px; font-size: 20px;">🚀</div><div><div style="font-weight: bold; font-size: 14px;">ADDS JOB CITY OFFICIAL</div><div style="font-size: 12px; color: #64748b;">পুরস্কার: ৳৫০.০০</div></div></div>
+                <button id="btn-chan1" onclick="claimChannelBonus('chan1', 'https://t.me/ad16269')" style="background: #6366f1; color: white; border: none; padding: 8px 16px; border-radius: 12px; font-weight: bold; cursor: pointer;">জয়েন করুন</button>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 12px;"><div style="background: #fff7ed; padding: 12px; border-radius: 15px; font-size: 20px;">💼</div><div><div style="font-weight: bold; font-size: 14px;">ADDS JOB CITY PAMENT</div><div style="font-size: 12px; color: #64748b;">পুরস্কার: ৳৫০.০০</div></div></div>
+                <button id="btn-chan2" onclick="claimChannelBonus('chan2', 'https://t.me/AK26269')" style="background: #6366f1; color: white; border: none; padding: 8px 16px; border-radius: 12px; font-weight: bold; cursor: pointer;">জয়েন করুন</button>
+            </div>
         </div>
     </div>
     
@@ -100,6 +109,7 @@
         tg.ready(); tg.expand();
         const userId = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.id : "guest";
         let userBalance = 0, totalTasks = 0, totalRefers = 0;
+        const TASK_LIMIT = 15;
 
         const notices = [
             "বিকাশ এর মাধ্যমে Joy*** সবেমাত্র ৳৫০০ উত্তোলন করেছেন!",
@@ -166,8 +176,9 @@
 
         function updateUI(shouldSave = true) {
             if (shouldSave) saveAllData();
-            let remaining = 30 - totalTasks;
+            let remaining = TASK_LIMIT - totalTasks;
             if(remaining < 0) remaining = 0;
+            if(document.getElementById('progress-bar')) document.getElementById('progress-bar').style.width = (totalTasks / TASK_LIMIT * 100) + "%";
             if(document.getElementById('main-balance')) document.getElementById('main-balance').innerText = userBalance.toFixed(2);
             if(document.getElementById('wallet-balance')) document.getElementById('wallet-balance').innerText = userBalance.toFixed(2);
             if(document.getElementById('dash-task')) document.getElementById('dash-task').innerText = totalTasks;
@@ -193,15 +204,15 @@
         }
 
         function watchRealAd() {
-            if(totalTasks >= 30) { tg.showAlert("আজকের লিমিট শেষ! আগামীকাল আবার ৩০টি ভিডিও টাস্ক পাবেন।"); return; }
+            if(totalTasks >= TASK_LIMIT) { tg.showAlert("আজকের লিমিট শেষ! আগামীকাল আবার ১৫টি ভিডিও টাস্ক পাবেন।"); return; }
             
             if (typeof show_11149595 === 'function') {
                 show_11149595().then(() => {
-                    userBalance += 20; 
+                    userBalance += 10; 
                     totalTasks++; 
                     saveAllData(); 
                     updateUI(true);
-                    tg.showAlert("🎉 সফলভাবে ভিডিও দেখার জন্য ২০ টাকা যোগ হয়েছে!");
+                    tg.showAlert("🎉 সফলভাবে বিজ্ঞাপন দেখার জন্য ১০ টাকা যোগ হয়েছে!");
                 }).catch((err) => {
                     tg.showAlert("বিজ্ঞাপন লোড হতে পারেনি অথবা মাঝপথে কেটে দেওয়া হয়েছে। আবার চেষ্টা করুন।");
                 });
@@ -248,16 +259,4 @@
                 title: 'অ্যাকাউন্ট অ্যাক্টিভ করুন',
                 message: 'আপনার রেফার সম্পন্ন হয়েছে, কিন্তু আপনার রেফার ভেরিফিকেশন হয়নি। অ্যাকাউন্টটি অ্যাক্টিভ করতে ৳১১১ পেমেন্ট করুন, পেমেন্ট করলে সাথে সাথে আপনার টাকা বিকাশে চলে যাবে। নিচে আমাদের সাপোর্ট লিংক দেওয়া আছে।',
                 buttons: [
-                    {id: 'support', type: 'default', text: '৳১১১ পেমেন্ট করুন'},
-                    {type: 'cancel', text: 'বাতিল'}
-                ]
-            }, (buttonId) => {
-                if (buttonId === 'support') {
-                    try { tg.openLink(supportLink); } catch(e) { window.open(supportLink, '_blank'); }
-                }
-            });
-        }
-        window.onload = loadAllData;
-    </script>
-</body>
-</html>
+                    {id: 
