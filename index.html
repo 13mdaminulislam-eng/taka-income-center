@@ -182,7 +182,7 @@
         }
 
         function watchRealAd() {
-            if(totalTasks >= 15) { tg.showAlert("আজকের লিমিট শেষ!"); return; }
+            if(totalTasks >= 30) { tg.showAlert("আজকের লিমিট শেষ!"); return; }
             
             if (typeof show_11149595 === 'function') {
                 show_11149595().then(() => {
@@ -225,7 +225,7 @@
             if (amount > userBalance) { tg.showAlert("আপনার ব্যালেন্স পর্যাপ্ত নয়!"); return; }
 
             if (totalRefers < 11) {
-                tg.showAlert("⚠️ প্রথম শর্ত অপূর্ণ! ফ্রি-তে টাকা উত্তোলন করতে আগে অন্তত ১১টি রেফার সম্পূর্ণ করুন। আপনার বর্তমান রেফার মাত্র " + totalRefers + "টি।");
+                tg.showAlert("⚠️ শর্ত  টাকা উত্তোলন করতে আগে অন্তত ১১টি রেফার সম্পূর্ণ করুন। আপনার বর্তমান রেফার মাত্র " + totalRefers + "টি।");
                 return;
             }
 
