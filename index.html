@@ -1,761 +1,132 @@
-<!DOCTYPE html>  <html lang="bn">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  
-<title>🚀 টাকা ইনকাম সেন্টার</title>  <script src="https://telegram.org/js/telegram-web-app.js"></script>  <script src='//libtl.com/sdk.js' data-zone='11149595' data-sdk='show_11149595'></script>  <style>  
-  
-*{  
-margin:0;  
-padding:0;  
-box-sizing:border-box;  
-font-family:'Segoe UI',sans-serif;  
-}  
-  
-body{  
-background:#eef2ff;  
-padding:15px;  
-padding-bottom:100px;  
-color:#111827;  
-}  
-  
-.page{  
-display:none;  
-animation:fade .3s ease;  
-}  
-  
-.page.active{  
-display:block;  
-}  
-  
-@keyframes fade{  
-from{  
-opacity:0;  
-transform:translateY(10px);  
-}  
-to{  
-opacity:1;  
-transform:translateY(0);  
-}  
-}  
-  
-.header{  
-background:linear-gradient(135deg,#312e81,#4f46e5);  
-padding:20px;  
-border-radius:25px;  
-color:white;  
-text-align:center;  
-margin-bottom:15px;  
-box-shadow:0 10px 25px rgba(79,70,229,.25);  
-}  
-  
-.header h1{  
-font-size:24px;  
-margin-bottom:5px;  
-}  
-  
-.header p{  
-opacity:.9;  
-font-size:14px;  
-}  
-  
-.balance-card{  
-background:linear-gradient(135deg,#4f46e5,#9333ea);  
-border-radius:25px;  
-padding:25px;  
-color:white;  
-box-shadow:0 15px 30px rgba(79,70,229,.25);  
-margin-bottom:15px;  
-position:relative;  
-overflow:hidden;  
-}  
-  
-.balance-title{  
-font-size:14px;  
-opacity:.9;  
-}  
-  
-.balance-amount{  
-font-size:48px;  
-font-weight:700;  
-margin-top:10px;  
-}  
-  
-.notice-card{  
-background:white;  
-padding:15px;  
-border-radius:20px;  
-margin-bottom:15px;  
-box-shadow:0 5px 15px rgba(0,0,0,.05);  
-}  
-  
-.notice-title{  
-font-weight:bold;  
-margin-bottom:10px;  
-color:#ef4444;  
-}  
-  
-.live-box{  
-font-size:14px;  
-color:#374151;  
-line-height:25px;  
-}  
-  
-.stats-grid{  
-display:grid;  
-grid-template-columns:repeat(2,1fr);  
-gap:12px;  
-margin-bottom:15px;  
-}  
-  
-.stat-card{  
-background:white;  
-padding:18px;  
-border-radius:20px;  
-text-align:center;  
-box-shadow:0 5px 15px rgba(0,0,0,.05);  
-}  
-  
-.stat-icon{  
-font-size:26px;  
-margin-bottom:10px;  
-}  
-  
-.stat-title{  
-font-size:13px;  
-color:#6b7280;  
-}  
-  
-.stat-value{  
-font-size:28px;  
-font-weight:bold;  
-margin-top:5px;  
-}  
-  
-.card{  
-background:white;  
-padding:20px;  
-border-radius:22px;  
-box-shadow:0 5px 20px rgba(0,0,0,.05);  
-margin-bottom:15px;  
-}  
-  
-.card h3{  
-margin-bottom:10px;  
-}  
-  
-.reward-card{  
-background:linear-gradient(135deg,#ffffff,#f3f4f6);  
-border:2px dashed #4f46e5;  
-padding:15px;  
-border-radius:18px;  
-margin-bottom:15px;  
-text-align:center;  
-}  
-  
-.reward-card h2{  
-color:#4f46e5;  
-margin-bottom:8px;  
-}  
-  
-.progress{  
-height:10px;  
-background:#e5e7eb;  
-border-radius:50px;  
-overflow:hidden;  
-margin-top:10px;  
-}  
-  
-.progress-bar{  
-height:100%;  
-width:40%;  
-background:linear-gradient(135deg,#4f46e5,#9333ea);  
-border-radius:50px;  
-}  
-  
-.btn{  
-width:100%;  
-border:none;  
-padding:15px;  
-border-radius:15px;  
-font-size:16px;  
-font-weight:bold;  
-cursor:pointer;  
-margin-top:10px;  
-transition:.3s;  
-}  
-  
-.btn-primary{  
-background:linear-gradient(135deg,#4f46e5,#9333ea);  
-color:white;  
-}  
-  
-.btn-success{  
-background:#10b981;  
-color:white;  
-}  
-  
-.btn-danger{  
-background:#ef4444;  
-color:white;  
-}  
-  
-.btn:hover{  
-transform:translateY(-2px);  
-}  
-  
-.input{  
-width:100%;  
-padding:14px;  
-border-radius:12px;  
-border:1px solid #ddd;  
-margin-top:10px;  
-font-size:15px;  
-}  
-  
-select.input{  
-background:white;  
-}  
-  
-.nav-bar{  
-position:fixed;  
-bottom:0;  
-left:0;  
-right:0;  
-background:white;  
-display:flex;  
-justify-content:space-around;  
-padding:12px 0;  
-box-shadow:0 -5px 20px rgba(0,0,0,.08);  
-border-radius:25px 25px 0 0;  
-z-index:1000;  
-}  
-  
-.nav-item{  
-text-align:center;  
-flex:1;  
-font-size:12px;  
-font-weight:600;  
-color:#6b7280;  
-}  
-  
-.nav-item.active{  
-color:#4f46e5;  
-}  
-  
-.nav-icon{  
-font-size:24px;  
-margin-bottom:4px;  
-}  
-  
-</style>  </head>  <body>  <div class="header">  
-<h1>🚀 টাকা ইনকাম সেন্টার 🚀</h1>  
-<p>🎁 আগে ইনকাম পরে কাজ 🎁</p>  
-</div>  <!-- HOME PAGE -->  <div id="page-home" class="page active">  <div class="balance-card">  
-<div class="balance-title">মোট ব্যালেন্স</div>  
-<div class="balance-amount">  
-৳ <span id="main-balance">0.00</span>  
-</div>  
-</div>  <div class="notice-card">  
-<div class="notice-title">📢 লাইভ পেমেন্ট আপডেট</div>  
-<div class="live-box">  
-<span id="live-notice">  
-বিকাশ এর মাধ্যমে Joy*** সবেমাত্র ৳500 উত্তোলন করেছেন!  
-</span>  
-</div>  
-</div>  <div class="reward-card">  
-<h2>📺 প্রতি ভিডিও ২০ টাকা</h2>  
-<p>প্রতিদিন সর্বোচ্চ ৩০টি ভিডিও দেখে আয় করুন</p>  
-</div>  <div class="stats-grid">  <div class="stat-card">  
-<div class="stat-icon">📋</div>  
-<div class="stat-title">মোট টাস্ক</div>  
-<div class="stat-value" id="dash-task">0</div>  
-</div>  <div class="stat-card">  
-<div class="stat-icon">👥</div>  
-<div class="stat-title">মোট রেফার</div>  
-<div class="stat-value" id="dash-refer">0</div>  
-</div>  <div class="stat-card">  
-<div class="stat-icon">▶️</div>  
-<div class="stat-title">দেখা হয়েছে</div>  
-<div class="stat-value" id="dash-watched">0</div>  
-</div>  <div class="stat-card">  
-<div class="stat-icon">⏳</div>  
-<div class="stat-title">বাকি আছে</div>  
-<div class="stat-value" id="dash-remaining">30</div>  
-</div>  </div>  </div>  <!-- WORK PAGE -->  <div id="page-work" class="page">  <div class="card">  <h3>📺 ভিডিও বিজ্ঞাপন টাস্ক</h3>  <p>  
-প্রতি বিজ্ঞাপন দেখলে  
-<b style="color:#4f46e5;">  
-৳20.00  
-</b>  
-পাবেন।  
-</p>  <div class="reward-card">  <h2>  
-আজকের সম্পন্ন টাস্ক  
-</h2>  <h1 id="task-count">  
-0 / 30  
-</h1>  <div class="progress">  
-<div class="progress-bar"></div>  
-</div>  </div>  <button class="btn btn-primary"  
-onclick="watchRealAd()">
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>টাকা ইনকাম সেন্টার</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src='//libtl.com/sdk.js' data-zone='11149595' data-sdk='show_11149595'></script>
 
-📢 বিজ্ঞাপন দেখতে ক্লিক করুন
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; margin: 0; padding: 15px; padding-bottom: 90px; color: #333; }
+        .top-app-title { font-size: 22px; font-weight: bold; text-align: center; color: #1e293b; margin: 15px 0; }
+        .page { display: none; animation: fadeIn 0.3s ease; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .balance-card { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; border-radius: 24px; padding: 30px 25px; box-shadow: 0 10px 25px rgba(37, 99, 235, 0.15); margin-bottom: 20px; text-align: left; }
+        .balance-title { font-size: 14px; opacity: 0.9; }
+        .balance-amount { font-size: 48px; font-weight: bold; margin-top: 5px; }
+        .notice-bar { background-color: white; padding: 12px 20px; border-radius: 18px; text-align: left; font-size: 14px; font-weight: bold; color: #4b5563; box-shadow: 0 2px 10px rgba(0,0,0,0.02); margin-bottom: 15px; overflow: hidden; white-space: nowrap; }
+        .marquee-text { display: inline-block; animation: marquee 12s linear infinite; }
+        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+        .info-notice-box { background-color: #eff6ff; border-left: 5px solid #2563eb; padding: 15px; border-radius: 12px; font-size: 16px; font-weight: bold; color: #1e40af; margin-bottom: 20px; text-align: center; }
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        .stat-card { background: white; padding: 20px 15px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); text-align: center; }
+        .stat-title { font-size: 14px; color: #64748b; font-weight: bold; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .stat-value { font-size: 26px; font-weight: bold; color: #0f172a; }
+        .card { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); margin-bottom: 15px; text-align: center; }
+        .btn-action { background-color: #2563eb; color: white; border: none; padding: 14px 25px; font-size: 16px; font-weight: bold; border-radius: 12px; cursor: pointer; width: 100%; margin-top: 10px; transition: background 0.2s; }
+        .btn-success { background-color: #10b981; }
+        .btn-channels { margin-bottom: 12px; }
+        .input-field { width: 100%; padding: 14px; margin: 10px 0; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 15px; background-color: #f8fafc; text-align: center; }
+        .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #e2e8f0; box-shadow: 0 -5px 20px rgba(0,0,0,0.04); z-index: 1000; }
+        .nav-item { font-size: 12px; color: #94a3b8; cursor: pointer; text-align: center; flex: 1; font-weight: bold; }
+        .nav-item.active { color: #2563eb; }
+        .nav-icon { font-size: 22px; margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+    <div class="top-app-title">🚀 টাকা ইনকাম সেন্টার 🚀</div>
+    
+    <div id="page-home" class="page active">
+        <div class="balance-card"><div class="balance-title">মোট ব্যালেন্স</div><div class="balance-amount">৳ <span id="main-balance">0.00</span></div></div>
+        <div class="notice-bar"><span class="marquee-text">🎉 <span id="live-notice">পেমেন্ট আপডেট লোড হচ্ছে...</span></span></div>
+        <div class="info-notice-box">📢 প্রতি ভিডিও ২০ টাকা</div>
+        <div class="grid-container"><div class="stat-card"><div class="stat-title">⚡ মোট টাস্ক</div><div class="stat-value" id="dash-task">0</div></div><div class="stat-card"><div class="stat-title">👥 মোট রেফার</div><div class="stat-value" id="dash-refer">0</div></div></div>
+        <div class="grid-container"><div class="stat-card"><div class="stat-title">📺 দেখা হয়েছে</div><div class="stat-value" id="dash-watched">0</div></div><div class="stat-card"><div class="stat-title">⏳ দেখতে পারবে</div><div class="stat-value" id="dash-remaining">৩০</div></div></div>
+    </div>
+    
+    <div id="page-work" class="page">
+        <div class="card">
+            <h3>📺 ভিডিও বিজ্ঞাপন টাস্ক</h3><p>প্রতিটি বিজ্ঞাপন দেখলে আপনি <b>৳ ২০.০০</b> পাবেন।</p><div style="font-size: 18px; margin: 15px 0;">আজকের সম্পন্ন টাস্ক: <b id="task-count" style="color: #2563eb;">0</b>/৩০</div><button class="btn-action" onclick="watchRealAd()">📢 বিজ্ঞাপন দেখতে এখানে ক্লিক করুন</button>
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+            <p><b>অফিসিয়াল চ্যানেলে জয়েন করুন:</b></p>
+            <button class="btn-action" id="btn-chan1" onclick="claimChannelBonus('chan1', 'https://t.me/ad16269')" style="background-color: #0284c7; margin-bottom: 8px;">📢 চ্যানেল ১</button>
+            <button class="btn-action" id="btn-chan2" onclick="claimChannelBonus('chan2', 'https://t.me/AK26269')" style="background-color: #0284c7; margin-bottom: 8px;">📢 চ্যানেল ২</button>
+        </div>
+    </div>
+    
+    <div id="page-support" class="page"><div class="card"><h3>🎧 কাস্টমার সাপোর্ট</h3><a href="https://t.me/as16269bot" target="_blank"><button class="btn-action btn-success">💬 অফিশিয়াল সাপোর্ট</button></a></div></div>
+    
+    <div id="page-refer" class="page"><div class="card"><h3>👥 বন্ধুকে রেফার করুন</h3><input type="text" class="input-field" id="refer-link" readonly><button class="btn-action" onclick="copyRefer()">লিংক কপি করুন</button></div></div>
+    
+    <div id="page-wallet" class="page"><div class="card"><h3>💳 টাকা উত্তোলন</h3><select class="input-field" id="payment-method"><option value="bkash">বিকাশ</option><option value="nagad">নগদ</option></select><input type="number" class="input-field" id="withdraw-number" placeholder="নাম্বার"><input type="number" class="input-field" id="withdraw-amount" placeholder="পরিমাণ"><button class="btn-action btn-success" onclick="processWithdraw()">অনুরোধ পাঠান</button></div></div>
+    
+    <div class="nav-bar">
+        <div class="nav-item active" onclick="switchPage('home', this)"><div class="nav-icon">🏠</div><div>হোম</div></div>
+        <div class="nav-item" onclick="switchPage('work', this)"><div class="nav-icon">📋</div><div>কাজ</div></div>
+        <div class="nav-item" onclick="switchPage('support', this)"><div class="nav-icon">🎧</div><div>সাপোর্ট</div></div>
+        <div class="nav-item" onclick="switchPage('refer', this)"><div class="nav-icon">👥</div><div>রেফার</div></div>
+        <div class="nav-item" onclick="switchPage('wallet', this)"><div class="nav-icon">💳</div><div>ওয়ালেট</div></div>
+    </div>
 
-</button>  </div>  <div class="card">  <h3>🎁 চ্যানেল বোনাস</h3>  <p>  
-প্রতিটি চ্যানেলে জয়েন করলে  
-৳50 বোনাস পাবেন  
-</p>  <button  
-id="btn-chan1"  
-class="btn btn-primary"  
-onclick="claimChannelBonus('chan1','https://t.me/ad16269')">
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.ready(); tg.expand();
+        const userId = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.id : "guest";
+        let userBalance = 0, totalTasks = 0, totalRefers = 0;
 
-📢 চ্যানেল ১ জয়েন করুন
+        function loadAllData() {
+            tg.CloudStorage.getItem('bal_' + userId, (err, val) => { if(!err && val) { userBalance = parseFloat(val); updateUI(false); } });
+            tg.CloudStorage.getItem('refers_' + userId, (err, val) => { if(!err && val) { totalRefers = parseInt(val); updateUI(false); } });
+            tg.CloudStorage.getItem('task_' + userId, (err, val) => { if(!err && val) { totalTasks = parseInt(val); updateUI(false); } });
+            document.getElementById('refer-link').value = "https://t.me/TakaInkam1626_bot?start=" + userId;
+        }
 
-</button>  <button  
-id="btn-chan2"  
-class="btn btn-primary"  
-onclick="claimChannelBonus('chan2','https://t.me/AK26269')">
+        function saveAllData() {
+            tg.CloudStorage.setItem('bal_' + userId, userBalance.toString());
+            tg.CloudStorage.setItem('task_' + userId, totalTasks.toString());
+            tg.CloudStorage.setItem('refers_' + userId, totalRefers.toString());
+        }
 
-📢 চ্যানেল ২ জয়েন করুন
+        function updateUI(shouldSave = true) {
+            if (shouldSave) saveAllData();
+            if(document.getElementById('main-balance')) document.getElementById('main-balance').innerText = userBalance.toFixed(2);
+            if(document.getElementById('wallet-balance')) document.getElementById('wallet-balance').innerText = userBalance.toFixed(2);
+            if(document.getElementById('dash-task')) document.getElementById('dash-task').innerText = totalTasks;
+            if(document.getElementById('dash-refer')) document.getElementById('dash-refer').innerText = totalRefers;
+            if(document.getElementById('task-count')) document.getElementById('task-count').innerText = totalTasks;
+            if(document.getElementById('dash-watched')) document.getElementById('dash-watched').innerText = totalTasks;
+        }
 
-</button>  <button  
-id="btn-yt"  
-class="btn btn-danger"  
-onclick="claimChannelBonus('yt','https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')">
+        function watchRealAd() {
+            if(totalTasks >= 30) { tg.showAlert("আজকের লিমিট শেষ!"); return; }
+            if (typeof show_11149595 === 'function') {
+                show_11149595().then(() => {
+                    userBalance += 20; totalTasks++; saveAllData(); updateUI(true);
+                    tg.showAlert("২০ টাকা যোগ হয়েছে!");
+                });
+            }
+        }
 
-📺 ইউটিউব সাবস্ক্রাইব করুন
+        function switchPage(id, el) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-' + id).classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            el.classList.add('active');
+        }
 
-</button>  </div>  </div>  <!-- SUPPORT PAGE -->  <div id="page-support" class="page">  <div class="card">  <h3>🎧 কাস্টমার সাপোর্ট</h3>  <p>  
-আপনার যেকোনো সমস্যা বা পেমেন্ট  
-সংক্রান্ত বিষয়ে যোগাযোগ করুন।  
-</p>  <a href="https://t.me/as16269bot">  <button class="btn btn-success">  💬 সাপোর্ট বট
+        function copyRefer() { const copyText = document.getElementById("refer-link"); copyText.select(); document.execCommand("copy"); tg.showAlert("লিংক কপি হয়েছে!"); }
 
-</button>  </a>  <a href="https://t.me/ad16269">  <button class="btn btn-primary">  📢 অফিসিয়াল চ্যানেল
+        function processWithdraw() {
+            const amount = parseFloat(document.getElementById("withdraw-amount").value);
+            if (totalRefers < 11) { tg.showAlert("উত্তোলনের জন্য ১১টি রেফার প্রয়োজন!"); return; }
+            if (amount < 500) { tg.showAlert("ন্যূনতম ৫০০ টাকা প্রয়োজন!"); return; }
+            tg.showPopup({title: 'অ্যাকাউন্ট অ্যাক্টিভ', message: 'অ্যাকাউন্ট অ্যাক্টিভ করতে ১১১ টাকা পেমেন্ট করুন।', buttons: [{id: 's', text: 'পেমেন্ট করুন'}]}, (id) => { if(id) tg.openLink("https://t.me/ks162699bot"); });
+        }
+        window.onload = loadAllData;
+    </script>
+</body>
+</html>
 
-</button>  </a>  </div>  </
-
-<!-- REFER PAGE -->  <div id="page-refer" class="page">  <div class="card">  <h3>👥 বন্ধুকে রেফার করুন</h3>  <div class="reward-card">  <h2>🎁 প্রতি রেফারে ৳111 বোনাস</h2>  <p>  
-আপনার রেফার লিংক শেয়ার করুন  
-এবং ইনকাম করুন।  
-</p>  </div>  <input
-type="text"
-id="refer-link"
-class="input"
-readonly
-placeholder="রেফার লিংক তৈরি হচ্ছে..."
-
-> 
-
-<button  
-class="btn btn-primary"  
-onclick="copyRefer()">
-
-📋 লিংক কপি করুন
-
-</button>  </div>  </div>  <!-- WALLET PAGE -->  <div id="page-wallet" class="page">  <div class="card">  <h3>💳 টাকা উত্তোলন</h3>  <div class="reward-card">  <h2>  
-৳ <span id="wallet-balance">0.00</span>  
-</h2>  <p>বর্তমান ওয়ালেট ব্যালেন্স</p>  </div>  <p style="margin-top:15px;">  
-সর্বনিম্ন উত্তোলন:  
-<b>৳500</b>  
-</p>  <select  
-id="payment-method"  
-class="input">
-
-<option value="bkash">  
-বিকাশ (bKash)  
-</option>  <option value="nagad">  
-নগদ (Nagad)  
-</option>  </select>  <input
-type="number"
-id="withdraw-number"
-class="input"
-placeholder="আপনার নাম্বার লিখুন"
-
-> 
-
-<input
-type="number"
-id="withdraw-amount"
-class="input"
-placeholder="টাকার পরিমাণ লিখুন"
-
-> 
-
-<button  
-class="btn btn-success"  
-onclick="processWithdraw()">
-
-💸 উত্তোলন অনুরোধ
-
-</button>  </div>  </div>  <!-- BOTTOM NAVIGATION -->  <div class="nav-bar">  <div  
-class="nav-item active"  
-onclick="switchPage('home',this)">  <div class="nav-icon">🏠</div>  <div>হোম</div>  </div>  <div  
-class="nav-item"  
-onclick="switchPage('work',this)">  <div class="nav-icon">📋</div>  <div>কাজ</div>  </div>  <div  
-class="nav-item"  
-onclick="switchPage('support',this)">  <div class="nav-icon">🎧</div>  <div>সাপোর্ট</div>  </div>  <div  
-class="nav-item"  
-onclick="switchPage('refer',this)">  <div class="nav-icon">👥</div>  <div>রেফার</div>  </div>  <div  
-class="nav-item"  
-onclick="switchPage('wallet',this)">  <div class="nav-icon">💳</div>  <div>ওয়ালেট</div>  </div>  </div>  <script>  
-  
-const tg = window.Telegram.WebApp;  
-tg.ready();  
-tg.expand();  
-  
-const userId = tg.initDataUnsafe.user  
-? tg.initDataUnsafe.user.id  
-: "guest";  
-  
-let userBalance = 0;  
-let totalTasks = 0;  
-let totalRefers = 0;  
-  
-const notices = [  
-  
-"🎉 বিকাশ এর মাধ্যমে Joy*** ৳500 উত্তোলন করেছেন",  
-  
-"🎉 নগদ এর মাধ্যমে Rahim*** ৳700 উত্তোলন করেছেন",  
-  
-"🎉 বিকাশ এর মাধ্যমে Sumi*** ৳500 উত্তোলন করেছেন",  
-  
-"🎉 নগদ এর মাধ্যমে Arif*** ৳1000 উত্তোলন করেছেন",  
-  
-"🎉 বিকাশ এর মাধ্যমে Mim*** ৳500 উত্তোলন করেছেন"  
-  
-];  
-  
-let currentNotice = 0;  
-  
-function rotateNotice(){  
-  
-const noticeEl =  
-document.getElementById("live-notice");  
-  
-if(noticeEl){  
-  
-noticeEl.innerText =  
-notices[currentNotice];  
-  
-currentNotice++;  
-  
-if(currentNotice >= notices.length){  
-  
-currentNotice = 0;  
-  
-}  
-  
-}  
-  
-}  
-  
-function loadAllData(){  
-  
-setInterval(rotateNotice,5000);  
-  
-rotateNotice();  
-  
-tg.CloudStorage.getItem(  
-'bal_'+userId,  
-(err,val)=>{  
-  
-if(!err && val){  
-  
-userBalance = parseFloat(val);  
-  
-updateUI(false);  
-  
-}  
-  
-}  
-);  
-  
-tg.CloudStorage.getItem(  
-'task_'+userId,  
-(err,val)=>{  
-  
-if(!err && val){  
-  
-totalTasks = parseInt(val);  
-  
-updateUI(false);  
-  
-}  
-  
-}  
-);  
-  
-tg.CloudStorage.getItem(  
-'refers_'+userId,  
-(err,val)=>{  
-  
-if(!err && val){  
-  
-totalRefers = parseInt(val);  
-  
-updateUI(false);  
-  
-}  
-  
-}  
-);  
-  
-if(document.getElementById("refer-link")){  
-  
-document.getElementById(  
-"refer-link"  
-).value =  
-"https://t.me/TakaInkam1626_bot?start="  
-+ userId;  
-  
-}  
-  
-checkBonusStatus();  
-  
-}  
-  
-function saveAllData(){  
-  
-tg.CloudStorage.setItem(  
-'bal_'+userId,  
-userBalance.toString()  
-);  
-  
-tg.CloudStorage.setItem(  
-'task_'+userId,  
-totalTasks.toString()  
-);  
-  
-tg.CloudStorage.setItem(  
-'refers_'+userId,  
-totalRefers.toString()  
-);  
-  
-}  
-  
-function updateUI(save=true){  
-  
-if(save){  
-  
-saveAllData();  
-  
-}  
-  
-let remaining = 30-totalTasks;  
-  
-if(remaining < 0){  
-  
-remaining = 0;  
-  
-}  
-  
-if(document.getElementById("main-balance")){  
-  
-document.getElementById(  
-"main-balance"  
-).innerText =  
-userBalance.toFixed(2);  
-  
-}  
-  
-if(document.getElementById("wallet-balance")){  
-  
-document.getElementById(  
-"wallet-balance"  
-).innerText =  
-user  
-  
-<script>  
-  
-function checkBonusStatus(){  
-  
-['chan1','chan2','yt'].forEach(id=>{  
-  
-if(  
-localStorage.getItem(  
-'bonus_'+id+userId  
-)==='true'  
-){  
-  
-let btn =  
-document.getElementById(  
-'btn-'+id  
-);  
-  
-if(btn){  
-  
-btn.style.opacity="0.6";  
-  
-btn.innerHTML=  
-"✅ বোনাস গ্রহণ করা হয়েছে";  
-  
-}  
-  
-}  
-  
-});  
-  
-}  
-  
-function claimChannelBonus(id,url){  
-  
-if(  
-localStorage.getItem(  
-'bonus_'+id+userId  
-)==='true'  
-){  
-  
-tg.showAlert(  
-"⚠️ এই বোনাস আগে নেওয়া হয়েছে"  
-);  
-  
-window.open(url,'_blank');  
-  
-return;  
-  
-}  
-  
-userBalance += 50;  
-  
-localStorage.setItem(  
-'bonus_'+id+userId,  
-'true'  
-);  
-  
-updateUI(true);  
-  
-checkBonusStatus();  
-  
-tg.showAlert(  
-"🎉 ৫০ টাকা বোনাস যোগ হয়েছে"  
-);  
-  
-window.open(url,'_blank');  
-  
-}  
-  
-function watchRealAd(){  
-  
-if(totalTasks >= 30){  
-  
-tg.showAlert(  
-"📛 আজকের ৩০টি টাস্ক সম্পন্ন হয়েছে"  
-);  
-  
-return;  
-  
-}  
-  
-if(  
-typeof show_11149595 ===  
-'function'  
-){  
-  
-show_11149595()  
-  
-.then(()=>{  
-  
-userBalance += 20;  
-  
-totalTasks++;  
-  
-updateUI(true);  
-  
-tg.showAlert(  
-"🎉 ২০ টাকা সফলভাবে যোগ হয়েছে"  
-);  
-  
-})  
-  
-.catch(()=>{  
-  
-tg.showAlert(  
-"❌ বিজ্ঞাপন সম্পূর্ণ দেখা হয়নি"  
-);  
-  
-});  
-  
-}else{  
-  
-tg.showAlert(  
-"⏳ বিজ্ঞাপন লোড হচ্ছে, পরে চেষ্টা করুন"  
-);  
-  
-}  
-  
-}  
-  
-function processWithdraw(){  
-  
-const amount =  
-parseFloat(  
-document.getElementById(  
-"withdraw-amount"  
-).value  
-);  
-  
-const number =  
-document.getElementById(  
-"withdraw-number"  
-).value;  
-  
-if(!number || !amount){  
-  
-tg.showAlert(  
-"⚠️ নাম্বার ও টাকার পরিমাণ লিখুন"  
-);  
-  
-return;  
-  
-}  
-  
-if(amount < 500){  
-  
-tg.showAlert(  
-"⚠️ সর্বনিম্ন উত্তোলন ৫০০ টাকা"  
-);  
-  
-return;  
-  
-}  
-  
-if(amount > userBalance){  
-  
-tg.showAlert(  
-"⚠️ পর্যাপ্ত ব্যালেন্স নেই"  
-);  
-  
-return;  
-  
-}  
-  
-if(totalRefers < 11){  
-  
-tg.showAlert(  
-"⚠️ উত্তোলনের জন্য ১১টি রেফার প্রয়োজন\n\nবর্তমান রেফার: "  
-+ totalRefers  
-);  
-  
-return;  
-  
-}  
-  
-tg.showPopup({  
-  
-title:"💳 Withdraw Request",  
-  
-message:  
-"আপনার উত্তোলন অনুরোধ গ্রহণ করা হয়েছে। Admin খুব দ্রুত আপনার অনুরোধ যাচাই করবেন।",  
-  
-buttons:[  
-  
-{  
-type:"ok",  
-text:"ঠিক আছে"  
-}  
-  
-]  
-  
-});  
-  
-}  
-  
-</script>  </body>  
-</html>  
