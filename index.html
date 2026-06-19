@@ -47,14 +47,14 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
 <div class="notice-bar"><span class="marquee-text">🎉 <span id="live-notice">পেমেন্ট আপডেট লোড হচ্ছে...</span></span></div>
 <div class="info-notice-box">📢 প্রতি ভিডিও ১০ টাকা</div>
 <div class="grid-container"><div class="stat-card"><div class="stat-title">⚡ মোট টাস্ক</div><div class="stat-value" id="dash-task">0</div></div><div class="stat-card"><div class="stat-title">👥 মোট রেফার</div><div class="stat-value" id="dash-refer">0</div></div></div>
-<div class="grid-container"><div class="stat-card"><div class="stat-title">📺 দেখা হয়েছে</div><div class="stat-value" id="dash-watched">0</div></div><div class="stat-card"><div class="stat-title">⏳ দেখতে পারবে</div><div class="stat-value" id="dash-remaining">৫০</div></div></div>
+<div class="grid-container"><div class="stat-card"><div class="stat-title">📺 দেখা হয়েছে</div><div class="stat-value" id="dash-watched">0</div></div><div class="stat-card"><div class="stat-title">⏳ দেখতে পারবে</div><div class="stat-value" id="dash-remaining">50</div></div></div>
 </div>
 
 <div id="page-work" class="page" style="padding: 10px;">
 <div class="card" style="background: #ffffff; padding: 25px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; border: 1px solid #f0f0f8;">
 <h3 style="margin-top: 0;">📺 বিজ্ঞাপন দেখুন</h3>
 <p>প্রতিটি বিজ্ঞাপন দেখে ৳১০.০০ ইনকাম করুন</p>
-<div style="text-align: left; font-size: 14px; font-weight: bold; margin-bottom: 10px;">আজকের সম্পন্ন <span style="float: right;" id="task-count">0</span> / 30</div>
+<div style="text-align: left; font-size: 14px; font-weight: bold; margin-bottom: 10px;">আজকের সম্পন্ন <span style="float: right;" id="task-count">0</span> / 50</div>
 <div style="background: #e2e8f0; height: 12px; border-radius: 10px; margin-bottom: 25px; overflow: hidden;"><div id="progress-bar" style="background: #6366f1; height: 100%; width: 0%; border-radius: 10px;"></div></div>
 <button class="btn-action" style="background: #ef4444; padding: 18px; border-radius: 18px;" onclick="watchRealAd()">বিজ্ঞাপন দেখুন</button>
 </div>
@@ -185,8 +185,8 @@ function updateUI() {
     if(document.getElementById('dash-refer-count')) document.getElementById('dash-refer-count').innerText = totalRefers;
     if(document.getElementById('task-count')) document.getElementById('task-count').innerText = totalTasks;
     if(document.getElementById('dash-watched')) document.getElementById('dash-watched').innerText = totalTasks;
-    if(document.getElementById('dash-remaining')) document.getElementById('dash-remaining').innerText = (30 - totalTasks);
-    if(document.getElementById('progress-bar')) document.getElementById('progress-bar').style.width = (totalTasks / 30 * 100) + "%";
+    if(document.getElementById('dash-remaining')) document.getElementById('dash-remaining').innerText = (50 - totalTasks);
+    if(document.getElementById('progress-bar')) document.getElementById('progress-bar').style.width = (totalTasks / 50 * 100) + "%";
 }
 
 function checkBonusStatus() {
@@ -206,7 +206,7 @@ async function claimChannelBonus(id, url) {
     if (doc.exists) { 
         tg.showAlert("⚠️ বোনাস নেওয়া হয়েছে!"); 
     } else {
-        userBalance += ৪০; 
+        userBalance += 40; 
         await bonusRef.set({ claimed: true });
         await saveAllData(); 
         updateUI(); 
@@ -217,10 +217,10 @@ async function claimChannelBonus(id, url) {
 }
 
 async function watchRealAd() {
-    if(totalTasks >= ৫০) { tg.showAlert("আজকের লিমিট শেষ!"); return; }
+    if(totalTasks >= 50) { tg.showAlert("আজকের লিমিট শেষ!"); return; }
     if (typeof show_11149595 === 'function') {
         show_11149595().then(() => {
-            userBalance += ১০; 
+            userBalance += 10; 
             totalTasks++; 
             saveAllData(); 
             updateUI();
@@ -275,5 +275,4 @@ function processWithdraw() {
 window.onload = loadAllData;
 </script>
 </body>
-    </html>
-    
+</html>
