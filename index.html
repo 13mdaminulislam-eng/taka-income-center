@@ -29,7 +29,6 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
 .card { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); margin-bottom: 15px; text-align: center; }
 .btn-action { background-color: #2563eb; color: white; border: none; padding: 14px 25px; font-size: 16px; font-weight: bold; border-radius: 12px; cursor: pointer; width: 100%; margin-top: 10px; transition: background 0.2s; }
 .btn-success { background-color: #10b981; }
-.btn-channels { margin-bottom: 12px; }
 .input-field { width: 100%; padding: 14px; margin: 10px 0; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 15px; background-color: #f8fafc; text-align: center; }
 .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #e2e8f0; box-shadow: 0 -5px 20px rgba(0,0,0,0.04); z-index: 1000; }
 .nav-item { font-size: 12px; color: #94a3b8; cursor: pointer; text-align: center; flex: 1; font-weight: bold; }
@@ -55,12 +54,8 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
 <div class="card" style="background: #ffffff; padding: 25px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; border: 1px solid #f0f0f8;">
 <h3 style="margin-top: 0;">📺 বিজ্ঞাপন দেখুন</h3>
 <p>প্রতিটি বিজ্ঞাপন দেখে ৳২০.০০ ইনকাম করুন</p>
-<div style="text-align: left; font-size: 14px; font-weight: bold; margin-bottom: 10px;">
-আজকের সম্পন্ন <span style="float: right;" id="task-count">0</span> / 30
-</div>
-<div style="background: #e2e8f0; height: 12px; border-radius: 10px; margin-bottom: 25px; overflow: hidden;">
-<div id="progress-bar" style="background: #6366f1; height: 100%; width: 0%; border-radius: 10px;"></div>
-</div>
+<div style="text-align: left; font-size: 14px; font-weight: bold; margin-bottom: 10px;">আজকের সম্পন্ন <span style="float: right;" id="task-count">0</span> / 30</div>
+<div style="background: #e2e8f0; height: 12px; border-radius: 10px; margin-bottom: 25px; overflow: hidden;"><div id="progress-bar" style="background: #6366f1; height: 100%; width: 0%; border-radius: 10px;"></div></div>
 <button class="btn-action" style="background: #ef4444; padding: 18px; border-radius: 18px;" onclick="watchRealAd()">বিজ্ঞাপন দেখুন</button>
 </div>
 <button class="btn-action" id="btn-chan1" style="background: #90caf9; padding: 12px;" onclick="claimChannelBonus('chan1', 'https://t.me/ad16269')">✅ চ্যানেল ১ বোনাস (৳৫০)</button>
@@ -71,12 +66,10 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
 <div id="page-support" class="page">
 <div style="background: linear-gradient(to bottom, #8A2BE2, #4B0082); border-radius: 20px; padding: 25px 20px; margin: 15px; color: white; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
 <h2 style="margin-top: 0; font-size: 19px;">কিভাবে কাজ করবেন?</h2>
-<p style="font-size: 14px; opacity: 0.9; margin-bottom: 15px;">কাজ শুরু করার আগে এই ভিডিওটি দেখে নিন। ভিডিওতে সম্পূর্ণভাবে দেখানো হয়েছে কিভাবে সঠিকভাবে কাজ করবেন।</p>
 <a href="https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v" target="_blank" style="display: inline-block; background-color: white; color: #4B0082; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 14px;">📺 ভিডিওটি দেখুন</a>
 </div>
 <div style="background-color: #ef4444; border-radius: 20px; padding: 25px 20px; margin: 15px; color: white; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
 <h2 style="margin-top: 0; font-size: 19px;">কাস্টমার সাপোর্ট</h2>
-<p style="font-size: 14px; opacity: 0.9; margin-bottom: 15px;">যেকোনো সমস্যা সমাধানের জন্য আমাদের সাথে যোগাযোগ করুন</p>
 <a href="https://t.me/as16269bot" target="_blank" style="display: block; background: rgba(255,255,255,0.2); padding: 12px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; margin-bottom: 10px; font-size: 14px;">💬 @as16269bot</a>
 <a href="https://t.me/ad16269" target="_blank" style="display: block; background: rgba(255,255,255,0.2); padding: 12px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; font-size: 14px;">📢 অফিশিয়াল চ্যানেল</a>
 </div>
@@ -146,7 +139,6 @@ currentNotice = (currentNotice + 1) % notices.length;
 async function loadAllData() {
 setInterval(rotateNotice, 7000);
 rotateNotice();
-const getOld = (key) => new Promise(res => tg.CloudStorage.getItem(key, (e, v) => res(v)));
 const userRef = db.collection('users').doc(userId);
 const doc = await userRef.get();
 if (doc.exists) {
@@ -155,13 +147,7 @@ userBalance = data.balance || 0;
 totalTasks = data.tasks || 0;
 totalRefers = data.refers || 0;
 } else {
-const oldBal = await getOld('bal_' + userId);
-const oldTask = await getOld('task_' + userId);
-const oldRef = await getOld('refers_' + userId);
-userBalance = parseFloat(oldBal || 0);
-totalTasks = parseInt(oldTask || 0);
-totalRefers = parseInt(oldRef || 0);
-await userRef.set({ balance: userBalance, tasks: totalTasks, refers: totalRefers });
+await userRef.set({ balance: 0, tasks: 0, refers: 0 });
 }
 if(document.getElementById('refer-link')) document.getElementById('refer-link').innerText = "https://t.me/TakaInkam1626_bot?start=" + userId;
 updateUI();
@@ -182,11 +168,8 @@ function updateUI() {
     if(document.getElementById('dash-refer')) document.getElementById('dash-refer').innerText = totalRefers;
     if(document.getElementById('dash-refer-count')) document.getElementById('dash-refer-count').innerText = totalRefers;
     if(document.getElementById('task-count')) document.getElementById('task-count').innerText = totalTasks;
-    
-    // ভিডিও দেখার হিসাব আপডেট
     if(document.getElementById('dash-watched')) document.getElementById('dash-watched').innerText = totalTasks;
     if(document.getElementById('dash-remaining')) document.getElementById('dash-remaining').innerText = (30 - totalTasks);
-    
     if(document.getElementById('progress-bar')) document.getElementById('progress-bar').style.width = (totalTasks / 30 * 100) + "%";
 }
 
@@ -195,7 +178,7 @@ function checkBonusStatus() {
 db.collection('users').doc(userId).collection('bonuses').doc(id).get().then(doc => {
 if (doc.exists) {
 let btn = document.getElementById('btn-' + id);
-if(btn) { btn.style.opacity = "0.5"; btn.innerText = "✅ বোনাস গৃহীত"; }
+if(btn) { btn.style.opacity = "0.5"; btn.innerText = "✅ বোনাস গৃহীত"; btn.disabled = true; }
 }
 });
 });
@@ -271,5 +254,4 @@ try { tg.openLink(supportLink); } catch(e) { window.open(supportLink, '_blank');
 window.onload = loadAllData;
 </script>
 </body>
-  </html>
-  
+</html>
