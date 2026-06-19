@@ -6,6 +6,10 @@
     <title>টাকা ইনকাম সেন্টার</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src='//libtl.com/sdk.js' data-zone='11149595' data-sdk='show_11149595'></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
     <style>
         * { box-sizing: border-box; }
         body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; margin: 0; padding: 15px; padding-bottom: 90px; color: #333; }
@@ -34,7 +38,6 @@
         .nav-item.active { color: #2563eb; }
         .nav-icon { font-size: 22px; margin-bottom: 4px; }
         
-        /* New Refer Styles */
         .refer-card { background: #1e293b; color: white; border-radius: 20px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); margin-bottom: 20px; }
         .refer-link-box { background: #0f172a; padding: 15px; border-radius: 12px; margin: 15px 0; display: flex; align-items: center; justify-content: space-between; font-size: 14px; }
         .btn-refer-action { background: #ec4899; color: white; border: none; padding: 14px; border-radius: 12px; width: 48%; font-weight: bold; cursor: pointer; }
@@ -114,6 +117,21 @@
     </div>
 
     <script>
+        // ফায়ারবেস কনফিগারেশন
+        const firebaseConfig = {
+          apiKey: "AizaSyCgOILqhT8ZXHZ--VZvKw3TdU2HB2RNWkw",
+          authDomain: "takaincome-326cf.firebaseapp.com",
+          projectId: "takaincome-326cf",
+          storageBucket: "takaincome-326cf.appspot.com",
+          messagingSenderId: "27644737509",
+          appId: "1:27644737509:web:bbad28493df31a8646a10c",
+          measurementId: "G-V356Y69BK8"
+        };
+
+        // ফায়ারবেস ইনিশিয়ালাইজেশন
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
         const tg = window.Telegram.WebApp;
         tg.ready(); tg.expand();
         const userId = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.id : "guest";
