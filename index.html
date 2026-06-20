@@ -218,19 +218,17 @@ async function processWithdraw() {
     const amount = parseFloat(document.getElementById("withdraw-amount").value);
     const number = document.getElementById("withdraw-number").value;
     const method = document.getElementById("payment-method").value;
-    const supportLink = "https://t.me/as16269bot"; 
+    const supportLink = "https://t.me/ad16269"; 
     
     if (!number || !amount) { tg.showAlert("সব তথ্য পূরণ করুন।"); return; }
     if (amount < 500) { tg.showAlert("ন্যূনতম ৫০০ কয়েন প্রয়োজন!"); return; }
     if (amount > userBalance) { tg.showAlert("পর্যাপ্ত ব্যালেন্স নেই!"); return; }
     
-    // ১১টি রেফার না থাকলে সরাসরি আটকে দেবে এবং প্রসেস এখানেই শেষ হবে
     if (totalRefers < 11) { 
         tg.showAlert("⚠️ রিডিম করতে ১১টি রেফার প্রয়োজন। বর্তমান রেফার: " + totalRefers + "টি।"); 
         return; 
     }
     
-    // ইউজার যদি অলরেডি অ্যাক্টিভ থাকে (ডেটাবেজে is_active: true থাকে)
     if (isActive === true) {
         await db.collection('withdraw_requests').add({
             userId: userId,
@@ -249,7 +247,6 @@ async function processWithdraw() {
         return;
     }
     
-    // ইউজার ১১টি রেফার করেছে কিন্তু এখনও অ্যাক্টিভেশন ফি দেয়নি, তাকে পপ-আপ দেখাবে
     tg.showPopup({
         title: 'পেমেন্ট রিকোয়েস্ট',
         message: 'আপনার ১১টি রেফার পূরণ হয়েছে। পেমেন্ট রিকোয়েস্ট পাঠানোর আগে ১১১ টাকা ফি দিয়ে অ্যাকাউন্ট অ্যাক্টিভ করুন।',
