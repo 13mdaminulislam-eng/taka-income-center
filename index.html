@@ -168,15 +168,23 @@ function updateUI() {
     document.getElementById('dash-refer-count').innerText = totalRefers;
     document.getElementById('task-count').innerText = totalTasks;
     document.getElementById('total-watched-count').innerText = totalWatched;
+    
+    // কাউন্ট সমস্যার সমাধান:
+    document.getElementById('dash-watched').innerText = totalWatched;
+    document.getElementById('dash-remaining').innerText = (50 - totalWatched);
+
     if(document.getElementById('progress-bar')) document.getElementById('progress-bar').style.width = (totalTasks / 50 * 100) + "%";
 }
 
 async function watchRealAd() {
-    if(totalTasks >= 50) { tg.showAlert("আজকের লিমিট শেষ!"); return; }
+    if(totalWatched >= 50) { tg.showAlert("আজকের লিমিট শেষ!"); return; }
     if (typeof show_11149595 === 'function') {
         show_11149595().then(() => {
-            userBalance += 10; totalTasks++; totalWatched++;
-            saveAllData(); updateUI();
+            userBalance += 10; 
+            totalTasks++; 
+            totalWatched++; 
+            saveAllData(); 
+            updateUI();
             tg.showAlert("🎉 ১০ কয়েন যোগ হয়েছে!");
         });
     }
@@ -191,24 +199,17 @@ function processWithdraw() {
     if (amount < 500) { tg.showAlert("ন্যূনতম ৫০০ কয়েন প্রয়োজন!"); return; }
     if (amount > userBalance) { tg.showAlert("পর্যাপ্ত ব্যালেন্স নেই!"); return; }
     
-    // রেফারেল চেক
     if (totalRefers < 11) {
         tg.showAlert("⚠️ রিডিম করতে ১১টি রেফার প্রয়োজন। বর্তমান রেফার: " + totalRefers + "টি।");
         return;
     }
     
-    // পেমেন্ট রিকোয়েস্ট ও অ্যাক্টিভেশন লজিক
     tg.showPopup({
         title: 'পেমেন্ট রিকোয়েস্ট',
         message: 'আপনার ১১টি রেফার পূর্ণ হয়েছে। পেমেন্ট রিকোয়েস্ট পাঠানোর আগে ১১১ টাকা ফি দিয়ে অ্যাকাউন্ট অ্যাক্টিভ করুন।',
         buttons: [{id: 'support', type: 'default', text: 'অ্যাক্টিভ করতে যোগাযোগ করুন'}, {type: 'cancel', text: 'বাতিল'}]
     }, (buttonId) => { 
-        if (buttonId === 'support') { 
-            tg.openLink(supportLink); 
-        } else {
-            let taka = (amount >= 1000) ? (amount / 1000) * 20 : (amount / 500) * 10;
-            tg.showAlert("আপনার " + amount + " কয়েন = " + taka + " টাকা। পেমেন্ট পেতে অবশ্যই অ্যাক্টিভেশন ফি প্রদান করুন।");
-        }
+        if (buttonId === 'support') { tg.openLink(supportLink); } 
     });
 }
 
