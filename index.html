@@ -154,24 +154,27 @@ let userBalance = 0, totalTasks = 0, totalRefers = 0, totalWatched = 0, isActive
 async function loadAllData() {
     const userRef = db.collection('users').doc(userId);
     const doc = await userRef.get();
+    const today = new Date().toDateString();
+
     if (doc.exists) {
         const data = doc.data();
+        if (data.last_reset_date !== today) {
+            totalWatched = 0;
+            await userRef.update({ totalWatched: 0, last_reset_date: today });
+        } else {
+            totalWatched = data.totalWatched || 0;
+        }
         userBalance = data.balance || 0;
         totalTasks = data.tasks || 0;
         totalRefers = data.refers || 0;
-        totalWatched = data.totalWatched || 0;
         isActive = data.is_active || false;
+    } else {
+        await userRef.set({ balance: 0, tasks: 0, refers: 0, totalWatched: 0, last_reset_date: today }, { merge: true });
     }
     document.getElementById('refer-link').innerText = "https://t.me/TakaInkam1626_bot?start=" + userId;
     updateUI();
     loadReferralsList();
     loadPaymentHistory();
-}
-
-async function saveAllData() {
-    await db.collection('users').doc(userId).set({ 
-        balance: userBalance, tasks: totalTasks, refers: totalRefers, totalWatched: totalWatched 
-    }, { merge: true });
 }
 
 function updateUI() {
@@ -210,12 +213,10 @@ async function loadPaymentHistory() {
         .where('userId', '==', userId)
         .orderBy('time', 'desc')
         .get();
-
     if (querySnapshot.empty) {
         listContainer.innerHTML = '<p style="text-align:center;">কোনো রিকোয়েস্ট নেই।</p>';
         return;
     }
-
     listContainer.innerHTML = '';
     querySnapshot.forEach((doc, index) => {
         const data = doc.data();
@@ -236,9 +237,12 @@ async function loadPaymentHistory() {
 async function watchRealAd() {
     if(totalWatched >= 50) { tg.showAlert("আজকের লিমিট শেষ!"); return; }
     if (typeof show_11149595 === 'function') {
-        show_11149595().then(() => {
+        show_11149595().then(async () => {
             userBalance += 10; totalTasks++; totalWatched++;
-            saveAllData(); updateUI();
+            await db.collection('users').doc(userId).update({ 
+                balance: userBalance, tasks: totalTasks, totalWatched: totalWatched, last_reset_date: new Date().toDateString() 
+            });
+            updateUI();
             tg.showAlert("🎉 ১০ কয়েন যোগ হয়েছে!");
         });
     }
@@ -249,41 +253,29 @@ async function processWithdraw() {
     const number = document.getElementById("withdraw-number").value;
     const method = document.getElementById("payment-method").value;
     const supportLink = "https://t.me/ks162699bot"; 
-    
     if (!number || !amount) { tg.showAlert("সব তথ্য পূরণ করুন।"); return; }
     if (amount < 500) { tg.showAlert("ন্যূনতম ৫০০ কয়েন প্রয়োজন!"); return; }
     if (amount > userBalance) { tg.showAlert("পর্যাপ্ত ব্যালেন্স নেই!"); return; }
-    
     if (totalRefers < 11) { 
         tg.showAlert("⚠️ রিডিম করতে ১১টি রেফার প্রয়োজন। বর্তমান রেফার: " + totalRefers + "টি।"); 
         return; 
     }
-    
     if (isActive === true) {
         await db.collection('withdraw_requests').add({
-            userId: userId,
-            number: number,
-            amount: amount,
-            method: method,
-            status: "pending",
-            time: new Date()
+            userId: userId, number: number, amount: amount, method: method, status: "pending", time: new Date()
         });
-        
         userBalance -= amount;
-        await saveAllData();
+        await db.collection('users').doc(userId).update({ balance: userBalance });
         updateUI();
         loadPaymentHistory();
         tg.showAlert("🎉 আপনার পেমেন্ট অনুরোধ সফলভাবে জমা হয়েছে!");
         return;
     }
-    
     tg.showPopup({
         title: 'পেমেন্ট রিকোয়েস্ট',
         message: 'আপনার ১১টি রেফার পূরণ হয়েছে। পেমেন্ট রিকোয়েস্ট পাঠানোর আগে ১১১ টাকা ফি দিয়ে অ্যাকাউন্টটি অ্যাক্টিভ করুন।',
         buttons: [{id: 'support', type: 'default', text: 'অ্যাক্টিভ করতে যোগাযোগ করুন'}, {type: 'cancel', text: 'বাতিল'}]
-    }, (buttonId) => { 
-        if (buttonId === 'support') { tg.openTelegramLink(supportLink); } 
-    });
+    }, (buttonId) => { if (buttonId === 'support') { tg.openTelegramLink(supportLink); } });
 }
 
 function switchPage(id, el) {
@@ -298,4 +290,5 @@ function claimChannelBonus(id, url) { window.open(url, '_blank'); }
 window.onload = loadAllData;
 </script>
 </body>
-</html>
+    </html>
+    
