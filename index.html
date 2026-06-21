@@ -271,16 +271,7 @@ function loadReferralsList() {
     for (let i = 1; i <= totalRefers; i++) {
         const card = document.createElement('div');
         card.className = 'list-card';
-        card.innerHTML = `
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <div style="font-size: 24px;">👤</div>
-                <div>
-                    <div style="font-weight: bold; color: #1e293b;">সফল রেফারেল #${i.toString().padStart(3, '0')}</div>
-                    <div class="list-date">📅 সক্রিয় মেম্বার</div>
-                </div>
-            </div>
-            <div style="color: #10b981; font-weight: bold;">+১১১ কয়েন</div>
-        `;
+        card.innerHTML = `<div><div>👤 সফল রেফারেল #00${i}</div><div class="list-date">📅 সক্রিয় মেম্বার</div></div><div style="color: #10b981;">+১১১ কয়েন</div>`;
         listContainer.appendChild(card);
     }
 }
@@ -295,7 +286,7 @@ async function loadPaymentHistory() {
         const item = document.createElement('div');
         item.style.padding = "10px 0"; item.style.borderBottom = "1px solid #f1f5f9";
         item.innerHTML = `<div style="font-size:14px; font-weight:bold;">${index + 1}. ${data.method.toUpperCase()} - ${data.payout} টাকা</div><div style="font-size:12px; color:#64748b;">স্ট্যাটাস: ${data.status === 'paid' ? 'সম্পন্ন' : 'পেন্ডিং'}</div>`;
-        item.appendChild(item); // Note: Fix logic here if needed, keeping structure same as before
+        listContainer.appendChild(item);
     });
 }
 
