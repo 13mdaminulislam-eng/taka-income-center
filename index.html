@@ -304,9 +304,6 @@ async function loadPaymentHistory() {
         const item = document.createElement('div');
         item.style.padding = "10px 0"; item.style.borderBottom = "1px solid #f1f5f9";
         item.innerHTML = `<div style="font-size:14px; font-weight:bold;">${index + 1}. ${data.method.toUpperCase()} - ${data.payout} টাকা (${data.amount} কয়েন)</div><div style="font-size:12px; color:#64748b;">নাম্বার: ${data.number}</div><div style="font-size:12px; color:${data.status === 'paid' ? '#10b981' : '#f59e0b'}; font-weight:bold;">স্ট্যাটাস: ${statusText}</div>`;
+        item.style.marginBottom = "5px";
         listContainer.appendChild(item);
-    });
-}
-
-function switchPage(id, el) {
   
