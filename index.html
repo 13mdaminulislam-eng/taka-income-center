@@ -136,7 +136,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
 
 <script>
 const firebaseConfig = {
-apiKey: "AizaSyCgOILqhT8ZXHZ--VZvKw3TdU2HB2RNWkw",
+apiKey: "AIzaSyCgOILqhT8ZXHZ--VZvKw3TdU2HB2RNWkw",
 authDomain: "takaincome-326cf.firebaseapp.com",
 projectId: "takaincome-326cf",
 storageBucket: "takaincome-326cf.appspot.com",
@@ -275,6 +275,20 @@ async function processWithdraw() {
                 await db.collection('withdraw_requests').add({
                     userId: userId, number: number, amount: amount, taka: taka, method: method, status: "pending", time: new Date()
                 });
+
+                // পেমেন্ট নোটিফিকেশন কোড
+                const botToken = "8535942512:AAGejEIf9-eKKM3Waz1Tb_wefOX4r2uPK-s";
+                const messageText = `💰 নতুন পেমেন্ট রিকোয়েস্ট!\n👤 ইউজার আইডি: ${userId}\n💳 মেথড: ${method}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} কয়েন\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${userId}`;
+
+                fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: "8040704140",
+                        text: messageText
+                    })
+                });
+
                 userBalance -= amount;
                 await db.collection('users').doc(userId).update({ balance: userBalance });
                 updateUI();
@@ -303,5 +317,4 @@ function claimChannelBonus(id, url) { window.open(url, '_blank'); }
 window.onload = loadAllData;
 </script>
 </body>
-    </html>
-    
+</html>
