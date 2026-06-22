@@ -149,7 +149,7 @@ const db = firebase.firestore();
 const tg = window.Telegram.WebApp;
 tg.ready(); tg.expand();
 const userId = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.id.toString() : "guest";
-let userBalance = 0, totalTasks = 0, totalRefers = 0, totalWatched = 0, lifetimeWatched = 0, isActive = false;
+let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, isActive = false;
 
 async function loadAllData() {
     const userRef = db.collection('users').doc(userId);
@@ -159,19 +159,17 @@ async function loadAllData() {
     if (doc.exists) {
         const data = doc.data();
         if (data.last_reset_date !== today) {
-            totalWatched = 0;
-            totalTasks = 0;
-            await userRef.update({ tasks: 0, dailyWatched: 0, last_reset_date: today });
+            dailyWatched = 0;
+            await userRef.update({ dailyWatched: 0, last_reset_date: today });
         } else {
-            totalTasks = data.tasks || 0;
-            totalWatched = data.dailyWatched || 0;
+            dailyWatched = data.dailyWatched || 0;
         }
         userBalance = data.balance || 0;
         totalRefers = data.refers || 0;
         lifetimeWatched = data.totalWatched || 0;
         isActive = data.is_active || false;
     } else {
-        await userRef.set({ balance: 0, tasks: 0, refers: 0, dailyWatched: 0, totalWatched: 0, last_reset_date: today }, { merge: true });
+        await userRef.set({ balance: 0, refers: 0, dailyWatched: 0, totalWatched: 0, last_reset_date: today }, { merge: true });
     }
     document.getElementById('refer-link').innerText = "https://t.me/TakaInkam1626_bot?start=" + userId;
     updateUI();
@@ -183,14 +181,14 @@ function updateUI() {
     document.getElementById('display-user-id').innerText = userId;
     document.getElementById('main-balance').innerText = Math.floor(userBalance);
     document.getElementById('wallet-balance').innerText = Math.floor(userBalance);
-    document.getElementById('dash-task').innerText = totalTasks;
+    document.getElementById('dash-task').innerText = dailyWatched;
     document.getElementById('dash-refer').innerText = totalRefers;
     document.getElementById('dash-refer-count').innerText = totalRefers;
-    document.getElementById('task-count').innerText = totalWatched;
+    document.getElementById('task-count').innerText = dailyWatched;
     document.getElementById('total-watched-count').innerText = lifetimeWatched;
-    document.getElementById('dash-watched').innerText = totalWatched;
-    document.getElementById('dash-remaining').innerText = (50 - totalWatched);
-    if(document.getElementById('progress-bar')) document.getElementById('progress-bar').style.width = (totalWatched / 50 * 100) + "%";
+    document.getElementById('dash-watched').innerText = dailyWatched;
+    document.getElementById('dash-remaining').innerText = (50 - dailyWatched);
+    if(document.getElementById('progress-bar')) document.getElementById('progress-bar').style.width = (dailyWatched / 50 * 100) + "%";
 }
 
 function loadReferralsList() {
@@ -237,12 +235,16 @@ async function loadPaymentHistory() {
 }
 
 async function watchRealAd() {
-    if(totalWatched >= 50) { tg.showAlert("আজকের লিমিট শেষ!"); return; }
+    if(dailyWatched >= 50) { tg.showAlert("আজকের লিমিট শেষ!"); return; }
     if (typeof show_11149595 === 'function') {
         show_11149595().then(async () => {
-            userBalance += 20; totalTasks++; totalWatched++; lifetimeWatched++;
+            userBalance += 20; 
+            dailyWatched++; 
+            lifetimeWatched++;
             await db.collection('users').doc(userId).update({ 
-                balance: userBalance, tasks: totalTasks, dailyWatched: totalWatched, totalWatched: lifetimeWatched 
+                balance: userBalance, 
+                dailyWatched: dailyWatched, 
+                totalWatched: lifetimeWatched 
             });
             updateUI();
             tg.showAlert("🎉 ২০ কয়েন যোগ হয়েছে!");
@@ -301,4 +303,5 @@ function claimChannelBonus(id, url) { window.open(url, '_blank'); }
 window.onload = loadAllData;
 </script>
 </body>
-</html>
+    </html>
+    
