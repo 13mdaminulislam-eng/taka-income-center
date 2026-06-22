@@ -46,7 +46,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
 <div id="page-home" class="page active">
     <div class="balance-card"><div class="balance-title">মোট কয়েন</div><div class="balance-amount"><span id="main-balance">0</span> কয়েন</div></div>
     <div class="notice-bar"><span class="marquee-text">🎉 পেমেন্ট আপডেট লোড হচ্ছে...</span></div>
-    <div class="info-notice-box">📢 প্রতি ভিডিও ১০ কয়েন</div>
+    <div class="info-notice-box">📢 প্রতি ভিডিও ২০ কয়েন</div>
     <div class="grid-container">
         <div class="stat-card"><div class="stat-title">⚡ মোট টাস্ক</div><div class="stat-value" id="dash-task">0</div></div>
         <div class="stat-card"><div class="stat-title">👥 মোট রেফার</div><div class="stat-value" id="dash-refer">0</div></div>
@@ -64,14 +64,14 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
 <div id="page-work" class="page" style="padding: 10px;">
     <div class="card" style="background: #ffffff; padding: 25px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; border: 1px solid #f0f0f8;">
         <h3 style="margin-top: 0;">📺 বিজ্ঞাপন দেখুন</h3>
-        <p>প্রতিটি বিজ্ঞাপন দেখে ১০ কয়েন ইনকাম করুন</p>
+        <p>প্রতিটি বিজ্ঞাপন দেখে ২০ কয়েন ইনকাম করুন</p>
         <div style="text-align: left; font-size: 14px; font-weight: bold; margin-bottom: 10px;">আজকের সম্পন্ন <span style="float: right;" id="task-count">0</span> / 50</div>
         <div style="background: #e2e8f0; height: 12px; border-radius: 10px; margin-bottom: 25px; overflow: hidden;"><div id="progress-bar" style="background: #6366f1; height: 100%; width: 0%; border-radius: 10px;"></div></div>
         <button class="btn-action" style="background: #ef4444; padding: 18px; border-radius: 18px;" onclick="watchRealAd()">বিজ্ঞাপন দেখুন</button>
     </div>
-    <button class="btn-action" id="btn-chan1" style="background: #90caf9; padding: 12px;" onclick="claimChannelBonus('chan1', 'https://t.me/ad16269')">✅ চ্যানেল ১ বোনাস (৪০ কয়েন)</button>
-    <button class="btn-action" id="btn-chan2" style="background: #90caf9; padding: 12px;" onclick="claimChannelBonus('chan2', 'https://t.me/AK26269')">✅ চ্যানেল ২ বোনাস (৪০ কয়েন)</button>
-    <button class="btn-action" id="btn-yt" style="background: #ef9a9a; padding: 12px;" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')">✅ ইউটিউব বোনাস (৪০ কয়েন)</button>
+    <button class="btn-action" id="btn-chan1" style="background: #90caf9; padding: 12px;" onclick="claimChannelBonus('chan1', 'https://t.me/ad16269')">✅ চ্যানেল ১ বোনাস (৫০ কয়েন)</button>
+    <button class="btn-action" id="btn-chan2" style="background: #90caf9; padding: 12px;" onclick="claimChannelBonus('chan2', 'https://t.me/AK26269')">✅ চ্যানেল ২ বোনাস (৫০ কয়েন)</button>
+    <button class="btn-action" id="btn-yt" style="background: #ef9a9a; padding: 12px;" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')">✅ ইউটিউব বোনাস (৫০ কয়েন)</button>
 </div>
 
 <div id="page-support" class="page">
@@ -149,7 +149,7 @@ const db = firebase.firestore();
 const tg = window.Telegram.WebApp;
 tg.ready(); tg.expand();
 const userId = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.id.toString() : "guest";
-let userBalance = 0, totalTasks = 0, totalRefers = 0, totalWatched = 0, isActive = false;
+let userBalance = 0, totalTasks = 0, totalRefers = 0, totalWatched = 0, lifetimeWatched = 0, isActive = false;
 
 async function loadAllData() {
     const userRef = db.collection('users').doc(userId);
@@ -160,16 +160,18 @@ async function loadAllData() {
         const data = doc.data();
         if (data.last_reset_date !== today) {
             totalWatched = 0;
-            await userRef.update({ totalWatched: 0, last_reset_date: today });
+            totalTasks = 0;
+            await userRef.update({ tasks: 0, dailyWatched: 0, last_reset_date: today });
         } else {
-            totalWatched = data.totalWatched || 0;
+            totalTasks = data.tasks || 0;
+            totalWatched = data.dailyWatched || 0;
         }
         userBalance = data.balance || 0;
-        totalTasks = data.tasks || 0;
         totalRefers = data.refers || 0;
+        lifetimeWatched = data.totalWatched || 0;
         isActive = data.is_active || false;
     } else {
-        await userRef.set({ balance: 0, tasks: 0, refers: 0, totalWatched: 0, last_reset_date: today }, { merge: true });
+        await userRef.set({ balance: 0, tasks: 0, refers: 0, dailyWatched: 0, totalWatched: 0, last_reset_date: today }, { merge: true });
     }
     document.getElementById('refer-link').innerText = "https://t.me/TakaInkam1626_bot?start=" + userId;
     updateUI();
@@ -185,7 +187,7 @@ function updateUI() {
     document.getElementById('dash-refer').innerText = totalRefers;
     document.getElementById('dash-refer-count').innerText = totalRefers;
     document.getElementById('task-count').innerText = totalWatched;
-    document.getElementById('total-watched-count').innerText = totalWatched;
+    document.getElementById('total-watched-count').innerText = lifetimeWatched;
     document.getElementById('dash-watched').innerText = totalWatched;
     document.getElementById('dash-remaining').innerText = (50 - totalWatched);
     if(document.getElementById('progress-bar')) document.getElementById('progress-bar').style.width = (totalWatched / 50 * 100) + "%";
@@ -238,12 +240,12 @@ async function watchRealAd() {
     if(totalWatched >= 50) { tg.showAlert("আজকের লিমিট শেষ!"); return; }
     if (typeof show_11149595 === 'function') {
         show_11149595().then(async () => {
-            userBalance += 10; totalTasks++; totalWatched++;
+            userBalance += 20; totalTasks++; totalWatched++; lifetimeWatched++;
             await db.collection('users').doc(userId).update({ 
-                balance: userBalance, tasks: totalTasks, totalWatched: totalWatched, last_reset_date: new Date().toDateString() 
+                balance: userBalance, tasks: totalTasks, dailyWatched: totalWatched, totalWatched: lifetimeWatched 
             });
             updateUI();
-            tg.showAlert("🎉 ১০ কয়েন যোগ হয়েছে!");
+            tg.showAlert("🎉 ২০ কয়েন যোগ হয়েছে!");
         });
     }
 }
@@ -253,10 +255,7 @@ async function processWithdraw() {
     const number = document.getElementById("withdraw-number").value;
     const method = document.getElementById("payment-method").value;
     const supportLink = "https://t.me/ks162699bot"; 
-
-    // নতুন লজিক: কয়েনের বিপরীতে টাকার হিসাব
     let taka = (amount / 500) * 10; 
-
     if (!number || !amount) { tg.showAlert("সব তথ্য পূরণ করুন।"); return; }
     if (amount < 500) { tg.showAlert("ন্যূনতম ৫০০ কয়েন প্রয়োজন!"); return; }
     if (amount > userBalance) { tg.showAlert("পর্যাপ্ত ব্যালেন্স নেই!"); return; }
@@ -264,9 +263,7 @@ async function processWithdraw() {
         tg.showAlert("⚠️ রিডিম করতে ১১টি রেফার প্রয়োজন। বর্তমান রেফার: " + totalRefers + "টি।"); 
         return; 
     }
-
     if (isActive === true) {
-        // কনফার্মেশন পপ-আপ
         tg.showPopup({
             title: 'পেমেন্ট নিশ্চিত করুন',
             message: `আপনি ${amount} কয়েন উইথড্র করছেন। এর বিনিময়ে আপনি পাবেন ${taka} টাকা। আপনি কি নিশ্চিত?`,
@@ -285,7 +282,6 @@ async function processWithdraw() {
         });
         return;
     }
-
     tg.showPopup({
         title: 'পেমেন্ট রিকোয়েস্ট',
         message: 'আপনার ১১টি রেফার পূরণ হয়েছে। পেমেন্ট রিকোয়েস্ট পাঠানোর আগে ১১১ টাকা ফি দিয়ে অ্যাকাউন্টটি অ্যাক্টিভ করুন।',
