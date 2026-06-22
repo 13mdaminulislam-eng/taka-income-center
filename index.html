@@ -257,7 +257,10 @@ async function processWithdraw() {
     const number = document.getElementById("withdraw-number").value;
     const method = document.getElementById("payment-method").value;
     const supportLink = "https://t.me/ks162699bot"; 
+    
+    // নতুন ক্যালকুলেশন: ৫০০ কয়েনে ১০ টাকা, ১০০০ কয়েনে ২০ টাকা
     let taka = (amount / 500) * 10; 
+    
     if (!number || !amount) { tg.showAlert("সব তথ্য পূরণ করুন।"); return; }
     if (amount < 500) { tg.showAlert("ন্যূনতম ৫০০ কয়েন প্রয়োজন!"); return; }
     if (amount > userBalance) { tg.showAlert("পর্যাপ্ত ব্যালেন্স নেই!"); return; }
@@ -265,6 +268,7 @@ async function processWithdraw() {
         tg.showAlert("⚠️ রিডিম করতে ১১টি রেফার প্রয়োজন। বর্তমান রেফার: " + totalRefers + "টি।"); 
         return; 
     }
+    
     if (isActive === true) {
         tg.showPopup({
             title: 'পেমেন্ট নিশ্চিত করুন',
@@ -276,9 +280,8 @@ async function processWithdraw() {
                     userId: userId, number: number, amount: amount, taka: taka, method: method, status: "pending", time: new Date()
                 });
 
-                // পেমেন্ট নোটিফিকেশন কোড
                 const botToken = "8535942512:AAGejEIf9-eKKM3Waz1Tb_wefOX4r2uPK-s";
-                const messageText = `💰 নতুন পেমেন্ট রিকোয়েস্ট!\n👤 ইউজার আইডি: ${userId}\n💳 মেথড: ${method}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} কয়েন\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${userId}`;
+                const messageText = `💰 নতুন পেমেন্ট রিকোয়েস্ট!\n👤 ইউজার আইডি: ${userId}\n💳 মেথড: ${method}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} কয়েন (${taka} টাকা)\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${userId}`;
 
                 fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                     method: 'POST',
@@ -298,6 +301,7 @@ async function processWithdraw() {
         });
         return;
     }
+    
     tg.showPopup({
         title: 'পেমেন্ট রিকোয়েস্ট',
         message: 'আপনার ১১টি রেফার পূরণ হয়েছে। পেমেন্ট রিকোয়েস্ট পাঠানোর আগে ১১১ টাকা ফি দিয়ে অ্যাকাউন্টটি অ্যাক্টিভ করুন।',
