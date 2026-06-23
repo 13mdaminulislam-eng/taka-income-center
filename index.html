@@ -56,7 +56,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
         <div class="stat-card"><div class="stat-title">⏳ দেখতে পারবে</div><div class="stat-value" id="dash-remaining">50</div></div>
     </div>
     <div class="card" style="padding: 15px;">
-        <div class="stat-title">🎬 সর্বমোট ভিডিও দেখা হয়েছে</div>
+        <div class="stat-title">🎬 লাইফটাইম ভিডিও দেখা হয়েছে</div>
         <div class="stat-value" id="total-watched-count" style="font-size: 32px; color: #2563eb;">0</div>
     </div>
 </div>
@@ -166,7 +166,7 @@ async function loadAllData() {
         }
         userBalance = data.balance || 0;
         totalRefers = data.refers || 0;
-        lifetimeWatched = data.totalWatched || 0;
+        lifetimeWatched = data.totalWatched || 0; // ডেটাবেস থেকে লাইফটাইম লোড হচ্ছে
         isActive = data.is_active || false;
     } else {
         await userRef.set({ balance: 0, refers: 0, dailyWatched: 0, totalWatched: 0, last_reset_date: today }, { merge: true });
@@ -185,12 +185,13 @@ function updateUI() {
     document.getElementById('dash-refer').innerText = totalRefers;
     document.getElementById('dash-refer-count').innerText = totalRefers;
     document.getElementById('task-count').innerText = dailyWatched;
-    document.getElementById('total-watched-count').innerText = lifetimeWatched;
+    document.getElementById('total-watched-count').innerText = lifetimeWatched; // এখানে লাইফটাইম আপডেট হচ্ছে
     document.getElementById('dash-watched').innerText = dailyWatched;
     document.getElementById('dash-remaining').innerText = (50 - dailyWatched);
     if(document.getElementById('progress-bar')) document.getElementById('progress-bar').style.width = (dailyWatched / 50 * 100) + "%";
 }
 
+// অন্যান্য ফাংশনগুলো আগের মতোই রাখুন
 function loadReferralsList() {
     const listContainer = document.getElementById('referrals-list-container');
     if (!listContainer) return;
@@ -243,7 +244,7 @@ async function watchRealAd() {
         show_11149595().then(async () => {
             userBalance += 20; 
             dailyWatched++; 
-            lifetimeWatched++;
+            lifetimeWatched++; // লাইফটাইম কাউন্ট বাড়ছে
             await db.collection('users').doc(userId).update({ 
                 balance: userBalance, 
                 dailyWatched: dailyWatched, 
@@ -319,8 +320,4 @@ function switchPage(id, el) {
 }
 function copyRefer() { navigator.clipboard.writeText("https://t.me/TakaInkam1626_bot?start=" + userId); tg.showAlert("লিংক কপি হয়েছে!"); }
 function shareRefer() { tg.openTelegramLink("https://t.me/share/url?url=" + encodeURIComponent("https://t.me/TakaInkam1626_bot?start=" + userId)); }
-function claimChannelBonus(id, url) { window.open(url, '_blank'); }
-window.onload = loadAllData;
-</script>
-</body>
-</html>
+function claimChannelBonus(id, url) 
