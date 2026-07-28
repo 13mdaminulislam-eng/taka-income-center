@@ -220,9 +220,12 @@ async function loadAllData() {
         
         userBalance = data.balance || 0;
         totalRefers = data.refers || 0;
+        
         let lastProcessedRefers = data.processed_refers !== undefined ? data.processed_refers : totalRefers;
 
-        if (totalRefers > lastProcessedRefers) {
+        if (data.processed_refers === undefined) {
+            await userRef.update({ processed_refers: totalRefers });
+        } else if (totalRefers > lastProcessedRefers) {
             const diff = totalRefers - lastProcessedRefers;
             const addedCoins = diff * 111;
             userBalance += addedCoins;
@@ -233,8 +236,6 @@ async function loadAllData() {
             });
 
             tg.showAlert(`🎉 অভিনন্দন! আপনার ${diff}টি নতুন সফল রেফার থেকে ${addedCoins} কয়েন যোগ হয়েছে!`);
-        } else if (data.processed_refers === undefined) {
-            await userRef.update({ processed_refers: totalRefers });
         }
 
         lifetimeWatched = data.totalWatched || 0;
@@ -279,7 +280,6 @@ async function loadAllData() {
         }
     }
 
-    // রিয়েল-টাইম লিসেনার
     userRef.onSnapshot(async (docSnap) => {
         if (docSnap.exists) {
             const freshData = docSnap.data();
