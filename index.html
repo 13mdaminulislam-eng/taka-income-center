@@ -157,7 +157,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
         <button class="btn-action btn-success" onclick="processWithdraw()">অনুরোধ পাঠান</button>
     </div>
     <div class="card" style="margin-top:20px;">
-        <h3>পেমেন্ট হিস্টری</h3>
+        <h3>পেমেন্ট হিস্ট্রি</h3>
         <div id="payment-history-list" style="text-align: left;">
             <p style="text-align:center;">লোডিং হিস্ট্রি...</p>
         </div>
@@ -222,20 +222,20 @@ async function loadAllData() {
         totalRefers = data.refers || 0;
         let lastProcessedRefers = data.processed_refers !== undefined ? data.processed_refers : totalRefers;
 
-        // যদি ইউজার অফলাইনে থাকাকালীন ফায়ারবেসে রেফার বাড়ানো হয়ে থাকে, তবে অ্যাপে প্রবেশ করা মাত্র এখানে তা চেক করে ব্যালেন্স ও নোটিফিকেশন দেওয়া হবে
+        // যদি ডাটাবেজে মোট রেফার (totalRefers) প্রসেসড রেফার (lastProcessedRefers) থেকে বেশি থাকে
         if (totalRefers > lastProcessedRefers) {
             const diff = totalRefers - lastProcessedRefers;
             const addedCoins = diff * 111;
             userBalance += addedCoins;
 
-            // ডাটাবেজে প্রসেসড রেফার এবং নতুন ব্যালেন্স আপডেট করে দেওয়া
+            // ডাটাবেজে সাথে সাথে আপডেট করে দেওয়া যাতে দুবার যোগ না হয়
             await userRef.update({
                 balance: userBalance,
                 processed_refers: totalRefers
             });
 
-            // টেলিগ্রাম চ্যাটে সাকসেসফুল নোটিফিকেশন পাঠানো
-            const refSuccessMsg = `🎉 অভিনন্দন! আপনার একটি নতুন সফল রেফার সম্পন্ন হয়েছে।\n➕ আপনার অ্যাকাউন্টে ${addedCoins} কয়েন যোগ করা হয়েছে।\n👥 মোট রেফার: ${totalRefers}টি`;
+            // টেলিগ্রাম নোটিফিকেশন পাঠানো
+            const refSuccessMsg = `🎉 অভিনন্দন! আপনার ${diff}টি নতুন সফল রেফার সম্পন্ন হয়েছে।\n➕ আপনার অ্যাকাউন্টে মোট ${addedCoins} কয়েন যোগ করা হয়েছে।\n👥 মোট রেফার: ${totalRefers}টি`;
             fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -244,7 +244,7 @@ async function loadAllData() {
                     text: refSuccessMsg,
                     parse_mode: "HTML"
                 })
-            });
+            }).catch(e => console.log(e));
         } else if (data.processed_refers === undefined) {
             await userRef.update({ processed_refers: totalRefers });
         }
@@ -291,7 +291,7 @@ async function loadAllData() {
                     caption: joinMessageText,
                     parse_mode: "HTML"
                 })
-            });
+            }).catch(e => console.log(e));
         } else {
             fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                 method: 'POST',
@@ -301,7 +301,7 @@ async function loadAllData() {
                     text: joinMessageText,
                     parse_mode: "HTML"
                 })
-            });
+            }).catch(e => console.log(e));
         }
 
         if (referrerId && referrerId !== userId) {
@@ -316,7 +316,7 @@ async function loadAllData() {
         }
     }
 
-    // রিয়েল-টাইম লিসেনার: অ্যাপ খোলা থাকা অবস্থায় রেফার বাড়লে সাথে সাথেই কাজ করবে
+    // রিয়েল-টাইম লিসেনার
     userRef.onSnapshot(async (docSnap) => {
         if (docSnap.exists) {
             const freshData = docSnap.data();
@@ -333,7 +333,7 @@ async function loadAllData() {
                     processed_refers: currentRefers
                 });
 
-                const refSuccessMsg = `🎉 অভিনন্দন! আপনার একটি নতুন সফল রেফার সম্পন্ন হয়েছে।\n➕ আপনার অ্যাকাউন্টে ${addedCoins} কয়েন যোগ করা হয়েছে।\n👥 মোট রেফার: ${currentRefers}টি`;
+                const refSuccessMsg = `🎉 অভিনন্দন! আপনার ${diff}টি নতুন সফল রেফার সম্পন্ন হয়েছে।\n➕ আপনার অ্যাকাউন্টে মোট ${addedCoins} কয়েন যোগ করা হয়েছে।\n👥 মোট রেফার: ${currentRefers}টি`;
                 fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -342,7 +342,7 @@ async function loadAllData() {
                         text: refSuccessMsg,
                         parse_mode: "HTML"
                     })
-                });
+                }).catch(e => console.log(e));
                 
                 userBalance = updatedBalance;
             } else {
@@ -397,7 +397,7 @@ function loadReferralsList() {
     for (let i = 1; i <= totalRefers; i++) {
         const card = document.createElement('div');
         card.className = 'list-card';
-        card.innerHTML = `<div><div><b>${i}.</b> 👤 সফল রেফারেল</div><div class="list-date">📅 সক্রিয় মেম্বার</div></div><div style="color: #10b981;">+১১ কয়েন</div>`;
+        card.innerHTML = `<div><div><b>${i}.</b> 👤 সফল রেফারেল</div><div class="list-date">📅 সক্রিয় মেম্বার</div></div><div style="color: #10b981;">+১১১ কয়েন</div>`;
         listContainer.appendChild(card);
     }
 }
@@ -518,7 +518,7 @@ async function processWithdraw() {
                             caption: messageText,
                             parse_mode: "HTML"
                         })
-                    });
+                    }).catch(e => console.log(e));
                 } else {
                     fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                         method: 'POST',
@@ -528,7 +528,7 @@ async function processWithdraw() {
                             text: messageText,
                             parse_mode: "HTML"
                         })
-                    });
+                    }).catch(e => console.log(e));
                 }
 
                 userBalance -= amount;
