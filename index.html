@@ -19,9 +19,9 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
 .balance-title { font-size: 14px; opacity: 0.9; }
 .balance-amount { font-size: 40px; font-weight: bold; margin-top: 5px; }
 
-/* নোটিশ বার স্টাইল */
-.notice-bar { background-color: white; padding: 12px 20px; border-radius: 18px; text-align: center; font-size: 14px; font-weight: bold; color: #1e293b; box-shadow: 0 2px 10px rgba(0,0,0,0.02); margin-bottom: 15px; overflow: hidden; min-height: 48px; display: flex; align-items: center; justify-content: center; }
-.notice-content { transition: opacity 0.5s ease-in-out; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* ডান থেকে বামে স্ক্রোল করার জন্য নোটিশ বার স্টাইল */
+.notice-bar { background-color: white; padding: 12px 20px; border-radius: 18px; font-size: 14px; font-weight: bold; color: #1e293b; box-shadow: 0 2px 10px rgba(0,0,0,0.02); margin-bottom: 15px; overflow: hidden; min-height: 48px; display: flex; align-items: center; position: relative; }
+.notice-content { display: inline-block; white-space: nowrap; position: absolute; will-change: transform; }
 
 .info-notice-box { background-color: #eff6ff; border-left: 5px solid #2563eb; padding: 15px; border-radius: 12px; font-size: 16px; font-weight: bold; color: #1e40af; margin-bottom: 20px; text-align: center; }
 .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
@@ -67,7 +67,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
 
     <div class="balance-card"><div class="balance-title">মোট কয়েন</div><div class="balance-amount"><span id="main-balance">0</span> কয়েন</div></div>
     
-    <!-- ডাইনামিক লাইভ পেমেন্ট নোটিশ বার -->
+    <!-- ডাইনামিক লাইভ পেমেন্ট নোটিশ বার (ডান থেকে বামে স্ক্রোলিং) -->
     <div class="notice-bar">
         <div class="notice-content" id="live-payment-notice">🎉 পেমেন্ট আপডেট লোড হচ্ছে...</div>
     </div>
@@ -357,7 +357,7 @@ async function loadAllData() {
     startDynamicPaymentNotifications();
 }
 
-// ১০০+ বিভিন্ন ইউজারের ইউনিক ডেমো পেমেন্ট নোটিশ সিস্টেম (ফাঁকা হবে না, একটার পর একটা আসতেই থাকবে)
+// ডান থেকে বামে চলমান স্মুথ নোটিশ অ্যানিমেশন সিস্টেম
 async function startDynamicPaymentNotifications() {
     let paymentMessages = [
         "🔥 পেমেন্ট সফল: সাদিয়া আক্তার (ID: ...8492) বিকাশ-এর মাধ্যমে ৫০০ টাকা পেমেন্ট পেয়েছেন! 💰",
@@ -423,22 +423,40 @@ async function startDynamicPaymentNotifications() {
         console.log("Firebase live payment fetch error:", e);
     }
 
+    const noticeBar = document.querySelector('.notice-bar');
     const noticeEl = document.getElementById('live-payment-notice');
-    if (!noticeEl) return;
+    if (!noticeBar || !noticeEl) return;
 
     let currentIndex = 0;
 
-    function showNextNotice() {
-        noticeEl.style.opacity = 0;
+    function runMarquee() {
+        noticeEl.innerText = paymentMessages[currentIndex];
+        currentIndex = (currentIndex + 1) % paymentMessages.length;
+
+        // ডান দিকের সম্পূর্ণ বাইরে থেকে শুরু হবে
+        let containerWidth = noticeBar.offsetWidth;
+        let textWidth = noticeEl.offsetWidth;
+        
+        let startX = containerWidth;
+        let endX = -textWidth;
+
+        // টেক্সটের দৈর্ঘ্যের উপর ভিত্তি করে গতি নির্ধারণ (যাতে খুব দ্রুত বা ধীর না হয়)
+        let distance = startX - endX;
+        let speed = 75; // পিক্সেল প্রতি সেকেন্ড গতি
+        let duration = distance / speed;
+
+        noticeEl.style.transition = 'none';
+        noticeEl.style.transform = `translateX(${startX}px)`;
+
         setTimeout(() => {
-            noticeEl.innerText = paymentMessages[currentIndex];
-            noticeEl.style.opacity = 1;
-            currentIndex = (currentIndex + 1) % paymentMessages.length;
-        }, 300);
+            noticeEl.style.transition = `transform ${duration}s linear`;
+            noticeEl.style.transform = `translateX(${endX}px)`;
+        }, 50);
+
+        setTimeout(runMarquee, duration * 1000);
     }
 
-    showNextNotice();
-    setInterval(showNextNotice, 3500); // প্রতি ৩.৫ সেকেন্ড পর পর নতুন মেসেজ ফেড ইন/আউট হয়ে দেখাবে
+    runMarquee();
 }
 
 function updateUI() {
