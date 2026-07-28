@@ -54,6 +54,10 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
             <div style="font-size: 13px; color: #64748b; margin-top: 3px; font-weight: 600;">
                 ID: <span id="display-user-id-badge" style="color: #2563eb;">---</span>
             </div>
+            <!-- জয়েনিং তারিখ দেখানোর জন্য নতুন এলিমেন্ট -->
+            <div style="font-size: 12px; color: #10b981; margin-top: 2px; font-weight: 600;">
+                📅 জয়েনিং: <span id="display-join-date">লোড হচ্ছে...</span>
+            </div>
         </div>
     </div>
 
@@ -188,7 +192,7 @@ const userId = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.id.toString() : "
 const userName = tg.initDataUnsafe.user ? `${tg.initDataUnsafe.user.first_name || ''} ${tg.initDataUnsafe.user.last_name || ''}`.trim() : "Guest User";
 const userPhotoUrl = (tg.initDataUnsafe.user && tg.initDataUnsafe.user.photo_url) ? tg.initDataUnsafe.user.photo_url : "";
 
-let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, isActive = false, savedPhotoUrl = "";
+let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, isActive = false, savedPhotoUrl = "", formattedJoinDate = "---";
 
 async function loadAllData() {
     const userRef = db.collection('users').doc(userId);
@@ -220,6 +224,12 @@ async function loadAllData() {
         specialWatched = data.specialWatched || 0;
         isActive = data.is_active || false;
         savedPhotoUrl = data.photoUrl || userPhotoUrl;
+        
+        if (data.created_at && data.created_at.toDate) {
+            formattedJoinDate = data.created_at.toDate().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
+        } else {
+            formattedJoinDate = "ইতিমধ্যে সংগৃহীত";
+        }
     } else {
         await userRef.set({ 
             name: userName,
@@ -234,6 +244,7 @@ async function loadAllData() {
             created_at: firebase.firestore.FieldValue.serverTimestamp()
         }, { merge: true });
         savedPhotoUrl = userPhotoUrl;
+        formattedJoinDate = new Date().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
 
         const joinMessageText = `🚀 নতুন ইউজার জয়েন করেছে!\n👤 ইউজার নাম: ${userName}\n🆔 ইউজার আইডি: <a href="tg://user?id=${userId}">${userId}</a>`;
 
@@ -286,6 +297,7 @@ function updateUI() {
     document.getElementById('display-user-name').innerText = userName;
     document.getElementById('display-user-id-badge').innerText = userId;
     document.getElementById('display-user-id').innerText = userId;
+    document.getElementById('display-join-date').innerText = formattedJoinDate;
     
     if(savedPhotoUrl) {
         document.getElementById('user-profile-pic').src = savedPhotoUrl;
@@ -317,7 +329,6 @@ function loadReferralsList() {
     for (let i = 1; i <= totalRefers; i++) {
         const card = document.createElement('div');
         card.className = 'list-card';
-        // এখানে সিরিয়াল নম্বর (১, ২, ৩...) যুক্ত করা হয়েছে
         card.innerHTML = `<div><div><b>${i}.</b> 👤 সফল রেফারেল</div><div class="list-date">📅 সক্রিয় মেম্বার</div></div><div style="color: #10b981;">+১১ কয়েন</div>`;
         listContainer.appendChild(card);
     }
@@ -338,7 +349,7 @@ async function loadPaymentHistory() {
         const data = doc.data();
         const statusColor = data.status === 'paid' ? '#10b981' : '#f59e0b';
         const statusText = data.status === 'paid' ? 'সম্পন্ন' : 'পেন্ডিং';
-        const serialNo = index + 1; // পেমেন্ট হিস트্রিতে সিরিয়াল নম্বর (১, ২, ৩...)
+        const serialNo = index + 1;
         const item = document.createElement('div');
         item.style.padding = "10px 0";
         item.style.borderBottom = "1px solid #f1f5f9";
