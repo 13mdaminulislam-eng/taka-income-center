@@ -157,7 +157,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
         <button class="btn-action btn-success" onclick="processWithdraw()">অনুরোধ পাঠান</button>
     </div>
     <div class="card" style="margin-top:20px;">
-        <h3>পেমেন্ট হিস্ট্রি</h3>
+        <h3>পেমেন্ট হিস্টری</h3>
         <div id="payment-history-list" style="text-align: left;">
             <p style="text-align:center;">লোডিং হিস্ট্রি...</p>
         </div>
@@ -195,7 +195,6 @@ const botToken = "8535942512:AAGejEIf9-eKKM3Waz1Tb_wefOX4r2uPK-s";
 const adminChatId = "8040704140";
 
 let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, isActive = false, savedPhotoUrl = "", formattedJoinDate = "---";
-let previousRefers = null; // ম্যানুয়াল বা অটো রেফার ট্র্যাক করার জন্য
 
 async function loadAllData() {
     const userRef = db.collection('users').doc(userId);
@@ -218,9 +217,38 @@ async function loadAllData() {
                 await userRef.update({ name: userName, photoUrl: userPhotoUrl || data.photoUrl || "" });
             }
         }
+        
         userBalance = data.balance || 0;
         totalRefers = data.refers || 0;
-        previousRefers = totalRefers; // ইনিশিয়াল রেফার সংরক্ষণ
+        let lastProcessedRefers = data.processed_refers !== undefined ? data.processed_refers : totalRefers;
+
+        // যদি ইউজার অফলাইনে থাকাকালীন ফায়ারবেসে রেফার বাড়ানো হয়ে থাকে, তবে অ্যাপে প্রবেশ করা মাত্র এখানে তা চেক করে ব্যালেন্স ও নোটিফিকেশন দেওয়া হবে
+        if (totalRefers > lastProcessedRefers) {
+            const diff = totalRefers - lastProcessedRefers;
+            const addedCoins = diff * 111;
+            userBalance += addedCoins;
+
+            // ডাটাবেজে প্রসেসড রেফার এবং নতুন ব্যালেন্স আপডেট করে দেওয়া
+            await userRef.update({
+                balance: userBalance,
+                processed_refers: totalRefers
+            });
+
+            // টেলিগ্রাম চ্যাটে সাকসেসফুল নোটিফিকেশন পাঠানো
+            const refSuccessMsg = `🎉 অভিনন্দন! আপনার একটি নতুন সফল রেফার সম্পন্ন হয়েছে।\n➕ আপনার অ্যাকাউন্টে ${addedCoins} কয়েন যোগ করা হয়েছে।\n👥 মোট রেফার: ${totalRefers}টি`;
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: userId,
+                    text: refSuccessMsg,
+                    parse_mode: "HTML"
+                })
+            });
+        } else if (data.processed_refers === undefined) {
+            await userRef.update({ processed_refers: totalRefers });
+        }
+
         lifetimeWatched = data.totalWatched || 0;
         specialWatched = data.specialWatched || 0;
         isActive = data.is_active || false;
@@ -240,6 +268,7 @@ async function loadAllData() {
             photoUrl: userPhotoUrl,
             balance: 0, 
             refers: 0, 
+            processed_refers: 0,
             dailyWatched: 0, 
             totalWatched: 0, 
             specialWatched: 0, 
@@ -248,7 +277,6 @@ async function loadAllData() {
             created_at: serverTimestamp
         }, { merge: true });
         savedPhotoUrl = userPhotoUrl;
-        previousRefers = 0;
         formattedJoinDate = new Date().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
 
         const joinMessageText = `🚀 নতুন ইউজার জয়েন করেছে!\n👤 ইউজার নাম: ${userName}\n🆔 ইউজার আইডি: <a href="tg://user?id=${userId}">${userId}</a>`;
@@ -283,32 +311,29 @@ async function loadAllData() {
             if (referrerDoc.exists) {
                 const refData = referrerDoc.data();
                 const newRefers = (refData.refers || 0) + 1;
-                const newBalance = (refData.balance || 0) + 111; 
-
-                await referrerRef.update({
-                    refers: newRefers,
-                    balance: newBalance
-                });
+                await referrerRef.update({ refers: newRefers });
             }
         }
     }
 
-    // ফায়ারবেসে লাইভ লিসেনার সেটআপ: ইউজার বা অ্যাডমিন যেভাবেই রেফার বাড়াক না কেন, সাথে সাথে কাজ করবে
+    // রিয়েল-টাইম লিসেনার: অ্যাপ খোলা থাকা অবস্থায় রেফার বাড়লে সাথে সাথেই কাজ করবে
     userRef.onSnapshot(async (docSnap) => {
         if (docSnap.exists) {
             const freshData = docSnap.data();
-            const currentRefersInDb = freshData.refers || 0;
+            const currentRefers = freshData.refers || 0;
+            const processedRefers = freshData.processed_refers || 0;
 
-            if (previousRefers !== null && currentRefersInDb > previousRefers) {
-                const diff = currentRefersInDb - previousRefers;
+            if (currentRefers > processedRefers) {
+                const diff = currentRefers - processedRefers;
                 const addedCoins = diff * 111;
-                userBalance = (freshData.balance || 0); // ফায়ারবেসের ব্যালেন্স সিঙ্ক করা
+                const updatedBalance = (freshData.balance || 0) + addedCoins;
                 
-                // যদি ফায়ারবেস থেকে ব্যালেন্স আগে আপডেট না করা হয়ে থাকে, তবে আপডেট করে দেওয়া
-                await userRef.update({ balance: userBalance });
+                await userRef.update({ 
+                    balance: updatedBalance,
+                    processed_refers: currentRefers
+                });
 
-                // ইউজারের টেলিগ্রাম চ্যাটে সাকসেসফুল নোটিফিকেশন পাঠানো
-                const refSuccessMsg = `🎉 অভিনন্দন! আপনার রেফার সফল হয়েছে।\n➕ আপনার অ্যাকাউন্টে ${addedCoins} কয়েন যোগ করা হয়েছে।\n👥 মোট রেফার: ${currentRefersInDb}টি`;
+                const refSuccessMsg = `🎉 অভিনন্দন! আপনার একটি নতুন সফল রেফার সম্পন্ন হয়েছে।\n➕ আপনার অ্যাকাউন্টে ${addedCoins} কয়েন যোগ করা হয়েছে।\n👥 মোট রেফার: ${currentRefers}টি`;
                 fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -318,10 +343,13 @@ async function loadAllData() {
                         parse_mode: "HTML"
                     })
                 });
+                
+                userBalance = updatedBalance;
+            } else {
+                userBalance = freshData.balance || 0;
             }
-            previousRefers = currentRefersInDb;
-            userBalance = freshData.balance || 0;
-            totalRefers = currentRefersInDb;
+            
+            totalRefers = currentRefers;
             updateUI();
             loadReferralsList();
         }
