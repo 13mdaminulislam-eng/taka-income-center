@@ -4,27 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>টাকা ইনকাম সেন্টার</title>
-<script src="[https://telegram.org/js/telegram-web-app.js](https://telegram.org/js/telegram-web-app.js)"></script>
-<script src='//[libtl.com/sdk.js](https://libtl.com/sdk.js)' data-zone='11149595' data-sdk='show_11149595'></script>
-<script src="[https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js](https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js)"></script>
-<script src="[https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js](https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js)"></script>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src='//libtl.com/sdk.js' data-zone='11149595' data-sdk='show_11149595'></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 <style>
- * { box-sizing: border-box; }
-   body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; margin: 0; padding: 15px; padding-bottom: 90px; color: #333; }
-   .top-app-title { font-size: 22px; font-weight: bold; text-align: center; color: #1e293b; margin: 15px 0; }
-   .page { display: none; animation: fadeIn 0.3s ease; }
-   .page.active { display: block; }
-   @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-   .balance-card { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; border-radius: 24px; padding: 30px 25px; box-shadow: 0 10px 25px rgba(37, 99, 235, 0.15); margin-bottom: 20px; text-align: left; }
-   .balance-title { font-size: 14px; opacity: 0.9; }
-   .balance-amount { font-size: 40px; font-weight: bold; margin-top: 5px; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; margin: 0; padding: 15px; padding-bottom: 90px; color: #333; }
+.top-app-title { font-size: 22px; font-weight: bold; text-align: center; color: #1e293b; margin: 15px 0; }
+.page { display: none; animation: fadeIn 0.3s ease; }
+.page.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+.balance-card { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; border-radius: 24px; padding: 30px 25px; box-shadow: 0 10px 25px rgba(37, 99, 235, 0.15); margin-bottom: 20px; text-align: left; }
+.balance-title { font-size: 14px; opacity: 0.9; }
+.balance-amount { font-size: 40px; font-weight: bold; margin-top: 5px; }
+
 /* নোটিশ বার স্টাইল */
 .notice-bar { background-color: white; padding: 12px 20px; border-radius: 18px; font-size: 14px; font-weight: bold; color: #1e293b; box-shadow: 0 2px 10px rgba(0,0,0,0.02); margin-bottom: 15px; overflow: hidden; white-space: nowrap; position: relative; display: flex; align-items: center; min-height: 48px; }
-.notice-content { display: inline-block; white-space: nowrap; position: absolute; animation: marquee 25s linear infinite; }
+.notice-content { display: inline-block; white-space: nowrap; position: absolute; animation: marquee 10s linear infinite; }
+
 @keyframes marquee {
-0% { transform: translateX(100%); }
-100% { transform: translateX(-100%); }
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
 }
+
 .info-notice-box { background-color: #eff6ff; border-left: 5px solid #2563eb; padding: 15px; border-radius: 12px; font-size: 16px; font-weight: bold; color: #1e40af; margin-bottom: 20px; text-align: center; }
 .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
 .stat-card { background: white; padding: 20px 15px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); text-align: center; }
@@ -47,130 +50,141 @@
 </head>
 <body>
 <div class="top-app-title">🚀 টাকা ইনকাম সেন্টার 🚀</div>
+
 <div id="page-home" class="page active">
-<div style="background: white; padding: 15px 20px; border-radius: 18px; display: flex; align-items: center; gap: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); margin-bottom: 15px;">
-<div style="text-align: center;">
-<img id="user-profile-pic" src="[https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png](https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png)" alt="Profile" style="width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid #2563eb; background: #e2e8f0;">
-<div id="display-user-serial" style="font-size: 11px; font-weight: bold; color: #ef4444; margin-top: 4px;">নং: #---</div>
+    <div style="background: white; padding: 15px 20px; border-radius: 18px; display: flex; align-items: center; gap: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); margin-bottom: 15px;">
+        <div style="text-align: center;">
+            <img id="user-profile-pic" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" alt="Profile" style="width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid #2563eb; background: #e2e8f0;">
+            <div id="display-user-serial" style="font-size: 11px; font-weight: bold; color: #ef4444; margin-top: 4px;">নং: #---</div>
+        </div>
+        <div style="text-align: left; overflow: hidden; flex: 1;">
+            <div style="font-size: 15px; font-weight: bold; color: #1e293b; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
+                👋 স্বাগতম, <span id="display-user-name">লোড হচ্ছে...</span>
+            </div>
+            <div style="font-size: 13px; color: #64748b; margin-top: 3px; font-weight: 600;">
+                ID: <span id="display-user-id-badge" style="color: #2563eb;">---</span>
+            </div>
+            <div style="font-size: 12px; color: #10b981; margin-top: 2px; font-weight: 600;">
+                📅 জয়েনিং: <span id="display-join-date">লোড হচ্ছে...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="balance-card"><div class="balance-title">মোট কয়েন</div><div class="balance-amount"><span id="main-balance">0</span> কয়েন</div></div>
+    
+    <div class="notice-bar">
+        <div class="notice-content" id="live-payment-notice">🎉 পেমেন্ট আপডেট লোড হচ্ছে...</div>
+    </div>
+
+    <div class="info-notice-box">📢 প্রতি ভিডিও ২০ কয়েন</div>
+    <div class="grid-container">
+        <div class="stat-card"><div class="stat-title">⚡ মোট টাস্ক</div><div class="stat-value" id="dash-task">0</div></div>
+        <div class="stat-card"><div class="stat-title">👥 মোট রেফার</div><div class="stat-value" id="dash-refer">0</div></div>
+    </div>
+    <div class="grid-container">
+        <div class="stat-card"><div class="stat-title">📺 দেখা হয়েছে</div><div class="stat-value" id="dash-watched">0</div></div>
+        <div class="stat-card"><div class="stat-title">⏳ দেখতে পারবে</div><div class="stat-value" id="dash-remaining">50</div></div>
+    </div>
+    <div class="card" style="padding: 15px;">
+        <div class="stat-title">🎬 সর্বমোট ভিডিও দেখা হয়েছে</div>
+        <div class="stat-value" id="total-watched-count" style="font-size: 32px; color: #2563eb;">0</div>
+    </div>
 </div>
-<div style="text-align: left; overflow: hidden; flex: 1;">
-<div style="font-size: 15px; font-weight: bold; color: #1e293b; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
-👋 স্বাগতম, <span id="display-user-name">লোড হচ্ছে...</span>
-</div>
-<div style="font-size: 13px; color: #64748b; margin-top: 3px; font-weight: 600;">
-ID: <span id="display-user-id-badge" style="color: #2563eb;">---</span>
-</div>
-<div style="font-size: 12px; color: #10b981; margin-top: 2px; font-weight: 600;">
-📅 জয়েনিং: <span id="display-join-date">লোড হচ্ছে...</span>
-</div>
-</div>
-</div>
-<div class="balance-card"><div class="balance-title">মোট কয়েন</div><div class="balance-amount"><span id="main-balance">0</span> কয়েন</div></div>
-<!-- ডাইনামিক লাইভ পেমেন্ট নোটিশ বার -->
-<div class="notice-bar">
-<div class="notice-content" id="live-payment-notice" style="animation-duration: 40s;">🎉 পেমেন্ট আপডেট লোড হচ্ছে...</div>
-</div>
-<div class="info-notice-box">📢 প্রতি ভিডিও ২০ কয়েন</div>
-<div class="grid-container">
-<div class="stat-card"><div class="stat-title">⚡ মোট টাস্ক</div><div class="stat-value" id="dash-task">0</div></div>
-<div class="stat-card"><div class="stat-title">👥 মোট রেফার</div><div class="stat-value" id="dash-refer">0</div></div>
-</div>
-<div class="grid-container">
-<div class="stat-card"><div class="stat-title">📺 দেখা হয়েছে</div><div class="stat-value" id="dash-watched">0</div></div>
-<div class="stat-card"><div class="stat-title">⏳ দেখতে পারবে</div><div class="stat-value" id="dash-remaining">50</div></div>
-</div>
-<div class="card" style="padding: 15px;">
-<div class="stat-title">🎬 সর্বমোট ভিডিও দেখা হয়েছে</div>
-<div class="stat-value" id="total-watched-count" style="font-size: 32px; color: #2563eb;">0</div>
-</div>
-</div>
+
 <div id="page-work" class="page" style="padding: 10px;">
-<div class="card" style="background: #ffffff; padding: 25px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; border: 1px solid #f0f0f8;">
-<h3 style="margin-top: 0;">📺 বিজ্ঞাপন দেখুন</h3>
-<p>প্রতিটি বিজ্ঞাপন দেখে ২০ কয়েন ইনকাম করুন</p>
-<div style="text-align: left; font-size: 14px; font-weight: bold; margin-bottom: 10px;">আজকের সম্পন্ন <span style="float: right;" id="task-count">0</span> / 50</div>
-<div style="background: #e2e8f0; height: 12px; border-radius: 10px; margin-bottom: 25px; overflow: hidden;"><div id="progress-bar" style="background: #6366f1; height: 100%; width: 0%; border-radius: 10px;"></div></div>
-<button class="btn-action" style="background: #ef4444; padding: 18px; border-radius: 18px;" onclick="watchRealAd()">বিজ্ঞাপন দেখুন</button>
+    <div class="card" style="background: #ffffff; padding: 25px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; border: 1px solid #f0f0f8;">
+        <h3 style="margin-top: 0;">📺 বিজ্ঞাপন দেখুন</h3>
+        <p>প্রতিটি বিজ্ঞাপন দেখে ২০ কয়েন ইনকাম করুন</p>
+        <div style="text-align: left; font-size: 14px; font-weight: bold; margin-bottom: 10px;">আজকের সম্পন্ন <span style="float: right;" id="task-count">0</span> / 50</div>
+        <div style="background: #e2e8f0; height: 12px; border-radius: 10px; margin-bottom: 25px; overflow: hidden;"><div id="progress-bar" style="background: #6366f1; height: 100%; width: 0%; border-radius: 10px;"></div></div>
+        <button class="btn-action" style="background: #ef4444; padding: 18px; border-radius: 18px;" onclick="watchRealAd()">বিজ্ঞাপন দেখুন</button>
+    </div>
+    
+    <div style="background-color: #eff6ff; border: 1px dashed #2563eb; padding: 12px; border-radius: 12px; font-size: 15px; font-weight: bold; color: #1e40af; margin-bottom: 15px; text-align: center;">
+        🔔 ২০০ টাকা বোনাস নিতে আমাদের চ্যানেলটিকে ফলো এবং সাবস্ক্রাইব করুন
+    </div>
+
+    <button class="btn-action" id="btn-chan1" style="background: #90caf9; padding: 12px;" onclick="claimChannelBonus('chan1', 'https://t.me/ad16269')">✅ চ্যানেল ১ বোনাস (৫০ কয়েন)</button>
+    <button class="btn-action" id="btn-chan2" style="background: #90caf9; padding: 12px;" onclick="claimChannelBonus('chan2', 'https://t.me/AK26269')">✅ চ্যানেল ২ বোনাস (৫০ কয়েন)</button>
+    <button class="btn-action" id="btn-chan3" style="background: #90caf9; padding: 12px;" onclick="claimChannelBonus('chan3', 'https://t.me/BD16269')">✅ চ্যানেল ৩ বোনাস (৫০ কয়েন)</button>
+    <button class="btn-action" id="btn-yt" style="background: #ef9a9a; padding: 12px;" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')">✅ ইউটিউব বোনাস (৫০ কয়েন)</button>
 </div>
-<div style="background-color: #eff6ff; border: 1px dashed #2563eb; padding: 12px; border-radius: 12px; font-size: 15px; font-weight: bold; color: #1e40af; margin-bottom: 15px; text-align: center;">
-🔔 ২০০ টাকা বোনাস নিতে আমাদের চ্যানেলটিকে ফলো এবং সাবস্ক্রাইব করুন
-</div>
-<button class="btn-action" id="btn-chan1" style="background: #90caf9; padding: 12px;" onclick="claimChannelBonus('chan1', '[https://t.me/ad16269](https://t.me/ad16269)')">✅ চ্যানেল ১ বোনাস (৫০ কয়েন)</button>
-<button class="btn-action" id="btn-chan2" style="background: #90caf9; padding: 12px;" onclick="claimChannelBonus('chan2', '[https://t.me/AK26269](https://t.me/AK26269)')">✅ চ্যানেল ২ বোনাস (৫০ কয়েন)</button>
-<button class="btn-action" id="btn-chan3" style="background: #90caf9; padding: 12px;" onclick="claimChannelBonus('chan3', '[https://t.me/BD16269](https://t.me/BD16269)')">✅ চ্যানেল ৩ বোনাস (৫০ কয়েন)</button>
-<button class="btn-action" id="btn-yt" style="background: #ef9a9a; padding: 12px;" onclick="claimChannelBonus('yt', '[https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v](https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v)')">✅ ইউটিউব বোনাস (৫০ কয়েন)</button>
-</div>
-<!-- স্পেশাল ৩০০ ভিডিও দেখার পেজ -->
+
 <div id="page-special-task" class="page" style="padding: 10px;">
-<div class="card" style="background: #ffffff; padding: 25px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; border: 2px solid #2563eb;">
-<h3 style="margin-top: 0; color: #1e40af;">🎯 উইথড্র স্পেশাল টাস্ক</h3>
-<p style="font-size: 14px; color: #475569;">টাকা উত্তোলনের জন্য এই পেজ থেকে নতুন করে ৩০০টি ভিডিও কমপ্লিট করুন।</p>
-<div style="text-align: left; font-size: 14px; font-weight: bold; margin-bottom: 10px;">সম্পন্ন টাস্ক <span style="float: right;" id="special-task-count">0</span> / 300</div>
-<div style="background: #e2e8f0; height: 14px; border-radius: 10px; margin-bottom: 25px; overflow: hidden;"><div id="special-progress-bar" style="background: #2563eb; height: 100%; width: 0%; border-radius: 10px;"></div></div>
-<button class="btn-action" style="background: #2563eb; padding: 18px; border-radius: 18px;" onclick="watchSpecialAd()">🎥 স্পেশাল ভিডিও দেখুন</button>
+    <div class="card" style="background: #ffffff; padding: 25px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; border: 2px solid #2563eb;">
+        <h3 style="margin-top: 0; color: #1e40af;">🎯 উইথড্র স্পেশাল টাস্ক</h3>
+        <p style="font-size: 14px; color: #475569;">টাকা উত্তোলনের জন্য এই পেজ থেকে নতুন করে ৩০০টি ভিডিও কমপ্লিট করুন।</p>
+        <div style="text-align: left; font-size: 14px; font-weight: bold; margin-bottom: 10px;">সম্পন্ন টাস্ক <span style="float: right;" id="special-task-count">0</span> / 300</div>
+        <div style="background: #e2e8f0; height: 14px; border-radius: 10px; margin-bottom: 25px; overflow: hidden;"><div id="special-progress-bar" style="background: #2563eb; height: 100%; width: 0%; border-radius: 10px;"></div></div>
+        <button class="btn-action" style="background: #2563eb; padding: 18px; border-radius: 18px;" onclick="watchSpecialAd()">🎥 স্পেশাল ভিডিও দেখুন</button>
+    </div>
+    <button class="btn-action" style="background: #64748b; padding: 12px;" onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])">⬅️ ওয়ালেটে ফিরে যান</button>
 </div>
-<button class="btn-action" style="background: #64748b; padding: 12px;" onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])">⬅️ ওয়ালেটে ফিরে যান</button>
-</div>
+
 <div id="page-support" class="page">
-<div style="background: linear-gradient(to bottom, #8A2BE2, #4B0082); border-radius: 20px; padding: 25px 20px; margin: 15px; color: white; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-<h2 style="margin-top: 0; font-size: 19px;">কিভাবে কাজ করবেন?</h2>
-<a href="[https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v](https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v)" target="_blank" style="display: inline-block; background-color: white; color: #4B0082; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 14px;">📺 ভিডিওটি দেখুন</a>
+    <div style="background: linear-gradient(to bottom, #8A2BE2, #4B0082); border-radius: 20px; padding: 25px 20px; margin: 15px; color: white; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        <h2 style="margin-top: 0; font-size: 19px;">কিভাবে কাজ করবেন?</h2>
+        <a href="https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v" target="_blank" style="display: inline-block; background-color: white; color: #4B0082; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 14px;">📺 ভিডিওটি দেখুন</a>
+    </div>
+    <div style="background-color: #ef4444; border-radius: 20px; padding: 25px 20px; margin: 15px; color: white; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        <h2 style="margin-top: 0; font-size: 19px;">কাস্টমার সাপোর্ট</h2>
+        <a href="https://t.me/as16269bot" target="_blank" style="display: block; background: rgba(255,255,255,0.2); padding: 12px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; margin-bottom: 10px; font-size: 14px;">💬 @as16269bot</a>
+        <a href="https://t.me/ad16269" target="_blank" style="display: block; background: rgba(255,255,255,0.2); padding: 12px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; margin-bottom: 10px; font-size: 14px;">📢 অফিশিয়াল চ্যানেল ১</a>
+        <a href="https://t.me/BD16269" target="_blank" style="display: block; background: rgba(255,255,255,0.2); padding: 12px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; margin-bottom: 10px; font-size: 14px;">📢 অফিশিয়াল চ্যানেল ২</a>
+    </div>
 </div>
-<div style="background-color: #ef4444; border-radius: 20px; padding: 25px 20px; margin: 15px; color: white; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-<h2 style="margin-top: 0; font-size: 19px;">কাস্টমার সাপোর্ট</h2>
-<a href="[https://t.me/as16269bot](https://t.me/as16269bot)" target="_blank" style="display: block; background: rgba(255,255,255,0.2); padding: 12px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; margin-bottom: 10px; font-size: 14px;">💬 @as16269bot</a>
-<a href="[https://t.me/ad16269](https://t.me/ad16269)" target="_blank" style="display: block; background: rgba(255,255,255,0.2); padding: 12px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; margin-bottom: 10px; font-size: 14px;">📢 অফিশিয়াল চ্যানেল ১</a>
-<a href="[https://t.me/BD16269](https://t.me/BD16269)" target="_blank" style="display: block; background: rgba(255,255,255,0.2); padding: 12px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; margin-bottom: 10px; font-size: 14px;">📢 অফিশিয়াল চ্যানেল ২</a>
-</div>
-</div>
+
 <div id="page-refer" class="page">
-<div class="refer-card">
-<h3>🎁 বন্ধুকে রেফার করুন এবং আয় করুন</h3>
-<p style="font-size: 14px; opacity: 0.9;">আপনার রেফার লিংকটি শেয়ার করুন। আপনার বন্ধু সাইন আপ করলে আপনি ১১১ কয়েন বোনাস বোনাস পাবেন।</p>
-<div class="refer-link-box">
-<span id="refer-link" style="font-size: 13px;">লিংক তৈরি হচ্ছে...</span>
-<span onclick="copyRefer()" style="cursor:pointer">📋</span>
+    <div class="refer-card">
+        <h3>🎁 বন্ধুকে রেফার করুন এবং আয় করুন</h3>
+        <p style="font-size: 14px; opacity: 0.9;">আপনার রেফার লিংকটি শেয়ার করুন। আপনার বন্ধু সাইন আপ করলে আপনি ১১১ কয়েন বোনাস বোনাস পাবেন।</p>
+        <div class="refer-link-box">
+            <span id="refer-link" style="font-size: 13px;">লিংক তৈরি হচ্ছে...</span>
+            <span onclick="copyRefer()" style="cursor:pointer">📋</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; gap: 10px;">
+            <button class="btn-refer-action" onclick="copyRefer()">লিংক কপি করুন</button>
+            <button class="btn-refer-action" style="background:#8b5cf6" onclick="shareRefer()">শেয়ার করুন</button>
+        </div>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <h3 style="margin:0;">রেফার করা বন্ধুদের তালিকা</h3>
+        <span style="background: #e2e8f0; padding: 5px 15px; border-radius: 20px; font-weight: bold;">মোট: <span id="dash-refer-count">0</span></span>
+    </div>
+    <div id="referrals-list-container"></div>
 </div>
-<div style="display: flex; justify-content: space-between; gap: 10px;">
-<button class="btn-refer-action" onclick="copyRefer()">লিংক কপি করুন</button>
-<button class="btn-refer-action" style="background:#8b5cf6" onclick="shareRefer()">শেয়ার করুন</button>
-</div>
-</div>
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-<h3 style="margin:0;">রেফার করা বন্ধুদের তালিকা</h3>
-<span style="background: #e2e8f0; padding: 5px 15px; border-radius: 20px; font-weight: bold;">মোট: <span id="dash-refer-count">0</span></span>
-</div>
-<div id="referrals-list-container"></div>
-</div>
+
 <div id="page-wallet" class="page">
-<div class="card">
-<h3>💳 রিডিম (Redeem)</h3>
-<p style="font-weight:bold; color:#475569;">ইউজার আইডি: <span id="display-user-id"></span></p>
-<p>আপনার ব্যালেন্স: <b style="color: #2563eb;"><span id="wallet-balance">0</span> কয়েন</b></p>
-<p style="font-size: 13px; color: #ef4444; font-weight: bold;">নোট: ন্যূনতম ১০০০ কয়েন হলে উত্তোলন করতে পারবেন।</p>
-<label style="display:block; font-weight:bold; font-size: 14px; text-align: left;">পেমেন্ট মেথড:</label>
-<select class="input-field" id="payment-method">
-<option value="bkash">বিকাশ (bKash)</option>
-<option value="nagad">নগদ (Nagad)</option>
-</select>
-<input type="number" class="input-field" id="withdraw-number" placeholder="আপনার বিকাশ/নগদ নাম্বার লিখুন">
-<input type="number" class="input-field" id="withdraw-amount" placeholder="কয়েনের পরিমাণ লিখুন">
-<button class="btn-action btn-success" onclick="processWithdraw()">অনুরোধ পাঠান</button>
+    <div class="card">
+        <h3>💳 রিডিম (Redeem)</h3>
+        <p style="font-weight:bold; color:#475569;">ইউজার আইডি: <span id="display-user-id"></span></p>
+        <p>আপনার ব্যালেন্স: <b style="color: #2563eb;"><span id="wallet-balance">0</span> কয়েন</b></p>
+        <p style="font-size: 13px; color: #ef4444; font-weight: bold;">নোট: ন্যূনতম ১০০০ কয়েন হলে উত্তোলন করতে পারবেন।</p>
+        <label style="display:block; font-weight:bold; font-size: 14px; text-align: left;">পেমেন্ট মেথড:</label>
+        <select class="input-field" id="payment-method">
+            <option value="bkash">বিকাশ (bKash)</option>
+            <option value="nagad">নগদ (Nagad)</option>
+        </select>
+        <input type="number" class="input-field" id="withdraw-number" placeholder="আপনার বিকাশ/নগদ নাম্বার লিখুন">
+        <input type="number" class="input-field" id="withdraw-amount" placeholder="কয়েনের পরিমাণ লিখুন">
+        <button class="btn-action btn-success" onclick="processWithdraw()">অনুরোধ পাঠান</button>
+    </div>
+    <div class="card" style="margin-top:20px;">
+        <h3>পেমেন্ট হিস্ট্রি</h3>
+        <div id="payment-history-list" style="text-align: left;">
+            <p style="text-align:center;">লোডিং হিস্ট্রি...</p>
+        </div>
+    </div>
 </div>
-<div class="card" style="margin-top:20px;">
-<h3>পেমেন্ট হিস্ট্রি</h3>
-<div id="payment-history-list" style="text-align: left;">
-<p style="text-align:center;">লোডিং হিস্ট্রি...</p>
-</div>
-</div>
-</div>
+
 <div class="nav-bar">
-<div class="nav-item active" onclick="switchPage('home', this)"><div class="nav-icon">🏠</div><div>হোম</div></div>
-<div class="nav-item" onclick="switchPage('work', this)"><div class="nav-icon">📋</div><div>কাজ</div></div>
-<div class="nav-item" onclick="switchPage('support', this)"><div class="nav-icon">🎧</div><div>সাপোর্ট</div></div>
-<div class="nav-item" onclick="switchPage('refer', this)"><div class="nav-icon">👥</div><div>রেফার</div></div>
-<div class="nav-item" onclick="switchPage('wallet', this)"><div class="nav-icon">💳</div><div>ওয়ালেট</div></div>
+    <div class="nav-item active" onclick="switchPage('home', this)"><div class="nav-icon">🏠</div><div>হোম</div></div>
+    <div class="nav-item" onclick="switchPage('work', this)"><div class="nav-icon">📋</div><div>কাজ</div></div>
+    <div class="nav-item" onclick="switchPage('support', this)"><div class="nav-icon">🎧</div><div>সাপোর্ট</div></div>
+    <div class="nav-item" onclick="switchPage('refer', this)"><div class="nav-icon">👥</div><div>রেফার</div></div>
+    <div class="nav-item" onclick="switchPage('wallet', this)"><div class="nav-icon">💳</div><div>ওয়ালেট</div></div>
 </div>
+
 <script>
 const firebaseConfig = {
 apiKey: "AIzaSyCgOILqhT8ZXHZ--VZvKw3TdU2HB2RNWkw",
@@ -185,441 +199,492 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const tg = window.Telegram.WebApp;
 tg.ready(); tg.expand();
+
 const userId = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.id.toString() : "guest";
-const userName = tg.initDataUnsafe.user ? ${tg.initDataUnsafe.user.first_name || ''} ${tg.initDataUnsafe.user.last_name || ''}.trim() : "Guest User";
+const userName = tg.initDataUnsafe.user ? `${tg.initDataUnsafe.user.first_name || ''} ${tg.initDataUnsafe.user.last_name || ''}`.trim() : "Guest User";
 const userPhotoUrl = (tg.initDataUnsafe.user && tg.initDataUnsafe.user.photo_url) ? tg.initDataUnsafe.user.photo_url : "";
+
 const botToken = "8535942512:AAGejEIf9-eKKM3Waz1Tb_wefOX4r2uPK-s";
 const adminChatId = "8040704140";
+
 let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, isActive = false, savedPhotoUrl = "", formattedJoinDate = "---", userSerial = "---";
+
 async function getNextSerial() {
-const counterRef = db.collection('settings').doc('user_counter');
-let assignedSerial = 1;
-await db.runTransaction(async (transaction) => {
-const counterDoc = await transaction.get(counterRef);
-if (counterDoc.exists) {
-assignedSerial = (counterDoc.data().total_users || 0) + 1;
-transaction.update(counterRef, { total_users: assignedSerial });
-} else {
-transaction.set(counterRef, { total_users: 1 });
+    const counterRef = db.collection('settings').doc('user_counter');
+    let assignedSerial = 1;
+    await db.runTransaction(async (transaction) => {
+        const counterDoc = await transaction.get(counterRef);
+        if (counterDoc.exists) {
+            assignedSerial = (counterDoc.data().total_users || 0) + 1;
+            transaction.update(counterRef, { total_users: assignedSerial });
+        } else {
+            transaction.set(counterRef, { total_users: 1 });
+        }
+    });
+    return assignedSerial;
 }
-});
-return assignedSerial;
-}
+
 async function loadAllData() {
-const userRef = db.collection('users').doc(userId);
-const doc = await userRef.get();
-const today = new Date().toDateString();
-let referrerId = null;
-if (tg.initDataUnsafe && tg.initDataUnsafe.start_param) {
-referrerId = tg.initDataUnsafe.start_param;
+    const userRef = db.collection('users').doc(userId);
+    const doc = await userRef.get();
+    const today = new Date().toDateString();
+
+    let referrerId = null;
+    if (tg.initDataUnsafe && tg.initDataUnsafe.start_param) {
+        referrerId = tg.initDataUnsafe.start_param;
+    }
+
+    if (doc.exists) {
+        const data = doc.data();
+        
+        if (!data.serial) {
+            userSerial = await getNextSerial();
+            await userRef.update({ serial: userSerial, name: userName, userId: userId });
+        } else {
+            userSerial = data.serial;
+            if(!data.name || !data.userId) {
+                await userRef.update({ name: userName, userId: userId });
+            }
+        }
+
+        if (data.last_reset_date !== today) {
+            dailyWatched = 0;
+            await userRef.update({ dailyWatched: 0, last_reset_date: today, name: userName, userId: userId, photoUrl: userPhotoUrl || data.photoUrl || "" });
+        } else {
+            dailyWatched = data.dailyWatched || 0;
+            if(!data.name || !data.photoUrl || !data.userId) {
+                await userRef.update({ name: userName, userId: userId, photoUrl: userPhotoUrl || data.photoUrl || "" });
+            }
+        }
+        
+        userBalance = data.balance || 0;
+        totalRefers = data.refers || 0;
+        
+        let lastProcessedRefers = data.processed_refers !== undefined ? data.processed_refers : totalRefers;
+
+        if (data.processed_refers === undefined) {
+            await userRef.update({ processed_refers: totalRefers });
+        } else if (totalRefers > lastProcessedRefers) {
+            const diff = totalRefers - lastProcessedRefers;
+            const addedCoins = diff * 111;
+            userBalance += addedCoins;
+
+            await userRef.update({
+                balance: userBalance,
+                processed_refers: totalRefers
+            });
+
+            tg.showAlert(`🎉 অভিনন্দন! আপনার ${diff}টি নতুন সফল রেফার থেকে ${addedCoins} কয়েন যোগ হয়েছে!`);
+        }
+
+        lifetimeWatched = data.totalWatched || 0;
+        specialWatched = data.specialWatched || 0;
+        isActive = data.is_active || false;
+        savedPhotoUrl = data.photoUrl || userPhotoUrl;
+        
+        if (data.created_at && data.created_at.toDate) {
+            formattedJoinDate = data.created_at.toDate().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
+        } else {
+            const currentDate = new Date();
+            await userRef.update({ created_at: firebase.firestore.FieldValue.serverTimestamp() });
+            formattedJoinDate = currentDate.toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
+        }
+    } else {
+        userSerial = await getNextSerial();
+        const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp();
+        
+        await userRef.set({ 
+            serial: userSerial,
+            name: userName,
+            userId: userId,
+            photoUrl: userPhotoUrl,
+            balance: 0, 
+            refers: 0, 
+            processed_refers: 0,
+            dailyWatched: 0, 
+            totalWatched: 0, 
+            specialWatched: 0, 
+            is_active: false, 
+            last_reset_date: today,
+            created_at: serverTimestamp
+        }, { merge: true });
+
+        savedPhotoUrl = userPhotoUrl;
+        formattedJoinDate = new Date().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
+
+        if (referrerId && referrerId !== userId) {
+            const referrerRef = db.collection('users').doc(referrerId);
+            const referrerDoc = await referrerRef.get();
+
+            if (referrerDoc.exists) {
+                const refData = referrerDoc.data();
+                const newRefers = (refData.refers || 0) + 1;
+                await referrerRef.update({ refers: newRefers });
+            }
+        }
+    }
+
+    userRef.onSnapshot(async (docSnap) => {
+        if (docSnap.exists) {
+            const freshData = docSnap.data();
+            const currentRefers = freshData.refers || 0;
+            const processedRefers = freshData.processed_refers !== undefined ? freshData.processed_refers : currentRefers;
+
+            if (currentRefers > processedRefers) {
+                const diff = currentRefers - processedRefers;
+                const addedCoins = diff * 111;
+                const updatedBalance = (freshData.balance || 0) + addedCoins;
+                
+                await userRef.update({ 
+                    balance: updatedBalance,
+                    processed_refers: currentRefers
+                });
+
+                userBalance = updatedBalance;
+                tg.showAlert(`🎉 অভিনন্দন! আপনার ${diff}টি নতুন সফল রেফার থেকে ${addedCoins} কয়েন যোগ হয়েছে!`);
+            } else {
+                userBalance = freshData.balance || 0;
+            }
+            
+            totalRefers = currentRefers;
+            userSerial = freshData.serial || userSerial;
+            updateUI();
+            loadReferralsList();
+        }
+    });
+
+    document.getElementById('refer-link').innerText = "https://t.me/TakaInkam1626_bot?start=" + userId;
+    updateUI();
+    loadReferralsList();
+    loadPaymentHistory();
+    startDynamicPaymentNotifications();
 }
-if (doc.exists) {
-const data = doc.data();
-if (!data.serial) {
-userSerial = await getNextSerial();
-await userRef.update({ serial: userSerial, name: userName, userId: userId });
-} else {
-userSerial = data.serial;
-if(!data.name || !data.userId) {
-await userRef.update({ name: userName, userId: userId });
-}
-}
-if (data.last_reset_date !== today) {
-dailyWatched = 0;
-await userRef.update({ dailyWatched: 0, last_reset_date: today, name: userName, userId: userId, photoUrl: userPhotoUrl || data.photoUrl || "" });
-} else {
-dailyWatched = data.dailyWatched || 0;
-if(!data.name || !data.photoUrl || !data.userId) {
-await userRef.update({ name: userName, userId: userId, photoUrl: userPhotoUrl || data.photoUrl || "" });
-}
-}
-userBalance = data.balance || 0;
-totalRefers = data.refers || 0;
-let lastProcessedRefers = data.processed_refers !== undefined ? data.processed_refers : totalRefers;
-if (data.processed_refers === undefined) {
-await userRef.update({ processed_refers: totalRefers });
-} else if (totalRefers > lastProcessedRefers) {
-const diff = totalRefers - lastProcessedRefers;
-const addedCoins = diff * 111;
-userBalance += addedCoins;
-await userRef.update({
-balance: userBalance,
-processed_refers: totalRefers
-});
-tg.showAlert(🎉 অভিনন্দন! আপনার ${diff}টি নতুন সফল রেফার থেকে ${addedCoins} কয়েন যোগ হয়েছে!);
-}
-lifetimeWatched = data.totalWatched || 0;
-specialWatched = data.specialWatched || 0;
-isActive = data.is_active || false;
-savedPhotoUrl = data.photoUrl || userPhotoUrl;
-if (data.created_at && data.created_at.toDate) {
-formattedJoinDate = data.created_at.toDate().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
-} else {
-const currentDate = new Date();
-await userRef.update({ created_at: firebase.firestore.FieldValue.serverTimestamp() });
-formattedJoinDate = currentDate.toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
-}
-} else {
-userSerial = await getNextSerial();
-const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp();
-await userRef.set({
-serial: userSerial,
-name: userName,
-userId: userId,
-photoUrl: userPhotoUrl,
-balance: 0,
-refers: 0,
-processed_refers: 0,
-dailyWatched: 0,
-totalWatched: 0,
-specialWatched: 0,
-is_active: false,
-last_reset_date: today,
-created_at: serverTimestamp
-}, { merge: true });
-savedPhotoUrl = userPhotoUrl;
-formattedJoinDate = new Date().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
-if (referrerId && referrerId !== userId) {
-const referrerRef = db.collection('users').doc(referrerId);
-const referrerDoc = await referrerRef.get();
-if (referrerDoc.exists) {
-const refData = referrerDoc.data();
-const newRefers = (refData.refers || 0) + 1;
-await referrerRef.update({ refers: newRefers });
-}
-}
-}
-userRef.onSnapshot(async (docSnap) => {
-if (docSnap.exists) {
-const freshData = docSnap.data();
-const currentRefers = freshData.refers || 0;
-const processedRefers = freshData.processed_refers !== undefined ? freshData.processed_refers : currentRefers;
-if (currentRefers > processedRefers) {
-const diff = currentRefers - processedRefers;
-const addedCoins = diff * 111;
-const updatedBalance = (freshData.balance || 0) + addedCoins;
-await userRef.update({
-balance: updatedBalance,
-processed_refers: currentRefers
-});
-userBalance = updatedBalance;
-tg.showAlert(🎉 অভিনন্দন! আপনার ${diff}টি নতুন সফল রেফার থেকে ${addedCoins} কয়েন যোগ হয়েছে!);
-} else {
-userBalance = freshData.balance || 0;
-}
-totalRefers = currentRefers;
-userSerial = freshData.serial || userSerial;
-updateUI();
-loadReferralsList();
-}
-});
-document.getElementById('refer-link').innerText = "https://t.me/TakaInkam1626_bot?start=" + userId;
-updateUI();
-loadReferralsList();
-loadPaymentHistory();
-startDynamicPaymentNotifications();
-}
-// ৪২০+ বিভিন্ন ইউজারের ইউনিক ডেমো পেমেন্ট নোটিশ সিস্টেম (ধীরগতির স্ক্রোল অ্যানিমেশনের জন্য আপডেট করা হয়েছে)
+
+// ৪২০+ বিভিন্ন ইউজারের ইউনিক ডেমো পেমেন্ট নোটিশ সিস্টেম
 async function startDynamicPaymentNotifications() {
-let paymentMessages = [
-"🔥 পেমেন্ট সফল: সাদিয়া আক্তার (ID: ...8492) বিকাশ-এর মাধ্যমে ৫০০ টাকা পেমেন্ট পেয়েছেন! 💰",
-"🚀 পেমেন্ট সফল: তানভীর হোসেন (ID: ...3910) নগদ-এর মাধ্যমে ১,০০০ টাকা পেমেন্ট পেয়েছেন! 💸",
-"🎉 পেমেন্ট সফল: নুসরাত জাহান (ID: ...6214) বিকাশ-এর মাধ্যমে ৬০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
-"⚡ পেমেন্ট সফল: ফাহিম ইসলাম (ID: ...9021) নগদ-এর মাধ্যমে ৮০০ টাকা পেমেন্ট পেয়েছেন! 💎",
-"✨ পেমেন্ট সফল: জান্নাতুল ফেরদৌস (ID: ...1182) বিকাশ-এর মাধ্যমে ১,৫০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
-"🎯 পেমেন্ট সফল: রিফাত হাসান (ID: ...4567) নগদ-এর মাধ্যমে ৭০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
-"💖 পেমেন্ট সফল: মীম আক্তার (ID: ...3329) বিকাশ-এর মাধ্যমে ১,২০০ টাকা পেমেন্ট পেয়েছেন! 💸",
-"🌟 পেমেন্ট সফল: জুবায়ের আলম (ID: ...7890) নগদ-এর মাধ্যমে ২,০০০ টাকা পেমেন্ট পেয়েছেন! 🎉",
-"🔥 পেমেন্ট সফল: সুমাইয়া খান (ID: ...2345) বিকাশ-এর মাধ্যমে ৫০০ টাকা পেমেন্ট পেয়েছেন! 💰",
-"🚀 পেমেন্ট সফল: সাব্বির আহমেদ (ID: ...8765) নগদ-এর মাধ্যমে ১,১০০ টাকা পেমেন্ট পেয়েছেন! ✨",
-"🎉 পেমেন্ট সফল: মেহজাবিন হক (ID: ...5432) বিকাশ-এর মাধ্যমে ৯০০ টাকা পেমেন্ট পেয়েছেন! ⚡",
-"💎 পেমেন্ট সফল: নাজমুল হুদা (ID: ...6789) নগদ-এর মাধ্যমে ১,৬০০ টাকা পেমেন্ট পেয়েছেন! 🎯",
-"✨ পেমেন্ট সফল: তাবাসসুম মিম (ID: ...4321) বিকাশ-এর মাধ্যমে ৬০০ টাকা পেমেন্ট পেয়েছেন! 💖",
-"🔥 পেমেন্ট সফল: আশিকুর রহমান (ID: ...9876) নগদ-এর মাধ্যমে ২,৫০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
-"🚀 পেমেন্ট সফল: আয়শা সিদ্দিকা (ID: ...1357) বিকাশ-এর মাধ্যমে ১,০০০ টাকা পেমেন্ট পেয়েছেন! 💰",
-"🎉 পেমেন্ট সফল: রাশেদুল ইসলাম (ID: ...2468) নগদ-এর মাধ্যমে ৮০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
-"⚡ পেমেন্ট সফল: পূজা সাহা (ID: ...3690) বিকাশ-এর মাধ্যমে ১,৩০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
-"💎 পেমেন্ট সফল: শরিফুল ইসলাম (ID: ...7412) নগদ-এর মাধ্যমে ১,৫০০ টাকা পেমেন্ট পেয়েছেন! ✨",
-"🎯 পেমেন্ট সফল: প্রিয়াঙ্কা দাস (ID: ...8523) বিকাশ-এর মাধ্যমে ৫০০ টাকা পেমেন্ট পেয়েছেন! 💖",
-"🔥 পেমেন্ট সফল: মেহেদী হাসান (ID: ...9634) নগদ-এর মাধ্যমে ১,৮০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
-"🚀 পেমেন্ট সফল: রিতু মনি (ID: ...1470) বিকাশ-এর মাধ্যমে ৭০০ টাকা পেমেন্ট পেয়েছেন! 💰",
-"🎉 পেমেন্ট সফল: সোহাগ মিয়া (ID: ...2581) নগদ-এর মাধ্যমে ৯০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
-"⚡ পেমেন্ট সফল: পায়েল ঘোষ (ID: ...3692) বিকাশ-এর মাধ্যমে ১,২০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
-"💎 পেমেন্ট সফল: ইমরান খান (ID: ...4703) নগদ-এর মাধ্যমে ২,০০০ টাকা পেমেন্ট পেয়েছেন! ✨",
-"✨ পেমেন্ট সফল: সাদিয়া ইসলাম (ID: ...5814) বিকাশ-এর মাধ্যমে ১,১০০ টাকা পেমেন্ট পেয়েছেন! 💖",
-"🔥 পেমেন্ট সফল: রিপন আহমেদ (ID: ...6925) নগদ-এর মাধ্যমে ১,৬০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
-"🚀 পেমেন্ট সফল: নাফিসা তাবাসসুম (ID: ...7036) বিকাশ-এর মাধ্যমে ৫০০ টাকা পেমেন্ট পেয়েছেন! 💰",
-"🎉 পেমেন্ট সফল: আল-আমিন খন্দকার (ID: ...8147) নগদ-এর মাধ্যমে ১,০০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
-"⚡ পেমেন্ট সফল: মেহনাজ উর্মি (ID: ...9258) বিকাশ-এর মাধ্যমে ৮০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
-"💎 পেমেন্ট সফল: শাকিল আহমেদ (ID: ...1593) নগদ-এর মাধ্যমে ১,৫০০ টাকা পেমেন্ট পেয়েছেন! ✨",
-"🎯 পেমেন্ট সফল: রাকিবুল ইসলাম (ID: ...2604) বিকাশ-এর মাধ্যমে ৭০০ টাকা পেমেন্ট পেয়েছেন! 💖",
-"🔥 পেমেন্ট সফল: ফারজানা ইয়াসমিন (ID: ...3715) নগদ-এর মাধ্যমে ১,৩০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
-"🚀 পেমেন্ট সফল: মনির হোসেন (ID: ...4826) বিকাশ-এর মাধ্যমে ২,২০০ টাকা পেমেন্ট পেয়েছেন! 💰",
-"🎉 পেমেন্ট সফল: সামিয়া রহমান (ID: ...5937) নগদ-এর মাধ্যমে ১,০০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
-"⚡ পেমেন্ট সফল: শান্তা ইসলাম (ID: ...6048) বিকাশ-এর মাধ্যমে ৬০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
-"💎 পেমেন্ট সফল: আরিফ হোসেন (ID: ...7159) নগদ-এর মাধ্যমে ১,৮০০ টাকা পেমেন্ট পেয়েছেন! ✨",
-"✨ পেমেন্ট সফল: নিশাত আনজুম (ID: ...8260) বিকাশ-এর মাধ্যমে ১,১০০ টাকা পেমেন্ট পেয়েছেন! 💖",
-"🔥 পেমেন্ট সফল: হৃদয় আহমেদ (ID: ...9371) নগদ-এর মাধ্যমে ২,৫০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
-"🚀 পেমেন্ট সফল: মুক্তা আক্তার (ID: ...1823) বিকাশ-এর মাধ্যমে ৮০০ টাকা পেমেন্ট পেয়েছেন! 💰",
-"🎉 পেমেন্ট সফল: সাগর আলী (ID: ...2934) নগদ-এর মাধ্যমে ১,৪০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
-"🔥 পেমেন্ট সফল: রাফি আহমেদ (ID: ...4111) বিকাশ-এর মাধ্যমে ৬০০ টাকা পেমেন্ট পেয়েছেন! 💰",
-"🚀 পেমেন্ট সফল: ঝর্না আক্তার (ID: ...4112) নগদ-এর মাধ্যমে ৯০০ টাকা পেমেন্ট পেয়েছেন! 💸",
-"🎉 পেমেন্ট সফল: মোস্তফা কামাল (ID: ...4113) বিকাশ-এর মাধ্যমে ১,২০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
-"⚡ পেমেন্ট সফল: সুরাইয়া খাতুন (ID: ...4114) নগদ-এর মাধ্যমে ১,৫০০ টাকা পেমেন্ট পেয়েছেন! 💎",
-"✨ পেমেন্ট সফল: বশির আহমেদ (ID: ...4115) বিকাশ-এর মাধ্যমে ৭০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
-"🎯 পেমেন্ট সফল: লিজা মনি (ID: ...4116) নগদ-এর মাধ্যমে ৮০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
-"💖 পেমেন্ট সফল: নাজমুল হাসান (ID: ...4117) বিকাশ-এর মাধ্যমে ১,১০০ টাকা পেমেন্ট পেয়েছেন! 💸",
-"🌟 পেমেন্ট সফল: মনিরা সুলতানা (ID: ...4118) নগদ-এর মাধ্যমে ২,০০০ টাকা পেমেন্ট পেয়েছেন! 🎉",
-"🔥 পেমেন্ট সফল: রাসেল মিয়া (ID: ...4119) বিকাশ-এর মাধ্যমে ৫০০ টাকা পেমেন্ট পেয়েছেন! 💰",
-"🚀 পেমেন্ট সফল: ইতি খাতুন (ID: ...4120) নগদ-এর মাধ্যমে ১,৩০০ টাকা পেমেন্ট পেয়েছেন! ✨",
-"🎉 পেমেন্ট সফল: রুবেল রানা (ID: ...4121) বিকাশ-এর মাধ্যমে ১,০০০ টাকা পেমেন্ট পেয়েছেন! ⚡",
-"💎 পেমেন্ট সফল: তানিয়া আক্তার (ID: ...4122) নগদ-এর মাধ্যমে ১,৬০০ টাকা পেমেন্ট পেয়েছেন! 🎯",
-"✨ পেমেন্ট সফল: সাদ্দাম হোসেন (ID: ...4123) বিকাশ-এর মাধ্যমে ৬০০ টাকা পেমেন্ট পেয়েছেন! 💖",
-"🔥 পেমেন্ট সফল: সোনিয়া পারভীন (ID: ...4124) নগদ-এর মাধ্যমে ২,২০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
-"🚀 পেমেন্ট সফল: জহির রায়হান (ID: ...4125) বিকাশ-এর মাধ্যমে ৮০০ টাকা পেমেন্ট পেয়েছেন! 💰",
-"🎉 পেমেন্ট সফল: পপি আক্তার (ID: ...4126) নগদ-এর মাধ্যমে ৯০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
-"⚡ পেমেন্ট সফল: কামাল হোসেন (ID: ...4127) বিকাশ-এর মাধ্যমে ১,৪০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
-"💎 পেমেন্ট সফল: জেসমিন আক্তার (ID: ...4128) নগদ-এর মাধ্যমে ১,৫০০ টাকা পেমেন্ট পেয়েছেন! ✨",
-"🎯 পেমেন্ট সফল: হাসান আলী (ID: ...4129) বিকাশ-এর মাধ্যমে ৫০০ টাকা পেমেন্ট পেয়েছেন! 💖",
-"🔥 পেমেন্ট সফল: মৌসুমী আক্তার (ID: ...4130) নগদ-এর মাধ্যমে ১,৮০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
-"🚀 পেমেন্ট সফল: ফরহাদ রেজা (ID: ...4131) বিকাশ-এর মাধ্যমে ৭০০ টাকা পেমেন্ট পেয়েছেন! 💰",
-"🎉 পেমেন্ট সফল: খাদিজা বেগম (ID: ...4132) নগদ-এর মাধ্যমে ১,০০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
-"⚡ পেমেন্ট সফল: আশরাফুল ইসলাম (ID: ...4133) বিকাশ-এর মাধ্যমে ১,৩০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
-"💎 পেমেন্ট সফল: রোকসানা আক্তার (ID: ...4134) নগদ-এর মাধ্যমে ২,০০০ টাকা পেমেন্ট পেয়েছেন! ✨",
-"✨ পেমেন্ট সফল: শামীম রেজা (ID: ...4135) বিকাশ-এর মাধ্যমে ১,১০০ টাকা পেমেন্ট পেয়েছেন! 💖",
-"🔥 পেমেন্ট সফল: নাসরিন সুলতানা (ID: ...4136) নগদ-এর মাধ্যমে ১,৬০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
-"🚀 পেমেন্ট সফল: বিল্লাল হোসেন (ID: ...4137) বিকাশ-এর মাধ্যমে ৫০০ টাকা পেমেন্ট পেয়েছেন! 💰",
-"🎉 পেমেন্ট সফল: সুমি আক্তার (ID: ...4138) নগদ-এর মাধ্যমে ১,২০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
-"⚡ পেমেন্ট সফল: মানিক মিয়া (ID: ...4139) বিকাশ-এর মাধ্যমে ৯০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
-"💎 পেমেন্ট সফল: শারমিন সুলতানা (ID: ...4140) নগদ-এর মাধ্যমে ১,৫০০ টাকা পেমেন্ট পেয়েছেন! ✨",
-"🎯 পেমেন্ট সফল: রাজু আহমেদ (ID: ...4141) বিকাশ-এর মাধ্যমে ৭০০ টাকা পেমেন্ট পেয়েছেন! 💖",
-"🔥 পেমেন্ট সফল: তানিয়া রহমান (ID: ...4142) নগদ-এর মাধ্যমে ১,৪০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
-"🚀 পেমেন্ট সফল: আলামিন হোসেন (ID: ...4143) বিকাশ-এর মাধ্যমে ২,০০০ টাকা পেমেন্ট পেয়েছেন! 💰",
-"🎉 পেমেন্ট সফল: মর্জিনা খাতুন (ID: ...4144) নগদ-এর মাধ্যমে ৮০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
-"⚡ পেমেন্ট সফল: ইব্রাহিম খলিল (ID: ...4145) বিকাশ-এর মাধ্যমে ১,২০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
-"💎 পেমেন্ট সফল: লিপি আক্তার (ID: ...4146) নগদ-এর মাধ্যমে ১,৭০০ টাকা পেমেন্ট পেয়েছেন! ✨",
-"✨ পেমেন্ট সফল: সোহেল রানা (ID: ...4147) বিকাশ-এর মাধ্যমে ১,১০০ টাকা পেমেন্ট পেয়েছেন! 💖",
-"🔥 পেমেন্ট সফল: পিয়ারা বেগম (ID: ...4148) নগদ-এর মাধ্যমে ২,৫০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
-"🚀 পেমেন্ট সফল: হাবিবুর রহমান (ID: ...4149) বিকাশ-এর মাধ্যমে ৮০০ টাকা পেমেন্ট পেয়েছেন! 💰",
-"🎉 পেমেন্ট সফল: রেশমা আক্তার (ID: ...4150) নগদ-এর মাধ্যমে ১,৩০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
-"🔥 পেমেন্ট সফল: নাঈম ইসলাম (ID: ...5201) বিকাশ-এর মাধ্যমে ৭০০ টাকা পেমেন্ট পেয়েছেন! 💰",
-"🚀 পেমেন্ট সফল: আসমা খাতুন (ID: ...5202) নগদ-এর মাধ্যমে ১,০০০ টাকা পেমেন্ট পেয়েছেন! 💸",
-"🎉 পেমেন্ট সফল: শরিফ উদ্দিন (ID: ...5203) বিকাশ-এর মাধ্যমে ৮০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
-"⚡ পেমেন্ট সফল: সালমা আক্তার (ID: ...5204) নগদ-এর মাধ্যমে ১,৫০০ টাকা পেমেন্ট পেয়েছেন! 💎",
-"✨ পেমেন্ট সফল: জসিম উদ্দিন (ID: ...5205) বিকাশ-এর মাধ্যমে ৬০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
-"🎯 পেমেন্ট সফল: পারভীন আক্তার (ID: ...5206) নগদ-এর মাধ্যমে ৯০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
-"💖 পেমেন্ট সফল: মিলন মিয়া (ID: ...5207) বিকাশ-এর মাধ্যমে ১,২০০ টাকা পেমেন্ট পেয়েছেন! 💸",
-"🌟 পেমেন্ট সফল: রেহানা বেগম (ID: ...5208) নগদ-এর মাধ্যমে ২,০০০ টাকা পেমেন্ট পেয়েছেন! 🎉",
-"🔥 পেমেন্ট সফল: আনোয়ার হোসেন (ID: ...5209) বিকাশ-এর মাধ্যমে ৫০০ টাকা পেমেন্ট পেয়েছেন! 💰",
-"🚀 পেমেন্ট সফল: শাহনাজ পারভীন (ID: ...5210) নগদ-এর মাধ্যমে ১,১০০ টাকা পেমেন্ট পেয়েছেন! ✨",
-"🎉 পেমেন্ট সফল: জাহাঙ্গীর আলম (ID: ...5211) বিকাশ-এর মাধ্যমে ১,৩০০ টাকা পেমেন্ট পেয়েছেন! ⚡",
-"💎 পেমেন্ট সফল: কুলসুম বেগম (ID: ...5212) নগদ-এর মাধ্যমে ১,৬০০ টাকা পেমেন্ট পেয়েছেন! 🎯",
-"✨ পেমেন্ট সফল: মোশাররফ হোসেন (ID: ...5213) বিকাশ-এর মাধ্যমে ৭০০ টাকা পেমেন্ট পেয়েছেন! 💖",
-"🔥 পেমেন্ট সফল: হোসনে আরা (ID: ...5214) নগদ-এর মাধ্যমে ২,৫০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
-"🚀 পেমেন্ট সফল: দিলরুবা খানম (ID: ...5215) বিকাশ-এর মাধ্যমে ১,০০০ টাকা পেমেন্ট পেয়েছেন! 💰",
-"🎉 পেমেন্ট সফল: দেলোয়ার হোসেন (ID: ...5216) নগদ-এর মাধ্যমে ৮০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
-"⚡ পেমেন্ট সফল: ফারজানা আক্তার (ID: ...5217) বিকাশ-এর মাধ্যমে ১,৪০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
-"💎 পেমেন্ট সফল: মনিরুল ইসলাম (ID: ...5218) নগদ-এর মাধ্যমে ১,৫০০ টাকা পেমেন্ট পেয়েছেন! ✨",
-"🎯 পেমেন্ট সফল: রিনা আক্তার (ID: ...5219) বিকাশ-এর মাধ্যমে ৫০০ টাকা পেমেন্ট পেয়েছেন! 💖",
-"🔥 পেমেন্ট সফল: শফিকুল ইসলাম (ID: ...5220) নগদ-এর মাধ্যমে ১,৯০০ টাকা পেমেন্ট পেয়েছেন! 🌟"
-];
-try {
-const querySnapshot = await db.collection('withdraw_requests')
-.where('status', '==', 'paid')
-.orderBy('time', 'desc')
-.limit(50)
-.get();
-if (!querySnapshot.empty) {
-querySnapshot.forEach(doc => {
-const data = doc.data();
-const uName = data.name || "ইউজার";
-const uTaka = data.taka || 500;
-const uMethod = data.method ? data.method.toUpperCase() : "বিকাশ";
-const uIdNum = data.userId ? data.userId.slice(-4) : Math.floor(1000 + Math.random() * 9000);
-paymentMessages.push(🔥 পেমেন্ট সফল: ${uName} (ID: ...${uIdNum}) ${uMethod}-এর মাধ্যমে ${uTaka} টাকা পেমেন্ট পেয়েছেন! 💰);
-});
+    let paymentMessages = [
+        "🔥 পেমেন্ট সফল: সাদিয়া আক্তার (ID: ...8492) বিকাশ-এর মাধ্যমে ৫০০ টাকা পেমেন্ট পেয়েছেন! 💰",
+        "🚀 পেমেন্ট সফল: তানভীর হোসেন (ID: ...3910) নগদ-এর মাধ্যমে ১,০০০ টাকা পেমেন্ট পেয়েছেন! 💸",
+        "🎉 পেমেন্ট সফল: নুসরাত জাহান (ID: ...6214) বিকাশ-এর মাধ্যমে ৬০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
+        "⚡ পেমেন্ট সফল: ফাহিম ইসলাম (ID: ...9021) নগদ-এর মাধ্যমে ৮০০ টাকা পেমেন্ট পেয়েছেন! 💎",
+        "✨ পেমেন্ট সফল: জান্নাতুল ফেরদৌস (ID: ...1182) বিকাশ-এর মাধ্যমে ১,৫০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
+        "🎯 পেমেন্ট সফল: রিফাত হাসান (ID: ...4567) নগদ-এর মাধ্যমে ৭০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
+        "💖 পেমেন্ট সফল: মীম আক্তার (ID: ...3329) বিকাশ-এর মাধ্যমে ১,২০০ টাকা পেমেন্ট পেয়েছেন! 💸",
+        "🌟 পেমেন্ট সফল: জুবায়ের আলম (ID: ...7890) নগদ-এর মাধ্যমে ২,০০০ টাকা পেমেন্ট পেয়েছেন! 🎉",
+        "🔥 পেমেন্ট সফল: সুমাইয়া খান (ID: ...2345) বিকাশ-এর মাধ্যমে ৫০০ টাকা পেমেন্ট পেয়েছেন! 💰",
+        "🚀 পেমেন্ট সফল: সাব্বির আহমেদ (ID: ...8765) নগদ-এর মাধ্যমে ১,১০০ টাকা পেমেন্ট পেয়েছেন! ✨",
+        "🎉 পেমেন্ট সফল: মেহজাবিন হক (ID: ...5432) বিকাশ-এর মাধ্যমে ৯০০ টাকা পেমেন্ট পেয়েছেন! ⚡",
+        "💎 পেমেন্ট সফল: নাজমুল হুদা (ID: ...6789) নগদ-এর মাধ্যমে ১,৬০০ টাকা পেমেন্ট পেয়েছেন! 🎯",
+        "✨ পেমেন্ট সফল: তাবাসসুম মিম (ID: ...4321) বিকাশ-এর মাধ্যমে ৬০০ টাকা পেমেন্ট পেয়েছেন! 💖",
+        "🔥 পেমেন্ট সফল: আশিকুর রহমান (ID: ...9876) নগদ-এর মাধ্যমে ২,৫০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
+        "🚀 পেমেন্ট সফল: আয়শা সিদ্দিকা (ID: ...1357) বিকাশ-এর মাধ্যমে ১,০০০ টাকা পেমেন্ট পেয়েছেন! 💰",
+        "🎉 পেমেন্ট সফল: রাশেদুল ইসলাম (ID: ...2468) নগদ-এর মাধ্যমে ৮০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
+        "⚡ পেমেন্ট সফল: পূজা সাহা (ID: ...3690) বিকাশ-এর মাধ্যমে ১,৩০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
+        "💎 পেমেন্ট সফল: শরিফুল ইসলাম (ID: ...7412) নগদ-এর মাধ্যমে ১,৫০০ টাকা পেমেন্ট পেয়েছেন! ✨",
+        "🎯 পেমেন্ট সফল: প্রিয়াঙ্কা দাস (ID: ...8523) বিকাশ-এর মাধ্যমে ৫০০ টাকা পেমেন্ট পেয়েছেন! 💖",
+        "🔥 পেমেন্ট সফল: মেহেদী হাসান (ID: ...9634) নগদ-এর মাধ্যমে ১,৮০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
+        "🚀 পেমেন্ট সফল: রিতু মনি (ID: ...1470) বিকাশ-এর মাধ্যমে ৭০০ টাকা পেমেন্ট পেয়েছেন! 💰",
+        "🎉 পেমেন্ট সফল: সোহাগ মিয়া (ID: ...2581) নগদ-এর মাধ্যমে ৯০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
+        "⚡ পেমেন্ট সফল: পায়েল ঘোষ (ID: ...3692) বিকাশ-এর মাধ্যমে ১,২০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
+        "💎 পেমেন্ট সফল: ইমরান খান (ID: ...4703) নগদ-এর মাধ্যমে ২,০০০ টাকা পেমেন্ট পেয়েছেন! ✨",
+        "✨ পেমেন্ট সফল: সাদিয়া ইসলাম (ID: ...5814) বিকাশ-এর মাধ্যমে ১,১০০ টাকা পেমেন্ট পেয়েছেন! 💖",
+        "🔥 পেমেন্ট সফল: রিপন আহমেদ (ID: ...6925) নগদ-এর মাধ্যমে ১,৬০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
+        "🚀 পেমেন্ট সফল: নাফিসা তাবাসসুম (ID: ...7036) বিকাশ-এর মাধ্যমে ৫০০ টাকা পেমেন্ট পেয়েছেন! 💰",
+        "🎉 পেমেন্ট সফল: আল-আমিন খন্দকার (ID: ...8147) নগদ-এর মাধ্যমে ১,০০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
+        "⚡ পেমেন্ট সফল: মেহনাজ উর্মি (ID: ...9258) বিকাশ-এর মাধ্যমে ৮০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
+        "💎 পেমেন্ট সফল: শাকিল আহমেদ (ID: ...1593) নগদ-এর মাধ্যমে ১,৫০০ টাকা পেমেন্ট পেয়েছেন! ✨",
+        "🎯 পেমেন্ট সফল: রাকিবুল ইসলাম (ID: ...2604) বিকাশ-এর মাধ্যমে ৭০০ টাকা পেমেন্ট পেয়েছেন! 💖",
+        "🔥 পেমেন্ট সফল: ফারজানা ইয়াসমিন (ID: ...3715) নগদ-এর মাধ্যমে ১,৩০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
+        "🚀 পেমেন্ট সফল: মনির হোসেন (ID: ...4826) বিকাশ-এর মাধ্যমে ২,২০০ টাকা পেমেন্ট পেয়েছেন! 💰",
+        "🎉 পেমেন্ট সফল: সামিয়া রহমান (ID: ...5937) নগদ-এর মাধ্যমে ১,০০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
+        "⚡ পেমেন্ট সফল: শান্তা ইসলাম (ID: ...6048) বিকাশ-এর মাধ্যমে ৬০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
+        "💎 পেমেন্ট সফল: আরিফ হোসেন (ID: ...7159) নগদ-এর মাধ্যমে ১,৮০০ টাকা পেমেন্ট পেয়েছেন! ✨",
+        "✨ পেমেন্ট সফল: নিশাত আনজুম (ID: ...8260) বিকাশ-এর মাধ্যমে ১,১০০ টাকা পেমেন্ট পেয়েছেন! 💖",
+        "🔥 পেমেন্ট সফল: হৃদয় আহমেদ (ID: ...9371) নগদ-এর মাধ্যমে ২,৫০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
+        "🚀 পেমেন্ট সফল: মুক্তা আক্তার (ID: ...1823) বিকাশ-এর মাধ্যমে ৮০০ টাকা পেমেন্ট পেয়েছেন! 💰",
+        "🎉 পেমেন্ট সফল: সাগর আলী (ID: ...2934) নগদ-এর মাধ্যমে ১,৪০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
+        "🔥 পেমেন্ট সফল: রাফি আহমেদ (ID: ...4111) বিকাশ-এর মাধ্যমে ৬০০ টাকা পেমেন্ট পেয়েছেন! 💰",
+        "🚀 পেমেন্ট সফল: ঝর্না আক্তার (ID: ...4112) নগদ-এর মাধ্যমে ৯০০ টাকা পেমেন্ট পেয়েছেন! 💸",
+        "🎉 পেমেন্ট সফল: মোস্তফা কামাল (ID: ...4113) বিকাশ-এর মাধ্যমে ১,২০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
+        "⚡ পেমেন্ট সফল: সুরাইয়া খাতুন (ID: ...4114) নগদ-এর মাধ্যমে ১,৫০০ টাকা পেমেন্ট পেয়েছেন! 💎",
+        "✨ পেমেন্ট সফল: বশির আহমেদ (ID: ...4115) বিকাশ-এর মাধ্যমে ৭০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
+        "🎯 পেমেন্ট সফল: লিজা মনি (ID: ...4116) নগদ-এর মাধ্যমে ৮০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
+        "💖 পেমেন্ট সফল: নাজমুল হাসান (ID: ...4117) বিকাশ-এর মাধ্যমে ১,১০০ টাকা পেমেন্ট পেয়েছেন! 💸",
+        "🌟 পেমেন্ট সফল: মনিরা সুলতানা (ID: ...4118) নগদ-এর মাধ্যমে ২,০০০ টাকা পেমেন্ট পেয়েছেন! 🎉",
+        "🔥 পেমেন্ট সফল: রাসেল মিয়া (ID: ...4119) বিকাশ-এর মাধ্যমে ৫০০ টাকা পেমেন্ট পেয়েছেন! 💰",
+        "🚀 পেমেন্ট সফল: ইতি খাতুন (ID: ...4120) নগদ-এর মাধ্যমে ১,৩০০ টাকা পেমেন্ট পেয়েছেন! ✨",
+        "🎉 পেমেন্ট সফল: রুবেল রানা (ID: ...4121) বিকাশ-এর মাধ্যমে ১,০০০ টাকা পেমেন্ট পেয়েছেন! ⚡",
+        "💎 পেমেন্ট সফল: তানিয়া আক্তার (ID: ...4122) নগদ-এর মাধ্যমে ১,৬০০ টাকা পেমেন্ট পেয়েছেন! 🎯",
+        "✨ পেমেন্ট সফল: সাদ্দাম হোসেন (ID: ...4123) বিকাশ-এর মাধ্যমে ৬০০ টাকা পেমেন্ট পেয়েছেন! 💖",
+        "🔥 পেমেন্ট সফল: সোনিয়া পারভীন (ID: ...4124) নগদ-এর মাধ্যমে ২,২০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
+        "🚀 পেমেন্ট সফল: জহির রায়হান (ID: ...4125) বিকাশ-এর মাধ্যমে ৮০০ টাকা পেমেন্ট পেয়েছেন! 💰",
+        "🎉 পেমেন্ট সফল: পপি আক্তার (ID: ...4126) নগদ-এর মাধ্যমে ৯০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
+        "⚡ পেমেন্ট সফল: কামাল হোসেন (ID: ...4127) বিকাশ-এর মাধ্যমে ১,৪০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
+        "💎 পেমেন্ট সফল: জেসমিন আক্তার (ID: ...4128) নগদ-এর মাধ্যমে ১,৫০০ টাকা পেমেন্ট পেয়েছেন! ✨",
+        "🎯 পেমেন্ট সফল: হাসান আলী (ID: ...4129) বিকাশ-এর মাধ্যমে ৫০০ টাকা পেমেন্ট পেয়েছেন! 💖",
+        "🔥 পেমেন্ট সফল: মৌসুমী আক্তার (ID: ...4130) নগদ-এর মাধ্যমে ১,৮০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
+        "🚀 পেমেন্ট সফল: ফরহাদ রেজা (ID: ...4131) বিকাশ-এর মাধ্যমে ৭০০ টাকা পেমেন্ট পেয়েছেন! 💰",
+        "🎉 পেমেন্ট সফল: খাদিজা বেগম (ID: ...4132) নগদ-এর মাধ্যমে ১,০০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
+        "⚡ পেমেন্ট সফল: আশরাফুল ইসলাম (ID: ...4133) বিকাশ-এর মাধ্যমে ১,৩০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
+        "💎 পেমেন্ট সফল: রোকসানা আক্তার (ID: ...4134) নগদ-এর মাধ্যমে ২,০০০ টাকা পেমেন্ট পেয়েছেন! ✨",
+        "✨ পেমেন্ট সফল: শামীম রেজা (ID: ...4135) বিকাশ-এর মাধ্যমে ১,১০০ টাকা পেমেন্ট পেয়েছেন! 💖",
+        "🔥 পেমেন্ট সফল: নাসরিন সুলতানা (ID: ...4136) নগদ-এর মাধ্যমে ১,৬০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
+        "🚀 পেমেন্ট সফল: বিল্লাল হোসেন (ID: ...4137) বিকাশ-এর মাধ্যমে ৫০০ টাকা পেমেন্ট পেয়েছেন! 💰",
+        "🎉 পেমেন্ট সফল: সুমি আক্তার (ID: ...4138) নগদ-এর মাধ্যমে ১,২০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
+        "⚡ পেমেন্ট সফল: মানিক মিয়া (ID: ...4139) বিকাশ-এর মাধ্যমে ৯০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
+        "💎 পেমেন্ট সফল: শারমিন সুলতানা (ID: ...4140) নগদ-এর মাধ্যমে ১,৫০০ টাকা পেমেন্ট পেয়েছেন! ✨",
+        "🎯 পেমেন্ট সফল: রাজু আহমেদ (ID: ...4141) বিকাশ-এর মাধ্যমে ৭০০ টাকা পেমেন্ট পেয়েছেন! 💖",
+        "🔥 পেমেন্ট সফল: তানিয়া রহমান (ID: ...4142) নগদ-এর মাধ্যমে ১,৪০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
+        "🚀 পেমেন্ট সফল: আলামিন হোসেন (ID: ...4143) বিকাশ-এর মাধ্যমে ২,০০০ টাকা পেমেন্ট পেয়েছেন! 💰",
+        "🎉 পেমেন্ট সফল: মর্জিনা খাতুন (ID: ...4144) নগদ-এর মাধ্যমে ৮০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
+        "⚡ পেমেন্ট সফল: ইব্রাহিম খলিল (ID: ...4145) বিকাশ-এর মাধ্যমে ১,২০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
+        "💎 পেমেন্ট সফল: লিপি আক্তার (ID: ...4146) নগদ-এর মাধ্যমে ১,৭০০ টাকা পেমেন্ট পেয়েছেন! ✨",
+        "✨ পেমেন্ট সফল: সোহেল রানা (ID: ...4147) বিকাশ-এর মাধ্যমে ১,১০০ টাকা পেমেন্ট পেয়েছেন! 💖",
+        "🔥 পেমেন্ট সফল: পিয়ারা বেগম (ID: ...4148) নগদ-এর মাধ্যমে ২,৫০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
+        "🚀 পেমেন্ট সফল: হাবিবুর রহমান (ID: ...4149) বিকাশ-এর মাধ্যমে ৮০০ টাকা পেমেন্ট পেয়েছেন! 💰",
+        "🎉 পেমেন্ট সফল: রেশমা আক্তার (ID: ...4150) নগদ-এর মাধ্যমে ১,৩০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
+        "🔥 পেমেন্ট সফল: নাঈম ইসলাম (ID: ...5201) বিকাশ-এর মাধ্যমে ৭০০ টাকা পেমেন্ট পেয়েছেন! 💰",
+        "🚀 পেমেন্ট সফল: আসমা খাতুন (ID: ...5202) নগদ-এর মাধ্যমে ১,০০০ টাকা পেমেন্ট পেয়েছেন! 💸",
+        "🎉 পেমেন্ট সফল: শরিফ উদ্দিন (ID: ...5203) বিকাশ-এর মাধ্যমে ৮০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
+        "⚡ পেমেন্ট সফল: সালমা আক্তার (ID: ...5204) নগদ-এর মাধ্যমে ১,৫০০ টাকা পেমেন্ট পেয়েছেন! 💎",
+        "✨ পেমেন্ট সফল: জসিম উদ্দিন (ID: ...5205) বিকাশ-এর মাধ্যমে ৬০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
+        "🎯 পেমেন্ট সফল: পারভীন আক্তার (ID: ...5206) নগদ-এর মাধ্যমে ৯০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
+        "💖 পেমেন্ট সফল: মিলন মিয়া (ID: ...5207) বিকাশ-এর মাধ্যমে ১,২০০ টাকা পেমেন্ট পেয়েছেন! 💸",
+        "🌟 পেমেন্ট সফল: রেহানা বেগম (ID: ...5208) নগদ-এর মাধ্যমে ২,০০০ টাকা পেমেন্ট পেয়েছেন! 🎉",
+        "🔥 পেমেন্ট সফল: আনোয়ার হোসেন (ID: ...5209) বিকাশ-এর মাধ্যমে ৫০০ টাকা পেমেন্ট পেয়েছেন! 💰",
+        "🚀 পেমেন্ট সফল: শাহনাজ পারভীন (ID: ...5210) নগদ-এর মাধ্যমে ১,১০০ টাকা পেমেন্ট পেয়েছেন! ✨",
+        "🎉 পেমেন্ট সফল: জাহাঙ্গীর আলম (ID: ...5211) বিকাশ-এর মাধ্যমে ১,৩০০ টাকা পেমেন্ট পেয়েছেন! ⚡",
+        "💎 পেমেন্ট সফল: কুলসুম বেগম (ID: ...5212) নগদ-এর মাধ্যমে ১,৬০০ টাকা পেমেন্ট পেয়েছেন! 🎯",
+        "✨ পেমেন্ট সফল: মোশাররফ হোসেন (ID: ...5213) বিকাশ-এর মাধ্যমে ৭০০ টাকা পেমেন্ট পেয়েছেন! 💖",
+        "🔥 পেমেন্ট সফল: হোসনে আরা (ID: ...5214) নগদ-এর মাধ্যমে ২,৫০০ টাকা পেমেন্ট পেয়েছেন! 🌟",
+        "🚀 পেমেন্ট সফল: দিলরুবা খানম (ID: ...5215) বিকাশ-এর মাধ্যমে ১,০০০ টাকা পেমেন্ট পেয়েছেন! 💰",
+        "🎉 পেমেন্ট সফল: দেলোয়ার হোসেন (ID: ...5216) নগদ-এর মাধ্যমে ৮০০ টাকা পেমেন্ট পেয়েছেন! 🔥",
+        "⚡ পেমেন্ট সফল: ফারজানা আক্তার (ID: ...5217) বিকাশ-এর মাধ্যমে ১,৪০০ টাকা পেমেন্ট পেয়েছেন! 🚀",
+        "💎 পেমেন্ট সফল: মনিরুল ইসলাম (ID: ...5218) নগদ-এর মাধ্যমে ১,৫০০ টাকা পেমেন্ট পেয়েছেন! ✨",
+        "🎯 পেমেন্ট সফল: রিনা আক্তার (ID: ...5219) বিকাশ-এর মাধ্যমে ৫০০ টাকা পেমেন্ট পেয়েছেন! 💖",
+        "🔥 পেমেন্ট সফল: শফিকুল ইসলাম (ID: ...5220) নগদ-এর মাধ্যমে ১,৯০০ টাকা পেমেন্ট পেয়েছেন! 🌟"
+    ];
+
+    try {
+        const querySnapshot = await db.collection('withdraw_requests')
+            .where('status', '==', 'paid')
+            .orderBy('time', 'desc')
+            .limit(50)
+            .get();
+
+        if (!querySnapshot.empty) {
+            querySnapshot.forEach(doc => {
+                const data = doc.data();
+                const uName = data.name || "ইউজার";
+                const uTaka = data.taka || 500;
+                const uMethod = data.method ? data.method.toUpperCase() : "বিকাশ";
+                const uIdNum = data.userId ? data.userId.slice(-4) : Math.floor(1000 + Math.random() * 9000);
+                paymentMessages.push(`🔥 পেমেন্ট সফল: ${uName} (ID: ...${uIdNum}) ${uMethod}-এর মাধ্যমে ${uTaka} টাকা পেমেন্ট পেয়েছেন! 💰`);
+            });
+        }
+    } catch (e) {
+        console.log("Firebase live payment fetch error:", e);
+    }
+
+    const noticeEl = document.getElementById('live-payment-notice');
+    if (!noticeEl) return;
+
+    noticeEl.innerHTML = paymentMessages.join(" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🚀 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ");
 }
-} catch (e) {
-console.log("Firebase live payment fetch error:", e);
-}
-const noticeEl = document.getElementById('live-payment-notice');
-if (!noticeEl) return;
-noticeEl.innerHTML = paymentMessages.join("          🚀          ");
-// অ্যানিমেশনের সময়কাল ৯০ সেকেন্ড করা হয়েছে যাতে স্ক্রোলিং অনেক ধীরগতিতে (১০ সেকেন্ডের বেশি আরামদায়ক সময়ে) হয়
-noticeEl.style.animationDuration = "90s";
-}
+
 function updateUI() {
-document.getElementById('display-user-name').innerText = userName;
-document.getElementById('display-user-id-badge').innerText = userId;
-document.getElementById('display-user-id').innerText = userId;
-document.getElementById('display-join-date').innerText = formattedJoinDate;
-document.getElementById('display-user-serial').innerText = "নং: #" + userSerial;
-if(savedPhotoUrl) {
-document.getElementById('user-profile-pic').src = savedPhotoUrl;
+    document.getElementById('display-user-name').innerText = userName;
+    document.getElementById('display-user-id-badge').innerText = userId;
+    document.getElementById('display-user-id').innerText = userId;
+    document.getElementById('display-join-date').innerText = formattedJoinDate;
+    document.getElementById('display-user-serial').innerText = "নং: #" + userSerial;
+    
+    if(savedPhotoUrl) {
+        document.getElementById('user-profile-pic').src = savedPhotoUrl;
+    }
+
+    document.getElementById('main-balance').innerText = Math.floor(userBalance);
+    document.getElementById('wallet-balance').innerText = Math.floor(userBalance);
+    document.getElementById('dash-task').innerText = dailyWatched;
+    document.getElementById('dash-refer').innerText = totalRefers;
+    document.getElementById('dash-refer-count').innerText = totalRefers;
+    document.getElementById('task-count').innerText = dailyWatched;
+    document.getElementById('total-watched-count').innerText = lifetimeWatched;
+    document.getElementById('dash-watched').innerText = dailyWatched;
+    document.getElementById('dash-remaining').innerText = (50 - dailyWatched);
+    
+    document.getElementById('special-task-count').innerText = specialWatched;
+    if(document.getElementById('progress-bar')) document.getElementById('progress-bar').style.width = (dailyWatched / 50 * 100) + "%";
+    if(document.getElementById('special-progress-bar')) document.getElementById('special-progress-bar').style.width = (specialWatched / 300 * 100) + "%";
 }
-document.getElementById('main-balance').innerText = Math.floor(userBalance);
-document.getElementById('wallet-balance').innerText = Math.floor(userBalance);
-document.getElementById('dash-task').innerText = dailyWatched;
-document.getElementById('dash-refer').innerText = totalRefers;
-document.getElementById('dash-refer-count').innerText = totalRefers;
-document.getElementById('task-count').innerText = dailyWatched;
-document.getElementById('total-watched-count').innerText = lifetimeWatched;
-document.getElementById('dash-watched').innerText = dailyWatched;
-document.getElementById('dash-remaining').innerText = (50 - dailyWatched);
-document.getElementById('special-task-count').innerText = specialWatched;
-if(document.getElementById('progress-bar')) document.getElementById('progress-bar').style.width = (dailyWatched / 50 * 100) + "%";
-if(document.getElementById('special-progress-bar')) document.getElementById('special-progress-bar').style.width = (specialWatched / 300 * 100) + "%";
-}
+
 function loadReferralsList() {
-const listContainer = document.getElementById('referrals-list-container');
-if (!listContainer) return;
-listContainer.innerHTML = '';
-if (totalRefers <= 0) {
-listContainer.innerHTML = '<div style="text-align:center; padding:20px; color:#64748b; font-weight:bold;">এখনো কোনো রেফার করা হয়নি</div>';
-return;
+    const listContainer = document.getElementById('referrals-list-container');
+    if (!listContainer) return;
+    listContainer.innerHTML = '';
+    if (totalRefers <= 0) {
+        listContainer.innerHTML = '<div style="text-align:center; padding:20px; color:#64748b; font-weight:bold;">এখনো কোনো রেফার করা হয়নি</div>';
+        return;
+    }
+    for (let i = 1; i <= totalRefers; i++) {
+        const card = document.createElement('div');
+        card.className = 'list-card';
+        card.innerHTML = `<div><div><b>${i}.</b> 👤 সফল রেফারেল</div><div class="list-date">📅 সক্রিয় মেম্বার</div></div><div style="color: #10b981;">+১১ কয়েন</div>`;
+        listContainer.appendChild(card);
+    }
 }
-for (let i = 1; i <= totalRefers; i++) {
-const card = document.createElement('div');
-card.className = 'list-card';
-card.innerHTML = <div><div><b>${i}.</b> 👤 সফল রেফারেল</div><div class="list-date">📅 সক্রিয় মেম্বার</div></div><div style="color: #10b981;">+১১ কয়েন</div>;
-listContainer.appendChild(card);
-}
-}
+
 async function loadPaymentHistory() {
-const listContainer = document.getElementById('payment-history-list');
-const querySnapshot = await db.collection('withdraw_requests')
-.where('userId', '==', userId)
-.orderBy('time', 'desc')
-.get();
-if (querySnapshot.empty) {
-listContainer.innerHTML = '<p style="text-align:center;">কোনো রিকোয়েস্ট নেই।</p>';
-return;
+    const listContainer = document.getElementById('payment-history-list');
+    const querySnapshot = await db.collection('withdraw_requests')
+        .where('userId', '==', userId)
+        .orderBy('time', 'desc')
+        .get();
+    if (querySnapshot.empty) {
+        listContainer.innerHTML = '<p style="text-align:center;">কোনো রিকোয়েস্ট নেই।</p>';
+        return;
+    }
+    listContainer.innerHTML = '';
+    querySnapshot.forEach((doc, index) => {
+        const data = doc.data();
+        const statusColor = data.status === 'paid' ? '#10b981' : '#f59e0b';
+        const statusText = data.status === 'paid' ? 'সম্পন্ন' : 'পেন্ডিং';
+        const serialNo = index + 1;
+        const item = document.createElement('div');
+        item.style.padding = "10px 0";
+        item.style.borderBottom = "1px solid #f1f5f9";
+        item.innerHTML = `
+            <div style="font-size:14px; font-weight:bold;">${serialNo}. ${data.method.toUpperCase()} - ${data.amount} কয়েন</div>
+            <div style="font-size:12px; color:#64748b;">নাম্বার: ${data.number}</div>
+            <div style="font-size:12px; color:${statusColor}; font-weight:bold;">স্ট্যাটাস: ${statusText}</div>
+        `;
+        listContainer.appendChild(item);
+    });
 }
-listContainer.innerHTML = '';
-querySnapshot.forEach((doc, index) => {
-const data = doc.data();
-const statusColor = data.status === 'paid' ? '#10b981' : '#f59e0b';
-const statusText = data.status === 'paid' ? 'সম্পন্ন' : 'পেন্ডিং';
-const serialNo = index + 1;
-const item = document.createElement('div');
-item.style.padding = "10px 0";
-item.style.borderBottom = "1px solid #f1f5f9";
-item.innerHTML = <div style="font-size:14px; font-weight:bold;">${serialNo}. ${data.method.toUpperCase()} - ${data.amount} কয়েন</div> <div style="font-size:12px; color:#64748b;">নাম্বার: ${data.number}</div> <div style="font-size:12px; color:${statusColor}; font-weight:bold;">স্ট্যাটাস: ${statusText}</div>;
-listContainer.appendChild(item);
-});
-}
+
 async function watchRealAd() {
-if(dailyWatched >= 50) { tg.showAlert("আজকের লিমিট শেষ!"); return; }
-if (typeof show_11149595 === 'function') {
-show_11149595().then(async () => {
-userBalance += 20;
-dailyWatched++;
-lifetimeWatched++;
-await db.collection('users').doc(userId).update({
-balance: userBalance,
-dailyWatched: dailyWatched,
-totalWatched: lifetimeWatched
-});
-updateUI();
-tg.showAlert("🎉 ২০ কয়েন যোগ হয়েছে!");
-});
+    if(dailyWatched >= 50) { tg.showAlert("আজকের লিমিট শেষ!"); return; }
+    if (typeof show_11149595 === 'function') {
+        show_11149595().then(async () => {
+            userBalance += 20; 
+            dailyWatched++; 
+            lifetimeWatched++;
+            await db.collection('users').doc(userId).update({ 
+                balance: userBalance, 
+                dailyWatched: dailyWatched, 
+                totalWatched: lifetimeWatched 
+            });
+            updateUI();
+            tg.showAlert("🎉 ২০ কয়েন যোগ হয়েছে!");
+        });
+    }
 }
-}
+
 async function watchSpecialAd() {
-if(specialWatched >= 300) { tg.showAlert("আপনার ৩০০টি ভিডিও দেখা সম্পন্ন হয়েছে!"); return; }
-if (typeof show_11149595 === 'function') {
-show_11149595().then(async () => {
-specialWatched++;
-await db.collection('users').doc(userId).update({
-specialWatched: specialWatched
-});
-updateUI();
-tg.showAlert("🎉 ১টি স্পেশাল ভিডিও দেখা সম্পন্ন হয়েছে!");
-});
+    if(specialWatched >= 300) { tg.showAlert("আপনার ৩০০টি ভিডিও দেখা সম্পন্ন হয়েছে!"); return; }
+    if (typeof show_11149595 === 'function') {
+        show_11149595().then(async () => {
+            specialWatched++;
+            await db.collection('users').doc(userId).update({ 
+                specialWatched: specialWatched 
+            });
+            updateUI();
+            tg.showAlert("🎉 ১টি স্পেশাল ভিডিও দেখা সম্পন্ন হয়েছে!");
+        });
+    }
 }
-}
+
 async function processWithdraw() {
-const amount = parseFloat(document.getElementById("withdraw-amount").value);
-const number = document.getElementById("withdraw-number").value;
-const method = document.getElementById("payment-method").value;
-const supportLink = "https://t.me/ks162699bot";
-let taka = (amount / 1000) * 20;
-if (!number || !amount) { tg.showAlert("সব তথ্য পূরণ করুন।"); return; }
-if (amount < 1000) { tg.showAlert("ন্যূনতম ১০০০ কয়েন প্রয়োজন!"); return; }
-if (amount > userBalance) { tg.showAlert("পর্যাপ্ত ব্যালেন্স নেই!"); return; }
-if (totalRefers < 11) {
-tg.showAlert("⚠️ রিডিম করতে ১১টি রেফার প্রয়োজন। বর্তমান রেফার: " + totalRefers + "টি।");
-return;
+    const amount = parseFloat(document.getElementById("withdraw-amount").value);
+    const number = document.getElementById("withdraw-number").value;
+    const method = document.getElementById("payment-method").value;
+    const supportLink = "https://t.me/ks162699bot"; 
+    
+    let taka = (amount / 1000) * 20; 
+    
+    if (!number || !amount) { tg.showAlert("সব তথ্য পূরণ করুন।"); return; }
+    if (amount < 1000) { tg.showAlert("ন্যূনতম ১০০০ কয়েন প্রয়োজন!"); return; }
+    if (amount > userBalance) { tg.showAlert("পর্যাপ্ত ব্যালেন্স নেই!"); return; }
+    if (totalRefers < 11) { 
+        tg.showAlert("⚠️ রিডিম করতে ১১টি রেফার প্রয়োজন। বর্তমান রেফার: " + totalRefers + "টি।"); 
+        return; 
+    }
+    
+    if (isActive === true) {
+        if (specialWatched < 300) {
+            tg.showPopup({
+                title: 'স্পেশাল টাস্ক অসমাপ্ত',
+                message: `টাকা উত্তোলনের অনুরোধ পাঠাতে হলে স্পেশাল পেজ থেকে নতুন করে ৩০০টি ভিডিও দেখতে হবে। আপনার দেখা হয়েছে: ${specialWatched} / 300টি।`,
+                buttons: [
+                    {id: 'gotospecial', type: 'default', text: 'স্পেশাল ভিডিও দেখতে যান'}, 
+                    {type: 'cancel', text: 'বাতিল'}
+                ]
+            }, (buttonId) => {
+                if (buttonId === 'gotospecial') {
+                    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                    document.getElementById('page-special-task').classList.add('active');
+                }
+            });
+            return;
+        }
+
+        tg.showPopup({
+            title: 'পেমেন্ট নিশ্চিত করুন',
+            message: `আপনি ${amount} কয়েন উইথড্র করছেন। এর বিনিময়ে আপনি পাবেন ${taka} টাকা। আপনি কি নিশ্চিত?`,
+            buttons: [{id: 'confirm', type: 'default', text: 'হ্যাঁ, নিশ্চিত'}, {type: 'cancel', text: 'বাতিল'}]
+        }, async (buttonId) => {
+            if (buttonId === 'confirm') {
+                await db.collection('withdraw_requests').add({
+                    userId: userId, name: userName, number: number, amount: amount, taka: taka, method: method, status: "pending", time: new Date()
+                });
+
+                const messageText = `💰 নতুন পেমেন্ট রিকোয়েস্ট!\n👤 ইউজার নাম: ${userName}\n🆔 ইউজার আইডি: <a href="tg://user?id=${userId}">${userId}</a>\n🔢 অ্যাকাউন্ট নং: #${userSerial}\n💳 মেথড: ${method.toUpperCase()}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} কয়েন (${taka} টাকা)\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${userId}`;
+
+                if (savedPhotoUrl && savedPhotoUrl.startsWith("http")) {
+                    fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            chat_id: adminChatId,
+                            photo: savedPhotoUrl,
+                            caption: messageText,
+                            parse_mode: "HTML"
+                        })
+                    }).catch(e => console.log(e));
+                } else {
+                    fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            chat_id: adminChatId,
+                            text: messageText,
+                            parse_mode: "HTML"
+                        })
+                    }).catch(e => console.log(e));
+                }
+
+                userBalance -= amount;
+                await db.collection('users').doc(userId).update({ balance: userBalance });
+                updateUI();
+                loadPaymentHistory();
+                tg.showAlert("🎉 আপনার পেমেন্ট অনুরোধ সফলভাবে জমা হয়েছে!");
+            }
+        });
+        return;
+    }
+    
+    tg.showPopup({
+        title: 'পেমেন্ট রিকোয়েস্ট',
+        message: 'আপনার ১১টি রেফার পূরণ হয়েছে। পেমেন্ট রিকোয়েস্ট পাঠানোর আগে ১১টি রেফার করে এবং ১১ কয়েন ফি দিয়ে অ্যাকাউন্টটি অ্যাক্টিভ করুন।',
+        buttons: [{id: 'support', type: 'default', text: 'অ্যাক্টিভ করতে যোগাযোগ করুন'}, {type: 'cancel', text: 'বাতিল'}]
+    }, (buttonId) => { if (buttonId === 'support') { tg.openTelegramLink(supportLink); } });
 }
-if (isActive === true) {
-if (specialWatched < 300) {
-tg.showPopup({
-title: 'স্পেশাল টাস্ক অসমাপ্ত',
-message: টাকা উত্তোলনের অনুরোধ পাঠাতে হলে স্পেশাল পেজ থেকে নতুন করে ৩০০টি ভিডিও দেখতে হবে। আপনার দেখা হয়েছে: ${specialWatched} / 300টি।,
-buttons: [
-{id: 'gotospecial', type: 'default', text: 'স্পেশাল ভিডিও দেখতে যান'},
-{type: 'cancel', text: 'বাতিল'}
-]
-}, (buttonId) => {
-if (buttonId === 'gotospecial') {
-document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-document.getElementById('page-special-task').classList.add('active');
-}
-});
-return;
-}
-tg.showPopup({
-title: 'পেমেন্ট নিশ্চিত করুন',
-message: আপনি ${amount} কয়েন উইথড্র করছেন। এর বিনিময়ে আপনি পাবেন ${taka} টাকা। আপনি কি নিশ্চিত?,
-buttons: [{id: 'confirm', type: 'default', text: 'হ্যাঁ, নিশ্চিত'}, {type: 'cancel', text: 'বাতিল'}]
-}, async (buttonId) => {
-if (buttonId === 'confirm') {
-await db.collection('withdraw_requests').add({
-userId: userId, name: userName, number: number, amount: amount, taka: taka, method: method, status: "pending", time: new Date()
-});
-const messageText = 💰 নতুন পেমেন্ট রিকোয়েস্ট!\n👤 ইউজার নাম: ${userName}\n🆔 ইউজার আইডি: <a href="tg://user?id=${userId}">${userId}</a>\n🔢 অ্যাকাউন্ট নং: #${userSerial}\n💳 মেথড: ${method.toUpperCase()}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} কয়েন (${taka} টাকা)\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${userId};
-if (savedPhotoUrl && savedPhotoUrl.startsWith("http")) {
-fetch([https://api.telegram.org/bot$](https://api.telegram.org/bot$){botToken}/sendPhoto, {
-method: 'POST',
-headers: { 'Content-Type': 'application/json' },
-body: JSON.stringify({
-chat_id: adminChatId,
-photo: savedPhotoUrl,
-caption: messageText,
-parse_mode: "HTML"
-})
-}).catch(e => console.log(e));
-} else {
-fetch([https://api.telegram.org/bot$](https://api.telegram.org/bot$){botToken}/sendMessage, {
-method: 'POST',
-headers: { 'Content-Type': 'application/json' },
-body: JSON.stringify({
-chat_id: adminChatId,
-text: messageText,
-parse_mode: "HTML"
-})
-}).catch(e => console.log(e));
-}
-userBalance -= amount;
-await db.collection('users').doc(userId).update({ balance: userBalance });
-updateUI();
-loadPaymentHistory();
-tg.showAlert("🎉 আপনার পেমেন্ট অনুরোধ সফলভাবে জমা হয়েছে!");
-}
-});
-return;
-}
-tg.showPopup({
-title: 'পেমেন্ট রিকোয়েস্ট',
-message: 'আপনার ১১টি রেফার পূরণ হয়েছে। পেমেন্ট রিকোয়েস্ট পাঠানোর আগে ১১টি রেফার করে এবং ১১ কয়েন ফি দিয়ে অ্যাকাউন্টটি অ্যাক্টিভ করুন।',
-buttons: [{id: 'support', type: 'default', text: 'অ্যাক্টিভ করতে যোগাযোগ করুন'}, {type: 'cancel', text: 'বাতিল'}]
-}, (buttonId) => { if (buttonId === 'support') { tg.openTelegramLink(supportLink); } });
-}
+
 function switchPage(id, el) {
-document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-document.getElementById('page-' + id).classList.add('active');
-document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-if(el) el.classList.add('active');
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    if(el) el.classList.add('active');
 }
 function copyRefer() { navigator.clipboard.writeText("https://t.me/TakaInkam1626_bot?start=" + userId); tg.showAlert("লিংক কপি হয়েছে!"); }
 function shareRefer() { tg.openTelegramLink("https://t.me/share/url?url=" + encodeURIComponent("https://t.me/TakaInkam1626_bot?start=" + userId)); }
