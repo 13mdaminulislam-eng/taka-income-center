@@ -226,26 +226,30 @@ async function loadAllData() {
 
     if (doc.exists) {
         const data = doc.data();
+        
+        // সিরিয়াল নাম্বার নিশ্চিত করা (যদি আগের ডেটাতে না থাকে)
+        if (!data.serial) {
+            userSerial = await getNextSerial();
+            await userRef.update({ serial: userSerial, name: userName, userId: userId });
+        } else {
+            userSerial = data.serial;
+            if(!data.name || !data.userId) {
+                await userRef.update({ name: userName, userId: userId });
+            }
+        }
+
         if (data.last_reset_date !== today) {
             dailyWatched = 0;
-            await userRef.update({ dailyWatched: 0, last_reset_date: today, name: userName, photoUrl: userPhotoUrl || data.photoUrl || "" });
+            await userRef.update({ dailyWatched: 0, last_reset_date: today, name: userName, userId: userId, photoUrl: userPhotoUrl || data.photoUrl || "" });
         } else {
             dailyWatched = data.dailyWatched || 0;
-            if(!data.name || !data.photoUrl) {
-                await userRef.update({ name: userName, photoUrl: userPhotoUrl || data.photoUrl || "" });
+            if(!data.name || !data.photoUrl || !data.userId) {
+                await userRef.update({ name: userName, userId: userId, photoUrl: userPhotoUrl || data.photoUrl || "" });
             }
         }
         
         userBalance = data.balance || 0;
         totalRefers = data.refers || 0;
-        
-        // যদি পুরোনো ইউজারের ডেটাবেজে সিরিয়াল না থাকে, তবে স্বয়ংক্রয়ভাবে একটি সিরিয়াল তৈরি করে অ্যাসাইন করে দিবে
-        if (!data.serial) {
-            userSerial = await getNextSerial();
-            await userRef.update({ serial: userSerial });
-        } else {
-            userSerial = data.serial;
-        }
         
         let lastProcessedRefers = data.processed_refers !== undefined ? data.processed_refers : totalRefers;
 
@@ -277,12 +281,14 @@ async function loadAllData() {
             formattedJoinDate = currentDate.toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
         }
     } else {
-        // একদম নতুন ইউজারের জন্য সিরিয়াল জেনারেট
+        // নতুন ইউজারের জন্য সিরিয়াল জেনারেট ও ফায়ারবেসে `serial`, `name`, `userId` প্রথমে সেভ করা
         userSerial = await getNextSerial();
         const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp();
         
         await userRef.set({ 
-            name: userName,
+            serial: userSerial,           // ফায়ারবেস লিস্টে সহজে চেনার জন্য সিরিয়াল
+            name: userName,               // ইউজারের নাম
+            userId: userId,               // ইউজারের টেলিগ্রাম আইডি
             photoUrl: userPhotoUrl,
             balance: 0, 
             refers: 0, 
@@ -292,7 +298,6 @@ async function loadAllData() {
             specialWatched: 0, 
             is_active: false, 
             last_reset_date: today,
-            serial: userSerial,
             created_at: serverTimestamp
         }, { merge: true });
 
