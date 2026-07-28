@@ -45,9 +45,17 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
 <div class="top-app-title">🚀 টাকা ইনকাম সেন্টার 🚀</div>
 
 <div id="page-home" class="page active">
-    <!-- ইউজারের নাম দেখানোর জন্য ছোট প্রিমিয়াম ব্যানার -->
-    <div style="background: white; padding: 12px 20px; border-radius: 18px; text-align: center; font-size: 16px; font-weight: bold; color: #2563eb; box-shadow: 0 2px 10px rgba(0,0,0,0.02); margin-bottom: 15px;">
-        👋 স্বাগতম, <span id="display-user-name" style="color: #1e293b;">লোড হচ্ছে...</span>
+    <!-- ইউজারের প্রোফাইল ছবি, নাম এবং নিচে ইউজার আইডি দেখানোর নতুন ডিজাইন -->
+    <div style="background: white; padding: 15px 20px; border-radius: 18px; display: flex; align-items: center; gap: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); margin-bottom: 15px;">
+        <img id="user-profile-pic" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" alt="Profile" style="width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid #2563eb; background: #e2e8f0;">
+        <div style="text-align: left; overflow: hidden;">
+            <div style="font-size: 15px; font-weight: bold; color: #1e293b; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
+                👋 স্বাগতম, <span id="display-user-name">লোড হচ্ছে...</span>
+            </div>
+            <div style="font-size: 13px; color: #64748b; margin-top: 3px; font-weight: 600;">
+                ID: <span id="display-user-id-badge" style="color: #2563eb;">---</span>
+            </div>
+        </div>
     </div>
 
     <div class="balance-card"><div class="balance-title">মোট কয়েন</div><div class="balance-amount"><span id="main-balance">0</span> কয়েন</div></div>
@@ -178,10 +186,11 @@ const tg = window.Telegram.WebApp;
 tg.ready(); tg.expand();
 
 const userId = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.id.toString() : "guest";
-// টেলিগ্রাম থেকে ইউজারের নাম বের করা (First name এবং Last name একসাথে)
 const userName = tg.initDataUnsafe.user ? `${tg.initDataUnsafe.user.first_name || ''} ${tg.initDataUnsafe.user.last_name || ''}`.trim() : "Guest User";
+// টেলিগ্রাম থেকে ইউজারের প্রোফাইল ছবির লিংক নেওয়ার চেষ্টা (যদি টেলিগ্রাম এপিআই থেকে সরাসরি পাওয়া যায়)
+const userPhotoUrl = (tg.initDataUnsafe.user && tg.initDataUnsafe.user.photo_url) ? tg.initDataUnsafe.user.photo_url : "";
 
-let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, isActive = false;
+let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, isActive = false, savedPhotoUrl = "";
 
 async function loadAllData() {
     const userRef = db.collection('users').doc(userId);
@@ -197,13 +206,11 @@ async function loadAllData() {
         const data = doc.data();
         if (data.last_reset_date !== today) {
             dailyWatched = 0;
-            // নাম আপডেট রাখার জন্য এখানেও নাম সেভ করা হলো
-            await userRef.update({ dailyWatched: 0, last_reset_date: today, name: userName });
+            await userRef.update({ dailyWatched: 0, last_reset_date: today, name: userName, photoUrl: userPhotoUrl || data.photoUrl || "" });
         } else {
             dailyWatched = data.dailyWatched || 0;
-            // যদি আগের ডাটাবেজে নাম সেভ না থাকে তবে আপডেট করে নেওয়া
-            if(!data.name) {
-                await userRef.update({ name: userName });
+            if(!data.name || !data.photoUrl) {
+                await userRef.update({ name: userName, photoUrl: userPhotoUrl || data.photoUrl || "" });
             }
         }
         userBalance = data.balance || 0;
@@ -211,10 +218,11 @@ async function loadAllData() {
         lifetimeWatched = data.totalWatched || 0;
         specialWatched = data.specialWatched || 0;
         isActive = data.is_active || false;
+        savedPhotoUrl = data.photoUrl || userPhotoUrl;
     } else {
-        // নতুন ইউজার যখন ডাটাবেজে তৈরি হবে তখন তার নামসহ সেভ হবে
         await userRef.set({ 
             name: userName,
+            photoUrl: userPhotoUrl,
             balance: 0, 
             refers: 0, 
             dailyWatched: 0, 
@@ -223,6 +231,7 @@ async function loadAllData() {
             is_active: false, 
             last_reset_date: today 
         }, { merge: true });
+        savedPhotoUrl = userPhotoUrl;
 
         if (referrerId && referrerId !== userId) {
             const referrerRef = db.collection('users').doc(referrerId);
@@ -247,8 +256,15 @@ async function loadAllData() {
 }
 
 function updateUI() {
-    document.getElementById('display-user-name').innerText = userName; // হোমে ইউজারের নাম শো করাবে
+    document.getElementById('display-user-name').innerText = userName;
+    document.getElementById('display-user-id-badge').innerText = userId;
     document.getElementById('display-user-id').innerText = userId;
+    
+    // যদি ডাটাবেজ বা টেলিগ্রাম থেকে ইউজারের প্রোফাইল ছবি পাওয়া যায় তা সেট করা, না হলে ডিফল্ট আইকন রাখা
+    if(savedPhotoUrl) {
+        document.getElementById('user-profile-pic').src = savedPhotoUrl;
+    }
+
     document.getElementById('main-balance').innerText = Math.floor(userBalance);
     document.getElementById('wallet-balance').innerText = Math.floor(userBalance);
     document.getElementById('dash-task').innerText = dailyWatched;
@@ -395,7 +411,7 @@ async function processWithdraw() {
                     })
                 });
 
-                    userBalance -= amount;
+                userBalance -= amount;
                 await db.collection('users').doc(userId).update({ balance: userBalance });
                 updateUI();
                 loadPaymentHistory();
