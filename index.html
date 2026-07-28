@@ -43,6 +43,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
 </head>
 <body>
 <div class="top-app-title">🚀 টাকা ইনকাম সেন্টার 🚀</div>
+
 <div id="page-home" class="page active">
     <div class="balance-card"><div class="balance-title">মোট কয়েন</div><div class="balance-amount"><span id="main-balance">0</span> কয়েন</div></div>
     <div class="notice-bar"><span class="marquee-text">🎉 পেমেন্ট আপডেট লোড হচ্ছে...</span></div>
@@ -73,6 +74,18 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
     <button class="btn-action" id="btn-chan2" style="background: #90caf9; padding: 12px;" onclick="claimChannelBonus('chan2', 'https://t.me/AK26269')">✅ চ্যানেল ২ বোনাস (৫০ কয়েন)</button>
     <button class="btn-action" id="btn-chan3" style="background: #90caf9; padding: 12px;" onclick="claimChannelBonus('chan3', 'https://t.me/BD16269')">✅ চ্যানেল ৩ বোনাস (৫০ কয়েন)</button>
     <button class="btn-action" id="btn-yt" style="background: #ef9a9a; padding: 12px;" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')">✅ ইউটিউব বোনাস (৫০ কয়েন)</button>
+</div>
+
+<!-- নতুন স্পেশাল ৩০০ ভিডিও দেখার পেজ -->
+<div id="page-special-task" class="page" style="padding: 10px;">
+    <div class="card" style="background: #ffffff; padding: 25px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; border: 2px solid #2563eb;">
+        <h3 style="margin-top: 0; color: #1e40af;">🎯 উইথড্র স্পেশাল টাস্ক</h3>
+        <p style="font-size: 14px; color: #475569;">টাকা উত্তোলনের জন্য এই পেজ থেকে নতুন করে ৩০০টি ভিডিও কমপ্লিট করুন।</p>
+        <div style="text-align: left; font-size: 14px; font-weight: bold; margin-bottom: 10px;">সম্পন্ন টাস্ক <span style="float: right;" id="special-task-count">0</span> / 300</div>
+        <div style="background: #e2e8f0; height: 14px; border-radius: 10px; margin-bottom: 25px; overflow: hidden;"><div id="special-progress-bar" style="background: #2563eb; height: 100%; width: 0%; border-radius: 10px;"></div></div>
+        <button class="btn-action" style="background: #2563eb; padding: 18px; border-radius: 18px;" onclick="watchSpecialAd()">🎥 স্পেশাল ভিডিও দেখুন</button>
+    </div>
+    <button class="btn-action" style="background: #64748b; padding: 12px;" onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])">⬅️ ওয়ালেটে ফিরে যান</button>
 </div>
 
 <div id="page-support" class="page">
@@ -154,7 +167,7 @@ const db = firebase.firestore();
 const tg = window.Telegram.WebApp;
 tg.ready(); tg.expand();
 const userId = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.id.toString() : "guest";
-let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, isActive = false;
+let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, isActive = false;
 
 async function loadAllData() {
     const userRef = db.collection('users').doc(userId);
@@ -172,9 +185,10 @@ async function loadAllData() {
         userBalance = data.balance || 0;
         totalRefers = data.refers || 0;
         lifetimeWatched = data.totalWatched || 0;
+        specialWatched = data.specialWatched || 0;
         isActive = data.is_active || false;
     } else {
-        await userRef.set({ balance: 0, refers: 0, dailyWatched: 0, totalWatched: 0, last_reset_date: today }, { merge: true });
+        await userRef.set({ balance: 0, refers: 0, dailyWatched: 0, totalWatched: 0, specialWatched: 0, last_reset_date: today }, { merge: true });
     }
     document.getElementById('refer-link').innerText = "https://t.me/TakaInkam1626_bot?start=" + userId;
     updateUI();
@@ -193,7 +207,11 @@ function updateUI() {
     document.getElementById('total-watched-count').innerText = lifetimeWatched;
     document.getElementById('dash-watched').innerText = dailyWatched;
     document.getElementById('dash-remaining').innerText = (50 - dailyWatched);
+    
+    // স্পেশাল টাস্ক ইউআই আপডেট
+    document.getElementById('special-task-count').innerText = specialWatched;
     if(document.getElementById('progress-bar')) document.getElementById('progress-bar').style.width = (dailyWatched / 50 * 100) + "%";
+    if(document.getElementById('special-progress-bar')) document.getElementById('special-progress-bar').style.width = (specialWatched / 300 * 100) + "%";
 }
 
 function loadReferralsList() {
@@ -257,6 +275,21 @@ async function watchRealAd() {
     }
 }
 
+// নতুন স্পেশাল অ্যাড দেখার ফাংশন (যা শুধু ৩০০ ভিডিওর কাউন্ট বাড়াবে)
+async function watchSpecialAd() {
+    if(specialWatched >= 300) { tg.showAlert("আপনার ৩০০টি ভিডিও দেখা সম্পন্ন হয়েছে!"); return; }
+    if (typeof show_11149595 === 'function') {
+        show_11149595().then(async () => {
+            specialWatched++;
+            await db.collection('users').doc(userId).update({ 
+                specialWatched: specialWatched 
+            });
+            updateUI();
+            tg.showAlert("🎉 ১টি স্পেশাল ভিডিও দেখা সম্পন্ন হয়েছে!");
+        });
+    }
+}
+
 async function processWithdraw() {
     const amount = parseFloat(document.getElementById("withdraw-amount").value);
     const number = document.getElementById("withdraw-number").value;
@@ -274,18 +307,20 @@ async function processWithdraw() {
     }
     
     if (isActive === true) {
-        // নতুন সংযোজিত শর্ত: অ্যাকাউন্ট একটিভ থাকলে ৩০০টি ভিডিও দেখা হয়েছে কি না চেক করবে
-        if (lifetimeWatched < 300) {
+        // নতুন স্পেশাল ৩০০ ভিডিও চেক
+        if (specialWatched < 300) {
             tg.showPopup({
-                title: 'ভিডিও টাস্ক অসমাপ্ত',
-                message: `টাকা উত্তোলনের অনুরোধ পাঠাতে হলে অনুগ্রহ করে ৩০০টি ভিডিও দেখে কমপ্লিট করুন। আপনার দেখা হয়েছে: ${lifetimeWatched}টি।`,
+                title: 'স্পেশাল টাস্ক অসমাপ্ত',
+                message: `টাকা উত্তোলনের অনুরোধ পাঠাতে হলে স্পেশাল পেজ থেকে নতুন করে ৩০০টি ভিডিও দেখতে হবে। আপনার দেখা হয়েছে: ${specialWatched} / 300টি।`,
                 buttons: [
-                    {id: 'gotowork', type: 'default', text: 'ভিডিও দেখতে যান'}, 
+                    {id: 'gotospecial', type: 'default', text: 'স্পেশাল ভিডিও দেখতে যান'}, 
                     {type: 'cancel', text: 'বাতিল'}
                 ]
             }, (buttonId) => {
-                if (buttonId === 'gotowork') {
-                    switchPage('work', document.querySelectorAll('.nav-item')[1]);
+                if (buttonId === 'gotospecial') {
+                    // স্পেশাল পেজে সুইচ করার জন্য ফাংশন কল
+                    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                    document.getElementById('page-special-task').classList.add('active');
                 }
             });
             return;
@@ -334,7 +369,7 @@ function switchPage(id, el) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-' + id).classList.add('active');
     document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-    el.classList.add('active');
+    if(el) el.classList.add('active');
 }
 function copyRefer() { navigator.clipboard.writeText("https://t.me/TakaInkam1626_bot?start=" + userId); tg.showAlert("লিংক কপি হয়েছে!"); }
 function shareRefer() { tg.openTelegramLink("https://t.me/share/url?url=" + encodeURIComponent("https://t.me/TakaInkam1626_bot?start=" + userId)); }
