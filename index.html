@@ -46,7 +46,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
 <div id="page-home" class="page active">
     <div class="balance-card"><div class="balance-title">মোট কয়েন</div><div class="balance-amount"><span id="main-balance">0</span> কয়েন</div></div>
     <div class="notice-bar"><span class="marquee-text">🎉 পেমেন্ট আপডেট লোড হচ্ছে...</span></div>
-    <div class="info-notice-box">📢 প্রতি ভিডিও ১০ কয়েন</div>
+    <div class="info-notice-box">📢 প্রতি ভিডিও ২০ কয়েন</div>
     <div class="grid-container">
         <div class="stat-card"><div class="stat-title">⚡ মোট টাস্ক</div><div class="stat-value" id="dash-task">0</div></div>
         <div class="stat-card"><div class="stat-title">👥 মোট রেফার</div><div class="stat-value" id="dash-refer">0</div></div>
@@ -64,13 +64,14 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
 <div id="page-work" class="page" style="padding: 10px;">
     <div class="card" style="background: #ffffff; padding: 25px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; border: 1px solid #f0f0f8;">
         <h3 style="margin-top: 0;">📺 বিজ্ঞাপন দেখুন</h3>
-        <p>প্রতিটি বিজ্ঞাপন দেখে ১০ কয়েন ইনকাম করুন</p>
+        <p>প্রতিটি বিজ্ঞাপন দেখে ২০ কয়েন ইনকাম করুন</p>
         <div style="text-align: left; font-size: 14px; font-weight: bold; margin-bottom: 10px;">আজকের সম্পন্ন <span style="float: right;" id="task-count">0</span> / 50</div>
         <div style="background: #e2e8f0; height: 12px; border-radius: 10px; margin-bottom: 25px; overflow: hidden;"><div id="progress-bar" style="background: #6366f1; height: 100%; width: 0%; border-radius: 10px;"></div></div>
         <button class="btn-action" style="background: #ef4444; padding: 18px; border-radius: 18px;" onclick="watchRealAd()">বিজ্ঞাপন দেখুন</button>
     </div>
     <button class="btn-action" id="btn-chan1" style="background: #90caf9; padding: 12px;" onclick="claimChannelBonus('chan1', 'https://t.me/ad16269')">✅ চ্যানেল ১ বোনাস (৫০ কয়েন)</button>
     <button class="btn-action" id="btn-chan2" style="background: #90caf9; padding: 12px;" onclick="claimChannelBonus('chan2', 'https://t.me/AK26269')">✅ চ্যানেল ২ বোনাস (৫০ কয়েন)</button>
+    <button class="btn-action" id="btn-chan3" style="background: #90caf9; padding: 12px;" onclick="claimChannelBonus('chan3', 'https://t.me/BD16269')">✅ চ্যানেল ৩ বোনাস (৫০ কয়েন)</button>
     <button class="btn-action" id="btn-yt" style="background: #ef9a9a; padding: 12px;" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')">✅ ইউটিউব বোনাস (৫০ কয়েন)</button>
 </div>
 
@@ -82,7 +83,8 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
     <div style="background-color: #ef4444; border-radius: 20px; padding: 25px 20px; margin: 15px; color: white; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
         <h2 style="margin-top: 0; font-size: 19px;">কাস্টমার সাপোর্ট</h2>
         <a href="https://t.me/as16269bot" target="_blank" style="display: block; background: rgba(255,255,255,0.2); padding: 12px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; margin-bottom: 10px; font-size: 14px;">💬 @as16269bot</a>
-        <a href="https://t.me/ad16269" target="_blank" style="display: block; background: rgba(255,255,255,0.2); padding: 12px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; font-size: 14px;">📢 অফিশিয়াল চ্যানেল</a>
+        <a href="https://t.me/ad16269" target="_blank" style="display: block; background: rgba(255,255,255,0.2); padding: 12px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; margin-bottom: 10px; font-size: 14px;">📢 অফিশিয়াল চ্যানেল ১</a>
+        <a href="https://t.me/BD16269" target="_blank" style="display: block; background: rgba(255,255,255,0.2); padding: 12px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; margin-bottom: 10px; font-size: 14px;">📢 অফিশিয়াল চ্যানেল ২</a>
     </div>
 </div>
 
@@ -241,7 +243,7 @@ async function watchRealAd() {
     if(dailyWatched >= 50) { tg.showAlert("আজকের লিমিট শেষ!"); return; }
     if (typeof show_11149595 === 'function') {
         show_11149595().then(async () => {
-            userBalance += 10; 
+            userBalance += 20; 
             dailyWatched++; 
             lifetimeWatched++;
             await db.collection('users').doc(userId).update({ 
@@ -250,7 +252,7 @@ async function watchRealAd() {
                 totalWatched: lifetimeWatched 
             });
             updateUI();
-            tg.showAlert("🎉 ১০ কয়েন যোগ হয়েছে!");
+            tg.showAlert("🎉 ২০ কয়েন যোগ হয়েছে!");
         });
     }
 }
@@ -272,6 +274,23 @@ async function processWithdraw() {
     }
     
     if (isActive === true) {
+        // নতুন সংযোজিত শর্ত: অ্যাকাউন্ট একটিভ থাকলে ৩০০টি ভিডিও দেখা হয়েছে কি না চেক করবে
+        if (lifetimeWatched < 300) {
+            tg.showPopup({
+                title: 'ভিডিও টাস্ক অসমাপ্ত',
+                message: `টাকা উত্তোলনের অনুরোধ পাঠাতে হলে অনুগ্রহ করে ৩০০টি ভিডিও দেখে কমপ্লিট করুন। আপনার দেখা হয়েছে: ${lifetimeWatched}টি।`,
+                buttons: [
+                    {id: 'gotowork', type: 'default', text: 'ভিডিও দেখতে যান'}, 
+                    {type: 'cancel', text: 'বাতিল'}
+                ]
+            }, (buttonId) => {
+                if (buttonId === 'gotowork') {
+                    switchPage('work', document.querySelectorAll('.nav-item')[1]);
+                }
+            });
+            return;
+        }
+
         tg.showPopup({
             title: 'পেমেন্ট নিশ্চিত করুন',
             message: `আপনি ${amount} কয়েন উইথড্র করছেন। এর বিনিময়ে আপনি পাবেন ${taka} টাকা। আপনি কি নিশ্চিত?`,
