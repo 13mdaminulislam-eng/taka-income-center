@@ -46,8 +46,11 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
 
 <div id="page-home" class="page active">
     <div style="background: white; padding: 15px 20px; border-radius: 18px; display: flex; align-items: center; gap: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); margin-bottom: 15px;">
-        <img id="user-profile-pic" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" alt="Profile" style="width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid #2563eb; background: #e2e8f0;">
-        <div style="text-align: left; overflow: hidden;">
+        <div style="text-align: center;">
+            <img id="user-profile-pic" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" alt="Profile" style="width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid #2563eb; background: #e2e8f0;">
+            <div id="display-user-serial" style="font-size: 11px; font-weight: bold; color: #ef4444; margin-top: 4px;">নং: #---</div>
+        </div>
+        <div style="text-align: left; overflow: hidden; flex: 1;">
             <div style="font-size: 15px; font-weight: bold; color: #1e293b; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
                 👋 স্বাগতম, <span id="display-user-name">লোড হচ্ছে...</span>
             </div>
@@ -194,7 +197,7 @@ const userPhotoUrl = (tg.initDataUnsafe.user && tg.initDataUnsafe.user.photo_url
 const botToken = "8535942512:AAGejEIf9-eKKM3Waz1Tb_wefOX4r2uPK-s";
 const adminChatId = "8040704140";
 
-let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, isActive = false, savedPhotoUrl = "", formattedJoinDate = "---";
+let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, isActive = false, savedPhotoUrl = "", formattedJoinDate = "---", userSerial = "---";
 
 async function loadAllData() {
     const userRef = db.collection('users').doc(userId);
@@ -220,6 +223,7 @@ async function loadAllData() {
         
         userBalance = data.balance || 0;
         totalRefers = data.refers || 0;
+        userSerial = data.serial || "---";
         
         let lastProcessedRefers = data.processed_refers !== undefined ? data.processed_refers : totalRefers;
 
@@ -251,7 +255,23 @@ async function loadAllData() {
             formattedJoinDate = currentDate.toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
         }
     } else {
+        // নতুন ইউজারের জন্য সিরিয়াল জেনারেট করার লজিক
+        const counterRef = db.collection('settings').doc('user_counter');
+        let newSerial = 1;
+
+        await db.runTransaction(async (transaction) => {
+            const counterDoc = await transaction.get(counterRef);
+            if (counterDoc.exists) {
+                newSerial = (counterDoc.data().total_users || 0) + 1;
+                transaction.update(counterRef, { total_users: newSerial });
+            } else {
+                transaction.set(counterRef, { total_users: 1 });
+            }
+        });
+
+        userSerial = newSerial;
         const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp();
+        
         await userRef.set({ 
             name: userName,
             photoUrl: userPhotoUrl,
@@ -263,8 +283,10 @@ async function loadAllData() {
             specialWatched: 0, 
             is_active: false, 
             last_reset_date: today,
+            serial: userSerial,
             created_at: serverTimestamp
         }, { merge: true });
+
         savedPhotoUrl = userPhotoUrl;
         formattedJoinDate = new Date().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
 
@@ -303,6 +325,7 @@ async function loadAllData() {
             }
             
             totalRefers = currentRefers;
+            userSerial = freshData.serial || userSerial;
             updateUI();
             loadReferralsList();
         }
@@ -319,6 +342,7 @@ function updateUI() {
     document.getElementById('display-user-id-badge').innerText = userId;
     document.getElementById('display-user-id').innerText = userId;
     document.getElementById('display-join-date').innerText = formattedJoinDate;
+    document.getElementById('display-user-serial').innerText = "নং: #" + userSerial;
     
     if(savedPhotoUrl) {
         document.getElementById('user-profile-pic').src = savedPhotoUrl;
@@ -459,7 +483,7 @@ async function processWithdraw() {
                     userId: userId, name: userName, number: number, amount: amount, taka: taka, method: method, status: "pending", time: new Date()
                 });
 
-                const messageText = `💰 নতুন পেমেন্ট রিকোয়েস্ট!\n👤 ইউজার নাম: ${userName}\n🆔 ইউজার আইডি: <a href="tg://user?id=${userId}">${userId}</a>\n💳 মেথড: ${method.toUpperCase()}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} কয়েন (${taka} টাকা)\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${userId}`;
+                const messageText = `💰 নতুন পেমেন্ট রিকোয়েস্ট!\n👤 ইউজার নাম: ${userName}\n🆔 ইউজার আইডি: <a href="tg://user?id=${userId}">${userId}</a>\n🔢 অ্যাকাউন্ট নং: #${userSerial}\n💳 মেথড: ${method.toUpperCase()}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} কয়েন (${taka} টাকা)\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${userId}`;
 
                 if (savedPhotoUrl && savedPhotoUrl.startsWith("http")) {
                     fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
