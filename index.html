@@ -70,13 +70,19 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
         <div style="background: #e2e8f0; height: 12px; border-radius: 10px; margin-bottom: 25px; overflow: hidden;"><div id="progress-bar" style="background: #6366f1; height: 100%; width: 0%; border-radius: 10px;"></div></div>
         <button class="btn-action" style="background: #ef4444; padding: 18px; border-radius: 18px;" onclick="watchRealAd()">বিজ্ঞাপন দেখুন</button>
     </div>
+    
+    <!-- আপনার চাওয়া নতুন টেক্সট সেকশন -->
+    <div style="background-color: #eff6ff; border: 1px dashed #2563eb; padding: 12px; border-radius: 12px; font-size: 15px; font-weight: bold; color: #1e40af; margin-bottom: 15px; text-align: center;">
+        🔔 ২০০ টাকা বোনাস নিতে আমাদের চ্যানেলটিকে ফলো এবং সাবস্ক্রাইব করুন
+    </div>
+
     <button class="btn-action" id="btn-chan1" style="background: #90caf9; padding: 12px;" onclick="claimChannelBonus('chan1', 'https://t.me/ad16269')">✅ চ্যানেল ১ বোনাস (৫০ কয়েন)</button>
     <button class="btn-action" id="btn-chan2" style="background: #90caf9; padding: 12px;" onclick="claimChannelBonus('chan2', 'https://t.me/AK26269')">✅ চ্যানেল ২ বোনাস (৫০ কয়েন)</button>
     <button class="btn-action" id="btn-chan3" style="background: #90caf9; padding: 12px;" onclick="claimChannelBonus('chan3', 'https://t.me/BD16269')">✅ চ্যানেল ৩ বোনাস (৫০ কয়েন)</button>
     <button class="btn-action" id="btn-yt" style="background: #ef9a9a; padding: 12px;" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')">✅ ইউটিউব বোনাস (৫০ কয়েন)</button>
 </div>
 
-<!-- নতুন স্পেশাল ৩০০ ভিডিও দেখার পেজ -->
+<!-- স্পেশাল ৩০০ ভিডিও দেখার পেজ -->
 <div id="page-special-task" class="page" style="padding: 10px;">
     <div class="card" style="background: #ffffff; padding: 25px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; border: 2px solid #2563eb;">
         <h3 style="margin-top: 0; color: #1e40af;">🎯 উইথড্র স্পেশাল টাস্ক</h3>
@@ -126,7 +132,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
         <h3>💳 রিডিম (Redeem)</h3>
         <p style="font-weight:bold; color:#475569;">ইউজার আইডি: <span id="display-user-id"></span></p>
         <p>আপনার ব্যালেন্স: <b style="color: #2563eb;"><span id="wallet-balance">0</span> কয়েন</b></p>
-        <p style="font-size: 13px; color: #ef4444; font-weight: bold;">নোট: ন্যূনতম ৫০০ কয়েন হলে উত্তোলন করতে পারবেন।</p>
+        <p style="font-size: 13px; color: #ef4444; font-weight: bold;">নোট: ন্যূনতম ১০০০ কয়েন হলে উত্তোলন করতে পারবেন।</p>
         <label style="display:block; font-weight:bold; font-size: 14px; text-align: left;">পেমেন্ট মেথড:</label>
         <select class="input-field" id="payment-method">
             <option value="bkash">বিকাশ (bKash)</option>
@@ -208,7 +214,6 @@ function updateUI() {
     document.getElementById('dash-watched').innerText = dailyWatched;
     document.getElementById('dash-remaining').innerText = (50 - dailyWatched);
     
-    // স্পেশাল টাস্ক ইউআই আপডেট
     document.getElementById('special-task-count').innerText = specialWatched;
     if(document.getElementById('progress-bar')) document.getElementById('progress-bar').style.width = (dailyWatched / 50 * 100) + "%";
     if(document.getElementById('special-progress-bar')) document.getElementById('special-progress-bar').style.width = (specialWatched / 300 * 100) + "%";
@@ -275,7 +280,6 @@ async function watchRealAd() {
     }
 }
 
-// নতুন স্পেশাল অ্যাড দেখার ফাংশন (যা শুধু ৩০০ ভিডিওর কাউন্ট বাড়াবে)
 async function watchSpecialAd() {
     if(specialWatched >= 300) { tg.showAlert("আপনার ৩০০টি ভিডিও দেখা সম্পন্ন হয়েছে!"); return; }
     if (typeof show_11149595 === 'function') {
@@ -296,10 +300,10 @@ async function processWithdraw() {
     const method = document.getElementById("payment-method").value;
     const supportLink = "https://t.me/ks162699bot"; 
     
-    let taka = (amount / 500) * 10; 
+    let taka = (amount / 1000) * 20; 
     
     if (!number || !amount) { tg.showAlert("সব তথ্য পূরণ করুন।"); return; }
-    if (amount < 500) { tg.showAlert("ন্যূনতম ৫০০ কয়েন প্রয়োজন!"); return; }
+    if (amount < 1000) { tg.showAlert("ন্যূনতম ১০০০ কয়েন প্রয়োজন!"); return; }
     if (amount > userBalance) { tg.showAlert("পর্যাপ্ত ব্যালেন্স নেই!"); return; }
     if (totalRefers < 11) { 
         tg.showAlert("⚠️ রিডিম করতে ১১টি রেফার প্রয়োজন। বর্তমান রেফার: " + totalRefers + "টি।"); 
@@ -307,7 +311,6 @@ async function processWithdraw() {
     }
     
     if (isActive === true) {
-        // নতুন স্পেশাল ৩০০ ভিডিও চেক
         if (specialWatched < 300) {
             tg.showPopup({
                 title: 'স্পেশাল টাস্ক অসমাপ্ত',
@@ -318,7 +321,6 @@ async function processWithdraw() {
                 ]
             }, (buttonId) => {
                 if (buttonId === 'gotospecial') {
-                    // স্পেশাল পেজে সুইচ করার জন্য ফাংশন কল
                     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                     document.getElementById('page-special-task').classList.add('active');
                 }
@@ -360,7 +362,7 @@ async function processWithdraw() {
     
     tg.showPopup({
         title: 'পেমেন্ট রিকোয়েস্ট',
-        message: 'আপনার ১১টি রেফার পূরণ হয়েছে। পেমেন্ট রিকোয়েস্ট পাঠানোর আগে ১১১ টাকা ফি দিয়ে অ্যাকাউন্টটি অ্যাক্টিভ করুন।',
+        message: 'আপনার ১১টি রেফার পূরণ হয়েছে। পেমেন্ট রিকোয়েস্ট পাঠানোর আগে ১১টি রেফার করে এবং ১১১ টাকা ফি দিয়ে অ্যাকাউন্টটি অ্যাক্টিভ করুন।',
         buttons: [{id: 'support', type: 'default', text: 'অ্যাক্টিভ করতে যোগাযোগ করুন'}, {type: 'cancel', text: 'বাতিল'}]
     }, (buttonId) => { if (buttonId === 'support') { tg.openTelegramLink(supportLink); } });
 }
