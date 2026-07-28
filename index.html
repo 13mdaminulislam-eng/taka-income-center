@@ -357,7 +357,7 @@ async function loadAllData() {
     startDynamicPaymentNotifications();
 }
 
-// ডান থেকে বামে চলমান স্মুথ নোটিশ অ্যানিমেশন সিস্টেম
+// ডান থেকে বামে চলমান স্মুথ নোটিশ অ্যানিমেশন সিস্টেম (৪০০+ ডেমো পেমেন্ট সহ)
 async function startDynamicPaymentNotifications() {
     let paymentMessages = [
         "🔥 পেমেন্ট সফল: সাদিয়া আক্তার (ID: ...8492) বিকাশ-এর মাধ্যমে ৫০০ টাকা পেমেন্ট পেয়েছেন! 💰",
@@ -402,11 +402,30 @@ async function startDynamicPaymentNotifications() {
         "🎉 পেমেন্ট সফল: সাগর আলী (ID: ...2934) নগদ-এর মাধ্যমে ১,৪০০ টাকা পেমেন্ট পেয়েছেন! 🔥"
     ];
 
+    // অতিরিক্ত ৩৬০+ ডেমো পেমেন্ট মেসেজ জেনারেট করা হলো (মোট ৪০০+)
+    const firstNames = ["রহিম", "করিম", "اقبال", "জাকির", "পার্থ", "লিটন", "বুলবুল", "শামিম", "হাসান", "হোসেন", "কামাল", "জামাল", "সোহেল", "দেলোয়ার", "মাজেদ", "ফারুক", "নাসির", "সাগর", "আকাশ", "পিয়াস", "সজিব", "শান্ত", "জয়", "বাবু", "সুব্রত", "অনিক", "প্রীতম", "সৌমিক", "রাফি", "ফাইয়াজ", "নাঈম", "মুন্না", "হৃদয়", "আসিফ", "সিয়াম", "নিহান", "রিদওয়ান", "তারেক", "মাসুদ", "জনি"];
+    const lastNames = ["আহমেদ", "উদ্ধিন", "মিয়া", "সরকার", "তালুকদার", "চৌধুরী", "খন্দকার", "প্রামাণিক", "মন্ডল", "বিশ্বাস", "মজুমদার", "বাপারি", "হাওলাদার", "বেপারী", "সিকদার", "ফকির", "কাজী", "মোল্লা", "দত্ত", "দাস", "সেন", "রায়", "সাহা", "ঘোষ", "বনিক", "শীল", "পাল", "নাগ", "দে", "কর"];
+    const methods = ["বিকাশ", "নগদ"];
+    const amounts = [500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1800, 2000, 2200, 2500];
+    const emojis = ["🔥", "🚀", "🎉", "⚡", "✨", "💎", "🎯", "💖", "🌟", "💰"];
+
+    for (let i = 41; i <= 400; i++) {
+        let fName = firstNames[Math.floor(Math.random() * firstNames.length)];
+        let lName = lastNames[Math.floor(Math.random() * lastNames.length)];
+        let method = methods[Math.floor(Math.random() * methods.length)];
+        let amount = amounts[Math.floor(Math.random() * amounts.length)];
+        let rndId = Math.floor(1000 + Math.random() * 9000);
+        let emoji = emojis[Math.floor(Math.random() * emojis.length)];
+        let emojiEnd = emojis[Math.floor(Math.random() * emojis.length)];
+        
+        paymentMessages.push(`${emoji} পেমেন্ট সফল: ${fName} ${lName} (ID: ...${rndId}) ${method}-এর মাধ্যমে ${amount} টাকা পেমেন্ট পেয়েছেন! ${emojiEnd}`);
+    }
+
     try {
         const querySnapshot = await db.collection('withdraw_requests')
             .where('status', '==', 'paid')
             .orderBy('time', 'desc')
-            .limit(30)
+            .limit(50)
             .get();
 
         if (!querySnapshot.empty) {
