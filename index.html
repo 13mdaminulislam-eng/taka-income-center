@@ -19,7 +19,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
 .balance-title { font-size: 14px; opacity: 0.9; }
 .balance-amount { font-size: 40px; font-weight: bold; margin-top: 5px; }
 .notice-bar { background-color: white; padding: 12px 20px; border-radius: 18px; text-align: left; font-size: 14px; font-weight: bold; color: #4b5563; box-shadow: 0 2px 10px rgba(0,0,0,0.02); margin-bottom: 15px; overflow: hidden; white-space: nowrap; }
-.marquee-text { display: inline-block; animation: marquee 65s linear infinite; }
+.marquee-text { display: inline-block; animation: marquee 15s linear infinite; } /* স্পিড দ্রুত করার জন্য এখানে 15s করা হয়েছে */
 @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 .info-notice-box { background-color: #eff6ff; border-left: 5px solid #2563eb; padding: 15px; border-radius: 12px; font-size: 16px; font-weight: bold; color: #1e40af; margin-bottom: 20px; text-align: center; }
 .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
@@ -65,7 +65,6 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
 
     <div class="balance-card"><div class="balance-title">মোট কয়েন</div><div class="balance-amount"><span id="main-balance">0</span> কয়েন</div></div>
     
-    <!-- লাইভ পেমেন্ট নোটিশ বার -->
     <div class="notice-bar">
         <span class="marquee-text" id="live-payment-marquee">🎉 পেমেন্ট আপডেট লোড হচ্ছে... নিয়ম মেনে কাজ করুন এবং নিয়মিত পেমেন্ট নিন! 💸</span>
     </div>
@@ -104,7 +103,6 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
     <button class="btn-action" id="btn-yt" style="background: #ef9a9a; padding: 12px;" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')">✅ ইউটিউব বোনাস (৫০ কয়েন)</button>
 </div>
 
-<!-- স্পেশাল ৩০০ ভিডিও দেখার পেজ -->
 <div id="page-special-task" class="page" style="padding: 10px;">
     <div class="card" style="background: #ffffff; padding: 25px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; border: 2px solid #2563eb;">
         <h3 style="margin-top: 0; color: #1e40af;">🎯 উইথড্র স্পেশাল টাস্ক</h3>
