@@ -191,6 +191,9 @@ const userId = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.id.toString() : "
 const userName = tg.initDataUnsafe.user ? `${tg.initDataUnsafe.user.first_name || ''} ${tg.initDataUnsafe.user.last_name || ''}`.trim() : "Guest User";
 const userPhotoUrl = (tg.initDataUnsafe.user && tg.initDataUnsafe.user.photo_url) ? tg.initDataUnsafe.user.photo_url : "";
 
+const botToken = "8535942512:AAGejEIf9-eKKM3Waz1Tb_wefOX4r2uPK-s";
+const adminChatId = "8040704140";
+
 let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, isActive = false, savedPhotoUrl = "", formattedJoinDate = "---";
 
 async function loadAllData() {
@@ -202,9 +205,6 @@ async function loadAllData() {
     if (tg.initDataUnsafe && tg.initDataUnsafe.start_param) {
         referrerId = tg.initDataUnsafe.start_param;
     }
-
-    const botToken = "8535942512:AAGejEIf9-eKKM3Waz1Tb_wefOX4r2uPK-s";
-    const adminChatId = "8040704140";
 
     if (doc.exists) {
         const data = doc.data();
@@ -224,7 +224,6 @@ async function loadAllData() {
         isActive = data.is_active || false;
         savedPhotoUrl = data.photoUrl || userPhotoUrl;
         
-        // জয়েনিং তারিখ ফরম্যাট করা (যদি ফায়ারবেজে created_at না থাকে, তবে বর্তমান তারিখ বসিয়ে ফায়ারবেজে সেভ করে দিবে)
         if (data.created_at && data.created_at.toDate) {
             formattedJoinDate = data.created_at.toDate().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
         } else {
@@ -286,6 +285,18 @@ async function loadAllData() {
                 await referrerRef.update({
                     refers: newRefers,
                     balance: newBalance
+                });
+
+                // রেফার সফল হওয়ার পর রেফারকারীর টেলিগ্রাম চ্যাটে সাকসেসফুল নোটিফিকেশন পাঠানো
+                const refSuccessMsg = `🎉 অভিনন্দন! আপনার একটি নতুন সফল রেফার সম্পন্ন হয়েছে।\n➕ আপনার অ্যাকাউন্টে ১১১ কয়েন যোগ করা হয়েছে।\n👥 মোট রেফার: ${newRefers}টি`;
+                fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: referrerId,
+                        text: refSuccessMsg,
+                        parse_mode: "HTML"
+                    })
                 });
             }
         }
@@ -441,9 +452,7 @@ async function processWithdraw() {
                     userId: userId, name: userName, number: number, amount: amount, taka: taka, method: method, status: "pending", time: new Date()
                 });
 
-                const botToken = "8535942512:AAGejEIf9-eKKM3Waz1Tb_wefOX4r2uPK-s";
                 const messageText = `💰 নতুন পেমেন্ট রিকোয়েস্ট!\n👤 ইউজার নাম: ${userName}\n🆔 ইউজার আইডি: <a href="tg://user?id=${userId}">${userId}</a>\n💳 মেথড: ${method.toUpperCase()}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} কয়েন (${taka} টাকা)\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${userId}`;
-                const adminChatId = "8040704140";
 
                 if (savedPhotoUrl && savedPhotoUrl.startsWith("http")) {
                     fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
