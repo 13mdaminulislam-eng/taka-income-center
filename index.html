@@ -221,7 +221,6 @@ async function loadAllData() {
         isActive = data.is_active || false;
         savedPhotoUrl = data.photoUrl || userPhotoUrl;
     } else {
-        // নতুন ইউজার জয়েন করলে ফায়ারবেজে ডেটা সেভ হবে
         await userRef.set({ 
             name: userName,
             photoUrl: userPhotoUrl,
@@ -231,11 +230,11 @@ async function loadAllData() {
             totalWatched: 0, 
             specialWatched: 0, 
             is_active: false, 
-            last_reset_date: today 
+            last_reset_date: today,
+            created_at: firebase.firestore.FieldValue.serverTimestamp()
         }, { merge: true });
         savedPhotoUrl = userPhotoUrl;
 
-        // নতুন ইউজার জয়েন করার সাথে সাথেই আপনার টেলিগ্রাম বটে ছবিসহ নোটিফিকেশন পাঠানোর কোড
         const joinMessageText = `🚀 নতুন ইউজার জয়েন করেছে!\n👤 ইউজার নাম: ${userName}\n🆔 ইউজার আইডি: <a href="tg://user?id=${userId}">${userId}</a>`;
 
         if (userPhotoUrl && userPhotoUrl.startsWith("http")) {
@@ -318,7 +317,8 @@ function loadReferralsList() {
     for (let i = 1; i <= totalRefers; i++) {
         const card = document.createElement('div');
         card.className = 'list-card';
-        card.innerHTML = `<div><div>👤 সফল রেফারেল #00${i}</div><div class="list-date">📅 সক্রিয় মেম্বার</div></div><div style="color: #10b981;">+১১ কয়েন</div>`;
+        // এখানে সিরিয়াল নম্বর (১, ২, ৩...) যুক্ত করা হয়েছে
+        card.innerHTML = `<div><div><b>${i}.</b> 👤 সফল রেফারেল</div><div class="list-date">📅 সক্রিয় মেম্বার</div></div><div style="color: #10b981;">+১১ কয়েন</div>`;
         listContainer.appendChild(card);
     }
 }
@@ -338,11 +338,12 @@ async function loadPaymentHistory() {
         const data = doc.data();
         const statusColor = data.status === 'paid' ? '#10b981' : '#f59e0b';
         const statusText = data.status === 'paid' ? 'সম্পন্ন' : 'পেন্ডিং';
+        const serialNo = index + 1; // পেমেন্ট হিস트্রিতে সিরিয়াল নম্বর (১, ২, ৩...)
         const item = document.createElement('div');
         item.style.padding = "10px 0";
         item.style.borderBottom = "1px solid #f1f5f9";
         item.innerHTML = `
-            <div style="font-size:14px; font-weight:bold;">${index + 1}. ${data.method.toUpperCase()} - ${data.amount} কয়েন</div>
+            <div style="font-size:14px; font-weight:bold;">${serialNo}. ${data.method.toUpperCase()} - ${data.amount} কয়েন</div>
             <div style="font-size:12px; color:#64748b;">নাম্বার: ${data.number}</div>
             <div style="font-size:12px; color:${statusColor}; font-weight:bold;">স্ট্যাটাস: ${statusText}</div>
         `;
