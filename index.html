@@ -222,29 +222,17 @@ async function loadAllData() {
         totalRefers = data.refers || 0;
         let lastProcessedRefers = data.processed_refers !== undefined ? data.processed_refers : totalRefers;
 
-        // যদি ডাটাবেজে মোট রেফার (totalRefers) প্রসেসড রেফার (lastProcessedRefers) থেকে বেশি থাকে
         if (totalRefers > lastProcessedRefers) {
             const diff = totalRefers - lastProcessedRefers;
             const addedCoins = diff * 111;
             userBalance += addedCoins;
 
-            // ডাটাবেজে সাথে সাথে আপডেট করে দেওয়া যাতে দুবার যোগ না হয়
             await userRef.update({
                 balance: userBalance,
                 processed_refers: totalRefers
             });
 
-            // টেলিগ্রাম নোটিফিকেশন পাঠানো
-            const refSuccessMsg = `🎉 অভিনন্দন! আপনার ${diff}টি নতুন সফল রেফার সম্পন্ন হয়েছে।\n➕ আপনার অ্যাকাউন্টে মোট ${addedCoins} কয়েন যোগ করা হয়েছে।\n👥 মোট রেফার: ${totalRefers}টি`;
-            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: userId,
-                    text: refSuccessMsg,
-                    parse_mode: "HTML"
-                })
-            }).catch(e => console.log(e));
+            tg.showAlert(`🎉 অভিনন্দন! আপনার ${diff}টি নতুন সফল রেফার থেকে ${addedCoins} কয়েন যোগ হয়েছে!`);
         } else if (data.processed_refers === undefined) {
             await userRef.update({ processed_refers: totalRefers });
         }
@@ -279,31 +267,6 @@ async function loadAllData() {
         savedPhotoUrl = userPhotoUrl;
         formattedJoinDate = new Date().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
 
-        const joinMessageText = `🚀 নতুন ইউজার জয়েন করেছে!\n👤 ইউজার নাম: ${userName}\n🆔 ইউজার আইডি: <a href="tg://user?id=${userId}">${userId}</a>`;
-
-        if (userPhotoUrl && userPhotoUrl.startsWith("http")) {
-            fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: adminChatId,
-                    photo: userPhotoUrl,
-                    caption: joinMessageText,
-                    parse_mode: "HTML"
-                })
-            }).catch(e => console.log(e));
-        } else {
-            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: adminChatId,
-                    text: joinMessageText,
-                    parse_mode: "HTML"
-                })
-            }).catch(e => console.log(e));
-        }
-
         if (referrerId && referrerId !== userId) {
             const referrerRef = db.collection('users').doc(referrerId);
             const referrerDoc = await referrerRef.get();
@@ -321,7 +284,7 @@ async function loadAllData() {
         if (docSnap.exists) {
             const freshData = docSnap.data();
             const currentRefers = freshData.refers || 0;
-            const processedRefers = freshData.processed_refers || 0;
+            const processedRefers = freshData.processed_refers !== undefined ? freshData.processed_refers : currentRefers;
 
             if (currentRefers > processedRefers) {
                 const diff = currentRefers - processedRefers;
@@ -333,18 +296,8 @@ async function loadAllData() {
                     processed_refers: currentRefers
                 });
 
-                const refSuccessMsg = `🎉 অভিনন্দন! আপনার ${diff}টি নতুন সফল রেফার সম্পন্ন হয়েছে।\n➕ আপনার অ্যাকাউন্টে মোট ${addedCoins} কয়েন যোগ করা হয়েছে।\n👥 মোট রেফার: ${currentRefers}টি`;
-                fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: userId,
-                        text: refSuccessMsg,
-                        parse_mode: "HTML"
-                    })
-                }).catch(e => console.log(e));
-                
                 userBalance = updatedBalance;
+                tg.showAlert(`🎉 অভিনন্দন! আপনার ${diff}টি নতুন সফল রেফার থেকে ${addedCoins} কয়েন যোগ হয়েছে!`);
             } else {
                 userBalance = freshData.balance || 0;
             }
