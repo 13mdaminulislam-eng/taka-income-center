@@ -19,7 +19,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
 .balance-title { font-size: 14px; opacity: 0.9; }
 .balance-amount { font-size: 40px; font-weight: bold; margin-top: 5px; }
 .notice-bar { background-color: white; padding: 12px 20px; border-radius: 18px; text-align: left; font-size: 14px; font-weight: bold; color: #4b5563; box-shadow: 0 2px 10px rgba(0,0,0,0.02); margin-bottom: 15px; overflow: hidden; white-space: nowrap; }
-.marquee-text { display: inline-block; animation: marquee 12s linear infinite; }
+.marquee-text { display: inline-block; animation: marquee 14s linear infinite; }
 @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 .info-notice-box { background-color: #eff6ff; border-left: 5px solid #2563eb; padding: 15px; border-radius: 12px; font-size: 16px; font-weight: bold; color: #1e40af; margin-bottom: 20px; text-align: center; }
 .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
@@ -64,7 +64,12 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
     </div>
 
     <div class="balance-card"><div class="balance-title">মোট কয়েন</div><div class="balance-amount"><span id="main-balance">0</span> কয়েন</div></div>
-    <div class="notice-bar"><span class="marquee-text">🎉 পেমেন্ট আপডেট লোড হচ্ছে...</span></div>
+    
+    <!-- লাইভ পেমেন্ট নোটিশ বার -->
+    <div class="notice-bar">
+        <span class="marquee-text" id="live-payment-marquee">🎉 পেমেন্ট আপডেট লোড হচ্ছে... নিয়ম মেনে কাজ করুন এবং নিয়মিত পেমেন্ট নিন! 💸</span>
+    </div>
+
     <div class="info-notice-box">📢 প্রতি ভিডিও ২০ কয়েন</div>
     <div class="grid-container">
         <div class="stat-card"><div class="stat-title">⚡ মোট টাস্ক</div><div class="stat-value" id="dash-task">0</div></div>
@@ -227,7 +232,6 @@ async function loadAllData() {
     if (doc.exists) {
         const data = doc.data();
         
-        // সিরিয়াল নাম্বার নিশ্চিত করা (যদি আগের ডেটাতে না থাকে)
         if (!data.serial) {
             userSerial = await getNextSerial();
             await userRef.update({ serial: userSerial, name: userName, userId: userId });
@@ -281,14 +285,13 @@ async function loadAllData() {
             formattedJoinDate = currentDate.toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
         }
     } else {
-        // নতুন ইউজারের জন্য সিরিয়াল জেনারেট ও ফায়ারবেসে `serial`, `name`, `userId` প্রথমে সেভ করা
         userSerial = await getNextSerial();
         const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp();
         
         await userRef.set({ 
-            serial: userSerial,           // ফায়ারবেস লিস্টে সহজে চেনার জন্য সিরিয়াল
-            name: userName,               // ইউজারের নাম
-            userId: userId,               // ইউজারের টেলিগ্রাম আইডি
+            serial: userSerial,
+            name: userName,
+            userId: userId,
             photoUrl: userPhotoUrl,
             balance: 0, 
             refers: 0, 
@@ -349,6 +352,39 @@ async function loadAllData() {
     updateUI();
     loadReferralsList();
     loadPaymentHistory();
+    loadLivePaymentUpdates();
+}
+
+// ফায়ারবেস থেকে সফল পেমেন্টগুলো এনে নোটিশ বারে শো করার ফাংশন
+async function loadLivePaymentUpdates() {
+    try {
+        const querySnapshot = await db.collection('withdraw_requests')
+            .where('status', '==', 'paid')
+            .orderBy('time', 'desc')
+            .limit(10)
+            .get();
+
+        const marqueeEl = document.getElementById('live-payment-marquee');
+        if (!marqueeEl) return;
+
+        if (querySnapshot.empty) {
+            marqueeEl.innerText = "🎉 পেমেন্ট আপডেট: নিয়ম মেনে কাজ করুন এবং নিয়মিত পেমেন্ট নিন! 💸";
+            return;
+        }
+
+        let updates = [];
+        querySnapshot.forEach(doc => {
+            const data = doc.data();
+            const uName = data.name || "ইউজার";
+            const uTaka = data.taka || 0;
+            const uMethod = data.method ? data.method.toUpperCase() : "বিকাশ";
+            updates.push(`🔥 অভিনন্দন! ${uName} ${uMethod}-এর মাধ্যমে সফলভাবে ${uTaka} টাকা পেমেন্ট পেয়েছেন! 💰`);
+        });
+
+        marqueeEl.innerText = updates.join("   🌟   ");
+    } catch (e) {
+        console.log("Live payment load error:", e);
+    }
 }
 
 function updateUI() {
