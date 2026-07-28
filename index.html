@@ -195,6 +195,7 @@ const botToken = "8535942512:AAGejEIf9-eKKM3Waz1Tb_wefOX4r2uPK-s";
 const adminChatId = "8040704140";
 
 let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, isActive = false, savedPhotoUrl = "", formattedJoinDate = "---";
+let previousRefers = null; // ম্যানুয়াল বা অটো রেফার ট্র্যাক করার জন্য
 
 async function loadAllData() {
     const userRef = db.collection('users').doc(userId);
@@ -219,6 +220,7 @@ async function loadAllData() {
         }
         userBalance = data.balance || 0;
         totalRefers = data.refers || 0;
+        previousRefers = totalRefers; // ইনিশিয়াল রেফার সংরক্ষণ
         lifetimeWatched = data.totalWatched || 0;
         specialWatched = data.specialWatched || 0;
         isActive = data.is_active || false;
@@ -246,6 +248,7 @@ async function loadAllData() {
             created_at: serverTimestamp
         }, { merge: true });
         savedPhotoUrl = userPhotoUrl;
+        previousRefers = 0;
         formattedJoinDate = new Date().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
 
         const joinMessageText = `🚀 নতুন ইউজার জয়েন করেছে!\n👤 ইউজার নাম: ${userName}\n🆔 ইউজার আইডি: <a href="tg://user?id=${userId}">${userId}</a>`;
@@ -286,21 +289,44 @@ async function loadAllData() {
                     refers: newRefers,
                     balance: newBalance
                 });
+            }
+        }
+    }
 
-                // রেফার সফল হওয়ার পর রেফারকারীর টেলিগ্রাম চ্যাটে সাকসেসফুল নোটিফিকেশন পাঠানো
-                const refSuccessMsg = `🎉 অভিনন্দন! আপনার একটি নতুন সফল রেফার সম্পন্ন হয়েছে।\n➕ আপনার অ্যাকাউন্টে ১১১ কয়েন যোগ করা হয়েছে।\n👥 মোট রেফার: ${newRefers}টি`;
+    // ফায়ারবেসে লাইভ লিসেনার সেটআপ: ইউজার বা অ্যাডমিন যেভাবেই রেফার বাড়াক না কেন, সাথে সাথে কাজ করবে
+    userRef.onSnapshot(async (docSnap) => {
+        if (docSnap.exists) {
+            const freshData = docSnap.data();
+            const currentRefersInDb = freshData.refers || 0;
+
+            if (previousRefers !== null && currentRefersInDb > previousRefers) {
+                const diff = currentRefersInDb - previousRefers;
+                const addedCoins = diff * 111;
+                userBalance = (freshData.balance || 0); // ফায়ারবেসের ব্যালেন্স সিঙ্ক করা
+                
+                // যদি ফায়ারবেস থেকে ব্যালেন্স আগে আপডেট না করা হয়ে থাকে, তবে আপডেট করে দেওয়া
+                await userRef.update({ balance: userBalance });
+
+                // ইউজারের টেলিগ্রাম চ্যাটে সাকসেসফুল নোটিফিকেশন পাঠানো
+                const refSuccessMsg = `🎉 অভিনন্দন! আপনার রেফার সফল হয়েছে।\n➕ আপনার অ্যাকাউন্টে ${addedCoins} কয়েন যোগ করা হয়েছে।\n👥 মোট রেফার: ${currentRefersInDb}টি`;
                 fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        chat_id: referrerId,
+                        chat_id: userId,
                         text: refSuccessMsg,
                         parse_mode: "HTML"
                     })
                 });
             }
+            previousRefers = currentRefersInDb;
+            userBalance = freshData.balance || 0;
+            totalRefers = currentRefersInDb;
+            updateUI();
+            loadReferralsList();
         }
-    }
+    });
+
     document.getElementById('refer-link').innerText = "https://t.me/TakaInkam1626_bot?start=" + userId;
     updateUI();
     loadReferralsList();
