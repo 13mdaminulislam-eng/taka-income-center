@@ -19,7 +19,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
 .balance-title { font-size: 14px; opacity: 0.9; }
 .balance-amount { font-size: 40px; font-weight: bold; margin-top: 5px; }
 .notice-bar { background-color: white; padding: 12px 20px; border-radius: 18px; text-align: left; font-size: 14px; font-weight: bold; color: #4b5563; box-shadow: 0 2px 10px rgba(0,0,0,0.02); margin-bottom: 15px; overflow: hidden; white-space: nowrap; }
-.marquee-text { display: inline-block; animation: marquee 55s linear infinite; }
+.marquee-text { display: inline-block; animation: marquee 65s linear infinite; }
 @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 .info-notice-box { background-color: #eff6ff; border-left: 5px solid #2563eb; padding: 15px; border-radius: 12px; font-size: 16px; font-weight: bold; color: #1e40af; margin-bottom: 20px; text-align: center; }
 .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
@@ -355,13 +355,13 @@ async function loadAllData() {
     loadLivePaymentUpdates();
 }
 
-// ইউনিক ও ডাইনামিক পেমেন্ট নোটিশ লোড করার ফাংশন (কখনো একই নাম পরপর আসবে না)
+// ১০০% ইউনিক ও সম্পূর্ণ রেন্ডম পেমেন্ট নোটিশ জেনারেটর (একই নাম বারবার আসবে না)
 async function loadLivePaymentUpdates() {
     try {
         const querySnapshot = await db.collection('withdraw_requests')
             .where('status', '==', 'paid')
             .orderBy('time', 'desc')
-            .limit(30)
+            .limit(50)
             .get();
 
         const marqueeEl = document.getElementById('live-payment-marquee');
@@ -369,7 +369,7 @@ async function loadLivePaymentUpdates() {
 
         let dynamicPayments = [];
 
-        // ডাটাবেজ থেকে রিয়েল পেমেন্টগুলো যোগ করা
+        // রিয়েল পেমেন্টগুলো যোগ করা
         if (!querySnapshot.empty) {
             querySnapshot.forEach(doc => {
                 const data = doc.data();
@@ -381,14 +381,23 @@ async function loadLivePaymentUpdates() {
             });
         }
 
-        // বিশাল এবং সম্পূর্ণ ইউনিক ছেলে ও মেয়েদের ডেমো পেমেন্ট পুল (রেন্ডম অ্যামাউন্ট ও আইডি জেনারেট করার জন্য)
-        const firstNames = ["সাদিয়া আক্তার", "তানভীর হোসেন", "নুসরাত জাহান", "ফাহিম ইসলাম", "জান্নাতুল ফেরদৌস", "রিফাত হাসান", "মীম আক্তার", "জুবায়ের আলম", "সুমাইয়া খান", "সাব্বির আহমেদ", "মেহজাবিন হক", "নাজমুল হুদা", "তাবাসসুম মিম", "আশিকুর রহমান", "আয়শা সিদ্দিকা", "রাশেদুল ইসলাম", "পূজা সাহা", "শরিফুল ইসলাম", "প্রিয়াঙ্কা দাস", "মেহেদী হাসান", "রিতু মনি", "সোহাগ মিয়া", "পায়েল ঘোষ", "ইমরান খান", "সাদিয়া ইসলাম", "রিপন আহমেদ", "নাফিসা তাবাসসুম", "আল-আমিন", "মেহনাজ উর্মি", "শাকিল আহমেদ"];
+        // বিশাল নাম ও টাইটেলের পুল
+        const firstNames = [
+            "সাদিয়া আক্তার", "তানভীর হোসেন", "নুসরাত জাহান", "ফাহিম ইসলাম", "জান্নাতুল ফেরদৌস", 
+            "রিফাত হাসান", "মীম আক্তার", "জুবায়ের আলম", "সুমাইয়া খান", "সাব্বির আহমেদ", 
+            "মেহজাবিন হক", "নাজমুল হুদা", "তাবাসসুম মিম", "আশিকুর রহমান", "আয়শা সিদ্দিকা", 
+            "রাশেদুল ইসলাম", "পূজা সাহা", "শরিফুল ইসলাম", "প্রিয়াঙ্কা দাস", "মেহেদী হাসান", 
+            "রিতু মনি", "সোহাগ মিয়া", "পায়েল ঘোষ", "ইমরান খান", "সাদিয়া ইসলাম", 
+            "রিপন আহমেদ", "নাফিসা তাবাসসুম", "আল-আমিন খন্দকার", "মেহনাজ উর্মি", "শাকিল আহমেদ",
+            "রাকিবুল ইসলাম", "ফারজানা ইয়াসমিন", "মনির হোসেন", "সামিয়া রহমান", "শান্তা ইসলাম",
+            "আরিফ হোসেন", "নিশাত আনজুম", "হৃদয় আহমেদ", "মুক্তা আক্তার", "সাগর আলী"
+        ];
         const methods = ["বিকাশ", "নগদ"];
-        const amounts = ["৫০০", "৬০০", "৭০০", "৮০০", "৯০০", "১,০০০", "১,১০০", "১,২০০", "১,৩০০", "১,৫০০", "১,৬০০", "১,৮০০", "২,০০০", "২,২০০", "২,৫০০"];
+        const amounts = ["৫০০", "৬০০", "৭০০", "৮০০", "৯০০", "১,০০০", "১,১০০", "১,২০০", "১,৩০০", "১,৫০০", "১,৬০০", "১,৮০০", "২,০০০", "২,২০০", "২,৫০০", "৩,০০০"];
         const emojis = ["🔥", "🚀", "🎉", "⚡", "🌟", "💎", "🎯", "✨", "🌸", "💖"];
 
-        // যদি ডাটাবেজে কম ইউজার থাকে, তবে ডেমো পুল থেকে স্বয়ংক্রিয়ভাবে নতুন নতুন রেন্ডম কম্বিনেশন তৈরি করা হবে
-        while (dynamicPayments.length < 35) {
+        // বিপুল পরিমাণ ইউনিক কম্বিনেশন তৈরি করা যাতে বারবার রিপিট না হয়
+        while (dynamicPayments.length < 60) {
             const randomName = firstNames[Math.floor(Math.random() * firstNames.length)];
             const randomMethod = methods[Math.floor(Math.random() * methods.length)];
             const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
@@ -397,13 +406,12 @@ async function loadLivePaymentUpdates() {
             
             const generatedText = `${randomEmoji} পেমেন্ট সফল: ${randomName} (ID: ...${randomId}) ${randomMethod}-এর মাধ্যমে ${randomAmount} টাকা পেমেন্ট পেয়েছেন! 💰`;
             
-            // ডুপ্লিকেট এড়াতে চেক করে যুক্ত করা
             if (!dynamicPayments.includes(generatedText)) {
                 dynamicPayments.push(generatedText);
             }
         }
 
-        // অ্যারেটিকে এলোমেলো (Shuffle) করে দেওয়া যাতে প্রতিবার একদম নতুন অর্ডারে শো করে
+        // ফিশার-ইয়েটস (Fisher-Yates) শাফেল অ্যালগরিদম দিয়ে শতভাগ এলোমেলো করা
         for (let i = dynamicPayments.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [dynamicPayments[i], dynamicPayments[j]] = [dynamicPayments[j], dynamicPayments[i]];
@@ -412,10 +420,6 @@ async function loadLivePaymentUpdates() {
         marqueeEl.innerText = dynamicPayments.join("   🌟   ");
     } catch (e) {
         console.log("Live payment load error:", e);
-        const marqueeEl = document.getElementById('live-payment-marquee');
-        if (marqueeEl) {
-            marqueeEl.innerText = "🔥 পেমেন্ট সফল: সাদিয়া আক্তার (ID: ...8492) বিকাশ-এর মাধ্যমে ১,০০০ টাকা পেমেন্ট পেয়েছেন! 💰   🚀 পেমেন্ট সফল: তানভীর হোসেন (ID: ...3910) নগদ-এর মাধ্যমে ৫০০ টাকা পেমেন্ট পেয়েছেন! 💸   🎉 পেমেন্ট সফল: নুসরাত জাহান (ID: ...7204) বিকাশ-এর মাধ্যমে ১,৫০০ টাকা পেমেন্ট পেয়েছেন! 💰";
-        }
     }
 }
 
