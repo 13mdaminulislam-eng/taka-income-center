@@ -218,7 +218,7 @@ async function getNextSerial() {
     return assignedSerial;
 }
 
-// টেলিগ্রাম নোটিফিকেশন ফাংশন (ফিক্সড)
+// টেলিগ্রাম নোটিফিকেশন ফাংশন (নতুন ইউজার)
 async function notifyAdminNewUser(serialNo, name, uId, photo) {
     const welcomeMsg = `🚀 নতুন ইউজার জয়েন করেছে!\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: <a href="tg://user?id=${uId}">${uId}</a>\n🔢 অ্যাকাউন্ট নং: #${serialNo}`;
     try {
@@ -240,6 +240,7 @@ async function notifyAdminNewUser(serialNo, name, uId, photo) {
     }
 }
 
+// টেলিগ্রাম নোটিফিকেশন ফাংশন (পেমেন্ট রিকোয়েস্ট - সাথে সাথে এডমিন ফাইলে যাবে)
 async function notifyAdminWithdrawRequest(serialNo, name, uId, method, number, amount, taka, photo) {
     const requestMsg = `💰 নতুন পেমেন্ট রিকোয়েস্ট!\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: <a href="tg://user?id=${uId}">${uId}</a>\n🔢 অ্যাকাউন্ট নং: #${serialNo}\n💳 মেথড: ${method.toUpperCase()}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} কয়েন (${taka} টাকা)\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${uId}`;
     try {
@@ -504,7 +505,6 @@ function loadReferralsList() {
     }
 }
 
-// পেমেন্ট হিস্ট্রি ফিক্স (NaN সমস্যার সমাধান)
 async function loadPaymentHistory() {
     const listContainer = document.getElementById('payment-history-list');
     try {
@@ -613,6 +613,7 @@ async function processWithdraw() {
     }, async (buttonId) => {
         if (buttonId === 'confirm') {
             try {
+                // ১. ফায়ারবেস ডাটাবেসে পেমেন্ট রিকোয়েস্ট সেভ করা
                 await db.collection('withdraw_requests').add({
                     userId: userId, 
                     name: userName, 
@@ -624,8 +625,10 @@ async function processWithdraw() {
                     time: new Date()
                 });
 
+                // ২. সাথে সাথে টেলিগ্রাম এডমিন ফাইলে নোটিফিকেশন পাঠানো
                 await notifyAdminWithdrawRequest(userSerial, userName, userId, method, number, amount, taka, savedPhotoUrl);
 
+                // ৩. ইউজারের ব্যালেন্স আপডেট করা
                 userBalance -= amount;
                 await db.collection('users').doc(userId).update({ balance: userBalance });
                 
