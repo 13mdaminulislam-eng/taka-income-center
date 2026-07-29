@@ -104,10 +104,11 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
     <button class="btn-action" id="btn-yt" style="background: #ef9a9a; padding: 12px;" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')">✅ ইউটিউব বোনাস (৫০ কয়েন)</button>
 </div>
 
+<!-- স্পেশাল টাস্ক পেজ -->
 <div id="page-special-task" class="page" style="padding: 10px;">
     <div class="card" style="background: #ffffff; padding: 25px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; border: 2px solid #2563eb;">
         <h3 style="margin-top: 0; color: #1e40af;">🎯 উইথড্র স্পেশাল টাস্ক</h3>
-        <p style="font-size: 14px; color: #475569;">টাকা উত্তোলনের জন্য এই পেজ থেকে নতুন করে ৩০০টি ভিডিও কমপ্লিট করুন।</p>
+        <p style="font-size: 14px; color: #475569;">টাকা উত্তোলনের অনুরোধ পাঠানোর জন্য এই পেজ থেকে ৩০০টি ভিডিও কমপ্লিট করুন।</p>
         <div style="text-align: left; font-size: 14px; font-weight: bold; margin-bottom: 10px;">সম্পন্ন টাস্ক <span style="float: right;" id="special-task-count">0</span> / 300</div>
         <div style="background: #e2e8f0; height: 14px; border-radius: 10px; margin-bottom: 25px; overflow: hidden;"><div id="special-progress-bar" style="background: #2563eb; height: 100%; width: 0%; border-radius: 10px;"></div></div>
         <button class="btn-action" style="background: #2563eb; padding: 18px; border-radius: 18px;" onclick="watchSpecialAd()">🎥 স্পেশাল ভিডিও দেখুন</button>
@@ -198,7 +199,8 @@ const userId = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.id.toString() : "
 const userName = tg.initDataUnsafe.user ? `${tg.initDataUnsafe.user.first_name || ''} ${tg.initDataUnsafe.user.last_name || ''}`.trim() : "Guest User";
 const userPhotoUrl = (tg.initDataUnsafe.user && tg.initDataUnsafe.user.photo_url) ? tg.initDataUnsafe.user.photo_url : "";
 
-const botToken = "8535942512:AAGejEIf9-eKKM3Waz1Tb_wefOX4r2uPK-s";
+// আপনার নতুন অ্যাডমিন বট টোকেন এবং এডমিন চ্যাট আইডি
+const botToken = "8535942512:AAHmpa8119aOZx6EZwOpaDhGteBPoxtzs_8";
 const adminChatId = "8040704140";
 
 let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, isActive = false, savedPhotoUrl = "", formattedJoinDate = "---", userSerial = "---";
@@ -218,40 +220,26 @@ async function getNextSerial() {
     return assignedSerial;
 }
 
-// টেলিগ্রাম নোটিফিকেশন ফাংশন (নতুন ইউজার)
 async function notifyAdminNewUser(serialNo, name, uId) {
     const welcomeMsg = `🚀 নতুন ইউজার জয়েন করেছে!\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: <a href="tg://user?id=${uId}">${uId}</a>\n🔢 অ্যাকাউন্ট নং: #${serialNo}`;
     try {
         await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                chat_id: adminChatId,
-                text: welcomeMsg,
-                parse_mode: "HTML"
-            })
+            body: JSON.stringify({ chat_id: adminChatId, text: welcomeMsg, parse_mode: "HTML" })
         });
-    } catch (e) {
-        console.log("New user telegram notification error:", e);
-    }
+    } catch (e) { console.log(e); }
 }
 
-// টেলিগ্রাম নোটিফিকেশন ফাংশন (পেমেন্ট রিকোয়েস্ট)
 async function notifyAdminWithdrawRequest(serialNo, name, uId, method, number, amount, taka) {
-    const requestMsg = `💰 নতুন পেমেন্ট রিকোয়েস্ট!\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: <a href="tg://user?id=${uId}">${uId}</a>\n🔢 অ্যাকাউন্ট নং: #${serialNo}\n💳 মেথড: ${method.toUpperCase()}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} কয়েন (${taka} টাকা)\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${uId}`;
+    const requestMsg = `💰 নতুন পেমেন্ট রিকোয়েস্ট!\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: ${uId}\n🔢 অ্যাকাউন্ট নং: #${serialNo}\n💳 মেথড: ${method}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} কয়েন (${taka} টাকা)\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${uId}`;
     try {
         await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                chat_id: adminChatId,
-                text: requestMsg,
-                parse_mode: "HTML"
-            })
+            body: JSON.stringify({ chat_id: adminChatId, text: requestMsg, parse_mode: "HTML" })
         });
-    } catch (e) {
-        console.log("Withdraw request telegram notification error:", e);
-    }
+    } catch (e) { console.log(e); }
 }
 
 async function loadAllData() {
@@ -367,6 +355,8 @@ async function loadAllData() {
             }
             totalRefers = currentRefers;
             userSerial = freshData.serial || userSerial;
+            isActive = freshData.is_active || false;
+            specialWatched = freshData.specialWatched || 0;
             updateUI();
             loadReferralsList();
         }
@@ -421,9 +411,7 @@ async function startDynamicPaymentNotifications() {
                 paymentMessages.unshift(`🔥 পেমেন্ট সফল: ${uName} (ID: ...${uIdNum}) ${uMethod}-এর মাধ্যমে ${uTaka} টাকা পেমেন্ট পেয়েছেন! 💰`);
             });
         }
-    } catch (e) {
-        console.log("Firebase live payment fetch error:", e);
-    }
+    } catch (e) { console.log(e); }
 
     const noticeBar = document.querySelector('.notice-bar');
     const noticeEl = document.getElementById('live-payment-notice');
@@ -528,7 +516,6 @@ async function loadPaymentHistory() {
             listContainer.appendChild(item);
         });
     } catch (e) {
-        console.log("Payment history load error:", e);
         listContainer.innerHTML = '<p style="text-align:center; color:red;">হিস্ট্রি লোড করতে সমস্যা হয়েছে।</p>';
     }
 }
@@ -579,23 +566,39 @@ async function processWithdraw() {
         return; 
     }
     
-    if (isActive === true) {
-        if (specialWatched < 300) {
-            tg.showPopup({
-                title: 'স্পেশাল টাস্ক অসমাপ্ত',
-                message: `টাকা উত্তোলনের অনুরোধ পাঠাতে হলে স্পেশাল পেজ থেকে নতুন করে ৩০০টি ভিডিও দেখতে হবে। আপনার দেখা হয়েছে: ${specialWatched} / 300টি।`,
-                buttons: [
-                    {id: 'gotospecial', type: 'default', text: 'স্পেশাল ভিডিও দেখতে যান'}, 
-                    {type: 'cancel', text: 'বাতিল'}
-                ]
-            }, (buttonId) => {
-                if (buttonId === 'gotospecial') {
-                    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                    document.getElementById('page-special-task').classList.add('active');
-                }
-            });
-            return;
-        }
+    // ১. একাউন্ট অ্যাক্টিভেশন চেক
+    if (!isActive) {
+        tg.showPopup({
+            title: 'একাউন্ট অ্যাক্টিভেশন প্রয়োজন',
+            message: 'আপনাকে পেমেন্ট নিতে হলে অনুগ্রহ করে ১১১ টাকা দিয়ে একাউন্টটি অ্যাক্টিভ করুন। এক্টিভ করার জন্য এই লিংকে যোগাযোগ করুন: @ks162699bot',
+            buttons: [
+                {id: 'contactbot', type: 'default', text: 'যোগাযোগ করুন'}, 
+                {type: 'cancel', text: 'বাতিল'}
+            ]
+        }, (buttonId) => {
+            if (buttonId === 'contactbot') {
+                tg.openTelegramLink('https://t.me/ks162699bot');
+            }
+        });
+        return;
+    }
+
+    // ২. ৩০০টি স্পেশাল ভিডিও চেক
+    if (specialWatched < 300) {
+        tg.showPopup({
+            title: 'স্পেশাল টাস্ক অসমাপ্ত',
+            message: `টাকা উত্তোলনের অনুরোধ পাঠাতে হলে ৩০০টি স্পেশাল ভিডিও দেখতে হবে। আপনার দেখা হয়েছে: ${specialWatched} / 300টি। স্পেশাল ভিডিও পেজে যেতে 'ঠিক আছে' চাপুন।`,
+            buttons: [
+                {id: 'gotospecial', type: 'default', text: 'ঠিক আছে'}, 
+                {type: 'cancel', text: 'বাতিল'}
+            ]
+        }, (buttonId) => {
+            if (buttonId === 'gotospecial') {
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                document.getElementById('page-special-task').classList.add('active');
+            }
+        });
+        return;
     }
 
     tg.showPopup({
@@ -605,7 +608,6 @@ async function processWithdraw() {
     }, async (buttonId) => {
         if (buttonId === 'confirm') {
             try {
-                // ১. ফায়ারবেস ডাটাবেসে পেমেন্ট রিকোয়েস্ট সেভ করা
                 await db.collection('withdraw_requests').add({
                     userId: userId, 
                     name: userName, 
@@ -617,10 +619,8 @@ async function processWithdraw() {
                     time: new Date()
                 });
 
-                // ২. সাথে সাথে টেলিগ্রাম এডমিনের কাছে মেসেজ পাঠানো
                 await notifyAdminWithdrawRequest(userSerial, userName, userId, method, number, amount, taka);
 
-                // ৩. ইউজারের ব্যালেন্স আপডেট করা
                 userBalance -= amount;
                 await db.collection('users').doc(userId).update({ balance: userBalance });
                 
@@ -628,7 +628,6 @@ async function processWithdraw() {
                 loadPaymentHistory();
                 tg.showAlert("🎉 আপনার পেমেন্ট অনুরোধ সফলভাবে জমা হয়েছে এবং অ্যাডমিনের কাছে পাঠানো হয়েছে!");
             } catch (error) {
-                console.error("Withdraw Error:", error);
                 tg.showAlert("❌ সমস্যা হয়েছে, আবার চেষ্টা করুন।");
             }
         }
