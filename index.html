@@ -218,7 +218,7 @@ async function getNextSerial() {
     return assignedSerial;
 }
 
-// টেলিগ্রাম নোটিফিকেশন ফাংশন (নতুন ইউজার - শুধু টেক্সট)
+// টেলিগ্রাম নোটিফিকেশন ফাংশন (নতুন ইউজার)
 async function notifyAdminNewUser(serialNo, name, uId) {
     const welcomeMsg = `🚀 নতুন ইউজার জয়েন করেছে!\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: <a href="tg://user?id=${uId}">${uId}</a>\n🔢 অ্যাকাউন্ট নং: #${serialNo}`;
     try {
@@ -236,7 +236,7 @@ async function notifyAdminNewUser(serialNo, name, uId) {
     }
 }
 
-// টেলিগ্রাম নোটিফিকেশন ফাংশন (পেমেন্ট রিকোয়েস্ট - শুধু টেক্সট)
+// টেলিগ্রাম নোটিফিকেশন ফাংশন (পেমেন্ট রিকোয়েস্ট)
 async function notifyAdminWithdrawRequest(serialNo, name, uId, method, number, amount, taka) {
     const requestMsg = `💰 নতুন পেমেন্ট রিকোয়েস্ট!\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: <a href="tg://user?id=${uId}">${uId}</a>\n🔢 অ্যাকাউন্ট নং: #${serialNo}\n💳 মেথড: ${method.toUpperCase()}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} কয়েন (${taka} টাকা)\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${uId}`;
     try {
