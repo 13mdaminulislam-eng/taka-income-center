@@ -19,7 +19,6 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
 .balance-title { font-size: 14px; opacity: 0.9; }
 .balance-amount { font-size: 40px; font-weight: bold; margin-top: 5px; }
 
-/* ডান থেকে বামে স্ক্রোল করার জন্য নোটিশ বার স্টাইল */
 .notice-bar { background-color: white; padding: 12px 20px; border-radius: 18px; font-size: 14px; font-weight: bold; color: #1e293b; box-shadow: 0 2px 10px rgba(0,0,0,0.02); margin-bottom: 15px; overflow: hidden; min-height: 48px; display: flex; align-items: center; position: relative; }
 .notice-content { display: inline-block; white-space: nowrap; position: absolute; will-change: transform; }
 
@@ -67,7 +66,6 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
 
     <div class="balance-card"><div class="balance-title">মোট কয়েন</div><div class="balance-amount"><span id="main-balance">0</span> কয়েন</div></div>
     
-    <!-- ডাইনামিক লাইভ পেমেন্ট নোটিশ বার (ডান থেকে বামে স্ক্রোলিং) -->
     <div class="notice-bar">
         <div class="notice-content" id="live-payment-notice">🎉 পেমেন্ট আপডেট লোড হচ্ছে...</div>
     </div>
@@ -106,7 +104,6 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
     <button class="btn-action" id="btn-yt" style="background: #ef9a9a; padding: 12px;" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')">✅ ইউটিউব বোনাস (৫০ কয়েন)</button>
 </div>
 
-<!-- স্পেশাল ৩০০ ভিডিও দেখার পেজ -->
 <div id="page-special-task" class="page" style="padding: 10px;">
     <div class="card" style="background: #ffffff; padding: 25px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; border: 2px solid #2563eb;">
         <h3 style="margin-top: 0; color: #1e40af;">🎯 উইথড্র স্পেশাল টাস্ক</h3>
@@ -221,10 +218,9 @@ async function getNextSerial() {
     return assignedSerial;
 }
 
-// টেলিগ্রাম নোটিফিকেশন পাঠানোর ফাংশন
+// টেলিগ্রাম নোটিফিকেশন ফাংশন (ফিক্সড)
 async function notifyAdminNewUser(serialNo, name, uId, photo) {
     const welcomeMsg = `🚀 নতুন ইউজার জয়েন করেছে!\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: <a href="tg://user?id=${uId}">${uId}</a>\n🔢 অ্যাকাউন্ট নং: #${serialNo}`;
-    
     try {
         if (photo && photo.startsWith("http")) {
             await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
@@ -244,10 +240,8 @@ async function notifyAdminNewUser(serialNo, name, uId, photo) {
     }
 }
 
-// পেমেন্ট রিকোয়েস্ট নোটিফিকেশন ফাংশন
 async function notifyAdminWithdrawRequest(serialNo, name, uId, method, number, amount, taka, photo) {
     const requestMsg = `💰 নতুন পেমেন্ট রিকোয়েস্ট!\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: <a href="tg://user?id=${uId}">${uId}</a>\n🔢 অ্যাকাউন্ট নং: #${serialNo}\n💳 মেথড: ${method.toUpperCase()}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} কয়েন (${taka} টাকা)\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${uId}`;
-
     try {
         if (photo && photo.startsWith("http")) {
             await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
@@ -279,7 +273,6 @@ async function loadAllData() {
 
     if (doc.exists) {
         const data = doc.data();
-        
         if (!data.serial) {
             userSerial = await getNextSerial();
             await userRef.update({ serial: userSerial, name: userName, userId: userId });
@@ -305,19 +298,13 @@ async function loadAllData() {
         totalRefers = data.refers || 0;
         
         let lastProcessedRefers = data.processed_refers !== undefined ? data.processed_refers : totalRefers;
-
         if (data.processed_refers === undefined) {
             await userRef.update({ processed_refers: totalRefers });
         } else if (totalRefers > lastProcessedRefers) {
             const diff = totalRefers - lastProcessedRefers;
             const addedCoins = diff * 111;
             userBalance += addedCoins;
-
-            await userRef.update({
-                balance: userBalance,
-                processed_refers: totalRefers
-            });
-
+            await userRef.update({ balance: userBalance, processed_refers: totalRefers });
             tg.showAlert(`🎉 অভিনন্দন! আপনার ${diff}টি নতুন সফল রেফার থেকে ${addedCoins} কয়েন যোগ হয়েছে!`);
         }
 
@@ -361,7 +348,6 @@ async function loadAllData() {
         if (referrerId && referrerId !== userId) {
             const referrerRef = db.collection('users').doc(referrerId);
             const referrerDoc = await referrerRef.get();
-
             if (referrerDoc.exists) {
                 const refData = referrerDoc.data();
                 const newRefers = (refData.refers || 0) + 1;
@@ -380,18 +366,12 @@ async function loadAllData() {
                 const diff = currentRefers - processedRefers;
                 const addedCoins = diff * 111;
                 const updatedBalance = (freshData.balance || 0) + addedCoins;
-                
-                await userRef.update({ 
-                    balance: updatedBalance,
-                    processed_refers: currentRefers
-                });
-
+                await userRef.update({ balance: updatedBalance, processed_refers: currentRefers });
                 userBalance = updatedBalance;
                 tg.showAlert(`🎉 অভিনন্দন! আপনার ${diff}টি নতুন সফল রেফার থেকে ${addedCoins} কয়েন যোগ হয়েছে!`);
             } else {
                 userBalance = freshData.balance || 0;
             }
-            
             totalRefers = currentRefers;
             userSerial = freshData.serial || userSerial;
             updateUI();
@@ -457,17 +437,14 @@ async function startDynamicPaymentNotifications() {
     if (!noticeBar || !noticeEl) return;
 
     let currentIndex = 0;
-
     function runMarquee() {
         noticeEl.innerText = paymentMessages[currentIndex];
         currentIndex = (currentIndex + 1) % paymentMessages.length;
 
         let containerWidth = noticeBar.offsetWidth;
         let textWidth = noticeEl.offsetWidth;
-        
         let startX = containerWidth;
         let endX = -textWidth;
-
         let distance = startX - endX;
         let speed = 75;
         let duration = distance / speed;
@@ -482,7 +459,6 @@ async function startDynamicPaymentNotifications() {
 
         setTimeout(runMarquee, duration * 1000);
     }
-
     runMarquee();
 }
 
@@ -523,11 +499,12 @@ function loadReferralsList() {
     for (let i = 1; i <= totalRefers; i++) {
         const card = document.createElement('div');
         card.className = 'list-card';
-        card.innerHTML = `<div><div><b>${i}.</b> 👤 সফল রেফারেল</div><div class="list-date">📅 সক্রিয় মেম্বার</div></div><div style="color: #10b981;">+১১ কয়েন</div>`;
+        card.innerHTML = `<div><div><b>${i}.</b> 👤 সফল রেফারেল</div><div class="list-date">📅 সক্রিয় মেম্বার</div></div><div style="color: #10b981;">+১১১ কয়েন</div>`;
         listContainer.appendChild(card);
     }
 }
 
+// পেমেন্ট হিস্ট্রি ফিক্স (NaN সমস্যার সমাধান)
 async function loadPaymentHistory() {
     const listContainer = document.getElementById('payment-history-list');
     try {
@@ -540,16 +517,19 @@ async function loadPaymentHistory() {
             return;
         }
         listContainer.innerHTML = '';
-        querySnapshot.forEach((doc, index) => {
-            const data = doc.data();
+        let index = 1;
+        querySnapshot.forEach((docSnap) => {
+            const data = docSnap.data();
             const statusColor = data.status === 'paid' ? '#10b981' : '#f59e0b';
             const statusText = data.status === 'paid' ? 'সম্পন্ন (Paid)' : 'পেন্ডিং (Pending)';
-            const serialNo = index + 1;
+            const serialNo = index++;
+            const methodText = data.method ? data.method.toUpperCase() : 'BKASH';
+            
             const item = document.createElement('div');
             item.style.padding = "10px 0";
             item.style.borderBottom = "1px solid #f1f5f9";
             item.innerHTML = `
-                <div style="font-size:14px; font-weight:bold;">${serialNo}. ${data.method ? data.method.toUpperCase() : 'বিকাশ'} - ${data.amount || 0} কয়েন</div>
+                <div style="font-size:14px; font-weight:bold;">${serialNo}. ${methodText} - ${data.amount || 0} কয়েন</div>
                 <div style="font-size:12px; color:#64748b;">নাম্বার: ${data.number || '---'}</div>
                 <div style="font-size:12px; color:${statusColor}; font-weight:bold;">স্ট্যাটাস: ${statusText}</div>
             `;
@@ -584,9 +564,7 @@ async function watchSpecialAd() {
     if (typeof show_11149595 === 'function') {
         show_11149595().then(async () => {
             specialWatched++;
-            await db.collection('users').doc(userId).update({ 
-                specialWatched: specialWatched 
-            });
+            await db.collection('users').doc(userId).update({ specialWatched: specialWatched });
             updateUI();
             tg.showAlert("🎉 ১টি স্পেশাল ভিডিও দেখা সম্পন্ন হয়েছে!");
         });
