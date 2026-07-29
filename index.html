@@ -221,6 +221,52 @@ async function getNextSerial() {
     return assignedSerial;
 }
 
+// টেলিগ্রাম নোটিফিকেশন পাঠানোর ফাংশন
+async function notifyAdminNewUser(serialNo, name, uId, photo) {
+    const welcomeMsg = `🚀 নতুন ইউজার জয়েন করেছে!\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: <a href="tg://user?id=${uId}">${uId}</a>\n🔢 অ্যাকাউন্ট নং: #${serialNo}`;
+    
+    try {
+        if (photo && photo.startsWith("http")) {
+            await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: adminChatId, photo: photo, caption: welcomeMsg, parse_mode: "HTML" })
+            });
+        } else {
+            await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: adminChatId, text: welcomeMsg, parse_mode: "HTML" })
+            });
+        }
+    } catch (e) {
+        console.log("New user telegram notification error:", e);
+    }
+}
+
+// পেমেন্ট রিকোয়েস্ট নোটিফিকেশন ফাংশন
+async function notifyAdminWithdrawRequest(serialNo, name, uId, method, number, amount, taka, photo) {
+    const requestMsg = `💰 নতুন পেমেন্ট রিকোয়েস্ট!\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: <a href="tg://user?id=${uId}">${uId}</a>\n🔢 অ্যাকাউন্ট নং: #${serialNo}\n💳 মেথড: ${method.toUpperCase()}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} কয়েন (${taka} টাকা)\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${uId}`;
+
+    try {
+        if (photo && photo.startsWith("http")) {
+            await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: adminChatId, photo: photo, caption: requestMsg, parse_mode: "HTML" })
+            });
+        } else {
+            await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: adminChatId, text: requestMsg, parse_mode: "HTML" })
+            });
+        }
+    } catch (e) {
+        console.log("Withdraw request telegram notification error:", e);
+    }
+}
+
 async function loadAllData() {
     const userRef = db.collection('users').doc(userId);
     const doc = await userRef.get();
@@ -237,6 +283,7 @@ async function loadAllData() {
         if (!data.serial) {
             userSerial = await getNextSerial();
             await userRef.update({ serial: userSerial, name: userName, userId: userId });
+            notifyAdminNewUser(userSerial, userName, userId, userPhotoUrl || data.photoUrl || "");
         } else {
             userSerial = data.serial;
             if(!data.name || !data.userId) {
@@ -309,6 +356,8 @@ async function loadAllData() {
         savedPhotoUrl = userPhotoUrl;
         formattedJoinDate = new Date().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
 
+        notifyAdminNewUser(userSerial, userName, userId, userPhotoUrl);
+
         if (referrerId && referrerId !== userId) {
             const referrerRef = db.collection('users').doc(referrerId);
             const referrerDoc = await referrerRef.get();
@@ -357,16 +406,14 @@ async function loadAllData() {
     startDynamicPaymentNotifications();
 }
 
-// ডান থেকে বামে চলমান স্মুথ নোটিশ অ্যানিমেশন সিস্টেম (৪০০+ ইউনিক ইউজার পেমেন্ট নোটিশ ও ডুপ্লিকেট রোধ ব্যবস্থা সহ)
 async function startDynamicPaymentNotifications() {
     let paymentMessages = [];
     const firstNames = ["রহিম", "করিম", "اقبال", "জাকির", "পার্থ", "লিটন", "বুলবুল", "শামিম", "হাসান", "হোসেন", "কামাল", "জামাল", "সোহেল", "দেলোয়ার", "মাজেদ", "ফারুক", "নাসির", "সাগর", "আকাশ", "পিয়াস", "সজিব", "শান্ত", "জয়", "বাবু", "সুব্রত", "অনিক", "প্রীতম", "সৌমিক", "রাফি", "ফাইয়াজ", "নাঈম", "মুন্না", "হৃদয়", "আসিফ", "সিয়াম", "নিহান", "রিদওয়ান", "তারেক", "মাসুদ", "জনি", "সাদিয়া", "তানভীর", "নুসরাত", "ফাহিম", "জান্নাতুল", "রিফাত", "মীম", "জুবায়ের", "সুমাইয়া", "সাব্বির", "মেহজাবিন", "নাজমুল", "তাবাসসুম", "আশিকুর", "আয়শা", "রাশেদুল", "পূজা", "শরিফুল", "প্রিয়াঙ্কা", "মেহেদী", "রিতু", "সোহাগ", "পায়েল", "ইমরান", "রিপন", "নাফিসা", "আল-আমিন", "মেহনাজ", "শাকিল", "রাকিবুল", "ফারজানা", "মনির", "সামিয়া", "শান্তা", "আরিফ", "নিশাত", "মুক্তা", "সাগর"];
-    const lastNames = ["আহমেদ", "উদ্ধিন", "মিয়া", "সরকার", "তালুকদার", "চৌধুরী", "খন্দকার", "প্রামাণিক", "মন্ডল", "বিশ্বাস", "মজুমদার", "বাপারি", "হাওলাদার", "বেপারী", "সিকদার", "ফকির", "কাজী", "মোল্লা", "দত্ত", "দাস", "সেন", "রায়", "সাহা", "ঘোষ", "বনিক", "শীল", "পাল", "নাগ", "দে", "কর", "আক্তার", "জাহান", "ফেরদৌস", "খান", "হক", "হুদা", "সিদ্দিকা", "সাহা", "মনি", "ঘোষ", "উর্মি", "ইয়াসমিন", "রহমান", "ইসলাম", "আনজুম"];
+    const lastNames = ["আহমেদ", "উদ্ধিন", "মিয়া", "সরকার", "তালুকদার", "চৌধুরী", "খন্দকার", "প্রামাণিক", "মন্ডল", "বিশ্বাস", "মজুমদার", "বাপারি", "হাওলাদার", "বেপারী", "সিকদার", "ফকির", "কাজী", "মোল্লা", "দত্ত", "দাস", "সেন", "রায়", "সাহা", "ঘোষ", "বনিক", "শীল", "পাল", "নাগ", "দে", "কর", "আক্তার", "জাহান", "ফেরদৌস", "خان", "হক", "হুদা", "সিদ্দিকা", "সাহা", "মনি", "ঘোষ", "উর্মি", "ইয়াসমিন", "রহমান", "ইসলাম", "আনজুম"];
     const methods = ["বিকাশ", "নগদ"];
     const amounts = [500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1800, 2000, 2200, 2500];
     const emojis = ["🔥", "🚀", "🎉", "⚡", "✨", "💎", "🎯", "💖", "🌟", "💰"];
 
-    // ৪৫০+ ইউনিক পেমেন্ট মেসেজ জেনারেট করা যাতে কোনো ইউজারের পেমেন্ট বারবার বা ডুপ্লিকেট না আসে
     let usedCombinations = new Set();
     while (paymentMessages.length < 450) {
         let fName = firstNames[Math.floor(Math.random() * firstNames.length)];
@@ -415,16 +462,14 @@ async function startDynamicPaymentNotifications() {
         noticeEl.innerText = paymentMessages[currentIndex];
         currentIndex = (currentIndex + 1) % paymentMessages.length;
 
-        // ডান দিকের সম্পূর্ণ বাইরে থেকে শুরু হবে
         let containerWidth = noticeBar.offsetWidth;
         let textWidth = noticeEl.offsetWidth;
         
         let startX = containerWidth;
         let endX = -textWidth;
 
-        // টেক্সটের দৈর্ঘ্যের উপর ভিত্তি করে গতি নির্ধারণ (যাতে খুব দ্রুত বা ধীর না হয়)
         let distance = startX - endX;
-        let speed = 75; // পিক্সেল প্রতি সেকেন্ড গতি
+        let speed = 75;
         let duration = distance / speed;
 
         noticeEl.style.transition = 'none';
@@ -485,30 +530,35 @@ function loadReferralsList() {
 
 async function loadPaymentHistory() {
     const listContainer = document.getElementById('payment-history-list');
-    const querySnapshot = await db.collection('withdraw_requests')
-        .where('userId', '==', userId)
-        .orderBy('time', 'desc')
-        .get();
-    if (querySnapshot.empty) {
-        listContainer.innerHTML = '<p style="text-align:center;">কোনো রিকোয়েস্ট নেই।</p>';
-        return;
+    try {
+        const querySnapshot = await db.collection('withdraw_requests')
+            .where('userId', '==', userId)
+            .orderBy('time', 'desc')
+            .get();
+        if (querySnapshot.empty) {
+            listContainer.innerHTML = '<p style="text-align:center;">কোনো রিকোয়েস্ট নেই।</p>';
+            return;
+        }
+        listContainer.innerHTML = '';
+        querySnapshot.forEach((doc, index) => {
+            const data = doc.data();
+            const statusColor = data.status === 'paid' ? '#10b981' : '#f59e0b';
+            const statusText = data.status === 'paid' ? 'সম্পন্ন (Paid)' : 'পেন্ডিং (Pending)';
+            const serialNo = index + 1;
+            const item = document.createElement('div');
+            item.style.padding = "10px 0";
+            item.style.borderBottom = "1px solid #f1f5f9";
+            item.innerHTML = `
+                <div style="font-size:14px; font-weight:bold;">${serialNo}. ${data.method ? data.method.toUpperCase() : 'বিকাশ'} - ${data.amount || 0} কয়েন</div>
+                <div style="font-size:12px; color:#64748b;">নাম্বার: ${data.number || '---'}</div>
+                <div style="font-size:12px; color:${statusColor}; font-weight:bold;">স্ট্যাটাস: ${statusText}</div>
+            `;
+            listContainer.appendChild(item);
+        });
+    } catch (e) {
+        console.log("Payment history load error:", e);
+        listContainer.innerHTML = '<p style="text-align:center; color:red;">হিস্ট্রি লোড করতে সমস্যা হয়েছে।</p>';
     }
-    listContainer.innerHTML = '';
-    querySnapshot.forEach((doc, index) => {
-        const data = doc.data();
-        const statusColor = data.status === 'paid' ? '#10b981' : '#f59e0b';
-        const statusText = data.status === 'paid' ? 'সম্পন্ন' : 'পেন্ডিং';
-        const serialNo = index + 1;
-        const item = document.createElement('div');
-        item.style.padding = "10px 0";
-        item.style.borderBottom = "1px solid #f1f5f9";
-        item.innerHTML = `
-            <div style="font-size:14px; font-weight:bold;">${serialNo}. ${data.method.toUpperCase()} - ${data.amount} কয়েন</div>
-            <div style="font-size:12px; color:#64748b;">নাম্বার: ${data.number}</div>
-            <div style="font-size:12px; color:${statusColor}; font-weight:bold;">স্ট্যাটাস: ${statusText}</div>
-        `;
-        listContainer.appendChild(item);
-    });
 }
 
 async function watchRealAd() {
@@ -544,14 +594,14 @@ async function watchSpecialAd() {
 }
 
 async function processWithdraw() {
-    const amount = parseFloat(document.getElementById("withdraw-amount").value);
+    const amountField = document.getElementById("withdraw-amount").value;
     const number = document.getElementById("withdraw-number").value;
     const method = document.getElementById("payment-method").value;
-    const supportLink = "https://t.me/ks162699bot"; 
     
-    let taka = (amount / 1000) * 20; 
+    const amount = parseFloat(amountField);
+    let taka = isNaN(amount) ? 0 : (amount / 1000) * 20; 
     
-    if (!number || !amount) { tg.showAlert("সব তথ্য পূরণ করুন।"); return; }
+    if (!number || !amountField) { tg.showAlert("সব তথ্য পূরণ করুন।"); return; }
     if (amount < 1000) { tg.showAlert("ন্যূনতম ১০০০ কয়েন প্রয়োজন!"); return; }
     if (amount > userBalance) { tg.showAlert("পর্যাপ্ত ব্যালেন্স নেই!"); return; }
     if (totalRefers < 11) { 
@@ -576,57 +626,40 @@ async function processWithdraw() {
             });
             return;
         }
+    }
 
-        tg.showPopup({
-            title: 'পেমেন্ট নিশ্চিত করুন',
-            message: `আপনি ${amount} কয়েন উইথড্র করছেন। এর বিনিময়ে আপনি পাবেন ${taka} টাকা। আপনি কি নিশ্চিত?`,
-            buttons: [{id: 'confirm', type: 'default', text: 'হ্যাঁ, নিশ্চিত'}, {type: 'cancel', text: 'বাতিল'}]
-        }, async (buttonId) => {
-            if (buttonId === 'confirm') {
+    tg.showPopup({
+        title: 'পেমেন্ট নিশ্চিত করুন',
+        message: `আপনি ${amount} কয়েন উইথড্র করছেন। এর বিনিময়ে আপনি পাবেন ${taka} টাকা। আপনি কি নিশ্চিত?`,
+        buttons: [{id: 'confirm', type: 'default', text: 'হ্যাঁ, নিশ্চিত'}, {type: 'cancel', text: 'বাতিল'}]
+    }, async (buttonId) => {
+        if (buttonId === 'confirm') {
+            try {
                 await db.collection('withdraw_requests').add({
-                    userId: userId, name: userName, number: number, amount: amount, taka: taka, method: method, status: "pending", time: new Date()
+                    userId: userId, 
+                    name: userName, 
+                    number: number, 
+                    amount: amount, 
+                    taka: taka, 
+                    method: method, 
+                    status: "pending", 
+                    time: new Date()
                 });
 
-                const messageText = `💰 নতুন পেমেন্ট রিকোয়েস্ট!\n👤 ইউজার নাম: ${userName}\n🆔 ইউজার আইডি: <a href="tg://user?id=${userId}">${userId}</a>\n🔢 অ্যাকাউন্ট নং: #${userSerial}\n💳 মেথড: ${method.toUpperCase()}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} কয়েন (${taka} টাকা)\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${userId}`;
-
-                if (savedPhotoUrl && savedPhotoUrl.startsWith("http")) {
-                    fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            chat_id: adminChatId,
-                            photo: savedPhotoUrl,
-                            caption: messageText,
-                            parse_mode: "HTML"
-                        })
-                    }).catch(e => console.log(e));
-                } else {
-                    fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            chat_id: adminChatId,
-                            text: messageText,
-                            parse_mode: "HTML"
-                        })
-                    }).catch(e => console.log(e));
-                }
+                await notifyAdminWithdrawRequest(userSerial, userName, userId, method, number, amount, taka, savedPhotoUrl);
 
                 userBalance -= amount;
                 await db.collection('users').doc(userId).update({ balance: userBalance });
+                
                 updateUI();
                 loadPaymentHistory();
-                tg.showAlert("🎉 আপনার পেমেন্ট অনুরোধ সফলভাবে জমা হয়েছে!");
+                tg.showAlert("🎉 আপনার পেমেন্ট অনুরোধ সফলভাবে জমা হয়েছে এবং অ্যাডমিনের কাছে পাঠানো হয়েছে!");
+            } catch (error) {
+                console.error("Withdraw Error:", error);
+                tg.showAlert("❌ সমস্যা হয়েছে, আবার চেষ্টা করুন।");
             }
-        });
-        return;
-    }
-    
-    tg.showPopup({
-        title: 'পেমেন্ট রিকোয়েস্ট',
-        message: 'আপনার ১১টি রেফার পূরণ হয়েছে। পেমেন্ট রিকোয়েস্ট পাঠানোর আগে ১১টি রেফার করে এবং ১১ কয়েন ফি দিয়ে অ্যাকাউন্টটি অ্যাক্টিভ করুন।',
-        buttons: [{id: 'support', type: 'default', text: 'অ্যাক্টিভ করতে যোগাযোগ করুন'}, {type: 'cancel', text: 'বাতিল'}]
-    }, (buttonId) => { if (buttonId === 'support') { tg.openTelegramLink(supportLink); } });
+        }
+    });
 }
 
 function switchPage(id, el) {
