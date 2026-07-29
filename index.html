@@ -230,6 +230,18 @@ async function notifyAdminNewUser(serialNo, name, uId) {
     } catch (e) { console.log(e); }
 }
 
+// নতুন রেফার এডমিন নোটিফিকেশন ফাংশন
+async function notifyAdminReferral(referrerName, referrerIdVal, newUserName, newUserameId) {
+    const refMsg = `👥 নতুন সফল রেফার!\n\n👑 যার মাধ্যমে রেফার হয়েছে:\n👤 নাম: ${referrerName}\n🆔 আইডি: <a href="tg://user?id=${referrerIdVal}">${referrerIdVal}</a>\n\n👤 যে জয়েন করেছে:\n👤 নাম: ${newUserName}\n🆔 আইডি: <a href="tg://user?id=${newUserameId}">${newUserameId}</a>`;
+    try {
+        await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: adminChatId, text: refMsg, parse_mode: "HTML" })
+        });
+    } catch (e) { console.log(e); }
+}
+
 async function notifyAdminWithdrawRequest(serialNo, name, uId, method, number, amount, taka) {
     const requestMsg = `💰 নতুন পেমেন্ট রিকোয়েস্ট!\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: ${uId}\n🔢 অ্যাকাউন্ট নং: #${serialNo}\n💳 মেথড: ${method}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} কয়েন (${taka} টাকা)\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${uId}`;
     try {
@@ -332,6 +344,9 @@ async function loadAllData() {
                 const refData = referrerDoc.data();
                 const newRefers = (refData.refers || 0) + 1;
                 await referrerRef.update({ refers: newRefers });
+                
+                // রেফার সফল হলে রেফারারের কাছে টেলিগ্রাম নোটিফিকেশন পাঠানোর লজিক
+                notifyAdminReferral(refData.name || "ইউজার", referrerId, userName, userId);
             }
         }
     }
@@ -504,7 +519,6 @@ async function loadPaymentHistory() {
             const serialNo = index++;
             const methodText = data.method ? data.method.toUpperCase() : 'BKASH';
             
-            // রিকোয়েস্ট পাঠানোর তারিখ ও সময় ফরম্যাট করার অংশ
             let timeString = '---';
             if (data.time && data.time.toDate) {
                 timeString = data.time.toDate().toLocaleString('bn-BD', { 
