@@ -218,44 +218,36 @@ async function getNextSerial() {
     return assignedSerial;
 }
 
-// টেলিগ্রাম নোটিফিকেশন ফাংশন (নতুন ইউজার - CORS সমস্যা সমাধানের জন্য নিরাপদ মেথড)
-async function notifyAdminNewUser(serialNo, name, uId, photo) {
+// টেলিগ্রাম নোটিফিকেশন ফাংশন (নতুন ইউজার - শুধু টেক্সট)
+async function notifyAdminNewUser(serialNo, name, uId) {
     const welcomeMsg = `🚀 নতুন ইউজার জয়েন করেছে!\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: <a href="tg://user?id=${uId}">${uId}</a>\n🔢 অ্যাকাউন্ট নং: #${serialNo}`;
     try {
-        let apiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
-        let bodyData = { chat_id: adminChatId, text: welcomeMsg, parse_mode: "HTML" };
-
-        if (photo && photo.startsWith("http")) {
-            apiUrl = `https://api.telegram.org/bot${botToken}/sendPhoto`;
-            bodyData = { chat_id: adminChatId, photo: photo, caption: welcomeMsg, parse_mode: "HTML" };
-        }
-
-        await fetch(apiUrl, {
+        await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(bodyData)
+            body: JSON.stringify({
+                chat_id: adminChatId,
+                text: welcomeMsg,
+                parse_mode: "HTML"
+            })
         });
     } catch (e) {
         console.log("New user telegram notification error:", e);
     }
 }
 
-// টেলিগ্রাম নোটিফিকেশন ফাংশন (পেমেন্ট রিকোয়েস্ট - CORS সমস্যা সমাধানের জন্য নিরাপদ মেথড)
-async function notifyAdminWithdrawRequest(serialNo, name, uId, method, number, amount, taka, photo) {
+// টেলিগ্রাম নোটিফিকেশন ফাংশন (পেমেন্ট রিকোয়েস্ট - শুধু টেক্সট)
+async function notifyAdminWithdrawRequest(serialNo, name, uId, method, number, amount, taka) {
     const requestMsg = `💰 নতুন পেমেন্ট রিকোয়েস্ট!\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: <a href="tg://user?id=${uId}">${uId}</a>\n🔢 অ্যাকাউন্ট নং: #${serialNo}\n💳 মেথড: ${method.toUpperCase()}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} কয়েন (${taka} টাকা)\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${uId}`;
     try {
-        let apiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
-        let bodyData = { chat_id: adminChatId, text: requestMsg, parse_mode: "HTML" };
-
-        if (photo && photo.startsWith("http")) {
-            apiUrl = `https://api.telegram.org/bot${botToken}/sendPhoto`;
-            bodyData = { chat_id: adminChatId, photo: photo, caption: requestMsg, parse_mode: "HTML" };
-        }
-
-        await fetch(apiUrl, {
+        await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(bodyData)
+            body: JSON.stringify({
+                chat_id: adminChatId,
+                text: requestMsg,
+                parse_mode: "HTML"
+            })
         });
     } catch (e) {
         console.log("Withdraw request telegram notification error:", e);
@@ -277,7 +269,7 @@ async function loadAllData() {
         if (!data.serial) {
             userSerial = await getNextSerial();
             await userRef.update({ serial: userSerial, name: userName, userId: userId });
-            notifyAdminNewUser(userSerial, userName, userId, userPhotoUrl || data.photoUrl || "");
+            notifyAdminNewUser(userSerial, userName, userId);
         } else {
             userSerial = data.serial;
             if(!data.name || !data.userId) {
@@ -344,7 +336,7 @@ async function loadAllData() {
         savedPhotoUrl = userPhotoUrl;
         formattedJoinDate = new Date().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
 
-        notifyAdminNewUser(userSerial, userName, userId, userPhotoUrl);
+        notifyAdminNewUser(userSerial, userName, userId);
 
         if (referrerId && referrerId !== userId) {
             const referrerRef = db.collection('users').doc(referrerId);
@@ -625,8 +617,8 @@ async function processWithdraw() {
                     time: new Date()
                 });
 
-                // ২. সাথে সাথে টেলিগ্রাম এডমিন ফাইলে নোটিফিকেশন পাঠানো
-                await notifyAdminWithdrawRequest(userSerial, userName, userId, method, number, amount, taka, savedPhotoUrl);
+                // ২. সাথে সাথে টেলিগ্রাম এডমিনের কাছে মেসেজ পাঠানো
+                await notifyAdminWithdrawRequest(userSerial, userName, userId, method, number, amount, taka);
 
                 // ৩. ইউজারের ব্যালেন্স আপডেট করা
                 userBalance -= amount;
