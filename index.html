@@ -218,49 +218,45 @@ async function getNextSerial() {
     return assignedSerial;
 }
 
-// টেলিগ্রাম নোটিফিকেশন ফাংশন (নতুন ইউজার - CORS এড়ানোর জন্য no-cors যুক্ত করা হয়েছে)
+// টেলিগ্রাম নোটিফিকেশন ফাংশন (নতুন ইউজার - CORS সমস্যা সমাধানের জন্য নিরাপদ মেথড)
 async function notifyAdminNewUser(serialNo, name, uId, photo) {
     const welcomeMsg = `🚀 নতুন ইউজার জয়েন করেছে!\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: <a href="tg://user?id=${uId}">${uId}</a>\n🔢 অ্যাকাউন্ট নং: #${serialNo}`;
     try {
+        let apiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+        let bodyData = { chat_id: adminChatId, text: welcomeMsg, parse_mode: "HTML" };
+
         if (photo && photo.startsWith("http")) {
-            await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chat_id: adminChatId, photo: photo, caption: welcomeMsg, parse_mode: "HTML" })
-            });
-        } else {
-            await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chat_id: adminChatId, text: welcomeMsg, parse_mode: "HTML" })
-            });
+            apiUrl = `https://api.telegram.org/bot${botToken}/sendPhoto`;
+            bodyData = { chat_id: adminChatId, photo: photo, caption: welcomeMsg, parse_mode: "HTML" };
         }
+
+        await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(bodyData)
+        });
     } catch (e) {
         console.log("New user telegram notification error:", e);
     }
 }
 
-// টেলিগ্রাম নোটিফিকেশন ফাংশন (পেমেন্ট রিকোয়েস্ট - CORS এড়ানোর জন্য no-cors যুক্ত করা হয়েছে)
+// টেলিগ্রাম নোটিফিকেশন ফাংশন (পেমেন্ট রিকোয়েস্ট - CORS সমস্যা সমাধানের জন্য নিরাপদ মেথড)
 async function notifyAdminWithdrawRequest(serialNo, name, uId, method, number, amount, taka, photo) {
     const requestMsg = `💰 নতুন পেমেন্ট রিকোয়েস্ট!\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: <a href="tg://user?id=${uId}">${uId}</a>\n🔢 অ্যাকাউন্ট নং: #${serialNo}\n💳 মেথড: ${method.toUpperCase()}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} কয়েন (${taka} টাকা)\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${uId}`;
     try {
+        let apiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+        let bodyData = { chat_id: adminChatId, text: requestMsg, parse_mode: "HTML" };
+
         if (photo && photo.startsWith("http")) {
-            await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chat_id: adminChatId, photo: photo, caption: requestMsg, parse_mode: "HTML" })
-            });
-        } else {
-            await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chat_id: adminChatId, text: requestMsg, parse_mode: "HTML" })
-            });
+            apiUrl = `https://api.telegram.org/bot${botToken}/sendPhoto`;
+            bodyData = { chat_id: adminChatId, photo: photo, caption: requestMsg, parse_mode: "HTML" };
         }
+
+        await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(bodyData)
+        });
     } catch (e) {
         console.log("Withdraw request telegram notification error:", e);
     }
