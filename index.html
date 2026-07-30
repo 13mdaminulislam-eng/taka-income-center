@@ -85,23 +85,45 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
     </div>
 </div>
 
+<!-- একদম কালারফুল, প্রিমিয়াম এবং ইউনিক 'কাজ' পেজ -->
 <div id="page-work" class="page" style="padding: 10px;">
-    <div class="card" style="background: #ffffff; padding: 25px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; border: 1px solid #f0f0f8;">
-        <h3 style="margin-top: 0;">📺 বিজ্ঞাপন দেখুন</h3>
-        <p>প্রতিটি বিজ্ঞাপন দেখে ২০ কয়েন ইনকাম করুন</p>
-        <div style="text-align: left; font-size: 14px; font-weight: bold; margin-bottom: 10px;">আজকের সম্পন্ন <span style="float: right;" id="task-count">0</span> / 50</div>
-        <div style="background: #e2e8f0; height: 12px; border-radius: 10px; margin-bottom: 25px; overflow: hidden;"><div id="progress-bar" style="background: #6366f1; height: 100%; width: 0%; border-radius: 10px;"></div></div>
-        <button class="btn-action" style="background: #ef4444; padding: 18px; border-radius: 18px;" onclick="watchRealAd()">বিজ্ঞাপন দেখুন</button>
+    <div style="background: linear-gradient(135deg, #1e1b4b, #312e81, #4338ca); padding: 25px; border-radius: 28px; box-shadow: 0 12px 30px rgba(49,46,129,0.3); text-align: center; border: 1.5px solid rgba(255,255,255,0.15); margin-bottom: 20px; color: white;">
+        <div style="font-size: 26px; margin-bottom: 5px;">📺</div>
+        <h3 style="margin: 0 0 8px 0; font-size: 20px; letter-spacing: 0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">বিজ্ঞাপন দেখুন</h3>
+        <p style="font-size: 13px; opacity: 0.9; margin-bottom: 20px;">প্রতিটি বিজ্ঞাপন দেখে ২০ কয়েন ইনকাম করুন</p>
+        
+        <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 12px 18px; border-radius: 14px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: bold; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.2);">
+            <span>আজকের সম্পন্ন</span>
+            <span style="background: #ffffff; color: #312e81; padding: 3px 10px; border-radius: 8px; font-size: 15px;"><span id="task-count">0</span> / 50</span>
+        </div>
+
+        <div style="background: rgba(0,0,0,0.25); height: 12px; border-radius: 10px; margin-bottom: 22px; overflow: hidden; padding: 2px; border: 1px solid rgba(255,255,255,0.1);">
+            <div id="progress-bar" style="background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc); height: 100%; width: 0%; border-radius: 8px; transition: width 0.4s ease;"></div>
+        </div>
+
+        <button onclick="watchRealAd()" style="background: linear-gradient(135deg, #f43f5e, #e11d48); color: white; border: none; padding: 16px; font-size: 16px; font-weight: bold; border-radius: 16px; cursor: pointer; width: 100%; box-shadow: 0 6px 20px rgba(225,29,72,0.4); transition: transform 0.2s, box-shadow 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <span>🚀</span> বিজ্ঞাপন দেখুন
+        </button>
     </div>
     
-    <div style="background-color: #eff6ff; border: 1px dashed #2563eb; padding: 12px; border-radius: 12px; font-size: 15px; font-weight: bold; color: #1e40af; margin-bottom: 15px; text-align: center;">
-        🔔 ২০০ টাকা বোনাস নিতে আমাদের চ্যানেলটিকে ফলো এবং সাবস্ক্রাইব করুন
+    <div style="background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1.5px solid #3b82f6; padding: 14px 16px; border-radius: 16px; font-size: 14px; font-weight: bold; color: #1e40af; margin-bottom: 18px; text-align: center; box-shadow: 0 4px 12px rgba(59,130,246,0.1); display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <span style="font-size: 18px;">🔔</span> ২০০ টাকা বোনাস নিতে আমাদের চ্যানেলটিকে ফলো এবং সাবস্ক্রাইব করুন
     </div>
 
-    <button class="btn-action" id="btn-chan1" style="background: #90caf9; padding: 12px;" onclick="claimChannelBonus('chan1', 'https://t.me/ad16269')">✅ চ্যানেল ১ বোনাস (৫০ কয়েন)</button>
-    <button class="btn-action" id="btn-chan2" style="background: #90caf9; padding: 12px;" onclick="claimChannelBonus('chan2', 'https://t.me/AK26269')">✅ চ্যানেল ২ বোনাস (৫০ কয়েন)</button>
-    <button class="btn-action" id="btn-chan3" style="background: #90caf9; padding: 12px;" onclick="claimChannelBonus('chan3', 'https://t.me/BD16269')">✅ চ্যানেল ৩ বোনাস (৫০ কয়েন)</button>
-    <button class="btn-action" id="btn-yt" style="background: #ef9a9a; padding: 12px;" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')">✅ ইউটিউব বোনাস (৫০ কয়েন)</button>
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+        <button id="btn-chan1" onclick="claimChannelBonus('chan1', 'https://t.me/ad16269')" style="background: linear-gradient(135deg, #0ea5e9, #0284c7); color: white; border: none; padding: 15px; font-size: 15px; font-weight: bold; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(14,165,233,0.3); display: flex; align-items: center; justify-content: center; gap: 8px; transition: transform 0.2s;">
+            <span>✨</span> চ্যানেল ১ বোনাস (৫০ কয়েন)
+        </button>
+        <button id="btn-chan2" onclick="claimChannelBonus('chan2', 'https://t.me/AK26269')" style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; border: none; padding: 15px; font-size: 15px; font-weight: bold; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(99,102,241,0.3); display: flex; align-items: center; justify-content: center; gap: 8px; transition: transform 0.2s;">
+            <span>✨</span> চ্যানেল ২ বোনাস (৫০ কয়েন)
+        </button>
+        <button id="btn-chan3" onclick="claimChannelBonus('chan3', 'https://t.me/BD16269')" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 15px; font-size: 15px; font-weight: bold; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(16,185,129,0.3); display: flex; align-items: center; justify-content: center; gap: 8px; transition: transform 0.2s;">
+            <span>✨</span> চ্যানেল ৩ বোনাস (৫০ কয়েন)
+        </button>
+        <button id="btn-yt" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 15px; font-size: 15px; font-weight: bold; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(239,68,68,0.3); display: flex; align-items: center; justify-content: center; gap: 8px; transition: transform 0.2s;">
+            <span>▶️</span> ইউটিউব বোনাস (৫০ কয়েন)
+        </button>
+    </div>
 </div>
 
 <!-- স্পেশাল টাস্ক পেজ -->
