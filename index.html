@@ -59,6 +59,20 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 .list-card { background: #1e293b; padding: 16px; border-radius: 16px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); color: #f8fafc; font-weight: 700; border: 1px solid rgba(255,255,255,0.05); }
 .list-date { font-size: 12px; color: #94a3b8; font-weight: 500; }
 select.input-field { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 15px center; background-size: 16px; }
+
+/* 🌟 নতুন ইউনিক ওয়ালেট পেজ ডিজাইন CSS */
+.wallet-hero-card { background: linear-gradient(135deg, #1e1b4b, #312e81, #1e293b); border-radius: 28px; padding: 25px 20px; box-shadow: 0 15px 35px rgba(49,46,129,0.3); margin-bottom: 20px; border: 1.5px solid rgba(139,92,246,0.3); position: relative; overflow: hidden; text-align: center; }
+.wallet-hero-card::before { content: ''; position: absolute; top: -60px; right: -60px; width: 160px; height: 160px; background: rgba(139,92,246,0.15); border-radius: 50%; pointer-events: none; }
+.wallet-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #8b5cf6, #ec4899); color: white; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; box-shadow: 0 4px 15px rgba(139,92,246,0.4); }
+.wallet-id-box { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(10px); padding: 8px 16px; border-radius: 12px; display: inline-block; font-size: 13px; color: #94a3b8; font-weight: 700; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 15px; }
+.wallet-balance-box { background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 18px; margin-bottom: 15px; }
+.wallet-balance-title { font-size: 13px; color: #cbd5e1; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }
+.wallet-balance-num { font-size: 34px; font-weight: 800; color: #38bdf8; text-shadow: 0 2px 10px rgba(56,189,248,0.3); }
+.wallet-notice-box { background: rgba(244, 63, 94, 0.1); border: 1px solid rgba(244, 63, 94, 0.25); border-radius: 14px; padding: 12px 15px; font-size: 13px; font-weight: 700; color: #fda4af; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.wallet-form-box { background: #1e293b; border-radius: 24px; padding: 22px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05); margin-bottom: 20px; text-align: left; }
+.wallet-label { display: block; font-weight: 700; font-size: 13px; color: #94a3b8; margin-bottom: 6px; margin-top: 12px; }
+.wallet-label:first-of-type { margin-top: 0; }
+.history-section-title { font-size: 16px; font-weight: 800; color: #f8fafc; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
 </style>
 </head>
 <body>
@@ -177,7 +191,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <div class="refer-card">
         <div class="refer-badge">💎 রেফার অ্যান্ড আর্ন প্রোগ্রাম</div>
         <h3 style="margin: 0 0 8px 0; font-size: 22px; font-weight: 800;">বন্ধুকে রেফার করুন, নিশ্চিত আয় করুন!</h3>
-        <p style="font-size: 13px; opacity: 0.85; line-height: 1.5; margin-bottom: 15px;">আপনার পার্সোনাল রেফার লিংকটি শেয়ার করুন। বন্ধু জয়েন করলেই আপনি পাবেন আকর্ষণীয় ক্যাশ বোনাস!</p>
+        <p style="font-size: 13px; opacity: 0.85; line-height: 1.5; margin-bottom: 15px;">আপনার পার্সোনাল রেফার লিংকটি শেয়ার করুন। বন্ধু জয়েন করলেই পাবেন আকর্ষণীয় ক্যাশ বোনাস!</p>
         
         <div class="refer-benefits">
             <div class="refer-benefit-item">
@@ -208,25 +222,44 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <div id="referrals-list-container"></div>
 </div>
 
+<!-- নতুন প্রিমিয়াম ও ইউনিক ওয়ালেট পেজ ডিজাইন -->
 <div id="page-wallet" class="page">
-    <div class="card">
-        <h3 style="margin-top:0; color: #60a5fa;">💳 রিডিম (Redeem)</h3>
-        <p style="font-weight:700; color:#94a3b8; font-size: 14px;">ইউজার আইডি: <span id="display-user-id" style="color: #f8fafc;"></span></p>
-        <p style="font-size: 15px;">আপনার ব্যালেন্স: <b style="color: #38bdf8;"><span id="wallet-balance">0</span> কয়েন</b></p>
-        <p style="font-size: 13px; color: #f43f5e; font-weight: 700;">নোট: ন্যূনতম ১০০০ কয়েন হলে উত্তোলন করতে পারবেন।</p>
-        <label style="display:block; font-weight:700; font-size: 14px; text-align: left; color: #94a3b8; margin-top: 15px;">পেমেন্ট মেথড:</label>
+    <div class="wallet-hero-card">
+        <div class="wallet-badge">💳 রিডিম সেন্টার (Redeem)</div>
+        <div style="font-size: 20px; font-weight: 800; color: #f8fafc; margin-bottom: 8px;">আপনার ওয়ালেট ব্যালেন্স</div>
+        
+        <div class="wallet-id-box">ইউজার আইডি: <span id="display-user-id" style="color: #38bdf8;">---</span></div>
+
+        <div class="wallet-balance-box">
+            <div class="wallet-balance-title">উপলব্ধ ব্যালেন্স</div>
+            <div class="wallet-balance-num"><span id="wallet-balance">0</span> <span style="font-size: 20px; color: #cbd5e1;">কয়েন</span></div>
+        </div>
+
+        <div class="wallet-notice-box">
+            <span style="font-size: 16px;">⚡</span> ন্যূনতম ১০০০ কয়েন হলে উত্তোলন করতে পারবেন।
+        </div>
+    </div>
+
+    <div class="wallet-form-box">
+        <label class="wallet-label">পেমেন্ট মেথড নির্বাচন করুন:</label>
         <select class="input-field" id="payment-method">
             <option value="bkash">বিকাশ (bKash)</option>
             <option value="nagad">নগদ (Nagad)</option>
         </select>
-        <input type="number" class="input-field" id="withdraw-number" placeholder="আপনার বিকাশ/নগদ নাম্বার লিখুন">
-        <input type="number" class="input-field" id="withdraw-amount" placeholder="কয়েনের পরিমাণ লিখুন">
-        <button class="btn-action btn-success" onclick="processWithdraw()">অনুরোধ পাঠান</button>
+
+        <label class="wallet-label">আপনার বিকাশ/নগদ নাম্বার:</label>
+        <input type="number" class="input-field" id="withdraw-number" placeholder="০১৭xxxxxxxx">
+
+        <label class="wallet-label">উত্তোলন করার কয়েনের পরিমাণ:</label>
+        <input type="number" class="input-field" id="withdraw-amount" placeholder="যেমন: ১০০০">
+
+        <button class="btn-action btn-success" style="margin-top: 15px; padding: 16px; border-radius: 14px; font-size: 16px;" onclick="processWithdraw()">🚀 পেমেন্ট অনুরোধ পাঠান</button>
     </div>
-    <div class="card" style="margin-top:20px;">
-        <h3 style="margin-top:0; font-size: 16px;">পেমেন্ট হিস্ট্রি</h3>
-        <div id="payment-history-list" style="text-align: left;">
-            <p style="text-align:center; color: #94a3b8;">লোডিং হিস্ট্রি...</p>
+
+    <div class="card" style="margin-top:20px; text-align: left; padding: 20px;">
+        <div class="history-section-title">📊 পেমেন্ট হিস্ট্রি</div>
+        <div id="payment-history-list">
+            <p style="text-align:center; color: #94a3b8; padding: 15px 0;">লোডিং হিস্ট্রি...</p>
         </div>
     </div>
 </div>
@@ -564,7 +597,7 @@ async function loadPaymentHistory() {
             .orderBy('time', 'desc')
             .get();
         if (querySnapshot.empty) {
-            listContainer.innerHTML = '<p style="text-align:center; color: #94a3b8;">কোনো রিকোয়েস্ট নেই।</p>';
+            listContainer.innerHTML = '<p style="text-align:center; color: #94a3b8; padding: 15px 0;">কোনো রিকোয়েস্ট নেই।</p>';
             return;
         }
         listContainer.innerHTML = '';
@@ -599,7 +632,7 @@ async function loadPaymentHistory() {
             listContainer.appendChild(item);
         });
     } catch (e) {
-        listContainer.innerHTML = '<p style="text-align:center; color:#f43f5e;">হিস্ট্রি লোড করতে সমস্যা হয়েছে।</p>';
+        listContainer.innerHTML = '<p style="text-align:center; color:#f43f5e; padding: 15px 0;">হিস্ট্রি লোড করতে সমস্যা হয়েছে।</p>';
     }
 }
 
