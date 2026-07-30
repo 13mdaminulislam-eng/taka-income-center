@@ -151,16 +151,16 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 
     <div style="display: flex; flex-direction: column; gap: 12px;">
-        <button id="btn-chan1" onclick="startChannelTask('chan1', 'https://t.me/ad16269')" style="background: linear-gradient(135deg, #0ea5e9, #0284c7); color: white; border: none; padding: 15px; font-size: 15px; font-weight: 700; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(14,165,233,0.3); display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <button id="btn-chan1" onclick="handleBonusTask('chan1', 'https://t.me/ad16269')" style="background: linear-gradient(135deg, #0ea5e9, #0284c7); color: white; border: none; padding: 15px; font-size: 15px; font-weight: 700; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(14,165,233,0.3); display: flex; align-items: center; justify-content: center; gap: 8px;">
             <span>✨</span> চ্যানেল ১ বোনাস (৫০ কয়েন)
         </button>
-        <button id="btn-chan2" onclick="startChannelTask('chan2', 'https://t.me/AK26269')" style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; border: none; padding: 15px; font-size: 15px; font-weight: 700; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(99,102,241,0.3); display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <button id="btn-chan2" onclick="handleBonusTask('chan2', 'https://t.me/AK26269')" style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; border: none; padding: 15px; font-size: 15px; font-weight: 700; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(99,102,241,0.3); display: flex; align-items: center; justify-content: center; gap: 8px;">
             <span>✨</span> চ্যানেল ২ বোনাস (৫০ কয়েন)
         </button>
-        <button id="btn-chan3" onclick="startChannelTask('chan3', 'https://facebook.com/AD16169')" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 15px; font-size: 15px; font-weight: 700; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(16,185,129,0.3); display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <button id="btn-chan3" onclick="handleBonusTask('chan3', 'https://facebook.com/AD16169')" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 15px; font-size: 15px; font-weight: 700; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(16,185,129,0.3); display: flex; align-items: center; justify-content: center; gap: 8px;">
             <span>👥</span> ফেসবুক পেজ বোনাস (৫০ কয়েন)
         </button>
-        <button id="btn-yt" onclick="startChannelTask('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 15px; font-size: 15px; font-weight: 700; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(239,68,68,0.3); display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <button id="btn-yt" onclick="handleBonusTask('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 15px; font-size: 15px; font-weight: 700; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(239,68,68,0.3); display: flex; align-items: center; justify-content: center; gap: 8px;">
             <span>▶️</span> ইউটিউব বোনাস (৫০ কয়েন)
         </button>
     </div>
@@ -315,7 +315,8 @@ const adminChatId = "8040704140";
 
 let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, isActive = false, savedPhotoUrl = "", formattedJoinDate = "---", userSerial = "---";
 let claimedBonuses = {};
-let pendingTaskKey = null; // ইউজার কোন লিংকে ক্লিক করেছে তা ট্র্যাক করার জন্য
+let pendingTaskKey = null; // কোন লিংকে ক্লিক করা হয়েছে তা ট্র্যাক করার জন্য
+let taskStates = {}; // কোন বাটনে এখন টাইমার বা ক্লেইম অপশন চলছে তা রাখার জন্য
 
 async function getNextSerial() {
     const counterRef = db.collection('settings').doc('user_counter');
@@ -499,61 +500,89 @@ async function loadAllData() {
     startDynamicPaymentNotifications();
 }
 
-// 🌟 নতুন লজিক: ইউজার লিংকে ক্লিক করে ব্যাเน আসলে ক্লেইম পপ-আপ দেখাবে
-function startChannelTask(id, url) {
+// 🌟 নতুন লজিক: ক্লিক করে চ্যানেল/পেজে যাবে এবং ব্যাক করলে টাইমার শুরু হবে
+const channelUrls = {
+    'chan1': 'https://t.me/ad16269',
+    'chan2': 'https://t.me/AK26269',
+    'chan3': 'https://facebook.com/AD16169',
+    'yt': 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v'
+};
+
+function handleBonusTask(id, url) {
     if (claimedBonuses[id]) {
         tg.showAlert("⚠️ আপনি ইতিমধ্যে এই বোনাসটি গ্রহণ করেছেন!");
         return;
     }
     
+    if (taskStates[id] === 'claimable') {
+        claimBonusCoins(id);
+        return;
+    }
+
     pendingTaskKey = id;
     window.open(url, '_blank');
 }
 
-// অ্যাপে ফোকাস ফিরে আসলে (ইউজার ব্যাক করলে) চেক করবে কোনো টাস্ক পেন্ডিং আছে কি না
+// ইউজার চ্যানেলে ঘুরে অ্যাপে ব্যাক করলে এই ফাংশন ফায়ার হবে
 window.addEventListener('focus', () => {
     if (pendingTaskKey) {
         const currentTask = pendingTaskKey;
         pendingTaskKey = null;
         
         if (!claimedBonuses[currentTask]) {
-            setTimeout(() => {
-                tg.showPopup({
-                    title: 'বোনাস কনফারমেশন',
-                    message: 'আপনি কি চ্যানেল/পেজে জয়েন বা সাবস্ক্রাইব করেছেন? হ্যাঁ চাপলে আপনার অ্যাকাউন্টে ৫০ কয়েন যোগ হয়ে যাবে।',
-                    buttons: [
-                        {id: 'claim_yes', type: 'default', text: 'হ্যাঁ, বোনাস নিন'},
-                        {type: 'cancel', text: 'বাতিল'}
-                    ]
-                }, async (buttonId) => {
-                    if (buttonId === 'claim_yes') {
-                        if (claimedBonuses[currentTask]) {
-                            tg.showAlert("⚠️ আপনি ইতিমধ্যে এই বোনাসটি গ্রহণ করেছেন!");
-                            return;
-                        }
-
-                        claimedBonuses[currentTask] = true;
-                        userBalance += 50;
-
-                        try {
-                            await db.collection('users').doc(userId).update({
-                                balance: userBalance,
-                                claimedBonuses: claimedBonuses
-                            });
-                            updateUI();
-                            updateBonusButtonsUI();
-                            tg.showAlert("🎉 অভিনন্দন! সফলভাবে ৫০ কয়েন বোনাস যোগ হয়েছে!");
-                        } catch (error) {
-                            claimedBonuses[currentTask] = false;
-                            userBalance -= 50;
-                            tg.showAlert("❌ বোনাস নিতে সমস্যা হয়েছে, আবার চেষ্টা করুন।");
-                        }
-                    }
-                });
-            }, 500);
+            startTimerForTask(currentTask);
         }
     }
 });
+
+function startTimerForTask(id) {
+    const btn = document.getElementById('btn-' + id);
+    if (!btn) return;
+
+    taskStates[id] = 'waiting';
+    let timeLeft = 10; // ১০ সেকেন্ড অপেক্ষা
+
+    btn.style.background = "linear-gradient(135deg, #d97706, #b45309)";
+    btn.innerHTML = `<span>⏳</span> ৫/১০ সেকেন্ড অপেক্ষা করুন (${timeLeft}s)`;
+    btn.disabled = true;
+
+    let timer = setInterval(() => {
+        timeLeft--;
+        if (timeLeft > 0) {
+            btn.innerHTML = `<span>⏳</span> অনুগ্রহ করে অপেক্ষা করুন (${timeLeft}s)`;
+        } else {
+            clearInterval(timer);
+            taskStates[id] = 'claimable';
+            btn.disabled = false;
+            btn.style.background = "linear-gradient(135deg, #10b981, #059669)";
+            btn.innerHTML = `<span>🎁</span> বোনাস ক্লেইম করুন (৫০ কয়েন)`;
+        }
+    }, 1000);
+}
+
+async function claimBonusCoins(id) {
+    if (claimedBonuses[id]) {
+        tg.showAlert("⚠️ আপনি ইতিমধ্যে এই বোনাসটি গ্রহণ করেছেন!");
+        return;
+    }
+
+    claimedBonuses[id] = true;
+    userBalance += 50;
+
+    try {
+        await db.collection('users').doc(userId).update({
+            balance: userBalance,
+            claimedBonuses: claimedBonuses
+        });
+        updateUI();
+        updateBonusButtonsUI();
+        tg.showAlert("🎉 অভিনন্দন! সফলভাবে ৫০ কয়েন বোনাস যোগ হয়েছে!");
+    } catch (error) {
+        claimedBonuses[id] = false;
+        userBalance -= 50;
+        tg.showAlert("❌ বোনাস নিতে সমস্যা হয়েছে, আবার চেষ্টা করুন।");
+    }
+}
 
 async function startDynamicPaymentNotifications() {
     let paymentMessages = [];
@@ -659,12 +688,11 @@ function updateBonusButtonsUI() {
     const bonusKeys = ['chan1', 'chan2', 'chan3', 'yt'];
     bonusKeys.forEach(key => {
         const btn = document.getElementById('btn-' + key);
-        if (btn) {
-            if (claimedBonuses[key]) {
-                btn.innerText = "✅ ইতিমধ্যে বোনাস নেওয়া হয়েছে";
-                btn.style.background = "linear-gradient(135deg, #475569, #334155)";
-                btn.style.opacity = "0.8";
-            }
+        if (btn && claimedBonuses[key]) {
+            btn.innerText = "✅ ইতিমধ্যে বোনাস নেওয়া হয়েছে";
+            btn.style.background = "linear-gradient(135deg, #475569, #334155)";
+            btn.style.opacity = "0.8";
+            btn.disabled = true;
         }
     });
 }
