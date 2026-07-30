@@ -46,6 +46,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 .nav-item.active { color: #38bdf8; }
 .nav-icon { font-size: 22px; margin-bottom: 3px; }
 
+/* ইউনিক ও আকর্ষণীয় রেফার সেকশন ডিজাইন */
 .refer-card { background: linear-gradient(145deg, #1e1b4b, #312e81, #1e293b); color: white; border-radius: 28px; padding: 25px; box-shadow: 0 15px 35px rgba(49,46,129,0.3); margin-bottom: 20px; border: 1.5px solid rgba(168,85,247,0.3); position: relative; overflow: hidden; }
 .refer-badge { display: inline-block; background: linear-gradient(135deg, #ec4899, #8b5cf6); padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(236,72,153,0.3); }
 .refer-benefits { background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 15px; margin: 15px 0; text-align: left; }
@@ -59,6 +60,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 .list-date { font-size: 12px; color: #94a3b8; font-weight: 500; }
 select.input-field { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 15px center; background-size: 16px; }
 
+/* 🌟 নতুন ইউনিক ওয়ালেট পেজ ডিজাইন CSS */
 .wallet-hero-card { background: linear-gradient(135deg, #1e1b4b, #312e81, #1e293b); border-radius: 28px; padding: 25px 20px; box-shadow: 0 15px 35px rgba(49,46,129,0.3); margin-bottom: 20px; border: 1.5px solid rgba(139,92,246,0.3); position: relative; overflow: hidden; text-align: center; }
 .wallet-hero-card::before { content: ''; position: absolute; top: -60px; right: -60px; width: 160px; height: 160px; background: rgba(139,92,246,0.15); border-radius: 50%; pointer-events: none; }
 .wallet-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #8b5cf6, #ec4899); color: white; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; box-shadow: 0 4px 15px rgba(139,92,246,0.4); }
@@ -72,13 +74,16 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .wallet-label:first-of-type { margin-top: 0; }
 .history-section-title { font-size: 16px; font-weight: 800; color: #f8fafc; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
 
+/* 🌟 কাস্টম রেফার পপ-আপ মডাল ডিজাইন (ছবির মতো) */
 .custom-modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 20px; animation: fadeInModal 0.25s ease; }
 .custom-modal-overlay.active { display: flex; }
 @keyframes fadeInModal { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
 .custom-modal-box { background: #1e293b; border: 1.5px solid rgba(255,255,255,0.1); border-radius: 28px; width: 100%; max-width: 360px; padding: 25px 20px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.5); color: #f8fafc; position: relative; }
+.custom-modal-icon { font-size: 36px; margin-bottom: 10px; }
 .custom-modal-title { font-size: 20px; font-weight: 800; color: #f8fafc; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .custom-modal-desc { font-size: 14px; color: #cbd5e1; line-height: 1.6; margin-bottom: 20px; text-align: left; background: rgba(15, 23, 42, 0.5); padding: 14px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.05); }
-.custom-modal-btn-primary { background: transparent; color: #38bdf8; border: none; font-size: 15px; font-weight: 700; width: 100%; padding: 10px; cursor: pointer; margin-bottom: 8px; }
+.custom-modal-btn-primary { background: transparent; color: #38bdf8; border: none; font-size: 15px; font-weight: 700; width: 100%; padding: 10px; cursor: pointer; margin-bottom: 8px; transition: opacity 0.2s; }
+.custom-modal-btn-primary:hover { opacity: 0.85; }
 .custom-modal-btn-cancel { background: transparent; color: #94a3b8; border: none; font-size: 15px; font-weight: 700; width: 100%; padding: 10px; cursor: pointer; margin-bottom: 8px; }
 .custom-modal-btn-buy { background: transparent; color: #38bdf8; border: none; font-size: 15px; font-weight: 700; width: 100%; padding: 10px; cursor: pointer; }
 </style>
@@ -126,6 +131,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
+<!-- কাজ পেজ -->
 <div id="page-work" class="page" style="padding: 10px;">
     <div style="background: linear-gradient(135deg, #1e1b4b, #312e81, #4338ca); padding: 25px; border-radius: 28px; box-shadow: 0 12px 30px rgba(49,46,129,0.3); text-align: center; border: 1.5px solid rgba(255,255,255,0.1); margin-bottom: 20px; color: white;">
         <div style="font-size: 26px; margin-bottom: 5px;">📺</div>
@@ -147,25 +153,26 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
     
     <div style="background: rgba(30, 58, 138, 0.4); border: 1.5px solid #3b82f6; padding: 14px 16px; border-radius: 16px; font-size: 14px; font-weight: 700; color: #93c5fd; margin-bottom: 18px; text-align: center; box-shadow: 0 4px 12px rgba(59,130,246,0.1); display: flex; align-items: center; justify-content: center; gap: 8px;">
-        <span style="font-size: 18px;">🔔</span> চ্যানেল/পেজে জয়েন করে ব্যাকে এসে বোনাস ক্লেইম করুন!
+        <span style="font-size: 18px;">🔔</span> ২০০ টাকা বোনাস নিতে আমাদের চ্যানেলটিকে ফলো এবং সাবস্ক্রাইব করুন
     </div>
 
     <div style="display: flex; flex-direction: column; gap: 12px;">
-        <button id="btn-chan1" onclick="handleBonusTask('chan1', 'https://t.me/ad16269')" style="background: linear-gradient(135deg, #0ea5e9, #0284c7); color: white; border: none; padding: 15px; font-size: 15px; font-weight: 700; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(14,165,233,0.3); display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <button id="btn-chan1" onclick="claimChannelBonus('chan1', 'https://t.me/ad16269')" style="background: linear-gradient(135deg, #0ea5e9, #0284c7); color: white; border: none; padding: 15px; font-size: 15px; font-weight: 700; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(14,165,233,0.3); display: flex; align-items: center; justify-content: center; gap: 8px;">
             <span>✨</span> চ্যানেল ১ বোনাস (৫০ কয়েন)
         </button>
-        <button id="btn-chan2" onclick="handleBonusTask('chan2', 'https://t.me/AK26269')" style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; border: none; padding: 15px; font-size: 15px; font-weight: 700; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(99,102,241,0.3); display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <button id="btn-chan2" onclick="claimChannelBonus('chan2', 'https://t.me/AK26269')" style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; border: none; padding: 15px; font-size: 15px; font-weight: 700; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(99,102,241,0.3); display: flex; align-items: center; justify-content: center; gap: 8px;">
             <span>✨</span> চ্যানেল ২ বোনাস (৫০ কয়েন)
         </button>
-        <button id="btn-chan3" onclick="handleBonusTask('chan3', 'https://facebook.com/AD16169')" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 15px; font-size: 15px; font-weight: 700; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(16,185,129,0.3); display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <button id="btn-chan3" onclick="claimChannelBonus('chan3', 'https://facebook.com/AD16169')" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 15px; font-size: 15px; font-weight: 700; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(16,185,129,0.3); display: flex; align-items: center; justify-content: center; gap: 8px;">
             <span>👥</span> ফেসবুক পেজ বোনাস (৫০ কয়েন)
         </button>
-        <button id="btn-yt" onclick="handleBonusTask('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 15px; font-size: 15px; font-weight: 700; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(239,68,68,0.3); display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <button id="btn-yt" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 15px; font-size: 15px; font-weight: 700; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(239,68,68,0.3); display: flex; align-items: center; justify-content: center; gap: 8px;">
             <span>▶️</span> ইউটিউব বোনাস (৫০ কয়েন)
         </button>
     </div>
 </div>
 
+<!-- স্পেশাল টাস্ক পেজ -->
 <div id="page-special-task" class="page" style="padding: 10px;">
     <div class="card" style="border: 2px solid #3b82f6;">
         <h3 style="margin-top: 0; color: #60a5fa;">🎯 উইথড্র স্পেশাল টাস্ক</h3>
@@ -192,6 +199,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
+<!-- নতুন ইউনিক ও আকর্ষণীয় রেফার পেজ ডিজাইন -->
 <div id="page-refer" class="page">
     <div class="refer-card">
         <div class="refer-badge">💎 রেফার অ্যান্ড আর্ন প্রোগ্রাম</div>
@@ -227,6 +235,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <div id="referrals-list-container"></div>
 </div>
 
+<!-- নতুন প্রিমিয়াম ও ইউনিক ওয়ালেট পেজ ডিজাইন -->
 <div id="page-wallet" class="page">
     <div class="wallet-hero-card">
         <div class="wallet-badge">💳 রিডিম সেন্টার (Redeem)</div>
@@ -268,6 +277,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
+<!-- 🌟 কাস্টম রেফার পপ-আপ মডাল HTML -->
 <div id="refer-modal" class="custom-modal-overlay">
     <div class="custom-modal-box">
         <div class="custom-modal-title"><span>⚠️</span> রেফার পূরণ হয়নি!</div>
@@ -315,8 +325,6 @@ const adminChatId = "8040704140";
 
 let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, isActive = false, savedPhotoUrl = "", formattedJoinDate = "---", userSerial = "---";
 let claimedBonuses = {};
-let pendingTaskKey = null; // কোন লিংকে ক্লিক করা হয়েছে তা ট্র্যাক করার জন্য
-let taskStates = {}; // কোন বাটনে এখন টাইমার বা ক্লেইম অপশন চলছে তা রাখার জন্য
 
 async function getNextSerial() {
     const counterRef = db.collection('settings').doc('user_counter');
@@ -442,8 +450,8 @@ async function loadAllData() {
             totalWatched: 0, 
             specialWatched: 0, 
             is_active: false, 
-            claimedBonuses: {},
             last_reset_date: today,
+            claimedBonuses: {},
             created_at: serverTimestamp
         }, { merge: true });
 
@@ -500,88 +508,57 @@ async function loadAllData() {
     startDynamicPaymentNotifications();
 }
 
-// 🌟 নতুন লজিক: ক্লিক করে চ্যানেল/পেজে যাবে এবং ব্যাক করলে টাইমার শুরু হবে
-const channelUrls = {
-    'chan1': 'https://t.me/ad16269',
-    'chan2': 'https://t.me/AK26269',
-    'chan3': 'https://facebook.com/AD16169',
-    'yt': 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v'
-};
+function updateBonusButtonsUI() {
+    const buttons = {
+        'chan1': { id: 'btn-chan1', text: '✨ চ্যানেল ১ বোনাস (৫০ কয়েন)' },
+        'chan2': { id: 'btn-chan2', text: '✨ চ্যানেল ২ বোনাস (৫০ কয়েন)' },
+        'chan3': { id: 'btn-chan3', text: '👥 ফেসবুক পেজ বোনাস (৫০ কয়েন)' },
+        'yt': { id: 'btn-yt', text: '▶️ ইউটিউব বোনাস (৫০ কয়েন)' }
+    };
 
-function handleBonusTask(id, url) {
-    if (claimedBonuses[id]) {
+    for (let key in buttons) {
+        const btn = document.getElementById(buttons[key].id);
+        if (btn) {
+            if (claimedBonuses[key]) {
+                btn.innerHTML = `✅ ইতিমধ্যে বোনাস নেওয়া হয়েছে`;
+                btn.style.background = "linear-gradient(135deg, #334155, #1e293b)";
+                btn.style.color = "#94a3b8";
+                btn.style.cursor = "not-allowed";
+                btn.disabled = true;
+            } else {
+                btn.innerHTML = buttons[key].text;
+                btn.disabled = false;
+            }
+        }
+    }
+}
+
+async function claimChannelBonus(bonusKey, url) {
+    if (claimedBonuses[bonusKey]) {
         tg.showAlert("⚠️ আপনি ইতিমধ্যে এই বোনাসটি গ্রহণ করেছেন!");
         return;
     }
-    
-    if (taskStates[id] === 'claimable') {
-        claimBonusCoins(id);
-        return;
-    }
 
-    pendingTaskKey = id;
     window.open(url, '_blank');
-}
 
-// ইউজার চ্যানেলে ঘুরে অ্যাপে ব্যাক করলে এই ফাংশন ফায়ার হবে
-window.addEventListener('focus', () => {
-    if (pendingTaskKey) {
-        const currentTask = pendingTaskKey;
-        pendingTaskKey = null;
-        
-        if (!claimedBonuses[currentTask]) {
-            startTimerForTask(currentTask);
-        }
-    }
-});
+    tg.showAlert("⏳ চ্যানেল/পেজ ভিজিট করার পর অ্যাপে ফিরে আসুন। ১০ সেকেন্ড পর আপনার বোনাস ক্লেম হয়ে যাবে!");
 
-function startTimerForTask(id) {
-    const btn = document.getElementById('btn-' + id);
-    if (!btn) return;
+    setTimeout(async () => {
+        if (claimedBonuses[bonusKey]) return;
 
-    taskStates[id] = 'waiting';
-    let timeLeft = 10; // ১০ সেকেন্ড অপেক্ষা
+        userBalance += 50;
+        claimedBonuses[bonusKey] = true;
 
-    btn.style.background = "linear-gradient(135deg, #d97706, #b45309)";
-    btn.innerHTML = `<span>⏳</span> ৫/১০ সেকেন্ড অপেক্ষা করুন (${timeLeft}s)`;
-    btn.disabled = true;
-
-    let timer = setInterval(() => {
-        timeLeft--;
-        if (timeLeft > 0) {
-            btn.innerHTML = `<span>⏳</span> অনুগ্রহ করে অপেক্ষা করুন (${timeLeft}s)`;
-        } else {
-            clearInterval(timer);
-            taskStates[id] = 'claimable';
-            btn.disabled = false;
-            btn.style.background = "linear-gradient(135deg, #10b981, #059669)";
-            btn.innerHTML = `<span>🎁</span> বোনাস ক্লেইম করুন (৫০ কয়েন)`;
-        }
-    }, 1000);
-}
-
-async function claimBonusCoins(id) {
-    if (claimedBonuses[id]) {
-        tg.showAlert("⚠️ আপনি ইতিমধ্যে এই বোনাসটি গ্রহণ করেছেন!");
-        return;
-    }
-
-    claimedBonuses[id] = true;
-    userBalance += 50;
-
-    try {
-        await db.collection('users').doc(userId).update({
+        const userRef = db.collection('users').doc(userId);
+        await userRef.update({
             balance: userBalance,
             claimedBonuses: claimedBonuses
         });
+
         updateUI();
         updateBonusButtonsUI();
-        tg.showAlert("🎉 অভিনন্দন! সফলভাবে ৫০ কয়েন বোনাস যোগ হয়েছে!");
-    } catch (error) {
-        claimedBonuses[id] = false;
-        userBalance -= 50;
-        tg.showAlert("❌ বোনাস নিতে সমস্যা হয়েছে, আবার চেষ্টা করুন।");
-    }
+        tg.showAlert("🎉 অভিনন্দন! সফলভাবে ৫০ কয়েন বোনাস পেয়ে গেছেন!");
+    }, 10000); // ১০ সেকেন্ড সময়
 }
 
 async function startDynamicPaymentNotifications() {
@@ -682,19 +659,6 @@ function updateUI() {
     document.getElementById('special-task-count').innerText = specialWatched;
     if(document.getElementById('progress-bar')) document.getElementById('progress-bar').style.width = (dailyWatched / 50 * 100) + "%";
     if(document.getElementById('special-progress-bar')) document.getElementById('special-progress-bar').style.width = (specialWatched / 300 * 100) + "%";
-}
-
-function updateBonusButtonsUI() {
-    const bonusKeys = ['chan1', 'chan2', 'chan3', 'yt'];
-    bonusKeys.forEach(key => {
-        const btn = document.getElementById('btn-' + key);
-        if (btn && claimedBonuses[key]) {
-            btn.innerText = "✅ ইতিমধ্যে বোনাস নেওয়া হয়েছে";
-            btn.style.background = "linear-gradient(135deg, #475569, #334155)";
-            btn.style.opacity = "0.8";
-            btn.disabled = true;
-        }
-    });
 }
 
 function loadReferralsList() {
