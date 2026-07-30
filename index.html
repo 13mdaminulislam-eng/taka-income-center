@@ -8,57 +8,76 @@
 <script src='//libtl.com/sdk.js' data-zone='11149595' data-sdk='show_11149595'></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; }
-body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; margin: 0; padding: 15px; padding-bottom: 90px; color: #333; }
-.top-app-title { font-size: 22px; font-weight: bold; text-align: center; color: #1e293b; margin: 15px 0; }
+body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin: 0; padding: 15px; padding-bottom: 95px; color: #f8fafc; }
+.top-app-title { font-size: 24px; font-weight: 800; text-align: center; color: #f8fafc; margin: 15px 0; background: linear-gradient(135deg, #60a5fa, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 0.5px; }
+
 .page { display: none; animation: fadeIn 0.3s ease; }
 .page.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-.balance-card { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; border-radius: 24px; padding: 30px 25px; box-shadow: 0 10px 25px rgba(37, 99, 235, 0.15); margin-bottom: 20px; text-align: left; }
-.balance-title { font-size: 14px; opacity: 0.9; }
-.balance-amount { font-size: 40px; font-weight: bold; margin-top: 5px; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-.notice-bar { background-color: white; padding: 12px 20px; border-radius: 18px; font-size: 14px; font-weight: bold; color: #1e293b; box-shadow: 0 2px 10px rgba(0,0,0,0.02); margin-bottom: 15px; overflow: hidden; min-height: 48px; display: flex; align-items: center; position: relative; }
+.balance-card { background: linear-gradient(135deg, #3b82f6, #1d4ed8, #4f46e5); color: white; border-radius: 28px; padding: 30px 25px; box-shadow: 0 15px 35px rgba(37, 99, 235, 0.3); margin-bottom: 20px; text-align: left; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+.balance-card::before { content: ''; position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: rgba(255,255,255,0.1); border-radius: 50%; pointer-events: none; }
+.balance-title { font-size: 14px; opacity: 0.85; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.balance-amount { font-size: 42px; font-weight: 800; margin-top: 5px; text-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+
+.notice-bar { background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(10px); padding: 12px 20px; border-radius: 18px; font-size: 14px; font-weight: 700; color: #38bdf8; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 15px; overflow: hidden; min-height: 48px; display: flex; align-items: center; position: relative; border: 1px solid rgba(255,255,255,0.05); }
 .notice-content { display: inline-block; white-space: nowrap; position: absolute; will-change: transform; }
 
-.info-notice-box { background-color: #eff6ff; border-left: 5px solid #2563eb; padding: 15px; border-radius: 12px; font-size: 16px; font-weight: bold; color: #1e40af; margin-bottom: 20px; text-align: center; }
+.info-notice-box { background: rgba(59, 130, 246, 0.1); border-left: 5px solid #3b82f6; padding: 16px; border-radius: 14px; font-size: 15px; font-weight: 700; color: #93c5fd; margin-bottom: 20px; text-align: center; border-top: 1px solid rgba(59,130,246,0.2); border-right: 1px solid rgba(59,130,246,0.2); border-bottom: 1px solid rgba(59,130,246,0.2); }
 .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
-.stat-card { background: white; padding: 20px 15px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); text-align: center; }
-.stat-title { font-size: 14px; color: #64748b; font-weight: bold; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 6px; }
-.stat-value { font-size: 26px; font-weight: bold; color: #0f172a; }
-.card { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); margin-bottom: 15px; text-align: center; }
-.btn-action { background-color: #2563eb; color: white; border: none; padding: 14px 25px; font-size: 16px; font-weight: bold; border-radius: 12px; cursor: pointer; width: 100%; margin-top: 10px; transition: background 0.2s; }
-.btn-success { background-color: #10b981; }
-.input-field { width: 100%; padding: 14px; margin: 10px 0; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 15px; background-color: #f8fafc; text-align: center; }
-.nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #e2e8f0; box-shadow: 0 -5px 20px rgba(0,0,0,0.04); z-index: 1000; }
-.nav-item { font-size: 12px; color: #94a3b8; cursor: pointer; text-align: center; flex: 1; font-weight: bold; }
-.nav-item.active { color: #2563eb; }
-.nav-icon { font-size: 22px; margin-bottom: 4px; }
-.refer-card { background: #1e293b; color: white; border-radius: 20px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); margin-bottom: 20px; }
-.refer-link-box { background: #0f172a; padding: 15px; border-radius: 12px; margin: 15px 0; display: flex; align-items: center; justify-content: space-between; font-size: 14px; }
-.btn-refer-action { background: #ec4899; color: white; border: none; padding: 14px; border-radius: 12px; width: 48%; font-weight: bold; cursor: pointer; }
-.list-card { background: white; padding: 15px; border-radius: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); color: #333; font-weight: bold; }
-.list-date { font-size: 12px; color: #64748b; font-weight: normal; }
+.stat-card { background: #1e293b; padding: 20px 15px; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); text-align: center; border: 1px solid rgba(255,255,255,0.05); transition: transform 0.2s; }
+.stat-card:hover { transform: translateY(-2px); }
+.stat-title { font-size: 13px; color: #94a3b8; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.stat-value { font-size: 26px; font-weight: 800; color: #f8fafc; }
+
+.card { background: #1e293b; padding: 25px; border-radius: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); margin-bottom: 15px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
+.btn-action { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; padding: 15px 25px; font-size: 16px; font-weight: 700; border-radius: 14px; cursor: pointer; width: 100%; margin-top: 10px; transition: all 0.2s; box-shadow: 0 6px 20px rgba(37,99,235,0.3); }
+.btn-action:active { transform: scale(0.98); }
+.btn-success { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 6px 20px rgba(16,185,129,0.3); }
+
+.input-field { width: 100%; padding: 15px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; font-size: 15px; background-color: #0f172a; color: white; text-align: center; outline: none; transition: border-color 0.2s; }
+.input-field:focus { border-color: #3b82f6; }
+
+.nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(15px); display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.08); box-shadow: 0 -10px 30px rgba(0,0,0,0.4); z-index: 1000; }
+.nav-item { font-size: 11px; color: #64748b; cursor: pointer; text-align: center; flex: 1; font-weight: 700; transition: color 0.2s; }
+.nav-item.active { color: #38bdf8; }
+.nav-icon { font-size: 22px; margin-bottom: 3px; }
+
+/* ইউনিক ও আকর্ষণীয় রেফার সেকশন ডিজাইন */
+.refer-card { background: linear-gradient(145deg, #1e1b4b, #312e81, #1e293b); color: white; border-radius: 28px; padding: 25px; box-shadow: 0 15px 35px rgba(49,46,129,0.3); margin-bottom: 20px; border: 1.5px solid rgba(168,85,247,0.3); position: relative; overflow: hidden; }
+.refer-badge { display: inline-block; background: linear-gradient(135deg, #ec4899, #8b5cf6); padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(236,72,153,0.3); }
+.refer-benefits { background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 15px; margin: 15px 0; text-align: left; }
+.refer-benefit-item { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #e2e8f0; }
+.refer-benefit-item:last-child { margin-bottom: 0; }
+.refer-link-box { background: #0f172a; padding: 14px 16px; border-radius: 14px; margin: 15px 0; display: flex; align-items: center; justify-content: space-between; font-size: 13px; border: 1px solid rgba(255,255,255,0.08); }
+.btn-refer-action { background: linear-gradient(135deg, #ec4899, #be185d); color: white; border: none; padding: 14px; border-radius: 14px; width: 48%; font-weight: 800; cursor: pointer; box-shadow: 0 6px 15px rgba(236,72,153,0.3); transition: transform 0.2s; }
+.btn-refer-action:active { transform: scale(0.98); }
+
+.list-card { background: #1e293b; padding: 16px; border-radius: 16px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); color: #f8fafc; font-weight: 700; border: 1px solid rgba(255,255,255,0.05); }
+.list-date { font-size: 12px; color: #94a3b8; font-weight: 500; }
+select.input-field { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 15px center; background-size: 16px; }
 </style>
 </head>
 <body>
 <div class="top-app-title">🚀 টাকা ইনকাম সেন্টার 🚀</div>
 
 <div id="page-home" class="page active">
-    <div style="background: white; padding: 15px 20px; border-radius: 18px; display: flex; align-items: center; gap: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); margin-bottom: 15px;">
+    <div style="background: #1e293b; padding: 16px 20px; border-radius: 20px; display: flex; align-items: center; gap: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.05);">
         <div style="text-align: center;">
-            <img id="user-profile-pic" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" alt="Profile" style="width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid #2563eb; background: #e2e8f0;">
-            <div id="display-user-serial" style="font-size: 11px; font-weight: bold; color: #ef4444; margin-top: 4px;">নং: #---</div>
+            <img id="user-profile-pic" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" alt="Profile" style="width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid #3b82f6; background: #0f172a;">
+            <div id="display-user-serial" style="font-size: 11px; font-weight: 800; color: #f43f5e; margin-top: 4px;">নং: #---</div>
         </div>
         <div style="text-align: left; overflow: hidden; flex: 1;">
-            <div style="font-size: 15px; font-weight: bold; color: #1e293b; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
+            <div style="font-size: 15px; font-weight: 700; color: #f8fafc; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
                 👋 স্বাগতম, <span id="display-user-name">লোড হচ্ছে...</span>
             </div>
-            <div style="font-size: 13px; color: #64748b; margin-top: 3px; font-weight: 600;">
-                ID: <span id="display-user-id-badge" style="color: #2563eb;">---</span>
+            <div style="font-size: 13px; color: #94a3b8; margin-top: 3px; font-weight: 600;">
+                ID: <span id="display-user-id-badge" style="color: #38bdf8;">---</span>
             </div>
-            <div style="font-size: 12px; color: #10b981; margin-top: 2px; font-weight: 600;">
+            <div style="font-size: 12px; color: #34d399; margin-top: 2px; font-weight: 600;">
                 📅 জয়েনিং: <span id="display-join-date">লোড হচ্ছে...</span>
             </div>
         </div>
@@ -79,48 +98,48 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
         <div class="stat-card"><div class="stat-title">📺 দেখা হয়েছে</div><div class="stat-value" id="dash-watched">0</div></div>
         <div class="stat-card"><div class="stat-title">⏳ দেখতে পারবে</div><div class="stat-value" id="dash-remaining">50</div></div>
     </div>
-    <div class="card" style="padding: 15px;">
+    <div class="card" style="padding: 20px;">
         <div class="stat-title">🎬 সর্বমোট ভিডিও দেখা হয়েছে</div>
-        <div class="stat-value" id="total-watched-count" style="font-size: 32px; color: #2563eb;">0</div>
+        <div class="stat-value" id="total-watched-count" style="font-size: 32px; color: #38bdf8;">0</div>
     </div>
 </div>
 
 <!-- কাজ পেজ -->
 <div id="page-work" class="page" style="padding: 10px;">
-    <div style="background: linear-gradient(135deg, #1e1b4b, #312e81, #4338ca); padding: 25px; border-radius: 28px; box-shadow: 0 12px 30px rgba(49,46,129,0.3); text-align: center; border: 1.5px solid rgba(255,255,255,0.15); margin-bottom: 20px; color: white;">
+    <div style="background: linear-gradient(135deg, #1e1b4b, #312e81, #4338ca); padding: 25px; border-radius: 28px; box-shadow: 0 12px 30px rgba(49,46,129,0.3); text-align: center; border: 1.5px solid rgba(255,255,255,0.1); margin-bottom: 20px; color: white;">
         <div style="font-size: 26px; margin-bottom: 5px;">📺</div>
-        <h3 style="margin: 0 0 8px 0; font-size: 20px; letter-spacing: 0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">বিজ্ঞাপন দেখুন</h3>
+        <h3 style="margin: 0 0 8px 0; font-size: 20px; letter-spacing: 0.5px;">বিজ্ঞাপন দেখুন</h3>
         <p style="font-size: 13px; opacity: 0.9; margin-bottom: 20px;">প্রতিটি বিজ্ঞাপন দেখে ২০ কয়েন ইনকাম করুন</p>
         
-        <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 12px 18px; border-radius: 14px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: bold; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.2);">
+        <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 12px 18px; border-radius: 14px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 700; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.15);">
             <span>আজকের সম্পন্ন</span>
             <span style="background: #ffffff; color: #312e81; padding: 3px 10px; border-radius: 8px; font-size: 15px;"><span id="task-count">0</span> / 50</span>
         </div>
 
-        <div style="background: rgba(0,0,0,0.25); height: 12px; border-radius: 10px; margin-bottom: 22px; overflow: hidden; padding: 2px; border: 1px solid rgba(255,255,255,0.1);">
+        <div style="background: rgba(0,0,0,0.3); height: 12px; border-radius: 10px; margin-bottom: 22px; overflow: hidden; padding: 2px; border: 1px solid rgba(255,255,255,0.1);">
             <div id="progress-bar" style="background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc); height: 100%; width: 0%; border-radius: 8px; transition: width 0.4s ease;"></div>
         </div>
 
-        <button onclick="watchRealAd()" style="background: linear-gradient(135deg, #f43f5e, #e11d48); color: white; border: none; padding: 16px; font-size: 16px; font-weight: bold; border-radius: 16px; cursor: pointer; width: 100%; box-shadow: 0 6px 20px rgba(225,29,72,0.4); transition: transform 0.2s, box-shadow 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <button onclick="watchRealAd()" style="background: linear-gradient(135deg, #f43f5e, #e11d48); color: white; border: none; padding: 16px; font-size: 16px; font-weight: 800; border-radius: 16px; cursor: pointer; width: 100%; box-shadow: 0 6px 20px rgba(225,29,72,0.4); transition: transform 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px;">
             <span>🚀</span> বিজ্ঞাপন দেখুন
         </button>
     </div>
     
-    <div style="background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1.5px solid #3b82f6; padding: 14px 16px; border-radius: 16px; font-size: 14px; font-weight: bold; color: #1e40af; margin-bottom: 18px; text-align: center; box-shadow: 0 4px 12px rgba(59,130,246,0.1); display: flex; align-items: center; justify-content: center; gap: 8px;">
+    <div style="background: rgba(30, 58, 138, 0.4); border: 1.5px solid #3b82f6; padding: 14px 16px; border-radius: 16px; font-size: 14px; font-weight: 700; color: #93c5fd; margin-bottom: 18px; text-align: center; box-shadow: 0 4px 12px rgba(59,130,246,0.1); display: flex; align-items: center; justify-content: center; gap: 8px;">
         <span style="font-size: 18px;">🔔</span> ২০০ টাকা বোনাস নিতে আমাদের চ্যানেলটিকে ফলো এবং সাবস্ক্রাইব করুন
     </div>
 
     <div style="display: flex; flex-direction: column; gap: 12px;">
-        <button id="btn-chan1" onclick="claimChannelBonus('chan1', 'https://t.me/ad16269')" style="background: linear-gradient(135deg, #0ea5e9, #0284c7); color: white; border: none; padding: 15px; font-size: 15px; font-weight: bold; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(14,165,233,0.3); display: flex; align-items: center; justify-content: center; gap: 8px; transition: transform 0.2s;">
+        <button id="btn-chan1" onclick="claimChannelBonus('chan1', 'https://t.me/ad16269')" style="background: linear-gradient(135deg, #0ea5e9, #0284c7); color: white; border: none; padding: 15px; font-size: 15px; font-weight: 700; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(14,165,233,0.3); display: flex; align-items: center; justify-content: center; gap: 8px;">
             <span>✨</span> চ্যানেল ১ বোনাস (৫০ কয়েন)
         </button>
-        <button id="btn-chan2" onclick="claimChannelBonus('chan2', 'https://t.me/AK26269')" style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; border: none; padding: 15px; font-size: 15px; font-weight: bold; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(99,102,241,0.3); display: flex; align-items: center; justify-content: center; gap: 8px; transition: transform 0.2s;">
+        <button id="btn-chan2" onclick="claimChannelBonus('chan2', 'https://t.me/AK26269')" style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; border: none; padding: 15px; font-size: 15px; font-weight: 700; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(99,102,241,0.3); display: flex; align-items: center; justify-content: center; gap: 8px;">
             <span>✨</span> চ্যানেল ২ বোনাস (৫০ কয়েন)
         </button>
-        <button id="btn-chan3" onclick="claimChannelBonus('chan3', 'https://facebook.com/AD16169')" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 15px; font-size: 15px; font-weight: bold; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(16,185,129,0.3); display: flex; align-items: center; justify-content: center; gap: 8px; transition: transform 0.2s;">
+        <button id="btn-chan3" onclick="claimChannelBonus('chan3', 'https://facebook.com/AD16169')" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 15px; font-size: 15px; font-weight: 700; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(16,185,129,0.3); display: flex; align-items: center; justify-content: center; gap: 8px;">
             <span>👥</span> ফেসবুক পেজ বোনাস (৫০ কয়েন)
         </button>
-        <button id="btn-yt" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 15px; font-size: 15px; font-weight: bold; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(239,68,68,0.3); display: flex; align-items: center; justify-content: center; gap: 8px; transition: transform 0.2s;">
+        <button id="btn-yt" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 15px; font-size: 15px; font-weight: 700; border-radius: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(239,68,68,0.3); display: flex; align-items: center; justify-content: center; gap: 8px;">
             <span>▶️</span> ইউটিউব বোনাস (৫০ কয়েন)
         </button>
     </div>
@@ -128,58 +147,74 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
 
 <!-- স্পেশাল টাস্ক পেজ -->
 <div id="page-special-task" class="page" style="padding: 10px;">
-    <div class="card" style="background: #ffffff; padding: 25px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; border: 2px solid #2563eb;">
-        <h3 style="margin-top: 0; color: #1e40af;">🎯 উইথড্র স্পেশাল টাস্ক</h3>
-        <p style="font-size: 14px; color: #475569;">টাকা উত্তোলনের অনুরোধ পাঠানোর জন্য এই পেজ থেকে ৩০০টি ভিডিও কমপ্লিট করুন।</p>
-        <div style="text-align: left; font-size: 14px; font-weight: bold; margin-bottom: 10px;">সম্পন্ন টাস্ক <span style="float: right;" id="special-task-count">0</span> / 300</div>
-        <div style="background: #e2e8f0; height: 14px; border-radius: 10px; margin-bottom: 25px; overflow: hidden;"><div id="special-progress-bar" style="background: #2563eb; height: 100%; width: 0%; border-radius: 10px;"></div></div>
-        <button class="btn-action" style="background: #2563eb; padding: 18px; border-radius: 18px;" onclick="watchSpecialAd()">🎥 স্পেশাল ভিডিও দেখুন</button>
+    <div class="card" style="border: 2px solid #3b82f6;">
+        <h3 style="margin-top: 0; color: #60a5fa;">🎯 উইথড্র স্পেশাল টাস্ক</h3>
+        <p style="font-size: 14px; color: #94a3b8;">টাকা উত্তোলনের অনুরোধ পাঠানোর জন্য এই পেজ থেকে ৩০০টি ভিডিও কমপ্লিট করুন।</p>
+        <div style="text-align: left; font-size: 14px; font-weight: 700; margin-bottom: 10px;">সম্পন্ন টাস্ক <span style="float: right;" id="special-task-count">0</span> / 300</div>
+        <div style="background: #0f172a; height: 14px; border-radius: 10px; margin-bottom: 25px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08);"><div id="special-progress-bar" style="background: #3b82f6; height: 100%; width: 0%; border-radius: 10px;"></div></div>
+        <button class="btn-action" style="padding: 16px; border-radius: 16px;" onclick="watchSpecialAd()">🎥 স্পেশাল ভিডিও দেখুন</button>
     </div>
-    <button class="btn-action" style="background: #64748b; padding: 12px;" onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])">⬅️ ওয়ালেটে ফিরে যান</button>
+    <button class="btn-action" style="background: #475569; padding: 12px;" onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])">⬅️ ওয়ালেটে ফিরে যান</button>
 </div>
 
 <div id="page-support" class="page">
-    <div style="background: linear-gradient(to bottom, #8A2BE2, #4B0082); border-radius: 20px; padding: 25px 20px; margin: 15px; color: white; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <div style="background: linear-gradient(135deg, #7c3aed, #4c1d95); border-radius: 20px; padding: 25px 20px; margin: 15px; color: white; text-align: center; box-shadow: 0 8px 20px rgba(124,58,237,0.3); border: 1px solid rgba(255,255,255,0.1);">
         <h2 style="margin-top: 0; font-size: 19px;">কিভাবে কাজ করবেন?</h2>
-        <a href="https://youtube.com/shorts/pN-qyekma7w?si=i4o0THIjZrOCfdPF" target="_blank" style="display: inline-block; background-color: white; color: #4B0082; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 14px; margin-bottom: 10px;">📺 কাজের ভিডিও দেখুন</a>
+        <a href="https://youtube.com/shorts/pN-qyekma7w?si=i4o0THIjZrOCfdPF" target="_blank" style="display: inline-block; background-color: white; color: #4c1d95; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 14px; margin-bottom: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">📺 কাজের ভিডিও দেখুন</a>
         <br>
-        <a href="https://youtube.com/shorts/EZR9C_hEleU?si=9s6nyD1gTExfLxyC" target="_blank" style="display: inline-block; background-color: white; color: #4B0082; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 14px;">🎁 বোনাস কিভাবে নিবেন দেখুন</a>
+        <a href="https://youtube.com/shorts/EZR9C_hEleU?si=9s6nyD1gTExfLxyC" target="_blank" style="display: inline-block; background-color: white; color: #4c1d95; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">🎁 বোনাস কিভাবে নিবেন দেখুন</a>
     </div>
-    <div style="background-color: #ef4444; border-radius: 20px; padding: 25px 20px; margin: 15px; color: white; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <div style="background: linear-gradient(135deg, #dc2626, #991b1b); border-radius: 20px; padding: 25px 20px; margin: 15px; color: white; text-align: center; box-shadow: 0 8px 20px rgba(220,38,38,0.3); border: 1px solid rgba(255,255,255,0.1);">
         <h2 style="margin-top: 0; font-size: 19px;">কাস্টমার সাপোর্ট</h2>
-        <a href="https://t.me/KA16269bot" target="_blank" style="display: block; background: rgba(255,255,255,0.2); padding: 12px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; margin-bottom: 10px; font-size: 14px;">💬 @KA16269bot</a>
-        <a href="https://t.me/ad16269" target="_blank" style="display: block; background: rgba(255,255,255,0.2); padding: 12px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; margin-bottom: 10px; font-size: 14px;">📢 অফিশিয়াল চ্যানেল ১</a>
-        <a href="https://t.me/BD16269" target="_blank" style="display: block; background: rgba(255,255,255,0.2); padding: 12px; border-radius: 50px; text-decoration: none; color: white; font-weight: bold; margin-bottom: 10px; font-size: 14px;">📢 অফিশিয়াল চ্যানেল ২</a>
+        <a href="https://t.me/KA16269bot" target="_blank" style="display: block; background: rgba(255,255,255,0.15); backdrop-filter: blur(5px); padding: 12px; border-radius: 50px; text-decoration: none; color: white; font-weight: 700; margin-bottom: 10px; font-size: 14px;">💬 @KA16269bot</a>
+        <a href="https://t.me/ad16269" target="_blank" style="display: block; background: rgba(255,255,255,0.15); backdrop-filter: blur(5px); padding: 12px; border-radius: 50px; text-decoration: none; color: white; font-weight: 700; margin-bottom: 10px; font-size: 14px;">📢 অফিশিয়াল চ্যানেল ১</a>
+        <a href="https://t.me/BD16269" target="_blank" style="display: block; background: rgba(255,255,255,0.15); backdrop-filter: blur(5px); padding: 12px; border-radius: 50px; text-decoration: none; color: white; font-weight: 700; margin-bottom: 10px; font-size: 14px;">📢 অফিশিয়াল চ্যানেল ২</a>
     </div>
 </div>
 
+<!-- নতুন ইউনিক ও আকর্ষণীয় রেফার পেজ ডিজাইন -->
 <div id="page-refer" class="page">
     <div class="refer-card">
-        <h3>🎁 বন্ধুকে রেফার করুন এবং আয় করুন</h3>
-        <p style="font-size: 14px; opacity: 0.9;">আপনার রেফার লিংকটি শেয়ার করুন। আপনার বন্ধু সাইন আপ করলে আপনি ১১১ কয়েন বোনাস বোনাস পাবেন।</p>
+        <div class="refer-badge">💎 রেফার অ্যান্ড আর্ন প্রোগ্রাম</div>
+        <h3 style="margin: 0 0 8px 0; font-size: 22px; font-weight: 800;">বন্ধুকে রেফার করুন, নিশ্চিত আয় করুন!</h3>
+        <p style="font-size: 13px; opacity: 0.85; line-height: 1.5; margin-bottom: 15px;">আপনার পার্সোনাল রেফার লিংকটি শেয়ার করুন। বন্ধু জয়েন করলেই আপনি পাবেন আকর্ষণীয় ক্যাশ বোনাস!</p>
+        
+        <div class="refer-benefits">
+            <div class="refer-benefit-item">
+                <span style="font-size: 16px;">🎁</span> <span>প্রতি সফল রেফারে পাবেন ইনস্ট্যান্ট <b>১১১ কয়েন বোনাস!</b></span>
+            </div>
+            <div class="refer-benefit-item">
+                <span style="font-size: 16px;">⚡</span> <span>আপনার বন্ধুর ইনকাম থেকে লাইফটাইম গ্রোথ সুবিধা।</span>
+            </div>
+            <div class="refer-benefit-item">
+                <span style="font-size: 16px;">🚀</span> <span>যত বেশি রেফার করবেন, উইথড্র করার সুযোগ তত দ্রুত পাবেন।</span>
+            </div>
+        </div>
+
         <div class="refer-link-box">
-            <span id="refer-link" style="font-size: 13px;">লিংক তৈরি হচ্ছে...</span>
-            <span onclick="copyRefer()" style="cursor:pointer">📋</span>
+            <span id="refer-link" style="font-size: 12px; color: #38bdf8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 230px;">লিংক তৈরি হচ্ছে...</span>
+            <span onclick="copyRefer()" style="cursor:pointer; font-size: 18px; padding-left: 5px;" title="কপি করুন">📋</span>
         </div>
         <div style="display: flex; justify-content: space-between; gap: 10px;">
-            <button class="btn-refer-action" onclick="copyRefer()">লিংক কপি করুন</button>
-            <button class="btn-refer-action" style="background:#8b5cf6" onclick="shareRefer()">শেয়ার করুন</button>
+            <button class="btn-refer-action" onclick="copyRefer()">📋 লিংক কপি করুন</button>
+            <button class="btn-refer-action" style="background: linear-gradient(135deg, #7c3aed, #6d28d9); box-shadow: 0 6px 15px rgba(124,58,237,0.3);" onclick="shareRefer()">🚀 শেয়ার করুন</button>
         </div>
     </div>
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-        <h3 style="margin:0;">রেফার করা বন্ধুদের তালিকা</h3>
-        <span style="background: #e2e8f0; padding: 5px 15px; border-radius: 20px; font-weight: bold;">মোট: <span id="dash-refer-count">0</span></span>
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding: 0 5px;">
+        <h3 style="margin:0; font-size: 16px;">রেফার করা বন্ধুদের তালিকা</h3>
+        <span style="background: #1e293b; color: #38bdf8; border: 1px solid rgba(255,255,255,0.08); padding: 5px 15px; border-radius: 20px; font-weight: 700; font-size: 13px;">মোট: <span id="dash-refer-count">0</span></span>
     </div>
     <div id="referrals-list-container"></div>
 </div>
 
 <div id="page-wallet" class="page">
     <div class="card">
-        <h3>💳 রিডিম (Redeem)</h3>
-        <p style="font-weight:bold; color:#475569;">ইউজার আইডি: <span id="display-user-id"></span></p>
-        <p>আপনার ব্যালেন্স: <b style="color: #2563eb;"><span id="wallet-balance">0</span> কয়েন</b></p>
-        <p style="font-size: 13px; color: #ef4444; font-weight: bold;">নোট: ন্যূনতম ১০০০ কয়েন হলে উত্তোলন করতে পারবেন।</p>
-        <label style="display:block; font-weight:bold; font-size: 14px; text-align: left;">পেমেন্ট মেথড:</label>
+        <h3 style="margin-top:0; color: #60a5fa;">💳 রিডিম (Redeem)</h3>
+        <p style="font-weight:700; color:#94a3b8; font-size: 14px;">ইউজার আইডি: <span id="display-user-id" style="color: #f8fafc;"></span></p>
+        <p style="font-size: 15px;">আপনার ব্যালেন্স: <b style="color: #38bdf8;"><span id="wallet-balance">0</span> কয়েন</b></p>
+        <p style="font-size: 13px; color: #f43f5e; font-weight: 700;">নোট: ন্যূনতম ১০০০ কয়েন হলে উত্তোলন করতে পারবেন।</p>
+        <label style="display:block; font-weight:700; font-size: 14px; text-align: left; color: #94a3b8; margin-top: 15px;">পেমেন্ট মেথড:</label>
         <select class="input-field" id="payment-method">
             <option value="bkash">বিকাশ (bKash)</option>
             <option value="nagad">নগদ (Nagad)</option>
@@ -189,9 +224,9 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
         <button class="btn-action btn-success" onclick="processWithdraw()">অনুরোধ পাঠান</button>
     </div>
     <div class="card" style="margin-top:20px;">
-        <h3>পেমেন্ট হিস্ট্রি</h3>
+        <h3 style="margin-top:0; font-size: 16px;">পেমেন্ট হিস্ট্রি</h3>
         <div id="payment-history-list" style="text-align: left;">
-            <p style="text-align:center;">লোডিং হিস্ট্রি...</p>
+            <p style="text-align:center; color: #94a3b8;">লোডিং হিস্ট্রি...</p>
         </div>
     </div>
 </div>
@@ -510,13 +545,13 @@ function loadReferralsList() {
     if (!listContainer) return;
     listContainer.innerHTML = '';
     if (totalRefers <= 0) {
-        listContainer.innerHTML = '<div style="text-align:center; padding:20px; color:#64748b; font-weight:bold;">এখনো কোনো রেফার করা হয়নি</div>';
+        listContainer.innerHTML = '<div style="text-align:center; padding:25px; color:#94a3b8; font-weight:700; background: #1e293b; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05);">এখনো কোনো রেফার করা হয়নি</div>';
         return;
     }
     for (let i = 1; i <= totalRefers; i++) {
         const card = document.createElement('div');
         card.className = 'list-card';
-        card.innerHTML = `<div><div><b>${i}.</b> 👤 সফল রেফারেল</div><div class="list-date">📅 সক্রিয় মেম্বার</div></div><div style="color: #10b981;">+১১১ কয়েন</div>`;
+        card.innerHTML = `<div><div><b>${i}.</b> 👤 সফল রেফারেল</div><div class="list-date">📅 সক্রিয় মেম্বার</div></div><div style="color: #34d399; font-weight: 800;">+১১১ কয়েন</div>`;
         listContainer.appendChild(card);
     }
 }
@@ -529,14 +564,14 @@ async function loadPaymentHistory() {
             .orderBy('time', 'desc')
             .get();
         if (querySnapshot.empty) {
-            listContainer.innerHTML = '<p style="text-align:center;">কোনো রিকোয়েস্ট নেই।</p>';
+            listContainer.innerHTML = '<p style="text-align:center; color: #94a3b8;">কোনো রিকোয়েস্ট নেই।</p>';
             return;
         }
         listContainer.innerHTML = '';
         let index = 1;
         querySnapshot.forEach((docSnap) => {
             const data = docSnap.data();
-            const statusColor = data.status === 'paid' ? '#10b981' : '#f59e0b';
+            const statusColor = data.status === 'paid' ? '#34d399' : '#fbbf24';
             const statusText = data.status === 'paid' ? 'সম্পন্ন (Paid)' : 'পেন্ডিং (Pending)';
             const serialNo = index++;
             const methodText = data.method ? data.method.toUpperCase() : 'BKASH';
@@ -553,18 +588,18 @@ async function loadPaymentHistory() {
             }
             
             const item = document.createElement('div');
-            item.style.padding = "10px 0";
-            item.style.borderBottom = "1px solid #f1f5f9";
+            item.style.padding = "12px 0";
+            item.style.borderBottom = "1px solid rgba(255,255,255,0.05)";
             item.innerHTML = `
-                <div style="font-size:14px; font-weight:bold;">${serialNo}. ${methodText} - ${data.amount || 0} কয়েন</div>
-                <div style="font-size:12px; color:#64748b;">নাম্বার: ${data.number || '---'}</div>
-                <div style="font-size:12px; color:#64748b;">তারিখ: ${timeString}</div>
-                <div style="font-size:12px; color:${statusColor}; font-weight:bold;">স্ট্যাটাস: ${statusText}</div>
+                <div style="font-size:14px; font-weight:700;">${serialNo}. ${methodText} - ${data.amount || 0} কয়েন</div>
+                <div style="font-size:12px; color:#94a3b8; margin-top: 2px;">নাম্বার: ${data.number || '---'}</div>
+                <div style="font-size:12px; color:#94a3b8;">তারিখ: ${timeString}</div>
+                <div style="font-size:12px; color:${statusColor}; font-weight:700; margin-top: 2px;">স্ট্যাটাস: ${statusText}</div>
             `;
             listContainer.appendChild(item);
         });
     } catch (e) {
-        listContainer.innerHTML = '<p style="text-align:center; color:red;">হিস্ট্রি লোড করতে সমস্যা হয়েছে।</p>';
+        listContainer.innerHTML = '<p style="text-align:center; color:#f43f5e;">হিস্ট্রি লোড করতে সমস্যা হয়েছে।</p>';
     }
 }
 
