@@ -119,7 +119,9 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; ma
 <div id="page-support" class="page">
     <div style="background: linear-gradient(to bottom, #8A2BE2, #4B0082); border-radius: 20px; padding: 25px 20px; margin: 15px; color: white; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
         <h2 style="margin-top: 0; font-size: 19px;">কিভাবে কাজ করবেন?</h2>
-        <a href="https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v" target="_blank" style="display: inline-block; background-color: white; color: #4B0082; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 14px;">📺 ভিডিওটি দেখুন</a>
+        <a href="https://youtube.com/shorts/pN-qyekma7w?si=i4o0THIjZrOCfdPF" target="_blank" style="display: inline-block; background-color: white; color: #4B0082; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 14px; margin-bottom: 10px;">📺 কাজের ভিডিও দেখুন</a>
+        <br>
+        <a href="https://youtube.com/shorts/EZR9C_hEleU?si=9s6nyD1gTExfLxyC" target="_blank" style="display: inline-block; background-color: white; color: #4B0082; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 14px;">🎁 বোনাস কিভাবে নিবেন দেখুন</a>
     </div>
     <div style="background-color: #ef4444; border-radius: 20px; padding: 25px 20px; margin: 15px; color: white; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
         <h2 style="margin-top: 0; font-size: 19px;">কাস্টমার সাপোর্ট</h2>
@@ -230,7 +232,6 @@ async function notifyAdminNewUser(serialNo, name, uId) {
     } catch (e) { console.log(e); }
 }
 
-// নতুন রেফার এডমিন নোটিফিকেশন ফাংশন
 async function notifyAdminReferral(referrerName, referrerIdVal, newUserName, newUserameId) {
     const refMsg = `👥 নতুন সফল রেফার!\n\n👑 যার মাধ্যমে রেফার হয়েছে:\n👤 নাম: ${referrerName}\n🆔 আইডি: <a href="tg://user?id=${referrerIdVal}">${referrerIdVal}</a>\n\n👤 যে জয়েন করেছে:\n👤 নাম: ${newUserName}\n🆔 আইডি: <a href="tg://user?id=${newUserameId}">${newUserameId}</a>`;
     try {
@@ -345,7 +346,6 @@ async function loadAllData() {
                 const newRefers = (refData.refers || 0) + 1;
                 await referrerRef.update({ refers: newRefers });
                 
-                // রেফার সফল হলে রেফারারের কাছে টেলিগ্রাম নোটিফিকেশন পাঠানোর লজিক
                 notifyAdminReferral(refData.name || "ইউজার", referrerId, userName, userId);
             }
         }
