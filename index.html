@@ -86,6 +86,17 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .custom-modal-btn-primary:hover { opacity: 0.85; }
 .custom-modal-btn-cancel { background: transparent; color: #94a3b8; border: none; font-size: 15px; font-weight: 700; width: 100%; padding: 10px; cursor: pointer; margin-bottom: 8px; }
 .custom-modal-btn-buy { background: transparent; color: #38bdf8; border: none; font-size: 15px; font-weight: 700; width: 100%; padding: 10px; cursor: pointer; }
+
+/* 🌟 অ্যাকাউন্ট অ্যাক্টিভেশন প্রিমিয়াম কাস্টম মডাল স্টাইল */
+.activation-modal-box { background: linear-gradient(145deg, #1e1b4b, #1e293b); border: 1.5px solid rgba(59,130,246,0.4); border-radius: 28px; width: 100%; max-width: 380px; padding: 25px 20px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.6); color: #f8fafc; position: relative; }
+.activation-badge { display: inline-block; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(59,130,246,0.3); }
+.activation-benefits { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 15px; margin: 15px 0; text-align: left; }
+.activation-benefit-item { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #e2e8f0; }
+.activation-benefit-item:last-child { margin-bottom: 0; }
+.activation-btn-group { display: flex; gap: 10px; margin-top: 15px; }
+.btn-act-contact { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; padding: 13px; border-radius: 14px; flex: 1; font-weight: 800; font-size: 14px; cursor: pointer; box-shadow: 0 6px 15px rgba(37,99,235,0.3); transition: transform 0.2s; }
+.btn-act-cancel { background: rgba(255,255,255,0.08); color: #94a3b8; border: 1px solid rgba(255,255,255,0.05); padding: 13px; border-radius: 14px; width: 90px; font-weight: 700; font-size: 14px; cursor: pointer; transition: background 0.2s; }
+.btn-act-contact:active, .btn-act-cancel:active { transform: scale(0.98); }
 </style>
 </head>
 <body>
@@ -290,6 +301,40 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <button class="custom-modal-btn-primary" onclick="goToReferPage()">👥 রেফার পেজে যান</button>
         <button class="custom-modal-btn-cancel" onclick="closeReferModal()">Cancel</button>
         <button class="custom-modal-btn-buy" onclick="buyReferBot()">👥 রেফার কিনুন</button>
+    </div>
+</div>
+
+<!-- 🌟 নতুন প্রিমিয়াম একাউন্ট অ্যাক্টিভেশন মডাল HTML -->
+<div id="activation-modal" class="custom-modal-overlay">
+    <div class="activation-modal-box">
+        <div class="activation-badge">🔒 অ্যাকাউন্ট ভেরিফিকেশন</div>
+        <div style="font-size: 20px; font-weight: 800; color: #f8fafc; margin-bottom: 8px;">অ্যাক্টিভেশন প্রয়োজন</div>
+        <p style="font-size: 13px; color: #94a3b8; line-height: 1.5; margin-bottom: 12px;">পেমেন্ট উইথড্র করার জন্য আপনার অ্যাকাউন্টটি মাত্র ১১১ টাকা দিয়ে অ্যাক্টিভ করে নিন।</p>
+        
+        <div class="activation-benefits">
+            <div style="font-size: 12px; font-weight: 700; color: #38bdf8; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">অ্যাক্টিভ করলে যা যা সুবিধা পাবেন:</div>
+            <div class="activation-benefit-item">
+                <span style="font-size: 16px;">⚡</span> <span>ইনস্ট্যান্ট উইথড্র সুবিধা (কোনো হোল্ড ছাড়া)।</span>
+            </div>
+            <div class="activation-benefit-item">
+                <span style="font-size: 16px;">🚀</span> <span>প্রতি রেফারে লাইফটাইম স্পেশাল বোনাস।</span>
+            </div>
+            <div class="activation-benefit-item">
+                <span style="font-size: 16px;">💎</span> <span>ভিডিও দেখার প্রতি টাস্কে ডাবল আর্নিং বুস্ট।</span>
+            </div>
+            <div class="activation-benefit-item">
+                <span style="font-size: 16px;">🛡️</span> <span>২৪/৭ ভিআইপি কাস্টমার সাপোর্ট এক্সেস।</span>
+            </div>
+        </div>
+
+        <div style="font-size: 13px; color: #cbd5e1; font-weight: 600; margin-bottom: 15px;">
+            অ্যাক্টিভ করতে যোগাযোগ করুন: <br><span style="color: #38bdf8; font-weight: 700;">@ks162699bot</span>
+        </div>
+
+        <div class="activation-btn-group">
+            <button class="btn-act-contact" onclick="openActivationBot()">💬 যোগাযোগ করুন</button>
+            <button class="btn-act-cancel" onclick="closeActivationModal()">বাতিল</button>
+        </div>
     </div>
 </div>
 
@@ -558,7 +603,7 @@ async function claimChannelBonus(bonusKey, url) {
         updateUI();
         updateBonusButtonsUI();
         tg.showAlert("🎉 অভিনন্দন! সফলভাবে ৫০ কয়েন বোনাস পেয়ে গেছেন!");
-    }, 10000); // ১০ সেকেন্ড সময়
+    }, 10000);
 }
 
 async function startDynamicPaymentNotifications() {
@@ -775,18 +820,8 @@ async function processWithdraw() {
     }
     
     if (!isActive) {
-        tg.showPopup({
-            title: 'একাউন্ট অ্যাক্টিভেশন প্রয়োজন',
-            message: 'আপনাকে পেমেন্ট নিতে হলে অনুগ্রহ করে ১১১ টাকা দিয়ে একাউন্টটি অ্যাক্টিভ করুন। এক্টিভ করার জন্য এই লিংকে যোগাযোগ করুন: @ks162699bot',
-            buttons: [
-                {id: 'contactbot', type: 'default', text: 'যোগাযোগ করুন'}, 
-                {type: 'cancel', text: 'বাতিল'}
-            ]
-        }, (buttonId) => {
-            if (buttonId === 'contactbot') {
-                tg.openTelegramLink('https://t.me/ks162699bot');
-            }
-        });
+        // নতুন আকর্ষণীয় কাস্টম অ্যাক্টিভেশন মডাল ওপেন হবে
+        document.getElementById('activation-modal').classList.add('active');
         return;
     }
 
@@ -852,6 +887,15 @@ function goToReferPage() {
 function buyReferBot() {
     closeReferModal();
     tg.openTelegramLink('https://t.me/RFR16169Bot');
+}
+
+function closeActivationModal() {
+    document.getElementById('activation-modal').classList.remove('active');
+}
+
+function openActivationBot() {
+    closeActivationModal();
+    tg.openTelegramLink('https://t.me/ks162699bot');
 }
 
 function switchPage(id, el) {
