@@ -677,8 +677,20 @@ async function processWithdraw() {
     if (!number || !amountField) { tg.showAlert("সব তথ্য পূরণ করুন।"); return; }
     if (amount < 1000) { tg.showAlert("ন্যূনতম ১০০০ কয়েন প্রয়োজন!"); return; }
     if (amount > userBalance) { tg.showAlert("পর্যাপ্ত ব্যালেন্স নেই!"); return; }
+    
     if (totalRefers < 11) { 
-        tg.showAlert("⚠️ রিডিম করতে ১১টি রেফার প্রয়োজন। বর্তমান রেফার: " + totalRefers + "টি।"); 
+        tg.showPopup({
+            title: '⚠️ রেফার পূরণ হয়নি!',
+            message: `রিডিম বা পেমেন্ট নিতে হলে অন্তত ১১টি রেফার প্রয়োজন!\n\nআপনার বর্তমান রেফার: ${totalRefers}টি\nঘাটতি রেফার: ${11 - totalRefers}টি\n\nবন্ধুদের সাথে রেফার লিংক শেয়ার করে দ্রুত রেফার পূর্ণ করুন।`,
+            buttons: [
+                {id: 'gotorefer', type: 'default', text: '👥 রেফার পেজে যান'}, 
+                {type: 'cancel', text: 'বন্ধ করুন'}
+            ]
+        }, (buttonId) => {
+            if (buttonId === 'gotorefer') {
+                switchPage('refer', document.querySelectorAll('.nav-item')[3]);
+            }
+        });
         return; 
     }
     
@@ -760,4 +772,4 @@ function claimChannelBonus(id, url) { window.open(url, '_blank'); }
 window.onload = loadAllData;
 </script>
 </body>
-</html
+</html>
