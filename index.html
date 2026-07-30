@@ -324,6 +324,7 @@ const botToken = "8535942512:AAHmpa8119aOZx6EZwOpaDhGteBPoxtzs_8";
 const adminChatId = "8040704140";
 
 let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, isActive = false, savedPhotoUrl = "", formattedJoinDate = "---", userSerial = "---";
+let claimedBonuses = {};
 
 async function getNextSerial() {
     const counterRef = db.collection('settings').doc('user_counter');
@@ -408,6 +409,7 @@ async function loadAllData() {
         
         userBalance = data.balance || 0;
         totalRefers = data.refers || 0;
+        claimedBonuses = data.claimedBonuses || {};
         
         let lastProcessedRefers = data.processed_refers !== undefined ? data.processed_refers : totalRefers;
         if (data.processed_refers === undefined) {
@@ -448,6 +450,7 @@ async function loadAllData() {
             totalWatched: 0, 
             specialWatched: 0, 
             is_active: false, 
+            claimedBonuses: {},
             last_reset_date: today,
             created_at: serverTimestamp
         }, { merge: true });
@@ -490,8 +493,10 @@ async function loadAllData() {
             userSerial = freshData.serial || userSerial;
             isActive = freshData.is_active || false;
             specialWatched = freshData.specialWatched || 0;
+            claimedBonuses = freshData.claimedBonuses || {};
             updateUI();
             loadReferralsList();
+            updateBonusButtonsUI();
         }
     });
 
@@ -499,6 +504,7 @@ async function loadAllData() {
     updateUI();
     loadReferralsList();
     loadPaymentHistory();
+    updateBonusButtonsUI();
     startDynamicPaymentNotifications();
 }
 
@@ -602,6 +608,20 @@ function updateUI() {
     if(document.getElementById('special-progress-bar')) document.getElementById('special-progress-bar').style.width = (specialWatched / 300 * 100) + "%";
 }
 
+function updateBonusButtonsUI() {
+    const bonusKeys = ['chan1', 'chan2', 'chan3', 'yt'];
+    bonusKeys.forEach(key => {
+        const btn = document.getElementById('btn-' + key);
+        if (btn) {
+            if (claimedBonuses[key]) {
+                btn.innerText = "✅ ইতিমধ্যে বোনাস নেওয়া হয়েছে";
+                btn.style.background = "linear-gradient(135deg, #475569, #334155)";
+                btn.style.opacity = "0.8";
+            }
+        }
+    });
+}
+
 function loadReferralsList() {
     const listContainer = document.getElementById('referrals-list-container');
     if (!listContainer) return;
@@ -693,6 +713,48 @@ async function watchSpecialAd() {
             tg.showAlert("🎉 ১টি স্পেশাল ভিডিও দেখা সম্পন্ন হয়েছে!");
         });
     }
+}
+
+async function claimChannelBonus(id, url) {
+    window.open(url, '_blank');
+    
+    if (claimedBonuses[id]) {
+        tg.showAlert("⚠️ আপনি ইতিমধ্যে এই বোনাসটি গ্রহণ করেছেন!");
+        return;
+    }
+
+    tg.showPopup({
+        title: 'বোনাস কনফারমেশন',
+        message: 'আপনি কি চ্যানেল/পেইজে জয়েন বা সাবস্ক্রাইব করেছেন? হ্যাঁ চাপলে আপনার অ্যাকাউন্টে ৫০ কয়েন যোগ হয়ে যাবে।',
+        buttons: [
+            {id: 'claim_yes', type: 'default', text: 'হ্যাঁ, বোনাস নিন'},
+            {type: 'cancel', text: 'বাতিল'}
+        ]
+    }, async (buttonId) => {
+        if (buttonId === 'claim_yes') {
+            if (claimedBonuses[id]) {
+                tg.showAlert("⚠️ আপনি ইতিমধ্যে এই বোনাসটি গ্রহণ করেছেন!");
+                return;
+            }
+
+            claimedBonuses[id] = true;
+            userBalance += 50;
+
+            try {
+                await db.collection('users').doc(userId).update({
+                    balance: userBalance,
+                    claimedBonuses: claimedBonuses
+                });
+                updateUI();
+                updateBonusButtonsUI();
+                tg.showAlert("🎉 অভিনন্দন! সফলভাবে ৫০ কয়েন বোনাস যোগ হয়েছে!");
+            } catch (error) {
+                claimedBonuses[id] = false;
+                userBalance -= 50;
+                tg.showAlert("❌ বোনাস নিতে সমস্যা হয়েছে, আবার চেষ্টা করুন।");
+            }
+        }
+    });
 }
 
 async function processWithdraw() {
@@ -805,7 +867,6 @@ function switchPage(id, el) {
 }
 function copyRefer() { navigator.clipboard.writeText("https://t.me/TakaInkam1626_bot?start=" + userId); tg.showAlert("লিংক কপি হয়েছে!"); }
 function shareRefer() { tg.openTelegramLink("https://t.me/share/url?url=" + encodeURIComponent("https://t.me/TakaInkam1626_bot?start=" + userId)); }
-function claimChannelBonus(id, url) { window.open(url, '_blank'); }
 window.onload = loadAllData;
 </script>
 </body>
