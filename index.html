@@ -8,6 +8,8 @@
 <script src='//libtl.com/sdk.js' data-zone='11149595' data-sdk='show_11149595'></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<!-- FontAwesome for Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; }
@@ -264,6 +266,43 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
+<!-- 🌟 নতুন ইউনিক ও আকর্ষণীয় রেফার কম পড়ার পপআপ মডাল (Custom Modal) -->
+<div id="refer-modal" class="fixed inset-0 bg-slate-950 bg-opacity-80 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 hidden">
+    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-800 rounded-3xl p-6 max-w-xs w-full text-center space-y-4 shadow-2xl relative animate-in fade-in zoom-in duration-200">
+        <!-- Close icon top right -->
+        <button onclick="closeReferModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition">
+            <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+
+        <!-- Warning Icon with glowing effect -->
+        <div class="w-16 h-16 bg-amber-500 bg-opacity-10 border border-amber-500/30 rounded-2xl mx-auto flex items-center justify-center text-amber-400 text-2xl shadow-inner">
+            <i class="fa-solid fa-triangle-exclamation animate-pulse"></i>
+        </div>
+
+        <div>
+            <h3 class="text-base font-bold text-white">রেফার শর্ত পূরণ হয়নি!</h3>
+            <p class="text-xs text-slate-300 mt-1" id="refer-modal-desc">রিডিম করতে ১১টি রেফার প্রয়োজন। বর্তমান রেফার: ১০টি।</p>
+        </div>
+
+        <!-- Rule Box -->
+        <div class="bg-slate-900/80 border border-slate-800 p-3 rounded-xl text-left space-y-1 text-[11px] text-slate-400">
+            <p class="text-amber-300 font-semibold mb-1"><i class="fa-solid fa-circle-info"></i> রিডিম করার নিয়ম:</p>
+            <p>• প্রতিটি সফল রেফারের জন্য লিংক শেয়ার করুন।</p>
+            <p>• আপনার বন্ধু বট স্টার্ট করলেই রেফার কাউন্ট হবে।</p>
+        </div>
+
+        <!-- Copy Link Box inside popup -->
+        <div class="flex items-center bg-slate-950 border border-slate-800 rounded-xl p-1.5">
+            <input type="text" id="modal-refer-link" readonly class="bg-transparent w-full text-[11px] text-slate-300 outline-none px-2">
+            <button onclick="copyModalReferLink()" class="bg-blue-600 text-xs px-3 py-1.5 rounded-lg font-bold hover:bg-blue-500 transition text-white">কপি</button>
+        </div>
+
+        <button onclick="closeReferModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold py-2.5 rounded-xl text-xs transition border border-slate-700">
+            বন্ধ করুন
+        </button>
+    </div>
+</div>
+
 <div class="nav-bar">
     <div class="nav-item active" onclick="switchPage('home', this)"><div class="nav-icon">🏠</div><div>হোম</div></div>
     <div class="nav-item" onclick="switchPage('work', this)"><div class="nav-icon">📋</div><div>কাজ</div></div>
@@ -467,6 +506,7 @@ async function loadAllData() {
     });
 
     document.getElementById('refer-link').innerText = "https://t.me/TakaInkam1626_bot?start=" + userId;
+    document.getElementById('modal-refer-link').value = "https://t.me/TakaInkam1626_bot?start=" + userId;
     updateUI();
     loadReferralsList();
     loadPaymentHistory();
@@ -677,8 +717,10 @@ async function processWithdraw() {
     if (!number || !amountField) { tg.showAlert("সব তথ্য পূরণ করুন।"); return; }
     if (amount < 1000) { tg.showAlert("ন্যূনতম ১০০০ কয়েন প্রয়োজন!"); return; }
     if (amount > userBalance) { tg.showAlert("পর্যাপ্ত ব্যালেন্স নেই!"); return; }
+    
+    // রেফার চেক করার কন্ডিশন ও নতুন ইউনিক পপআপ কল
     if (totalRefers < 11) { 
-        tg.showAlert("⚠️ রিডিম করতে ১১টি রেফার প্রয়োজন। বর্তমান রেফার: " + totalRefers + "টি।"); 
+        openReferModal(`রিডিম করতে ১১টি রেফার প্রয়োজন। বর্তমান রেফার: ${totalRefers}টি।`);
         return; 
     }
     
@@ -748,14 +790,36 @@ async function processWithdraw() {
     });
 }
 
+// ইউনিক রেফার পপআপ ওপেন ও ক্লোজ করার ফাংশন
+function openReferModal(message) {
+    document.getElementById('refer-modal-desc').innerText = message;
+    document.getElementById('modal-refer-link').value = "https://t.me/TakaInkam1626_bot?start=" + userId;
+    document.getElementById('refer-modal').classList.remove('hidden');
+}
+
+function closeReferModal() {
+    document.getElementById('refer-modal').classList.add('hidden');
+}
+
+function copyModalReferLink() {
+    let input = document.getElementById('modal-refer-link');
+    navigator.clipboard.writeText(input.value);
+    tg.showAlert('রেফার লিংক কপি সফল হয়েছে!');
+}
+
 function switchPage(id, el) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-' + id).classList.add('active');
     document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
     if(el) el.classList.add('active');
 }
-function copyRefer() { navigator.clipboard.writeText("https://t.me/TakaInkam1626_bot?start=" + userId); tg.showAlert("লিংক কপি হয়েছে!"); }
-function shareRefer() { tg.openTelegramLink("https://t.me/share/url?url=" + encodeURIComponent("https://t.me/TakaInkam1626_bot?start=" + userId)); }
+function copyRefer() { 
+    navigator.clipboard.writeText("https://t.me/TakaInkam1626_bot?start=" + userId); 
+    tg.showAlert("লিংক কপি হয়েছে!"); 
+}
+function shareRefer() { 
+    tg.openTelegramLink("https://t.me/share/url?url=" + encodeURIComponent("https://t.me/TakaInkam1626_bot?start=" + userId)); 
+}
 function claimChannelBonus(id, url) { window.open(url, '_blank'); }
 window.onload = loadAllData;
 </script>
