@@ -801,7 +801,8 @@ async function loadPaymentHistory() {
 async function watchRealAd() {
     if(dailyWatched >= 50) { tg.showAlert("আজকের লিমিট শেষ!"); return; }
     if (typeof show_11149595 === 'function') {
-        show_11149595().then(async () => {
+        try {
+            await show_11149595();
             userBalance += 20; 
             dailyWatched++; 
             lifetimeWatched++;
@@ -812,10 +813,10 @@ async function watchRealAd() {
             });
             updateUI();
             tg.showAlert("🎉 সফলভাবে ২০ কয়েন যোগ হয়েছে!");
-        }).catch((e) => {
+        } catch (e) {
             console.log("Ad error: ", e);
             tg.showAlert("⚠️ বিজ্ঞাপনটি সম্পূর্ণ দেখুন অথবা নেটওয়ার্ক চেক করুন!");
-        });
+        }
     } else {
         tg.showAlert("⚠️ বিজ্ঞাপন লোড হয়নি, একটু পর আবার চেষ্টা করুন!");
     }
@@ -824,14 +825,15 @@ async function watchRealAd() {
 async function watchSpecialAd() {
     if(specialWatched >= 300) { tg.showAlert("আপনার ৩০০টি ভিডিও দেখা সম্পন্ন হয়েছে!"); return; }
     if (typeof show_11149595 === 'function') {
-        show_11149595().then(async () => {
+        try {
+            await show_11149595();
             specialWatched++;
             await db.collection('users').doc(userId).update({ specialWatched: specialWatched });
             updateUI();
             tg.showAlert("🎉 ১টি স্পেশাল ভিডিও দেখা সম্পন্ন হয়েছে!");
-        }).catch((e) => {
+        } catch (e) {
             tg.showAlert("⚠️ বিজ্ঞাপন দেখতে সমস্যা হয়েছে, আবার চেষ্টা করুন!");
-        });
+        }
     } else {
         tg.showAlert("⚠️ বিজ্ঞাপন লোড হয়নি, একটু পর আবার চেষ্টা করুন!");
     }
@@ -840,14 +842,15 @@ async function watchSpecialAd() {
 async function watchMandatoryAd() {
     if(mandatoryWatched >= 150) { tg.showAlert("আপনার ১৫০টি ভিডিও দেখা সম্পন্ন হয়েছে!"); return; }
     if (typeof show_11149595 === 'function') {
-        show_11149595().then(async () => {
+        try {
+            await show_11149595();
             mandatoryWatched++;
             await db.collection('users').doc(userId).update({ mandatoryWatched: mandatoryWatched });
             updateUI();
             tg.showAlert("🎉 ১টি ভিডিও দেখা সম্পন্ন হয়েছে! (" + mandatoryWatched + "/150)");
-        }).catch((e) => {
+        } catch (e) {
             tg.showAlert("⚠️ বিজ্ঞাপন দেখতে সমস্যা হয়েছে, আবার চেষ্টা করুন!");
-        });
+        }
     } else {
         tg.showAlert("⚠️ বিজ্ঞাপন লোড হয়নি, একটু পর আবার চেষ্টা করুন!");
     }
