@@ -406,30 +406,30 @@ async function getNextSerial() {
     return assignedSerial;
 }
 
-// অ্যাডমিনের কাছে নোটিফিকেশন (রেফারারের তথ্যসহ)
+// অ্যাডমিনের কাছে নোটিফিকেশন (আপনার কাঙ্খিত ফরম্যাট অনুযায়ী)
 async function notifyAdminNewUser(serialNo, name, uId, referrerName, referrerIdVal) {
-    let refInfo = "কাউের রেফার লিংক ছাড়াই সরাসরি জয়েন করেছে";
+    let refInfo = "👑 রেফারার:\n(কেউ রেফার করেনি, সরাসরি জয়েন করেছে)";
     if (referrerIdVal) {
-        refInfo = `👑 রেফারার:\n👤 নাম: ${referrerName}\n🆔 আইডি: <a href="tg://user?id=${referrerIdVal}">${referrerIdVal}</a>`;
+        refInfo = `👑 রেফারার:\n👤 নাম: ${referrerName}\n🆔 আইডি: ${referrerIdVal}`;
     }
-    const welcomeMsg = `🚀 নতুন ইউজার জয়েন করেছে!\n\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: <a href="tg://user?id=${uId}">${uId}</a>\n🔢 অ্যাকাউন্ট নং: #${serialNo}\n\n${refInfo}`;
+    const welcomeMsg = `🚀 নতুন ইউজার জয়েন করেছে!\n\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: ${uId}\n🔢 অ্যাকাউন্ট নং: #${serialNo}\n\n${refInfo}`;
     try {
         await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: adminChatId, text: welcomeMsg, parse_mode: "HTML" })
+            body: JSON.stringify({ chat_id: adminChatId, text: welcomeMsg })
         });
     } catch (e) { console.log(e); }
 }
 
-// রেফারারের কাছে নোটিফিকেশন পাঠানোর ফাংশন
-async function notifyReferrer(referrerIdVal, newUserName, newUserameId) {
-    const refMsg = `🎉 সুখবর! আপনার রেফার লিংকের মাধ্যমে নতুন একজন ইউজার কাজ শুরু করেছে।\n\n👤 ইউজারের নাম: ${newUserName}\n🆔 ইউজারের ইউআইডি: <a href="tg://user?id=${newUserameId}">${newUserameId}</a>`;
+// রেফারারের কাছে মেসেজ পাঠানোর ফাংশন (আপনার কাঙ্খিত ফরম্যাট অনুযায়ী)
+async function notifyReferrer(referrerIdVal, newUserName, newUserameId, newUserSerialNo) {
+    const refMsg = `🎉 সুখবর! আপনার রেফার লিংকের মাধ্যমে নতুন একজন ইউজার যুক্ত হয়েছেন এবং আপনি ১১১ কয়েন বোনাস পেয়েছেন!\n\n👤 ইউজারের নাম: ${newUserName}\n🆔 ইউজার আইডি: ${newUserameId}\n🔢 অ্যাকাউন্ট নং: #${newUserSerialNo}`;
     try {
         await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: referrerIdVal, text: refMsg, parse_mode: "HTML" })
+            body: JSON.stringify({ chat_id: referrerIdVal, text: refMsg })
         });
     } catch (e) { console.log(e); }
 }
@@ -440,7 +440,7 @@ async function notifyAdminWithdrawRequest(serialNo, name, uId, method, number, a
         await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: adminChatId, text: requestMsg, parse_mode: "HTML" })
+            body: JSON.stringify({ chat_id: adminChatId, text: requestMsg })
         });
     } catch (e) { console.log(e); }
 }
@@ -461,7 +461,6 @@ async function loadAllData() {
             userSerial = await getNextSerial();
             await userRef.update({ serial: userSerial, name: userName, userId: userId });
             
-            // তথ্য সংগ্রহ করে অ্যাডমিনের কাছে পাঠানো
             let refNameForAdmin = "";
             if (referrerId && referrerId !== userId) {
                 const refDoc = await db.collection('users').doc(referrerId).get();
@@ -548,12 +547,12 @@ async function loadAllData() {
                 const newRefers = (refData.refers || 0) + 1;
                 await referrerRef.update({ refers: newRefers });
                 
-                // রেফারারের কাছে নোটিফিকেশন পাঠানো
-                notifyReferrer(referrerId, userName, userId);
+                // যার রেফার লিংকে জয়েন করেছে তাকে মেসেজ পাঠানো
+                notifyReferrer(referrerId, userName, userId, userSerial);
             }
         }
 
-        // অ্যাডমিনের কাছে নতুন ইউজারের নোটিফিকেশন পাঠানো (রেফারারের নাম ও আইডি সহ)
+        // অ্যাডমিনের কাছে নোটিফিকেশন পাঠানো
         notifyAdminNewUser(userSerial, userName, userId, referrerName, referrerId);
     }
 
