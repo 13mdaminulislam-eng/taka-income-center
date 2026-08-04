@@ -74,7 +74,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .wallet-label:first-of-type { margin-top: 0; }
 .history-section-title { font-size: 16px; font-weight: 800; color: #f8fafc; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
 
-/* 🌟 কাস্টম রেফার পপ-আপ মডাল ডিজাইন (ছবির মতো) */
+/* 🌟 কাস্টম রেফার পপ-আপ মডাল ডিজাইন */
 .custom-modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 20px; animation: fadeInModal 0.25s ease; }
 .custom-modal-overlay.active { display: flex; }
 @keyframes fadeInModal { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
@@ -195,7 +195,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <button class="btn-action" style="background: #475569; padding: 12px;" onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])">⬅️ ওয়ালেটে ফিরে যান</button>
 </div>
 
-<!-- 🌟 নতুন ১৫০টি ভিডিও দেখার স্পেশাল পেজ (রেফার পূর্ণ হওয়ার পর এবং এক্টিভেশনের আগে দৃশ্যমান হবে) -->
+<!-- ১৫০টি ভিডিও দেখার স্পেশাল পেজ -->
 <div id="page-mandatory-task" class="page" style="padding: 10px;">
     <div class="card" style="border: 2px solid #ec4899; background: linear-gradient(145deg, #1e1b4b, #1e293b);">
         <div style="font-size: 32px; margin-bottom: 8px;">🎬</div>
@@ -227,7 +227,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- নতুন ইউনিক ও আকর্ষণীয় রেফার পেজ ডিজাইন -->
+<!-- রেফার পেজ -->
 <div id="page-refer" class="page">
     <div class="refer-card">
         <div class="refer-badge">💎 রেফার অ্যান্ড আর্ন প্রোগ্রাম</div>
@@ -263,7 +263,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <div id="referrals-list-container"></div>
 </div>
 
-<!-- নতুন প্রিমিয়াম ও ইউনিক ওয়ালেট পেজ ডিজাইন -->
+<!-- ওয়ালেট পেজ -->
 <div id="page-wallet" class="page">
     <div class="wallet-hero-card">
         <div class="wallet-badge">💳 রিডিম সেন্টার (Redeem)</div>
@@ -305,7 +305,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- 🌟 কাস্টম রেফার পপ-আপ মডাল HTML -->
+<!-- কাস্টম রেফার পপ-আপ মডাল HTML -->
 <div id="refer-modal" class="custom-modal-overlay">
     <div class="custom-modal-box">
         <div class="custom-modal-title"><span>⚠️</span> রেফার পূরণ হয়নি!</div>
@@ -321,12 +321,12 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- 🌟 নতুন প্রিমিয়াম একাউন্ট অ্যাক্টিভেশন মডাল HTML (পরিবর্তিত মেসেজ সহ) -->
+<!-- একাউন্ট অ্যাক্টিভেশন মডাল HTML -->
 <div id="activation-modal" class="custom-modal-overlay">
     <div class="activation-modal-box">
         <div class="activation-badge">🔒 অ্যাকাউন্ট ভেরিফিকেশন</div>
         <div style="font-size: 20px; font-weight: 800; color: #f8fafc; margin-bottom: 8px;">অ্যাক্টিভেশন প্রয়োজন</div>
-        <p style="font-size: 14px; color: #cbd5e1; line-height: 1.5; margin-bottom: 12px; font-weight: 600;">মাত্র ১১১ টাকা দিয়ে অ্যাকাউন্ট অ্যাক্টিভ করে প্রিমিয়াম সুবিধা উপভোগ করুন।</p>
+        <p style="font-size: 14px; color: #cbd5e1; line-height: 1.5; margin-bottom: 12px; font-weight: 600;">মাত্র ১১টি রেফার ও ১৫০টি ভিডিও দেখার পর অ্যাকাউন্ট অ্যাক্টিভ করুন।</p>
         
         <div class="activation-benefits">
             <div style="font-size: 12px; font-weight: 700; color: #38bdf8; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">🌟 অ্যাক্টিভ সদস্যদের সুবিধা:</div>
@@ -406,8 +406,13 @@ async function getNextSerial() {
     return assignedSerial;
 }
 
-async function notifyAdminNewUser(serialNo, name, uId) {
-    const welcomeMsg = `🚀 নতুন ইউজার জয়েন করেছে!\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: <a href="tg://user?id=${uId}">${uId}</a>\n🔢 অ্যাকাউন্ট নং: #${serialNo}`;
+// অ্যাডমিনের কাছে নোটিফিকেশন (রেফারারের তথ্যসহ)
+async function notifyAdminNewUser(serialNo, name, uId, referrerName, referrerIdVal) {
+    let refInfo = "কাউের রেফার লিংক ছাড়াই সরাসরি জয়েন করেছে";
+    if (referrerIdVal) {
+        refInfo = `👑 রেফারার:\n👤 নাম: ${referrerName}\n🆔 আইডি: <a href="tg://user?id=${referrerIdVal}">${referrerIdVal}</a>`;
+    }
+    const welcomeMsg = `🚀 নতুন ইউজার জয়েন করেছে!\n\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: <a href="tg://user?id=${uId}">${uId}</a>\n🔢 অ্যাকাউন্ট নং: #${serialNo}\n\n${refInfo}`;
     try {
         await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: 'POST',
@@ -417,13 +422,14 @@ async function notifyAdminNewUser(serialNo, name, uId) {
     } catch (e) { console.log(e); }
 }
 
-async function notifyAdminReferral(referrerName, referrerIdVal, newUserName, newUserameId) {
-    const refMsg = `👥 নতুন সফল রেফার!\n\n👑 যার মাধ্যমে রেফার হয়েছে:\n👤 নাম: ${referrerName}\n🆔 আইডি: <a href="tg://user?id=${referrerIdVal}">${referrerIdVal}</a>\n\n👤 যে জয়েন করেছে:\n👤 নাম: ${newUserName}\n🆔 আইডি: <a href="tg://user?id=${newUserameId}">${newUserameId}</a>`;
+// রেফারারের কাছে নোটিফিকেশন পাঠানোর ফাংশন
+async function notifyReferrer(referrerIdVal, newUserName, newUserameId) {
+    const refMsg = `🎉 সুখবর! আপনার রেফার লিংকের মাধ্যমে নতুন একজন ইউজার কাজ শুরু করেছে।\n\n👤 ইউজারের নাম: ${newUserName}\n🆔 ইউজারের ইউআইডি: <a href="tg://user?id=${newUserameId}">${newUserameId}</a>`;
     try {
         await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: adminChatId, text: refMsg, parse_mode: "HTML" })
+            body: JSON.stringify({ chat_id: referrerIdVal, text: refMsg, parse_mode: "HTML" })
         });
     } catch (e) { console.log(e); }
 }
@@ -454,7 +460,14 @@ async function loadAllData() {
         if (!data.serial) {
             userSerial = await getNextSerial();
             await userRef.update({ serial: userSerial, name: userName, userId: userId });
-            notifyAdminNewUser(userSerial, userName, userId);
+            
+            // তথ্য সংগ্রহ করে অ্যাডমিনের কাছে পাঠানো
+            let refNameForAdmin = "";
+            if (referrerId && referrerId !== userId) {
+                const refDoc = await db.collection('users').doc(referrerId).get();
+                if (refDoc.exists) refNameForAdmin = refDoc.data().name || "ইউজার";
+            }
+            notifyAdminNewUser(userSerial, userName, userId, refNameForAdmin, referrerId);
         } else {
             userSerial = data.serial;
             if(!data.name || !data.userId) {
@@ -525,19 +538,23 @@ async function loadAllData() {
         savedPhotoUrl = userPhotoUrl;
         formattedJoinDate = new Date().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
 
-        notifyAdminNewUser(userSerial, userName, userId);
-
+        let referrerName = "";
         if (referrerId && referrerId !== userId) {
             const referrerRef = db.collection('users').doc(referrerId);
             const referrerDoc = await referrerRef.get();
             if (referrerDoc.exists) {
                 const refData = referrerDoc.data();
+                referrerName = refData.name || "ইউজার";
                 const newRefers = (refData.refers || 0) + 1;
                 await referrerRef.update({ refers: newRefers });
                 
-                notifyAdminReferral(refData.name || "ইউজার", referrerId, userName, userId);
+                // রেফারারের কাছে নোটিফিকেশন পাঠানো
+                notifyReferrer(referrerId, userName, userId);
             }
         }
+
+        // অ্যাডমিনের কাছে নতুন ইউজারের নোটিফিকেশন পাঠানো (রেফারারের নাম ও আইডি সহ)
+        notifyAdminNewUser(userSerial, userName, userId, referrerName, referrerId);
     }
 
     userRef.onSnapshot(async (docSnap) => {
@@ -858,7 +875,6 @@ async function processWithdraw() {
         return; 
     }
     
-    // 🌟 নতুন শর্ত: ১১টি রেফার সম্পন্ন হওয়ার পর এবং অ্যাকাউন্ট এক্টিভ হওয়ার আগে ১৫০টি ভিডিও দেখা বাধ্যতামূলক (যা রেফার কমপ্লিট হওয়ার আগে হাইড ছিল)
     if (mandatoryWatched < 150) {
         tg.showPopup({
             title: 'শর্ত পূরণ বাকি আছে',
@@ -965,4 +981,4 @@ function shareRefer() { tg.openTelegramLink("https://t.me/share/url?url=" + enco
 window.onload = loadAllData;
 </script>
 </body>
-        </html>
+</html>
