@@ -41,12 +41,12 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 .input-field { width: 100%; padding: 15px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; font-size: 15px; background-color: #0f172a; color: white; text-align: center; outline: none; transition: border-color 0.2s; }
 .input-field:focus { border-color: #3b82f6; }
 
-.nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(15px); display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.08); box-shadow: 0 -10px 30px rgba(0,0,0,0.4); z-index: 1000; }
+.nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(15px); display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.08); box-shadow: -10px 30px rgba(0,0,0,0.4); z-index: 1000; }
 .nav-item { font-size: 11px; color: #64748b; cursor: pointer; text-align: center; flex: 1; font-weight: 700; transition: color 0.2s; }
 .nav-item.active { color: #38bdf8; }
 .nav-icon { font-size: 22px; margin-bottom: 3px; }
 
-/* ইউনিক ও আকর্ষণীয় রেফার সেকশন ডিজাইন (নতুন ও আধুনিক লুক) */
+/* ইউনিক ও আকর্ষণীয় রেফার সেকশন ডিজাইন */
 .refer-card { background: linear-gradient(145deg, #0f172a, #1e1b4b, #312e81); color: white; border-radius: 28px; padding: 25px; box-shadow: 0 20px 40px rgba(15,23,42,0.6); margin-bottom: 20px; border: 2px solid transparent; background-clip: padding-box; position: relative; overflow: hidden; }
 .refer-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 28px; border: 2px solid transparent; background: linear-gradient(135deg, #ec4899, #8b5cf6, #3b82f6) border-box; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: destination-out; mask-composite: exclude; pointer-events: none; }
 .refer-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #ec4899, #8b5cf6); padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; box-shadow: 0 4px 15px rgba(236,72,153,0.4); }
@@ -66,7 +66,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 .list-date { font-size: 12px; color: #94a3b8; font-weight: 500; }
 select.input-field { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 15px center; background-size: 16px; }
 
-/* 🌟 নতুন ইউনিক ওয়ালেট পেজ ডিজাইন CSS */
+/* ওয়ালেট পেজ ডিজাইন */
 .wallet-hero-card { background: linear-gradient(135deg, #1e1b4b, #312e81, #1e293b); border-radius: 28px; padding: 25px 20px; box-shadow: 0 15px 35px rgba(49,46,129,0.3); margin-bottom: 20px; border: 1.5px solid rgba(139,92,246,0.3); position: relative; overflow: hidden; text-align: center; }
 .wallet-hero-card::before { content: ''; position: absolute; top: -60px; right: -60px; width: 160px; height: 160px; background: rgba(139,92,246,0.15); border-radius: 50%; pointer-events: none; }
 .wallet-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #8b5cf6, #ec4899); color: white; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; box-shadow: 0 4px 15px rgba(139,92,246,0.4); }
@@ -80,29 +80,42 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .wallet-label:first-of-type { margin-top: 0; }
 .history-section-title { font-size: 16px; font-weight: 800; color: #f8fafc; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
 
-/* 🌟 কাস্টম রেফার পপ-আপ মডাল ডিজাইন */
+/* 🌟 নতুন ইউনিক ও আকর্ষণীয় সাপোর্ট পেজ ডিজাইন (স্টেপ বাই স্টেপ গাইড) */
+.support-hero-card { background: linear-gradient(145deg, #1e1b4b, #312e81, #1e293b); border: 1.5px solid rgba(124,58,237,0.4); border-radius: 28px; padding: 24px 20px; box-shadow: 0 15px 35px rgba(76,29,149,0.3); margin-bottom: 18px; text-align: center; }
+.support-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #7c3aed, #ec4899); color: white; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; box-shadow: 0 4px 15px rgba(124,58,237,0.4); }
+.support-step-box { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 18px; margin-bottom: 14px; text-align: left; }
+.support-step-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 15px; font-weight: 800; color: #f8fafc; }
+.support-step-num { background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0; }
+.support-step-desc { font-size: 13px; color: #cbd5e1; line-height: 1.5; margin-bottom: 14px; font-weight: 600; }
+.support-action-btn { display: flex; align-items: center; justify-content: center; gap: 8px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 12px 16px; border-radius: 12px; text-decoration: none; font-size: 14px; font-weight: 700; transition: all 0.2s; }
+.support-action-btn:hover { background: rgba(255,255,255,0.15); transform: translateY(-1px); }
+
+.support-admin-card { background: linear-gradient(145deg, #991b1b, #7f1d1d, #450a0a); border: 1.5px solid rgba(239,68,68,0.4); border-radius: 28px; padding: 24px 20px; box-shadow: 0 15px 35px rgba(153,27,27,0.3); margin-bottom: 18px; text-align: center; }
+.support-admin-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #ef4444, #dc2626); color: white; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; box-shadow: 0 4px 15px rgba(239,68,68,0.4); }
+.support-admin-item { display: flex; align-items: center; justify-content: space-between; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255,255,255,0.1); padding: 14px 16px; border-radius: 14px; margin-bottom: 10px; text-decoration: none; color: white; font-weight: 700; font-size: 14px; transition: transform 0.2s; }
+.support-admin-item:last-child { margin-bottom: 0; }
+.support-admin-item:active { transform: scale(0.98); }
+
+/* কাস্টম রেফার পপ-আপ মডাল */
 .custom-modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 20px; animation: fadeInModal 0.25s ease; }
 .custom-modal-overlay.active { display: flex; }
 @keyframes fadeInModal { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
 .custom-modal-box { background: #1e293b; border: 1.5px solid rgba(255,255,255,0.1); border-radius: 28px; width: 100%; max-width: 360px; padding: 25px 20px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.5); color: #f8fafc; position: relative; }
-.custom-modal-icon { font-size: 36px; margin-bottom: 10px; }
 .custom-modal-title { font-size: 20px; font-weight: 800; color: #f8fafc; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .custom-modal-desc { font-size: 14px; color: #cbd5e1; line-height: 1.6; margin-bottom: 20px; text-align: left; background: rgba(15, 23, 42, 0.5); padding: 14px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.05); }
-.custom-modal-btn-primary { background: transparent; color: #38bdf8; border: none; font-size: 15px; font-weight: 700; width: 100%; padding: 10px; cursor: pointer; margin-bottom: 8px; transition: opacity 0.2s; }
-.custom-modal-btn-primary:hover { opacity: 0.85; }
+.custom-modal-btn-primary { background: transparent; color: #38bdf8; border: none; font-size: 15px; font-weight: 700; width: 100%; padding: 10px; cursor: pointer; margin-bottom: 8px; }
 .custom-modal-btn-cancel { background: transparent; color: #94a3b8; border: none; font-size: 15px; font-weight: 700; width: 100%; padding: 10px; cursor: pointer; margin-bottom: 8px; }
 .custom-modal-btn-buy { background: transparent; color: #38bdf8; border: none; font-size: 15px; font-weight: 700; width: 100%; padding: 10px; cursor: pointer; }
 
-/* 🌟 অ্যাকাউন্ট অ্যাক্টিভেশন প্রিমিয়াম কাস্টম মডাল স্টাইল */
+/* অ্যাকাউন্ট অ্যাক্টিভেশন মডাল স্টাইল */
 .activation-modal-box { background: linear-gradient(145deg, #1e1b4b, #1e293b); border: 1.5px solid rgba(59,130,246,0.4); border-radius: 28px; width: 100%; max-width: 380px; padding: 25px 20px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.6); color: #f8fafc; position: relative; }
 .activation-badge { display: inline-block; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(59,130,246,0.3); }
 .activation-benefits { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 15px; margin: 15px 0; text-align: left; }
 .activation-benefit-item { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #e2e8f0; }
 .activation-benefit-item:last-child { margin-bottom: 0; }
 .activation-btn-group { display: flex; gap: 10px; margin-top: 15px; }
-.btn-act-contact { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; padding: 13px; border-radius: 14px; flex: 1; font-weight: 800; font-size: 14px; cursor: pointer; box-shadow: 0 6px 15px rgba(37,99,235,0.3); transition: transform 0.2s; }
-.btn-act-cancel { background: rgba(255,255,255,0.08); color: #94a3b8; border: 1px solid rgba(255,255,255,0.05); padding: 13px; border-radius: 14px; width: 90px; font-weight: 700; font-size: 14px; cursor: pointer; transition: background 0.2s; }
-.btn-act-contact:active, .btn-act-cancel:active { transform: scale(0.98); }
+.btn-act-contact { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; padding: 13px; border-radius: 14px; flex: 1; font-weight: 800; font-size: 14px; cursor: pointer; box-shadow: 0 6px 15px rgba(37,99,235,0.3); }
+.btn-act-cancel { background: rgba(255,255,255,0.08); color: #94a3b8; border: 1px solid rgba(255,255,255,0.05); padding: 13px; border-radius: 14px; width: 90px; font-weight: 700; font-size: 14px; cursor: pointer; }
 </style>
 </head>
 <body>
@@ -218,18 +231,59 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <button class="btn-action" style="background: #475569; padding: 12px;" onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])">⬅️ ওয়ালেটে ফিরে যান</button>
 </div>
 
+<!-- নতুন ইউনিক ও আকর্ষণীয় সাপোর্ট পেজ (স্টেপ বাই স্টেপ গাইড) -->
 <div id="page-support" class="page">
-    <div style="background: linear-gradient(135deg, #7c3aed, #4c1d95); border-radius: 20px; padding: 25px 20px; margin: 15px; color: white; text-align: center; box-shadow: 0 8px 20px rgba(124,58,237,0.3); border: 1px solid rgba(255,255,255,0.1);">
-        <h2 style="margin-top: 0; font-size: 19px;">কিভাবে কাজ করবেন?</h2>
-        <a href="https://youtube.com/shorts/pN-qyekma7w?si=i4o0THIjZrOCfdPF" target="_blank" style="display: inline-block; background-color: white; color: #4c1d95; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 14px; margin-bottom: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">📺 কাজের ভিডিও দেখুন</a>
-        <br>
-        <a href="https://youtube.com/shorts/EZR9C_hEleU?si=9s6nyD1gTExfLxyC" target="_blank" style="display: inline-block; background-color: white; color: #4c1d95; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">🎁 বোনাস কিভাবে নিবেন দেখুন</a>
+    <div class="support-hero-card">
+        <div class="support-badge">🎧 গাইড ও সাপোর্ট সেন্টার</div>
+        <div style="font-size: 20px; font-weight: 800; color: #f8fafc; margin-bottom: 6px;">কোথায় ক্লিক করলে কী দেখতে পাবেন?</div>
+        <p style="font-size: 13px; color: #cbd5e1; margin: 0; font-weight: 600;">সহজ নির্দেশিকা অনুসরণ করে আপনার সমস্ত সমস্যার সমাধান করুন।</p>
     </div>
-    <div style="background: linear-gradient(135deg, #dc2626, #991b1b); border-radius: 20px; padding: 25px 20px; margin: 15px; color: white; text-align: center; box-shadow: 0 8px 20px rgba(220,38,38,0.3); border: 1px solid rgba(255,255,255,0.1);">
-        <h2 style="margin-top: 0; font-size: 19px;">কাস্টমার সাপোর্ট</h2>
-        <a href="https://t.me/KA16269bot" target="_blank" style="display: block; background: rgba(255,255,255,0.15); backdrop-filter: blur(5px); padding: 12px; border-radius: 50px; text-decoration: none; color: white; font-weight: 700; margin-bottom: 10px; font-size: 14px;">💬 @KA16269bot</a>
-        <a href="https://t.me/ad16269" target="_blank" style="display: block; background: rgba(255,255,255,0.15); backdrop-filter: blur(5px); padding: 12px; border-radius: 50px; text-decoration: none; color: white; font-weight: 700; margin-bottom: 10px; font-size: 14px;">📢 অফিশিয়াল চ্যানেল ১</a>
-        <a href="https://t.me/BD16269" target="_blank" style="display: block; background: rgba(255,255,255,0.15); backdrop-filter: blur(5px); padding: 12px; border-radius: 50px; text-decoration: none; color: white; font-weight: 700; margin-bottom: 10px; font-size: 14px;">📢 অফিশিয়াল চ্যানেল ২</a>
+
+    <!-- স্টেপ ১ -->
+    <div class="support-step-box">
+        <div class="support-step-header">
+            <div class="support-step-num">১</div>
+            <span>কিভাবে কাজ করবেন বা ভিডিও দেখবেন?</span>
+        </div>
+        <div class="support-step-desc">
+            নিচের বোতামে ক্লিক করে ভিডিও টিউটোরিয়াল দেখুন। কীভাবে বিজ্ঞাপনে ক্লিক করতে হবে এবং কয়েন জমা করতে হবে তা দেখতে পাবেন।
+        </div>
+        <a href="https://youtube.com/shorts/pN-qyekma7w?si=i4o0THIjZrOCfdPF" target="_blank" class="support-action-btn">
+            <span>📺</span> কাজের ভিডিও দেখুন (YouTube Shorts)
+        </a>
+    </div>
+
+    <!-- স্টেপ ২ -->
+    <div class="support-step-box">
+        <div class="support-step-header">
+            <div class="support-step-num">২</div>
+            <span>বোনাস কিভাবে ক্লেইম বা নিবেন?</span>
+        </div>
+        <div class="support-step-desc">
+            চ্যানেল সাবস্ক্রাইব ও পেজ ফলো করে ফ্রি বোনাস নেওয়ার সঠিক নিয়ম জানতে নিচের ভিডিওটি দেখুন।
+        </div>
+        <a href="https://youtube.com/shorts/EZR9C_hEleU?si=9s6nyD1gTExfLxyC" target="_blank" class="support-action-btn">
+            <span>🎁</span> বোনাস নেওয়ার নিয়ম দেখুন (YouTube Shorts)
+        </a>
+    </div>
+
+    <!-- কাস্টমার সাপোর্ট ও চ্যানেল সেকশন -->
+    <div class="support-admin-card">
+        <div class="support-admin-badge">💬 সরাসরি যোগাযোগ ও আপডেট</div>
+        <div style="font-size: 16px; font-weight: 800; color: #f8fafc; margin-bottom: 12px;">অফিশিয়াল লিংকসমূহ</div>
+        
+        <a href="https://t.me/KA16269bot" target="_blank" class="support-admin-item">
+            <span>🤖 কাস্টমার সাপোর্ট বট (সাহায্য নিন)</span>
+            <span>💬</span>
+        </a>
+        <a href="https://t.me/ad16269" target="_blank" class="support-admin-item">
+            <span>📢 অফিশিয়াল চ্যানেল ১ (পেমেন্ট প্রুফ)</span>
+            <span>📢</span>
+        </a>
+        <a href="https://t.me/BD16269" target="_blank" class="support-admin-item">
+            <span>📢 অফিশিয়াল চ্যানেল ২ (নতুন আপডেট)</span>
+            <span>📢</span>
+        </a>
     </div>
 </div>
 
@@ -314,7 +368,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- কাস্টম রেফার পপ-আপ মডাল HTML -->
+<!-- কাস্টম রেফার পপ-আপ মডাল -->
 <div id="refer-modal" class="custom-modal-overlay">
     <div class="custom-modal-box">
         <div class="custom-modal-title"><span>⚠️</span> রেফার পূরণ হয়নি!</div>
@@ -330,7 +384,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- একাউন্ট অ্যাক্টিভেশন মডাল HTML -->
+<!-- একাউন্ট অ্যাক্টিভেশন মডাল -->
 <div id="activation-modal" class="custom-modal-overlay">
     <div class="activation-modal-box">
         <div class="activation-badge">🔒 অ্যাকাউন্ট ভেরিফিকেশন</div>
@@ -339,21 +393,11 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         
         <div class="activation-benefits">
             <div style="font-size: 12px; font-weight: 700; color: #38bdf8; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">🌟 অ্যাক্টিভ সদস্যদের সুবিধা:</div>
-            <div class="activation-benefit-item">
-                <span style="font-size: 16px;">⚡</span> <span>দ্রুত উইথড্র সুবিধা</span>
-            </div>
-            <div class="activation-benefit-item">
-                <span style="font-size: 16px;">🚀</span> <span>প্রিমিয়াম ইনকাম ফিচার</span>
-            </div>
-            <div class="activation-benefit-item">
-                <span style="font-size: 16px;">💎</span> <span>অতিরিক্ত আয়ের সুযোগ</span>
-            </div>
-            <div class="activation-benefit-item">
-                <span style="font-size: 16px;">👑</span> <span>ভিআইপি মেম্বার স্ট্যাটাস</span>
-            </div>
-            <div class="activation-benefit-item">
-                <span style="font-size: 16px;">🛡️</span> <span>২৪/৭ প্রায়োরিটি সাপোর্ট</span>
-            </div>
+            <div class="activation-benefit-item"><span style="font-size: 16px;">⚡</span> <span>দ্রুত উইথড্র সুবিধা</span></div>
+            <div class="activation-benefit-item"><span style="font-size: 16px;">🚀</span> <span>প্রিমিয়াম ইনকাম ফিচার</span></div>
+            <div class="activation-benefit-item"><span style="font-size: 16px;">💎</span> <span>অতিরিক্ত আয়ের সুযোগ</span></div>
+            <div class="activation-benefit-item"><span style="font-size: 16px;">👑</span> <span>ভিআইপি মেম্বার স্ট্যাটাস</span></div>
+            <div class="activation-benefit-item"><span style="font-size: 16px;">🛡️</span> <span>২৪/৭ প্রায়োরিটি সাপোর্ট</span></div>
         </div>
 
         <div style="font-size: 13px; color: #cbd5e1; font-weight: 600; margin-bottom: 15px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 12px;">
