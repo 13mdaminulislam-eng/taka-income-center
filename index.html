@@ -46,10 +46,16 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 .nav-item.active { color: #38bdf8; }
 .nav-icon { font-size: 22px; margin-bottom: 3px; }
 
-/* ইউনিক ও আকর্ষণীয় রেফার সেকশন ডিজাইন */
-.refer-card { background: linear-gradient(145deg, #1e1b4b, #312e81, #1e293b); color: white; border-radius: 28px; padding: 25px; box-shadow: 0 15px 35px rgba(49,46,129,0.3); margin-bottom: 20px; border: 1.5px solid rgba(168,85,247,0.3); position: relative; overflow: hidden; }
-.refer-badge { display: inline-block; background: linear-gradient(135deg, #ec4899, #8b5cf6); padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(236,72,153,0.3); }
-.refer-benefits { background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 15px; margin: 15px 0; text-align: left; }
+/* ইউনিক ও আকর্ষণীয় রেফার সেকশন ডিজাইন (নতুন ও আধুনিক লুক) */
+.refer-card { background: linear-gradient(145deg, #0f172a, #1e1b4b, #312e81); color: white; border-radius: 28px; padding: 25px; box-shadow: 0 20px 40px rgba(15,23,42,0.6); margin-bottom: 20px; border: 2px solid transparent; background-clip: padding-box; position: relative; overflow: hidden; }
+.refer-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 28px; border: 2px solid transparent; background: linear-gradient(135deg, #ec4899, #8b5cf6, #3b82f6) border-box; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: destination-out; mask-composite: exclude; pointer-events: none; }
+.refer-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #ec4899, #8b5cf6); padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; box-shadow: 0 4px 15px rgba(236,72,153,0.4); }
+
+.refer-hero-box { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(236,72,153,0.25); border-radius: 20px; padding: 20px; margin-bottom: 18px; text-align: center; box-shadow: inset 0 2px 10px rgba(0,0,0,0.3); }
+.refer-hero-title { font-size: 19px; font-weight: 800; color: #f8fafc; margin-bottom: 8px; line-height: 1.4; background: linear-gradient(135deg, #f43f5e, #c084fc, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.refer-hero-desc { font-size: 13px; color: #cbd5e1; line-height: 1.6; font-weight: 600; margin: 0; }
+
+.refer-benefits { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 15px; margin: 15px 0; text-align: left; }
 .refer-benefit-item { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #e2e8f0; }
 .refer-benefit-item:last-child { margin-bottom: 0; }
 .refer-link-box { background: #0f172a; padding: 14px 16px; border-radius: 14px; margin: 15px 0; display: flex; align-items: center; justify-content: space-between; font-size: 13px; border: 1px solid rgba(255,255,255,0.08); }
@@ -231,8 +237,11 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <div id="page-refer" class="page">
     <div class="refer-card">
         <div class="refer-badge">💎 রেফার অ্যান্ড আর্ন প্রোগ্রাম</div>
-        <h3 style="margin: 0 0 8px 0; font-size: 22px; font-weight: 800;">বন্ধুকে রেফার করুন, নিশ্চিত আয় করুন!</h3>
-        <p style="font-size: 13px; opacity: 0.85; line-height: 1.5; margin-bottom: 15px;">আপনার পার্সোনাল রেফার লিংকটি শেয়ার করুন। বন্ধু জয়েন করলেই পাবেন আকর্ষণীয় ক্যাশ বোনাস!</p>
+        
+        <div class="refer-hero-box">
+            <h3 class="refer-hero-title">🎁 বন্ধুদের আমন্ত্রণ করুন, প্রতিটি সফল রেফারে নিশ্চিত ১১১ টাকা বোনাস!</h3>
+            <p class="refer-hero-desc">আপনার রেফার লিংক শেয়ার করুন, বন্ধু যোগ দিলেই ইনস্ট্যান্ট রিওয়ার্ড পান।</p>
+        </div>
         
         <div class="refer-benefits">
             <div class="refer-benefit-item">
@@ -406,7 +415,6 @@ async function getNextSerial() {
     return assignedSerial;
 }
 
-// অ্যাডমিনের কাছে নোটিফিকেশন (আপনার কাঙ্খিত ফরম্যাট অনুযায়ী)
 async function notifyAdminNewUser(serialNo, name, uId, referrerName, referrerIdVal) {
     let refInfo = "👑 রেফারার:\n(কেউ রেফার করেনি, সরাসরি জয়েন করেছে)";
     if (referrerIdVal) {
@@ -422,7 +430,6 @@ async function notifyAdminNewUser(serialNo, name, uId, referrerName, referrerIdV
     } catch (e) { console.log(e); }
 }
 
-// রেফারারের কাছে মেসেজ পাঠানোর ফাংশন (আপনার কাঙ্খিত ফরম্যাট অনুযায়ী)
 async function notifyReferrer(referrerIdVal, newUserName, newUserameId, newUserSerialNo) {
     const refMsg = `🎉 সুখবর! আপনার রেফার লিংকের মাধ্যমে নতুন একজন ইউজার যুক্ত হয়েছেন এবং আপনি ১১১ কয়েন বোনাস পেয়েছেন!\n\n👤 ইউজারের নাম: ${newUserName}\n🆔 ইউজার আইডি: ${newUserameId}\n🔢 অ্যাকাউন্ট নং: #${newUserSerialNo}`;
     try {
@@ -547,12 +554,10 @@ async function loadAllData() {
                 const newRefers = (refData.refers || 0) + 1;
                 await referrerRef.update({ refers: newRefers });
                 
-                // যার রেফার লিংকে জয়েন করেছে তাকে মেসেজ পাঠানো
                 notifyReferrer(referrerId, userName, userId, userSerial);
             }
         }
 
-        // অ্যাডমিনের কাছে নোটিফিকেশন পাঠানো
         notifyAdminNewUser(userSerial, userName, userId, referrerName, referrerId);
     }
 
