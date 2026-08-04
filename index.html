@@ -46,21 +46,133 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 .nav-item.active { color: #38bdf8; }
 .nav-icon { font-size: 22px; margin-bottom: 3px; }
 
-/* রেফার সেকশন ডিজাইন */
-.refer-card { background: linear-gradient(145deg, #0f172a, #1e1b4b, #312e81); color: white; border-radius: 28px; padding: 25px; box-shadow: 0 20px 40px rgba(15,23,42,0.6); margin-bottom: 20px; border: 2px solid transparent; background-clip: padding-box; position: relative; overflow: hidden; }
-.refer-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 28px; border: 2px solid transparent; background: linear-gradient(135deg, #ec4899, #8b5cf6, #3b82f6) border-box; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: destination-out; mask-composite: exclude; pointer-events: none; }
-.refer-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #ec4899, #8b5cf6); padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; box-shadow: 0 4px 15px rgba(236,72,153,0.4); }
+/* 🌟 অতি আকর্ষণীয় নতুন রেফার সেকশন ডিজাইন */
+.refer-card { 
+    background: linear-gradient(160deg, #1e1b4b 0%, #0f172a 50%, #172554 100%); 
+    color: white; 
+    border-radius: 32px; 
+    padding: 28px 22px; 
+    box-shadow: 0 20px 45px rgba(15,23,42,0.7), inset 0 1px 0 rgba(255,255,255,0.15); 
+    margin-bottom: 20px; 
+    position: relative; 
+    overflow: hidden; 
+    border: 1.5px solid rgba(99, 102, 241, 0.35); 
+}
+.refer-card::before { 
+    content: ''; 
+    position: absolute; 
+    top: -60px; 
+    right: -60px; 
+    width: 150px; 
+    height: 150px; 
+    background: radial-gradient(circle, rgba(236,72,153,0.25) 0%, transparent 70%); 
+    border-radius: 50%; 
+    pointer-events: none; 
+}
+.refer-badge { 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 8px; 
+    background: linear-gradient(135deg, #ec4899, #8b5cf6); 
+    padding: 7px 18px; 
+    border-radius: 24px; 
+    font-size: 12px; 
+    font-weight: 850; 
+    text-transform: uppercase; 
+    letter-spacing: 0.8px; 
+    margin-bottom: 16px; 
+    box-shadow: 0 6px 20px rgba(236,72,153,0.35); 
+}
 
-.refer-hero-box { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(236,72,153,0.25); border-radius: 20px; padding: 20px; margin-bottom: 18px; text-align: center; box-shadow: inset 0 2px 10px rgba(0,0,0,0.3); }
-.refer-hero-title { font-size: 19px; font-weight: 800; color: #f8fafc; margin-bottom: 8px; line-height: 1.4; background: linear-gradient(135deg, #f43f5e, #c084fc, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.refer-hero-desc { font-size: 13px; color: #cbd5e1; line-height: 1.6; font-weight: 600; margin: 0; }
+.refer-hero-box { 
+    background: rgba(15, 23, 42, 0.75); 
+    backdrop-filter: blur(12px); 
+    border: 1px solid rgba(236,72,153,0.3); 
+    border-radius: 22px; 
+    padding: 22px 18px; 
+    margin-bottom: 18px; 
+    text-align: center; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35), inset 0 1px 2px rgba(255,255,255,0.1); 
+}
+.refer-hero-title { 
+    font-size: 18px; 
+    font-weight: 800; 
+    color: #f8fafc; 
+    margin-bottom: 8px; 
+    line-height: 1.45; 
+    background: linear-gradient(135deg, #fb7185, #e879f9, #38bdf8); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+}
+.refer-hero-desc { 
+    font-size: 13px; 
+    color: #cbd5e1; 
+    line-height: 1.6; 
+    font-weight: 600; 
+    margin: 0; 
+}
 
-.refer-benefits { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 15px; margin: 15px 0; text-align: left; }
-.refer-benefit-item { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #e2e8f0; }
+.refer-benefits { 
+    background: rgba(15, 23, 42, 0.5); 
+    border: 1px solid rgba(255,255,255,0.08); 
+    border-radius: 18px; 
+    padding: 16px 18px; 
+    margin: 16px 0; 
+    text-align: left; 
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.2);
+}
+.refer-benefit-item { 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+    font-size: 13px; 
+    font-weight: 650; 
+    margin-bottom: 10px; 
+    color: #e2e8f0; 
+}
 .refer-benefit-item:last-child { margin-bottom: 0; }
-.refer-link-box { background: #0f172a; padding: 14px 16px; border-radius: 14px; margin: 15px 0; display: flex; align-items: center; justify-content: space-between; font-size: 13px; border: 1px solid rgba(255,255,255,0.08); }
-.btn-refer-action { background: linear-gradient(135deg, #ec4899, #be185d); color: white; border: none; padding: 14px; border-radius: 14px; width: 48%; font-weight: 800; cursor: pointer; box-shadow: 0 6px 15px rgba(236,72,153,0.3); transition: transform 0.2s; }
-.btn-refer-action:active { transform: scale(0.98); }
+.refer-benefit-icon {
+    font-size: 16px;
+    background: rgba(139, 92, 246, 0.15);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.refer-link-box { 
+    background: #090d16; 
+    padding: 14px 16px; 
+    border-radius: 16px; 
+    margin: 16px 0; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    font-size: 13px; 
+    border: 1.5px solid rgba(56, 189, 248, 0.3); 
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+}
+.btn-refer-action { 
+    background: linear-gradient(135deg, #ec4899, #db2777); 
+    color: white; 
+    border: none; 
+    padding: 15px; 
+    border-radius: 16px; 
+    width: 48%; 
+    font-weight: 800; 
+    font-size: 14px;
+    cursor: pointer; 
+    box-shadow: 0 8px 20px rgba(236,72,153,0.4); 
+    transition: all 0.2s; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+.btn-refer-action:active { transform: scale(0.97); }
 
 .list-card { background: #1e293b; padding: 16px; border-radius: 16px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); color: #f8fafc; font-weight: 700; border: 1px solid rgba(255,255,255,0.05); }
 .list-date { font-size: 12px; color: #94a3b8; font-weight: 500; }
@@ -232,7 +344,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <button class="btn-action" style="background: #475569; padding: 12px;" onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])">⬅️ ওয়ালেটে ফিরে যান</button>
 </div>
 
-<!-- 🌟 নতুন ছোট, সুন্দর ও গোছানো সাপোর্ট পেজ ডিজাইন -->
+<!-- সাপোর্ট পেজ -->
 <div id="page-support" class="page">
     <div class="support-main-card">
         <div class="support-header-badge">🎧 গাইড ও সহায়তা সেন্টার</div>
@@ -240,7 +352,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <p style="font-size: 12px; color: #cbd5e1; margin: 0; font-weight: 600;">সহজ স্টেপ অনুসরণ করে কাজ ও বোনাস বুঝে নিন।</p>
 
         <div class="support-steps-container">
-            <!-- স্টেপ ১: ভিডিও দেখার গাইড -->
             <a href="https://youtube.com/shorts/pN-qyekma7w?si=i4o0THIjZrOCfdPF" target="_blank" class="support-step-row">
                 <div class="support-step-info">
                     <div class="support-step-icon">📺</div>
@@ -252,7 +363,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
                 <div class="support-arrow">➔</div>
             </a>
 
-            <!-- স্টেপ ২: বোনাস নেওয়ার গাইড -->
             <a href="https://youtube.com/shorts/EZR9C_hEleU?si=9s6nyD1gTExfLxyC" target="_blank" class="support-step-row">
                 <div class="support-step-info">
                     <div class="support-step-icon">🎁</div>
@@ -266,7 +376,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         </div>
     </div>
 
-    <!-- অফিশিয়াল লিংকসমূহ কার্ড -->
     <div class="support-channels-card">
         <div class="support-header-badge" style="background: linear-gradient(135deg, #ef4444, #dc2626);">💬 অফিশিয়াল সাপোর্ট ও চ্যানেল</div>
         <div style="font-size: 15px; font-weight: 800; color: #f8fafc; margin-bottom: 6px;">সরাসরি যোগাযোগ করুন</div>
@@ -286,35 +395,35 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- রেফার পেজ -->
+<!-- রেফার পেজ (নতুন আকর্ষণীয় ডিজাইন) -->
 <div id="page-refer" class="page">
     <div class="refer-card">
         <div class="refer-badge">💎 রেফার অ্যান্ড আর্ন প্রোগ্রাম</div>
         
         <div class="refer-hero-box">
-            <h3 class="refer-hero-title">🎁 বন্ধুদের আমন্ত্রণ করুন, প্রতিটি সফল রেফারে নিশ্চিত ১১১ টাকা বোনাস!</h3>
+            <h3 class="refer-hero-title">🎁 বন্ধুদের আমন্ত্রণ করুন, প্রতিটি সফল রেফারে নিশ্চিত ১১১ কয়েন বোনাস!</h3>
             <p class="refer-hero-desc">আপনার রেফার লিংক শেয়ার করুন, বন্ধু যোগ দিলেই ইনস্ট্যান্ট রিওয়ার্ড পান।</p>
         </div>
         
         <div class="refer-benefits">
             <div class="refer-benefit-item">
-                <span style="font-size: 16px;">🎁</span> <span>প্রতি সফল রেফারে পাবেন ইনস্ট্যান্ট <b>১১১ কয়েন বোনাস!</b></span>
+                <div class="refer-benefit-icon">🎁</div> <span>প্রতি সফল রেফারে পাবেন ইনস্ট্যান্ট <b>১১১ কয়েন বোনাস!</b></span>
             </div>
             <div class="refer-benefit-item">
-                <span style="font-size: 16px;">⚡</span> <span>আপনার বন্ধুর ইনকাম থেকে লাইফটাইম গ্রোথ সুবিধা।</span>
+                <div class="refer-benefit-icon">⚡</div> <span>আপনার বন্ধুর ইনকাম থেকে লাইফটাইম গ্রোথ সুবিধা।</span>
             </div>
             <div class="refer-benefit-item">
-                <span style="font-size: 16px;">🚀</span> <span>যত বেশি রেফার করবেন, উইথড্র করার সুযোগ তত দ্রুত পাবেন।</span>
+                <div class="refer-benefit-icon">🚀</div> <span>যত বেশি রেফার করবেন, উইথড্র করার সুযোগ তত দ্রুত পাবেন।</span>
             </div>
         </div>
 
         <div class="refer-link-box">
-            <span id="refer-link" style="font-size: 12px; color: #38bdf8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 230px;">লিংক তৈরি হচ্ছে...</span>
+            <span id="refer-link" style="font-size: 12px; color: #38bdf8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 220px; font-weight: 600;">লিংক তৈরি হচ্ছে...</span>
             <span onclick="copyRefer()" style="cursor:pointer; font-size: 18px; padding-left: 5px;" title="কপি করুন">📋</span>
         </div>
         <div style="display: flex; justify-content: space-between; gap: 10px;">
-            <button class="btn-refer-action" onclick="copyRefer()">📋 লিংক কপি করুন</button>
-            <button class="btn-refer-action" style="background: linear-gradient(135deg, #7c3aed, #6d28d9); box-shadow: 0 6px 15px rgba(124,58,237,0.3);" onclick="shareRefer()">🚀 শেয়ার করুন</button>
+            <button class="btn-refer-action" onclick="copyRefer()">📋 লিংক কপি</button>
+            <button class="btn-refer-action" style="background: linear-gradient(135deg, #7c3aed, #6d28d9); box-shadow: 0 8px 20px rgba(124,58,237,0.4);" onclick="shareRefer()">🚀 শেয়ার করুন</button>
         </div>
     </div>
     
