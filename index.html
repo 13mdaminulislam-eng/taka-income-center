@@ -656,6 +656,7 @@ async function loadAllData() {
         userSerial = await getNextSerial();
         const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp();
         
+        // 🟢 নতুন ইউজারের ডাটা সেভ করার সময় রেফারার আইডি (referrer) যুক্ত করা হলো
         await userRef.set({ 
             serial: userSerial,
             name: userName,
@@ -671,7 +672,8 @@ async function loadAllData() {
             is_active: false, 
             last_reset_date: today,
             claimedBonuses: {},
-            created_at: serverTimestamp
+            created_at: serverTimestamp,
+            referrer: (referrerId && referrerId !== userId) ? referrerId : null
         }, { merge: true });
 
         savedPhotoUrl = userPhotoUrl;
