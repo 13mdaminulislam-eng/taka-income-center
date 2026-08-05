@@ -60,7 +60,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 .list-date { font-size: 12px; color: #94a3b8; font-weight: 500; }
 select.input-field { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 15px center; background-size: 16px; }
 
-/* 🌟 নতুন ইউনিক ওয়ালেট পেজ ডিজাইন CSS */
+/* ওয়ালেট পেজ ডিজাইন */
 .wallet-hero-card { background: linear-gradient(135deg, #1e1b4b, #312e81, #1e293b); border-radius: 28px; padding: 25px 20px; box-shadow: 0 15px 35px rgba(49,46,129,0.3); margin-bottom: 20px; border: 1.5px solid rgba(139,92,246,0.3); position: relative; overflow: hidden; text-align: center; }
 .wallet-hero-card::before { content: ''; position: absolute; top: -60px; right: -60px; width: 160px; height: 160px; background: rgba(139,92,246,0.15); border-radius: 50%; pointer-events: none; }
 .wallet-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #8b5cf6, #ec4899); color: white; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; box-shadow: 0 4px 15px rgba(139,92,246,0.4); }
@@ -74,19 +74,18 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .wallet-label:first-of-type { margin-top: 0; }
 .history-section-title { font-size: 16px; font-weight: 800; color: #f8fafc; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
 
-/* 🌟 কাস্টম রেফার পপ-আপ মডাল ডিজাইন */
+/* মডাল স্টাইল */
 .custom-modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 20px; animation: fadeInModal 0.25s ease; }
 .custom-modal-overlay.active { display: flex; }
 @keyframes fadeInModal { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
 .custom-modal-box { background: #1e293b; border: 1.5px solid rgba(255,255,255,0.1); border-radius: 28px; width: 100%; max-width: 360px; padding: 25px 20px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.5); color: #f8fafc; position: relative; }
-.custom-modal-icon { font-size: 36px; margin-bottom: 10px; }
 .custom-modal-title { font-size: 20px; font-weight: 800; color: #f8fafc; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .custom-modal-desc { font-size: 14px; color: #cbd5e1; line-height: 1.6; margin-bottom: 20px; text-align: left; background: rgba(15, 23, 42, 0.5); padding: 14px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.05); }
 .custom-modal-btn-primary { background: transparent; color: #38bdf8; border: none; font-size: 15px; font-weight: 700; width: 100%; padding: 10px; cursor: pointer; margin-bottom: 8px; }
 .custom-modal-btn-cancel { background: transparent; color: #94a3b8; border: none; font-size: 15px; font-weight: 700; width: 100%; padding: 10px; cursor: pointer; margin-bottom: 8px; }
 .custom-modal-btn-buy { background: transparent; color: #38bdf8; border: none; font-size: 15px; font-weight: 700; width: 100%; padding: 10px; cursor: pointer; }
 
-/* 🌟 অ্যাকাউন্ট অ্যাক্টিভেশন প্রিমিয়াম কাস্টম মডাল স্টাইল */
+/* অ্যাকাউন্ট অ্যাক্টিভেশন মডাল স্টাইল */
 .activation-modal-box { background: linear-gradient(145deg, #1e1b4b, #1e293b); border: 1.5px solid rgba(59,130,246,0.4); border-radius: 28px; width: 100%; max-width: 380px; padding: 25px 20px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.6); color: #f8fafc; position: relative; }
 .activation-badge { display: inline-block; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(59,130,246,0.3); }
 .activation-benefits { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 15px; margin: 15px 0; text-align: left; }
@@ -304,7 +303,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- কাস্টম রেফার পপ-আপ মডাল HTML -->
+<!-- কাস্টম রেফার পপ-আপ মডাল -->
 <div id="refer-modal" class="custom-modal-overlay">
     <div class="custom-modal-box">
         <div class="custom-modal-title"><span>⚠️</span> রেফার পূরণ হয়নি!</div>
@@ -320,7 +319,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- অ্যাকাউন্ট অ্যাক্টিভেশন মডাল HTML -->
+<!-- অ্যাকাউন্ট অ্যাক্টিভেশন মডাল -->
 <div id="activation-modal" class="custom-modal-overlay">
     <div class="activation-modal-box">
         <div class="activation-badge">🔒 অ্যাকাউন্ট ভেরিফিকেশন</div>
@@ -329,21 +328,11 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         
         <div class="activation-benefits">
             <div style="font-size: 12px; font-weight: 700; color: #38bdf8; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">🌟 অ্যাক্টিভ সদস্যদের সুবিধা:</div>
-            <div class="activation-benefit-item">
-                <span style="font-size: 16px;">⚡</span> <span>দ্রুত উইথড্র সুবিধা</span>
-            </div>
-            <div class="activation-benefit-item">
-                <span style="font-size: 16px;">🚀</span> <span>প্রিমিয়াম ইনকাম ফিচার</span>
-            </div>
-            <div class="activation-benefit-item">
-                <span style="font-size: 16px;">💎</span> <span>অতিরিক্ত আয়ের সুযোগ</span>
-            </div>
-            <div class="activation-benefit-item">
-                <span style="font-size: 16px;">👑</span> <span>ভিআইপি মেম্বার স্ট্যাটাস</span>
-            </div>
-            <div class="activation-benefit-item">
-                <span style="font-size: 16px;">🛡️</span> <span>২৪/৭ প্রায়োরিটি সাপোর্ট</span>
-            </div>
+            <div class="activation-benefit-item"><span style="font-size: 16px;">⚡</span> <span>দ্রুত উইথড্র সুবিধা</span></div>
+            <div class="activation-benefit-item"><span style="font-size: 16px;">🚀</span> <span>প্রিমিয়াম ইনকাম ফিচার</span></div>
+            <div class="activation-benefit-item"><span style="font-size: 16px;">💎</span> <span>অতিরিক্ত আয়ের সুযোগ</span></div>
+            <div class="activation-benefit-item"><span style="font-size: 16px;">👑</span> <span>ভিআইপি মেম্বার স্ট্যাটাস</span></div>
+            <div class="activation-benefit-item"><span style="font-size: 16px;">🛡️</span> <span>২৪/৭ প্রায়োরিটি সাপোর্ট</span></div>
         </div>
 
         <div style="font-size: 13px; color: #cbd5e1; font-weight: 600; margin-bottom: 15px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 12px;">
@@ -405,8 +394,18 @@ async function getNextSerial() {
     return assignedSerial;
 }
 
-async function notifyAdminNewUser(serialNo, name, uId) {
-    const welcomeMsg = `🚀 নতুন ইউজার জয়েন করেছে!\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: <a href="tg://user?id=${uId}">${uId}</a>\n🔢 অ্যাকাউন্ট নং: #${serialNo}`;
+// 🌟 প্রিমিয়াম ও আকর্ষণীয় অ্যাডমিন নোটিফিকেশন ফাংশন
+async function notifyAdminNewUser(serialNo, name, uId, joinDateStr, referrerName = "কেউ না (সরাসরি)", referrerId = "---", referrerSerial = "---") {
+    const welcomeMsg = `✨ <b>🚀 নতুন মেম্বার জয়েনিং অ্যালার্ট! 🚀</b> ✨\n\n` +
+                       `👤 <b>ইউজার নাম:</b> <code>${name}</code>\n` +
+                       `🆔 <b>ইউজার আইডি:</b> <a href="tg://user?id=${uId}">${uId}</a>\n` +
+                       `🔢 <b>সিরিয়াল নাম্বার:</b> #${serialNo}\n` +
+                       `📅 <b>জয়েনিং তারিখ ও সময়:</b> ${joinDateStr}\n\n` +
+                       `👑 <b>══════ রেফারার তথ্য ══════</b>\n` +
+                       `• নাম: <code>${referrerName}</code>\n` +
+                       `• আইডি: ${referrerId !== "---" ? `<a href="tg://user?id=${referrerId}">${referrerId}</a>` : "---"}\n` +
+                       `• সিরিয়াল নং: #${referrerSerial}\n` +
+                       `✨ <b>স্ট্যাটাস:</b> সফলভাবে যুক্ত হয়েছে!`;
     try {
         await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: 'POST',
@@ -416,19 +415,8 @@ async function notifyAdminNewUser(serialNo, name, uId) {
     } catch (e) { console.log(e); }
 }
 
-async function notifyAdminReferral(referrerName, referrerIdVal, newUserName, newUserameId) {
-    const refMsg = `👥 নতুন সফল রেফার!\n\n👑 যার মাধ্যমে রেফার হয়েছে:\n👤 নাম: ${referrerName}\n🆔 আইডি: <a href="tg://user?id=${referrerIdVal}">${referrerIdVal}</a>\n\n👤 যে জয়েন করেছে:\n👤 নাম: ${newUserName}\n🆔 আইডি: <a href="tg://user?id=${newUserameId}">${newUserameId}</a>`;
-    try {
-        await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: adminChatId, text: refMsg, parse_mode: "HTML" })
-        });
-    } catch (e) { console.log(e); }
-}
-
 async function notifyAdminWithdrawRequest(serialNo, name, uId, method, number, amount, taka) {
-    const requestMsg = `💰 নতুন পেমেন্ট রিকোয়েস্ট!\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: ${uId}\n🔢 অ্যাকাউন্ট নং: #${serialNo}\n💳 মেথড: ${method}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} কয়েন (${taka} টাকা)\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${uId}`;
+    const requestMsg = `💰 <b>নতুন পেমেন্ট রিকোয়েস্ট!</b>\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: ${uId}\n🔢 অ্যাকাউন্ট নং: #${serialNo}\n💳 মেথড: ${method}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} কয়েন (${taka} টাকা)\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${uId}`;
     try {
         await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: 'POST',
@@ -442,6 +430,7 @@ async function loadAllData() {
     const userRef = db.collection('users').doc(userId);
     const doc = await userRef.get();
     const today = new Date().toDateString();
+    const nowTimestamp = Date.now();
 
     let referrerId = null;
     if (tg.initDataUnsafe && tg.initDataUnsafe.start_param) {
@@ -450,10 +439,35 @@ async function loadAllData() {
 
     if (doc.exists) {
         const data = doc.data();
+
+        let lastActive = data.last_active_time || nowTimestamp;
+        let diffDays = (nowTimestamp - lastActive) / (1000 * 60 * 60 * 24);
+
+        if (diffDays >= 5) {
+            await userRef.update({
+                balance: 0,
+                dailyWatched: 0,
+                totalWatched: 0,
+                specialWatched: 0,
+                mandatoryWatched: 0,
+                last_active_time: nowTimestamp,
+                last_reset_date: today
+            });
+            userBalance = 0;
+            dailyWatched = 0;
+            lifetimeWatched = 0;
+            specialWatched = 0;
+            mandatoryWatched = 0;
+            tg.showAlert("⚠️ টানা ৫ দিন বা তার বেশি সময় নিষ্ক্রিয় থাকায় আপনার অ্যাকাউন্ট ও ব্যালেন্স রিসেট করে শূন্য করা হয়েছে!");
+        } else {
+            await userRef.update({ last_active_time: nowTimestamp });
+        }
+
         if (!data.serial) {
             userSerial = await getNextSerial();
+            const joinDateFormatted = new Date().toLocaleString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
             await userRef.update({ serial: userSerial, name: userName, userId: userId });
-            notifyAdminNewUser(userSerial, userName, userId);
+            notifyAdminNewUser(userSerial, userName, userId, joinDateFormatted, "কেউ না (সরাসরি)", "---", "---");
         } else {
             userSerial = data.serial;
             if(!data.name || !data.userId) {
@@ -461,17 +475,23 @@ async function loadAllData() {
             }
         }
 
-        if (data.last_reset_date !== today) {
-            dailyWatched = 0;
-            await userRef.update({ dailyWatched: 0, last_reset_date: today, name: userName, userId: userId, photoUrl: userPhotoUrl || data.photoUrl || "" });
-        } else {
-            dailyWatched = data.dailyWatched || 0;
-            if(!data.name || !data.photoUrl || !data.userId) {
-                await userRef.update({ name: userName, userId: userId, photoUrl: userPhotoUrl || data.photoUrl || "" });
+        if (diffDays < 5) {
+            if (data.last_reset_date !== today) {
+                dailyWatched = 0;
+                await userRef.update({ dailyWatched: 0, last_reset_date: today, name: userName, userId: userId, photoUrl: userPhotoUrl || data.photoUrl || "" });
+            } else {
+                dailyWatched = data.dailyWatched || 0;
+                if(!data.name || !data.photoUrl || !data.userId) {
+                    await userRef.update({ name: userName, userId: userId, photoUrl: userPhotoUrl || data.photoUrl || "" });
+                }
             }
+            
+            userBalance = data.balance || 0;
+            lifetimeWatched = data.totalWatched || 0;
+            specialWatched = data.specialWatched || 0;
+            mandatoryWatched = data.mandatoryWatched || 0;
         }
-        
-        userBalance = data.balance || 0;
+
         totalRefers = data.refers || 0;
         claimedBonuses = data.claimedBonuses || {};
         
@@ -483,12 +503,9 @@ async function loadAllData() {
             const addedCoins = diff * 111;
             userBalance += addedCoins;
             await userRef.update({ balance: userBalance, processed_refers: totalRefers });
-            tg.showAlert(`🎉 অভিনন্দন! আপনার ${diff}টি নতুন সফল রেফার থেকে ${addedCoins} কয়েন যোগ হয়েছে!`);
+            tg.showAlert(`💎 অসাধারণ সংবাদ, বস!\nআপনার চমৎকার রেফার লিংকের মাধ্যমে একজন নতুন বন্ধু সফলভাবে জয়েন করেছে!\n\n🎁 বোনাস: আপনার ওয়ালেটে ইনস্ট্যান্ট ${addedCoins} কয়েন যোগ করা হয়েছে! 🚀`);
         }
 
-        lifetimeWatched = data.totalWatched || 0;
-        specialWatched = data.specialWatched || 0;
-        mandatoryWatched = data.mandatoryWatched || 0;
         isActive = data.is_active || false;
         savedPhotoUrl = data.photoUrl || userPhotoUrl;
         
@@ -502,7 +519,26 @@ async function loadAllData() {
     } else {
         userSerial = await getNextSerial();
         const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp();
+        const joinDateFormatted = new Date().toLocaleString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
         
+        let referrerNameStr = "কেউ না (সরাসরি)";
+        let referrerIdStr = "---";
+        let referrerSerialStr = "---";
+
+        if (referrerId && referrerId !== userId) {
+            const referrerRef = db.collection('users').doc(referrerId);
+            const referrerDoc = await referrerRef.get();
+            if (referrerDoc.exists) {
+                const refData = referrerDoc.data();
+                referrerNameStr = refData.name || "ইউজার";
+                referrerIdStr = referrerId;
+                referrerSerialStr = refData.serial || "---";
+                
+                const newRefers = (refData.refers || 0) + 1;
+                await referrerRef.update({ refers: newRefers });
+            }
+        }
+
         await userRef.set({ 
             serial: userSerial,
             name: userName,
@@ -517,6 +553,7 @@ async function loadAllData() {
             mandatoryWatched: 0,
             is_active: false, 
             last_reset_date: today,
+            last_active_time: nowTimestamp,
             claimedBonuses: {},
             created_at: serverTimestamp
         }, { merge: true });
@@ -524,19 +561,7 @@ async function loadAllData() {
         savedPhotoUrl = userPhotoUrl;
         formattedJoinDate = new Date().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
 
-        notifyAdminNewUser(userSerial, userName, userId);
-
-        if (referrerId && referrerId !== userId) {
-            const referrerRef = db.collection('users').doc(referrerId);
-            const referrerDoc = await referrerRef.get();
-            if (referrerDoc.exists) {
-                const refData = referrerDoc.data();
-                const newRefers = (refData.refers || 0) + 1;
-                await referrerRef.update({ refers: newRefers });
-                
-                notifyAdminReferral(refData.name || "ইউজার", referrerId, userName, userId);
-            }
-        }
+        notifyAdminNewUser(userSerial, userName, userId, joinDateFormatted, referrerNameStr, referrerIdStr, referrerSerialStr);
     }
 
     userRef.onSnapshot(async (docSnap) => {
@@ -551,7 +576,8 @@ async function loadAllData() {
                 const updatedBalance = (freshData.balance || 0) + addedCoins;
                 await userRef.update({ balance: updatedBalance, processed_refers: currentRefers });
                 userBalance = updatedBalance;
-                tg.showAlert(`🎉 অভিনন্দন! আপনার ${diff}টি নতুন সফল রেফার থেকে ${addedCoins} কয়েন যোগ হয়েছে!`);
+                
+                tg.showAlert(`💎 অসাধারণ সংবাদ, বস!\nআপনার চমৎকার রেফার লিংকের মাধ্যমে একজন নতুন বন্ধু সফলভাবে জয়েন করেছে!\n\n🎁 বোনাস: আপনার ওয়ালেটে ইনস্ট্যান্ট ${addedCoins} কয়েন যোগ করা হয়েছে! 🚀`);
             } else {
                 userBalance = freshData.balance || 0;
             }
@@ -619,7 +645,8 @@ async function claimChannelBonus(bonusKey, url) {
         const userRef = db.collection('users').doc(userId);
         await userRef.update({
             balance: userBalance,
-            claimedBonuses: claimedBonuses
+            claimedBonuses: claimedBonuses,
+            last_active_time: Date.now()
         });
 
         updateUI();
@@ -795,7 +822,6 @@ async function loadPaymentHistory() {
     }
 }
 
-// 🌟 আপডেট করা বিজ্ঞাপন ফাংশনগুলো (যা বিজ্ঞাপন ক্লোজ করার সাথে সাথেই কয়েন ও কাউন্ট যোগ করবে)
 async function watchRealAd() {
     if(dailyWatched >= 50) { tg.showAlert("আজকের লিমিট শেষ!"); return; }
     
@@ -806,8 +832,7 @@ async function watchRealAd() {
             await show_11149595();
             adCompleted = true;
         } catch (e) {
-            console.log("Ad error/closed:", e);
-            adCompleted = true; // অনেক সময় ইউজার বিজ্ঞাপন কেটে দিলে এক্সেপশন আসে, তবুও সফল কাউন্ট করতে পারেন চাইলে
+            adCompleted = true;
         }
     } else {
         adCompleted = true;
@@ -821,7 +846,8 @@ async function watchRealAd() {
             await db.collection('users').doc(userId).update({ 
                 balance: userBalance, 
                 dailyWatched: dailyWatched, 
-                totalWatched: lifetimeWatched 
+                totalWatched: lifetimeWatched,
+                last_active_time: Date.now()
             });
             updateUI();
             tg.showAlert("🎉 ২০ কয়েন সফলভাবে যোগ হয়েছে!");
@@ -849,7 +875,10 @@ async function watchSpecialAd() {
     if (adCompleted) {
         specialWatched++;
         try {
-            await db.collection('users').doc(userId).update({ specialWatched: specialWatched });
+            await db.collection('users').doc(userId).update({ 
+                specialWatched: specialWatched,
+                last_active_time: Date.now()
+            });
             updateUI();
             tg.showAlert("🎉 ১টি স্পেশাল ভিডিও দেখা সম্পন্ন হয়েছে!");
         } catch (err) {
@@ -876,7 +905,10 @@ async function watchMandatoryAd() {
     if (adCompleted) {
         mandatoryWatched++;
         try {
-            await db.collection('users').doc(userId).update({ mandatoryWatched: mandatoryWatched });
+            await db.collection('users').doc(userId).update({ 
+                mandatoryWatched: mandatoryWatched,
+                last_active_time: Date.now()
+            });
             updateUI();
             tg.showAlert("🎉 ১টি ভিডিও দেখা সম্পন্ন হয়েছে! (" + mandatoryWatched + "/150)");
         } catch (err) {
@@ -965,7 +997,10 @@ async function processWithdraw() {
                 await notifyAdminWithdrawRequest(userSerial, userName, userId, method, number, amount, taka);
 
                 userBalance -= amount;
-                await db.collection('users').doc(userId).update({ balance: userBalance });
+                await db.collection('users').doc(userId).update({ 
+                    balance: userBalance,
+                    last_active_time: Date.now()
+                });
                 
                 updateUI();
                 loadPaymentHistory();
