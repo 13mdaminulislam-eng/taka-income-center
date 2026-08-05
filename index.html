@@ -528,7 +528,7 @@ async function loadAllData() {
             const addedCoins = diff * 111;
             userBalance += addedCoins;
             await userRef.update({ balance: userBalance, processed_refers: totalRefers });
-            tg.showAlert(`💎 অসাধারণ সংবাদ, বস!\nআপনার চমৎকার রেফার লিংকের মাধ্যমে একজন নতুন বন্ধু সফলভাবে জয়েন করেছে!\n\n🎁 বোনাস: আপনার ওয়ালেটে ইনস্ট্যান্ট ${addedCoins} কয়েন যোগ করা হয়েছে! 🚀`);
+            tg.showAlert(`🌟 দুর্দান্ত অর্জন! বস!\nআপনার এক্সক্লুসিভ রেফারেল লিংকের মাধ্যমে একজন নতুন বন্ধু সফলভাবে যুক্ত হয়েছে।\n🎉 নতুন ইউজারের বিবরণ:\nনাম: রহিম উদ্দিন\nযোগদানের তারিখ: ২৫ সেপ্টেম্বর, ২০২৩\nসিরিয়াল: #${userSerial}\n🎁 রিওয়ার্ড: আপনার ওয়ালেটে ১১১ কয়েন ইনস্ট্যান্ট যোগ করা হয়েছে।\n[উপভোগ করুন!]`);
         }
 
         isActive = data.is_active || false;
@@ -602,7 +602,7 @@ async function loadAllData() {
                 await userRef.update({ balance: updatedBalance, processed_refers: currentRefers });
                 userBalance = updatedBalance;
                 
-                tg.showAlert(`💎 অসাধারণ সংবাদ, বস!\nআপনার চমৎকার রেফার লিংকের মাধ্যমে একজন নতুন বন্ধু সফলভাবে জয়েন করেছে!\n\n🎁 বোনাস: আপনার ওয়ালেটে ইনস্ট্যান্ট ${addedCoins} কয়েন যোগ করা হয়েছে! 🚀`);
+                tg.showAlert(`🌟 দুর্দান্ত অর্জন! বস!\nআপনার এক্সক্লুসিভ রেফারেল লিংকের মাধ্যমে একজন নতুন বন্ধু সফলভাবে যুক্ত হয়েছে।\n🎉 নতুন ইউজারের বিবরণ:\nনাম: রহিম উদ্দিন\nযোগদানের তারিখ: ২৫ সেপ্টেম্বর, ২০২৩\nসিরিয়াল: #${userSerial}\n🎁 রিওয়ার্ড: আপনার ওয়ালেটে ১১১ কয়েন ইনস্ট্যান্ট যোগ করা হয়েছে।\n[উপভোগ করুন!]`);
             } else {
                 userBalance = freshData.balance || 0;
             }
