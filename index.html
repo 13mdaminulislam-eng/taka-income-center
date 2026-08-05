@@ -394,10 +394,10 @@ async function getNextSerial() {
     return assignedSerial;
 }
 
-// 🌟 প্রিমিয়াম ও আকর্ষণীয় অ্যাডমিন নোটিফিকেশন ফাংশন (সঠিক রেফারার তথ্যসহ)
+// 🌟 ১০০% নিশ্চিত ও নিখুঁত রেফারার তথ্যসহ অ্যাডমিন নোটিফিকেশন ফাংশন
 async function notifyAdminNewUser(serialNo, name, uId, joinDateStr, referrerName = "কেউ না (সরাসরি)", referrerId = "---", referrerSerial = "---") {
     let referrerInfoHtml = "";
-    if (referrerId !== "---") {
+    if (referrerId !== "---" && referrerId !== uId) {
         referrerInfoHtml = `• নাম: <code>${referrerName}</code>\n` +
                            `• আইডি: <a href="tg://user?id=${referrerId}">${referrerId}</a>\n` +
                            `• সিরিয়াল নং: #${referrerSerial}`;
@@ -443,7 +443,7 @@ async function loadAllData() {
 
     let referrerId = null;
     if (tg.initDataUnsafe && tg.initDataUnsafe.start_param) {
-        referrerId = tg.initDataUnsafe.start_param;
+        referrerId = tg.initDataUnsafe.start_param.trim();
     }
 
     if (doc.exists) {
