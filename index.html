@@ -424,7 +424,7 @@ async function notifyAdminNewUser(serialNo, name, uId, joinDateStr, referrerName
     } catch (e) { console.log(e); }
 }
 
-// 🌟 রেফারারকে টেলিগ্রামে নোটিফিকেশন পাঠানোর ফাংশন
+// 🌟 রেফারকারীর জন্য নোটিফিকেশন মেসেজ ফাংশন
 async function notifyReferrerNewUser(referrerId, newUserName, newUserId, newUserSerial, joinDateStr) {
     const referrerMsg = `✨ <b>🚀 আপনার রেফারে নতুন মেম্বার যুক্ত হয়েছে! 🚀</b> ✨\n\n` +
                        `👤 <b>নতুন ইউজারের নাম:</b> <code>${newUserName}</code>\n` +
@@ -580,7 +580,7 @@ async function loadAllData() {
                 const newRefers = (refData.refers || 0) + 1;
                 await referrerRef.update({ refers: newRefers });
 
-                // রেফারারকে টেলিগ্রামে নোটিফিকেশন পাঠানো
+                // রেফারারকে টেলিগ্রামে নোটিফিকেশন ও মেসেজ পাঠানো
                 notifyReferrerNewUser(referrerId, userName, userId, userSerial, joinDateFormatted);
             }
         }
