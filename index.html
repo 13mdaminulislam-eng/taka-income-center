@@ -424,6 +424,24 @@ async function notifyAdminNewUser(serialNo, name, uId, joinDateStr, referrerName
     } catch (e) { console.log(e); }
 }
 
+// 🌟 রেফারারকে টেলিগ্রামে নোটিফিকেশন পাঠানোর ফাংশন
+async function notifyReferrerNewUser(referrerId, newUserName, newUserId, newUserSerial, joinDateStr) {
+    const referrerMsg = `✨ <b>🚀 আপনার রেফারে নতুন মেম্বার যুক্ত হয়েছে! 🚀</b> ✨\n\n` +
+                       `👤 <b>নতুন ইউজারের নাম:</b> <code>${newUserName}</code>\n` +
+                       `🆔 <b>ইউজারের আইডি:</b> <a href="tg://user?id=${newUserId}">${newUserId}</a>\n` +
+                       `🔢 <b>সিরিয়াল নাম্বার:</b> #${newUserSerial}\n` +
+                       `📅 <b>জয়েনিং সময়:</b> ${joinDateStr}\n\n` +
+                       `🎁 <b>বোনাস:</b> আপনি সফলভাবে <b>১১১ কয়েন</b> রেফার বোনাস পেয়েছেন!\n` +
+                       `✨ <b>স্ট্যাটাস:</b> আপনার অ্যাকাউন্টে বোনাস যোগ করা হয়েছে।`;
+    try {
+        await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: referrerId, text: referrerMsg, parse_mode: "HTML" })
+        });
+    } catch (e) { console.log(e); }
+}
+
 async function notifyAdminWithdrawRequest(serialNo, name, uId, method, number, amount, taka) {
     const requestMsg = `💰 <b>নতুন পেমেন্ট রিকোয়েস্ট!</b>\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: ${uId}\n🔢 অ্যাকাউন্ট নং: #${serialNo}\n💳 মেথড: ${method}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} কয়েন (${taka} টাকা)\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${uId}`;
     try {
@@ -561,6 +579,9 @@ async function loadAllData() {
                 
                 const newRefers = (refData.refers || 0) + 1;
                 await referrerRef.update({ refers: newRefers });
+
+                // রেফারারকে টেলিগ্রামে নোটিফিকেশন পাঠানো
+                notifyReferrerNewUser(referrerId, userName, userId, userSerial, joinDateFormatted);
             }
         }
 
@@ -1071,4 +1092,4 @@ function shareRefer() { tg.openTelegramLink("https://t.me/share/url?url=" + enco
 window.onload = loadAllData;
 </script>
 </body>
-                </html>
+</html>
