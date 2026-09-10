@@ -74,6 +74,11 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .wallet-label:first-of-type { margin-top: 0; }
 .history-section-title { font-size: 16px; font-weight: 800; color: #f8fafc; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
 
+/* শর্টকাট অ্যামাউন্ট বাটন ডিজাইন (সর্বনিম্ন ১০০০ থেকে শুরু) */
+.quick-amounts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 10px 0 15px 0; }
+.quick-amount-btn { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399; padding: 10px 5px; font-size: 13px; font-weight: 700; border-radius: 10px; cursor: pointer; text-align: center; transition: all 0.2s; }
+.quick-amount-btn:active { background: #10b981; color: white; transform: scale(0.95); }
+
 /* মডাল স্টাইল */
 .custom-modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 20px; animation: fadeInModal 0.25s ease; }
 .custom-modal-overlay.active { display: flex; }
@@ -292,6 +297,13 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <label class="wallet-label">উত্তোলন করার কয়েনের পরিমাণ:</label>
         <input type="number" class="input-field" id="withdraw-amount" placeholder="যেমন: ১০০০">
 
+        <div class="quick-amounts">
+            <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(1000)">১০০০</button>
+            <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(2000)">২০০০</button>
+            <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(5000)">৫০০০</button>
+            <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(10000)">১০০০০</button>
+        </div>
+
         <button class="btn-action btn-success" style="margin-top: 15px; padding: 16px; border-radius: 14px; font-size: 16px;" onclick="processWithdraw()">🚀 পেমেন্ট অনুরোধ পাঠান</button>
     </div>
 
@@ -378,6 +390,10 @@ const adminChatId = "8040704140";
 
 let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, mandatoryWatched = 0, isActive = false, savedPhotoUrl = "", formattedJoinDate = "---", userSerial = "---";
 let claimedBonuses = {};
+
+function setWithdrawAmount(amount) {
+    document.getElementById('withdraw-amount').value = amount;
+}
 
 async function getNextSerial() {
     const counterRef = db.collection('settings').doc('user_counter');
