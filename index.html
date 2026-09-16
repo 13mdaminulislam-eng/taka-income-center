@@ -30,7 +30,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 .notice-bar { background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(10px); padding: 8px 15px; border-radius: 12px; font-size: 13px; font-weight: 700; color: #34d399; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 12px; overflow: hidden; min-height: 38px; display: flex; align-items: center; position: relative; border: 1px solid rgba(255,255,255,0.05); }
 .notice-content { display: inline-block; white-space: nowrap; position: absolute; will-change: transform; }
 
-.info-notice-box { background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981; padding: 10px 14px; border-radius: 10px; font-size: 13px; font-weight: 700; color: #34d399; margin-bottom: 12px; text-align: center; border: 1px solid rgba(16,185,129,0.2); }
+.info-notice-box { background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981; padding: 10px 14px; border-radius: 10px; font-size: 13px; font-weight: 700; color: #34d399; margin-bottom: 12px; text-align: center; border-top: 1px solid rgba(16,185,129,0.2); border-right: 1px solid rgba(16,185,129,0.2); border-bottom: 1px solid rgba(16,185,129,0.2); }
 .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
 .stat-card { background: #1e293b; padding: 12px 10px; border-radius: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); text-align: center; border: 1px solid rgba(255,255,255,0.05); }
 .stat-title { font-size: 11px; color: #94a3b8; font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; justify-content: center; gap: 4px; }
@@ -40,18 +40,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 .btn-action { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 10px 20px; font-size: 14px; font-weight: 700; border-radius: 10px; cursor: pointer; width: 100%; margin-top: 8px; transition: all 0.2s; box-shadow: 0 4px 15px rgba(239,68,68,0.3); }
 .btn-action:active { transform: scale(0.98); }
 .btn-success { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 15px rgba(16,185,129,0.3); }
-
-/* নতুন কাজের পেজের জন্য স্টাইল (ছবির ডিজাইন অনুযায়ী) */
-.task-item-card { background: #1e293b; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 14px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.2s; }
-.task-item-card:hover { border-color: rgba(16, 185, 129, 0.4); }
-.task-left-side { display: flex; align-items: center; gap: 12px; overflow: hidden; }
-.task-icon-box { background: #0f172a; border: 1px solid rgba(255,255,255,0.1); width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
-.task-info-box { text-align: left; overflow: hidden; }
-.task-title-text { font-size: 13px; font-weight: 700; color: #f8fafc; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; margin-bottom: 2px; }
-.task-reward-text { font-size: 11px; font-weight: 600; color: #34d399; }
-.task-btn-join { background: linear-gradient(135deg, #06b6d4, #3b82f6); color: white; border: none; padding: 8px 14px; font-size: 12px; font-weight: 700; border-radius: 10px; cursor: pointer; white-space: nowrap; box-shadow: 0 4px 12px rgba(59,130,246,0.3); transition: transform 0.2s; flex-shrink: 0; }
-.task-btn-join:active { transform: scale(0.95); }
-.task-btn-start { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 12px rgba(16,185,129,0.3); }
 
 .input-field { width: 100%; padding: 10px 12px; margin: 6px 0; border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; font-size: 13px; background-color: #0f172a; color: white; text-align: center; outline: none; transition: border-color 0.2s; }
 .input-field:focus { border-color: #10b981; }
@@ -116,7 +104,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <div class="top-app-title">💰 「ডেইলি টাস্ক ইনকাম সেন্টার」 💰</div>
 
 <div id="page-home" class="page active">
-    <!-- রিয়েল-টাইম বাংলা তারিখ ও বার -->
+    <!-- এখানে শুধু রিয়েল-টাইম বাংলা তারিখ ও বার শো করবে (সময় বাদ দেওয়া হয়েছে) -->
     <div class="live-date-banner">
         <div class="live-date-title">📅 আজকের রিয়েল-টাইম তারিখ</div>
         <div class="live-date-value" id="live-current-date-time">লোড হচ্ছে...</div>
@@ -161,10 +149,8 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- নতুন ডিজাইনের "কাজ" (Work) পেজ - আপনার ছবি অনুযায়ী -->
 <div id="page-work" class="page" style="padding: 5px;">
-    <!-- বিজ্ঞাপন দেখার মেইন টাস্ক কার্ড -->
-    <div style="background: linear-gradient(135deg, #450a0a, #065f46, #047857); padding: 16px; border-radius: 18px; box-shadow: 0 8px 20px rgba(16,185,129,0.2); text-align: center; border: 1.5px solid rgba(255,255,255,0.1); margin-bottom: 14px; color: white;">
+    <div style="background: linear-gradient(135deg, #450a0a, #065f46, #047857); padding: 16px; border-radius: 18px; box-shadow: 0 8px 20px rgba(16,185,129,0.2); text-align: center; border: 1.5px solid rgba(255,255,255,0.1); margin-bottom: 12px; color: white;">
         <div style="font-size: 20px; margin-bottom: 2px;">📺</div>
         <h3 style="margin: 0 0 4px 0; font-size: 16px; letter-spacing: 0.5px;">বিজ্ঞাপন দেখুন</h3>
         <p style="font-size: 12px; opacity: 0.9; margin-bottom: 12px;">প্রতিটি বিজ্ঞাপন দেখে ২০ কয়েন ইনকাম করুন</p>
@@ -182,54 +168,28 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <span>🚀</span> এড দেখতে এখানে ক্লিক করুন
         </button>
     </div>
-
-    <div style="font-size: 13px; font-weight: 800; color: #34d399; margin: 12px 2px 8px 2px; display: flex; align-items: center; gap: 6px;">
-        <span>🔔</span> চ্যানেল ও বোনাস টাস্কসমূহ:
+    
+    <div style="background: rgba(6, 95, 70, 0.4); border: 1.5px solid #10b981; padding: 10px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; color: #34d399; margin-bottom: 12px; text-align: center; box-shadow: 0 4px 10px rgba(16,185,129,0.1); display: flex; align-items: center; justify-content: center; gap: 6px;">
+        <span style="font-size: 14px;">🔔</span> ২০০ টাকা বোনাস নিতে আমাদের চ্যানেলগুলো ফলো করুন
     </div>
 
-    <!-- ছবির আদলে ডিজাইন করা চ্যানেল ও বোনাস কার্ড লিস্ট -->
-    <div class="task-item-card">
-        <div class="task-left-side">
-            <div class="task-icon-box">✈️</div>
-            <div class="task-info-box">
-                <div class="task-title-text">ADDS JOB CITY OFFICIAL 💼</div>
-                <div class="task-reward-text">রিওয়ার্ড: TK 50.00 (৫০ কয়েন)</div>
-            </div>
-        </div>
-        <button id="btn-chan1" class="task-btn-join" onclick="claimChannelBonus('chan1', 'https://t.me/ad16269')">এখনই জয়েন করুন</button>
-    </div>
-
-    <div class="task-item-card">
-        <div class="task-left-side">
-            <div class="task-icon-box">✈️</div>
-            <div class="task-info-box">
-                <div class="task-title-text">আরো ইনকাম 💵</div>
-                <div class="task-reward-text">রিওয়ার্ড: TK 20.00 (৫০ কয়েন)</div>
-            </div>
-        </div>
-        <button id="btn-chan2" class="task-btn-join" onclick="claimChannelBonus('chan2', 'https://t.me/AH16269')">এখনই জয়েন করুন</button>
-    </div>
-
-    <div class="task-item-card">
-        <div class="task-left-side">
-            <div class="task-icon-box">🎁</div>
-            <div class="task-info-box">
-                <div class="task-title-text">OFFICIAL FACEBOOK</div>
-                <div class="task-reward-text">রিওয়ার্ড: TK 30.00 (৫০ কয়েন)</div>
-            </div>
-        </div>
-        <button id="btn-chan3" class="task-btn-join task-btn-start" onclick="claimChannelBonus('chan3', 'https://facebook.com/AD16169')">শুরু করুন</button>
-    </div>
-
-    <div class="task-item-card" style="border: 1.5px solid rgba(16, 185, 129, 0.4);">
-        <div class="task-left-side">
-            <div class="task-icon-box">▶️</div>
-            <div class="task-info-box">
-                <div class="task-title-text">ইউটিউব বোনাস চ্যানেল</div>
-                <div class="task-reward-text">রিওয়ার্ড: TK 50.00 (৫০ কয়েন)</div>
-            </div>
-        </div>
-        <button id="btn-yt" class="task-btn-join task-btn-start" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')">শুরু করুন</button>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <button id="btn-chan1" onclick="claimChannelBonus('chan1', 'https://t.me/ad16269')" style="background: #1e293b; color: #94a3b8; border: 1px solid rgba(255,255,255,0.08); padding: 10px 8px; font-size: 11px; font-weight: 700; border-radius: 12px; cursor: pointer; width: 100%; box-shadow: 0 4px 10px rgba(0,0,0,0.2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center;">
+            <span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span> 
+            <span>ইতিমধ্যে নেওয়া হয়েছে</span>
+        </button>
+        <button id="btn-chan2" onclick="claimChannelBonus('chan2', 'https://t.me/AH16269')" style="background: #1e293b; color: #94a3b8; border: 1px solid rgba(255,255,255,0.08); padding: 10px 8px; font-size: 11px; font-weight: 700; border-radius: 12px; cursor: pointer; width: 100%; box-shadow: 0 4px 10px rgba(0,0,0,0.2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center;">
+            <span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span> 
+            <span>ইতিমধ্যে নেওয়া হয়েছে</span>
+        </button>
+        <button id="btn-chan3" onclick="claimChannelBonus('chan3', 'https://facebook.com/AD16169')" style="background: #1e293b; color: #94a3b8; border: 1px solid rgba(255,255,255,0.08); padding: 10px 8px; font-size: 11px; font-weight: 700; border-radius: 12px; cursor: pointer; width: 100%; box-shadow: 0 4px 10px rgba(0,0,0,0.2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center;">
+            <span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span> 
+            <span>ইতিমধ্যে নেওয়া হয়েছে</span>
+        </button>
+        <button id="btn-yt" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 10px 8px; font-size: 11px; font-weight: 700; border-radius: 12px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(239,68,68,0.4); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center;">
+            <span style="background: rgba(255,255,255,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">▶️</span> 
+            <span>ইউটিউব বোনাস (৫০ কয়েন)</span>
+        </button>
     </div>
 </div>
 
@@ -432,7 +392,7 @@ const adminChatId = "8040704140";
 let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, mandatoryWatched = 0, isActive = false, savedPhotoUrl = "", formattedJoinDate = "---", userSerial = "---";
 let claimedBonuses = {};
 
-// স্বয়ংক্রিয় লাইভ তারিখ আপডেট ফাংশন
+// স্বয়ংক্রিয় লাইভ তারিখ আপডেট ফাংশন (সময় বাদ দিয়ে শুধু বাংলা তারিখ ও বার)
 function updateLiveDateTime() {
     const now = new Date();
     const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
@@ -719,19 +679,28 @@ function updateBonusButtonsUI() {
     const buttons = {
         'chan1': { 
             id: 'btn-chan1', 
-            html: (claimed) => claimed ? "✓ ইতিমধ্যে নেওয়া" : "এখনই জয়েন করুন" 
+            html: (claimed) => claimed ? 
+                `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
+                `<span style="background: rgba(16,185,129,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">✨</span><span>চ্যানেল ১ বোনাস (৫০ কয়েন)</span>`
         },
         'chan2': { 
             id: 'btn-chan2', 
-            html: (claimed) => claimed ? "✓ ইতিমধ্যে নেওয়া" : "এখনই জয়েন করুন" 
+            html: (claimed) => claimed ? 
+                `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
+                `<span style="background: rgba(16,185,129,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">✨</span><span>চ্যানেল ২ বোনাস (৫০ কয়েন)</span>`
         },
         'chan3': { 
             id: 'btn-chan3', 
-            html: (claimed) => claimed ? "✓ ইতিমধ্যে নেওয়া" : "শুরু করুন" 
+            html: (claimed) => claimed ? 
+                `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
+                `<span style="background: rgba(239,68,68,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #ef4444;">👥</span><span>ফেসবুক পেজ বোনাস (৫০ কয়েন)</span>`
         },
         'yt': { 
             id: 'btn-yt', 
-            html: (claimed) => claimed ? "✓ ইতিমধ্যে নেওয়া" : "শুরু করুন" 
+            html: (claimed) => claimed ? 
+                `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
+                `<span style="background: rgba(255,255,255,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">▶️</span><span>ইউটিউব বোনাস (৫০ কয়েন)</span>`,
+            isRed: true
         }
     };
 
@@ -739,15 +708,25 @@ function updateBonusButtonsUI() {
         const btn = document.getElementById(buttons[key].id);
         if (btn) {
             const isClaimed = claimedBonuses[key];
-            btn.innerText = buttons[key].html(isClaimed);
+            btn.innerHTML = buttons[key].html(isClaimed);
             
             if (isClaimed) {
-                btn.style.background = "#334155";
+                btn.style.background = "#1e293b";
                 btn.style.color = "#94a3b8";
-                btn.style.boxShadow = "none";
+                btn.style.border = "1px solid rgba(255,255,255,0.08)";
+                btn.style.boxShadow = "0 4px 10px rgba(0,0,0,0.2)";
             } else {
-                btn.style.background = "";
-                btn.style.color = "white";
+                if (buttons[key].isRed) {
+                    btn.style.background = "linear-gradient(135deg, #ef4444, #dc2626)";
+                    btn.style.color = "white";
+                    btn.style.border = "none";
+                    btn.style.boxShadow = "0 4px 15px rgba(239,68,68,0.4)";
+                } else {
+                    btn.style.background = "#1e293b";
+                    btn.style.color = "#f8fafc";
+                    btn.style.border = "1px solid rgba(16,185,129,0.3)";
+                    btn.style.boxShadow = "0 4px 10px rgba(0,0,0,0.2)";
+                }
             }
         }
     }
