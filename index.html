@@ -62,14 +62,18 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 .list-date { font-size: 11px; color: #94a3b8; font-weight: 500; }
 select.input-field { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 12px center; background-size: 14px; }
 
-/* এক নাম্বার ছবির স্টাইলের সাথে মিলিয়ে ওয়ালেট পেজের কার্ড ডিজাইন */
-.wallet-task-card { background: #1e293b; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 14px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 6px 18px rgba(0,0,0,0.25); text-align: left; }
-.wallet-task-left { display: flex; align-items: center; gap: 12px; }
-.wallet-task-icon-box { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.25); width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #34d399; flex-shrink: 0; }
-.wallet-task-title { font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 3px; }
-.wallet-task-reward { font-size: 12px; color: #94a3b8; font-weight: 700; }
-.wallet-task-btn { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 8px 16px; font-size: 12px; font-weight: 800; border-radius: 10px; cursor: pointer; box-shadow: 0 4px 12px rgba(16,185,129,0.3); white-space: nowrap; transition: transform 0.2s; }
-.wallet-task-btn:active { transform: scale(0.95); }
+.wallet-hero-card { background: linear-gradient(135deg, #450a0a, #065f46, #1e293b); border-radius: 20px; padding: 16px; box-shadow: 0 10px 25px rgba(16,185,129,0.2); margin-bottom: 12px; border: 1.5px solid rgba(16,185,129,0.3); position: relative; overflow: hidden; text-align: center; }
+.wallet-hero-card::before { content: ''; position: absolute; top: -60px; right: -60px; width: 160px; height: 160px; background: rgba(16,185,129,0.15); border-radius: 50%; pointer-events: none; }
+.wallet-badge { display: inline-flex; align-items: center; gap: 4px; background: linear-gradient(135deg, #10b981, #ef4444); color: white; padding: 4px 12px; border-radius: 14px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; box-shadow: 0 4px 12px rgba(16,185,129,0.4); }
+.wallet-id-box { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(10px); padding: 6px 12px; border-radius: 10px; display: inline-block; font-size: 12px; color: #94a3b8; font-weight: 700; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 10px; }
+.wallet-balance-box { background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 12px; margin-bottom: 10px; }
+.wallet-balance-title { font-size: 11px; color: #cbd5e1; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+.wallet-balance-num { font-size: 26px; font-weight: 800; color: #34d399; text-shadow: 0 2px 10px rgba(52,211,153,0.3); }
+.wallet-notice-box { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 10px; padding: 8px 12px; font-size: 12px; font-weight: 700; color: #34d399; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.wallet-form-box { background: #1e293b; border-radius: 18px; padding: 16px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05); margin-bottom: 12px; text-align: left; }
+.wallet-label { display: block; font-weight: 700; font-size: 12px; color: #94a3b8; margin-bottom: 4px; margin-top: 8px; }
+.wallet-label:first-of-type { margin-top: 0; }
+.history-section-title { font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
 
 .quick-amounts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 8px 0 10px 0; }
 .quick-amount-btn { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399; padding: 8px 4px; font-size: 12px; font-weight: 700; border-radius: 8px; cursor: pointer; text-align: center; transition: all 0.2s; }
@@ -100,6 +104,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <div class="top-app-title">💰 「ডেইলি টাস্ক ইনকাম সেন্টার」 💰</div>
 
 <div id="page-home" class="page active">
+    <!-- এখানে শুধু রিয়েল-টাইম বাংলা তারিখ ও বার শো করবে (সময় বাদ দেওয়া হয়েছে) -->
     <div class="live-date-banner">
         <div class="live-date-title">📅 আজকের রিয়েল-টাইম তারিখ</div>
         <div class="live-date-value" id="live-current-date-time">লোড হচ্ছে...</div>
@@ -145,6 +150,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 </div>
 
 <div id="page-work" class="page" style="padding: 5px;">
+    <!-- কাজের সেকশনের ভিডিও বাটনগুলো বড় করা হয়েছে -->
     <div style="background: linear-gradient(135deg, #065f46, #047857); border-radius: 20px; padding: 20px 16px; margin: 10px 0; color: white; text-align: center; box-shadow: 0 10px 25px rgba(16,185,129,0.3); border: 1.5px solid rgba(255,255,255,0.15);">
         <h2 style="margin-top: 0; font-size: 18px; margin-bottom: 12px; font-weight: 800; letter-spacing: 0.5px;">🎥 কিভাবে কাজ করবেন?</h2>
         <a href="https://youtube.com/shorts/pN-qyekma7w?si=i4o0THIjZrOCfdPF" target="_blank" style="display: block; background: linear-gradient(135deg, #ffffff, #f1f5f9); color: #065f46; padding: 14px 20px; border-radius: 14px; text-decoration: none; font-weight: 800; font-size: 14px; margin-bottom: 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.15); transition: transform 0.2s;">📺 কাজের ভিডিও দেখুন</a>
@@ -222,6 +228,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 </div>
 
 <div id="page-support" class="page">
+    <!-- প্রিমিয়াম ও আকর্ষণীয় সাপোর্ট সেকশন ডিজাইন -->
     <div style="background: linear-gradient(135deg, #450a0a, #991b1b, #dc2626); border-radius: 24px; padding: 22px 18px; margin: 15px 0; color: white; text-align: center; box-shadow: 0 12px 35px rgba(220,38,38,0.35); border: 1.5px solid rgba(255,255,255,0.15); position: relative; overflow: hidden;">
         <div style="position: absolute; top: -30px; right: -30px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%; pointer-events: none;"></div>
         
@@ -271,51 +278,34 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <div id="referrals-list-container"></div>
 </div>
 
-<!-- ওয়ালেট পেজ: ১ নম্বর ছবির স্টাইলে ডিজাইন করা কার্ড লেআউট -->
 <div id="page-wallet" class="page">
-    <div class="wallet-task-card">
-        <div class="wallet-task-left">
-            <div class="wallet-task-icon-box">💳</div>
-            <div>
-                <div class="wallet-task-title">ওয়ালেট ব্যালেন্স</div>
-                <div class="wallet-task-reward"><span id="wallet-balance" style="color: #34d399; font-size: 15px; font-weight: 800;">0</span> কয়েন</div>
-            </div>
-        </div>
-        <button class="wallet-task-btn" onclick="scrollToWithdrawForm()">উত্তোলন</button>
-    </div>
+    <div class="wallet-hero-card">
+        <div class="wallet-badge">💳 রিডিম সেন্টার (Redeem)</div>
+        <div style="font-size: 16px; font-weight: 800; color: #f8fafc; margin-bottom: 6px;">আপনার ওয়ালেট ব্যালেন্স</div>
+        
+        <div class="wallet-id-box">ইউজার আইডি: <span id="display-user-id" style="color: #34d399;">---</span></div>
 
-    <div class="wallet-task-card" style="border-color: rgba(16, 185, 129, 0.3);">
-        <div class="wallet-task-left">
-            <div class="wallet-task-icon-box">🆔</div>
-            <div>
-                <div class="wallet-task-title">ইউজার আইডি</div>
-                <div class="wallet-task-reward" id="display-user-id" style="color: #34d399;">---</div>
-            </div>
+        <div class="wallet-balance-box">
+            <div class="wallet-balance-title">উপলব্ধ ব্যালেন্স</div>
+            <div class="wallet-balance-num"><span id="wallet-balance">0</span> <span style="font-size: 16px; color: #cbd5e1;">কয়েন</span></div>
         </div>
-        <div style="font-size: 11px; font-weight: 700; color: #34d399; background: rgba(16,185,129,0.1); padding: 4px 10px; border-radius: 8px;">সক্রিয় আইডি</div>
-    </div>
 
-    <div class="wallet-task-card" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(30, 41, 59, 1));">
-        <div class="wallet-task-left">
-            <div class="wallet-task-icon-box">⚡</div>
-            <div>
-                <div class="wallet-task-title">ন্যূনতম শর্ত</div>
-                <div class="wallet-task-reward">কমপক্ষে ১০০০ কয়েন প্রয়োজন</div>
-            </div>
+        <div class="wallet-notice-box">
+            <span style="font-size: 14px;">⚡</span> ন্যূনতম ১০০০ কয়েন হলে উত্তোলন করতে পারবেন।
         </div>
     </div>
 
-    <div id="withdraw-form-section" class="wallet-form-box" style="background: #1e293b; border-radius: 18px; padding: 16px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05); margin-bottom: 12px; text-align: left;">
-        <label class="wallet-label" style="display: block; font-weight: 700; font-size: 12px; color: #94a3b8; margin-bottom: 4px;">পেমেন্ট মেথড নির্বাচন করুন:</label>
+    <div class="wallet-form-box">
+        <label class="wallet-label">পেমেন্ট মেথড নির্বাচন করুন:</label>
         <select class="input-field" id="payment-method">
             <option value="bkash">বিকাশ (bKash)</option>
             <option value="nagad">নগদ (Nagad)</option>
         </select>
 
-        <label class="wallet-label" style="display: block; font-weight: 700; font-size: 12px; color: #94a3b8; margin-bottom: 4px; margin-top: 8px;">আপনার বিকাশ/নগদ নাম্বার:</label>
+        <label class="wallet-label">আপনার বিকাশ/নগদ নাম্বার:</label>
         <input type="number" class="input-field" id="withdraw-number" placeholder="০১৭xxxxxxxx">
 
-        <label class="wallet-label" style="display: block; font-weight: 700; font-size: 12px; color: #94a3b8; margin-bottom: 4px; margin-top: 8px;">উত্তোলন করার কয়েনের পরিমাণ:</label>
+        <label class="wallet-label">উত্তোলন করার কয়েনের পরিমাণ:</label>
         <input type="number" class="input-field" id="withdraw-amount" placeholder="যেমন: ১০০০">
 
         <div class="quick-amounts">
@@ -329,7 +319,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 
     <div class="card" style="margin-top:12px; text-align: left; padding: 14px;">
-        <div class="history-section-title" style="font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">📊 পেমেন্ট হিস্ট্রি</div>
+        <div class="history-section-title">📊 পেমেন্ট হিস্ট্রি</div>
         <div id="payment-history-list">
             <p style="text-align:center; color: #94a3b8; padding: 10px 0;">লোডিং হিস্ট্রি...</p>
         </div>
@@ -410,6 +400,7 @@ const adminChatId = "8040704140";
 let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, mandatoryWatched = 0, isActive = false, savedPhotoUrl = "", formattedJoinDate = "---", userSerial = "---";
 let claimedBonuses = {};
 
+// স্বয়ংক্রিয় লাইভ তারিখ আপডেট ফাংশন (সময় বাদ দিয়ে শুধু বাংলা তারিখ ও বার)
 function updateLiveDateTime() {
     const now = new Date();
     const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
@@ -424,10 +415,6 @@ updateLiveDateTime();
 
 function setWithdrawAmount(amount) {
     document.getElementById('withdraw-amount').value = amount;
-}
-
-function scrollToWithdrawForm() {
-    document.getElementById('withdraw-form-section').scrollIntoView({ behavior: 'smooth' });
 }
 
 async function getNextSerial() {
