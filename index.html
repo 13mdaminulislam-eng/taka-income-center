@@ -137,7 +137,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
     <div class="grid-container">
         <div class="stat-card"><div class="stat-title">📺 দেখা হয়েছে</div><div class="stat-value" id="dash-watched">0</div></div>
-        <div class="stat-card"><div class="stat-title">⏳ দেখতে পারবে</div><div class="stat-value" id="dash-remaining">50</div></div>
+        <div class="stat-card"><div class="stat-title">⏳ দেখতে পারবে</div><div class="stat-value" id="dash-remaining">100</div></div>
     </div>
     <div class="card" style="padding: 20px;">
         <div class="stat-title">🎬 সর্বমোট ভিডিও দেখা হয়েছে</div>
@@ -145,7 +145,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- কাজ পেজ (ছবির ডিজাইন অনুযায়ী আপডেট করা) -->
 <div id="page-work" class="page" style="padding: 10px;">
     <div style="background: linear-gradient(135deg, #450a0a, #065f46, #047857); padding: 25px; border-radius: 28px; box-shadow: 0 12px 30px rgba(16,185,129,0.2); text-align: center; border: 1.5px solid rgba(255,255,255,0.1); margin-bottom: 20px; color: white;">
         <div style="font-size: 26px; margin-bottom: 5px;">📺</div>
@@ -154,7 +153,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         
         <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 12px 18px; border-radius: 14px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 700; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.15);">
             <span>আজকের সম্পন্ন</span>
-            <span style="background: #ffffff; color: #065f46; padding: 3px 10px; border-radius: 8px; font-size: 15px;"><span id="task-count">0</span> / 50</span>
+            <span style="background: #ffffff; color: #065f46; padding: 3px 10px; border-radius: 8px; font-size: 15px;"><span id="task-count">0</span> / 100</span>
         </div>
 
         <div style="background: rgba(0,0,0,0.3); height: 12px; border-radius: 10px; margin-bottom: 22px; overflow: hidden; padding: 2px; border: 1px solid rgba(255,255,255,0.1);">
@@ -170,7 +169,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <span style="font-size: 18px;">🔔</span> ২০০ টাকা বোনাস নিতে আমাদের চ্যানেলগুলো ফলো করুন
     </div>
 
-    <!-- ছবির মতো টু-কলাম গ্রিড ডিজাইন -->
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
         <button id="btn-chan1" onclick="claimChannelBonus('chan1', 'https://t.me/ad16269')" style="background: #1e293b; color: #94a3b8; border: 1px solid rgba(255,255,255,0.08); padding: 18px 12px; font-size: 13px; font-weight: 700; border-radius: 16px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center;">
             <span style="background: #10b981; color: white; width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px;">✔</span> 
@@ -191,7 +189,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- স্পেশাল টাস্ক পেজ -->
 <div id="page-special-task" class="page" style="padding: 10px;">
     <div class="card" style="border: 2px solid #10b981;">
         <h3 style="margin-top: 0; color: #34d399;">🎯 উইথড্র স্পেশাল টাস্ক</h3>
@@ -203,7 +200,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <button class="btn-action" style="background: #475569; padding: 12px;" onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])">⬅️ ওয়ালেটে ফিরে যান</button>
 </div>
 
-<!-- ১৫০টি ভিডিও দেখার স্পেশাল পেজ -->
 <div id="page-mandatory-task" class="page" style="padding: 10px;">
     <div class="card" style="border: 2px solid #ef4444; background: linear-gradient(145deg, #450a0a, #1e293b);">
         <div style="font-size: 32px; margin-bottom: 8px;">🎬</div>
@@ -235,7 +231,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- রেফার পেজ ডিজাইন -->
 <div id="page-refer" class="page">
     <div class="refer-card">
         <div class="refer-badge">💎 রেফার অ্যান্ড আর্ন প্রোগ্রাম</div>
@@ -271,7 +266,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <div id="referrals-list-container"></div>
 </div>
 
-<!-- ওয়ালেট পেজ ডিজাইন -->
 <div id="page-wallet" class="page">
     <div class="wallet-hero-card">
         <div class="wallet-badge">💳 রিডিম সেন্টার (Redeem)</div>
@@ -320,7 +314,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- কাস্টম রেফার পপ-আপ মডাল -->
 <div id="refer-modal" class="custom-modal-overlay">
     <div class="custom-modal-box">
         <div class="custom-modal-title"><span>⚠️</span> রেফার পূরণ হয়নি!</div>
@@ -336,7 +329,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- অ্যাকাউন্ট অ্যাক্টিভেশন মডাল -->
 <div id="activation-modal" class="custom-modal-overlay">
     <div class="activation-modal-box">
         <div class="activation-badge">🔒 অ্যাকাউন্ট ভেরিফিকেশন</div>
@@ -844,13 +836,13 @@ function updateUI() {
     document.getElementById('task-count').innerText = dailyWatched;
     document.getElementById('total-watched-count').innerText = lifetimeWatched;
     document.getElementById('dash-watched').innerText = dailyWatched;
-    document.getElementById('dash-remaining').innerText = (50 - dailyWatched);
+    document.getElementById('dash-remaining').innerText = (100 - dailyWatched);
     
     document.getElementById('special-task-count').innerText = specialWatched;
     document.getElementById('mandatory-task-count').innerText = mandatoryWatched;
     document.getElementById('mandatory-btn-count').innerText = mandatoryWatched;
 
-    if(document.getElementById('progress-bar')) document.getElementById('progress-bar').style.width = (dailyWatched / 50 * 100) + "%";
+    if(document.getElementById('progress-bar')) document.getElementById('progress-bar').style.width = (dailyWatched / 100 * 100) + "%";
     if(document.getElementById('special-progress-bar')) document.getElementById('special-progress-bar').style.width = (specialWatched / 500 * 100) + "%";
     if(document.getElementById('mandatory-progress-bar')) document.getElementById('mandatory-progress-bar').style.width = (mandatoryWatched / 150 * 100) + "%";
 }
@@ -919,7 +911,7 @@ async function loadPaymentHistory() {
 }
 
 async function watchRealAd() {
-    if(dailyWatched >= 50) { tg.showAlert("আজকের লিমিট শেষ!"); return; }
+    if(dailyWatched >= 100) { tg.showAlert("আজকের লিমিট শেষ!"); return; }
     
     let adCompleted = false;
     
