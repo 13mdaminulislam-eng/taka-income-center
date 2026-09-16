@@ -18,7 +18,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 .page.active { display: block; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-/* আকর্ষণীয় লাইভ ডেট ও টাইম কার্ড ডিজাইন */
+/* আকর্ষণীয় লাইভ ডেট কার্ড ডিজাইন */
 .live-date-banner { background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(239, 68, 68, 0.15)); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 20px; padding: 15px 20px; margin-bottom: 18px; text-align: center; box-shadow: 0 8px 25px rgba(0,0,0,0.3); position: relative; overflow: hidden; backdrop-filter: blur(10px); }
 .live-date-banner::before { content: ''; position: absolute; top: -50px; left: -50px; width: 100px; height: 100px; background: rgba(16, 185, 129, 0.1); border-radius: 50%; pointer-events: none; }
 .live-date-title { font-size: 13px; font-weight: 700; color: #34d399; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; display: flex; align-items: center; justify-content: center; gap: 6px; }
@@ -107,9 +107,9 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <div class="top-app-title">💰 「ডেইলি টাস্ক ইনকাম সেন্টার」 💰</div>
 
 <div id="page-home" class="page active">
-    <!-- এখানে প্রতিদিন স্বয়ংক্রিয়ভাবে পরিবর্তিত হওয়া আকর্ষণীয় লাইভ ডেট ও টাইম উইজেট যুক্ত করা হয়েছে -->
+    <!-- এখানে শুধু রিয়েল-টাইম বাংলা তারিখ ও বার শো করবে (সময় বাদ দেওয়া হয়েছে) -->
     <div class="live-date-banner">
-        <div class="live-date-title">📅 আজকের রিয়েল-টাইম তারিখ ও সময়</div>
+        <div class="live-date-title">📅 আজকের রিয়েল-টাইম তারিখ</div>
         <div class="live-date-value" id="live-current-date-time">লোড হচ্ছে...</div>
     </div>
 
@@ -395,19 +395,18 @@ const adminChatId = "8040704140";
 let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, mandatoryWatched = 0, isActive = false, savedPhotoUrl = "", formattedJoinDate = "---", userSerial = "---";
 let claimedBonuses = {};
 
-// স্বয়ংক্রিয় লাইভ তারিখ ও সময় আপডেট ফাংশন
+// স্বয়ংক্রিয় লাইভ তারিখ আপডেট ফাংশন (সময় বাদ দিয়ে শুধু বাংলা তারিখ ও বার)
 function updateLiveDateTime() {
     const now = new Date();
     const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
     let dateStr = now.toLocaleDateString('bn-BD', options);
-    let timeStr = now.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     
     const dateTimeElement = document.getElementById('live-current-date-time');
     if (dateTimeElement) {
-        dateTimeElement.innerText = `${dateStr} | ${timeStr}`;
+        dateTimeElement.innerText = dateStr;
     }
 }
-setInterval(updateLiveDateTime, 1000);
+updateLiveDateTime();
 
 function setWithdrawAmount(amount) {
     document.getElementById('withdraw-amount').value = amount;
@@ -1106,3 +1105,63 @@ async function processWithdraw() {
 
                 await notifyAdminWithdrawRequest(userSerial, userName, userId, method, number, amount, taka);
 
+                userBalance -= amount;
+                await db.collection('users').doc(userId).update({ balance: userBalance });
+                updateUI();
+                loadPaymentHistory();
+                tg.showAlert("✅ পেমেন্ট রিকোয়েস্ট সফলভাবে পাঠানো হয়েছে!");
+            } catch (err) {
+                tg.showAlert("❌ পেমেন্ট রিকোয়েস্ট পাঠাতে সমস্যা হয়েছে!");
+            }
+        }
+    });
+}
+
+function switchPage(pageId, element) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('page-' + pageId).classList.add('active');
+    if(element) element.classList.add('active');
+}
+
+function copyRefer() {
+    const link = "https://t.me/TakaInkam1626_bot?start=" + userId;
+    navigator.clipboard.writeText(link);
+    tg.showAlert("📋 রেফার লিংক কপি সফল হয়েছে!");
+}
+
+function shareRefer() {
+    const link = "https://t.me/TakaInkam1626_bot?start=" + userId;
+    const text = "💰 ঘরে বসে প্রতিদিন ইনকাম করুন খুব সহজে!\nআজই জয়েন করুন 👇\n" + link;
+    if(tg.openTelegramLink) {
+        tg.openTelegramLink("https://t.me/share/url?url=" + encodeURIComponent(link) + "&text=" + encodeURIComponent(text));
+    } else {
+        window.open("https://t.me/share/url?url=" + encodeURIComponent(link) + "&text=" + encodeURIComponent(text), '_blank');
+    }
+}
+
+function closeReferModal() {
+    document.getElementById('refer-modal').classList.remove('active');
+}
+
+function goToReferPage() {
+    closeReferModal();
+    switchPage('refer', document.querySelectorAll('.nav-item')[3]);
+}
+
+function buyReferBot() {
+    window.open("https://t.me/RFR16169Bot", "_blank");
+}
+
+function closeActivationModal() {
+    document.getElementById('activation-modal').classList.remove('active');
+}
+
+function openActivationBot() {
+    window.open("https://t.me/ks162699bot", "_blank");
+}
+
+loadAllData();
+</script>
+</body>
+</html>
