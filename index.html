@@ -126,14 +126,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .btn-act-contact { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 10px; border-radius: 10px; flex: 1; font-weight: 800; font-size: 13px; cursor: pointer; box-shadow: 0 4px 12px rgba(16,185,129,0.3); transition: transform 0.2s; }
 .btn-act-cancel { background: rgba(255,255,255,0.08); color: #94a3b8; border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 10px; width: 80px; font-weight: 700; font-size: 13px; cursor: pointer; }
 .btn-act-contact:active, .btn-act-cancel:active { transform: scale(0.98); }
-
-/* প্রিমিয়াম ইনকাম ও উইথড্র হিস্ট্রি কাস্টম ডিজাইন স্টাইল */
-.premium-history-card { background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 16px; padding: 14px; margin-bottom: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.3); position: relative; overflow: hidden; }
-.premium-history-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, #10b981, #06b6d4); }
-.income-item-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-.income-item-row:last-child { border-bottom: none; }
-.status-badge-pending { background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.4); padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 4px; }
-.status-badge-success { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 4px; }
 </style>
 </head>
 <body>
@@ -367,25 +359,23 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <button class="btn-action btn-success" style="margin-top: 10px; padding: 12px; border-radius: 12px; font-size: 14px;" onclick="processWithdraw()">🚀 পেমেন্ট অনুরোধ পাঠান</button>
     </div>
 
-    <!-- পরিবর্তিত সেকশন ১: ইনকাম হিস্টরি (আকর্ষণীয় প্রিমিয়াম ডিজাইন) -->
     <a href="#" class="wallet-menu-card" onclick="switchWalletTab('history')">
         <div class="wallet-menu-left">
-            <div class="wallet-menu-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(16, 185, 129, 0.3);">💎</div>
+            <div class="wallet-menu-icon">🕒</div>
             <div>
-                <div class="wallet-menu-title">ইনকাম হিস্টরি</div>
-                <div class="wallet-menu-desc">দৈনিক ইনকামের বিস্তারিত তালিকা দেখুন</div>
+                <div class="wallet-menu-title">ট্রানজেকশন হিস্ট্রি</div>
+                <div class="wallet-menu-desc">আপনার সব ইনকাম রেকর্ড দেখুন</div>
             </div>
         </div>
         <div class="wallet-menu-arrow">›</div>
     </a>
 
-    <!-- পরিবর্তিত সেকশন ২: উইথড্র হিস্টরি (পেন্ডিং ও সাকসেসফুল ইউনিক প্রিমিয়াম ডিজাইন) -->
     <a href="#" class="wallet-menu-card" onclick="switchWalletTab('withdraw-history')">
         <div class="wallet-menu-left">
-            <div class="wallet-menu-icon" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border-color: rgba(239, 68, 68, 0.3);">🚀</div>
+            <div class="wallet-menu-icon">📈</div>
             <div>
-                <div class="wallet-menu-title">উইথড্র হিস্টরি</div>
-                <div class="wallet-menu-desc">পেন্ডিং ও সাকসেসফুল পেমেন্ট লিস্ট দেখুন</div>
+                <div class="wallet-menu-title">উইথড্র হিস্ট্রি</div>
+                <div class="wallet-menu-desc">আপনার উইথড্র রেকর্ড দেখুন</div>
             </div>
         </div>
         <div class="wallet-menu-arrow">›</div>
@@ -425,11 +415,11 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <div class="wallet-menu-arrow">›</div>
     </a>
 
-    <!-- প্রিমিয়াম ইনকাম ও উইথড্র হিস্টরি ডাটা প্রদর্শনের বক্স -->
-    <div class="premium-history-card" id="history-section-box" style="display: none;">
-        <div class="history-section-title" style="color: #34d399; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px;">📊 পেমেন্ট ও ইনকাম হিস্টরি স্ট্যাটাস</div>
+    <!-- পেমেন্ট হিস্ট্রি সেকশন যা এখন শুধু হিস্ট্রি দেখতে চাইলে ওপেন হবে -->
+    <div class="card" id="history-section-box" style="margin-top:12px; text-align: left; padding: 14px; display: none;">
+        <div class="history-section-title">📊 পেমেন্ট হিস্ট্রি (স্ট্যাটাস চেক)</div>
         <div id="payment-history-list">
-            <p style="text-align:center; color: #94a3b8; padding: 10px 0;">হিস্ট্রি লোড হচ্ছে...</p>
+            <p style="text-align:center; color: #94a3b8; padding: 10px 0;">লোডিং হিস্ট্রি...</p>
         </div>
     </div>
 </div>
@@ -1074,18 +1064,15 @@ async function loadPaymentHistory() {
             .orderBy('time', 'desc')
             .get();
         if (querySnapshot.empty) {
-            listContainer.innerHTML = '<p style="text-align:center; color: #94a3b8; padding: 10px 0;">কোনো রিকোয়েস্ট বা ইনকাম রেকর্ড পাওয়া যায়নি।</p>';
+            listContainer.innerHTML = '<p style="text-align:center; color: #94a3b8; padding: 10px 0;">কোনো রিকোয়েস্ট নেই।</p>';
             return;
         }
         listContainer.innerHTML = '';
         let index = 1;
         querySnapshot.forEach((docSnap) => {
             const data = docSnap.data();
-            const isPaid = data.status === 'paid';
-            const statusBadge = isPaid 
-                ? `<span class="status-badge-success">✔ সফল (Success)</span>` 
-                : `<span class="status-badge-pending">⏳ পেন্ডিং (Pending)</span>`;
-            
+            const statusColor = data.status === 'paid' ? '#34d399' : '#fbbf24';
+            const statusText = data.status === 'paid' ? 'সম্পন্ন (Paid)' : 'পেন্ডিং (Pending)';
             const serialNo = index++;
             const methodText = data.method ? data.method.toUpperCase() : 'BKASH';
             
@@ -1101,17 +1088,13 @@ async function loadPaymentHistory() {
             }
             
             const item = document.createElement('div');
-            item.className = 'income-item-row';
+            item.style.padding = "8px 0";
+            item.style.borderBottom = "1px solid rgba(255,255,255,0.05)";
             item.innerHTML = `
-                <div>
-                    <div style="font-size:13px; font-weight:800; color:#f8fafc;">${serialNo}. ${methodText} - ${data.amount || 0} কয়েন</div>
-                    <div style="font-size:11px; color:#94a3b8; margin-top:2px;">📱 নাম্বার: ${data.number || '---'}</div>
-                    <div style="font-size:10px; color:#64748b; margin-top:1px;">📅 ${timeString}</div>
-                </div>
-                <div style="text-align:right;">
-                    <div style="font-size:13px; font-weight:800; color:${isPaid ? '#34d399' : '#fbbf24'}; margin-bottom:4px;">৳${data.taka || 0}</div>
-                    <div>${statusBadge}</div>
-                </div>
+                <div style="font-size:13px; font-weight:700;">${serialNo}. ${methodText} - ${data.amount || 0} কয়েন</div>
+                <div style="font-size:11px; color:#94a3b8; margin-top: 2px;">নাম্বার: ${data.number || '---'}</div>
+                <div style="font-size:11px; color:#94a3b8;">তারিখ: ${timeString}</div>
+                <div style="font-size:11px; color:${statusColor}; font-weight:700; margin-top: 2px;">স্ট্যাটাস: ${statusText}</div>
             `;
             listContainer.appendChild(item);
         });
