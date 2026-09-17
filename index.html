@@ -315,9 +315,8 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- রিয়েল ইনকাম হিস্টোরি পেজ (হুবহু ছবির ডিজাইনের মতো) -->
+<!-- ইনকাম হিস্টোরি পেজ -->
 <div id="page-income-history" class="page">
-    <!-- শীর্ষ ব্যানার / হেডার -->
     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding: 0 4px;">
         <div onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])" style="font-size: 20px; cursor: pointer; color: #f8fafc;">←</div>
         <div style="display: flex; align-items: center; gap: 8px;">
@@ -327,7 +326,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <div style="width: 20px;"></div>
     </div>
 
-    <!-- ছোট নোট কার্ড -->
     <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 12px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
         <div style="font-size: 12px; color: #94a3b8; line-height: 1.4; font-weight: 600;">
             আপনি কত ভিডিও দেখে কত পয়েন্ট ইনকাম করেছেন তার সম্পূর্ণ হিস্টরি এখানে দেখুন
@@ -335,7 +333,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <div style="font-size: 28px; margin-left: 8px;">🎬</div>
     </div>
 
-    <!-- ৪টি স্ট্যাটস সামারি বক্স (উপরে) -->
     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 12px;">
         <div style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 10px 4px; text-align: center;">
             <div style="font-size: 9px; color: #94a3b8; font-weight: 700; margin-bottom: 2px;">মোট ভিডিও দেখা</div>
@@ -355,7 +352,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         </div>
     </div>
 
-    <!-- আজকের ইনকাম কার্ড -->
     <div style="background: #1e293b; border: 1.5px solid rgba(16,185,129,0.3); border-radius: 16px; padding: 14px; margin-bottom: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
             <div style="display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 800; color: #f8fafc;">
@@ -386,12 +382,10 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         </div>
     </div>
 
-    <!-- সাম্প্রতিক ইনকাম হিস্টোরি হেডার -->
     <div style="font-size: 13px; font-weight: 800; color: #f8fafc; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
         <span>🕒</span> সাম্প্রতিক ইনকাম হিস্টোরি
     </div>
 
-    <!-- ইউজারের রিয়েল ডাটা ভিত্তিক ইনকাম হিস্টোরি লিস্ট -->
     <div id="recent-income-list-container">
         <!-- ডায়নামিক্যালি পপুলেট হবে -->
     </div>
@@ -579,7 +573,7 @@ const adminChatId = "8040704140";
 
 let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, mandatoryWatched = 0, isActive = false, savedPhotoUrl = "", formattedJoinDate = "---", userSerial = "---";
 let claimedBonuses = {};
-let historyDates = [];
+let historyDates = {};
 
 function updateLiveDateTime() {
     const now = new Date();
@@ -694,6 +688,7 @@ async function loadAllData() {
     const userRef = db.collection('users').doc(userId);
     const doc = await userRef.get();
     const today = new Date().toDateString();
+    const todayKey = new Date().toISOString().split('T')[0];
     const nowTimestamp = Date.now();
 
     let referrerId = null;
@@ -776,7 +771,13 @@ async function loadAllData() {
 
         totalRefers = data.refers || 0;
         claimedBonuses = data.claimedBonuses || {};
+        
+        // পূর্ববর্তী হিস্ট্রি লোড করা, যদি না থাকে তবে মোট দেখার সংখ্যা থেকে ব্যাকআপ তৈরি করা যাতে পুরনো ব্যালেন্স ও কয়েন লস্ট না হয়
         historyDates = data.history_dates || {};
+        if (Object.keys(historyDates).length === 0 && lifetimeWatched > 0) {
+            historyDates[todayKey] = dailyWatched > 0 ? dailyWatched : lifetimeWatched;
+            await userRef.update({ history_dates: historyDates });
+        }
         
         let lastProcessedRefers = data.processed_refers !== undefined ? data.processed_refers : totalRefers;
         if (data.processed_refers === undefined) {
@@ -896,7 +897,7 @@ function updateBonusButtonsUI() {
             id: 'btn-chan1', 
             html: (claimed) => claimed ? 
                 `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
-                `<span style="background: rgba(16,185,129,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">✨</span><span>চ্যানেল ১ বোনাস (৫০ কয়েন)</span>`
+                `<span style="background: rgba(16,185,129,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">✨</span><span>চ্যানেল ১ বোনাস (৫০ কয়েনস্বর)</span>`
         },
         'chan2': { 
             id: 'btn-chan2', 
@@ -1071,7 +1072,7 @@ function updateUI() {
     document.getElementById('dash-watched').innerText = dailyWatched;
     document.getElementById('dash-remaining').innerText = (100 - dailyWatched);
     
-    // ইনকাম হিস্টোরি পেজ ডাটা আপডেট (রিয়েল ইউজার ডাটা)
+    // ইনকাম হিস্টোরি পেজ ডাটা আপডেট
     if(document.getElementById('history-total-watched')) document.getElementById('history-total-watched').innerText = lifetimeWatched + " টি";
     if(document.getElementById('history-total-income')) document.getElementById('history-total-income').innerText = (lifetimeWatched * 20) + " পয়েন্ট";
     if(document.getElementById('history-today-watched')) document.getElementById('history-today-watched').innerText = dailyWatched + " টি";
@@ -1102,7 +1103,7 @@ function loadReferralsList() {
     }
 }
 
-// সাম্প্রতিক ইনকাম হিস্টোরি লিস্ট (শুধুমাত্র ইউজারের রিয়েল ডেটা ও তারিখ অনুযায়ী দেখাবে)
+// সাম্প্রতিক ইনকাম হিস্টোরি লিস্ট (ইউজারের রিয়েল এবং পুরনো ব্যাকআপ ডেটা সহ)
 function loadRecentIncomeHistoryList() {
     const container = document.getElementById('recent-income-list-container');
     if(!container) return;
@@ -1121,14 +1122,13 @@ function loadRecentIncomeHistoryList() {
         if (watchedCount > 0) {
             const pointsEarned = watchedCount * 20;
             
-            // ডেট ফরম্যাটিং (যেমন: 17 Sep 2026)
             let formattedDateLabel = dateStr;
             try {
                 const d = new Date(dateStr);
                 formattedDateLabel = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
             } catch(e) {}
 
-            const dayPart = formattedDateLabel.split(' ')[0];
+            const dayPart = formattedDateLabel.split(' ')[0] || '';
             const monthYearPart = (formattedDateLabel.split(' ')[1] || '') + ' ' + (formattedDateLabel.split(' ')[2] || '');
 
             const card = document.createElement('div');
@@ -1167,7 +1167,7 @@ function loadRecentIncomeHistoryList() {
     });
 }
 
-// লিডারবোর্ড লোড করার ফাংশন (সর্বোচ্চ ২০ জন)
+// লিডারবোর্ড লোড করার ফাংশন
 async function loadLeaderboard() {
     const lbContainer = document.getElementById('leaderboard-list-container');
     if (!lbContainer) return;
