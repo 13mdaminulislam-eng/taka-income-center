@@ -315,7 +315,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- নতুন "ইনকাম হিস্টোরি" পেজ বা সেকশন (হুবহু ছবির মতো ডিজাইন) -->
+<!-- রিয়েল ইনকাম হিস্টোরি পেজ (হুবহু ছবির ডিজাইনের মতো) -->
 <div id="page-income-history" class="page">
     <!-- শীর্ষ ব্যানার / হেডার -->
     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding: 0 4px;">
@@ -391,7 +391,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <span>🕒</span> সাম্প্রতিক ইনকাম হিস্টোরি
     </div>
 
-    <!-- সাম্প্রতিক ৫ দিনের ডেমো/ডাইনামিক হিস্টোরি লিস্ট -->
+    <!-- ইউজারের রিয়েল ডাটা ভিত্তিক ইনকাম হিস্টোরি লিস্ট -->
     <div id="recent-income-list-container">
         <!-- ডায়নামিক্যালি পপুলেট হবে -->
     </div>
@@ -441,7 +441,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <button class="btn-action btn-success" style="margin-top: 10px; padding: 12px; border-radius: 12px; font-size: 14px;" onclick="processWithdraw()">🚀 পেমেন্ট অনুরোধ পাঠান</button>
     </div>
 
-    <!-- পরিবর্তিত: ট্রানজেকশন হিস্ট্রির পরিবর্তে হুবহু "ইনকাম হিস্টোরি" মেনু কার্ড -->
     <a href="#" class="wallet-menu-card" onclick="switchPage('income-history', null)">
         <div class="wallet-menu-left">
             <div class="wallet-menu-icon">📈</div>
@@ -526,7 +525,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <div class="activation-modal-box">
         <div class="activation-badge">🔒 অ্যাকাউন্ট ভেরিফিকেশন</div>
         <div style="font-size: 17px; font-weight: 800; color: #f8fafc; margin-bottom: 6px;">অ্যাক্টিভেশন প্রয়োজন</div>
-        <p style="font-size: 12px; color: #cbd5e1; line-height: 1.4; margin-bottom: 10px; font-weight: 600;">মাত্র **১১১ টাকা** দিয়ে অ্যাকাউন্ট সক্রিয় করুন এবং নির্দিষ্ট শর্ত পূরণ করে উপভোগ করুন একঝাক প্রিমিয়াম সুবিধা!</p>
+        <p style="font-size: 12px; color: #cbd5e1; line-height: 1.4; margin-bottom: 10px; font-weight: 600;">মাত্র **১১ টাকা** দিয়ে অ্যাকাউন্ট সক্রিয় করুন এবং নির্দিষ্ট শর্ত পূরণ করে উপভোগ করুন একঝাক প্রিমিয়াম সুবিধা!</p>
         
         <div class="activation-benefits">
             <div style="font-size: 11px; font-weight: 700; color: #34d399; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">🌟 অ্যাক্টিভ সদস্যদের বিশেষ সুবিধাসমূহ:</div>
@@ -580,6 +579,7 @@ const adminChatId = "8040704140";
 
 let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, mandatoryWatched = 0, isActive = false, savedPhotoUrl = "", formattedJoinDate = "---", userSerial = "---";
 let claimedBonuses = {};
+let historyDates = [];
 
 function updateLiveDateTime() {
     const now = new Date();
@@ -591,7 +591,6 @@ function updateLiveDateTime() {
         dateTimeElement.innerText = dateStr;
     }
 
-    // ইনকাম হিস্টোরি পেজের তারিখ আপডেট
     const engOptions = { day: 'numeric', month: 'short', year: 'numeric' };
     let engDateStr = now.toLocaleDateString('en-GB', engOptions);
     if(document.getElementById('history-today-date')) document.getElementById('history-today-date').innerText = engDateStr;
@@ -716,13 +715,15 @@ async function loadAllData() {
                 specialWatched: 0,
                 mandatoryWatched: 0,
                 last_active_time: nowTimestamp,
-                last_reset_date: today
+                last_reset_date: today,
+                history_dates: {}
             });
             userBalance = 0;
             dailyWatched = 0;
             lifetimeWatched = 0;
             specialWatched = 0;
             mandatoryWatched = 0;
+            historyDates = {};
             tg.showAlert("⚠️ টানা ৫ দিন বা তার বেশি সময় নিষ্ক্রিয় থাকায় আপনার অ্যাকাউন্ট ও ব্যালেন্স রিসেট করে শূন্য করা হয়েছে!");
         } else {
             await userRef.update({ last_active_time: nowTimestamp });
@@ -775,6 +776,7 @@ async function loadAllData() {
 
         totalRefers = data.refers || 0;
         claimedBonuses = data.claimedBonuses || {};
+        historyDates = data.history_dates || {};
         
         let lastProcessedRefers = data.processed_refers !== undefined ? data.processed_refers : totalRefers;
         if (data.processed_refers === undefined) {
@@ -838,6 +840,7 @@ async function loadAllData() {
             last_reset_date: today,
             last_active_time: nowTimestamp,
             claimedBonuses: {},
+            history_dates: {},
             created_at: serverTimestamp
         }, { merge: true });
 
@@ -870,6 +873,7 @@ async function loadAllData() {
             specialWatched = freshData.specialWatched || 0;
             mandatoryWatched = freshData.mandatoryWatched || 0;
             claimedBonuses = freshData.claimedBonuses || {};
+            historyDates = freshData.history_dates || {};
             updateUI();
             loadReferralsList();
             updateBonusButtonsUI();
@@ -1067,7 +1071,7 @@ function updateUI() {
     document.getElementById('dash-watched').innerText = dailyWatched;
     document.getElementById('dash-remaining').innerText = (100 - dailyWatched);
     
-    // ইনকাম হিস্টোরি পেজ ডাটা আপডেট
+    // ইনকাম হিস্টোরি পেজ ডাটা আপডেট (রিয়েল ইউজার ডাটা)
     if(document.getElementById('history-total-watched')) document.getElementById('history-total-watched').innerText = lifetimeWatched + " টি";
     if(document.getElementById('history-total-income')) document.getElementById('history-total-income').innerText = (lifetimeWatched * 20) + " পয়েন্ট";
     if(document.getElementById('history-today-watched')) document.getElementById('history-today-watched').innerText = dailyWatched + " টি";
@@ -1098,53 +1102,68 @@ function loadReferralsList() {
     }
 }
 
-// সাম্প্রতিক ইনকাম হিস্টোরি লিস্ট (হুবহু ছবির ডিজাইনের মতো ৫টি রো)
+// সাম্প্রতিক ইনকাম হিস্টোরি লিস্ট (শুধুমাত্র ইউজারের রিয়েল ডেটা ও তারিখ অনুযায়ী দেখাবে)
 function loadRecentIncomeHistoryList() {
     const container = document.getElementById('recent-income-list-container');
     if(!container) return;
     
-    const sampleHistory = [
-        { date: "16 Sep 2026", watched: 22, points: 440 },
-        { date: "15 Sep 2026", watched: 18, points: 360 },
-        { date: "14 Sep 2026", watched: 30, points: 600 },
-        { date: "13 Sep 2026", watched: 27, points: 540 },
-        { date: "12 Sep 2026", watched: 20, points: 400 }
-    ];
-
     container.innerHTML = '';
-    sampleHistory.forEach(item => {
-        const card = document.createElement('div');
-        card.style.background = "#1e293b";
-        card.style.border = "1px solid rgba(255,255,255,0.06)";
-        card.style.borderRadius = "14px";
-        card.style.padding = "10px 14px";
-        card.style.marginBottom = "8px";
-        card.style.display = "flex";
-        card.style.alignItems = "center";
-        card.style.justifyContent = "space-between";
-        card.style.boxShadow = "0 4px 15px rgba(0,0,0,0.2)";
 
-        card.innerHTML = `
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <div style="background: linear-gradient(135deg, #3b82f6, #6366f1); border-radius: 10px; padding: 8px 10px; text-align: center; min-width: 48px;">
-                    <div style="font-size: 13px; font-weight: 800; color: white; line-height: 1;">${item.date.split(' ')[0]}</div>
-                    <div style="font-size: 9px; font-weight: 700; color: #cbd5e1; margin-top: 2px;">${item.date.split(' ')[1]} ${item.date.split(' ')[2]}</div>
+    const datesKeys = Object.keys(historyDates).sort().reverse();
+
+    if (datesKeys.length === 0) {
+        container.innerHTML = '<div style="text-align:center; padding:15px; color:#94a3b8; font-weight:700; background: #1e293b; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">এখনো কোনো ইনকাম হিস্টোরি নেই</div>';
+        return;
+    }
+
+    datesKeys.forEach(dateStr => {
+        const watchedCount = historyDates[dateStr] || 0;
+        if (watchedCount > 0) {
+            const pointsEarned = watchedCount * 20;
+            
+            // ডেট ফরম্যাটিং (যেমন: 17 Sep 2026)
+            let formattedDateLabel = dateStr;
+            try {
+                const d = new Date(dateStr);
+                formattedDateLabel = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+            } catch(e) {}
+
+            const dayPart = formattedDateLabel.split(' ')[0];
+            const monthYearPart = (formattedDateLabel.split(' ')[1] || '') + ' ' + (formattedDateLabel.split(' ')[2] || '');
+
+            const card = document.createElement('div');
+            card.style.background = "#1e293b";
+            card.style.border = "1px solid rgba(255,255,255,0.06)";
+            card.style.borderRadius = "14px";
+            card.style.padding = "10px 14px";
+            card.style.marginBottom = "8px";
+            card.style.display = "flex";
+            card.style.alignItems = "center";
+            card.style.justifyContent = "space-between";
+            card.style.boxShadow = "0 4px 15px rgba(0,0,0,0.2)";
+
+            card.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="background: linear-gradient(135deg, #3b82f6, #6366f1); border-radius: 10px; padding: 8px 10px; text-align: center; min-width: 48px;">
+                        <div style="font-size: 13px; font-weight: 800; color: white; line-height: 1;">${dayPart}</div>
+                        <div style="font-size: 9px; font-weight: 700; color: #cbd5e1; margin-top: 2px;">${monthYearPart}</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 10px; color: #94a3b8; font-weight: 700;">ভিডিও দেখা</div>
+                        <div style="font-size: 13px; font-weight: 800; color: #f8fafc;">${watchedCount} টি</div>
+                    </div>
                 </div>
                 <div>
-                    <div style="font-size: 10px; color: #94a3b8; font-weight: 700;">ভিডিও দেখা</div>
-                    <div style="font-size: 13px; font-weight: 800; color: #f8fafc;">${item.watched} টি</div>
+                    <div style="font-size: 10px; color: #94a3b8; font-weight: 700; text-align: right;">মোট ইনকাম</div>
+                    <div style="font-size: 13px; font-weight: 800; color: #34d399;">${pointsEarned} পয়েন্ট</div>
                 </div>
-            </div>
-            <div>
-                <div style="font-size: 10px; color: #94a3b8; font-weight: 700; text-align: right;">মোট ইনকাম</div>
-                <div style="font-size: 13px; font-weight: 800; color: #34d399;">${item.points} পয়েন্ট</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="background: rgba(16,185,129,0.2); color: #34d399; padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">✓ সম্পন্ন</span>
-                <span style="color: #64748b; font-size: 14px; font-weight: 700;">›</span>
-            </div>
-        `;
-        container.appendChild(card);
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="background: rgba(16,185,129,0.2); color: #34d399; padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">✓ সম্পন্ন</span>
+                    <span style="color: #64748b; font-size: 14px; font-weight: 700;">›</span>
+                </div>
+            `;
+            container.appendChild(card);
+        }
     });
 }
 
@@ -1269,14 +1288,20 @@ async function watchRealAd() {
         userBalance += 20; 
         dailyWatched++; 
         lifetimeWatched++;
+
+        const todayKey = new Date().toISOString().split('T')[0];
+        historyDates[todayKey] = dailyWatched;
+
         try {
             await db.collection('users').doc(userId).update({ 
                 balance: userBalance, 
                 dailyWatched: dailyWatched, 
                 totalWatched: lifetimeWatched,
+                history_dates: historyDates,
                 last_active_time: Date.now()
             });
             updateUI();
+            loadRecentIncomeHistoryList();
             tg.showAlert("🎉 ২০ কয়েন সফলভাবে যোগ হয়েছে!");
         } catch (err) {
             tg.showAlert("❌ ডাটাবেসে সেভ করতে সমস্যা হয়েছে!");
