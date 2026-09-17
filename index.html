@@ -90,7 +90,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .quick-amount-btn { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399; padding: 8px 4px; font-size: 12px; font-weight: 700; border-radius: 8px; cursor: pointer; text-align: center; transition: all 0.2s; }
 .quick-amount-btn:active { background: #10b981; color: white; transform: scale(0.95); }
 
-/* লিডারবোর্ড ও ইনকাম হিস্টোরি স্টাইল */
+/* নতুন লাইভ/গেম স্টাইল লিডারবোর্ড ও ইনকাম হিস্টোরি ডিজাইন */
 .leaderboard-hero { background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(16, 185, 129, 0.15)); border: 1.5px solid rgba(239, 68, 68, 0.3); border-radius: 20px; padding: 16px; margin-bottom: 12px; text-align: center; backdrop-filter: blur(10px); }
 .leaderboard-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #ef4444, #10b981); color: white; padding: 4px 14px; border-radius: 14px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; box-shadow: 0 4px 12px rgba(239,68,68,0.3); }
 .lb-item { background: #1e293b; border-radius: 14px; padding: 10px 14px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
@@ -276,7 +276,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         
         <div class="refer-benefits">
             <div class="refer-benefit-item">
-                <span style="font-size: 14px;">🎁</span> <span>প্রতি সফল রেফারে পাবেন ইনস্ট্যান্ট <b>১১১ কয়েন বোনাস!</b></span>
+                <span style="font-size: 14px;">🎁</span> <span>প্রতি সফল রেফারে পাবেন ইনস্ট্যান্ট <b>১১ কয়েন বোনাস!</b></span>
             </div>
             <div class="refer-benefit-item">
                 <span style="font-size: 14px;">⚡</span> <span>আপনার বন্ধুর ইনকাম থেকে লাইফটাইম গ্রোথ সুবিধা।</span>
@@ -315,7 +315,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- ইনকাম হিস্টোরি পেজ -->
+<!-- নতুন সুন্দর ও আধুনিক ইনকাম হিস্টোরি পেজ -->
 <div id="page-income-history" class="page">
     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding: 0 4px;">
         <div onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])" style="font-size: 20px; cursor: pointer; color: #f8fafc;">←</div>
@@ -328,62 +328,28 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 
     <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 12px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
         <div style="font-size: 12px; color: #94a3b8; line-height: 1.4; font-weight: 600;">
-            আপনি কত ভিডিও দেখে কত পয়েন্ট ইনকাম করেছেন তার সম্পূর্ণ হিস্টরি এখানে দেখুন
+            আপনি কত ভিডিও দেখে কত পয়েন্ট ইনকাম করেছেন তার সম্পূর্ণ রেকর্ড এখানে দেখুন
         </div>
         <div style="font-size: 28px; margin-left: 8px;">🎬</div>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 12px;">
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 12px;">
         <div style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 10px 4px; text-align: center;">
             <div style="font-size: 9px; color: #94a3b8; font-weight: 700; margin-bottom: 2px;">মোট ভিডিও দেখা</div>
             <div style="font-size: 15px; font-weight: 800; color: #38bdf8;" id="history-total-watched">0 টি</div>
         </div>
         <div style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 10px 4px; text-align: center;">
-            <div style="font-size: 9px; color: #94a3b8; font-weight: 700; margin-bottom: 2px;">প্রতি ভিডিও পয়েন্ট</div>
+            <div style="font-size: 9px; color: #94a3b8; font-weight: 700; margin-bottom: 2px;">প্রতি ভিডিও রেট</div>
             <div style="font-size: 15px; font-weight: 800; color: #facc15;">20 পয়েন্ট</div>
         </div>
         <div style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 10px 4px; text-align: center;">
             <div style="font-size: 9px; color: #94a3b8; font-weight: 700; margin-bottom: 2px;">মোট ইনকাম</div>
             <div style="font-size: 13px; font-weight: 800; color: #34d399;" id="history-total-income">0 পয়েন্ট</div>
         </div>
-        <div style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 10px 4px; text-align: center;">
-            <div style="font-size: 9px; color: #94a3b8; font-weight: 700; margin-bottom: 2px;">আজকের তারিখ</div>
-            <div style="font-size: 10px; font-weight: 800; color: #f8fafc;" id="history-today-date">17 Sep 2026</div>
-        </div>
-    </div>
-
-    <div style="background: #1e293b; border: 1.5px solid rgba(16,185,129,0.3); border-radius: 16px; padding: 14px; margin-bottom: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-            <div style="display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 800; color: #f8fafc;">
-                <span>📅</span> আজকের ইনকাম
-            </div>
-            <div style="font-size: 11px; color: #94a3b8; font-weight: 700;" id="history-today-date-sub">17 Sep 2026</div>
-        </div>
-
-        <div style="background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(6,182,212,0.15)); border: 1px solid rgba(16,185,129,0.3); border-radius: 12px; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center;">
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <div style="background: rgba(16,185,129,0.2); width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px;">🎬</div>
-                <div>
-                    <div style="font-size: 10px; color: #94a3b8; font-weight: 700;">ভিডিও দেখা</div>
-                    <div style="font-size: 13px; font-weight: 800; color: #f8fafc;" id="history-today-watched">0 টি</div>
-                </div>
-            </div>
-            <div>
-                <div style="font-size: 10px; color: #94a3b8; font-weight: 700; text-align: center;">প্রতি ভিডিও</div>
-                <div style="font-size: 13px; font-weight: 800; color: #f8fafc;">20 পয়েন্ট</div>
-            </div>
-            <div style="text-align: right;">
-                <div style="font-size: 10px; color: #94a3b8; font-weight: 700;">মোট ইনকাম</div>
-                <div style="font-size: 13px; font-weight: 800; color: #34d399;" id="history-today-points">0 পয়েন্ট</div>
-            </div>
-        </div>
-        <div style="text-align: right; margin-top: 6px;">
-            <span style="background: rgba(16,185,129,0.2); color: #34d399; padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">✓ সম্পন্ন</span>
-        </div>
     </div>
 
     <div style="font-size: 13px; font-weight: 800; color: #f8fafc; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-        <span>🕒</span> সাম্প্রতিক ইনকাম হিস্টোরি
+        <span>🕒</span> দৈনিক কাজের রেকর্ড
     </div>
 
     <div id="recent-income-list-container">
@@ -519,7 +485,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <div class="activation-modal-box">
         <div class="activation-badge">🔒 অ্যাকাউন্ট ভেরিফিকেশন</div>
         <div style="font-size: 17px; font-weight: 800; color: #f8fafc; margin-bottom: 6px;">অ্যাক্টিভেশন প্রয়োজন</div>
-        <p style="font-size: 12px; color: #cbd5e1; line-height: 1.4; margin-bottom: 10px; font-weight: 600;">মাত্র **১১ টাকা** দিয়ে অ্যাকাউন্ট সক্রিয় করুন এবং নির্দিষ্ট শর্ত পূরণ করে উপভোগ করুন একঝাক প্রিমিয়াম সুবিধা!</p>
+        <p style="font-size: 12px; color: #cbd5e1; line-height: 1.4; margin-bottom: 10px; font-weight: 600;">মাত্র **১১১ টাকা** দিয়ে অ্যাকাউন্ট সক্রিয় করুন এবং নির্দিষ্ট শর্ত পূরণ করে উপভোগ করুন একঝাক প্রিমিয়াম সুবিধা!</p>
         
         <div class="activation-benefits">
             <div style="font-size: 11px; font-weight: 700; color: #34d399; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">🌟 অ্যাক্টিভ সদস্যদের বিশেষ সুবিধাসমূহ:</div>
@@ -584,11 +550,6 @@ function updateLiveDateTime() {
     if (dateTimeElement) {
         dateTimeElement.innerText = dateStr;
     }
-
-    const engOptions = { day: 'numeric', month: 'short', year: 'numeric' };
-    let engDateStr = now.toLocaleDateString('en-GB', engOptions);
-    if(document.getElementById('history-today-date')) document.getElementById('history-today-date').innerText = engDateStr;
-    if(document.getElementById('history-today-date-sub')) document.getElementById('history-today-date-sub').innerText = engDateStr;
 }
 updateLiveDateTime();
 
@@ -661,7 +622,7 @@ async function notifyReferrerNewUser(referrerId, newUserName, newUserId, newUser
                        `🆔 <b>ইউজারের আইডি:</b> <a href="tg://user?id=${newUserId}">${newUserId}</a>\n` +
                        `🔢 <b>সিরিয়াল নাম্বার:</b> #${newUserSerial}\n` +
                        `📅 <b>জয়েনিং সময়:</b> ${joinDateStr}\n\n` +
-                       `🎁 <b>বোনাস:</b> আপনি সফলভাবে <b>১১১ কয়েন</b> রেফার বোনাস পেয়েছেন!\n` +
+                       `🎁 <b>বোনাস:</b> আপনি সফলভাবে <b>১১ কয়েন</b> রেফার বোনাস পেয়েছেন!\n` +
                        `✨ <b>স্ট্যাটাস:</b> আপনার অ্যাকাউন্টে বোনাস যোগ করা হয়েছে।`;
     try {
         await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -772,7 +733,7 @@ async function loadAllData() {
         totalRefers = data.refers || 0;
         claimedBonuses = data.claimedBonuses || {};
         
-        // পূর্ববর্তী হিস্ট্রি লোড করা, যদি না থাকে তবে মোট দেখার সংখ্যা থেকে ব্যাকআপ তৈরি করা যাতে পুরনো ব্যালেন্স ও কয়েন লস্ট না হয়
+        // পুরনো ব্যালেন্স ও কয়েন অক্ষুণ্ণ রেখে হিস্ট্রি ডেটা ম্যাপ করা
         historyDates = data.history_dates || {};
         if (Object.keys(historyDates).length === 0 && lifetimeWatched > 0) {
             historyDates[todayKey] = dailyWatched > 0 ? dailyWatched : lifetimeWatched;
@@ -784,7 +745,7 @@ async function loadAllData() {
             await userRef.update({ processed_refers: totalRefers });
         } else if (totalRefers > lastProcessedRefers) {
             const diff = totalRefers - lastProcessedRefers;
-            const addedCoins = diff * 111;
+            const addedCoins = diff * 11;
             userBalance += addedCoins;
             await userRef.update({ balance: userBalance, processed_refers: totalRefers });
             tg.showAlert(`💎 অসাধারণ সংবাদ, বস!\nআপনার চমৎকার রেফার লিংকের মাধ্যমে একজন নতুন বন্ধু সফলভাবে জয়েন করেছে!\n\n🎁 বোনাস: আপনার ওয়ালেটে ইনস্ট্যান্ট ${addedCoins} কয়েন যোগ করা হয়েছে! 🚀`);
@@ -859,7 +820,7 @@ async function loadAllData() {
 
             if (currentRefers > processedRefers) {
                 const diff = currentRefers - processedRefers;
-                const addedCoins = diff * 111;
+                const addedCoins = diff * 11;
                 const updatedBalance = (freshData.balance || 0) + addedCoins;
                 await userRef.update({ balance: updatedBalance, processed_refers: currentRefers });
                 userBalance = updatedBalance;
@@ -897,7 +858,7 @@ function updateBonusButtonsUI() {
             id: 'btn-chan1', 
             html: (claimed) => claimed ? 
                 `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
-                `<span style="background: rgba(16,185,129,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">✨</span><span>চ্যানেল ১ বোনাস (৫০ কয়েনস্বর)</span>`
+                `<span style="background: rgba(16,185,129,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">✨</span><span>চ্যানেল ১ বোনাস (৫০ কয়েন)</span>`
         },
         'chan2': { 
             id: 'btn-chan2', 
@@ -1072,11 +1033,9 @@ function updateUI() {
     document.getElementById('dash-watched').innerText = dailyWatched;
     document.getElementById('dash-remaining').innerText = (100 - dailyWatched);
     
-    // ইনকাম হিস্টোরি পেজ ডাটা আপডেট
+    // ইনকাম হিস্টোরি কার্ড ডাটা আপডেট
     if(document.getElementById('history-total-watched')) document.getElementById('history-total-watched').innerText = lifetimeWatched + " টি";
     if(document.getElementById('history-total-income')) document.getElementById('history-total-income').innerText = (lifetimeWatched * 20) + " পয়েন্ট";
-    if(document.getElementById('history-today-watched')) document.getElementById('history-today-watched').innerText = dailyWatched + " টি";
-    if(document.getElementById('history-today-points')) document.getElementById('history-today-points').innerText = (dailyWatched * 20) + " পয়েন্ট";
 
     document.getElementById('special-task-count').innerText = specialWatched;
     document.getElementById('mandatory-task-count').innerText = mandatoryWatched;
@@ -1098,18 +1057,17 @@ function loadReferralsList() {
     for (let i = 1; i <= totalRefers; i++) {
         const card = document.createElement('div');
         card.className = 'list-card';
-        card.innerHTML = `<div><div><b>${i}.</b> 👤 সফল রেফারেল</div><div class="list-date">📅 সক্রিয় মেম্বার</div></div><div style="color: #34d399; font-weight: 800;">+১১১ কয়েন</div>`;
+        card.innerHTML = `<div><div><b>${i}.</b> 👤 সফল রেফারেল</div><div class="list-date">📅 সক্রিয় মেম্বার</div></div><div style="color: #34d399; font-weight: 800;">+১১ কয়েন</div>`;
         listContainer.appendChild(card);
     }
 }
 
-// সাম্প্রতিক ইনকাম হিস্টোরি লিস্ট (ইউজারের রিয়েল এবং পুরনো ব্যাকআপ ডেটা সহ)
+// ইনকাম হিস্টোরির ডায়নামিক লিস্ট রেন্ডার করা
 function loadRecentIncomeHistoryList() {
     const container = document.getElementById('recent-income-list-container');
     if(!container) return;
     
     container.innerHTML = '';
-
     const datesKeys = Object.keys(historyDates).sort().reverse();
 
     if (datesKeys.length === 0) {
@@ -1135,7 +1093,7 @@ function loadRecentIncomeHistoryList() {
             card.style.background = "#1e293b";
             card.style.border = "1px solid rgba(255,255,255,0.06)";
             card.style.borderRadius = "14px";
-            card.style.padding = "10px 14px";
+            card.style.padding = "12px 14px";
             card.style.marginBottom = "8px";
             card.style.display = "flex";
             card.style.alignItems = "center";
@@ -1149,17 +1107,13 @@ function loadRecentIncomeHistoryList() {
                         <div style="font-size: 9px; font-weight: 700; color: #cbd5e1; margin-top: 2px;">${monthYearPart}</div>
                     </div>
                     <div>
-                        <div style="font-size: 10px; color: #94a3b8; font-weight: 700;">ভিডিও দেখা</div>
-                        <div style="font-size: 13px; font-weight: 800; color: #f8fafc;">${watchedCount} টি</div>
+                        <div style="font-size: 11px; color: #94a3b8; font-weight: 700;">ভিডিও দেখা</div>
+                        <div style="font-size: 14px; font-weight: 800; color: #f8fafc;">${watchedCount} টি</div>
                     </div>
                 </div>
-                <div>
-                    <div style="font-size: 10px; color: #94a3b8; font-weight: 700; text-align: right;">মোট ইনকাম</div>
-                    <div style="font-size: 13px; font-weight: 800; color: #34d399;">${pointsEarned} পয়েন্ট</div>
-                </div>
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <span style="background: rgba(16,185,129,0.2); color: #34d399; padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">✓ সম্পন্ন</span>
-                    <span style="color: #64748b; font-size: 14px; font-weight: 700;">›</span>
+                <div style="text-align: right;">
+                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700;">মোট ইনকাম</div>
+                    <div style="font-size: 14px; font-weight: 800; color: #34d399;">${pointsEarned} পয়েন্ট</div>
                 </div>
             `;
             container.appendChild(card);
@@ -1167,7 +1121,7 @@ function loadRecentIncomeHistoryList() {
     });
 }
 
-// লিডারবোর্ড লোড করার ফাংশন
+// লিডারবোর্ড লোড করার ফাংশন (সর্বোচ্চ ২০ জন)
 async function loadLeaderboard() {
     const lbContainer = document.getElementById('leaderboard-list-container');
     if (!lbContainer) return;
