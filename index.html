@@ -359,23 +359,23 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <button class="btn-action btn-success" style="margin-top: 10px; padding: 12px; border-radius: 12px; font-size: 14px;" onclick="processWithdraw()">🚀 পেমেন্ট অনুরোধ পাঠান</button>
     </div>
 
-    <a href="#" class="wallet-menu-card" onclick="switchWalletTab('income')">
+    <a href="#" class="wallet-menu-card" onclick="switchWalletTab('history')">
         <div class="wallet-menu-left">
-            <div class="wallet-menu-icon" style="background: rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.2); color: #34d399;">📈</div>
+            <div class="wallet-menu-icon">🕒</div>
             <div>
-                <div class="wallet-menu-title">ইনকাম হিস্ট্রি</div>
-                <div class="wallet-menu-desc">দৈনিক ভিডিও দেখার পয়েন্ট ও সময়ের তালিকা</div>
+                <div class="wallet-menu-title">ট্রানজেকশন হিস্ট্রি</div>
+                <div class="wallet-menu-desc">আপনার সব ইনকাম রেকর্ড দেখুন</div>
             </div>
         </div>
         <div class="wallet-menu-arrow">›</div>
     </a>
 
-    <a href="#" class="wallet-menu-card" onclick="switchWalletTab('withdraw')">
+    <a href="#" class="wallet-menu-card" onclick="switchWalletTab('withdraw-history')">
         <div class="wallet-menu-left">
-            <div class="wallet-menu-icon" style="background: rgba(56,189,248,0.1); border-color: rgba(56,189,248,0.2); color: #38bdf8;">✨</div>
+            <div class="wallet-menu-icon">📈</div>
             <div>
                 <div class="wallet-menu-title">উইথড্র হিস্ট্রি</div>
-                <div class="wallet-menu-desc">সফল পেমেন্ট ও উইথড্র রেকর্ড দেখুন</div>
+                <div class="wallet-menu-desc">আপনার উইথড্র রেকর্ড দেখুন</div>
             </div>
         </div>
         <div class="wallet-menu-arrow">›</div>
@@ -415,11 +415,11 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <div class="wallet-menu-arrow">›</div>
     </a>
 
-    <!-- প্রিমিয়াম ডায়নামিক হিস্ট্রি সেকশন বক্স -->
-    <div class="card" id="history-section-box" style="margin-top:12px; text-align: left; padding: 16px; display: none; background: linear-gradient(145deg, #1e293b, #0f172a); border: 1.5px solid rgba(16,185,129,0.3); border-radius: 18px;">
-        <div class="history-section-title" id="history-box-title" style="font-size: 15px; color: #34d399; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; margin-bottom: 12px;">📊 হিস্ট্রি</div>
-        <div id="dynamic-history-list">
-            <p style="text-align:center; color: #94a3b8; padding: 10px 0;">লোড হচ্ছে...</p>
+    <!-- পেমেন্ট হিস্ট্রি সেকশন যা এখন শুধু হিস্ট্রি দেখতে চাইলে ওপেন হবে -->
+    <div class="card" id="history-section-box" style="margin-top:12px; text-align: left; padding: 14px; display: none;">
+        <div class="history-section-title">📊 পেমেন্ট হিস্ট্রি (স্ট্যাটাস চেক)</div>
+        <div id="payment-history-list">
+            <p style="text-align:center; color: #94a3b8; padding: 10px 0;">লোডিং হিস্ট্রি...</p>
         </div>
     </div>
 </div>
@@ -525,17 +525,7 @@ function toggleWithdrawForm() {
 
 function switchWalletTab(type) {
     const historyBox = document.getElementById('history-section-box');
-    const titleEl = document.getElementById('history-box-title');
     historyBox.style.display = 'block';
-    
-    if (type === 'income') {
-        titleEl.innerHTML = '📈 ইনকাম হিস্ট্রি (দৈনিক ভিডিও দেখার তালিকা)';
-        loadIncomeHistory();
-    } else if (type === 'withdraw') {
-        titleEl.innerHTML = '✨ সফল উইথড্র হিস্ট্রি (পেমেন্ট রেকর্ড)';
-        loadSuccessfulWithdrawHistory();
-    }
-    
     historyBox.scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -800,6 +790,7 @@ async function loadAllData() {
     document.getElementById('refer-link').innerText = "https://t.me/TakaInkam1626_bot?start=" + userId;
     updateUI();
     loadReferralsList();
+    loadPaymentHistory();
     loadLeaderboard();
     updateBonusButtonsUI();
     startDynamicPaymentNotifications();
@@ -1006,7 +997,7 @@ function loadReferralsList() {
     for (let i = 1; i <= totalRefers; i++) {
         const card = document.createElement('div');
         card.className = 'list-card';
-        card.innerHTML = `<div><div><b>${i}.</b> 👤 সফল রেফারেল</div><div class="list-date">📅 সক্রিয় মেম্বার</div></div><div style="color: #34d399; font-weight: 800;">+১১১ কয়েন</div>`;
+        card.innerHTML = `<div><div><b>${i}.</b> 👤 সফল রেফারেল</div><div class="list-date">📅 সক্রিয় মেম্বার</div></div><div style="color: #34d399; font-weight: 800;">+১১ কয়েন</div>`;
         listContainer.appendChild(card);
     }
 }
@@ -1065,122 +1056,50 @@ async function loadLeaderboard() {
     }
 }
 
-// ১. ইনকাম হিস্ট্রি লোড করার ফাংশন (দৈনিক ভিডিও দেখার তালিকা, তারিখ ও সময়সহ)
-async function loadIncomeHistory() {
-    const listContainer = document.getElementById('dynamic-history-list');
-    listContainer.innerHTML = '<p style="text-align:center; color: #94a3b8; padding: 10px 0;">ইনকাম হিস্ট্রি লোড হচ্ছে...</p>';
-
-    try {
-        const querySnapshot = await db.collection('income_history')
-            .where('userId', '==', userId)
-            .orderBy('time', 'desc')
-            .limit(30)
-            .get();
-
-        if (querySnapshot.empty) {
-            // যদি ফায়ারবেসে আলাদা কালেকশন না থাকে তবে ইউজারের বর্তমান মোট দেখার ওপর ভিত্তি করে বা ডিফলต์ লিস্ট দেখাবে
-            listContainer.innerHTML = `
-                <div style="background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); border-radius: 12px; padding: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <div style="font-size: 13px; font-weight: 800; color: #34d399;">🎬 দৈনিক ভিডিও টাস্ক ইনকাম</div>
-                        <div style="font-size: 11px; color: #94a3b8; margin-top: 2px;">📅 আজ (${new Date().toLocaleDateString('bn-BD')})</div>
-                    </div>
-                    <div style="text-align: right;">
-                        <div style="font-size: 14px; font-weight: 800; color: #34d399;">+${dailyWatched * 20} কয়েন</div>
-                        <div style="font-size: 10px; color: #cbd5e1;">মোট ${dailyWatched}টি ভিডিও</div>
-                    </div>
-                </div>
-            `;
-            return;
-        }
-
-        listContainer.innerHTML = '';
-        let index = 1;
-        querySnapshot.forEach((docSnap) => {
-            const data = docSnap.data();
-            let timeString = 'আজ';
-            if (data.time && data.time.toDate) {
-                timeString = data.time.toDate().toLocaleString('bn-BD', { 
-                    year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' 
-                });
-            }
-            const item = document.createElement('div');
-            item.style.cssText = "background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.2); border-radius: 12px; padding: 10px 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;";
-            item.innerHTML = `
-                <div>
-                    <div style="font-size: 13px; font-weight: 800; color: #f8fafc;">${index++}. 📺 ভিডিও টাস্ক কমপ্লিট</div>
-                    <div style="font-size: 11px; color: #94a3b8; margin-top: 2px;">🕒 ${timeString}</div>
-                </div>
-                <div style="text-align: right;">
-                    <div style="font-size: 14px; font-weight: 800; color: #34d399;">+${data.coins || 20} কয়েন</div>
-                    <div style="font-size: 10px; color: #38bdf8; font-weight: 700;">সফল</div>
-                </div>
-            `;
-            listContainer.appendChild(item);
-        });
-    } catch (e) {
-        listContainer.innerHTML = `
-            <div style="background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); border-radius: 12px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <div style="font-size: 13px; font-weight: 800; color: #34d399;">🎬 দৈনিক ভিডিও টাস্ক ইনকাম</div>
-                    <div style="font-size: 11px; color: #94a3b8; margin-top: 2px;">📅 আজকের সেশন</div>
-                </div>
-                <div style="text-align: right;">
-                    <div style="font-size: 14px; font-weight: 800; color: #34d399;">+${dailyWatched * 20} কয়েন</div>
-                    <div style="font-size: 10px; color: #cbd5e1;">মোট ${dailyWatched}টি ভিডিও</div>
-                </div>
-            </div>
-        `;
-    }
-}
-
-// ২. সফল উইথড্র হিস্ট্রি লোড করার ফাংশন (শুধুমাত্র পেমেন্ট এবং পেমেন্ট সাকসেসফুল লিস্ট)
-async function loadSuccessfulWithdrawHistory() {
-    const listContainer = document.getElementById('dynamic-history-list');
-    listContainer.innerHTML = '<p style="text-align:center; color: #94a3b8; padding: 10px 0;">সফল উইথড্র হিস্ট্রি লোড হচ্ছে...</p>';
-
+async function loadPaymentHistory() {
+    const listContainer = document.getElementById('payment-history-list');
     try {
         const querySnapshot = await db.collection('withdraw_requests')
             .where('userId', '==', userId)
-            .where('status', '==', 'paid')
             .orderBy('time', 'desc')
             .get();
-
         if (querySnapshot.empty) {
-            listContainer.innerHTML = '<p style="text-align:center; color: #94a3b8; padding: 15px 0;">কোনো সফল পেমেন্ট রেকর্ড পাওয়া যায়নি।</p>';
+            listContainer.innerHTML = '<p style="text-align:center; color: #94a3b8; padding: 10px 0;">কোনো রিকোয়েস্ট নেই।</p>';
             return;
         }
-
         listContainer.innerHTML = '';
         let index = 1;
         querySnapshot.forEach((docSnap) => {
             const data = docSnap.data();
+            const statusColor = data.status === 'paid' ? '#34d399' : '#fbbf24';
+            const statusText = data.status === 'paid' ? 'সম্পন্ন (Paid)' : 'পেন্ডিং (Pending)';
+            const serialNo = index++;
             const methodText = data.method ? data.method.toUpperCase() : 'BKASH';
             
             let timeString = '---';
             if (data.time && data.time.toDate) {
                 timeString = data.time.toDate().toLocaleString('bn-BD', { 
-                    year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric', 
+                    hour: '2-digit', 
+                    minute: '2-digit' 
                 });
             }
             
             const item = document.createElement('div');
-            item.style.cssText = "background: rgba(56,189,248,0.06); border: 1.5px solid rgba(56,189,248,0.3); border-radius: 14px; padding: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2);";
+            item.style.padding = "8px 0";
+            item.style.borderBottom = "1px solid rgba(255,255,255,0.05)";
             item.innerHTML = `
-                <div>
-                    <div style="font-size: 13px; font-weight: 800; color: #f8fafc;">${index++}. 💳 ${methodText} পেমেন্ট</div>
-                    <div style="font-size: 11px; color: #38bdf8; font-weight: 600; margin-top: 2px;">📱 নাম্বার: ${data.number || '---'}</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 1px;">🕒 ${timeString}</div>
-                </div>
-                <div style="text-align: right;">
-                    <div style="font-size: 14px; font-weight: 800; color: #34d399;">৳${data.taka || 0} টাকা</div>
-                    <div style="font-size: 10px; background: rgba(16,185,129,0.2); color: #34d399; padding: 2px 8px; border-radius: 6px; font-weight: 800; margin-top: 4px; display: inline-block;">✅ পেমেন্ট সফল</div>
-                </div>
+                <div style="font-size:13px; font-weight:700;">${serialNo}. ${methodText} - ${data.amount || 0} কয়েন</div>
+                <div style="font-size:11px; color:#94a3b8; margin-top: 2px;">নাম্বার: ${data.number || '---'}</div>
+                <div style="font-size:11px; color:#94a3b8;">তারিখ: ${timeString}</div>
+                <div style="font-size:11px; color:${statusColor}; font-weight:700; margin-top: 2px;">স্ট্যাটাস: ${statusText}</div>
             `;
             listContainer.appendChild(item);
         });
     } catch (e) {
-        listContainer.innerHTML = '<p style="text-align:center; color:#ef4444; padding: 15px 0;">হিস্ট্রি লোড করতে সমস্যা হয়েছে।</p>';
+        listContainer.innerHTML = '<p style="text-align:center; color:#ef4444; padding: 10px 0;">হিস্ট্রি লোড করতে সমস্যা হয়েছে।</p>';
     }
 }
 
@@ -1211,15 +1130,6 @@ async function watchRealAd() {
                 totalWatched: lifetimeWatched,
                 last_active_time: Date.now()
             });
-
-            // ইনকাম হিস্ট্রিতে রেকর্ড যোগ করা (ঐচ্ছিক ডাটাবেস এন্ট্রি)
-            await db.collection('income_history').add({
-                userId: userId,
-                coins: 20,
-                type: 'video_task',
-                time: firebase.firestore.FieldValue.serverTimestamp()
-            });
-
             updateUI();
             tg.showAlert("🎉 ২০ কয়েন সফলভাবে যোগ হয়েছে!");
         } catch (err) {
@@ -1370,6 +1280,7 @@ async function processWithdraw() {
                 userBalance -= amount;
                 await db.collection('users').doc(userId).update({ balance: userBalance });
                 updateUI();
+                loadPaymentHistory();
                 tg.showAlert("✅ পেমেন্ট রিকোয়েস্ট সফলভাবে পাঠানো হয়েছে!");
             } catch (err) {
                 tg.showAlert("❌ পেমেন্ট রিকোয়েস্ট পাঠাতে সমস্যা হয়েছে!");
@@ -1429,4 +1340,4 @@ function openActivationBot() {
 loadAllData();
 </script>
 </body>
-</html>
+                </html>
