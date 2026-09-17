@@ -90,7 +90,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .quick-amount-btn { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399; padding: 8px 4px; font-size: 12px; font-weight: 700; border-radius: 8px; cursor: pointer; text-align: center; transition: all 0.2s; }
 .quick-amount-btn:active { background: #10b981; color: white; transform: scale(0.95); }
 
-/* হুবহু ছবি সদৃশ পেমেন্ট হিস্ট্রি নিয়ন ডিজাইন */
 .history-header-box { background: linear-gradient(135deg, #1e293b, #0f172a); border: 1.5px solid rgba(56, 189, 248, 0.25); border-radius: 20px; padding: 16px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
 .history-header-title { font-size: 16px; font-weight: 800; color: #f8fafc; display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
 .history-header-desc { font-size: 11px; color: #94a3b8; font-weight: 600; }
@@ -183,13 +182,13 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         </div>
     </div>
 
-    <div class="balance-card"><div class="balance-title">মোট কয়েন</div><div class="balance-amount"><span id="main-balance">0</span> কয়েন</div></div>
+    <div class="balance-card"><div class="balance-title">মোট ব্যালেন্স</div><div class="balance-amount"><span id="main-balance">0</span> টাকা</div></div>
     
     <div class="notice-bar">
         <div class="notice-content" id="live-payment-notice">🎉 পেমেন্ট আপডেট লোড হচ্ছে...</div>
     </div>
 
-    <div class="info-notice-box">📢 প্রতি ভিডিও ২০ কয়েন</div>
+    <div class="info-notice-box">📢 প্রতি ভিডিও ০.৪০ টাকা</div>
     <div class="grid-container">
         <div class="stat-card"><div class="stat-title">⚡ মোট টাস্ক</div><div class="stat-value" id="dash-task">0</div></div>
         <div class="stat-card"><div class="stat-title">👥 মোট রেফার</div><div class="stat-value" id="dash-refer">0</div></div>
@@ -214,7 +213,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <div style="background: linear-gradient(135deg, #450a0a, #065f46, #047857); padding: 16px; border-radius: 18px; box-shadow: 0 8px 20px rgba(16,185,129,0.2); text-align: center; border: 1.5px solid rgba(255,255,255,0.1); margin-bottom: 12px; color: white;">
         <div style="font-size: 20px; margin-bottom: 2px;">📺</div>
         <h3 style="margin: 0 0 4px 0; font-size: 16px; letter-spacing: 0.5px;">বিজ্ঞাপন দেখুন</h3>
-        <p style="font-size: 12px; opacity: 0.9; margin-bottom: 12px;">প্রতিটি বিজ্ঞাপন দেখে ২০ কয়েন ইনকাম করুন</p>
+        <p style="font-size: 12px; opacity: 0.9; margin-bottom: 12px;">প্রতিটি বিজ্ঞাপন দেখে ০.৪০ টাকা ইনকাম করুন</p>
         
         <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 8px 12px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 700; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.15);">
             <span>আজকের সম্পন্ন</span>
@@ -249,7 +248,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         </button>
         <button id="btn-yt" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 10px 8px; font-size: 11px; font-weight: 700; border-radius: 12px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(239,68,68,0.4); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center;">
             <span style="background: rgba(255,255,255,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">▶️</span> 
-            <span>ইউটিউব বোনাস (৫০ কয়েন)</span>
+            <span>ইউটিউব বোনাস (১ টাকা)</span>
         </button>
     </div>
 </div>
@@ -304,7 +303,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         
         <div class="refer-benefits">
             <div class="refer-benefit-item">
-                <span style="font-size: 14px;">🎁</span> <span>প্রতি সফল রেফারে পাবেন ইনস্ট্যান্ট <b>১১১ কয়েন বোনাস!</b></span>
+                <span style="font-size: 14px;">🎁</span> <span>প্রতি সফল রেফারে পাবেন ইনস্ট্যান্ট <b>২.২২ টাকা বোনাস!</b></span>
             </div>
             <div class="refer-benefit-item">
                 <span style="font-size: 14px;">⚡</span> <span>আপনার বন্ধুর ইনকাম থেকে লাইফটাইম গ্রোথ সুবিধা।</span>
@@ -331,7 +330,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <div id="referrals-list-container"></div>
 </div>
 
-<!-- লিডারবোর্ড পেজ -->
 <div id="page-leaderboard" class="page">
     <div class="leaderboard-hero">
         <div class="leaderboard-badge">🏆 লাইভ লিডারবোর্ড</div>
@@ -343,7 +341,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- ইনকাম হিস্টোরি পেজ -->
 <div id="page-income-history" class="page">
     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding: 0 4px;">
         <div onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])" style="font-size: 20px; cursor: pointer; color: #f8fafc;">←</div>
@@ -356,7 +353,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 
     <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 12px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
         <div style="font-size: 12px; color: #94a3b8; line-height: 1.4; font-weight: 600;">
-            আপনি কত ভিডিও দেখে কত পয়েন্ট ইনকাম করেছেন তার সম্পূর্ণ রেকর্ড এখানে দেখুন
+            আপনি কত ভিডিও দেখে কত টাকা ইনকাম করেছেন তার সম্পূর্ণ রেকর্ড এখানে দেখুন
         </div>
         <div style="font-size: 28px; margin-left: 8px;">🎬</div>
     </div>
@@ -368,11 +365,11 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         </div>
         <div style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 10px 4px; text-align: center;">
             <div style="font-size: 9px; color: #94a3b8; font-weight: 700; margin-bottom: 2px;">প্রতি ভিডিও রেট</div>
-            <div style="font-size: 15px; font-weight: 800; color: #facc15;">20 পয়েন্ট</div>
+            <div style="font-size: 15px; font-weight: 800; color: #facc15;">0.40 টাকা</div>
         </div>
         <div style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 10px 4px; text-align: center;">
             <div style="font-size: 9px; color: #94a3b8; font-weight: 700; margin-bottom: 2px;">মোট ইনকাম</div>
-            <div style="font-size: 13px; font-weight: 800; color: #34d399;" id="history-total-income">0 পয়েন্ট</div>
+            <div style="font-size: 13px; font-weight: 800; color: #34d399;" id="history-total-income">0 টাকা</div>
         </div>
     </div>
 
@@ -380,12 +377,9 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <span>🕒</span> দৈনিক কাজের রেকর্ড
     </div>
 
-    <div id="recent-income-list-container">
-        <!-- ডায়নামিক্যালি পপুলেট হবে -->
-    </div>
+    <div id="recent-income-list-container"></div>
 </div>
 
-<!-- পেমেন্ট হিস্ট্রি পেজ (কয়েন ফরম্যাট) -->
 <div id="page-payment-history" class="page">
     <div class="history-header-box">
         <div>
@@ -421,11 +415,11 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 
         <div class="wallet-balance-box">
             <div class="wallet-balance-title">উপলব্ধ ব্যালেন্স</div>
-            <div class="wallet-balance-num"><span id="wallet-balance">0</span> <span style="font-size: 16px; color: #cbd5e1;">কয়েন</span></div>
+            <div class="wallet-balance-num"><span id="wallet-balance">0</span> <span style="font-size: 16px; color: #cbd5e1;">টাকা</span></div>
         </div>
 
         <div class="wallet-notice-box">
-            <span style="font-size: 14px;">⚡</span> ন্যূনতম ১০০০ কয়েন হলে উত্তোলন করতে পারবেন।
+            <span style="font-size: 14px;">⚡</span> ন্যূনতম ২০ টাকা হলে উত্তোলন করতে পারবেন।
         </div>
     </div>
 
@@ -443,14 +437,14 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <label class="wallet-label">আপনার বিকাশ/নগদ নাম্বার:</label>
         <input type="number" class="input-field" id="withdraw-number" placeholder="০১৭xxxxxxxx">
 
-        <label class="wallet-label">উত্তোলন করার কয়েনের পরিমাণ:</label>
-        <input type="number" class="input-field" id="withdraw-amount" placeholder="যেমন: ১০০০">
+        <label class="wallet-label">উত্তোলন করার টাকার পরিমাণ:</label>
+        <input type="number" class="input-field" id="withdraw-amount" placeholder="যেমন: ২০">
 
         <div class="quick-amounts">
-            <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(1000)">১০০০</button>
-            <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(2000)">২০০০</button>
-            <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(5000)">৫০০০</button>
-            <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(10000)">১০০০০</button>
+            <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(20)">২০</button>
+            <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(40)">৪০</button>
+            <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(100)">১০০</button>
+            <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(200)">২০০</button>
         </div>
 
         <button class="btn-action btn-success" style="margin-top: 10px; padding: 12px; border-radius: 12px; font-size: 14px;" onclick="processWithdraw()">🚀 পেমেন্ট অনুরোধ পাঠান</button>
@@ -663,7 +657,7 @@ async function notifyReferrerNewUser(referrerId, newUserName, newUserId, newUser
                        `🆔 <b>ইউজারের আইডি:</b> <a href="tg://user?id=${newUserId}">${newUserId}</a>\n` +
                        `🔢 <b>সিরিয়াল নাম্বার:</b> #${newUserSerial}\n` +
                        `📅 <b>জয়েনিং সময়:</b> ${joinDateStr}\n\n` +
-                       `🎁 <b>বোনাস:</b> আপনি সফলভাবে <b>১১১ কয়েন</b> রেফার বোনাস পেয়েছেন!\n` +
+                       `🎁 <b>বোনাস:</b> আপনি সফলভাবে <b>২.২২ টাকা</b> রেফার বোনাস পেয়েছেন!\n` +
                        `✨ <b>স্ট্যাটাস:</b> আপনার অ্যাকাউন্টে বোনাস যোগ করা হয়েছে।`;
     try {
         await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -674,8 +668,8 @@ async function notifyReferrerNewUser(referrerId, newUserName, newUserId, newUser
     } catch (e) { console.log(e); }
 }
 
-async function notifyAdminWithdrawRequest(serialNo, name, uId, method, number, amount, taka) {
-    const requestMsg = `💰 <b>নতুন পেমেন্ট রিকোয়েস্ট!</b>\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: ${uId}\n🔢 অ্যাকাউন্ট নং: #${serialNo}\n💳 মেথড: ${method}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} কয়েন (${taka} টাকা)\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${uId}`;
+async function notifyAdminWithdrawRequest(serialNo, name, uId, method, number, amount) {
+    const requestMsg = `💰 <b>নতুন পেমেন্ট রিকোয়েস্ট!</b>\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: ${uId}\n🔢 অ্যাকাউন্ট নং: #${serialNo}\n💳 মেথড: ${method}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} টাকা\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${uId}`;
     try {
         await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: 'POST',
@@ -785,10 +779,10 @@ async function loadAllData() {
             await userRef.update({ processed_refers: totalRefers });
         } else if (totalRefers > lastProcessedRefers) {
             const diff = totalRefers - lastProcessedRefers;
-            const addedCoins = diff * 111;
-            userBalance += addedCoins;
+            const addedTaka = parseFloat((diff * 2.22).toFixed(2));
+            userBalance = parseFloat((userBalance + addedTaka).toFixed(2));
             await userRef.update({ balance: userBalance, processed_refers: totalRefers });
-            tg.showAlert(`💎 অসাধারণ সংবাদ, বস!\nআপনার চমৎকার রেফার লিংকের মাধ্যমে একজন নতুন বন্ধু সফলভাবে জয়েন করেছে!\n\n🎁 বোনাস: আপনার ওয়ালেটে ইনস্ট্যান্ট ${addedCoins} কয়েন যোগ করা হয়েছে! 🚀`);
+            tg.showAlert(`💎 অসাধারণ সংবাদ, বস!\nআপনার চমৎকার রেফার লিংকের মাধ্যমে একজন নতুন বন্ধু সফলভাবে জয়েন করেছে!\n\n🎁 বোনাস: আপনার ওয়ালেটে ইনস্ট্যান্ট ${addedTaka} টাকা যোগ করা হয়েছে! 🚀`);
         }
 
         isActive = data.is_active || false;
@@ -860,12 +854,12 @@ async function loadAllData() {
 
             if (currentRefers > processedRefers) {
                 const diff = currentRefers - processedRefers;
-                const addedCoins = diff * 111;
-                const updatedBalance = (freshData.balance || 0) + addedCoins;
+                const addedTaka = parseFloat((diff * 2.22).toFixed(2));
+                const updatedBalance = parseFloat(((freshData.balance || 0) + addedTaka).toFixed(2));
                 await userRef.update({ balance: updatedBalance, processed_refers: currentRefers });
                 userBalance = updatedBalance;
                 
-                tg.showAlert(`💎 অসাধারণ সংবাদ, বস!\nআপনার চমৎকার রেফার লিংকের মাধ্যমে একজন নতুন বন্ধু সফলভাবে জয়েন করেছে!\n\n🎁 বোনাস: আপনার ওয়ালেটে ইনস্ট্যান্ট ${addedCoins} কয়েন যোগ করা হয়েছে! 🚀`);
+                tg.showAlert(`💎 অসাধারণ সংবাদ, বস!\nআপনার চমৎকার রেফার লিংকের মাধ্যমে একজন নতুন বন্ধু সফলভাবে জয়েন করেছে!\n\n🎁 বোনাস: আপনার ওয়ালেটে ইনস্ট্যান্ট ${addedTaka} টাকা যোগ করা হয়েছে! 🚀`);
             } else {
                 userBalance = freshData.balance || 0;
             }
@@ -898,25 +892,25 @@ function updateBonusButtonsUI() {
             id: 'btn-chan1', 
             html: (claimed) => claimed ? 
                 `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
-                `<span style="background: rgba(16,185,129,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">✨</span><span>চ্যানেল ১ বোনাস (৫০ কয়েন)</span>`
+                `<span style="background: rgba(16,185,129,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">✨</span><span>চ্যানেল ১ বোনাস (১ টাকা)</span>`
         },
         'chan2': { 
             id: 'btn-chan2', 
             html: (claimed) => claimed ? 
                 `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
-                `<span style="background: rgba(16,185,129,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">✨</span><span>চ্যানেল ২ বোনাস (৫০ কয়েন)</span>`
+                `<span style="background: rgba(16,185,129,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">✨</span><span>চ্যানেল ২ বোনাস (১ টাকা)</span>`
         },
         'chan3': { 
             id: 'btn-chan3', 
             html: (claimed) => claimed ? 
                 `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
-                `<span style="background: rgba(239,68,68,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #ef4444;">👥</span><span>ফেসবুক পেজ বোনাস (৫০ কয়েন)</span>`
+                `<span style="background: rgba(239,68,68,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #ef4444;">👥</span><span>ফেসবুক পেজ বোনাস (১ টাকা)</span>`
         },
         'yt': { 
             id: 'btn-yt', 
             html: (claimed) => claimed ? 
                 `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
-                `<span style="background: rgba(255,255,255,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">▶️</span><span>ইউটিউব বোনাস (৫০ কয়েন)</span>`,
+                `<span style="background: rgba(255,255,255,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">▶️</span><span>ইউটিউব বোনাস (১ টাকা)</span>`,
             isRed: true
         }
     };
@@ -961,7 +955,7 @@ async function claimChannelBonus(bonusKey, url) {
     setTimeout(async () => {
         if (claimedBonuses[bonusKey]) return;
 
-        userBalance += 50;
+        userBalance = parseFloat((userBalance + 1).toFixed(2));
         claimedBonuses[bonusKey] = true;
 
         const userRef = db.collection('users').doc(userId);
@@ -973,7 +967,7 @@ async function claimChannelBonus(bonusKey, url) {
 
         updateUI();
         updateBonusButtonsUI();
-        tg.showAlert("🎉 অভিনন্দন! সফলভাবে ৫০ কয়েন বোনাস পেয়ে গেছেন!");
+        tg.showAlert("🎉 অভিনন্দন! সফলভাবে ১ টাকা বোনাস পেয়ে গেছেন!");
     }, 10000);
 }
 
@@ -982,7 +976,7 @@ async function startDynamicPaymentNotifications() {
     const firstNames = ["রহিম", "করিম", "اقبال", "জাকির", "পার্থ", "লিটন", "বুলবুল", "শামিম", "হাসান", "হোসেন", "কামাল", "জামাল", "সোহেল", "দেলোয়ার", "মাজেদ", "ফারুক", "নাসির", "সাগর", "আকাশ", "পিয়াস", "সজিব", "শান্ত", "জয়", "বাবু", "সুব্রত", "অনিক", "প্রীতম", "সৌমিক", "রাফি", "ফাইয়াজ", "নাঈম", "মুন্না", "হৃদয়", "আসিফ", "সিয়াম", "নিহান", "রিদওয়ান", "তারেক", "মাসুদ", "জনি", "সাদিয়া", "তানভীর", "নুসরাত", "ফাহিম", "জান্নাতুল", "রিফাত", "মীম", "জুবায়ের", "সুমাইয়া", "সাব্বির", "মেহজাবিন", "নাজমুল", "তাবাসসুম", "আশিকুর", "আয়শা", "রাশেদুল", "পূজা", "শরিফুল", "প্রিয়াঙ্কা", "মেহেদী", "রিতু", "সোহাগ", "পায়েল", "ইমরান", "রিপন", "নাফিসা", "আল-আমিন", "মেহনাজ", "শাকিল", "রাকিবুল", "ফারজানা", "মনির", "সামিয়া", "শান্তা", "আরিফ", "নিশাত", "মুক্তা", "সাগর"];
     const lastNames = ["আহমেদ", "উদ্ধিন", "মিয়া", "সরকার", "তালুকদার", "চৌধুরী", "খন্দকার", "প্রামাণিক", "মন্ডল", "বিশ্বাস", "মজুমদার", "বাপারি", "হাওলাদার", "বেপারী", "সিকদার", "ফকির", "কাজী", "মোল্লা", "দত্ত", "দাস", "সেন", "রায়", "সাহা", "ঘোষ", "বনিক", "শীল", "পাল", "নাগ", "দে", "কর", "আক্তার", "জাহান", "ফেরদৌস", "خان", "হক", "হুদা", "সিদ্দিকা", "সাহা", "মনি", "ঘোষ", "উর্মি", "ইয়াসমিন", "রহমান", "ইসলাম", "আনজুম"];
     const methods = ["বিকাশ", "নগদ"];
-    const amounts = [1000, 1500, 2000, 2500, 3000, 4000, 5000, 6000, 8000, 10000];
+    const amounts = [20, 30, 50, 100, 150, 200, 300, 500];
     const emojis = ["🔥", "🚀", "🎉", "⚡", "✨", "💎", "🎯", "💖", "🌟", "💰"];
 
     let usedCombinations = new Set();
@@ -998,7 +992,7 @@ async function startDynamicPaymentNotifications() {
             usedCombinations.add(uniqueKey);
             let emoji = emojis[Math.floor(Math.random() * emojis.length)];
             let emojiEnd = emojis[Math.floor(Math.random() * emojis.length)];
-            paymentMessages.push(`${emoji} পেমেন্ট সফল: ${fName} ${lName} (ID: ...${rndId}) ${method}-এর মাধ্যমে ${amount} কয়েন পেমেন্ট পেয়েছেন! ${emojiEnd}`);
+            paymentMessages.push(`${emoji} পেমেন্ট সফল: ${fName} ${lName} (ID: ...${rndId}) ${method}-এর মাধ্যমে ${amount} টাকা পেমেন্ট পেয়েছেন! ${emojiEnd}`);
         }
     }
 
@@ -1013,10 +1007,10 @@ async function startDynamicPaymentNotifications() {
             querySnapshot.forEach(doc => {
                 const data = doc.data();
                 const uName = data.name || "ইউজার";
-                const uAmount = data.amount || 1000;
+                const uAmount = data.amount || 20;
                 const uMethod = data.method ? data.method.toUpperCase() : "বিকাশ";
                 const uIdNum = data.userId ? data.userId.slice(-4) : Math.floor(1000 + Math.random() * 9000);
-                paymentMessages.unshift(`🔥 পেমেন্ট সফল: ${uName} (ID: ...${uIdNum}) ${uMethod}-এর মাধ্যমে ${uAmount} কয়েন পেমেন্ট পেয়েছেন! 💰`);
+                paymentMessages.unshift(`🔥 পেমেন্ট সফল: ${uName} (ID: ...${uIdNum}) ${uMethod}-এর মাধ্যমে ${uAmount} টাকা পেমেন্ট পেয়েছেন! 💰`);
             });
         }
     } catch (e) { console.log(e); }
@@ -1062,8 +1056,8 @@ function updateUI() {
         document.getElementById('user-profile-pic').src = savedPhotoUrl;
     }
 
-    document.getElementById('main-balance').innerText = Math.floor(userBalance);
-    document.getElementById('wallet-balance').innerText = Math.floor(userBalance);
+    document.getElementById('main-balance').innerText = userBalance.toFixed(2);
+    document.getElementById('wallet-balance').innerText = userBalance.toFixed(2);
     document.getElementById('dash-task').innerText = dailyWatched;
     document.getElementById('dash-refer').innerText = totalRefers;
     document.getElementById('dash-refer-count').innerText = totalRefers;
@@ -1073,7 +1067,7 @@ function updateUI() {
     document.getElementById('dash-remaining').innerText = (100 - dailyWatched);
     
     if(document.getElementById('history-total-watched')) document.getElementById('history-total-watched').innerText = lifetimeWatched + " টি";
-    if(document.getElementById('history-total-income')) document.getElementById('history-total-income').innerText = (lifetimeWatched * 20) + " পয়েন্ট";
+    if(document.getElementById('history-total-income')) document.getElementById('history-total-income').innerText = (lifetimeWatched * 0.40).toFixed(2) + " টাকা";
 
     document.getElementById('special-task-count').innerText = specialWatched;
     document.getElementById('mandatory-task-count').innerText = mandatoryWatched;
@@ -1095,7 +1089,7 @@ function loadReferralsList() {
     for (let i = 1; i <= totalRefers; i++) {
         const card = document.createElement('div');
         card.className = 'list-card';
-        card.innerHTML = `<div><div><b>${i}.</b> 👤 সফল রেফারেল</div><div class="list-date">📅 সক্রিয় মেম্বার</div></div><div style="color: #34d399; font-weight: 800;">+১১১ কয়েন</div>`;
+        card.innerHTML = `<div><div><b>${i}.</b> 👤 সফল রেফারেল</div><div class="list-date">📅 সক্রিয় মেম্বার</div></div><div style="color: #34d399; font-weight: 800;">+২.২২ টাকা</div>`;
         listContainer.appendChild(card);
     }
 }
@@ -1115,7 +1109,7 @@ function loadRecentIncomeHistoryList() {
     datesKeys.forEach(dateStr => {
         const watchedCount = historyDates[dateStr] || 0;
         if (watchedCount > 0) {
-            const pointsEarned = watchedCount * 20;
+            const incomeEarned = (watchedCount * 0.40).toFixed(2);
             
             let formattedDateLabel = dateStr;
             try {
@@ -1150,7 +1144,7 @@ function loadRecentIncomeHistoryList() {
                 </div>
                 <div style="text-align: right;">
                     <div style="font-size: 11px; color: #94a3b8; font-weight: 700;">মোট ইনকাম</div>
-                    <div style="font-size: 14px; font-weight: 800; color: #34d399;">${pointsEarned} পয়েন্ট</div>
+                    <div style="font-size: 14px; font-weight: 800; color: #34d399;">${incomeEarned} টাকা</div>
                 </div>
             `;
             container.appendChild(card);
@@ -1179,7 +1173,7 @@ async function loadLeaderboard() {
             const data = docSnap.data();
             const name = data.name || "গেস্ট ইউজার";
             const uId = data.userId || "---";
-            const balance = Math.floor(data.balance || 0);
+            const balance = (data.balance || 0).toFixed(2);
             const photo = data.photoUrl || "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png";
 
             let rankClass = "lb-rank";
@@ -1200,7 +1194,7 @@ async function loadLeaderboard() {
                 </div>
                 <div class="lb-amount-box">
                     <div class="lb-amount">${balance}</div>
-                    <div class="lb-coins-label">কয়েন</div>
+                    <div class="lb-coins-label">টাকা</div>
                 </div>
             `;
             lbContainer.appendChild(item);
@@ -1250,7 +1244,7 @@ function renderPaymentCards(dataList) {
     listContainer.innerHTML = '';
     dataList.forEach(data => {
         const method = (data.method || 'bkash').toLowerCase();
-        const amountCoins = data.amount || 1000;
+        const amountTaka = data.amount || 20;
         const number = data.number || '---';
         
         let maskedNumber = number;
@@ -1305,7 +1299,7 @@ function renderPaymentCards(dataList) {
             <div class="ph-left">
                 <div class="${logoClass}">${logoText}</div>
                 <div class="ph-info">
-                    <div class="ph-amount">${amountCoins} কয়েন</div>
+                    <div class="ph-amount">${amountTaka} টাকা</div>
                     <div class="ph-details">নাম্বার: ${maskedNumber}</div>
                     <div class="ph-details">তারিখ: ${timeString}</div>
                 </div>
@@ -1350,7 +1344,7 @@ async function watchRealAd() {
     }
 
     if (adCompleted) {
-        userBalance += 20; 
+        userBalance = parseFloat((userBalance + 0.40).toFixed(2)); 
         dailyWatched++; 
         lifetimeWatched++;
 
@@ -1367,7 +1361,7 @@ async function watchRealAd() {
             });
             updateUI();
             loadRecentIncomeHistoryList();
-            tg.showAlert("🎉 ২০ কয়েন সফলভাবে যোগ হয়েছে!");
+            tg.showAlert("🎉 ০.৪০ টাকা সফলভাবে যোগ হয়েছে!");
         } catch (err) {
             tg.showAlert("❌ ডাটাবেসে সেভ করতে সমস্যা হয়েছে!");
         }
@@ -1440,10 +1434,9 @@ async function processWithdraw() {
     const method = document.getElementById("payment-method").value;
     
     const amount = parseFloat(amountField);
-    let taka = isNaN(amount) ? 0 : (amount / 1000) * 20; 
     
     if (!number || !amountField) { tg.showAlert("সব তথ্য পূরণ করুন।"); return; }
-    if (amount < 1000) { tg.showAlert("ন্যূনতম ১০০০ কয়েন প্রয়োজন!"); return; }
+    if (amount < 20) { tg.showAlert("ন্যূনতম ২০ টাকা প্রয়োজন!"); return; }
     if (amount > userBalance) { tg.showAlert("পর্যাপ্ত ব্যালেন্স নেই!"); return; }
     
     if (totalRefers < 11) {
@@ -1495,7 +1488,7 @@ async function processWithdraw() {
 
     tg.showPopup({
         title: 'পেমেন্ট নিশ্চিত করুন',
-        message: `আপনি ${amount} কয়েন উইথড্র করছেন। আপনি কি নিশ্চিত?`,
+        message: `আপনি ${amount} টাকা উইথড্র করছেন। আপনি কি নিশ্চিত?`,
         buttons: [{id: 'confirm', type: 'default', text: 'হ্যাঁ, নিশ্চিত'}, {type: 'cancel', text: 'বাতিল'}]
     }, async (buttonId) => {
         if (buttonId === 'confirm') {
@@ -1505,15 +1498,14 @@ async function processWithdraw() {
                     name: userName, 
                     number: number, 
                     amount: amount, 
-                    taka: taka, 
                     method: method, 
                     status: "pending", 
                     time: new Date()
                 });
 
-                await notifyAdminWithdrawRequest(userSerial, userName, userId, method, number, amount, taka);
+                await notifyAdminWithdrawRequest(userSerial, userName, userId, method, number, amount);
 
-                userBalance -= amount;
+                userBalance = parseFloat((userBalance - amount).toFixed(2));
                 await db.collection('users').doc(userId).update({ balance: userBalance });
                 updateUI();
                 loadPaymentHistory();
@@ -1549,7 +1541,7 @@ function copyRefer() {
 
 function shareRefer() {
     const link = "https://t.me/TakaInkam1626_bot?start=" + userId;
-    const text = "💰 ঘরে বসে প্রতিদিন ইনকাম করুন খুব সহজে!\nআজই জয়েন করুন 👇\n" + link;
+    const text = "💰 ঘরে বসে প্রতিদিন ইনকাম করুন খুব সহজে খুব সহজে!\nআজই জয়েন করুন 👇\n" + link;
     if(tg.openTelegramLink) {
         tg.openTelegramLink("https://t.me/share/url?url=" + encodeURIComponent(link) + "&text=" + encodeURIComponent(text));
     } else {
