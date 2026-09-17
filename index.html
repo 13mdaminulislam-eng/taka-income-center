@@ -385,7 +385,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- পেমেন্ট হিস্ট্রি পেজ (কয়েন ফরম্যাট) -->
+<!-- পেমেন্ট হিস্ট্রি পেজ (টাকা ফরম্যাট) -->
 <div id="page-payment-history" class="page">
     <div class="history-header-box">
         <div>
@@ -1251,6 +1251,8 @@ function renderPaymentCards(dataList) {
     dataList.forEach(data => {
         const method = (data.method || 'bkash').toLowerCase();
         const amountCoins = data.amount || 1000;
+        // প্রতি ১০০০ কয়েনে ২০ টাকা হিসাব অনুযায়ী টাকার পরিমাণ বের করা হলো
+        const calculatedTaka = (amountCoins / 1000) * 20;
         const number = data.number || '---';
         
         let maskedNumber = number;
@@ -1305,7 +1307,7 @@ function renderPaymentCards(dataList) {
             <div class="ph-left">
                 <div class="${logoClass}">${logoText}</div>
                 <div class="ph-info">
-                    <div class="ph-amount">${amountCoins} কয়েন</div>
+                    <div class="ph-amount">${calculatedTaka} টাকা</div>
                     <div class="ph-details">নাম্বার: ${maskedNumber}</div>
                     <div class="ph-details">তারিখ: ${timeString}</div>
                 </div>
