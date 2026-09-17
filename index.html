@@ -90,7 +90,35 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .quick-amount-btn { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399; padding: 8px 4px; font-size: 12px; font-weight: 700; border-radius: 8px; cursor: pointer; text-align: center; transition: all 0.2s; }
 .quick-amount-btn:active { background: #10b981; color: white; transform: scale(0.95); }
 
-/* নতুন লাইভ/গেম স্টাইল লিডারবোর্ড ও ইনকাম হিস্টোরি ডিজাইন */
+/* হুবহু ছবি সদৃশ পেমেন্ট হিস্ট্রি নিয়ন ডিজাইন */
+.history-header-box { background: linear-gradient(135deg, #1e293b, #0f172a); border: 1.5px solid rgba(56, 189, 248, 0.25); border-radius: 20px; padding: 16px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+.history-header-title { font-size: 16px; font-weight: 800; color: #f8fafc; display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.history-header-desc { font-size: 11px; color: #94a3b8; font-weight: 600; }
+
+.history-filter-container { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 14px; scrollbar-width: none; }
+.history-filter-container::-webkit-scrollbar { display: none; }
+.history-filter-btn { background: #1e293b; border: 1px solid rgba(255,255,255,0.08); color: #94a3b8; padding: 8px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; display: flex; align-items: center; gap: 6px; transition: all 0.2s; }
+.history-filter-btn.active { background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border-color: #38bdf8; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4); }
+
+.payment-history-card { background: #121824; border-radius: 18px; padding: 14px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; border: 1.5px solid; box-shadow: 0 6px 20px rgba(0,0,0,0.3); position: relative; overflow: hidden; }
+.payment-history-card.success { border-color: #059669; background: linear-gradient(145deg, #062318, #121824); }
+.payment-history-card.pending { border-color: #d97706; background: linear-gradient(145deg, #271c08, #121824); }
+.payment-history-card.failed { border-color: #dc2626; background: linear-gradient(145deg, #2a0c0c, #121824); }
+
+.ph-left { display: flex; align-items: center; gap: 12px; }
+.ph-logo { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+.ph-logo.bkash { background: #e11d48; color: white; border: 1px solid rgba(255,255,255,0.2); }
+.ph-logo.nagad { background: #ea580c; color: white; border: 1px solid rgba(255,255,255,0.2); }
+
+.ph-info { text-align: left; }
+.ph-amount { font-size: 18px; font-weight: 800; color: #f8fafc; margin-bottom: 2px; }
+.ph-details { font-size: 11px; color: #94a3b8; font-weight: 600; line-height: 1.3; }
+
+.ph-status-badge { padding: 6px 12px; border-radius: 14px; font-size: 11px; font-weight: 800; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 2px; box-shadow: 0 3px 10px rgba(0,0,0,0.2); }
+.ph-status-badge.success { background: rgba(5, 150, 105, 0.2); color: #34d399; border: 1px solid rgba(5, 150, 105, 0.4); }
+.ph-status-badge.pending { background: rgba(217, 119, 6, 0.2); color: #fbbf24; border: 1px solid rgba(217, 119, 6, 0.4); }
+.ph-status-badge.failed { background: rgba(220, 38, 38, 0.2); color: #f87171; border: 1px solid rgba(220, 38, 38, 0.4); }
+
 .leaderboard-hero { background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(16, 185, 129, 0.15)); border: 1.5px solid rgba(239, 68, 68, 0.3); border-radius: 20px; padding: 16px; margin-bottom: 12px; text-align: center; backdrop-filter: blur(10px); }
 .leaderboard-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #ef4444, #10b981); color: white; padding: 4px 14px; border-radius: 14px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; box-shadow: 0 4px 12px rgba(239,68,68,0.3); }
 .lb-item { background: #1e293b; border-radius: 14px; padding: 10px 14px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
@@ -315,7 +343,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- নতুন সুন্দর ও আধুনিক ইনকাম হিস্টোরি পেজ -->
+<!-- ইনকাম হিস্টোরি পেজ -->
 <div id="page-income-history" class="page">
     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding: 0 4px;">
         <div onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])" style="font-size: 20px; cursor: pointer; color: #f8fafc;">←</div>
@@ -355,6 +383,33 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <div id="recent-income-list-container">
         <!-- ডায়নামিক্যালি পপুলেট হবে -->
     </div>
+</div>
+
+<!-- হুবহু ছবির মতো পেমেন্ট হিস্ট্রি পেজ -->
+<div id="page-payment-history" class="page">
+    <div class="history-header-box">
+        <div>
+            <div class="history-header-title"><span style="font-size: 20px;">💳</span> পেমেন্ট হিস্ট্রি</div>
+            <div class="history-header-desc">আপনার সকল পেমেন্টের সম্পূর্ণ হিস্ট্রি এখানে দেখুন</div>
+        </div>
+        <div style="display: flex; gap: 4px; align-items: center;">
+            <div style="background: #e11d48; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; border: 2px solid #fff;">💸</div>
+            <div style="background: #ea580c; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; border: 2px solid #fff; margin-left: -12px;">৳</div>
+        </div>
+    </div>
+
+    <div class="history-filter-container">
+        <button class="history-filter-btn active" onclick="filterPaymentHistory('all', this)">⚡ সবগুলো</button>
+        <button class="history-filter-btn" onclick="filterPaymentHistory('success', this)">✅ সফল</button>
+        <button class="history-filter-btn" onclick="filterPaymentHistory('pending', this)">⏳ পেন্ডিং</button>
+        <button class="history-filter-btn" onclick="filterPaymentHistory('failed', this)">❌ ব্যর্থ</button>
+    </div>
+
+    <div id="payment-history-list-container">
+        <p style="text-align:center; color: #94a3b8; padding: 20px 0;">হিস্ট্রি লোড হচ্ছে...</p>
+    </div>
+    
+    <button class="btn-action" style="background: #475569; padding: 11px; margin-top: 10px;" onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])">⬅️ ওয়ালেটে ফিরে যান</button>
 </div>
 
 <div id="page-wallet" class="page">
@@ -412,7 +467,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <div class="wallet-menu-arrow">›</div>
     </a>
 
-    <a href="#" class="wallet-menu-card" onclick="switchWalletTab('withdraw-history')">
+    <a href="#" class="wallet-menu-card" onclick="switchPage('payment-history', null)">
         <div class="wallet-menu-left">
             <div class="wallet-menu-icon">🕒</div>
             <div>
@@ -434,7 +489,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <div class="wallet-menu-arrow">›</div>
     </a>
 
-    <!-- লিডারবোর্ড মেনু কার্ড -->
     <a href="#" class="wallet-menu-card" onclick="switchPage('leaderboard', null)">
         <div class="wallet-menu-left">
             <div class="wallet-menu-icon">📊</div>
@@ -456,14 +510,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         </div>
         <div class="wallet-menu-arrow">›</div>
     </a>
-
-    <!-- পেমেন্ট হিস্ট্রি সেকশন -->
-    <div class="card" id="history-section-box" style="margin-top:12px; text-align: left; padding: 14px; display: none;">
-        <div class="history-section-title">📊 উইথড্র হিস্ট্রি (স্ট্যাটাস চেক)</div>
-        <div id="payment-history-list">
-            <p style="text-align:center; color: #94a3b8; padding: 10px 0;">লোডিং হিস্ট্রি...</p>
-        </div>
-    </div>
 </div>
 
 <div id="refer-modal" class="custom-modal-overlay">
@@ -540,6 +586,7 @@ const adminChatId = "8040704140";
 let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, mandatoryWatched = 0, isActive = false, savedPhotoUrl = "", formattedJoinDate = "---", userSerial = "---";
 let claimedBonuses = {};
 let historyDates = {};
+let rawWithdrawRequests = [];
 
 function updateLiveDateTime() {
     const now = new Date();
@@ -564,12 +611,6 @@ function toggleWithdrawForm() {
     } else {
         formBox.classList.add('active');
     }
-}
-
-function switchWalletTab(type) {
-    const historyBox = document.getElementById('history-section-box');
-    historyBox.style.display = 'block';
-    historyBox.scrollIntoView({ behavior: 'smooth' });
 }
 
 async function getNextSerial() {
@@ -733,7 +774,6 @@ async function loadAllData() {
         totalRefers = data.refers || 0;
         claimedBonuses = data.claimedBonuses || {};
         
-        // পুরনো ব্যালেন্স ও কয়েন অক্ষুণ্ণ রেখে হিস্ট্রি ডেটা ম্যাপ করা
         historyDates = data.history_dates || {};
         if (Object.keys(historyDates).length === 0 && lifetimeWatched > 0) {
             historyDates[todayKey] = dailyWatched > 0 ? dailyWatched : lifetimeWatched;
@@ -916,7 +956,6 @@ async function claimChannelBonus(bonusKey, url) {
     }
 
     window.open(url, '_blank');
-
     tg.showAlert("⏳ চ্যানেল/পেজ ভিজিট করার পর অ্যাপে ফিরে আসুন। ১০ সেকেন্ড পর আপনার বোনাস ক্লেম হয়ে যাবে!");
 
     setTimeout(async () => {
@@ -1033,7 +1072,6 @@ function updateUI() {
     document.getElementById('dash-watched').innerText = dailyWatched;
     document.getElementById('dash-remaining').innerText = (100 - dailyWatched);
     
-    // ইনকাম হিস্টোরি কার্ড ডাটা আপডেট
     if(document.getElementById('history-total-watched')) document.getElementById('history-total-watched').innerText = lifetimeWatched + " টি";
     if(document.getElementById('history-total-income')) document.getElementById('history-total-income').innerText = (lifetimeWatched * 20) + " পয়েন্ট";
 
@@ -1062,7 +1100,6 @@ function loadReferralsList() {
     }
 }
 
-// ইনকাম হিস্টোরির ডায়নামিক লিস্ট রেন্ডার করা
 function loadRecentIncomeHistoryList() {
     const container = document.getElementById('recent-income-list-container');
     if(!container) return;
@@ -1121,7 +1158,6 @@ function loadRecentIncomeHistoryList() {
     });
 }
 
-// লিডারবোর্ড লোড করার ফাংশন (সর্বোচ্চ ২০ জন)
 async function loadLeaderboard() {
     const lbContainer = document.getElementById('leaderboard-list-container');
     if (!lbContainer) return;
@@ -1175,50 +1211,129 @@ async function loadLeaderboard() {
     }
 }
 
+// ফায়ারবেস থেকে রিয়েল উইথড্র হিস্ট্রি ফেচ করে হুবহু ছবির মতো রেন্ডার করা
 async function loadPaymentHistory() {
-    const listContainer = document.getElementById('payment-history-list');
+    const listContainer = document.getElementById('payment-history-list-container');
+    if (!listContainer) return;
+
     try {
         const querySnapshot = await db.collection('withdraw_requests')
             .where('userId', '==', userId)
             .orderBy('time', 'desc')
             .get();
+
         if (querySnapshot.empty) {
-            listContainer.innerHTML = '<p style="text-align:center; color: #94a3b8; padding: 10px 0;">কোনো রিকোয়েস্ট নেই।</p>';
+            listContainer.innerHTML = '<p style="text-align:center; color: #94a3b8; padding: 20px 0;">কোনো উইথড্র রিকোয়েস্ট পাওয়া যায়নি।</p>';
+            rawWithdrawRequests = [];
             return;
         }
-        listContainer.innerHTML = '';
-        let index = 1;
+
+        rawWithdrawRequests = [];
         querySnapshot.forEach((docSnap) => {
-            const data = docSnap.data();
-            const statusColor = data.status === 'paid' ? '#34d399' : '#fbbf24';
-            const statusText = data.status === 'paid' ? 'সম্পন্ন (Paid)' : 'পেন্ডিং (Pending)';
-            const serialNo = index++;
-            const methodText = data.method ? data.method.toUpperCase() : 'BKASH';
-            
-            let timeString = '---';
-            if (data.time && data.time.toDate) {
-                timeString = data.time.toDate().toLocaleString('bn-BD', { 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric', 
-                    hour: '2-digit', 
-                    minute: '2-digit' 
-                });
-            }
-            
-            const item = document.createElement('div');
-            item.style.padding = "8px 0";
-            item.style.borderBottom = "1px solid rgba(255,255,255,0.05)";
-            item.innerHTML = `
-                <div style="font-size:13px; font-weight:700;">${serialNo}. ${methodText} - ${data.amount || 0} কয়েন</div>
-                <div style="font-size:11px; color:#94a3b8; margin-top: 2px;">নাম্বার: ${data.number || '---'}</div>
-                <div style="font-size:11px; color:#94a3b8;">তারিখ: ${timeString}</div>
-                <div style="font-size:11px; color:${statusColor}; font-weight:700; margin-top: 2px;">স্ট্যাটাস: ${statusText}</div>
-            `;
-            listContainer.appendChild(item);
+            rawWithdrawRequests.push(docSnap.data());
         });
+
+        renderPaymentCards(rawWithdrawRequests);
     } catch (e) {
-        listContainer.innerHTML = '<p style="text-align:center; color:#ef4444; padding: 10px 0;">হিস্ট্রি লোড করতে সমস্যা হয়েছে।</p>';
+        listContainer.innerHTML = '<p style="text-align:center; color:#ef4444; padding: 20px 0;">হিস্ট্রি লোড করতে সমস্যা হয়েছে।</p>';
+    }
+}
+
+function renderPaymentCards(dataList) {
+    const listContainer = document.getElementById('payment-history-list-container');
+    if (!listContainer) return;
+
+    if (dataList.length === 0) {
+        listContainer.innerHTML = '<p style="text-align:center; color: #94a3b8; padding: 20px 0;">এই ফিল্টারে কোনো হিস্ট্রি নেই।</p>';
+        return;
+    }
+
+    listContainer.innerHTML = '';
+    dataList.forEach(data => {
+        const method = (data.method || 'bkash').toLowerCase();
+        const amountTaka = data.taka || ((data.amount || 0) / 1000) * 20;
+        const number = data.number || '---';
+        
+        let maskedNumber = number;
+        if(number.length >= 11) {
+            maskedNumber = number.slice(0, 3) + 'XXXX' + number.slice(7);
+        }
+
+        let timeString = '---';
+        if (data.time && data.time.toDate) {
+            timeString = data.time.toDate().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) + ', ' + data.time.toDate().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        let statusKey = 'pending';
+        if (data.status === 'paid') statusKey = 'success';
+        else if (data.status === 'failed') statusKey = 'failed';
+        else statusKey = 'pending';
+
+        let logoClass = 'ph-logo bkash';
+        let logoText = 'bKash';
+        let methodDisplayName = 'bKash';
+        if (method.includes('nagad')) {
+            logoClass = 'ph-logo nagad';
+            logoText = 'নগদ';
+            methodDisplayName = 'Nagad';
+        }
+
+        let badgeHtml = '';
+        if (statusKey === 'success') {
+            badgeHtml = `
+                <div class="ph-status-badge success">
+                    <span style="display: flex; align-items: center; gap: 4px;">✅ পেমেন্ট সফল</span>
+                    <span style="font-size: 9px; font-weight: 600;">Payment Successful</span>
+                </div>
+            `;
+        } else if (statusKey === 'pending') {
+            badgeHtml = `
+                <div class="ph-status-badge pending">
+                    <span style="display: flex; align-items: center; gap: 4px;">⏳ পেন্ডিং</span>
+                    <span style="font-size: 9px; font-weight: 600;">Payment Processing</span>
+                </div>
+            `;
+        } else {
+            badgeHtml = `
+                <div class="ph-status-badge failed">
+                    <span style="display: flex; align-items: center; gap: 4px;">❌ ব্যর্থ হয়েছে</span>
+                    <span style="font-size: 9px; font-weight: 600;">Payment Failed</span>
+                </div>
+            `;
+        }
+
+        const card = document.createElement('div');
+        card.className = `payment-history-card ${statusKey}`;
+        card.innerHTML = `
+            <div class="ph-left">
+                <div class="${logoClass}">${logoText}</div>
+                <div class="ph-info">
+                    <div class="ph-amount">৳ ${amountTaka}</div>
+                    <div class="ph-details">নাম্বার: ${maskedNumber}</div>
+                    <div class="ph-details">তারিখ: ${timeString}</div>
+                </div>
+            </div>
+            <div>${badgeHtml}</div>
+        `;
+        listContainer.appendChild(card);
+    });
+}
+
+function filterPaymentHistory(filterType, btnElement) {
+    document.querySelectorAll('.history-filter-btn').forEach(btn => btn.classList.remove('active'));
+    if(btnElement) btnElement.classList.add('active');
+
+    if (filterType === 'all') {
+        renderPaymentCards(rawWithdrawRequests);
+    } else if (filterType === 'success') {
+        const filtered = rawWithdrawRequests.filter(item => item.status === 'paid');
+        renderPaymentCards(filtered);
+    } else if (filterType === 'pending') {
+        const filtered = rawWithdrawRequests.filter(item => item.status === 'pending' || !item.status);
+        renderPaymentCards(filtered);
+    } else if (filterType === 'failed') {
+        const filtered = rawWithdrawRequests.filter(item => item.status === 'failed');
+        renderPaymentCards(filtered);
     }
 }
 
@@ -1226,7 +1341,6 @@ async function watchRealAd() {
     if(dailyWatched >= 100) { tg.showAlert("আজকের লিমিট শেষ!"); return; }
     
     let adCompleted = false;
-    
     if (typeof show_11149595 === 'function') {
         try {
             await show_11149595();
@@ -1425,6 +1539,8 @@ function switchPage(pageId, element) {
     } else if (pageId === 'income-history') {
         updateUI();
         loadRecentIncomeHistoryList();
+    } else if (pageId === 'payment-history') {
+        loadPaymentHistory();
     }
 }
 
