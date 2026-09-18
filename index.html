@@ -553,6 +553,24 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
+<!-- ইউজার এন্ট্রি ওয়েলকাম পপ-আপ মডাল -->
+<div id="welcome-alert-modal" class="custom-modal-overlay">
+    <div class="custom-modal-box" style="max-width: 340px; background: linear-gradient(145deg, #1e293b, #0f172a); border: 2px solid #10b981; padding: 20px;">
+        <div style="font-size: 32px; margin-bottom: 6px;">🔥</div>
+        <div style="font-size: 17px; font-weight: 800; color: #34d399; margin-bottom: 10px;">ডেইলি টাস্ক ইনকাম সেন্টার</div>
+        <div style="font-size: 13px; color: #cbd5e1; line-height: 1.6; margin-bottom: 16px; text-align: left; background: rgba(15, 23, 42, 0.6); padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);">
+            🌸 <b>আসসালামু আলাইকুম</b><br><br>
+            ✨ ফ্রিতে অনলাইন ইনকামের সুযোগ!<br>
+            📌 কোনো ইনভেস্টমেন্ট ছাড়াই নিয়ম মেনে কাজ করার সুযোগ।<br><br>
+            💵 প্রতি রেফারে: <b>৳১১১</b><br>
+            💰 প্রতি বিজ্ঞাপনে: <b>৳২০</b><br>
+            📊 দৈনিক সর্বোচ্চ: <b>১০০টি বিজ্ঞাপন</b><br><br>
+            🟢 পেমেন্ট মাধ্যম: <b>বিকাশ ও নগদ</b>
+        </div>
+        <button class="btn-action btn-success" style="padding: 12px; border-radius: 12px; font-size: 14px; margin-top: 0;" onclick="closeWelcomeAlertModal()">বুঝেছি ✅</button>
+    </div>
+</div>
+
 <div class="nav-bar">
     <div class="nav-item active" onclick="switchPage('home', this)"><div class="nav-icon">🏠</div><div>হোম</div></div>
     <div class="nav-item" onclick="switchPage('work', this)"><div class="nav-icon">📋</div><div>কাজ</div></div>
@@ -587,6 +605,21 @@ let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, spe
 let claimedBonuses = {};
 let historyDates = {};
 let rawWithdrawRequests = [];
+
+// পেজ লোড হওয়ার সাথে সাথে ওয়েলকাম নোটিফিকেশন পপ-আপ দেখানোর ফাংশন
+function showWelcomeAlert() {
+    const welcomeModal = document.getElementById('welcome-alert-modal');
+    if (welcomeModal) {
+        welcomeModal.classList.add('active');
+    }
+}
+
+function closeWelcomeAlertModal() {
+    const welcomeModal = document.getElementById('welcome-alert-modal');
+    if (welcomeModal) {
+        welcomeModal.classList.remove('active');
+    }
+}
 
 function updateLiveDateTime() {
     const now = new Date();
@@ -687,6 +720,9 @@ async function notifyAdminWithdrawRequest(serialNo, name, uId, method, number, a
 
 async function loadAllData() {
     updateLiveDateTime();
+    // অ্যাপ ওপেন হওয়ার সাথে সাথে ওয়েলকাম মেসেজ পপ-আপ কল করা হলো
+    showWelcomeAlert();
+
     const userRef = db.collection('users').doc(userId);
     const doc = await userRef.get();
     const today = new Date().toDateString();
@@ -1251,7 +1287,6 @@ function renderPaymentCards(dataList) {
     dataList.forEach(data => {
         const method = (data.method || 'bkash').toLowerCase();
         const amountCoins = data.amount || 1000;
-        // প্রতি ১০০০ কয়েনে ২০ টাকা হিসাব অনুযায়ী টাকার পরিমাণ বের করা হলো
         const calculatedTaka = (amountCoins / 1000) * 20;
         const number = data.number || '---';
         
