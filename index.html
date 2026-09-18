@@ -281,7 +281,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <button class="btn-action" style="background: #475569; padding: 10px; font-size: 13px;" onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])">⬅️ ওয়ালেটে ফিরে যান</button>
 </div>
 
-<!-- নতুন ডিজাইনের সাপোর্ট পেজ -->
+<!-- আপডেটকৃত সাপোর্ট পেজ -->
 <div id="page-support" class="page">
     <div style="text-align: center; margin-bottom: 14px;">
         <h2 style="font-size: 20px; font-weight: 800; color: #f8fafc; margin-bottom: 4px;">টিউটোয়াল ভিডিও</h2>
@@ -322,14 +322,14 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         </a>
 
         <!-- FAQ -->
-        <a href="https://t.me/KA16269bot" target="_blank" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 16px 12px; text-align: center; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s; display: flex; flex-direction: column; align-items: center;">
+        <a href="https://t.me/ami16169" target="_blank" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 16px 12px; text-align: center; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s; display: flex; flex-direction: column; align-items: center;">
             <div style="width: 44px; height: 44px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #ef4444; margin-bottom: 8px;">❓</div>
             <div style="font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 2px;">FAQ</div>
             <div style="font-size: 10px; color: #94a3b8; font-weight: 600;">সাধারণ প্রশ্নোত্তর</div>
         </a>
 
         <!-- লাইভ চ্যাট -->
-        <a href="https://t.me/KA16269bot" target="_blank" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 16px 12px; text-align: center; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s; display: flex; flex-direction: column; align-items: center;">
+        <a href="https://t.me/AD16169Bot" target="_blank" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 16px 12px; text-align: center; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s; display: flex; flex-direction: column; align-items: center;">
             <div style="width: 44px; height: 44px; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #f59e0b; margin-bottom: 8px;">💬</div>
             <div style="font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 2px;">লাইভ চ্যাট</div>
             <div style="font-size: 10px; color: #94a3b8; font-weight: 600;">তাৎক্ষণিক সাহায্য</div>
@@ -1004,7 +1004,7 @@ function updateBonusButtonsUI() {
             id: 'btn-yt', 
             html: (claimed) => claimed ? 
                 `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
-                `<span style="background: rgba(255,255,255,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">▶️</span><span>ইউটিউব বোনাস (৫০ কয়েন)</span>`,
+                `<span style="background: rgba(255,255,255,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">▶️</span><span>ইউটিউব বোনাস (৫০ কয়েন)</span>`,
             isRed: true
         }
     };
@@ -1183,7 +1183,7 @@ function loadReferralsList() {
     for (let i = 1; i <= totalRefers; i++) {
         const card = document.createElement('div');
         card.className = 'list-card';
-        card.innerHTML = `<div><div><b>${i}.</b> 👤 সফল রেফারেল</div><div class="list-date">📅 সক্রিয় মেম্বার</div></div><div style="color: #34d399; font-weight: 800;">+১১১ কয়েন</div>`;
+        card.innerHTML = `<div><div><b>${i}.</b> 👤 সফল রেফারেল</div><div class="list-date">📅 সক্রিয় মেম্বার</div></div><div style="color: #34d399; font-weight: 800;">+১১ দিন</div>`;
         listContainer.appendChild(card);
     }
 }
