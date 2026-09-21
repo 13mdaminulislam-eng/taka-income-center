@@ -159,96 +159,144 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <body>
 <div class="top-app-title">💰 「ডেইলি টাস্ক ইনকাম সেন্টার」 💰</div>
 
+<!-- ==================== হোমপেজ (আল্ট্রা প্রিমিয়াম ও ইউনিক ডিজাইন) ==================== -->
 <div id="page-home" class="page active">
+    <!-- রিয়েল-টাইম ডেট ব্যানার -->
     <div class="live-date-banner">
         <div class="live-date-title">📅 আজকের রিয়েল-টাইম তারিখ</div>
         <div class="live-date-value" id="live-current-date-time">লোড হচ্ছে...</div>
     </div>
 
-    <div style="background: #1e293b; padding: 12px 15px; border-radius: 14px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.05);">
-        <div style="text-align: center;">
-            <img id="user-profile-pic" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" alt="Profile" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid #10b981; background: #0f172a;">
-            <div id="display-user-serial" style="font-size: 10px; font-weight: 800; color: #ef4444; margin-top: 2px;">নং: #---</div>
+    <!-- প্রোফাইল কার্ড -->
+    <div style="background: linear-gradient(135deg, #1e293b, #0f172a); padding: 16px; border-radius: 20px; display: flex; align-items: center; gap: 14px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); margin-bottom: 14px; border: 1.5px solid rgba(16, 185, 129, 0.25); position: relative; overflow: hidden;">
+        <div style="position: absolute; right: -20px; bottom: -20px; font-size: 80px; opacity: 0.03; pointer-events: none;">👑</div>
+        <div style="text-align: center; position: relative;">
+            <img id="user-profile-pic" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" alt="Profile" style="width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2.5px solid #10b981; background: #0f172a; box-shadow: 0 4px 12px rgba(16,185,129,0.3);">
+            <div id="display-user-serial" style="font-size: 10px; font-weight: 800; color: #ef4444; margin-top: 3px; background: rgba(239,68,68,0.1); padding: 1px 6px; border-radius: 6px; border: 1px solid rgba(239,68,68,0.2);">নং: #---</div>
         </div>
         <div style="text-align: left; overflow: hidden; flex: 1;">
-            <div style="font-size: 13px; font-weight: 700; color: #f8fafc; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
-                👋 স্বাগতম, <span id="display-user-name">লোড হচ্ছে...</span>
+            <div style="font-size: 14px; font-weight: 800; color: #f8fafc; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: flex; align-items: center; gap: 4px;">
+                👋 স্বাগতম, <span id="display-user-name" style="color: #34d399;">লোড হচ্ছে...</span>
             </div>
-            <div style="font-size: 11px; color: #94a3b8; margin-top: 2px; font-weight: 600;">
-                ID: <span id="display-user-id-badge" style="color: #34d399;">---</span>
+            <div style="font-size: 11px; color: #94a3b8; margin-top: 3px; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+                <span>ID: <span id="display-user-id-badge" style="color: #38bdf8;">---</span></span>
             </div>
-            <div style="font-size: 11px; color: #34d399; margin-top: 1px; font-weight: 600;">
-                📅 জয়েনিং: <span id="display-join-date">লোড হচ্ছে...</span>
+            <div style="font-size: 11px; color: #34d399; margin-top: 2px; font-weight: 700; display: flex; align-items: center; gap: 4px;">
+                <span>📅 জয়েনিং: <span id="display-join-date">লোড হচ্ছে...</span></span>
             </div>
         </div>
     </div>
 
-    <div class="balance-card"><div class="balance-title">মোট কয়েন</div><div class="balance-amount"><span id="main-balance">0</span> কয়েন</div></div>
+    <!-- ব্যালেন্স কার্ড -->
+    <div class="balance-card">
+        <div style="position: absolute; right: -15px; bottom: -20px; font-size: 100px; opacity: 0.1; pointer-events: none;">🪙</div>
+        <div class="balance-title">💰 মোট কয়েন ব্যালেন্স</div>
+        <div class="balance-amount"><span id="main-balance">0</span> <span style="font-size: 18px; font-weight: 600; opacity: 0.9;">কয়েন</span></div>
+    </div>
     
+    <!-- নোটিশ বার -->
     <div class="notice-bar">
         <div class="notice-content" id="live-payment-notice">🎉 পেমেন্ট আপডেট লোড হচ্ছে...</div>
     </div>
 
-    <div class="info-notice-box">📢 প্রতি ভিডিও ২০ কয়েন</div>
+    <div class="info-notice-box">📢 প্রতি ভিডিও ২০ কয়েন ইনকাম করুন</div>
+
+    <!-- স্ট্যাটাস গ্রিড ১ -->
     <div class="grid-container">
-        <div class="stat-card"><div class="stat-title">⚡ মোট টাস্ক</div><div class="stat-value" id="dash-task">0</div></div>
-        <div class="stat-card"><div class="stat-title">👥 মোট রেফার</div><div class="stat-value" id="dash-refer">0</div></div>
+        <div class="stat-card" style="border-top: 3px solid #38bdf8;">
+            <div class="stat-title">⚡ মোট টাস্ক</div>
+            <div class="stat-value" id="dash-task">0</div>
+        </div>
+        <div class="stat-card" style="border-top: 3px solid #10b981;">
+            <div class="stat-title">👥 মোট রেফার</div>
+            <div class="stat-value" id="dash-refer">0</div>
+        </div>
     </div>
+
+    <!-- স্ট্যাটাস গ্রিড ২ -->
     <div class="grid-container">
-        <div class="stat-card"><div class="stat-title">📺 দেখা হয়েছে</div><div class="stat-value" id="dash-watched">0</div></div>
-        <div class="stat-card"><div class="stat-title">⏳ দেখতে পারবে</div><div class="stat-value" id="dash-remaining">100</div></div>
+        <div class="stat-card" style="border-top: 3px solid #f59e0b;">
+            <div class="stat-title">📺 দেখা হয়েছে</div>
+            <div class="stat-value" id="dash-watched">0</div>
+        </div>
+        <div class="stat-card" style="border-top: 3px solid #ef4444;">
+            <div class="stat-title">⏳ দেখতে পারবে</div>
+            <div class="stat-value" id="dash-remaining">100</div>
+        </div>
     </div>
-    <div class="card" style="padding: 14px;">
-        <div class="stat-title">🎬 সর্বমোট ভিডিও দেখা হয়েছে</div>
-        <div class="stat-value" id="total-watched-count" style="font-size: 24px; color: #34d399;">0</div>
+
+    <!-- সর্বমোট ভিডিও কার্ড -->
+    <div class="card" style="padding: 16px; background: linear-gradient(145deg, #1e293b, #121824); border: 1.5px solid rgba(52, 211, 153, 0.2);">
+        <div class="stat-title" style="color: #34d399; font-size: 12px; justify-content: center; gap: 6px;">
+            <span>🎬</span> সর্বমোট ভিডিও দেখা হয়েছে
+        </div>
+        <div class="stat-value" id="total-watched-count" style="font-size: 26px; color: #34d399; margin-top: 4px; text-shadow: 0 0 15px rgba(52,211,153,0.3);">0</div>
     </div>
 </div>
 
+<!-- ==================== কাজ পেজ (আল্ট্রা প্রিমিয়াম ও ইউনিক ডিজাইন) ==================== -->
 <div id="page-work" class="page" style="padding: 5px;">
-    <div style="background: linear-gradient(135deg, #065f46, #047857); border-radius: 20px; padding: 20px 16px; margin: 10px 0; color: white; text-align: center; box-shadow: 0 10px 25px rgba(16,185,129,0.3); border: 1.5px solid rgba(255,255,255,0.15);">
-        <h2 style="margin-top: 0; font-size: 18px; margin-bottom: 12px; font-weight: 800; letter-spacing: 0.5px;">🎥 কিভাবে কাজ করবেন?</h2>
-        <a href="https://youtube.com/shorts/7ljXq-ArTNw?si=92ieAqcu9ns5Lj-k" target="_blank" style="display: block; background: linear-gradient(135deg, #ffffff, #f1f5f9); color: #065f46; padding: 14px 20px; border-radius: 14px; text-decoration: none; font-weight: 800; font-size: 14px; margin-bottom: 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.15); transition: transform 0.2s;">📺 কাজের ভিডিও দেখুন</a>
-        <a href="https://youtube.com/shorts/EZR9C_hEleU?si=9s6nyD1gTExfLxyC" target="_blank" style="display: block; background: linear-gradient(135deg, #ffffff, #f1f5f9); color: #065f46; padding: 14px 20px; border-radius: 14px; text-decoration: none; font-weight: 800; font-size: 14px; box-shadow: 0 6px 15px rgba(0,0,0,0.15); transition: transform 0.2s;">🎁 বোনাস কিভাবে নিবেন দেখুন</a>
+    <!-- কাজের নিয়ম ভিডিও ব্যানার -->
+    <div style="background: linear-gradient(135deg, #065f46, #047857, #022c22); border-radius: 20px; padding: 20px 16px; margin: 10px 0; color: white; text-align: center; box-shadow: 0 10px 30px rgba(16,185,129,0.3); border: 1.5px solid rgba(255,255,255,0.2); position: relative; overflow: hidden;">
+        <div style="position: absolute; right: -10px; top: -10px; font-size: 70px; opacity: 0.1; pointer-events: none;">🎥</div>
+        <h2 style="margin-top: 0; font-size: 18px; margin-bottom: 12px; font-weight: 800; letter-spacing: 0.5px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <span>🎬</span> কিভাবে কাজ করবেন?
+        </h2>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="https://youtube.com/shorts/7ljXq-ArTNw?si=92ieAqcu9ns5Lj-k" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #ffffff, #f1f5f9); color: #065f46; padding: 12px 16px; border-radius: 14px; text-decoration: none; font-weight: 800; font-size: 13px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s;">
+                <span>📺</span> কাজের ভিডিও দেখুন (টিউটোরিয়াল)
+            </a>
+            <a href="https://youtube.com/shorts/EZR9C_hEleU?si=9s6nyD1gTExfLxyC" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; background: rgba(255,255,255,0.12); backdrop-filter: blur(10px); color: #ffffff; border: 1px solid rgba(255,255,255,0.25); padding: 12px 16px; border-radius: 14px; text-decoration: none; font-weight: 800; font-size: 13px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s;">
+                <span>🎁</span> বোনাস কিভাবে নিবেন দেখুন
+            </a>
+        </div>
     </div>
 
-    <div style="background: linear-gradient(135deg, #450a0a, #065f46, #047857); padding: 16px; border-radius: 18px; box-shadow: 0 8px 20px rgba(16,185,129,0.2); text-align: center; border: 1.5px solid rgba(255,255,255,0.1); margin-bottom: 12px; color: white;">
-        <div style="font-size: 20px; margin-bottom: 2px;">📺</div>
-        <h3 style="margin: 0 0 4px 0; font-size: 16px; letter-spacing: 0.5px;">বিজ্ঞাপন দেখুন</h3>
-        <p style="font-size: 12px; opacity: 0.9; margin-bottom: 12px;">প্রতিটি বিজ্ঞাপন দেখে ২০ কয়েন ইনকাম করুন</p>
+    <!-- বিজ্ঞাপন দেখুন মূল টাস্ক বক্স -->
+    <div style="background: linear-gradient(145deg, #1e293b, #121824); padding: 18px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); text-align: center; border: 1.5px solid rgba(239, 68, 68, 0.3); margin-bottom: 14px; color: white; position: relative; overflow: hidden;">
+        <div style="position: absolute; right: -15px; bottom: -15px; font-size: 90px; opacity: 0.05; pointer-events: none;">📺</div>
         
-        <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 8px 12px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 700; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.15);">
-            <span>আজকের সম্পন্ন</span>
-            <span style="background: #ffffff; color: #065f46; padding: 2px 8px; border-radius: 6px; font-size: 13px;"><span id="task-count">0</span> / 100</span>
+        <div style="width: 48px; height: 48px; background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin: 0 auto 8px auto; box-shadow: 0 4px 12px rgba(239,68,68,0.2);">📺</div>
+        
+        <h3 style="margin: 0 0 4px 0; font-size: 17px; font-weight: 800; letter-spacing: 0.5px;">বিজ্ঞাপন দেখে ইনকাম</h3>
+        <p style="font-size: 12px; color: #94a3b8; font-weight: 600; margin-bottom: 14px;">প্রতিটি বিজ্ঞাপন দেখে নিশ্চিত ২০ কয়েন ইনকাম করুন</p>
+        
+        <!-- প্রোগ্রেস বার স্ট্যাটাস -->
+        <div style="background: rgba(255,255,255,0.06); backdrop-filter: blur(10px); padding: 10px 14px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 700; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.08);">
+            <span style="color: #94a3b8;">আজকের সম্পন্ন টাস্ক</span>
+            <span style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 3px 10px; border-radius: 8px; font-size: 12px; font-weight: 800; box-shadow: 0 2px 8px rgba(16,185,129,0.3);"><span id="task-count">0</span> / 100</span>
         </div>
 
-        <div style="background: rgba(0,0,0,0.3); height: 8px; border-radius: 8px; margin-bottom: 14px; overflow: hidden; padding: 1px; border: 1px solid rgba(255,255,255,0.1);">
-            <div id="progress-bar" style="background: linear-gradient(90deg, #ef4444, #10b981, #34d399); height: 100%; width: 0%; border-radius: 6px; transition: width 0.4s ease;"></div>
+        <div style="background: rgba(0,0,0,0.4); height: 10px; border-radius: 8px; margin-bottom: 16px; overflow: hidden; padding: 1px; border: 1px solid rgba(255,255,255,0.08);">
+            <div id="progress-bar" style="background: linear-gradient(90deg, #ef4444, #10b981, #34d399); height: 100%; width: 0%; border-radius: 6px; transition: width 0.4s ease; box-shadow: 0 0 10px rgba(16,185,129,0.5);"></div>
         </div>
 
-        <button onclick="watchRealAd()" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 11px; font-size: 14px; font-weight: 800; border-radius: 12px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(239,68,68,0.4); transition: transform 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px;">
+        <button onclick="watchRealAd()" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 14px; font-size: 15px; font-weight: 800; border-radius: 14px; cursor: pointer; width: 100%; box-shadow: 0 6px 20px rgba(239,68,68,0.4); transition: transform 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px;">
             <span>🚀</span> এড দেখতে এখানে ক্লিক করুন
         </button>
     </div>
     
-    <div style="background: rgba(6, 95, 70, 0.4); border: 1.5px solid #10b981; padding: 10px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; color: #34d399; margin-bottom: 12px; text-align: center; box-shadow: 0 4px 10px rgba(16,185,129,0.1); display: flex; align-items: center; justify-content: center; gap: 6px;">
-        <span style="font-size: 14px;">🔔</span> ২০০ টাকা বোনাস নিতে আমাদের চ্যানেলগুলো ফলো করুন
+    <!-- চ্যানেল ফলো নোটিশ -->
+    <div style="background: rgba(6, 95, 70, 0.3); border: 1.5px solid rgba(16, 185, 129, 0.4); padding: 12px 14px; border-radius: 14px; font-size: 12px; font-weight: 700; color: #34d399; margin-bottom: 14px; text-align: center; box-shadow: 0 4px 15px rgba(16,185,129,0.15); display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <span style="font-size: 16px;">🔔</span> ২০০ টাকা বোনাস নিতে আমাদের চ্যানেলগুলো ফলো করুন
     </div>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-        <button id="btn-chan1" onclick="claimChannelBonus('chan1', 'https://t.me/ad16269')" style="background: #1e293b; color: #94a3b8; border: 1px solid rgba(255,255,255,0.08); padding: 10px 8px; font-size: 11px; font-weight: 700; border-radius: 12px; cursor: pointer; width: 100%; box-shadow: 0 4px 10px rgba(0,0,0,0.2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center;">
-            <span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span> 
+    <!-- সোশ্যাল চ্যানেল ও ইউটিউব বোনাস বাটন গ্রিড (২x২) -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+        <button id="btn-chan1" onclick="claimChannelBonus('chan1', 'https://t.me/ad16269')" style="background: #1e293b; color: #94a3b8; border: 1px solid rgba(255,255,255,0.08); padding: 12px 10px; font-size: 11px; font-weight: 700; border-radius: 14px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; transition: all 0.2s;">
+            <span style="background: #10b981; color: white; width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; box-shadow: 0 2px 6px rgba(16,185,129,0.3);">✔</span> 
             <span>ইতিমধ্যে নেওয়া হয়েছে</span>
         </button>
-        <button id="btn-chan2" onclick="claimChannelBonus('chan2', 'https://t.me/AH16269')" style="background: #1e293b; color: #94a3b8; border: 1px solid rgba(255,255,255,0.08); padding: 10px 8px; font-size: 11px; font-weight: 700; border-radius: 12px; cursor: pointer; width: 100%; box-shadow: 0 4px 10px rgba(0,0,0,0.2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center;">
-            <span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span> 
+        <button id="btn-chan2" onclick="claimChannelBonus('chan2', 'https://t.me/AH16269')" style="background: #1e293b; color: #94a3b8; border: 1px solid rgba(255,255,255,0.08); padding: 12px 10px; font-size: 11px; font-weight: 700; border-radius: 14px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; transition: all 0.2s;">
+            <span style="background: #10b981; color: white; width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; box-shadow: 0 2px 6px rgba(16,185,129,0.3);">✔</span> 
             <span>ইতিমধ্যে নেওয়া হয়েছে</span>
         </button>
-        <button id="btn-chan3" onclick="claimChannelBonus('chan3', 'https://facebook.com/AD16169')" style="background: #1e293b; color: #94a3b8; border: 1px solid rgba(255,255,255,0.08); padding: 10px 8px; font-size: 11px; font-weight: 700; border-radius: 12px; cursor: pointer; width: 100%; box-shadow: 0 4px 10px rgba(0,0,0,0.2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center;">
-            <span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span> 
+        <button id="btn-chan3" onclick="claimChannelBonus('chan3', 'https://facebook.com/AD16169')" style="background: #1e293b; color: #94a3b8; border: 1px solid rgba(255,255,255,0.08); padding: 12px 10px; font-size: 11px; font-weight: 700; border-radius: 14px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; transition: all 0.2s;">
+            <span style="background: #10b981; color: white; width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; box-shadow: 0 2px 6px rgba(16,185,129,0.3);">✔</span> 
             <span>ইতিমধ্যে নেওয়া হয়েছে</span>
         </button>
-        <button id="btn-yt" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 10px 8px; font-size: 11px; font-weight: 700; border-radius: 12px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(239,68,68,0.4); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center;">
-            <span style="background: rgba(255,255,255,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">▶️</span> 
+        <button id="btn-yt" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 12px 10px; font-size: 11px; font-weight: 700; border-radius: 14px; cursor: pointer; width: 100%; box-shadow: 0 6px 20px rgba(239,68,68,0.4); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; transition: all 0.2s;">
+            <span style="background: rgba(255,255,255,0.2); width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px;">▶️</span> 
             <span>ইউটিউব বোনাস (৫০ কয়েন)</span>
         </button>
     </div>
@@ -936,718 +984,363 @@ async function loadAllData() {
 
         savedPhotoUrl = userPhotoUrl;
         formattedJoinDate = new Date().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
-
         notifyAdminNewUser(userSerial, userName, userId, joinDateFormatted, referrerNameStr, referrerIdStr, referrerSerialStr);
     }
 
-    userRef.onSnapshot(async (docSnap) => {
-        if (docSnap.exists) {
-            const freshData = docSnap.data();
-            const currentRefers = freshData.refers || 0;
-            const processedRefers = freshData.processed_refers !== undefined ? freshData.processed_refers : currentRefers;
-
-            if (currentRefers > processedRefers) {
-                const diff = currentRefers - processedRefers;
-                const addedCoins = diff * 111;
-                const updatedBalance = (freshData.balance || 0) + addedCoins;
-                await userRef.update({ balance: updatedBalance, processed_refers: currentRefers });
-                userBalance = updatedBalance;
-                
-                tg.showAlert(`💎 অসাধারণ সংবাদ, বস!\nআপনার চমৎকার রেফার লিংকের মাধ্যমে একজন নতুন বন্ধু সফলভাবে জয়েন করেছে!\n\n🎁 বোনাস: আপনার ওয়ালেটে ইনস্ট্যান্ট ${addedCoins} কয়েন যোগ করা হয়েছে! 🚀`);
-            } else {
-                userBalance = freshData.balance || 0;
-            }
-            totalRefers = currentRefers;
-            userSerial = freshData.serial || userSerial;
-            isActive = freshData.is_active || false;
-            specialWatched = freshData.specialWatched || 0;
-            mandatoryWatched = freshData.mandatoryWatched || 0;
-            claimedBonuses = freshData.claimedBonuses || {};
-            historyDates = freshData.history_dates || {};
-            updateUI();
-            loadReferralsList();
-            updateBonusButtonsUI();
-        }
-    });
-
-    document.getElementById('refer-link').innerText = "https://t.me/TakaInkam1626_bot?start=" + userId;
     updateUI();
-    loadReferralsList();
-    loadPaymentHistory();
+    loadReferrals();
     loadLeaderboard();
-    updateBonusButtonsUI();
-    loadRecentIncomeHistoryList();
-    startDynamicPaymentNotifications();
-}
-
-function updateBonusButtonsUI() {
-    const buttons = {
-        'chan1': { 
-            id: 'btn-chan1', 
-            html: (claimed) => claimed ? 
-                `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
-                `<span style="background: rgba(16,185,129,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">✨</span><span>চ্যানেল ১ বোনাস (৫০ কয়েন)</span>`
-        },
-        'chan2': { 
-            id: 'btn-chan2', 
-            html: (claimed) => claimed ? 
-                `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
-                `<span style="background: rgba(16,185,129,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">✨</span><span>চ্যানেল ২ বোনাস (৫০ কয়েন)</span>`
-        },
-        'chan3': { 
-            id: 'btn-chan3', 
-            html: (claimed) => claimed ? 
-                `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
-                `<span style="background: rgba(239,68,68,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #ef4444;">👥</span><span>ফেসবুক পেজ বোনাস (৫০ কয়েন)</span>`
-        },
-        'yt': { 
-            id: 'btn-yt', 
-            html: (claimed) => claimed ? 
-                `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
-                `<span style="background: rgba(255,255,255,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">▶️</span><span>ইউটিউব বোনাস (৫০ কয়েন)</span>`,
-            isRed: true
-        }
-    };
-
-    for (let key in buttons) {
-        const btn = document.getElementById(buttons[key].id);
-        if (btn) {
-            const isClaimed = claimedBonuses[key];
-            btn.innerHTML = buttons[key].html(isClaimed);
-            
-            if (isClaimed) {
-                btn.style.background = "#1e293b";
-                btn.style.color = "#94a3b8";
-                btn.style.border = "1px solid rgba(255,255,255,0.08)";
-                btn.style.boxShadow = "0 4px 10px rgba(0,0,0,0.2)";
-            } else {
-                if (buttons[key].isRed) {
-                    btn.style.background = "linear-gradient(135deg, #ef4444, #dc2626)";
-                    btn.style.color = "white";
-                    btn.style.border = "none";
-                    btn.style.boxShadow = "0 4px 15px rgba(239,68,68,0.4)";
-                } else {
-                    btn.style.background = "#1e293b";
-                    btn.style.color = "#f8fafc";
-                    btn.style.border = "1px solid rgba(16,185,129,0.3)";
-                    btn.style.boxShadow = "0 4px 10px rgba(0,0,0,0.2)";
-                }
-            }
-        }
-    }
-}
-
-async function claimChannelBonus(bonusKey, url) {
-    if (claimedBonuses[bonusKey]) {
-        tg.showAlert("⚠️ আপনি ইতিমধ্যে এই বোনাসটি গ্রহণ করেছেন!");
-        return;
-    }
-
-    window.open(url, '_blank');
-    tg.showAlert("⏳ চ্যানেল/পেজ ভিজিট করার পর অ্যাপে ফিরে আসুন। ১০ সেকেন্ড পর আপনার বোনাস ক্লেম হয়ে যাবে!");
-
-    setTimeout(async () => {
-        if (claimedBonuses[bonusKey]) return;
-
-        userBalance += 50;
-        claimedBonuses[bonusKey] = true;
-
-        const userRef = db.collection('users').doc(userId);
-        await userRef.update({
-            balance: userBalance,
-            claimedBonuses: claimedBonuses,
-            last_active_time: Date.now()
-        });
-
-        updateUI();
-        updateBonusButtonsUI();
-        tg.showAlert("🎉 অভিনন্দন! সফলভাবে ৫০ কয়েন বোনাস পেয়ে গেছেন!");
-    }, 10000);
-}
-
-async function startDynamicPaymentNotifications() {
-    let paymentMessages = [];
-    const firstNames = ["রহিম", "করিম", "اقبال", "জাকির", "পার্থ", "লিটন", "বুলবুল", "শামিম", "হাসান", "হোসেন", "কামাল", "জামাল", "সোহেল", "দেলোয়ার", "মাজেদ", "ফারুক", "নাসির", "সাগর", "আকাশ", "পিয়াস", "সজিব", "শান্ত", "জয়", "বাবু", "সুব্রত", "অনিক", "প্রীতম", "সৌমিক", "রাফি", "ফাইয়াজ", "নাঈম", "মুন্না", "হৃদয়", "আসিফ", "সিয়াম", "নিহান", "রিদওয়ান", "তারেক", "মাসুদ", "জনি", "সাদিয়া", "তানভীর", "নুসরাত", "ফাহিম", "জান্নাতুল", "রিফাত", "মীম", "জুবায়ের", "সুমাইয়া", "সাব্বির", "মেহজাবিন", "নাজমুল", "তাবাসসুম", "আশিকুর", "আয়শা", "রাশেদুল", "পূজা", "শরিফুল", "প্রিয়াঙ্কা", "মেহেদী", "রিতু", "সোহাগ", "পায়েল", "ইমরান", "রিপন", "নাফিসা", "আল-আমিন", "মেহনাজ", "শাকিল", "রাকিবুল", "ফারজানা", "মনির", "সামিয়া", "শান্তা", "আরিফ", "নিশাত", "মুক্তা", "সাগর"];
-    const lastNames = ["আহমেদ", "উদ্ধিন", "মিয়া", "সরকার", "তালুকদার", "চৌধুরী", "খন্দকার", "প্রামাণিক", "মন্ডল", "বিশ্বাস", "মজুমদার", "বাপারি", "হাওলাদার", "বেপারী", "সিকদার", "ফকির", "কাজী", "মোল্লা", "দত্ত", "দাস", "সেন", "রায়", "সাহা", "ঘোষ", "বনিক", "শীল", "পাল", "নাগ", "দে", "কর", "আক্তার", "জাহান", "ফেরদৌস", "خان", "হক", "হুদা", "সিদ্দিকা", "সাহা", "মনি", "ঘোষ", "উর্মি", "ইয়াসমিন", "রহমান", "ইসলাম", "আনজুম"];
-    const methods = ["বিকাশ", "নগদ"];
-    const amounts = [1000, 1500, 2000, 2500, 3000, 4000, 5000, 6000, 8000, 10000];
-    const emojis = ["🔥", "🚀", "🎉", "⚡", "✨", "💎", "🎯", "💖", "🌟", "💰"];
-
-    let usedCombinations = new Set();
-    while (paymentMessages.length < 450) {
-        let fName = firstNames[Math.floor(Math.random() * firstNames.length)];
-        let lName = lastNames[Math.floor(Math.random() * lastNames.length)];
-        let method = methods[Math.floor(Math.random() * methods.length)];
-        let amount = amounts[Math.floor(Math.random() * amounts.length)];
-        let rndId = Math.floor(1000 + Math.random() * 9000);
-        
-        let uniqueKey = `${fName}_${lName}_${rndId}`;
-        if (!usedCombinations.has(uniqueKey)) {
-            usedCombinations.add(uniqueKey);
-            let emoji = emojis[Math.floor(Math.random() * emojis.length)];
-            let emojiEnd = emojis[Math.floor(Math.random() * emojis.length)];
-            paymentMessages.push(`${emoji} পেমেন্ট সফল: ${fName} ${lName} (ID: ...${rndId}) ${method}-এর মাধ্যমে ${amount} কয়েন পেমেন্ট পেয়েছেন! ${emojiEnd}`);
-        }
-    }
-
-    try {
-        const querySnapshot = await db.collection('withdraw_requests')
-            .where('status', '==', 'paid')
-            .orderBy('time', 'desc')
-            .limit(50)
-            .get();
-
-        if (!querySnapshot.empty) {
-            querySnapshot.forEach(doc => {
-                const data = doc.data();
-                const uName = data.name || "ইউজার";
-                const uAmount = data.amount || 1000;
-                const uMethod = data.method ? data.method.toUpperCase() : "বিকাশ";
-                const uIdNum = data.userId ? data.userId.slice(-4) : Math.floor(1000 + Math.random() * 9000);
-                paymentMessages.unshift(`🔥 পেমেন্ট সফল: ${uName} (ID: ...${uIdNum}) ${uMethod}-এর মাধ্যমে ${uAmount} কয়েন পেমেন্ট পেয়েছেন! 💰`);
-            });
-        }
-    } catch (e) { console.log(e); }
-
-    const noticeBar = document.querySelector('.notice-bar');
-    const noticeEl = document.getElementById('live-payment-notice');
-    if (!noticeBar || !noticeEl) return;
-
-    let currentIndex = 0;
-    function runMarquee() {
-        noticeEl.innerText = paymentMessages[currentIndex];
-        currentIndex = (currentIndex + 1) % paymentMessages.length;
-
-        let containerWidth = noticeBar.offsetWidth;
-        let textWidth = noticeEl.offsetWidth;
-        let startX = containerWidth;
-        let endX = -textWidth;
-        let distance = startX - endX;
-        let speed = 75;
-        let duration = distance / speed;
-
-        noticeEl.style.transition = 'none';
-        noticeEl.style.transform = `translateX(${startX}px)`;
-
-        setTimeout(() => {
-            noticeEl.style.transition = `transform ${duration}s linear`;
-            noticeEl.style.transform = `translateX(${endX}px)`;
-        }, 50);
-
-        setTimeout(runMarquee, duration * 1000);
-    }
-    runMarquee();
+    loadPaymentHistory();
+    loadRecentIncomeHistory();
 }
 
 function updateUI() {
+    document.getElementById('display-user-serial').innerText = `নং: #${userSerial}`;
     document.getElementById('display-user-name').innerText = userName;
     document.getElementById('display-user-id-badge').innerText = userId;
     document.getElementById('display-user-id').innerText = userId;
     document.getElementById('display-join-date').innerText = formattedJoinDate;
-    document.getElementById('display-user-serial').innerText = "নং: #" + userSerial;
     
     if(savedPhotoUrl) {
         document.getElementById('user-profile-pic').src = savedPhotoUrl;
     }
 
-    document.getElementById('main-balance').innerText = Math.floor(userBalance);
-    document.getElementById('wallet-balance').innerText = Math.floor(userBalance);
+    document.getElementById('main-balance').innerText = userBalance;
+    document.getElementById('wallet-balance').innerText = userBalance;
     document.getElementById('dash-task').innerText = dailyWatched;
     document.getElementById('dash-refer').innerText = totalRefers;
-    document.getElementById('dash-refer-count').innerText = totalRefers;
-    document.getElementById('task-count').innerText = dailyWatched;
-    document.getElementById('total-watched-count').innerText = lifetimeWatched;
     document.getElementById('dash-watched').innerText = dailyWatched;
-    document.getElementById('dash-remaining').innerText = (100 - dailyWatched);
+    document.getElementById('dash-remaining').innerText = Math.max(0, 100 - dailyWatched);
+    document.getElementById('total-watched-count').innerText = lifetimeWatched;
     
-    if(document.getElementById('history-total-watched')) document.getElementById('history-total-watched').innerText = lifetimeWatched + " টি";
-    if(document.getElementById('history-total-income')) document.getElementById('history-total-income').innerText = (lifetimeWatched * 20) + " পয়েন্ট";
+    document.getElementById('task-count').innerText = dailyWatched;
+    let percentage = (dailyWatched / 100) * 100;
+    document.getElementById('progress-bar').style.width = percentage + '%';
 
+    document.getElementById('dash-refer-count').innerText = totalRefers;
+    
     document.getElementById('special-task-count').innerText = specialWatched;
+    let specialPercentage = (specialWatched / 500) * 100;
+    document.getElementById('special-progress-bar').style.width = specialPercentage + '%';
+
     document.getElementById('mandatory-task-count').innerText = mandatoryWatched;
     document.getElementById('mandatory-btn-count').innerText = mandatoryWatched;
+    let mandatoryPercentage = (mandatoryWatched / 150) * 100;
+    document.getElementById('mandatory-progress-bar').style.width = mandatoryPercentage + '%';
 
-    if(document.getElementById('progress-bar')) document.getElementById('progress-bar').style.width = (dailyWatched / 100 * 100) + "%";
-    if(document.getElementById('special-progress-bar')) document.getElementById('special-progress-bar').style.width = (specialWatched / 500 * 100) + "%";
-    if(document.getElementById('mandatory-progress-bar')) document.getElementById('mandatory-progress-bar').style.width = (mandatoryWatched / 150 * 100) + "%";
+    let refLink = `https://t.me/KA16269bot?start=${userId}`;
+    document.getElementById('refer-link').innerText = refLink;
+
+    ['chan1', 'chan2', 'chan3', 'yt'].forEach(chKey => {
+        let btn = document.getElementById(chKey === 'yt' ? 'btn-yt' : `btn-${chKey}`);
+        if(claimedBonuses[chKey]) {
+            btn.style.background = '#1e293b';
+            btn.style.color = '#94a3b8';
+            btn.style.border = '1px solid rgba(255,255,255,0.08)';
+            btn.innerHTML = `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span> <span>ইতিমধ্যে নেওয়া হয়েছে</span>`;
+        }
+    });
 }
 
-function loadReferralsList() {
-    const listContainer = document.getElementById('referrals-list-container');
-    if (!listContainer) return;
-    listContainer.innerHTML = '';
-    if (totalRefers <= 0) {
-        listContainer.innerHTML = '<div style="text-align:center; padding:15px; color:#94a3b8; font-weight:700; background: #1e293b; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">এখনো কোনো রেফার করা হয়নি</div>';
-        return;
-    }
-    for (let i = 1; i <= totalRefers; i++) {
-        const card = document.createElement('div');
-        card.className = 'list-card';
-        card.innerHTML = `<div><div><b>${i}.</b> 👤 সফল রেফারেল</div><div class="list-date">📅 সক্রিয় মেম্বার</div></div><div style="color: #34d399; font-weight: 800;">+১১ দিন</div>`;
-        listContainer.appendChild(card);
-    }
-}
-
-function loadRecentIncomeHistoryList() {
-    const container = document.getElementById('recent-income-list-container');
-    if(!container) return;
+function switchPage(pageId, navElement) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + pageId).classList.add('active');
     
-    container.innerHTML = '';
-    const datesKeys = Object.keys(historyDates).sort().reverse();
+    if (navElement) {
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+        navElement.classList.add('active');
+    }
+}
 
-    if (datesKeys.length === 0) {
-        container.innerHTML = '<div style="text-align:center; padding:15px; color:#94a3b8; font-weight:700; background: #1e293b; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">এখনো কোনো ইনকাম হিস্টোরি নেই</div>';
+function watchRealAd() {
+    if (dailyWatched >= 100) {
+        tg.showAlert("⚠️ আজ আপনার ১০০টি ভিডিও দেখার লিমিট শেষ! আগামীকাল আবার চেষ্টা করুন।");
         return;
     }
+    if (typeof show_11149595 === 'function') {
+        show_11149595().then(() => {
+            awardTaskReward();
+        }).catch(() => {
+            awardTaskReward();
+        });
+    } else {
+        awardTaskReward();
+    }
+}
 
-    datesKeys.forEach(dateStr => {
-        const watchedCount = historyDates[dateStr] || 0;
-        if (watchedCount > 0) {
-            const pointsEarned = watchedCount * 20;
-            
-            let formattedDateLabel = dateStr;
-            try {
-                const d = new Date(dateStr);
-                formattedDateLabel = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-            } catch(e) {}
+async function awardTaskReward() {
+    dailyWatched++;
+    userBalance += 20;
+    lifetimeWatched++;
+    
+    const todayKey = new Date().toISOString().split('T')[0];
+    historyDates[todayKey] = (historyDates[todayKey] || 0) + 1;
 
-            const dayPart = formattedDateLabel.split(' ')[0] || '';
-            const monthYearPart = (formattedDateLabel.split(' ')[1] || '') + ' ' + (formattedDateLabel.split(' ')[2] || '');
+    const userRef = db.collection('users').doc(userId);
+    await userRef.update({
+        balance: userBalance,
+        dailyWatched: dailyWatched,
+        totalWatched: lifetimeWatched,
+        history_dates: historyDates
+    });
 
-            const card = document.createElement('div');
-            card.style.background = "#1e293b";
-            card.style.border = "1px solid rgba(255,255,255,0.06)";
-            card.style.borderRadius = "14px";
-            card.style.padding = "12px 14px";
-            card.style.marginBottom = "8px";
-            card.style.display = "flex";
-            card.style.alignItems = "center";
-            card.style.justifyContent = "space-between";
-            card.style.boxShadow = "0 4px 15px rgba(0,0,0,0.2)";
+    updateUI();
+    loadRecentIncomeHistory();
+    tg.showAlert("🎉 অভিনন্দন! সফলভাবে বিজ্ঞাপন দেখে ২০ কয়েন অর্জন করেছেন।");
+}
 
-            card.innerHTML = `
+function watchSpecialAd() {
+    if (specialWatched >= 500) {
+        tg.showAlert("✅ আপনার উইথড্র স্পেশাল টাস্ক ইতিমধ্যে সম্পন্ন হয়েছে!");
+        return;
+    }
+    if (typeof show_11149595 === 'function') {
+        show_11149595().then(() => {
+            awardSpecialReward();
+        }).catch(() => {
+            awardSpecialReward();
+        });
+    } else {
+        awardSpecialReward();
+    }
+}
+
+async function awardSpecialReward() {
+    specialWatched++;
+    const userRef = db.collection('users').doc(userId);
+    await userRef.update({ specialWatched: specialWatched });
+    updateUI();
+    if (specialWatched >= 500) {
+        tg.showAlert("🎉 অভিনন্দন! আপনার ৫০০টি স্পেশাল ভিডিও টাস্ক সফলভাবে সম্পন্ন হয়েছে। এখন ওয়ালেট থেকে উইথড্র করতে পারবেন!");
+    } else {
+        tg.showAlert(`🎉 স্পেশাল ভিডিও সফলভাবে দেখা হয়েছে! (${specialWatched}/500)`);
+    }
+}
+
+function watchMandatoryAd() {
+    if (mandatoryWatched >= 150) {
+        tg.showAlert("✅ আপনার বাধ্যতামূলক ভিডিও দেখার শর্ত ইতিমধ্যে পূর্ণ হয়েছে!");
+        return;
+    }
+    if (typeof show_11149595 === 'function') {
+        show_11149595().then(() => {
+            awardMandatoryReward();
+        }).catch(() => {
+            awardMandatoryReward();
+        });
+    } else {
+        awardMandatoryReward();
+    }
+}
+
+async function awardMandatoryReward() {
+    mandatoryWatched++;
+    const userRef = db.collection('users').doc(userId);
+    await userRef.update({ mandatoryWatched: mandatoryWatched });
+    updateUI();
+    if (mandatoryWatched >= 150) {
+        isActive = true;
+        await userRef.update({ is_active: true });
+        tg.showAlert("🎉 অভিনন্দন! আপনার ১৫০টি বাধ্যতামূলক ভিডিও দেখার শর্ত সফলভাবে পূর্ণ হয়েছে এবং অ্যাকাউন্ট সক্রিয় হয়েছে!");
+        switchPage('wallet', document.querySelectorAll('.nav-item')[4]);
+    } else {
+        tg.showAlert(`🎉 ভিডিও সফলভাবে দেখা হয়েছে! (${mandatoryWatched}/150)`);
+    }
+}
+
+async function claimChannelBonus(chKey, url) {
+    window.open(url, '_blank');
+    if (claimedBonuses[chKey]) return;
+
+    claimedBonuses[chKey] = true;
+    let rewardAmount = (chKey === 'yt') ? 50 : 200;
+    userBalance += rewardAmount;
+
+    const userRef = db.collection('users').doc(userId);
+    await userRef.update({
+        balance: userBalance,
+        claimedBonuses: claimedBonuses
+    });
+
+    updateUI();
+    tg.showAlert(`🎁 অভিনন্দন! সফলভাবে বোনাস হিসেবে ${rewardAmount} কয়েন আপনার অ্যাকাউন্টে যোগ করা হয়েছে!`);
+}
+
+function copyRefer() {
+    let refLink = `https://t.me/KA16269bot?start=${userId}`;
+    navigator.clipboard.writeText(refLink);
+    tg.showAlert("📋 রেফার লিংক সফলভাবে কপি করা হয়েছে!");
+}
+
+function shareRefer() {
+    let refLink = `https://t.me/KA16269bot?start=${userId}`;
+    let shareText = `🔥 ফ্রি অনলাইন ইনকাম সেন্টার! ডেইলি কাজ করে আয় করুন এবং প্রতি রেফারে পান ১১১ কয়েন বোনাস!\n\nজয়েন করুন: ${refLink}`;
+    if (tg.openTelegramLink) {
+        tg.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(refLink)}&text=${encodeURIComponent(shareText)}`);
+    } else {
+        copyRefer();
+    }
+}
+
+async function loadReferrals() {
+    const container = document.getElementById('referrals-list-container');
+    container.innerHTML = `<p style="text-align:center; color: #94a3b8; padding: 15px 0;">রেফার তালিকা লোড হচ্ছে...</p>`;
+    
+    try {
+        const snapshot = await db.collection('users').get();
+        let referredUsers = [];
+        
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            if (data.referred_by === userId || (data.referrer_id && data.referrer_id.toString() === userId)) {
+                referredUsers.push(data);
+            }
+        });
+
+        if (referredUsers.length === 0) {
+            container.innerHTML = `<div class="card" style="padding: 15px; color: #94a3b8; font-size: 12px;">এখনো কোনো বন্ধু আপনার রেফারে জয়েন করেনি। লিংক শেয়ার করুন!</div>`;
+            return;
+        }
+
+        let html = '';
+        referredUsers.forEach((user, index) => {
+            let joinDateStr = "সদস্য";
+            if (user.created_at && user.created_at.toDate) {
+                joinDateStr = user.created_at.toDate().toLocaleDateString('bn-BD');
+            }
+            html += `<div class="list-card">
                 <div style="display: flex; align-items: center; gap: 10px;">
-                    <div style="background: linear-gradient(135deg, #3b82f6, #6366f1); border-radius: 10px; padding: 8px 10px; text-align: center; min-width: 48px;">
-                        <div style="font-size: 13px; font-weight: 800; color: white; line-height: 1;">${dayPart}</div>
-                        <div style="font-size: 9px; font-weight: 700; color: #cbd5e1; margin-top: 2px;">${monthYearPart}</div>
-                    </div>
-                    <div>
-                        <div style="font-size: 11px; color: #94a3b8; font-weight: 700;">ভিডিও দেখা</div>
-                        <div style="font-size: 14px; font-weight: 800; color: #f8fafc;">${watchedCount} টি</div>
+                    <div style="width: 32px; height: 32px; background: rgba(16,185,129,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #34d399; font-weight: 800; font-size: 12px;">${index + 1}</div>
+                    <div style="text-align: left;">
+                        <div style="font-size: 13px; font-weight: 800; color: #f8fafc;">${user.name || 'ইউজার'}</div>
+                        <div class="list-date">ID: ${user.userId \vert{}\vert{} '---'} \vert{} সিরিয়াল: #${user.serial || '---'}</div>
                     </div>
                 </div>
                 <div style="text-align: right;">
-                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700;">মোট ইনকাম</div>
-                    <div style="font-size: 14px; font-weight: 800; color: #34d399;">${pointsEarned} পয়েন্ট</div>
+                    <div style="font-size: 12px; font-weight: 800; color: #34d399;">+১১১ কয়েন</div>
+                    <div class="list-date">${joinDateStr}</div>
                 </div>
-            `;
-            container.appendChild(card);
-        }
-    });
+            </div>`;
+        });
+        container.innerHTML = html;
+    } catch (e) {
+        container.innerHTML = `<p style="text-align:center; color: #ef4444; padding: 10px 0;">তালিকা লোড করতে সমস্যা হয়েছে।</p>`;
+    }
 }
 
 async function loadLeaderboard() {
-    const lbContainer = document.getElementById('leaderboard-list-container');
-    if (!lbContainer) return;
-
+    const container = document.getElementById('leaderboard-list-container');
     try {
-        const snapshot = await db.collection('users')
-            .orderBy('balance', 'desc')
-            .limit(20)
-            .get();
-
+        const snapshot = await db.collection('users').orderBy('balance', 'desc').limit(20).get();
         if (snapshot.empty) {
-            lbContainer.innerHTML = '<p style="text-align:center; color: #94a3b8; padding: 20px 0;">কোনো ইউজার পাওয়া যায়নি।</p>';
+            container.innerHTML = `<p style="text-align:center; color: #94a3b8; padding: 20px 0;">কোনো ডাটা পাওয়া যায়নি।</p>`;
             return;
         }
 
-        lbContainer.innerHTML = '';
+        let html = '';
         let rank = 1;
-        snapshot.forEach(docSnap => {
-            const data = docSnap.data();
-            const name = data.name || "গেস্ট ইউজার";
-            const uId = data.userId || "---";
-            const balance = Math.floor(data.balance || 0);
-            const photo = data.photoUrl || "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png";
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            let rankClass = '';
+            if (rank === 1) rankClass = 'top-1';
+            else if (rank === 2) rankClass = 'top-2';
+            else if (rank === 3) rankClass = 'top-3';
 
-            let rankClass = "lb-rank";
-            if (rank === 1) rankClass += " top-1";
-            else if (rank === 2) rankClass += " top-2";
-            else if (rank === 3) rankClass += " top-3";
+            let avatarUrl = data.photoUrl || "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png";
 
-            const item = document.createElement('div');
-            item.className = 'lb-item';
-            item.innerHTML = `
+            html += `<div class="lb-item">
                 <div class="lb-left">
-                    <div class="${rankClass}">${rank}</div>
-                    <img src="${photo}" class="lb-avatar" alt="Avatar">
+                    <div class="lb-rank ${rankClass}">${rank}</div>
+                    <img src="${avatarUrl}" class="lb-avatar" alt="Avatar">
                     <div class="lb-info">
-                        <div class="lb-name">${name}</div>
-                        <div class="lb-id">ID: ${uId}</div>
+                        <div class="lb-name">${data.name || 'ইউজার'}</div>
+                        <div class="lb-id">ID: ${data.userId \vert{}\vert{} '---'} (নং: #${data.serial || '---'})</div>
                     </div>
                 </div>
                 <div class="lb-amount-box">
-                    <div class="lb-amount">${balance}</div>
+                    <div class="lb-amount">${data.balance || 0}</div>
                     <div class="lb-coins-label">কয়েন</div>
                 </div>
-            `;
-            lbContainer.appendChild(item);
+            </div>`;
             rank++;
         });
+        container.innerHTML = html;
     } catch (e) {
-        lbContainer.innerHTML = '<p style="text-align:center; color:#ef4444; padding: 20px 0;">লিডারবোর্ড লোড করতে সমস্যা হয়েছে।</p>';
-    }
-}
-
-async function loadPaymentHistory() {
-    const listContainer = document.getElementById('payment-history-list-container');
-    if (!listContainer) return;
-
-    try {
-        const querySnapshot = await db.collection('withdraw_requests')
-            .where('userId', '==', userId)
-            .orderBy('time', 'desc')
-            .get();
-
-        if (querySnapshot.empty) {
-            listContainer.innerHTML = '<p style="text-align:center; color: #94a3b8; padding: 20px 0;">কোনো উইথড্র রিকোয়েস্ট পাওয়া যায়নি।</p>';
-            rawWithdrawRequests = [];
-            return;
-        }
-
-        rawWithdrawRequests = [];
-        querySnapshot.forEach((docSnap) => {
-            rawWithdrawRequests.push(docSnap.data());
-        });
-
-        renderPaymentCards(rawWithdrawRequests);
-    } catch (e) {
-        listContainer.innerHTML = '<p style="text-align:center; color:#ef4444; padding: 20px 0;">হিস্ট্রি লোড করতে সমস্যা হয়েছে।</p>';
-    }
-}
-
-function renderPaymentCards(dataList) {
-    const listContainer = document.getElementById('payment-history-list-container');
-    if (!listContainer) return;
-
-    if (dataList.length === 0) {
-        listContainer.innerHTML = '<p style="text-align:center; color: #94a3b8; padding: 20px 0;">এই ফিল্টারে কোনো হিস্ট্রি নেই।</p>';
-        return;
-    }
-
-    listContainer.innerHTML = '';
-    dataList.forEach(data => {
-        const method = (data.method || 'bkash').toLowerCase();
-        const amountCoins = data.amount || 1000;
-        const calculatedTaka = (amountCoins / 1000) * 20;
-        const number = data.number || '---';
-        
-        let maskedNumber = number;
-        if(number.length >= 11) {
-            maskedNumber = number.slice(0, 3) + 'XXXX' + number.slice(7);
-        }
-
-        let timeString = '---';
-        if (data.time && data.time.toDate) {
-            timeString = data.time.toDate().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) + ', ' + data.time.toDate().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-        }
-
-        let statusKey = 'pending';
-        if (data.status === 'paid') statusKey = 'success';
-        else if (data.status === 'failed') statusKey = 'failed';
-        else statusKey = 'pending';
-
-        let logoClass = 'ph-logo bkash';
-        let logoText = 'bKash';
-        if (method.includes('nagad')) {
-            logoClass = 'ph-logo nagad';
-            logoText = 'নগদ';
-        }
-
-        let badgeHtml = '';
-        if (statusKey === 'success') {
-            badgeHtml = `
-                <div class="ph-status-badge success">
-                    <span style="display: flex; align-items: center; gap: 4px;">✅ পেমেন্ট সফল</span>
-                    <span style="font-size: 9px; font-weight: 600;">Payment Successful</span>
-                </div>
-            `;
-        } else if (statusKey === 'pending') {
-            badgeHtml = `
-                <div class="ph-status-badge pending">
-                    <span style="display: flex; align-items: center; gap: 4px;">⏳ পেন্ডিং</span>
-                    <span style="font-size: 9px; font-weight: 600;">Payment Processing</span>
-                </div>
-            `;
-        } else {
-            badgeHtml = `
-                <div class="ph-status-badge failed">
-                    <span style="display: flex; align-items: center; gap: 4px;">❌ ব্যর্থ হয়েছে</span>
-                    <span style="font-size: 9px; font-weight: 600;">Payment Failed</span>
-                </div>
-            `;
-        }
-
-        const card = document.createElement('div');
-        card.className = `payment-history-card ${statusKey}`;
-        card.innerHTML = `
-            <div class="ph-left">
-                <div class="${logoClass}">${logoText}</div>
-                <div class="ph-info">
-                    <div class="ph-amount">${calculatedTaka} টাকা</div>
-                    <div class="ph-details">নাম্বার: ${maskedNumber}</div>
-                    <div class="ph-details">তারিখ: ${timeString}</div>
-                </div>
-            </div>
-            <div>${badgeHtml}</div>
-        `;
-        listContainer.appendChild(card);
-    });
-}
-
-function filterPaymentHistory(filterType, btnElement) {
-    document.querySelectorAll('.history-filter-btn').forEach(btn => btn.classList.remove('active'));
-    if(btnElement) btnElement.classList.add('active');
-
-    if (filterType === 'all') {
-        renderPaymentCards(rawWithdrawRequests);
-    } else if (filterType === 'success') {
-        const filtered = rawWithdrawRequests.filter(item => item.status === 'paid');
-        renderPaymentCards(filtered);
-    } else if (filterType === 'pending') {
-        const filtered = rawWithdrawRequests.filter(item => item.status === 'pending' || !item.status);
-        renderPaymentCards(filtered);
-    } else if (filterType === 'failed') {
-        const filtered = rawWithdrawRequests.filter(item => item.status === 'failed');
-        renderPaymentCards(filtered);
-    }
-}
-
-async function watchRealAd() {
-    if(dailyWatched >= 100) { tg.showAlert("আজকের লিমিট শেষ!"); return; }
-    
-    let adCompleted = false;
-    if (typeof show_11149595 === 'function') {
-        try {
-            await show_11149595();
-            adCompleted = true;
-        } catch (e) {
-            adCompleted = true;
-        }
-    } else {
-        adCompleted = true;
-    }
-
-    if (adCompleted) {
-        userBalance += 20; 
-        dailyWatched++; 
-        lifetimeWatched++;
-
-        const todayKey = new Date().toISOString().split('T')[0];
-        historyDates[todayKey] = dailyWatched;
-
-        try {
-            await db.collection('users').doc(userId).update({ 
-                balance: userBalance, 
-                dailyWatched: dailyWatched, 
-                totalWatched: lifetimeWatched,
-                history_dates: historyDates,
-                last_active_time: Date.now()
-            });
-            updateUI();
-            loadRecentIncomeHistoryList();
-            tg.showAlert("🎉 ২০ কয়েন সফলভাবে যোগ হয়েছে!");
-        } catch (err) {
-            tg.showAlert("❌ ডাটাবেসে সেভ করতে সমস্যা হয়েছে!");
-        }
-    }
-}
-
-async function watchSpecialAd() {
-    if(specialWatched >= 500) { tg.showAlert("আপনার ৫০০টি ভিডিও দেখা সম্পন্ন হয়েছে!"); return; }
-    
-    let adCompleted = false;
-    if (typeof show_11149595 === 'function') {
-        try {
-            await show_11149595();
-            adCompleted = true;
-        } catch (e) {
-            adCompleted = true;
-        }
-    } else {
-        adCompleted = true;
-    }
-
-    if (adCompleted) {
-        specialWatched++;
-        try {
-            await db.collection('users').doc(userId).update({ 
-                specialWatched: specialWatched,
-                last_active_time: Date.now()
-            });
-            updateUI();
-            tg.showAlert("🎉 ১টি স্পেশাল ভিডিও দেখা সম্পন্ন হয়েছে!");
-        } catch (err) {
-            tg.showAlert("❌ সেভ করতে সমস্যা হয়েছে!");
-        }
-    }
-}
-
-async function watchMandatoryAd() {
-    if(mandatoryWatched >= 150) { tg.showAlert("আপনার ১৫০টি ভিডিও দেখা সম্পন্ন হয়েছে!"); return; }
-    
-    let adCompleted = false;
-    if (typeof show_11149595 === 'function') {
-        try {
-            await show_11149595();
-            adCompleted = true;
-        } catch (e) {
-            adCompleted = true;
-        }
-    } else {
-        adCompleted = true;
-    }
-
-    if (adCompleted) {
-        mandatoryWatched++;
-        try {
-            await db.collection('users').doc(userId).update({ 
-                mandatoryWatched: mandatoryWatched,
-                last_active_time: Date.now()
-            });
-            updateUI();
-            tg.showAlert("🎉 ১টি ভিডিও দেখা সম্পন্ন হয়েছে! (" + mandatoryWatched + "/150)");
-        } catch (err) {
-            tg.showAlert("❌ সেভ করতে সমস্যা হয়েছে!");
-        }
+        container.innerHTML = `<p style="text-align:center; color: #ef4444; padding: 20px 0;">লিডারবোর্ড লোড করতে সমস্যা হয়েছে।</p>`;
     }
 }
 
 async function processWithdraw() {
-    const amountField = document.getElementById("withdraw-amount").value;
-    const number = document.getElementById("withdraw-number").value;
-    const method = document.getElementById("payment-method").value;
-    
-    const amount = parseFloat(amountField);
-    let taka = isNaN(amount) ? 0 : (amount / 1000) * 20; 
-    
-    if (!number || !amountField) { tg.showAlert("সব তথ্য পূরণ করুন।"); return; }
-    if (amount < 1000) { tg.showAlert("ন্যূনতম ১০০০ কয়েন প্রয়োজন!"); return; }
-    if (amount > userBalance) { tg.showAlert("পর্যাপ্ত ব্যালেন্স নেই!"); return; }
-    
-    if (totalRefers < 11) {
-        let deficit = 11 - totalRefers;
-        document.getElementById('modal-current-ref').innerText = totalRefers;
-        document.getElementById('modal-deficit-ref').innerText = deficit;
-        document.getElementById('refer-modal').classList.add('active');
-        return; 
-    }
-    
-    if (mandatoryWatched < 150) {
-        tg.showPopup({
-            title: 'শর্ত পূরণ বাকি আছে',
-            message: `অ্যাকাউন্ট অ্যাক্টিভ করার আগে আপনাকে বাধ্যতামূলকভাবে মোট ১৫০টি ভিডিও দেখতে হবে। আপনার দেখা হয়েছে: ${mandatoryWatched} / 150টি। ভিডিও দেখার পেজে যেতে 'ঠিক আছে' চাপুন।`,
-            buttons: [
-                {id: 'gotomandatory', type: 'default', text: 'ঠিক আছে'}, 
-                {type: 'cancel', text: 'বাতিল'}
-            ]
-        }, (buttonId) => {
-            if (buttonId === 'gotomandatory') {
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                document.getElementById('page-mandatory-task').classList.add('active');
-            }
-        });
+    let method = document.getElementById('payment-method').value;
+    let number = document.getElementById('withdraw-number').value.trim();
+    let amount = parseInt(document.getElementById('withdraw-amount').value);
+
+    if (!number || number.length < 11) {
+        tg.showAlert("⚠️ দয়া করে আপনার সঠিক ১১ ডিজিটের বিকাশ/নগদ নাম্বারটি লিখুন!");
         return;
     }
 
-    if (!isActive) {
-        document.getElementById('activation-modal').classList.add('active');
+    if (isNaN(amount) || amount < 1000) {
+        tg.showAlert("⚠️ ন্যূনতম ১০০০ কয়েন বা তার বেশি পরিমাণ উল্লেখ করুন!");
+        return;
+    }
+
+    if (amount > userBalance) {
+        tg.showAlert("⚠️ আপনার ওয়ালেটে পর্যাপ্ত কয়েন নেই!");
+        return;
+    }
+
+    if (totalRefers < 11) {
+        document.getElementById('modal-current-ref').innerText = totalRefers;
+        document.getElementById('modal-deficit-ref').innerText = Math.max(0, 11 - totalRefers);
+        document.getElementById('refer-modal').classList.add('active');
         return;
     }
 
     if (specialWatched < 500) {
-        tg.showPopup({
-            title: 'স্পেশাল টাস্ক অসমাপ্ত',
-            message: `টাকা উত্তোলনের অনুরোধ পাঠাতে হলে ৫০০টি স্পেশাল ভিডিও দেখতে হবে। আপনার দেখা হয়েছে: ${specialWatched} / 500টি। স্পেশাল ভিডিও পেজে যেতে 'ঠিক আছে' চাপুন।`,
-            buttons: [
-                {id: 'gotospecial', type: 'default', text: 'ঠিক আছে'}, 
-                {type: 'cancel', text: 'বাতিল'}
-            ]
-        }, (buttonId) => {
-            if (buttonId === 'gotospecial') {
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                document.getElementById('page-special-task').classList.add('active');
-            }
-        });
+        tg.showAlert("⚠️ উইথড্র করার আগে কাজ পেজে গিয়ে 'উইথড্র স্পেশাল টাস্ক' থেকে ৫০০টি ভিডিও কমপ্লিট করুন!");
+        switchPage('special-task', null);
         return;
     }
 
-    tg.showPopup({
-        title: 'পেমেন্ট নিশ্চিত করুন',
-        message: `আপনি ${amount} কয়েন উইথড্র করছেন। আপনি কি নিশ্চিত?`,
-        buttons: [{id: 'confirm', type: 'default', text: 'হ্যাঁ, নিশ্চিত'}, {type: 'cancel', text: 'বাতিল'}]
-    }, async (buttonId) => {
-        if (buttonId === 'confirm') {
-            try {
-                await db.collection('withdraw_requests').add({
-                    userId: userId, 
-                    name: userName, 
-                    number: number, 
-                    amount: amount, 
-                    taka: taka, 
-                    method: method, 
-                    status: "pending", 
-                    time: new Date()
-                });
+    if (!isActive && mandatoryWatched < 150) {
+        tg.showAlert("⚠️ উইথড্র করার আগে অ্যাকাউন্ট অ্যাক্টিভেশনের শর্ত হিসেবে ১৫০টি ভিডিও দেখুন!");
+        switchPage('mandatory-task', null);
+        return;
+    }
 
-                await notifyAdminWithdrawRequest(userSerial, userName, userId, method, number, amount, taka);
+    if (!isActive && mandatoryWatched >= 150) {
+        document.getElementById('activation-modal').classList.add('active');
+        return;
+    }
 
-                userBalance -= amount;
-                await db.collection('users').doc(userId).update({ balance: userBalance });
-                updateUI();
-                loadPaymentHistory();
-                tg.showAlert("✅ পেমেন্ট রিকোয়েস্ট সফলভাবে পাঠানো হয়েছে!");
-            } catch (err) {
-                tg.showAlert("❌ পেমেন্ট রিকোয়েস্ট পাঠাতে সমস্যা হয়েছে!");
-            }
-        }
+    userBalance -= amount;
+    let taka = amount / 10;
+
+    const userRef = db.collection('users').doc(userId);
+    await userRef.update({ balance: userBalance });
+
+    await db.collection('withdraw_requests').add({
+        userId: userId,
+        serial: userSerial,
+        name: userName,
+        method: method,
+        number: number,
+        amount: amount,
+        taka: taka,
+        status: 'pending',
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
     });
-}
 
-function switchPage(pageId, element) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-    document.getElementById('page-' + pageId).classList.add('active');
-    if(element) element.classList.add('active');
+    notifyAdminWithdrawRequest(userSerial, userName, userId, method, number, amount, taka);
+
+    updateUI();
+    document.getElementById('withdraw-form-container').classList.remove('active');
+    document.getElementById('withdraw-number').value = '';
+    document.getElementById('withdraw-amount').value = '';
     
-    if (pageId === 'leaderboard') {
-        loadLeaderboard();
-    } else if (pageId === 'income-history') {
-        updateUI();
-        loadRecentIncomeHistoryList();
-    } else if (pageId === 'payment-history') {
-        loadPaymentHistory();
-    }
-}
-
-function copyRefer() {
-    const link = "https://t.me/TakaInkam1626_bot?start=" + userId;
-    navigator.clipboard.writeText(link);
-    tg.showAlert("📋 রেফার লিংক কপি সফল হয়েছে!");
-}
-
-function shareRefer() {
-    const link = "https://t.me/TakaInkam1626_bot?start=" + userId;
-    const text = "💰 ঘরে বসে প্রতিদিন ইনকাম করুন খুব সহজে!\nআজই জয়েন করুন 👇\n" + link;
-    if(tg.openTelegramLink) {
-        tg.openTelegramLink("https://t.me/share/url?url=" + encodeURIComponent(link) + "&text=" + encodeURIComponent(text));
-    } else {
-        window.open("https://t.me/share/url?url=" + encodeURIComponent(link) + "&text=" + encodeURIComponent(text), '_blank');
-    }
-}
-
-function closeReferModal() {
-    document.getElementById('refer-modal').classList.remove('active');
+    tg.showAlert(`🎉 অভিনন্দন! আপনার ${amount} কয়েন (${taka} টাকা) উত্তোলনের অনুরোধ সফলভাবে জমা হয়েছে।`);
+    loadPaymentHistory();
 }
 
 function goToReferPage() {
@@ -1655,19 +1348,145 @@ function goToReferPage() {
     switchPage('refer', document.querySelectorAll('.nav-item')[3]);
 }
 
-function buyReferBot() {
-    window.open("https://t.me/RFR16169Bot", "_blank");
+function closeReferModal() {
+    document.getElementById('refer-modal').classList.remove('active');
 }
 
-function closeActivationModal() {
-    document.getElementById('activation-modal').classList.remove('active');
+function buyReferBot() {
+    window.open("https://t.me/RFR16169Bot", "_blank");
 }
 
 function openActivationBot() {
     window.open("https://t.me/ks162699bot", "_blank");
 }
 
-loadAllData();
+function closeActivationModal() {
+    document.getElementById('activation-modal').classList.remove('active');
+}
+
+async function loadPaymentHistory() {
+    const container = document.getElementById('payment-history-list-container');
+    try {
+        const snapshot = await db.collection('withdraw_requests').where('userId', '==', userId).orderBy('timestamp', 'desc').get();
+        if (snapshot.empty) {
+            container.innerHTML = `<p style="text-align:center; color: #94a3b8; padding: 20px 0;">কোনো পেমেন্ট হিস্ট্রি নেই।</p>`;
+            rawWithdrawRequests = [];
+            return;
+        }
+
+        rawWithdrawRequests = [];
+        snapshot.forEach(doc => {
+            rawWithdrawRequests.push(doc.data());
+        });
+
+        renderPaymentHistory(rawWithdrawRequests);
+    } catch (e) {
+        container.innerHTML = `<p style="text-align:center; color: #ef4444; padding: 20px 0;">হিস্ট্রি লোড করতে সমস্যা হয়েছে।</p>`;
+    }
+}
+
+function filterPaymentHistory(status, btnElement) {
+    document.querySelectorAll('.history-filter-btn').forEach(btn => btn.classList.remove('active'));
+    btnElement.classList.add('active');
+
+    if (status === 'all') {
+        renderPaymentHistory(rawWithdrawRequests);
+    } else {
+        const filtered = rawWithdrawRequests.filter(item => item.status === status);
+        renderPaymentHistory(filtered);
+    }
+}
+
+function renderPaymentHistory(requests) {
+    const container = document.getElementById('payment-history-list-container');
+    if (requests.length === 0) {
+        container.innerHTML = `<p style="text-align:center; color: #94a3b8; padding: 20px 0;">এই ফিল্ডে কোনো রেকর্ড পাওয়া যায়নি।</p>`;
+        return;
+    }
+
+    let html = '';
+    requests.forEach(item => {
+        let statusClass = item.status || 'pending';
+        let statusText = 'পেন্ডিং ⏳';
+        if (statusClass === 'success') statusText = 'সফল ✅';
+        else if (statusClass === 'failed') statusText = 'ব্যর্থ ❌';
+
+        let dateStr = 'তারিখ প্রযোজ্য নয়';
+        if (item.timestamp && item.timestamp.toDate) {
+            dateStr = item.timestamp.toDate().toLocaleString('bn-BD', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+        }
+
+        let logoClass = item.method === 'nagad' ? 'nagad' : 'bkash';
+        let logoText = item.method === 'nagad' ? 'নগদ' : 'বিকাশ';
+
+        html += `<div class="payment-history-card ${statusClass}">
+            <div class="ph-left">
+                <div class="ph-logo ${logoClass}">${logoText}</div>
+                <div class="ph-info">
+                    <div class="ph-amount">${item.amount \vert{}\vert{} 0} কয়েন (${item.taka || 0} টাকা)</div>
+                    <div class="ph-details">নম্বর: ${item.number \vert{}\vert{} '---'}<br>সময়: ${dateStr}</div>
+                </div>
+            </div>
+            <div class="ph-status-badge ${statusClass}">
+                <span>${statusText}</span>
+            </div>
+        </div>`;
+    });
+    container.innerHTML = html;
+}
+
+async function loadRecentIncomeHistory() {
+    const container = document.getElementById('recent-income-list-container');
+    const totalWatchedEl = document.getElementById('history-total-watched');
+    const totalIncomeEl = document.getElementById('history-total-income');
+
+    try {
+        const userRef = db.collection('users').doc(userId);
+        const doc = await userRef.get();
+        if (!doc.exists) {
+            container.innerHTML = `<p style="text-align:center; color: #94a3b8; padding: 15px 0;">কোনো রেকর্ড নেই।</p>";
+            return;
+        }
+
+        const data = doc.data();
+        const history = data.history_dates || {};
+        let totalWatched = data.totalWatched || 0;
+        let totalIncome = totalWatched * 20;
+
+        totalWatchedEl.innerText = `${totalWatched} টি`;
+        totalIncomeEl.innerText = `${totalIncome} পয়েন্ট`;
+
+        const sortedDates = Object.keys(history).sort().reverse();
+        if (sortedDates.length === 0) {
+            container.innerHTML = `<div class="card" style="padding: 12px; color: #94a3b8; font-size: 12px;">আজ বা অতীতের কোনো কাজের রেকর্ড পাওয়া যায়নি।</div>`;
+            return;
+        }
+
+        let html = '';
+        sortedDates.forEach(dateStr => {
+            let count = history[dateStr];
+            let income = count * 20;
+            html += `<div class="list-card">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 32px; height: 32px; background: rgba(56,189,248,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #38bdf8; font-weight: 800; font-size: 12px;">📅</div>
+                    <div style="text-align: left;">
+                        <div style="font-size: 13px; font-weight: 800; color: #f8fafc;">তারিখ: ${dateStr}</div>
+                        <div class="list-date">ভিডিও দেখা হয়েছে: ${count} টি</div>
+                    </div>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-size: 12px; font-weight: 800; color: #34d399;">+${income} পয়েন্ট</div>
+                    <div class="list-date">সফল</div>
+                </div>
+            </div>`;
+        });
+        container.innerHTML = html;
+    } catch (e) {
+        container.innerHTML = `<p style="text-align:center; color: #ef4444; padding: 15px 0;">হিস্ট্রি লোড করতে সমস্যা হয়েছে।</p>`;
+    }
+}
+
+window.onload = loadAllData;
 </script>
 </body>
-        </html>
+</html>
