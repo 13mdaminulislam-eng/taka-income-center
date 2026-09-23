@@ -89,7 +89,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .quick-amount-btn { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399; padding: 8px 4px; font-size: 12px; font-weight: 700; border-radius: 8px; cursor: pointer; text-align: center; transition: all 0.2s; }
 .quick-amount-btn:active { background: #10b981; color: white; transform: scale(0.95); }
 
-/* টপ-আপ স্টাইলের লাইভ পেমেন্ট ও অর্ডার লিস্ট কার্ড ডিজাইন */
+/* লাইভ ক্যাশআউট ও পেমেন্ট অর্ডার কার্ড ডিজাইন */
 .topup-order-card { background: #1e293b; border-radius: 16px; padding: 12px 14px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s ease; }
 .topup-order-left { display: flex; align-items: center; gap: 12px; }
 .topup-user-avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid #10b981; background: #0f172a; }
@@ -146,7 +146,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .btn-act-cancel { background: rgba(255,255,255,0.08); color: #94a3b8; border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 10px; width: 80px; font-weight: 700; font-size: 13px; cursor: pointer; }
 .btn-act-contact:active, .btn-act-cancel:active { transform: scale(0.98); }
 
-/* টপ-আপ স্টাইলের পেমেন্ট রিভিউ মডাল */
+/* পেমেন্ট রিভিউ মডাল ডিজাইন */
 .payment-review-modal-box { 
     background: linear-gradient(145deg, #182235, #0d1322); 
     border: 2px solid; 
@@ -517,7 +517,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <button class="btn-action btn-success" style="margin-top: 10px; padding: 12px; border-radius: 12px; font-size: 14px;" onclick="processWithdraw()">🚀 পেমেন্ট অনুরোধ পাঠান</button>
     </div>
 
-    <!-- টপ-আপ স্টাইলের পেমেন্ট রিভিউ বাটন -->
+    <!-- পেমেন্ট রিভিউ বাটন -->
     <a href="#" class="wallet-menu-card" onclick="openPaymentReviewModal()">
         <div class="wallet-menu-left">
             <div class="wallet-menu-icon" style="background: rgba(56,189,248,0.1); border-color: rgba(56,189,248,0.2); color: #38bdf8;">💳</div>
@@ -585,14 +585,14 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </a>
 </div>
 
-<!-- টপ-আপ স্টাইলের লাইভ পেমেন্ট রিভিউ মডাল -->
+<!-- পেমেন্ট রিভিউ মডাল -->
 <div id="payment-review-modal" class="custom-modal-overlay">
     <div class="payment-review-modal-box">
         <div class="payment-review-main-title">💰 「ডেইলি টাস্ক ইনকাম সেন্টার」 💰</div>
-        <div class="payment-review-sub-title">✨ লাইভ পেমেন্ট ও অর্ডার লিস্ট • প্রতিদিনের আপডেট</div>
+        <div class="payment-review-sub-title">✨ লাইভ পেমেন্ট ও ক্যাশআউট লিস্ট • প্রতিদিনের আপডেট</div>
         
         <div class="live-feed-box-container" id="live-payment-feed-container">
-            <!-- ডায়নামিক টপ-আপ স্টাইল কার্ড এখানে লোড হবে -->
+            <!-- ডায়নামিক ক্যাশআউট স্টাইল কার্ড এখানে লোড হবে -->
         </div>
 
         <button class="btn-action btn-success" style="padding: 10px; border-radius: 12px; font-size: 13px; margin-top: 4px;" onclick="closePaymentReviewModal()">বন্ধ করুন</button>
@@ -696,54 +696,60 @@ let claimedBonuses = {};
 let historyDates = {};
 let rawWithdrawRequests = [];
 
-const masterTopUpStylePool = [
-    { name: "AR RIFAT AR RIFAT", desc: "WEEKLY - ৳১৫৮", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
-    { name: "Nur Khan", desc: "1X Weekly Lite - ৳৪৫", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
-    { name: "apon 123", desc: "MONTHLY - ৳৭৯০", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
-    { name: "Sourav Das", desc: "1X Weekly Lite - ৳৪৫", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
-    { name: "MD Shopon Khan", desc: "115 Diamond - ৳৭৯", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
-    { name: "Gaming Touhid", desc: "WEEKLY - ৳১৫৮", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
-    { name: "Bijoy Ahmed", desc: "100 Diamond - ৳১৩০", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
-    { name: "VOICE OF ISLAM", desc: "115 Diamond - ৳৭৯", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
-    { name: "Pakhi hasan", desc: "2X Weekly Lite - ৳৯০", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
-    { name: "Nazmul Islam", desc: "বিকাশ ক্যাশআউট - ৳৮০০", status: "Pending", type: "pending", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
-    { name: "Tanvir Hasan", desc: "রকেট ক্যাশআউট - ৳৩,০০০", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
-    { name: "Sakib Al Hasan", desc: "নগদ ক্যাশআউট - ৳১,২০০", status: "Pending", type: "pending", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
-    { name: "Rakib Hossain", desc: "WEEKLY - ৳১৫৮", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
-    { name: "Fahim Muntasir", desc: "115 Diamond - ৳৭৯", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" }
+const masterCashoutStylePool = [
+    { name: "রিফাত আহমেদ", desc: "বিকাশ ক্যাশআউট - ৳১,৫০০", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "নাজমুল ইসলাম", desc: "নগদ ক্যাশআউট - ৳৮০০", status: "Pending", type: "pending", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "তানভীর হাসান", desc: "রকেট ক্যাশআউট - ৳৩,০০০", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "সাকিব আল হাসান", desc: "বিকাশ ক্যাশআউট - ৳১,২০০", status: "Pending", type: "pending", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "রাকিব হোসেন", desc: "নগদ ক্যাশআউট - ৳৫,০০০", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "ফাহিম মুনতাসির", desc: "রকেট ক্যাশআউট - ৳৭৫০", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "ইমরান খান", desc: "বিকাশ ক্যাশআউট - ৳২,৫০০", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "জুবায়ের আহমেদ", desc: "নগদ ক্যাশআউট - ৳১,৮০০", status: "Pending", type: "pending", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "সাদিয়া আক্তার", desc: "রকেট ক্যাশআউট - ৳২,২০০", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "মেহেদী হাসান", desc: "বিকাশ ক্যাশআউট - ৳৪,৫০০", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "সাব্বির রহমান", desc: "নগদ ক্যাশআউট - ৳১,১০০", status: "Pending", type: "pending", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "আশিকুর রহমান", desc: "রকেট ক্যাশআউট - ৳৩,৫০০", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" }
 ];
 
-function getDailyUniqueTopUpPool() {
+function getDailyUniqueCashoutPool() {
     const todayDateStr = new Date().toISOString().split('T')[0];
-    const savedData = localStorage.getItem('daily_topup_pool_data');
+    const savedData = localStorage.getItem('daily_cashout_pool_data');
     
     let poolData = savedData ? JSON.parse(savedData) : null;
     
     if (!poolData || poolData.date !== todayDateStr) {
-        let shuffled = [...masterTopUpStylePool].sort(() => 0.5 - Math.random());
+        let shuffled = [...masterCashoutStylePool].sort(() => 0.5 - Math.random());
         poolData = {
             date: todayDateStr,
             items: shuffled
         };
-        localStorage.setItem('daily_topup_pool_data', JSON.stringify(poolData));
+        localStorage.setItem('daily_cashout_pool_data', JSON.stringify(poolData));
     }
     return poolData.items;
 }
 
 function openPaymentReviewModal() {
     document.getElementById('payment-review-modal').classList.add('active');
-    renderTopUpStyleList();
+    renderCashoutStyleList();
 }
 
 function closePaymentReviewModal() {
     document.getElementById('payment-review-modal').classList.remove('active');
 }
 
-function renderTopUpStyleList() {
+function renderCashoutStyleList() {
     const container = document.getElementById('live-payment-feed-container');
     if (!container) return;
 
-    const items = getDailyUniqueTopUpPool();
+    let items = getDailyUniqueCashoutPool();
+    
+    // সফল পেমেন্ট (Done) গুলো উপরে এবং পেন্ডিং (Pending) গুলো নিচে সাজিয়ে দেওয়া
+    items.sort((a, b) => {
+        if (a.status === 'Done' && b.status !== 'Done') return -1;
+        if (a.status !== 'Done' && b.status === 'Done') return 1;
+        return 0;
+    });
+
     container.innerHTML = '';
 
     items.forEach(item => {
