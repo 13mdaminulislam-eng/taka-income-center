@@ -108,7 +108,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .ph-logo { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
 .ph-logo.bkash { background: #e11d48; color: white; border: 1px solid rgba(255,255,255,0.2); }
 .ph-logo.nagad { background: #ea580c; color: white; border: 1px solid rgba(255,255,255,0.2); }
-.ph-logo.rocket { background: #8b5cf6; color: white; border: 1px solid rgba(255,255,255,0.2); }
 
 .ph-info { text-align: left; }
 .ph-amount { font-size: 18px; font-weight: 800; color: #f8fafc; margin-bottom: 2px; }
@@ -212,7 +211,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     height: 3.5px;
     background: linear-gradient(90deg, #38bdf8, #10b981, #f59e0b, #ef4444);
 }
-.feed-user-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.feed-user-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
 .feed-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid #38bdf8; background: #0f172a; }
 .feed-user { font-weight: 800; color: #38bdf8; font-size: 15px; text-shadow: 0 2px 5px rgba(56,189,248,0.3); }
 .feed-details { color: #cbd5e1; font-size: 12px; font-weight: 600; line-height: 1.5; text-align: center; }
@@ -521,10 +520,9 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <select class="input-field" id="payment-method">
             <option value="bkash">বিকাশ (bKash)</option>
             <option value="nagad">নগদ (Nagad)</option>
-            <option value="rocket">রকেট (Rocket)</option>
         </select>
 
-        <label class="wallet-label">আপনার বিকাশ/নগদ/রকেট নাম্বার:</label>
+        <label class="wallet-label">আপনার বিকাশ/নগদ নাম্বার:</label>
         <input type="number" class="input-field" id="withdraw-number" placeholder="০১৭xxxxxxxx">
 
         <label class="wallet-label">উত্তোলন করার কয়েনের পরিমাণ:</label>
@@ -676,7 +674,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             🎥 <b>বিজ্ঞাপন টাস্ক:</b> প্রতি বিজ্ঞাপনে <b>৳২০</b><br>
             📊 <b>দৈনিক সুযোগ:</b> প্রতিদিন সর্বোচ্চ <b>১০০টি বিজ্ঞাপন</b><br>
             🆓 সম্পূর্ণ ফ্রিতে কাজ করার সুযোগ<br><br>
-            💳 <b>পেমেন্ট মাধ্যম:</b> বিকাশ, নগদ, রকেট<br>
+            💳 <b>পেমেন্ট মাধ্যম:</b> বিকাশ, নগদ<br>
             🤝 <b>আমাদের লক্ষ্য:</b> সঠিক সময়ে পেমেন্ট প্রদান করা।
         </div>
         
@@ -719,50 +717,48 @@ let claimedBonuses = {};
 let historyDates = {};
 let rawWithdrawRequests = [];
 
-// সম্পূর্ণ নতুন মেয়েদের নাম এবং বিভিন্ন ডেমো ছবিযুক্ত মাস্টার পেমেন্ট রিভিউ পুল
+// সম্পূর্ণ নতুন মেয়েদের নাম, ছবি, রেন্ডম আইডি ও সিরিয়াল নাম্বার যুক্ত মাস্টার পুল (রকেট বাদ দিয়ে শুধু বিকাশ ও নগদ)
 const masterPaymentReviewPool = [
-    { name: "সাদিয়া আক্তার", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ১,৫০০ টাকা", method: "বিকাশ" },
-    { name: "নুসরাত জাহান", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৮০০ টাকা", method: "নগদ" },
-    { name: "জান্নাতুল ফেরদৌস", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150", amount: "৳ ৩,০০০ টাকা", method: "রকেট" },
-    { name: "মেহজাবিন চৌধুরী", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150", amount: "৳ ১,২০০ টাকা", method: "বিকাশ" },
-    { name: "তাবাসসুম মীম", avatar: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=150", amount: "৳ ৫,০০০ টাকা", method: "নগদ" },
-    { name: "আয়শা সিদ্দিকা", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150", amount: "৳ ৭৫০ টাকা", method: "রকেট" },
-    { name: "পূজা সেন", avatar: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=150", amount: "৳ ২,৫০০ টাকা", method: "নগদ" },
-    { name: "প্রিয়াঙ্কা রায়", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150", amount: "৳ ১,৮০০ টাকা", method: "বিকাশ" },
-    { name: "রিতু মনি", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150", amount: "৳ ২,২০০ টাকা", method: "রকেট" },
-    { name: "পায়েল ঘোষ", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৪,৫০০ টাকা", method: "বিকাশ" },
-    { name: "নাফিসা তাবাসসুম", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150", amount: "৳ ১,১০০ টাকা", method: "নগদ" },
-    { name: "মেহনাজ উর্মি", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150", amount: "৳ ৩,৫০০ টাকা", method: "রকেট" },
-    { name: "ফারজানা ইয়াসমিন", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ৯৫০ টাকা", method: "বিকাশ" },
-    { name: "সামিয়া রহমান", avatar: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=150", amount: "৳ ৪,০০০ টাকা", method: "নগদ" },
-    { name: "শান্তা ইসলাম", avatar: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=150", amount: "৳ ১,২৫০ টাকা", method: "রকেট" },
-    { name: "নিশাত আনজুম", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150", amount: "৳ ২,৮০০ টাকা", method: "বিকাশ" },
-    { name: "মুক্তা মনি", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৩,২০০ টাকা", method: "নগদ" },
-    { name: "সুবর্ণা আক্তার", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150", amount: "৳ ১,৬০০ টাকা", method: "রকেট" },
-    { name: "তানিয়া খাতুন", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150", amount: "৳ ২,১০০ টাকা", method: "বিকাশ" },
-    { name: "রোকেয়া বেগম", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ১,৯০০ টাকা", method: "নগদ" }
+    { name: "সাদিয়া আক্তার", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ১,৫০০ টাকা", method: "বিকাশ", serial: "#১৬১", telegramId: "...৬৬১৮" },
+    { name: "নুসরাত জাহান", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৮০০ টাকা", method: "নগদ", serial: "#১৫২", telegramId: "...৫২৪১" },
+    { name: "জান্নাতুল ফেরদৌস", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150", amount: "৳ ৩,০০০ টাকা", method: "বিকাশ", serial: "#১৮৩", telegramId: "...৯৮৭৫" },
+    { name: "মেহজাবিন চৌধুরী", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150", amount: "৳ ১,২০০ টাকা", method: "নগদ", serial: "#১৯৪", telegramId: "...৩১২০" },
+    { name: "তাবাসসুম মীম", avatar: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=150", amount: "৳ ৫,০০০ টাকা", method: "বিকাশ", serial: "#২০৫", telegramId: "...৭৬৫৪" },
+    { name: "আয়শা সিদ্দিকা", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150", amount: "৳ ৭৫০ টাকা", method: "নগদ", serial: "#২১৬", telegramId: "...৪০৮৯" },
+    { name: "পূজা সেন", avatar: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=150", amount: "৳ ২,৫০০ টাকা", method: "বিকাশ", serial: "#২২৭", telegramId: "...৫৫১২" },
+    { name: "প্রিয়াঙ্কা রায়", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150", amount: "৳ ১,৮০০ টাকা", method: "নগদ", serial: "#২৩৮", telegramId: "...১৯৩৩" },
+    { name: "রিতু মনি", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150", amount: "৳ ২,২০০ টাকা", method: "বিকাশ", serial: "#২৪৯", telegramId: "...৮৪৪৫" },
+    { name: "পায়েল ঘোষ", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৪,৫০০ টাকা", method: "নগদ", serial: "#২৫০", telegramId: "...৩৭৮৯" },
+    { name: "নাফিসা তাবাসসুম", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150", amount: "৳ ১,১০০ টাকা", method: "বিকাশ", serial: "#২৬১", telegramId: "...৪৯২০" },
+    { name: "মেহনাজ উর্মি", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150", amount: "৳ ৩,৫০০ টাকা", method: "নগদ", serial: "#২৭২", telegramId: "...৬১৫৩" },
+    { name: "ফারজানা ইয়াসমিন", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ৯৫০ টাকা", method: "বিকাশ", serial: "#২৮৩", telegramId: "...৭২৮৪" },
+    { name: "সামিয়া রহমান", avatar: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=150", amount: "৳ ৪,০০০ টাকা", method: "নগদ", serial: "#২৯৪", telegramId: "...৮৩৯১" },
+    { name: "শান্তা ইসলাম", avatar: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=150", amount: "৳ ১,২৫০ টাকা", method: "বিকাশ", serial: "#৩০৫", telegramId: "...৯৫০২" },
+    { name: "নিশাত আনজুম", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150", amount: "৳ ২,৮০০ টাকা", method: "নগদ", serial: "#৩১৬", telegramId: "...১০১৫" },
+    { name: "মুক্তা মনি", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৩,২০০ টাকা", method: "বিকাশ", serial: "#৩২৭", telegramId: "...২০২৬" },
+    { name: "সুবর্ণা আক্তার", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150", amount: "৳ ১,৬০০ টাকা", method: "নগদ", serial: "#৩৩৮", telegramId: "...৩০৩৭" },
+    { name: "তানিয়া খাতুন", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150", amount: "৳ ২,১০০ টাকা", method: "বিকাশ", serial: "#৩৪৯", telegramId: "...৪০৪৮" },
+    { name: "রোকেয়া বেগম", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ১,৯০০ টাকা", method: "নগদ", serial: "#৩৫ কাজেই", telegramId: "...৫০৫৯" }
 ];
 
 let reviewInterval = null;
 
-// প্রতিদিন নতুন ইউনিক পুল জেনারেট করার লজিক (যাতে প্রতিদিন সম্পূর্ণ নতুন নাম ও ছবি দেখায় এবং আগের দিনগুলোর সাথে রিপিট না হয়)
+// প্রতিদিন নতুন ইউনিক পুল এবং একবার দেখানো নামগুলো লোকালস্টোরেজে সেভ করার লজিক (যাতে একই নাম বারবার বা পরবর্তী দিনে আর না দেখায়)
 function getDailyUniqueReviewPool() {
     const todayDateStr = new Date().toISOString().split('T')[0];
-    const savedData = localStorage.getItem('daily_review_pool_data_girls');
+    const savedData = localStorage.getItem('daily_review_pool_data_unique_girls');
     
     let poolData = savedData ? JSON.parse(savedData) : null;
     
-    // যদি তারিখ পরিবর্তিত হয় বা ডাটা না থাকে, তবে সম্পূর্ণ নতুন সেট সিলেক্ট হবে
+    // তারিখ পরিবর্তন হলে নতুন পুল সেট হবে
     if (!poolData || poolData.date !== todayDateStr) {
         let shuffled = [...masterPaymentReviewPool].sort(() => 0.5 - Math.random());
-        let selectedToday = shuffled.slice(0, 10); // প্রতিদিন ১০টি করে নতুন নাম
-        
         poolData = {
             date: todayDateStr,
-            available: selectedToday,
+            available: shuffled,
             shown: []
         };
-        localStorage.setItem('daily_review_pool_data_girls', JSON.stringify(poolData));
+        localStorage.setItem('daily_review_pool_data_unique_girls', JSON.stringify(poolData));
     }
     return poolData;
 }
@@ -789,17 +785,18 @@ function showNextReviewPayment() {
 
     let poolData = getDailyUniqueReviewPool();
 
+    // যদি আজকের সব নাম দেখানো শেষ হয়ে যায়, তবে আর দেখাবে না বা খালি মেসেজ দিবে
     if (poolData.available.length === 0) {
-        poolData.available = [...poolData.shown];
-        poolData.shown = [];
+        container.innerHTML = `<div class="feed-details" style="color: #94a3b8;">আজকের সকল পেমেন্ট রিভিউ দেখানো সম্পন্ন হয়েছে!</div>`;
+        return;
     }
 
+    // একটি নাম র‍্যান্ডমলি নিয়ে available থেকে চিরতরে রিমুভ (splice) করে shown এ দেওয়া হচ্ছে, ফলে এটি আর রিপিট হবে না
     const randomIndex = Math.floor(Math.random() * poolData.available.length);
     const record = poolData.available.splice(randomIndex, 1)[0];
     poolData.shown.push(record);
     
-    const todayDateStr = new Date().toISOString().split('T')[0];
-    localStorage.setItem('daily_review_pool_data_girls', JSON.stringify(poolData));
+    localStorage.setItem('daily_review_pool_data_unique_girls', JSON.stringify(poolData));
 
     const now = new Date();
     const dateFormatted = now.toLocaleDateString('bn-BD', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -810,17 +807,17 @@ function showNextReviewPayment() {
     container.offsetHeight; 
     container.style.animation = 'fadeInModal 0.4s ease-in-out';
 
-    // ইউজার আইডি বা সিরিয়াল নম্বর সম্পূর্ণ বাদ দিয়ে শুধু ছবি, নাম, মাধ্যম, টাকার পরিমাণ এবং সময় দেখানো হচ্ছে
+    // ছবি, নাম, আইডি, সিরিয়াল নাম্বার এবং পেমেন্ট ডিটেইলস সহ সুন্দর ডিজাইন
     container.innerHTML = `
         <div class="feed-user-row">
             <img src="${record.avatar}" class="feed-avatar" alt="Avatar">
-            <div class="feed-user">${record.name}</div>
+            <div class="feed-user">${record.name} (ID: ${record.telegramId})</div>
         </div>
         <div class="feed-details">
-            মাধ্যম: <span style="color:#f38ba8;">${record.method}</span><br>
+            অ্যাকাউন্ট: <span style="color:#f38ba8;">${record.serial}</span> | মাধ্যম: <span style="color:#38bdf8;">${record.method}</span><br>
             পেমেন্ট সফল: <span class="feed-amount">${record.amount}</span>
         </div>
-        <div style="font-size: 10px; color: #38bdf8; margin-top: 6px; font-weight: 700;">📅 ${fullDateTimeStr}</div>
+        <div style="font-size: 10px; color: #34d399; margin-top: 4px; font-weight: 700;">📅 ${fullDateTimeStr}</div>
     `;
 }
 
@@ -1228,9 +1225,9 @@ async function claimChannelBonus(bonusKey, url) {
 
 async function startDynamicPaymentNotifications() {
     let paymentMessages = [];
-    const firstNames = ["রহিম", "করিম", "জাকির", "পার্থ", "লিটন", "বুলবুল", "শামিম", "হাসান", "হোসেন", "কামাল", "জামাল", "সোহেল", "দেলোয়ার", "মাজেদ", "ফারুক", "নাসির", "সাগর", "আকাশ", "পিয়াস", "সজিব", "শান্ত", "জয়", "বাবু", "সুব্রত", "অনিক", "প্রীতম", "সৌমিক", "রাফি", "ফাইয়াজ", "নাঈম", "মুন্না", "হৃদয়", "আসিফ", "সিয়াম", "নিহান", "রিদওয়ান", "তারেক", "মাসুদ", "জনি", "সাদিয়া", "তানভীর", "নুসরাত", "ফাহিম", "জান্নাতুল", "রিফাত", "মীম", "জুবায়ের", "সুমাইয়া", "সাব্বির", "মেহজাবিন", "নাজমুল", "তাবাসসুম", "আশিকুর", "আয়শা", "রাশেদুল", "পূজা", "শরিফুল", "প্রিয়াঙ্কা", "মেহেদী", "রিতু", "সোহাগ", "পায়েল", "ইমরান", "রিপন", "নাফিসা", "আল-আমিন", "মেহনাজ", "শাকিল", "রাকিবুল", "ফারজানা", "মনির", "সামিয়া", "শান্তা", "আরিফ", "নিশাত", "মুক্তা"];
-    const lastNames = ["আহমেদ", "উদ্ধিন", "মিয়া", "সরকার", "তালুকদার", "চৌধুরী", "খন্দকার", "প্রামাণিক", "মন্ডল", "বিশ্বাস", "মজুমদার", "বাপারি", "হাওলাদার", "বেপারী", "সিকদার", "ফকির", "কাজী", "মোল্লা", "দত্ত", "দাস", "সেন", "রায়", "সাহা", "ঘোষ", "বনিক", "শীল", "পাল", "নাগ", "দে", "কর", "আক্তার", "জাহান", "ফেরদৌস", "হক", "হুদা", "সিদ্দিকা", "মনি", "উর্মি", "ইয়াসমিন", "রহমান", "ইসলাম", "আনজুম"];
-    const methods = ["বিকাশ", "নগদ", "রকেট"];
+    const firstNames = ["সাদিয়া", "নুসরাত", "জান্নাতুল", "মেহজাবিন", "তাবাসসুম", "আয়শা", "পূজা", "প্রিয়াঙ্কা", "রিতু", "পায়েল", "নাফিসা", "মেহনাজ", "ফারজানা", "সামিয়া", "শান্তা", "নিশাত", "মুক্তা", "সুবর্ণা", "তানিয়া", "রোকেয়া"];
+    const lastNames = ["আক্তার", "জাহান", "ফেরদৌস", "চৌধুরী", "মীম", "সিদ্দিকা", "সেন", "রায়", "মনি", "ঘোষ", "তাবাসসুম", "উর্মি", "ইয়াসমিন", "রহমান", "ইসলাম", "আনজুম", "বেগম"];
+    const methods = ["বিকাশ", "নগদ"];
     const amounts = ["৳ ১,০০০ টাকা", "৳ ১,৫০০ টাকা", "৳ ২,০০০ টাকা", "৳ ২,৫০০ টাকা", "৳ ৩,০০০ টাকা", "৳ ৪,০০০ টাকা", "৳ ৫,০০০ টাকা"];
     const emojis = ["🔥", "🚀", "🎉", "⚡", "✨", "💎", "🎯", "💖", "🌟", "💰"];
 
@@ -1499,9 +1496,6 @@ function renderPaymentCards(dataList) {
         if (method.includes('nagad')) {
             logoClass = 'ph-logo nagad';
             logoText = 'নগদ';
-        } else if (method.includes('rocket')) {
-            logoClass = 'ph-logo rocket';
-            logoText = 'রকেট';
         }
 
         let badgeHtml = '';
