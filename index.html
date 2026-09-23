@@ -89,7 +89,18 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .quick-amount-btn { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399; padding: 8px 4px; font-size: 12px; font-weight: 700; border-radius: 8px; cursor: pointer; text-align: center; transition: all 0.2s; }
 .quick-amount-btn:active { background: #10b981; color: white; transform: scale(0.95); }
 
-/* পেমেন্ট হিস্ট্রি নিয়ন ডিজাইন */
+/* টপ-আপ স্টাইলের লাইভ পেমেন্ট ও অর্ডার লিস্ট কার্ড ডিজাইন */
+.topup-order-card { background: #1e293b; border-radius: 16px; padding: 12px 14px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s ease; }
+.topup-order-left { display: flex; align-items: center; gap: 12px; }
+.topup-user-avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid #10b981; background: #0f172a; }
+.topup-info { text-align: left; }
+.topup-name { font-size: 13px; font-weight: 800; color: #f8fafc; margin-bottom: 2px; }
+.topup-details { font-size: 11px; color: #94a3b8; font-weight: 700; }
+
+.topup-status-badge { padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 800; text-align: center; box-shadow: 0 3px 10px rgba(0,0,0,0.2); white-space: nowrap; }
+.topup-status-badge.done { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+.topup-status-badge.pending { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+
 .history-header-box { background: linear-gradient(135deg, #1e293b, #0f172a); border: 1.5px solid rgba(56, 189, 248, 0.25); border-radius: 20px; padding: 16px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
 .history-header-title { font-size: 16px; font-weight: 800; color: #f8fafc; display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
 .history-header-desc { font-size: 11px; color: #94a3b8; font-weight: 600; }
@@ -98,26 +109,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .history-filter-container::-webkit-scrollbar { display: none; }
 .history-filter-btn { background: #1e293b; border: 1px solid rgba(255,255,255,0.08); color: #94a3b8; padding: 8px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; display: flex; align-items: center; gap: 6px; transition: all 0.2s; }
 .history-filter-btn.active { background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border-color: #38bdf8; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4); }
-
-.payment-history-card { background: #121824; border-radius: 18px; padding: 14px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; border: 1.5px solid; box-shadow: 0 6px 20px rgba(0,0,0,0.3); position: relative; overflow: hidden; }
-.payment-history-card.success { border-color: #059669; background: linear-gradient(145deg, #062318, #121824); }
-.payment-history-card.pending { border-color: #d97706; background: linear-gradient(145deg, #271c08, #121824); }
-.payment-history-card.failed { border-color: #dc2626; background: linear-gradient(145deg, #2a0c0c, #121824); }
-
-.ph-left { display: flex; align-items: center; gap: 12px; }
-.ph-logo { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
-.ph-logo.bkash { background: #e11d48; color: white; border: 1px solid rgba(255,255,255,0.2); }
-.ph-logo.nagad { background: #ea580c; color: white; border: 1px solid rgba(255,255,255,0.2); }
-.ph-logo.rocket { background: #8b5cf6; color: white; border: 1px solid rgba(255,255,255,0.2); }
-
-.ph-info { text-align: left; }
-.ph-amount { font-size: 18px; font-weight: 800; color: #f8fafc; margin-bottom: 2px; }
-.ph-details { font-size: 11px; color: #94a3b8; font-weight: 600; line-height: 1.3; }
-
-.ph-status-badge { padding: 6px 12px; border-radius: 14px; font-size: 11px; font-weight: 800; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 2px; box-shadow: 0 3px 10px rgba(0,0,0,0.2); }
-.ph-status-badge.success { background: rgba(5, 150, 105, 0.2); color: #34d399; border: 1px solid rgba(5, 150, 105, 0.4); }
-.ph-status-badge.pending { background: rgba(217, 119, 6, 0.2); color: #fbbf24; border: 1px solid rgba(217, 119, 6, 0.4); }
-.ph-status-badge.failed { background: rgba(220, 38, 38, 0.2); color: #f87171; border: 1px solid rgba(220, 38, 38, 0.4); }
 
 .leaderboard-hero { background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(16, 185, 129, 0.15)); border: 1.5px solid rgba(239, 68, 68, 0.3); border-radius: 20px; padding: 16px; margin-bottom: 12px; text-align: center; backdrop-filter: blur(10px); }
 .leaderboard-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #ef4444, #10b981); color: white; padding: 4px 14px; border-radius: 14px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; box-shadow: 0 4px 12px rgba(239,68,68,0.3); }
@@ -155,66 +146,54 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .btn-act-cancel { background: rgba(255,255,255,0.08); color: #94a3b8; border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 10px; width: 80px; font-weight: 700; font-size: 13px; cursor: pointer; }
 .btn-act-contact:active, .btn-act-cancel:active { transform: scale(0.98); }
 
-/* পেমেন্ট রিভিউ মডাল ডিজাইন */
+/* টপ-আপ স্টাইলের পেমেন্ট রিভিউ মডাল */
 .payment-review-modal-box { 
     background: linear-gradient(145deg, #182235, #0d1322); 
     border: 2px solid; 
     border-image: linear-gradient(135deg, #38bdf8, #10b981, #ef4444) 1; 
     border-radius: 24px; 
     width: 100%; 
-    max-width: 360px; 
-    padding: 22px 18px; 
+    max-width: 380px; 
+    padding: 18px 14px; 
     text-align: center; 
     box-shadow: 0 25px 50px rgba(0,0,0,0.8), 0 0 25px rgba(56,189,248,0.25); 
     color: #f8fafc; 
     position: relative; 
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
 }
 .payment-review-main-title {
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 800;
     background: linear-gradient(135deg, #38bdf8, #34d399, #f59e0b);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
     letter-spacing: 0.5px;
 }
 .payment-review-sub-title {
-    font-size: 11px;
+    font-size: 10px;
     color: #cbd5e1;
     font-weight: 700;
     background: rgba(16, 185, 129, 0.15);
     border: 1px solid rgba(16, 185, 129, 0.3);
-    padding: 5px 10px;
+    padding: 4px 10px;
     border-radius: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     display: inline-block;
 }
-.live-feed-box { 
-    background: rgba(11, 17, 29, 0.9); 
-    border: 1.5px solid rgba(56, 189, 248, 0.4); 
-    padding: 16px 14px; 
-    border-radius: 16px; 
-    margin: 6px 0 16px 0; 
-    min-height: 100px; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
-    box-shadow: inset 0 3px 12px rgba(0,0,0,0.6); 
-    animation: fadeInModal 0.4s ease-in-out; 
-    position: relative;
-    overflow: hidden;
+.live-feed-box-container { 
+    overflow-y: auto; 
+    max-height: 380px; 
+    padding-right: 2px; 
+    margin-bottom: 12px; 
+    scrollbar-width: thin; 
+    scrollbar-color: #10b981 #1e293b;
+    text-align: left;
 }
-.live-feed-box::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3.5px;
-    background: linear-gradient(90deg, #38bdf8, #10b981, #f59e0b, #ef4444);
-}
-.feed-user { font-weight: 800; color: #38bdf8; font-size: 15px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; text-shadow: 0 2px 5px rgba(56,189,248,0.3); }
-.feed-details { color: #cbd5e1; font-size: 12px; font-weight: 600; line-height: 1.5; }
-.feed-amount { color: #34d399; font-weight: 800; font-size: 16px; text-shadow: 0 2px 8px rgba(16,185,129,0.4); }
+.live-feed-box-container::-webkit-scrollbar { width: 4px; }
+.live-feed-box-container::-webkit-scrollbar-thumb { background: #10b981; border-radius: 4px; }
 </style>
 </head>
 <body>
@@ -538,13 +517,13 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <button class="btn-action btn-success" style="margin-top: 10px; padding: 12px; border-radius: 12px; font-size: 14px;" onclick="processWithdraw()">🚀 পেমেন্ট অনুরোধ পাঠান</button>
     </div>
 
-    <!-- পেমেন্ট রিভিউ বাটন -->
+    <!-- টপ-আপ স্টাইলের পেমেন্ট রিভিউ বাটন -->
     <a href="#" class="wallet-menu-card" onclick="openPaymentReviewModal()">
         <div class="wallet-menu-left">
             <div class="wallet-menu-icon" style="background: rgba(56,189,248,0.1); border-color: rgba(56,189,248,0.2); color: #38bdf8;">💳</div>
             <div>
-                <div class="wallet-menu-title">পেমেন্টের রিভিউ</div>
-                <div class="wallet-menu-desc">লাইভ পেমেন্ট প্রুফ ও রেকর্ড দেখুন</div>
+                <div class="wallet-menu-title">পেমেন্টের রিভিউ (Live Feed)</div>
+                <div class="wallet-menu-desc">সফল ও পেন্ডিং পেমেন্টের লাইভ লিস্ট দেখুন</div>
             </div>
         </div>
         <div class="wallet-menu-arrow">›</div>
@@ -606,17 +585,17 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </a>
 </div>
 
-<!-- পেমেন্ট রিভিউ মডাল -->
+<!-- টপ-আপ স্টাইলের লাইভ পেমেন্ট রিভিউ মডাল -->
 <div id="payment-review-modal" class="custom-modal-overlay">
     <div class="payment-review-modal-box">
         <div class="payment-review-main-title">💰 「ডেইলি টাস্ক ইনকাম সেন্টার」 💰</div>
-        <div class="payment-review-sub-title">✨ আজকের পেমেন্ট রিভিউ • প্রতিদিনের পেমেন্ট প্রতিদিন দেওয়া হয়</div>
+        <div class="payment-review-sub-title">✨ লাইভ পেমেন্ট ও অর্ডার লিস্ট • প্রতিদিনের আপডেট</div>
         
-        <div class="live-feed-box" id="live-payment-feed-container">
-            <div class="feed-user">লোড হচ্ছে...</div>
+        <div class="live-feed-box-container" id="live-payment-feed-container">
+            <!-- ডায়নামিক টপ-আপ স্টাইল কার্ড এখানে লোড হবে -->
         </div>
 
-        <button class="btn-action btn-success" style="padding: 10px; border-radius: 12px; font-size: 13px; margin-top: 0;" onclick="closePaymentReviewModal()">বন্ধ করুন</button>
+        <button class="btn-action btn-success" style="padding: 10px; border-radius: 12px; font-size: 13px; margin-top: 4px;" onclick="closePaymentReviewModal()">বন্ধ করুন</button>
     </div>
 </div>
 
@@ -717,97 +696,76 @@ let claimedBonuses = {};
 let historyDates = {};
 let rawWithdrawRequests = [];
 
-const masterPaymentReviewPool = [
-    { name: "রিফাত আহমেদ", id: "ID: ...৫২৪১", serial: "#১৫2", amount: "৳ ১,৫০০ টাকা", method: "বিকাশ" },
-    { name: "নাজমুল ইসলাম", id: "ID: ...৮৮৯৩", serial: "#১৫৩", amount: "৳ ৮০০ টাকা", method: "নগদ" },
-    { name: "তানভীর হাসান", id: "ID: ...১০২৭", serial: "#১৫৪", amount: "৳ ৩,০০০ টাকা", method: "রকেট" },
-    { name: "সাকিব আল হাসান", id: "ID: ...৪৪১১", serial: "#১৫৫", amount: "৳ ১,২০০ টাকা", method: "বিকাশ" },
-    { name: "রাকিব হোসেন", id: "ID: ...৯৯৮২", serial: "#১৫৬", amount: "৳ ৫,০০০ টাকা", method: "নগদ" },
-    { name: "ফাহিম মুনতাসির", id: "ID: ...২২১৫", serial: "#১৫৭", amount: "৳ ৭৫০ টাকা", method: "রকেট" },
-    { name: "ইমরান খান", id: "ID: ...৭৭৬৫", serial: "#১৫৮", amount: "৳ ২,৫০০ টাকা", method: "নগদ" },
-    { name: "জুবায়ের আহমেদ", id: "ID: ...৩৩৪৯", serial: "#১৫৯", amount: "৳ ১,৮০০ টাকা", method: "বিকাশ" },
-    { name: "সাদিয়া আক্তার", id: "ID: ...৫৫১২", serial: "#১৬০", amount: "৳ ২,২০০ টাকা", method: "রকেট" },
-    { name: "মেহেদী হাসান", id: "ID: ...৬৬১৮", serial: "#১৬১", amount: "৳ ৪,৫০০ টাকা", method: "বিকাশ" },
-    { name: "সাব্বির রহমান", id: "ID: ...৭৭৮১", serial: "#১৬২", amount: "৳ ১,১০০ টাকা", method: "নগদ" },
-    { name: "আশিকুর রহমান", id: "ID: ...৩৯০২", serial: "#১৬৩", amount: "৳ ৩,৫০০ টাকা", method: "রকেট" },
-    { name: "রাশেদুল ইসলাম", id: "ID: ...৮৮৪০", serial: "#১৬৪", amount: "৳ ৯৫০ টাকা", method: "বিকাশ" },
-    { name: "শরিফুল ইসলাম", id: "ID: ...৩৩২৫", serial: "#১৬৫", amount: "৳ ৪,০০০ টাকা", method: "নগদ" },
-    { name: "সোহাগ আহমেদ", id: "ID: ...৫৫৬৫", serial: "#১৬৬", amount: "৳ ১,২৫০ টাকা", method: "রকেট" }
+const masterTopUpStylePool = [
+    { name: "AR RIFAT AR RIFAT", desc: "WEEKLY - ৳১৫৮", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "Nur Khan", desc: "1X Weekly Lite - ৳৪৫", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "apon 123", desc: "MONTHLY - ৳৭৯০", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "Sourav Das", desc: "1X Weekly Lite - ৳৪৫", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "MD Shopon Khan", desc: "115 Diamond - ৳৭৯", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "Gaming Touhid", desc: "WEEKLY - ৳১৫৮", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "Bijoy Ahmed", desc: "100 Diamond - ৳১৩০", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "VOICE OF ISLAM", desc: "115 Diamond - ৳৭৯", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "Pakhi hasan", desc: "2X Weekly Lite - ৳৯০", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "Nazmul Islam", desc: "বিকাশ ক্যাশআউট - ৳৮০০", status: "Pending", type: "pending", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "Tanvir Hasan", desc: "রকেট ক্যাশআউট - ৳৩,০০০", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "Sakib Al Hasan", desc: "নগদ ক্যাশআউট - ৳১,২০০", status: "Pending", type: "pending", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "Rakib Hossain", desc: "WEEKLY - ৳১৫৮", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" },
+    { name: "Fahim Muntasir", desc: "115 Diamond - ৳৭৯", status: "Done", type: "success", avatar: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" }
 ];
 
-let reviewInterval = null;
-
-function getDailyUniqueReviewPool() {
+function getDailyUniqueTopUpPool() {
     const todayDateStr = new Date().toISOString().split('T')[0];
-    const savedData = localStorage.getItem('daily_review_pool_data');
+    const savedData = localStorage.getItem('daily_topup_pool_data');
     
     let poolData = savedData ? JSON.parse(savedData) : null;
     
     if (!poolData || poolData.date !== todayDateStr) {
-        let shuffled = [...masterPaymentReviewPool].sort(() => 0.5 - Math.random());
-        let selectedToday = shuffled.slice(0, 10);
-        
+        let shuffled = [...masterTopUpStylePool].sort(() => 0.5 - Math.random());
         poolData = {
             date: todayDateStr,
-            available: selectedToday,
-            shown: []
+            items: shuffled
         };
-        localStorage.setItem('daily_review_pool_data', JSON.stringify(poolData));
+        localStorage.setItem('daily_topup_pool_data', JSON.stringify(poolData));
     }
-    return poolData;
+    return poolData.items;
 }
 
 function openPaymentReviewModal() {
     document.getElementById('payment-review-modal').classList.add('active');
-    showNextReviewPayment();
-    if (!reviewInterval) {
-        reviewInterval = setInterval(showNextReviewPayment, 4000);
-    }
+    renderTopUpStyleList();
 }
 
 function closePaymentReviewModal() {
     document.getElementById('payment-review-modal').classList.remove('active');
-    if (reviewInterval) {
-        clearInterval(reviewInterval);
-        reviewInterval = null;
-    }
 }
 
-function showNextReviewPayment() {
+function renderTopUpStyleList() {
     const container = document.getElementById('live-payment-feed-container');
     if (!container) return;
 
-    let poolData = getDailyUniqueReviewPool();
+    const items = getDailyUniqueTopUpPool();
+    container.innerHTML = '';
 
-    if (poolData.available.length === 0) {
-        poolData.available = [...poolData.shown];
-        poolData.shown = [];
-    }
+    items.forEach(item => {
+        let badgeClass = item.status === 'Done' ? 'topup-status-badge done' : 'topup-status-badge pending';
+        let badgeText = item.status === 'Done' ? '✓ Done' : '⏳ Pending';
 
-    const randomIndex = Math.floor(Math.random() * poolData.available.length);
-    const record = poolData.available.splice(randomIndex, 1)[0];
-    poolData.shown.push(record);
-    
-    const todayDateStr = new Date().toISOString().split('T')[0];
-    localStorage.setItem('daily_review_pool_data', JSON.stringify(poolData));
-
-    const now = new Date();
-    const dateFormatted = now.toLocaleDateString('bn-BD', { day: 'numeric', month: 'long', year: 'numeric' });
-    const timeFormatted = now.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' });
-    const fullDateTimeStr = `${dateFormatted}, ${timeFormatted}`;
-
-    container.style.animation = 'none';
-    container.offsetHeight; 
-    container.style.animation = 'fadeInModal 0.4s ease-in-out';
-
-    container.innerHTML = `
-        <div class="feed-user">👤 ${record.name} (${record.id})</div>
-        <div class="feed-details">
-            অ্যাকাউন্ট: <b>${record.serial}</b> | মাধ্যম: <span style="color:#f38ba8;">${record.method}</span><br>
-            পেমেন্ট সফল: <span class="feed-amount">${record.amount}</span>
-        </div>
-        <div style="font-size: 10px; color: #38bdf8; margin-top: 6px; font-weight: 700;">📅 ${fullDateTimeStr}</div>
-    `;
+        const card = document.createElement('div');
+        card.className = 'topup-order-card';
+        card.innerHTML = `
+            <div class="topup-order-left">
+                <img src="${item.avatar}" class="topup-user-avatar" alt="Avatar">
+                <div class="topup-info">
+                    <div class="topup-name">${item.name}</div>
+                    <div class="topup-details">${item.desc}</div>
+                </div>
+            </div>
+            <div>
+                <div class="${badgeClass}">${badgeText}</div>
+            </div>
+        `;
+        container.appendChild(card);
+    });
 }
 
 function showWelcomeAlert() {
