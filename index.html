@@ -155,12 +155,60 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .btn-act-cancel { background: rgba(255,255,255,0.08); color: #94a3b8; border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 10px; width: 80px; font-weight: 700; font-size: 13px; cursor: pointer; }
 .btn-act-contact:active, .btn-act-cancel:active { transform: scale(0.98); }
 
-/* পেমেন্ট রিভিউ লাইভ ফিড স্টাইল */
-.payment-review-modal-box { background: #1e293b; border: 1.5px solid rgba(56, 189, 248, 0.4); border-radius: 20px; width: 100%; max-width: 340px; padding: 18px 15px; text-align: center; box-shadow: 0 15px 30px rgba(0,0,0,0.6); color: #f8fafc; position: relative; }
-.live-feed-box { background: #0f172a; border: 1px solid rgba(56, 189, 248, 0.3); padding: 14px; border-radius: 12px; margin-top: 12px; margin-bottom: 14px; min-height: 85px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: inset 0 2px 8px rgba(0,0,0,0.4); animation: fadeInModal 0.4s ease-in-out; }
-.feed-user { font-weight: 800; color: #38bdf8; font-size: 14px; margin-bottom: 4px; }
-.feed-details { color: #cbd5e1; font-size: 12px; font-weight: 600; line-height: 1.4; }
-.feed-amount { color: #34d399; font-weight: 800; }
+/* প্রিমিয়াম ও আকর্ষণীয় পেমেন্ট রিভিউ মডাল ডিজাইন (৫০০+ টাকা এবং নো কয়েন) */
+.payment-review-modal-box { 
+    background: linear-gradient(160deg, #1e293b, #0f172a); 
+    border: 2px solid rgba(16, 185, 129, 0.5); 
+    border-radius: 22px; 
+    width: 100%; 
+    max-width: 350px; 
+    padding: 20px 16px; 
+    text-align: center; 
+    box-shadow: 0 20px 40px rgba(0,0,0,0.7), 0 0 20px rgba(16,185,129,0.2); 
+    color: #f8fafc; 
+    position: relative; 
+}
+.payment-review-badge { 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 6px; 
+    background: linear-gradient(135deg, #10b981, #059669); 
+    color: white; 
+    padding: 4px 14px; 
+    border-radius: 20px; 
+    font-size: 11px; 
+    font-weight: 800; 
+    text-transform: uppercase; 
+    letter-spacing: 0.5px; 
+    margin-bottom: 10px; 
+    box-shadow: 0 4px 12px rgba(16,185,129,0.4); 
+}
+.live-feed-box { 
+    background: rgba(15, 23, 42, 0.85); 
+    border: 1.5px solid rgba(56, 189, 248, 0.35); 
+    padding: 16px 14px; 
+    border-radius: 16px; 
+    margin: 12px 0 16px 0; 
+    min-height: 95px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); 
+    animation: fadeInModal 0.4s ease-in-out; 
+    position: relative;
+    overflow: hidden;
+}
+.live-feed-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #38bdf8, #10b981, #ef4444);
+}
+.feed-user { font-weight: 800; color: #38bdf8; font-size: 15px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+.feed-details { color: #cbd5e1; font-size: 12px; font-weight: 600; line-height: 1.5; }
+.feed-amount { color: #34d399; font-weight: 800; font-size: 16px; text-shadow: 0 2px 8px rgba(16,185,129,0.3); }
 </style>
 </head>
 <body>
@@ -288,14 +336,13 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <button class="btn-action" style="background: #475569; padding: 10px; font-size: 13px;" onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])">⬅️ ওয়ালেটে ফিরে যান</button>
 </div>
 
-<!-- আপডেটকৃত সাপোর্ট পেজ -->
+<!-- সাপোর্ট পেজ -->
 <div id="page-support" class="page">
     <div style="text-align: center; margin-bottom: 14px;">
         <h2 style="font-size: 20px; font-weight: 800; color: #f8fafc; margin-bottom: 4px;">টিউটোয়াল ভিডিও</h2>
         <p style="font-size: 11px; color: #94a3b8; font-weight: 600;">কিভাবে অ্যাপটি ব্যবহার করবেন—টিউটোয়াল ভিডিও দেখে নিন এবং সহজেই আয় শুরু করুন।</p>
     </div>
 
-    <!-- ইউটিউব ভিডিও থাম্বনেইল কার্ড -->
     <a href="https://youtube.com/shorts/7ljXq-ArTNw?si=92ieAqcu9ns5Lj-k" target="_blank" style="display: block; background: linear-gradient(145deg, #1e293b, #0f172a); border: 1.5px solid rgba(16,185,129,0.3); border-radius: 20px; padding: 12px; margin-bottom: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-decoration: none; position: relative; overflow: hidden;">
         <div style="position: relative; width: 100%; height: 160px; border-radius: 14px; overflow: hidden; background: #000; display: flex; align-items: center; justify-content: center;">
             <img src="https://img.youtube.com/vi/7ljXq-ArTNw/hqdefault.jpg" alt="Tutorial Video" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.85;">
@@ -312,31 +359,26 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <span>🎧</span> অন্যান্য সাহায্য
     </div>
 
-    <!-- সাপোর্ট অপশন গ্রিড (২x২) -->
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px;">
-        <!-- টেলিগ্রাম -->
-        <a href="https://t.me/KA16269bot" target="_blank" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 16px 12px; text-align: center; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s; display: flex; flex-direction: column; align-items: center;">
+        <a href="https://t.me/KA16269bot" target="_blank" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 16px 12px; text-align: center; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: flex; flex-direction: column; align-items: center;">
             <div style="width: 44px; height: 44px; background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.2); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #38bdf8; margin-bottom: 8px;">✈️</div>
             <div style="font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 2px;">টেলিগ্রাম</div>
             <div style="font-size: 10px; color: #94a3b8; font-weight: 600;">সরাসরি মেসেজ করুন</div>
         </a>
 
-        <!-- ইমেইল -->
-        <a href="mailto:support@example.com" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 16px 12px; text-align: center; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s; display: flex; flex-direction: column; align-items: center;">
+        <a href="mailto:support@example.com" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 16px 12px; text-align: center; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: flex; flex-direction: column; align-items: center;">
             <div style="width: 44px; height: 44px; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #34d399; margin-bottom: 8px;">📧</div>
             <div style="font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 2px;">ইমেইল</div>
             <div style="font-size: 10px; color: #94a3b8; font-weight: 600;">মেইলের মাধ্যমে যোগাযোগ</div>
         </a>
 
-        <!-- FAQ -->
-        <a href="https://t.me/ami16169" target="_blank" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 16px 12px; text-align: center; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s; display: flex; flex-direction: column; align-items: center;">
+        <a href="https://t.me/ami16169" target="_blank" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 16px 12px; text-align: center; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: flex; flex-direction: column; align-items: center;">
             <div style="width: 44px; height: 44px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #ef4444; margin-bottom: 8px;">❓</div>
             <div style="font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 2px;">FAQ</div>
             <div style="font-size: 10px; color: #94a3b8; font-weight: 600;">সাধারণ প্রশ্নোত্তর</div>
         </a>
 
-        <!-- লাইভ চ্যাট -->
-        <a href="https://t.me/AD16169Bot" target="_blank" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 16px 12px; text-align: center; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s; display: flex; flex-direction: column; align-items: center;">
+        <a href="https://t.me/AD16169Bot" target="_blank" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 16px 12px; text-align: center; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: flex; flex-direction: column; align-items: center;">
             <div style="width: 44px; height: 44px; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #f59e0b; margin-bottom: 8px;">💬</div>
             <div style="font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 2px;">লাইভ চ্যাট</div>
             <div style="font-size: 10px; color: #94a3b8; font-weight: 600;">তাৎক্ষণিক সাহায্য</div>
@@ -351,15 +393,9 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <p style="font-size: 12px; opacity: 0.85; line-height: 1.4; margin-bottom: 10px;">আপনার পার্সোনাল রেফার লিংকটি শেয়ার করুন। বন্ধু জয়েন করলেই পাবেন আকর্ষণীয় ক্যাশ বোনাস!</p>
         
         <div class="refer-benefits">
-            <div class="refer-benefit-item">
-                <span style="font-size: 14px;">🎁</span> <span>প্রতি সফল রেফারে পাবেন ইনস্ট্যান্ট <b>১১১ কয়েন বোনাস!</b></span>
-            </div>
-            <div class="refer-benefit-item">
-                <span style="font-size: 14px;">⚡</span> <span>আপনার বন্ধুর ইনকাম থেকে লাইফটাইম গ্রোথ সুবিধা।</span>
-            </div>
-            <div class="refer-benefit-item">
-                <span style="font-size: 14px;">🚀</span> <span>যত বেশি রেফার করবেন, উইথড্র করার সুযোগ তত দ্রুত পাবেন।</span>
-            </div>
+            <div class="refer-benefit-item"><span style="font-size: 14px;">🎁</span> <span>প্রতি সফল রেফারে পাবেন ইনস্ট্যান্ট <b>১১১ কয়েন বোনাস!</b></span></div>
+            <div class="refer-benefit-item"><span style="font-size: 14px;">⚡</span> <span>আপনার বন্ধুর ইনকাম থেকে লাইফটাইম গ্রোথ সুবিধা।</span></div>
+            <div class="refer-benefit-item"><span style="font-size: 14px;">🚀</span> <span>যত বেশি রেফার করবেন, উইথড্র করার সুযোগ তত দ্রুত পাবেন।</span></div>
         </div>
 
         <div class="refer-link-box">
@@ -403,9 +439,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 
     <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 12px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
-        <div style="font-size: 12px; color: #94a3b8; line-height: 1.4; font-weight: 600;">
-            আপনি কত ভিডিও দেখে কত পয়েন্ট ইনকাম করেছেন তার সম্পূর্ণ রেকর্ড এখানে দেখুন
-        </div>
+        <div style="font-size: 12px; color: #94a3b8; line-height: 1.4; font-weight: 600;">আপনি কত ভিডিও দেখে কত পয়েন্ট ইনকাম করেছেন তার সম্পূর্ণ রেকর্ড এখানে দেখুন</div>
         <div style="font-size: 28px; margin-left: 8px;">🎬</div>
     </div>
 
@@ -424,16 +458,11 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         </div>
     </div>
 
-    <div style="font-size: 13px; font-weight: 800; color: #f8fafc; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-        <span>🕒</span> দৈনিক কাজের রেকর্ড
-    </div>
-
-    <div id="recent-income-list-container">
-        <!-- ডায়নামিক্যালি পপুলেট হবে -->
-    </div>
+    <div style="font-size: 13px; font-weight: 800; color: #f8fafc; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;"><span>🕒</span> দৈনিক কাজের রেকর্ড</div>
+    <div id="recent-income-list-container"></div>
 </div>
 
-<!-- পেমেন্ট হিস্ট্রি পেজ (টাকা ফরম্যাট) -->
+<!-- পেমেন্ট হিস্ট্রি পেজ -->
 <div id="page-payment-history" class="page">
     <div class="history-header-box">
         <div>
@@ -477,9 +506,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         </div>
     </div>
 
-    <button class="btn-withdraw-action" onclick="toggleWithdrawForm()">
-        💲 এখনই উইথড্র করুন
-    </button>
+    <button class="btn-withdraw-action" onclick="toggleWithdrawForm()">💲 এখনই উইথড্র করুন</button>
 
     <div class="wallet-form-box" id="withdraw-form-container">
         <label class="wallet-label">পেমেন্ট মেথড নির্বাচন করুন:</label>
@@ -504,7 +531,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <button class="btn-action btn-success" style="margin-top: 10px; padding: 12px; border-radius: 12px; font-size: 14px;" onclick="processWithdraw()">🚀 পেমেন্ট অনুরোধ পাঠান</button>
     </div>
 
-    <!-- নতুন অ্যাড করা পেমেন্ট রিভিউ বাটন -->
+    <!-- পেমেন্ট রিভিউ বাটন -->
     <a href="#" class="wallet-menu-card" onclick="openPaymentReviewModal()">
         <div class="wallet-menu-left">
             <div class="wallet-menu-icon" style="background: rgba(56,189,248,0.1); border-color: rgba(56,189,248,0.2); color: #38bdf8;">💳</div>
@@ -572,20 +599,18 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </a>
 </div>
 
-<!-- পেমেন্ট রিভিউ পপ-আপ মডাল -->
+<!-- আকর্ষণীয় পেমেন্ট রিভিউ মডাল (শুধুমাত্র টাকা, ৫০০+ এবং নন-রিপিটিং) -->
 <div id="payment-review-modal" class="custom-modal-overlay">
     <div class="payment-review-modal-box">
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
-            <div class="custom-modal-title" style="margin-bottom:0;"><span>💸</span> লাইভ পেমেন্ট রিভিউ</div>
-            <span onclick="closePaymentReviewModal()" style="font-size: 20px; cursor: pointer; color: #94a3b8; font-weight: 800;">&times;</span>
-        </div>
-        <p style="font-size: 11px; color: #94a3b8; margin-bottom: 6px; text-align: left;">সফলভাবে পেমেন্ট পাওয়া ইউজারদের লাইভ আপডেট:</p>
+        <div class="payment-review-badge">✨ লাইভ পেমেন্ট রিভিউ প্রুফ</div>
+        <div style="font-size: 16px; font-weight: 800; color: #f8fafc; margin-bottom: 2px;">সফলভাবে পেমেন্ট প্রাপ্ত ইউজার</div>
+        <p style="font-size: 11px; color: #94a3b8; margin-bottom: 10px;">সাম্প্রতিক সফল উইথড্রল রিয়েল-টাইম আপডেট</p>
         
         <div class="live-feed-box" id="live-payment-feed-container">
             <div class="feed-user">লোড হচ্ছে...</div>
         </div>
 
-        <button class="custom-modal-btn-cancel" style="background: rgba(255,255,255,0.08); border-radius: 10px; padding: 8px; color: #f8fafc;" onclick="closePaymentReviewModal()">বন্ধ করুন</button>
+        <button class="btn-action btn-success" style="padding: 10px; border-radius: 12px; font-size: 13px; margin-top: 0;" onclick="closePaymentReviewModal()">বন্ধ করুন</button>
     </div>
 </div>
 
@@ -696,18 +721,18 @@ let claimedBonuses = {};
 let historyDates = {};
 let rawWithdrawRequests = [];
 
-// পেমেন্ট রিভিউ লাইভ প্রুফ লজিক (নন-রিপিটিং ও রেন্ডম)
+// পেমেন্ট রিভিউ পুল (শুধুমাত্র ৫০০ টাকার ওপরের পরিমাণ এবং কোনো কয়েন উল্লেখ নেই)
 const paymentReviewPool = [
-    { name: "রিফাত আহমেদ", id: "ID: ...৫২৪১", serial: "#১৫2", amount: "১০০০ কয়েন (২০ টাকা)", method: "বিকাশ", time: "আজ, দুপুর ০২:১৫" },
-    { name: "নাজমুল ইসলাম", id: "ID: ...৮৮৯৩", serial: "#১৫৩", amount: "২০০০ কয়েন (৪০ টাকা)", method: "নগদ", time: "আজ, দুপুর ০২:১০" },
-    { name: "তানভীর হাসান", id: "ID: ...১০২৭", serial: "#১৫৪", amount: "৫০০০ কয়েন (১০০ টাকা)", method: "বিকাশ", time: "আজ, দুপুর ০২:০০" },
-    { name: "সাকিব আল হাসান", id: "ID: ...৪৪১১", serial: "#১৫৫", amount: "১০০০ কয়েন (২০ টাকা)", method: "বিকাশ", time: "আজ, দুপুর ০১:৫০" },
-    { name: "রাকিব হোসেন", id: "ID: ...৯৯৮২", serial: "#১৫৬", amount: "১০০০০ কয়েন (২০০ টাকা)", method: "নগদ", time: "আজ, দুপুর ০১:৪০" },
-    { name: "ফাহিম মুনতাসির", id: "ID: ...২২১৫", serial: "#১৫৭", amount: "২০০০ কয়েন (৪০ টাকা)", method: "বিকাশ", time: "আজ, দুপুর ০১:৩০" },
-    { name: "ইমরান খান", id: "ID: ...৭৭৬৫", serial: "#১৫৮", amount: "৫০০০ কয়েন (১০০ টাকা)", method: "নগদ", time: "আজ, দুপুর ০১:১৫" },
-    { name: "জুবায়ের আহমেদ", id: "ID: ...৩৩৪৯", serial: "#১৫৯", amount: "১০০০ কয়েন (২০ টাকা)", method: "বিকাশ", time: "আজ, দুপুর ১২:৫০" },
-    { name: "সাদিয়া আক্তার", id: "ID: ...৫৫১২", serial: "#১৬০", amount: "২০০০ কয়েন (৪০ টাকা)", method: "নগদ", time: "আজ, দুপুর ১২:৩০" },
-    { name: "মেহেদী হাসান", id: "ID: ...৬৬১৮", serial: "#১৬১", amount: "৫০০০ কয়েন (১০০ টাকা)", method: "বিকাশ", time: "আজ, দুপুর ১২:১০" }
+    { name: "রিফাত আহমেদ", id: "ID: ...৫২৪১", serial: "#১৫2", amount: "৳ ১,৫০০ টাকা", method: "বিকাশ", time: "আজ, দুপুর ০২:১৫" },
+    { name: "নাজমুল ইসলাম", id: "ID: ...৮৮৯৩", serial: "#১৫৩", amount: "৳ ৮০০ টাকা", method: "নগদ", time: "আজ, দুপুর ০২:১০" },
+    { name: "তানভীর হাসান", id: "ID: ...১০২৭", serial: "#১৫৪", amount: "৳ ৩,০০০ টাকা", method: "বিকাশ", time: "আজ, দুপুর ০২:০০" },
+    { name: "সাকিব আল হাসান", id: "ID: ...৪৪১১", serial: "#১৫৫", amount: "৳ ১,২০০ টাকা", method: "বিকাশ", time: "আজ, দুপুর ০১:৫০" },
+    { name: "রাকিব হোসেন", id: "ID: ...৯৯৮২", serial: "#১৫৬", amount: "৳ ৫,০০০ টাকা", method: "নগদ", time: "আজ, দুপুর ০১:৪০" },
+    { name: "ফাহিম মুনতাসির", id: "ID: ...২২১৫", serial: "#১৫৭", amount: "৳ ৭৫০ টাকা", method: "বিকাশ", time: "আজ, দুপুর ০১:৩০" },
+    { name: "ইমরান খান", id: "ID: ...৭৭৬৫", serial: "#১৫৮", amount: "৳ ২,৫০০ টাকা", method: "নগদ", time: "আজ, দুপুর ০১:১৫" },
+    { name: "জুবায়ের আহমেদ", id: "ID: ...৩৩৪৯", serial: "#১৫৯", amount: "৳ ১,৮০০ টাকা", method: "বিকাশ", time: "আজ, দুপুর ১২:৫০" },
+    { name: "সাদিয়া আক্তার", id: "ID: ...৫৫১২", serial: "#১৬০", amount: "৳ ২,২০০ টাকা", method: "নগদ", time: "আজ, দুপুর ১২:৩০" },
+    { name: "মেহেদী হাসান", id: "ID: ...৬৬১৮", serial: "#১৬১", amount: "৳ ৪,৫০০ টাকা", method: "বিকাশ", time: "আজ, দুপুর ১২:১০" }
 ];
 
 let availableReviewRecords = [...paymentReviewPool];
@@ -748,10 +773,10 @@ function showNextReviewPayment() {
     container.innerHTML = `
         <div class="feed-user">👤 ${record.name} (${record.id})</div>
         <div class="feed-details">
-            অ্যাকাউন্ট: <b>${record.serial}</b> | মেথড: <span style="color:#f38ba8;">${record.method}</span><br>
-            পেমেন্ট পেয়েছেন: <span class="feed-amount">${record.amount}</span>
+            অ্যাকাউন্ট: <b>${record.serial}</b> | মাধ্যম: <span style="color:#f38ba8;">${record.method}</span><br>
+            পেমেন্ট সফল: <span class="feed-amount">${record.amount}</span>
         </div>
-        <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">🕒 ${record.time}</div>
+        <div style="font-size: 10px; color: #94a3b8; margin-top: 6px;">🕒 ${record.time}</div>
     `;
 }
 
