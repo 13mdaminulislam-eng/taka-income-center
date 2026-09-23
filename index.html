@@ -48,46 +48,45 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 .nav-item.active { color: #34d399; }
 .nav-icon { font-size: 18px; margin-bottom: 2px; }
 
-.refer-card { background: linear-gradient(145deg, #450a0a, #065f46, #1e293b); color: white; border-radius: 20px; padding: 16px; box-shadow: 0 10px 25px rgba(16,185,129,0.2); margin-bottom: 12px; border: 1.5px solid rgba(16,185,129,0.3); position: relative; overflow: hidden; }
-.refer-badge { display: inline-block; background: linear-gradient(135deg, #ef4444, #10b981); padding: 3px 10px; border-radius: 14px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; box-shadow: 0 4px 12px rgba(16,185,129,0.3); }
-.refer-benefits { background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 10px; margin: 10px 0; text-align: left; }
-.refer-benefit-item { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; margin-bottom: 6px; color: #e2e8f0; }
+/* রেফার পেজ প্রিমিয়াম ডিজাইন */
+.refer-card { background: linear-gradient(145deg, #1e293b, #0f172a); color: white; border-radius: 22px; padding: 20px; box-shadow: 0 12px 30px rgba(16,185,129,0.15); margin-bottom: 14px; border: 2px solid rgba(16,185,129,0.4); position: relative; overflow: hidden; }
+.refer-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #10b981, #059669); padding: 5px 14px; border-radius: 16px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; box-shadow: 0 4px 12px rgba(16,185,129,0.3); }
+.refer-benefits { background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 12px; margin: 12px 0; text-align: left; }
+.refer-benefit-item { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; margin-bottom: 8px; color: #e2e8f0; }
 .refer-benefit-item:last-child { margin-bottom: 0; }
-.refer-link-box { background: #0f172a; padding: 10px 12px; border-radius: 10px; margin: 10px 0; display: flex; align-items: center; justify-content: space-between; font-size: 12px; border: 1px solid rgba(255,255,255,0.08); }
-.btn-refer-action { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 10px; border-radius: 10px; width: 48%; font-weight: 800; font-size: 12px; cursor: pointer; box-shadow: 0 4px 12px rgba(16,185,129,0.3); transition: transform 0.2s; }
-.btn-refer-action:active { transform: scale(0.98); }
+.refer-link-box { background: #0b1118; padding: 12px 14px; border-radius: 12px; margin: 12px 0; display: flex; align-items: center; justify-content: space-between; font-size: 12px; border: 1px solid rgba(56,189,248,0.3); }
+.btn-refer-copy { background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border: none; padding: 12px; border-radius: 12px; width: 48%; font-weight: 800; font-size: 12px; cursor: pointer; box-shadow: 0 4px 15px rgba(2,132,199,0.4); transition: transform 0.2s; }
+.btn-refer-share { background: linear-gradient(135deg, #e11d48, #9f1239); color: white; border: none; padding: 12px; border-radius: 12px; width: 48%; font-weight: 800; font-size: 12px; cursor: pointer; box-shadow: 0 4px 15px rgba(225,29,72,0.4); transition: transform 0.2s; }
+.btn-refer-copy:active, .btn-refer-share:active { transform: scale(0.98); }
 
-.list-card { background: #1e293b; padding: 10px 12px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); color: #f8fafc; font-weight: 700; border: 1px solid rgba(255,255,255,0.05); }
-.list-date { font-size: 11px; color: #94a3b8; font-weight: 500; }
-select.input-field { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 12px center; background-size: 14px; }
+/* রেফারকৃত বন্ধু তালিকা প্রিমিয়াম কার্ড ডিজাইন */
+.referral-user-card { background: linear-gradient(145deg, #1e293b, #121824); padding: 12px 14px; border-radius: 16px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 6px 20px rgba(0,0,0,0.25); color: #f8fafc; font-weight: 700; border: 1.5px solid rgba(56,189,248,0.2); }
+.ref-user-left { display: flex; align-items: center; gap: 12px; }
+.ref-user-avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid #38bdf8; background: #0f172a; }
+.ref-user-info { text-align: left; }
+.ref-user-name { font-size: 13px; font-weight: 800; color: #f8fafc; margin-bottom: 2px; }
+.ref-user-id { font-size: 11px; color: #38bdf8; font-weight: 700; }
+.ref-user-badge { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); padding: 6px 12px; border-radius: 14px; font-size: 11px; font-weight: 800; box-shadow: 0 3px 10px rgba(0,0,0,0.2); white-space: nowrap; }
 
-.wallet-hero-card { background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(16, 185, 129, 0.15)); border: 1.5px solid rgba(6, 182, 212, 0.3); border-radius: 20px; padding: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); margin-bottom: 12px; position: relative; overflow: hidden; text-align: center; backdrop-filter: blur(10px); }
-.wallet-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #06b6d4, #10b981); color: white; padding: 4px 14px; border-radius: 14px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; box-shadow: 0 4px 12px rgba(6,182,212,0.3); }
-.wallet-id-box { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(10px); padding: 6px 14px; border-radius: 10px; display: inline-block; font-size: 12px; color: #38bdf8; font-weight: 700; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 12px; }
-.wallet-balance-box { background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 12px; margin-bottom: 10px; }
-.wallet-balance-title { font-size: 11px; color: #cbd5e1; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
-.wallet-balance-num { font-size: 28px; font-weight: 800; color: #38bdf8; text-shadow: 0 2px 10px rgba(56,189,248,0.3); }
-.wallet-notice-box { background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.25); border-radius: 10px; padding: 8px 12px; font-size: 12px; font-weight: 700; color: #38bdf8; display: flex; align-items: center; justify-content: center; gap: 6px; }
+/* কাজ পেজ ইউনিক বাটন ও সেকশন ডিজাইন */
+.work-hero-box { background: linear-gradient(135deg, #065f46, #047857); border-radius: 22px; padding: 20px 16px; margin: 10px 0 14px 0; color: white; text-align: center; box-shadow: 0 10px 25px rgba(16,185,129,0.3); border: 1.5px solid rgba(255,255,255,0.2); }
+.btn-work-video { display: block; background: linear-gradient(135deg, #38bdf8, #0284c7); color: #0f172a; padding: 14px 20px; border-radius: 14px; text-decoration: none; font-weight: 800; font-size: 14px; margin-bottom: 10px; box-shadow: 0 6px 15px rgba(56,189,248,0.3); transition: transform 0.2s; }
+.btn-work-bonus-guide { display: block; background: linear-gradient(135deg, #f59e0b, #d97706); color: #0f172a; padding: 14px 20px; border-radius: 14px; text-decoration: none; font-weight: 800; font-size: 14px; box-shadow: 0 6px 15px rgba(245,158,11,0.3); transition: transform 0.2s; }
+.btn-work-video:active, .btn-work-bonus-guide:active { transform: scale(0.98); }
 
-.btn-withdraw-action { display: block; width: 100%; background: linear-gradient(135deg, #06b6d4, #3b82f6); color: #0f172a; border: none; padding: 14px; border-radius: 16px; font-size: 15px; font-weight: 800; text-align: center; cursor: pointer; box-shadow: 0 6px 20px rgba(6,182,212,0.4); margin-bottom: 14px; transition: transform 0.2s; text-decoration: none; }
-.btn-withdraw-action:active { transform: scale(0.98); }
+.work-main-card { background: linear-gradient(145deg, #1e293b, #131c2e); padding: 18px 16px; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); margin-bottom: 14px; color: white; }
+.btn-main-ad { background: linear-gradient(135deg, #ef4444, #b91c1c); color: white; border: none; padding: 14px; font-size: 14px; font-weight: 800; border-radius: 14px; cursor: pointer; width: 100%; box-shadow: 0 6px 20px rgba(239,68,68,0.4); display: flex; align-items: center; justify-content: center; gap: 8px; transition: transform 0.2s; }
+.btn-main-ad:active { transform: scale(0.98); }
 
-.wallet-menu-card { background: #1e293b; border-radius: 16px; padding: 12px 16px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; transition: background 0.2s; text-decoration: none; color: inherit; }
-.wallet-menu-card:active { background: #2a3950; }
-.wallet-menu-left { display: flex; align-items: center; gap: 12px; }
-.wallet-menu-icon { width: 40px; height: 40px; background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #38bdf8; }
-.wallet-menu-title { font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 2px; }
-.wallet-menu-desc { font-size: 11px; color: #94a3b8; font-weight: 600; }
-.wallet-menu-arrow { font-size: 16px; color: #64748b; font-weight: 700; }
+.channel-bonus-banner { background: rgba(6, 95, 70, 0.4); border: 1.5px solid #10b981; padding: 12px 14px; border-radius: 14px; font-size: 12px; font-weight: 700; color: #34d399; margin-bottom: 14px; text-align: center; box-shadow: 0 4px 12px rgba(16,185,129,0.15); display: flex; align-items: center; justify-content: center; gap: 8px; }
 
-.wallet-form-box { background: #1e293b; border-radius: 18px; padding: 16px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05); margin-bottom: 12px; text-align: left; display: none; }
-.wallet-form-box.active { display: block; }
-.wallet-label { display: block; font-weight: 700; font-size: 12px; color: #94a3b8; margin-bottom: 4px; margin-top: 8px; }
-.wallet-label:first-of-type { margin-top: 0; }
-
-.quick-amounts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 8px 0 10px 0; }
-.quick-amount-btn { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399; padding: 8px 4px; font-size: 12px; font-weight: 700; border-radius: 8px; cursor: pointer; text-align: center; transition: all 0.2s; }
-.quick-amount-btn:active { background: #10b981; color: white; transform: scale(0.95); }
+/* চ্যানেল ও সোশ্যাল বোনাস বাটনগুলোর ইউনিক ইউনিক ডিজাইন */
+.grid-channel-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.btn-chan-style-1 { background: linear-gradient(135deg, #1e293b, #0f172a); color: #38bdf8; border: 1.5px solid rgba(56,189,248,0.4); padding: 12px 10px; font-size: 11px; font-weight: 800; border-radius: 14px; cursor: pointer; width: 100%; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: transform 0.2s; }
+.btn-chan-style-2 { background: linear-gradient(135deg, #1e293b, #0f172a); color: #34d399; border: 1.5px solid rgba(16,185,129,0.4); padding: 12px 10px; font-size: 11px; font-weight: 800; border-radius: 14px; cursor: pointer; width: 100%; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: transform 0.2s; }
+.btn-chan-style-3 { background: linear-gradient(135deg, #1e293b, #0f172a); color: #f43f5e; border: 1.5px solid rgba(244,63,94,0.4); padding: 12px 10px; font-size: 11px; font-weight: 800; border-radius: 14px; cursor: pointer; width: 100%; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: transform 0.2s; }
+.btn-chan-style-4 { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 12px 10px; font-size: 11px; font-weight: 800; border-radius: 14px; cursor: pointer; width: 100%; box-shadow: 0 6px 15px rgba(239,68,68,0.4); text-align: center; transition: transform 0.2s; }
+.btn-chan-style-1:active, .btn-chan-style-2:active, .btn-chan-style-3:active, .btn-chan-style-4:active { transform: scale(0.97); }
 
 /* পেমেন্ট হিস্ট্রি নিয়ন ডিজাইন */
 .history-header-box { background: linear-gradient(135deg, #1e293b, #0f172a); border: 1.5px solid rgba(56, 189, 248, 0.25); border-radius: 20px; padding: 16px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
@@ -265,19 +264,20 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
+<!-- কাজ পেজ (নতুন আকর্ষণীয় ও প্রিমিয়াম ডিজাইন) -->
 <div id="page-work" class="page" style="padding: 5px;">
-    <div style="background: linear-gradient(135deg, #065f46, #047857); border-radius: 20px; padding: 20px 16px; margin: 10px 0; color: white; text-align: center; box-shadow: 0 10px 25px rgba(16,185,129,0.3); border: 1.5px solid rgba(255,255,255,0.15);">
+    <div class="work-hero-box">
         <h2 style="margin-top: 0; font-size: 18px; margin-bottom: 12px; font-weight: 800; letter-spacing: 0.5px;">🎥 কিভাবে কাজ করবেন?</h2>
-        <a href="https://youtube.com/shorts/7ljXq-ArTNw?si=92ieAqcu9ns5Lj-k" target="_blank" style="display: block; background: linear-gradient(135deg, #ffffff, #f1f5f9); color: #065f46; padding: 14px 20px; border-radius: 14px; text-decoration: none; font-weight: 800; font-size: 14px; margin-bottom: 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.15);">📺 কাজের ভিডিও দেখুন</a>
-        <a href="https://youtube.com/shorts/EZR9C_hEleU?si=9s6nyD1gTExfLxyC" target="_blank" style="display: block; background: linear-gradient(135deg, #ffffff, #f1f5f9); color: #065f46; padding: 14px 20px; border-radius: 14px; text-decoration: none; font-weight: 800; font-size: 14px; box-shadow: 0 6px 15px rgba(0,0,0,0.15);">🎁 বোনাস কিভাবে নিবেন দেখুন</a>
+        <a href="https://youtube.com/shorts/7ljXq-ArTNw?si=92ieAqcu9ns5Lj-k" target="_blank" class="btn-work-video">📺 কাজের ভিডিও দেখুন</a>
+        <a href="https://youtube.com/shorts/EZR9C_hEleU?si=9s6nyD1gTExfLxyC" target="_blank" class="btn-work-bonus-guide">🎁 বোনাস কিভাবে নিবেন দেখুন</a>
     </div>
 
-    <div style="background: linear-gradient(135deg, #450a0a, #065f46, #047857); padding: 16px; border-radius: 18px; box-shadow: 0 8px 20px rgba(16,185,129,0.2); text-align: center; border: 1.5px solid rgba(255,255,255,0.1); margin-bottom: 12px; color: white;">
-        <div style="font-size: 20px; margin-bottom: 2px;">📺</div>
+    <div class="work-main-card">
+        <div style="font-size: 22px; margin-bottom: 4px;">📺</div>
         <h3 style="margin: 0 0 4px 0; font-size: 16px; letter-spacing: 0.5px;">বিজ্ঞাপন দেখুন</h3>
         <p style="font-size: 12px; opacity: 0.9; margin-bottom: 12px;">প্রতিটি বিজ্ঞাপন দেখে ২০ কয়েন ইনকাম করুন</p>
         
-        <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 8px 12px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 700; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.15);">
+        <div style="background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); padding: 8px 12px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 700; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.12);">
             <span>আজকের সম্পন্ন</span>
             <span style="background: #ffffff; color: #065f46; padding: 2px 8px; border-radius: 6px; font-size: 13px;"><span id="task-count">0</span> / 100</span>
         </div>
@@ -286,31 +286,31 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <div id="progress-bar" style="background: linear-gradient(90deg, #ef4444, #10b981, #34d399); height: 100%; width: 0%; border-radius: 6px; transition: width 0.4s ease;"></div>
         </div>
 
-        <button onclick="watchRealAd()" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 11px; font-size: 14px; font-weight: 800; border-radius: 12px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(239,68,68,0.4); display: flex; align-items: center; justify-content: center; gap: 6px;">
+        <button onclick="watchRealAd()" class="btn-main-ad">
             <span>🚀</span> এড দেখতে এখানে ক্লিক করুন
         </button>
     </div>
     
-    <div style="background: rgba(6, 95, 70, 0.4); border: 1.5px solid #10b981; padding: 10px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; color: #34d399; margin-bottom: 12px; text-align: center; box-shadow: 0 4px 10px rgba(16,185,129,0.1); display: flex; align-items: center; justify-content: center; gap: 6px;">
+    <div class="channel-bonus-banner">
         <span style="font-size: 14px;">🔔</span> ২০০ টাকা বোনাস নিতে আমাদের চ্যানেলগুলো ফলো করুন
     </div>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-        <button id="btn-chan1" onclick="claimChannelBonus('chan1', 'https://t.me/ad16269')" style="background: #1e293b; color: #94a3b8; border: 1px solid rgba(255,255,255,0.08); padding: 10px 8px; font-size: 11px; font-weight: 700; border-radius: 12px; cursor: pointer; width: 100%; text-align: center;">
-            <span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span> 
-            <span>ইতিমধ্যে নেওয়া হয়েছে</span>
+    <div class="grid-channel-buttons">
+        <button id="btn-chan1" onclick="claimChannelBonus('chan1', 'https://t.me/ad16269')" class="btn-chan-style-1">
+            <span style="background: rgba(56,189,248,0.2); width: 22px; height: 22px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; color: #38bdf8;">✨</span> 
+            <span>চ্যানেল ১ বোনাস</span>
         </button>
-        <button id="btn-chan2" onclick="claimChannelBonus('chan2', 'https://t.me/AH16269')" style="background: #1e293b; color: #94a3b8; border: 1px solid rgba(255,255,255,0.08); padding: 10px 8px; font-size: 11px; font-weight: 700; border-radius: 12px; cursor: pointer; width: 100%; text-align: center;">
-            <span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span> 
-            <span>ইতিমধ্যে নেওয়া হয়েছে</span>
+        <button id="btn-chan2" onclick="claimChannelBonus('chan2', 'https://t.me/AH16269')" class="btn-chan-style-2">
+            <span style="background: rgba(16,185,129,0.2); width: 22px; height: 22px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">✨</span> 
+            <span>চ্যানেল ২ বোনাস</span>
         </button>
-        <button id="btn-chan3" onclick="claimChannelBonus('chan3', 'https://facebook.com/AD16169')" style="background: #1e293b; color: #94a3b8; border: 1px solid rgba(255,255,255,0.08); padding: 10px 8px; font-size: 11px; font-weight: 700; border-radius: 12px; cursor: pointer; width: 100%; text-align: center;">
-            <span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span> 
-            <span>ইতিমধ্যে নেওয়া হয়েছে</span>
+        <button id="btn-chan3" onclick="claimChannelBonus('chan3', 'https://facebook.com/AD16169')" class="btn-chan-style-3">
+            <span style="background: rgba(244,63,94,0.2); width: 22px; height: 22px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; color: #f43f5e;">👥</span> 
+            <span>ফেসবুক পেজ বোনাস</span>
         </button>
-        <button id="btn-yt" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 10px 8px; font-size: 11px; font-weight: 700; border-radius: 12px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(239,68,68,0.4); text-align: center;">
-            <span style="background: rgba(255,255,255,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">▶️</span> 
-            <span>ইউটিউব বোনাস (৫০ কয়েন)</span>
+        <button id="btn-yt" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')" class="btn-chan-style-4">
+            <span style="background: rgba(255,255,255,0.2); width: 22px; height: 22px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px;">▶️</span> 
+            <span>ইউটিউব বোনাস</span>
         </button>
     </div>
 </div>
@@ -392,6 +392,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
+<!-- রেফার পেজ (নতুন আকর্ষণীয় প্রিমিয়াম ডিজাইন ও রেন্ডম ইউজার লিস্ট) -->
 <div id="page-refer" class="page">
     <div class="refer-card">
         <div class="refer-badge">💎 রেফার অ্যান্ড আর্ন প্রোগ্রাম</div>
@@ -405,12 +406,12 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         </div>
 
         <div class="refer-link-box">
-            <span id="refer-link" style="font-size: 11px; color: #34d399; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 200px;">লিংক তৈরি হচ্ছে...</span>
+            <span id="refer-link" style="font-size: 11px; color: #38bdf8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 200px;">লিংক তৈরি হচ্ছে...</span>
             <span onclick="copyRefer()" style="cursor:pointer; font-size: 16px; padding-left: 4px;" title="কপি করুন">📋</span>
         </div>
         <div style="display: flex; justify-content: space-between; gap: 8px;">
-            <button class="btn-refer-action" onclick="copyRefer()">📋 লিংক কপি করুন</button>
-            <button class="btn-refer-action" style="background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 4px 12px rgba(239,68,68,0.3);" onclick="shareRefer()">🚀 শেয়ার করুন</button>
+            <button class="btn-refer-copy" onclick="copyRefer()">📋 লিংক কপি করুন</button>
+            <button class="btn-refer-share" onclick="shareRefer()">🚀 শেয়ার করুন</button>
         </div>
     </div>
     
@@ -1135,26 +1136,26 @@ function updateBonusButtonsUI() {
         'chan1': { 
             id: 'btn-chan1', 
             html: (claimed) => claimed ? 
-                `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
-                `<span style="background: rgba(16,185,129,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">✨</span><span>চ্যানেল ১ বোনাস (৫০ কয়েন অফিসিয়াল)</span>`
+                `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
+                `<span style="background: rgba(56,189,248,0.2); width: 22px; height: 22px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; color: #38bdf8;">✨</span><span>চ্যানেল ১ বোনাস</span>`
         },
         'chan2': { 
             id: 'btn-chan2', 
             html: (claimed) => claimed ? 
-                `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
-                `<span style="background: rgba(16,185,129,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">✨</span><span>চ্যানেল ২ বোনাস (৫০ কয়েন অফিসিয়াল)</span>`
+                `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
+                `<span style="background: rgba(16,185,129,0.2); width: 22px; height: 22px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">✨</span><span>চ্যানেল ২ বোনাস</span>`
         },
         'chan3': { 
             id: 'btn-chan3', 
             html: (claimed) => claimed ? 
-                `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
-                `<span style="background: rgba(239,68,68,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #ef4444;">👥</span><span>ফেসবুক পেজ বোনাস (৫০ কয়েন)</span>`
+                `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
+                `<span style="background: rgba(244,63,94,0.2); width: 22px; height: 22px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; color: #f43f5e;">👥</span><span>ফেসবুক পেজ বোনাস</span>`
         },
         'yt': { 
             id: 'btn-yt', 
             html: (claimed) => claimed ? 
-                `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
-                `<span style="background: rgba(255,255,255,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">▶️</span><span>ইউটিউব বোনাস (৫০ কয়েন)</span>`,
+                `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
+                `<span style="background: rgba(255,255,255,0.2); width: 22px; height: 22px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">▶️</span><span>ইউটিউব বোনাস</span>`,
             isRed: true
         }
     };
@@ -1169,16 +1170,6 @@ function updateBonusButtonsUI() {
                 btn.style.background = "#1e293b";
                 btn.style.color = "#94a3b8";
                 btn.style.border = "1px solid rgba(255,255,255,0.08)";
-            } else {
-                if (buttons[key].isRed) {
-                    btn.style.background = "linear-gradient(135deg, #ef4444, #dc2626)";
-                    btn.style.color = "white";
-                    btn.style.border = "none";
-                } else {
-                    btn.style.background = "#1e293b";
-                    btn.style.color = "#f8fafc";
-                    btn.style.border = "1px solid rgba(16,185,129,0.3)";
-                }
             }
         }
     }
@@ -1295,18 +1286,40 @@ function updateUI() {
     if(document.getElementById('mandatory-progress-bar')) document.getElementById('mandatory-progress-bar').style.width = (mandatoryWatched / 150 * 100) + "%";
 }
 
+/* রেন্ডম ইউজার এবং ছবিসহ ডেমো রেফার তালিকা জেনারেটর */
 function loadReferralsList() {
     const listContainer = document.getElementById('referrals-list-container');
     if (!listContainer) return;
     listContainer.innerHTML = '';
+    
     if (totalRefers <= 0) {
-        listContainer.innerHTML = '<div style="text-align:center; padding:15px; color:#94a3b8; font-weight:700; background: #1e293b; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">এখনো কোনো রেফার করা হয়নি</div>';
+        listContainer.innerHTML = '<div style="text-align:center; padding:15px; color:#94a3b8; font-weight:700; background: #1e293b; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05);">এখনো কোনো রেফার করা হয়নি</div>';
         return;
     }
+
+    const demoNames = ["সাকিব আল হাসান", "নাজমুল ইসলাম", "ফাহিম মুনতাসির", "রাকিব হোসেন", "ইমরান খান", "জুবায়ের আহমেদ", "সাদিয়া আক্তার", "মেহেদী হাসান", "সাব্বির রহমান", "আশিকুর রহমান", "তানভীর হাসান", "রাশেদুল ইসলাম", "শরিফুল ইসলাম", "সোহাগ আহমেদ", "পার্থ রায়"];
+    const demoSerials = ["#১৫২", "#১৫৩", "#১৫৪", "#১৫৫৫", "#১৫৬", "#১৫৭", "#১৫৮", "#১৫৯", "#১৬০", "#১৬১", "#১৬২", "#১৬৩", "#১৬৪", "#১৬৫", "#১৬৬"];
+    
     for (let i = 1; i <= totalRefers; i++) {
+        let nameIndex = (i - 1) % demoNames.length;
+        let rName = demoNames[nameIndex];
+        let rSerial = demoSerials[nameIndex];
+        let rId = "ID: ..." + Math.floor(1000 + Math.random() * 9000);
+
         const card = document.createElement('div');
-        card.className = 'list-card';
-        card.innerHTML = `<div><div><b>${i}.</b> 👤 সফল রেফারেল</div><div class="list-date">📅 সক্রিয় মেম্বার</div></div><div style="color: #34d399; font-weight: 800;">+১১ দিন</div>`;
+        card.className = 'referral-user-card';
+        card.innerHTML = `
+            <div class="ref-user-left">
+                <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" class="ref-user-avatar" alt="Avatar">
+                <div class="ref-user-info">
+                    <div class="ref-user-name">${i}. ${rName} (${rSerial})</div>
+                    <div class="ref-user-id">${rId} • 📅 সক্রিয় মেম্বার</div>
+                </div>
+            </div>
+            <div>
+                <div class="ref-user-badge">+১১ দিন</div>
+            </div>
+        `;
         listContainer.appendChild(card);
     }
 }
