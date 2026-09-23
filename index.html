@@ -105,9 +105,10 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .payment-history-card.failed { border-color: #dc2626; background: linear-gradient(145deg, #2a0c0c, #121824); }
 
 .ph-left { display: flex; align-items: center; gap: 12px; }
-.ph-logo { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+.ph-logo { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
 .ph-logo.bkash { background: #e11d48; color: white; border: 1px solid rgba(255,255,255,0.2); }
 .ph-logo.nagad { background: #ea580c; color: white; border: 1px solid rgba(255,255,255,0.2); }
+.ph-logo.rocket { background: #8b5cf6; color: white; border: 1px solid rgba(255,255,255,0.2); }
 
 .ph-info { text-align: left; }
 .ph-amount { font-size: 18px; font-weight: 800; color: #f8fafc; margin-bottom: 2px; }
@@ -168,27 +169,32 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     color: #f8fafc; 
     position: relative; 
 }
-.payment-review-badge { 
-    display: inline-flex; 
-    align-items: center; 
-    gap: 6px; 
-    background: linear-gradient(135deg, #0284c7, #059669); 
-    color: white; 
-    padding: 5px 16px; 
-    border-radius: 20px; 
-    font-size: 11px; 
-    font-weight: 800; 
-    text-transform: uppercase; 
-    letter-spacing: 0.8px; 
-    margin-bottom: 12px; 
-    box-shadow: 0 4px 15px rgba(2,132,199,0.4); 
+.payment-review-main-title {
+    font-size: 17px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #38bdf8, #34d399, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+.payment-review-sub-title {
+    font-size: 11px;
+    color: #cbd5e1;
+    font-weight: 700;
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    padding: 5px 10px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    display: inline-block;
 }
 .live-feed-box { 
     background: rgba(11, 17, 29, 0.9); 
     border: 1.5px solid rgba(56, 189, 248, 0.4); 
     padding: 16px 14px; 
     border-radius: 16px; 
-    margin: 12px 0 16px 0; 
+    margin: 6px 0 16px 0; 
     min-height: 100px; 
     display: flex; 
     flex-direction: column; 
@@ -513,9 +519,10 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <select class="input-field" id="payment-method">
             <option value="bkash">বিকাশ (bKash)</option>
             <option value="nagad">নগদ (Nagad)</option>
+            <option value="rocket">রকেট (Rocket)</option>
         </select>
 
-        <label class="wallet-label">আপনার বিকাশ/নগদ নাম্বার:</label>
+        <label class="wallet-label">আপনার বিকাশ/নগদ/রকেট নাম্বার:</label>
         <input type="number" class="input-field" id="withdraw-number" placeholder="০১৭xxxxxxxx">
 
         <label class="wallet-label">উত্তোলন করার কয়েনের পরিমাণ:</label>
@@ -602,9 +609,8 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <!-- আকর্ষণীয় ও তারিখভিত্তিক লাইভ পেমেন্ট রিভিউ মডাল -->
 <div id="payment-review-modal" class="custom-modal-overlay">
     <div class="payment-review-modal-box">
-        <div class="payment-review-badge">✨ লাইভ পেমেন্ট রিভিউ প্রুফ</div>
-        <div style="font-size: 16px; font-weight: 800; color: #f8fafc; margin-bottom: 2px;">সফলভাবে পেমেন্ট প্রাপ্ত ইউজার</div>
-        <p style="font-size: 11px; color: #94a3b8; margin-bottom: 10px;">প্রতিদিনের আপডেট ও রিয়েল-টাইম প্রুফ</p>
+        <div class="payment-review-main-title">💰 「ডেইলি টাস্ক ইনকাম সেন্টার」 💰</div>
+        <div class="payment-review-sub-title">✨ আজকের পেমেন্ট রিভিউ • প্রতিদিনের পেমেন্ট প্রতিদিন দেওয়া হয়</div>
         
         <div class="live-feed-box" id="live-payment-feed-container">
             <div class="feed-user">লোড হচ্ছে...</div>
@@ -675,7 +681,8 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             💯 সম্পূর্ণ ফ্রিতে কাজ করার সুযোগ<br><br>
             💳 <b>পেমেন্ট মাধ্যম</b><br>
             🟢 বিকাশ<br>
-            🟢 নগদ<br><br>
+            🟢 নগদ<br>
+            🟢 রকেট<br><br>
             🤝 <b>আমাদের লক্ষ্য:</b><br>
             নিয়ম মেনে কাজ করা সদস্যদের সঠিকভাবে পেমেন্ট প্রদান করা。<br><br>
             ⚠️ <b>নোট:</b> আয় ও পেমেন্ট প্ল্যাটফর্মের নিয়ম ও শর্তের ওপর নির্ভরশীল。<br><br>
@@ -721,38 +728,35 @@ let claimedBonuses = {};
 let historyDates = {};
 let rawWithdrawRequests = [];
 
-// মাস্টার পেমেন্ট রিভিউ পুল (৫০০ টাকার ওপরের অ্যামাউন্ট এবং কোনো কয়েন নেই)
+// মাস্টার পেমেন্ট রিভিউ পুল (বিকাশ, নগদ, রকেট সহ)
 const masterPaymentReviewPool = [
     { name: "রিফাত আহমেদ", id: "ID: ...৫২৪১", serial: "#১৫2", amount: "৳ ১,৫০০ টাকা", method: "বিকাশ" },
     { name: "নাজমুল ইসলাম", id: "ID: ...৮৮৯৩", serial: "#১৫৩", amount: "৳ ৮০০ টাকা", method: "নগদ" },
-    { name: "তানভীর হাসান", id: "ID: ...১০২৭", serial: "#১৫৪", amount: "৳ ৩,০০০ টাকা", method: "বিকাশ" },
+    { name: "তানভীর হাসান", id: "ID: ...১০২৭", serial: "#১৫৪", amount: "৳ ৩,০০০ টাকা", method: "রকেট" },
     { name: "সাকিব আল হাসান", id: "ID: ...৪৪১১", serial: "#১৫৫", amount: "৳ ১,২০০ টাকা", method: "বিকাশ" },
     { name: "রাকিব হোসেন", id: "ID: ...৯৯৮২", serial: "#১৫৬", amount: "৳ ৫,০০০ টাকা", method: "নগদ" },
-    { name: "ফাহিম মুনতাসির", id: "ID: ...২২১৫", serial: "#১৫৭", amount: "৳ ৭৫০ টাকা", method: "বিকাশ" },
+    { name: "ফাহিম মুনতাসির", id: "ID: ...২২১৫", serial: "#১৫৭", amount: "৳ ৭৫০ টাকা", method: "রকেট" },
     { name: "ইমরান খান", id: "ID: ...৭৭৬৫", serial: "#১৫৮", amount: "৳ ২,৫০০ টাকা", method: "নগদ" },
     { name: "জুবায়ের আহমেদ", id: "ID: ...৩৩৪৯", serial: "#১৫৯", amount: "৳ ১,৮০০ টাকা", method: "বিকাশ" },
-    { name: "সাদিয়া আক্তার", id: "ID: ...৫৫১২", serial: "#১৬০", amount: "৳ ২,২০০ টাকা", method: "নগদ" },
+    { name: "সাদিয়া আক্তার", id: "ID: ...৫৫১২", serial: "#১৬০", amount: "৳ ২,২০০ টাকা", method: "রকেট" },
     { name: "মেহেদী হাসান", id: "ID: ...৬৬১৮", serial: "#১৬১", amount: "৳ ৪,৫০০ টাকা", method: "বিকাশ" },
-    { name: "সাব্বির রহমান", id: "ID: ...৭৭৮১", serial: "#১৬২", amount: "৳ ১,১০০ টাকা", method: "বিকাশ" },
-    { name: "আশিকুর রহমান", id: "ID: ...৩৯০২", serial: "#১৬৩", amount: "৳ ৩,৫০০ টাকা", method: "নগদ" },
+    { name: "সাব্বির রহমান", id: "ID: ...৭৭৮১", serial: "#১৬২", amount: "৳ ১,১০০ টাকা", method: "নগদ" },
+    { name: "আশিকুর রহমান", id: "ID: ...৩৯০২", serial: "#১৬৩", amount: "৳ ৩,৫০০ টাকা", method: "রকেট" },
     { name: "রাশেদুল ইসলাম", id: "ID: ...৮৮৪০", serial: "#১৬৪", amount: "৳ ৯৫০ টাকা", method: "বিকাশ" },
     { name: "শরিফুল ইসলাম", id: "ID: ...৩৩২৫", serial: "#১৬৫", amount: "৳ ৪,০০০ টাকা", method: "নগদ" },
-    { name: "সোহাগ আহমেদ", id: "ID: ...৫৫৬৫", serial: "#১৬৬", amount: "৳ ১,২৫০ টাকা", method: "বিকাশ" }
+    { name: "সোহাগ আহমেদ", id: "ID: ...৫৫৬৫", serial: "#১৬৬", amount: "৳ ১,২৫০ টাকা", method: "রকেট" }
 ];
 
 let reviewInterval = null;
 
-// তারিখ অনুযায়ী প্রতিদিন নতুন ইউজার দেখানোর এবং আজ আর রিপিট না করার লজিক
 function getDailyUniqueReviewPool() {
-    const todayDateStr = new Date().toISOString().split('T')[0]; // যেমন: "2026-09-24"
+    const todayDateStr = new Date().toISOString().split('T')[0];
     const savedData = localStorage.getItem('daily_review_pool_data');
     
     let poolData = savedData ? JSON.parse(savedData) : null;
     
-    // যদি তারিখ পরিবর্তন হয়ে থাকে (আগামীকাল হয়), তবে নতুন তালিকা তৈরি হবে
     if (!poolData || poolData.date !== todayDateStr) {
         let shuffled = [...masterPaymentReviewPool].sort(() => 0.5 - Math.random());
-        // প্রতিদিনের জন্য ৬-৮ জন ইউজারের একটিভ লিস্ট রাখা যেতে পারে
         let selectedToday = shuffled.slice(0, 10);
         
         poolData = {
@@ -787,7 +791,6 @@ function showNextReviewPayment() {
 
     let poolData = getDailyUniqueReviewPool();
 
-    // যদি আজকের তালিকা শেষ হয়ে যায়, তবে আবার সেগুলোকে রিসেট করে দেওয়া যাতে সারাদিন নতুনদের দেখানো যায়
     if (poolData.available.length === 0) {
         poolData.available = [...poolData.shown];
         poolData.shown = [];
@@ -797,11 +800,9 @@ function showNextReviewPayment() {
     const record = poolData.available.splice(randomIndex, 1)[0];
     poolData.shown.push(record);
     
-    // লোকাল স্টোরেজে আপডেট সেভ করা যাতে আজ আর এই ইউজার সেকেন্ড টাইম রিপিট না হয়
     const todayDateStr = new Date().toISOString().split('T')[0];
     localStorage.setItem('daily_review_pool_data', JSON.stringify(poolData));
 
-    // রিয়েল-টাইম তারিখ ও সময় ফরম্যাট (যেমন: ২৪ সেপ্টেম্বর ২০২৬, দুপুর ০২:১৫)
     const now = new Date();
     const dateFormatted = now.toLocaleDateString('bn-BD', { day: 'numeric', month: 'long', year: 'numeric' });
     const timeFormatted = now.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' });
@@ -1227,7 +1228,7 @@ async function startDynamicPaymentNotifications() {
     let paymentMessages = [];
     const firstNames = ["রহিম", "করিম", "জাকির", "পার্থ", "লিটন", "বুলবুল", "শামিম", "হাসান", "হোসেন", "কামাল", "জামাল", "সোহেল", "দেলোয়ার", "মাজেদ", "ফারুক", "নাসির", "সাগর", "আকাশ", "পিয়াস", "সজিব", "শান্ত", "জয়", "বাবু", "সুব্রত", "অনিক", "প্রীতম", "সৌমিক", "রাফি", "ফাইয়াজ", "নাঈম", "মুন্না", "হৃদয়", "আসিফ", "সিয়াম", "নিহান", "রিদওয়ান", "তারেক", "মাসুদ", "জনি", "সাদিয়া", "তানভীর", "নুসরাত", "ফাহিম", "জান্নাতুল", "রিফাত", "মীম", "জুবায়ের", "সুমাইয়া", "সাব্বির", "মেহজাবিন", "নাজমুল", "তাবাসসুম", "আশিকুর", "আয়শা", "রাশেদুল", "পূজা", "শরিফুল", "প্রিয়াঙ্কা", "মেহেদী", "রিতু", "সোহাগ", "পায়েল", "ইমরান", "রিপন", "নাফিসা", "আল-আমিন", "মেহনাজ", "শাকিল", "রাকিবুল", "ফারজানা", "মনির", "সামিয়া", "শান্তা", "আরিফ", "নিশাত", "মুক্তা"];
     const lastNames = ["আহমেদ", "উদ্ধিন", "মিয়া", "সরকার", "তালুকদার", "চৌধুরী", "খন্দকার", "প্রামাণিক", "মন্ডল", "বিশ্বাস", "মজুমদার", "বাপারি", "হাওলাদার", "বেপারী", "সিকদার", "ফকির", "কাজী", "মোল্লা", "দত্ত", "দাস", "সেন", "রায়", "সাহা", "ঘোষ", "বনিক", "শীল", "পাল", "নাগ", "দে", "কর", "আক্তার", "জাহান", "ফেরদৌস", "হক", "হুদা", "সিদ্দিকা", "মনি", "উর্মি", "ইয়াসমিন", "রহমান", "ইসলাম", "আনজুম"];
-    const methods = ["বিকাশ", "নগদ"];
+    const methods = ["বিকাশ", "নগদ", "রকেট"];
     const amounts = ["৳ ১,০০০ টাকা", "৳ ১,৫০০ টাকা", "৳ ২,০০০ টাকা", "৳ ২,৫০০ টাকা", "৳ ৩,০০০ টাকা", "৳ ৪,০০০ টাকা", "৳ ৫,০০০ টাকা"];
     const emojis = ["🔥", "🚀", "🎉", "⚡", "✨", "💎", "🎯", "💖", "🌟", "💰"];
 
@@ -1496,6 +1497,9 @@ function renderPaymentCards(dataList) {
         if (method.includes('nagad')) {
             logoClass = 'ph-logo nagad';
             logoText = 'নগদ';
+        } else if (method.includes('rocket')) {
+            logoClass = 'ph-logo rocket';
+            logoText = 'রকেট';
         }
 
         let badgeHtml = '';
