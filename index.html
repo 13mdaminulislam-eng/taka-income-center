@@ -154,17 +154,16 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .btn-act-cancel { background: rgba(255,255,255,0.08); color: #94a3b8; border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 10px; width: 80px; font-weight: 700; font-size: 13px; cursor: pointer; }
 .btn-act-contact:active, .btn-act-cancel:active { transform: scale(0.98); }
 
-/* পেমেন্ট রিভিউ মডাল ডিজাইন */
+/* প্রিমিয়াম পেমেন্ট রিভিউ মডাল ডিজাইন */
 .payment-review-modal-box { 
-    background: linear-gradient(145deg, #182235, #0d1322); 
-    border: 2px solid; 
-    border-image: linear-gradient(135deg, #38bdf8, #10b981, #ef4444) 1; 
-    border-radius: 24px; 
+    background: linear-gradient(145deg, #121a2c, #090d16); 
+    border: 2px solid rgba(56, 189, 248, 0.5); 
+    border-radius: 26px; 
     width: 100%; 
     max-width: 360px; 
     padding: 22px 18px; 
     text-align: center; 
-    box-shadow: 0 25px 50px rgba(0,0,0,0.8), 0 0 25px rgba(56,189,248,0.25); 
+    box-shadow: 0 30px 60px rgba(0,0,0,0.85), 0 0 30px rgba(56,189,248,0.25); 
     color: #f8fafc; 
     position: relative; 
 }
@@ -183,23 +182,23 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     font-weight: 700;
     background: rgba(16, 185, 129, 0.15);
     border: 1px solid rgba(16, 185, 129, 0.3);
-    padding: 5px 10px;
-    border-radius: 12px;
-    margin-bottom: 12px;
+    padding: 5px 12px;
+    border-radius: 14px;
+    margin-bottom: 14px;
     display: inline-block;
 }
 .live-feed-box { 
-    background: rgba(11, 17, 29, 0.9); 
+    background: rgba(15, 23, 42, 0.95); 
     border: 1.5px solid rgba(56, 189, 248, 0.4); 
-    padding: 16px 14px; 
-    border-radius: 16px; 
+    padding: 18px 14px; 
+    border-radius: 18px; 
     margin: 6px 0 16px 0; 
-    min-height: 110px; 
+    min-height: 125px; 
     display: flex; 
     flex-direction: column; 
     justify-content: center; 
     align-items: center; 
-    box-shadow: inset 0 3px 12px rgba(0,0,0,0.6); 
+    box-shadow: inset 0 4px 15px rgba(0,0,0,0.7), 0 8px 25px rgba(0,0,0,0.4); 
     animation: fadeInModal 0.4s ease-in-out; 
     position: relative;
     overflow: hidden;
@@ -211,11 +210,11 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     height: 3.5px;
     background: linear-gradient(90deg, #38bdf8, #10b981, #f59e0b, #ef4444);
 }
-.feed-user-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
-.feed-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid #38bdf8; background: #0f172a; }
-.feed-user { font-weight: 800; color: #38bdf8; font-size: 15px; text-shadow: 0 2px 5px rgba(56,189,248,0.3); }
-.feed-details { color: #cbd5e1; font-size: 12px; font-weight: 600; line-height: 1.5; text-align: center; }
-.feed-amount { color: #34d399; font-weight: 800; font-size: 16px; text-shadow: 0 2px 8px rgba(16,185,129,0.4); }
+.feed-user-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.feed-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2.5px solid #38bdf8; background: #0f172a; box-shadow: 0 4px 10px rgba(56,189,248,0.3); }
+.feed-user { font-weight: 800; color: #f8fafc; font-size: 15px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+.feed-details { color: #cbd5e1; font-size: 12px; font-weight: 700; line-height: 1.6; text-align: center; }
+.feed-amount { color: #34d399; font-weight: 800; font-size: 17px; text-shadow: 0 2px 8px rgba(16,185,129,0.4); }
 </style>
 </head>
 <body>
@@ -717,28 +716,28 @@ let claimedBonuses = {};
 let historyDates = {};
 let rawWithdrawRequests = [];
 
-// সম্পূর্ণ নতুন মেয়েদের নাম, ছবি, রেন্ডম আইডি ও সিরিয়াল নাম্বার যুক্ত মাস্টার পুল (রকেট বাদ দিয়ে শুধু বিকাশ ও নগদ)
+// মেয়েদের নাম, ছবি, রেন্ডম আইডি, সিরিয়াল নাম্বার এবং ডেমো বিকাশ/নগদ নাম্বারসহ মাস্টার পুল
 const masterPaymentReviewPool = [
-    { name: "সাদিয়া আক্তার", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ১,৫০০ টাকা", method: "বিকাশ", serial: "#১৬১", telegramId: "...৬৬১৮" },
-    { name: "নুসরাত জাহান", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৮০০ টাকা", method: "নগদ", serial: "#১৫২", telegramId: "...৫২৪১" },
-    { name: "জান্নাতুল ফেরদৌস", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150", amount: "৳ ৩,০০০ টাকা", method: "বিকাশ", serial: "#১৮৩", telegramId: "...৯৮৭৫" },
-    { name: "মেহজাবিন চৌধুরী", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150", amount: "৳ ১,২০০ টাকা", method: "নগদ", serial: "#১৯৪", telegramId: "...৩১২০" },
-    { name: "তাবাসসুম মীম", avatar: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=150", amount: "৳ ৫,০০০ টাকা", method: "বিকাশ", serial: "#২০৫", telegramId: "...৭৬৫৪" },
-    { name: "আয়শা সিদ্দিকা", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150", amount: "৳ ৭৫০ টাকা", method: "নগদ", serial: "#২১৬", telegramId: "...৪০৮৯" },
-    { name: "পূজা সেন", avatar: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=150", amount: "৳ ২,৫০০ টাকা", method: "বিকাশ", serial: "#২২৭", telegramId: "...৫৫১২" },
-    { name: "প্রিয়াঙ্কা রায়", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150", amount: "৳ ১,৮০০ টাকা", method: "নগদ", serial: "#২৩৮", telegramId: "...১৯৩৩" },
-    { name: "রিতু মনি", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150", amount: "৳ ২,২০০ টাকা", method: "বিকাশ", serial: "#২৪৯", telegramId: "...৮৪৪৫" },
-    { name: "পায়েল ঘোষ", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৪,৫০০ টাকা", method: "নগদ", serial: "#২৫০", telegramId: "...৩৭৮৯" },
-    { name: "নাফিসা তাবাসসুম", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150", amount: "৳ ১,১০০ টাকা", method: "বিকাশ", serial: "#২৬১", telegramId: "...৪৯২০" },
-    { name: "মেহনাজ উর্মি", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150", amount: "৳ ৩,৫০০ টাকা", method: "নগদ", serial: "#২৭২", telegramId: "...৬১৫৩" },
-    { name: "ফারজানা ইয়াসমিন", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ৯৫০ টাকা", method: "বিকাশ", serial: "#২৮৩", telegramId: "...৭২৮৪" },
-    { name: "সামিয়া রহমান", avatar: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=150", amount: "৳ ৪,০০০ টাকা", method: "নগদ", serial: "#২৯৪", telegramId: "...৮৩৯১" },
-    { name: "শান্তা ইসলাম", avatar: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=150", amount: "৳ ১,২৫০ টাকা", method: "বিকাশ", serial: "#৩০৫", telegramId: "...৯৫০২" },
-    { name: "নিশাত আনজুম", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150", amount: "৳ ২,৮০০ টাকা", method: "নগদ", serial: "#৩১৬", telegramId: "...১০১৫" },
-    { name: "মুক্তা মনি", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৩,২০০ টাকা", method: "বিকাশ", serial: "#৩২৭", telegramId: "...২০২৬" },
-    { name: "সুবর্ণা আক্তার", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150", amount: "৳ ১,৬০০ টাকা", method: "নগদ", serial: "#৩৩৮", telegramId: "...৩০৩৭" },
-    { name: "তানিয়া খাতুন", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150", amount: "৳ ২,১০০ টাকা", method: "বিকাশ", serial: "#৩৪৯", telegramId: "...৪০৪৮" },
-    { name: "রোকেয়া বেগম", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ১,৯০০ টাকা", method: "নগদ", serial: "#৩৫ কাজেই", telegramId: "...৫০৫৯" }
+    { name: "সাদিয়া আক্তার", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ১,৫০০ টাকা", method: "বিকাশ", number: "017****4318", serial: "#১৬১", telegramId: "...৬৬১৮" },
+    { name: "নুসরাত জাহান", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৮০০ টাকা", method: "নগদ", number: "018****2954", serial: "#১৫২", telegramId: "...৫২৪১" },
+    { name: "জান্নাতুল ফেরদৌস", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150", amount: "৳ ৩,০০০ টাকা", method: "বিকাশ", number: "019****8172", serial: "#১৮৩", telegramId: "...৯৮৭৫" },
+    { name: "মেহজাবিন চৌধুরী", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150", amount: "৳ ১,২০০ টাকা", method: "নগদ", number: "013****6493", serial: "#১৯৪", telegramId: "...৩১২০" },
+    { name: "তাবাসসুম মীম", avatar: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=150", amount: "৳ ৫,০০০ টাকা", method: "বিকাশ", number: "016****3821", serial: "#২০৫", telegramId: "...৭৬৫৪" },
+    { name: "আয়শা সিদ্দিকা", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150", amount: "৳ ৭৫০ টাকা", method: "নগদ", number: "015****9205", serial: "#২১৬", telegramId: "...৪০৮৯" },
+    { name: "পূজা সেন", avatar: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=150", amount: "৳ ২,৫০০ টাকা", method: "বিকাশ", number: "017****1586", serial: "#২২৭", telegramId: "...৫৫১২" },
+    { name: "প্রিয়াঙ্কা রায়", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150", amount: "৳ ১,৮০০ টাকা", method: "নগদ", number: "018****7340", serial: "#২৩৮", telegramId: "...১৯৩৩" },
+    { name: "রিতু মনি", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150", amount: "৳ ২,২০০ টাকা", method: "বিকাশ", number: "019****4619", serial: "#২৪৯", telegramId: "...৮৪৪৫" },
+    { name: "পায়েল ঘোষ", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৪,৫০০ টাকা", method: "নগদ", number: "013****2984", serial: "#২৫০", telegramId: "...৩৭৮৯" },
+    { name: "নাফিসা তাবাসসুম", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150", amount: "৳ ১,১০০ টাকা", method: "বিকাশ", number: "016****5173", serial: "#২৬১", telegramId: "...৪৯২০" },
+    { name: "মেহনাজ উর্মি", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150", amount: "৳ ৩,৫০০ টাকা", method: "নগদ", number: "017****8392", serial: "#২৭২", telegramId: "...৬১৫৩" },
+    { name: "ফারজানা ইয়াসমিন", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ৯৫০ টাকা", method: "বিকাশ", number: "018****2047", serial: "#২৮৩", telegramId: "...৭২৮৪" },
+    { name: "সামিয়া রহমান", avatar: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=150", amount: "৳ ৪,০০০ টাকা", method: "নগদ", number: "019****9526", serial: "#২৯৪", telegramId: "...৮৩৯১" },
+    { name: "শান্তা ইসলাম", avatar: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=150", amount: "৳ ১,২৫০ টাকা", method: "বিকাশ", number: "013****6184", serial: "#৩০৫", telegramId: "...৯৫০২" },
+    { name: "নিশাত আনজুম", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150", amount: "৳ ২,৮০০ টাকা", method: "নগদ", number: "015****3749", serial: "#৩১৬", telegramId: "...১০১৫" },
+    { name: "মুক্তা মনি", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৩,২০০ টাকা", method: "বিকাশ", number: "016****4920", serial: "#৩২৭", telegramId: "...২০২৬" },
+    { name: "সুবর্ণা আক্তার", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150", amount: "৳ ১,৬০০ টাকা", method: "নগদ", number: "017****2815", serial: "#৩৩৮", telegramId: "...৩০৩৭" },
+    { name: "তানিয়া খাতুন", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150", amount: "৳ ২,১০০ টাকা", method: "বিকাশ", number: "018****6038", serial: "#৩৪৯", telegramId: "...৪০৪৮" },
+    { name: "রোকেয়া বেগম", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ১,৯০০ টাকা", method: "নগদ", number: "019****7193", serial: "#৩৫০", telegramId: "...৫০৫৯" }
 ];
 
 let reviewInterval = null;
@@ -746,11 +745,10 @@ let reviewInterval = null;
 // প্রতিদিন নতুন ইউনিক পুল এবং একবার দেখানো নামগুলো লোকালস্টোরেজে সেভ করার লজিক (যাতে একই নাম বারবার বা পরবর্তী দিনে আর না দেখায়)
 function getDailyUniqueReviewPool() {
     const todayDateStr = new Date().toISOString().split('T')[0];
-    const savedData = localStorage.getItem('daily_review_pool_data_unique_girls');
+    const savedData = localStorage.getItem('daily_review_pool_data_unique_girls_v2');
     
     let poolData = savedData ? JSON.parse(savedData) : null;
     
-    // তারিখ পরিবর্তন হলে নতুন পুল সেট হবে
     if (!poolData || poolData.date !== todayDateStr) {
         let shuffled = [...masterPaymentReviewPool].sort(() => 0.5 - Math.random());
         poolData = {
@@ -758,7 +756,7 @@ function getDailyUniqueReviewPool() {
             available: shuffled,
             shown: []
         };
-        localStorage.setItem('daily_review_pool_data_unique_girls', JSON.stringify(poolData));
+        localStorage.setItem('daily_review_pool_data_unique_girls_v2', JSON.stringify(poolData));
     }
     return poolData;
 }
@@ -785,18 +783,16 @@ function showNextReviewPayment() {
 
     let poolData = getDailyUniqueReviewPool();
 
-    // যদি আজকের সব নাম দেখানো শেষ হয়ে যায়, তবে আর দেখাবে না বা খালি মেসেজ দিবে
     if (poolData.available.length === 0) {
         container.innerHTML = `<div class="feed-details" style="color: #94a3b8;">আজকের সকল পেমেন্ট রিভিউ দেখানো সম্পন্ন হয়েছে!</div>`;
         return;
     }
 
-    // একটি নাম র‍্যান্ডমলি নিয়ে available থেকে চিরতরে রিমুভ (splice) করে shown এ দেওয়া হচ্ছে, ফলে এটি আর রিপিট হবে না
     const randomIndex = Math.floor(Math.random() * poolData.available.length);
     const record = poolData.available.splice(randomIndex, 1)[0];
     poolData.shown.push(record);
     
-    localStorage.setItem('daily_review_pool_data_unique_girls', JSON.stringify(poolData));
+    localStorage.setItem('daily_review_pool_data_unique_girls_v2', JSON.stringify(poolData));
 
     const now = new Date();
     const dateFormatted = now.toLocaleDateString('bn-BD', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -807,14 +803,14 @@ function showNextReviewPayment() {
     container.offsetHeight; 
     container.style.animation = 'fadeInModal 0.4s ease-in-out';
 
-    // ছবি, নাম, আইডি, সিরিয়াল নাম্বার এবং পেমেন্ট ডিটেইলস সহ সুন্দর ডিজাইন
+    // প্রিমিয়াম লুক: ছবি, নাম, আইডি, অ্যাকাউন্ট সিরিয়াল, বিকাশ/নগদ মাধ্যম, ডেমো নাম্বার (017****4318) এবং পেমেন্ট সফল পরিমাণ
     container.innerHTML = `
         <div class="feed-user-row">
             <img src="${record.avatar}" class="feed-avatar" alt="Avatar">
             <div class="feed-user">${record.name} (ID: ${record.telegramId})</div>
         </div>
         <div class="feed-details">
-            অ্যাকাউন্ট: <span style="color:#f38ba8;">${record.serial}</span> | মাধ্যম: <span style="color:#38bdf8;">${record.method}</span><br>
+            অ্যাকাউন্ট: <span style="color:#f38ba8;">${record.serial}</span> | মাধ্যম: <span style="color:#38bdf8;">${record.method}</span> (${record.number})<br>
             পেমেন্ট সফল: <span class="feed-amount">${record.amount}</span>
         </div>
         <div style="font-size: 10px; color: #34d399; margin-top: 4px; font-weight: 700;">📅 ${fullDateTimeStr}</div>
