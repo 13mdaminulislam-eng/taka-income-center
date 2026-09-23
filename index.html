@@ -90,7 +90,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .quick-amount-btn { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399; padding: 8px 4px; font-size: 12px; font-weight: 700; border-radius: 8px; cursor: pointer; text-align: center; transition: all 0.2s; }
 .quick-amount-btn:active { background: #10b981; color: white; transform: scale(0.95); }
 
-/* হুবহু ছবি সদৃশ পেমেন্ট হিস্ট্রি নিয়ন ডিজাইন */
+/* পেমেন্ট হিস্ট্রি নিয়ন ডিজাইন */
 .history-header-box { background: linear-gradient(135deg, #1e293b, #0f172a); border: 1.5px solid rgba(56, 189, 248, 0.25); border-radius: 20px; padding: 16px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
 .history-header-title { font-size: 16px; font-weight: 800; color: #f8fafc; display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
 .history-header-desc { font-size: 11px; color: #94a3b8; font-weight: 600; }
@@ -154,6 +154,13 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .btn-act-contact { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 10px; border-radius: 10px; flex: 1; font-weight: 800; font-size: 13px; cursor: pointer; box-shadow: 0 4px 12px rgba(16,185,129,0.3); transition: transform 0.2s; }
 .btn-act-cancel { background: rgba(255,255,255,0.08); color: #94a3b8; border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 10px; width: 80px; font-weight: 700; font-size: 13px; cursor: pointer; }
 .btn-act-contact:active, .btn-act-cancel:active { transform: scale(0.98); }
+
+/* পেমেন্ট রিভিউ লাইভ ফিড স্টাইল */
+.payment-review-modal-box { background: #1e293b; border: 1.5px solid rgba(56, 189, 248, 0.4); border-radius: 20px; width: 100%; max-width: 340px; padding: 18px 15px; text-align: center; box-shadow: 0 15px 30px rgba(0,0,0,0.6); color: #f8fafc; position: relative; }
+.live-feed-box { background: #0f172a; border: 1px solid rgba(56, 189, 248, 0.3); padding: 14px; border-radius: 12px; margin-top: 12px; margin-bottom: 14px; min-height: 85px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: inset 0 2px 8px rgba(0,0,0,0.4); animation: fadeInModal 0.4s ease-in-out; }
+.feed-user { font-weight: 800; color: #38bdf8; font-size: 14px; margin-bottom: 4px; }
+.feed-details { color: #cbd5e1; font-size: 12px; font-weight: 600; line-height: 1.4; }
+.feed-amount { color: #34d399; font-weight: 800; }
 </style>
 </head>
 <body>
@@ -497,6 +504,18 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <button class="btn-action btn-success" style="margin-top: 10px; padding: 12px; border-radius: 12px; font-size: 14px;" onclick="processWithdraw()">🚀 পেমেন্ট অনুরোধ পাঠান</button>
     </div>
 
+    <!-- নতুন অ্যাড করা পেমেন্ট রিভিউ বাটন -->
+    <a href="#" class="wallet-menu-card" onclick="openPaymentReviewModal()">
+        <div class="wallet-menu-left">
+            <div class="wallet-menu-icon" style="background: rgba(56,189,248,0.1); border-color: rgba(56,189,248,0.2); color: #38bdf8;">💳</div>
+            <div>
+                <div class="wallet-menu-title">পেমেন্টের রিভিউ</div>
+                <div class="wallet-menu-desc">লাইভ পেমেন্ট প্রুফ ও রেকর্ড দেখুন</div>
+            </div>
+        </div>
+        <div class="wallet-menu-arrow">›</div>
+    </a>
+
     <a href="#" class="wallet-menu-card" onclick="switchPage('income-history', null)">
         <div class="wallet-menu-left">
             <div class="wallet-menu-icon">📈</div>
@@ -551,6 +570,23 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         </div>
         <div class="wallet-menu-arrow">›</div>
     </a>
+</div>
+
+<!-- পেমেন্ট রিভিউ পপ-আপ মডাল -->
+<div id="payment-review-modal" class="custom-modal-overlay">
+    <div class="payment-review-modal-box">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <div class="custom-modal-title" style="margin-bottom:0;"><span>💸</span> লাইভ পেমেন্ট রিভিউ</div>
+            <span onclick="closePaymentReviewModal()" style="font-size: 20px; cursor: pointer; color: #94a3b8; font-weight: 800;">&times;</span>
+        </div>
+        <p style="font-size: 11px; color: #94a3b8; margin-bottom: 6px; text-align: left;">সফলভাবে পেমেন্ট পাওয়া ইউজারদের লাইভ আপডেট:</p>
+        
+        <div class="live-feed-box" id="live-payment-feed-container">
+            <div class="feed-user">লোড হচ্ছে...</div>
+        </div>
+
+        <button class="custom-modal-btn-cancel" style="background: rgba(255,255,255,0.08); border-radius: 10px; padding: 8px; color: #f8fafc;" onclick="closePaymentReviewModal()">বন্ধ করুন</button>
+    </div>
 </div>
 
 <div id="refer-modal" class="custom-modal-overlay">
@@ -659,6 +695,65 @@ let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, spe
 let claimedBonuses = {};
 let historyDates = {};
 let rawWithdrawRequests = [];
+
+// পেমেন্ট রিভিউ লাইভ প্রুফ লজিক (নন-রিপিটিং ও রেন্ডম)
+const paymentReviewPool = [
+    { name: "রিফাত আহমেদ", id: "ID: ...৫২৪১", serial: "#১৫2", amount: "১০০০ কয়েন (২০ টাকা)", method: "বিকাশ", time: "আজ, দুপুর ০২:১৫" },
+    { name: "নাজমুল ইসলাম", id: "ID: ...৮৮৯৩", serial: "#১৫৩", amount: "২০০০ কয়েন (৪০ টাকা)", method: "নগদ", time: "আজ, দুপুর ০২:১০" },
+    { name: "তানভীর হাসান", id: "ID: ...১০২৭", serial: "#১৫৪", amount: "৫০০০ কয়েন (১০০ টাকা)", method: "বিকাশ", time: "আজ, দুপুর ০২:০০" },
+    { name: "সাকিব আল হাসান", id: "ID: ...৪৪১১", serial: "#১৫৫", amount: "১০০০ কয়েন (২০ টাকা)", method: "বিকাশ", time: "আজ, দুপুর ০১:৫০" },
+    { name: "রাকিব হোসেন", id: "ID: ...৯৯৮২", serial: "#১৫৬", amount: "১০০০০ কয়েন (২০০ টাকা)", method: "নগদ", time: "আজ, দুপুর ০১:৪০" },
+    { name: "ফাহিম মুনতাসির", id: "ID: ...২২১৫", serial: "#১৫৭", amount: "২০০০ কয়েন (৪০ টাকা)", method: "বিকাশ", time: "আজ, দুপুর ০১:৩০" },
+    { name: "ইমরান খান", id: "ID: ...৭৭৬৫", serial: "#১৫৮", amount: "৫০০০ কয়েন (১০০ টাকা)", method: "নগদ", time: "আজ, দুপুর ০১:১৫" },
+    { name: "জুবায়ের আহমেদ", id: "ID: ...৩৩৪৯", serial: "#১৫৯", amount: "১০০০ কয়েন (২০ টাকা)", method: "বিকাশ", time: "আজ, দুপুর ১২:৫০" },
+    { name: "সাদিয়া আক্তার", id: "ID: ...৫৫১২", serial: "#১৬০", amount: "২০০০ কয়েন (৪০ টাকা)", method: "নগদ", time: "আজ, দুপুর ১২:৩০" },
+    { name: "মেহেদী হাসান", id: "ID: ...৬৬১৮", serial: "#১৬১", amount: "৫০০০ কয়েন (১০০ টাকা)", method: "বিকাশ", time: "আজ, দুপুর ১২:১০" }
+];
+
+let availableReviewRecords = [...paymentReviewPool];
+let reviewInterval = null;
+
+function openPaymentReviewModal() {
+    document.getElementById('payment-review-modal').classList.add('active');
+    showNextReviewPayment();
+    if (!reviewInterval) {
+        reviewInterval = setInterval(showNextReviewPayment, 4000);
+    }
+}
+
+function closePaymentReviewModal() {
+    document.getElementById('payment-review-modal').classList.remove('active');
+    if (reviewInterval) {
+        clearInterval(reviewInterval);
+        reviewInterval = null;
+    }
+    availableReviewRecords = [...paymentReviewPool];
+}
+
+function showNextReviewPayment() {
+    const container = document.getElementById('live-payment-feed-container');
+    if (!container) return;
+
+    if (availableReviewRecords.length === 0) {
+        availableReviewRecords = [...paymentReviewPool];
+    }
+
+    const randomIndex = Math.floor(Math.random() * availableReviewRecords.length);
+    const record = availableReviewRecords.splice(randomIndex, 1)[0];
+
+    container.style.animation = 'none';
+    container.offsetHeight; 
+    container.style.animation = 'fadeInModal 0.4s ease-in-out';
+
+    container.innerHTML = `
+        <div class="feed-user">👤 ${record.name} (${record.id})</div>
+        <div class="feed-details">
+            অ্যাকাউন্ট: <b>${record.serial}</b> | মেথড: <span style="color:#f38ba8;">${record.method}</span><br>
+            পেমেন্ট পেয়েছেন: <span class="feed-amount">${record.amount}</span>
+        </div>
+        <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">🕒 ${record.time}</div>
+    `;
+}
 
 function showWelcomeAlert() {
     const welcomeModal = document.getElementById('welcome-alert-modal');
@@ -1670,4 +1765,4 @@ function openActivationBot() {
 loadAllData();
 </script>
 </body>
-        </html>
+</html>
