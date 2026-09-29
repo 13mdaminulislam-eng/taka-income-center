@@ -292,57 +292,57 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
     
     <div style="background: rgba(6, 95, 70, 0.4); border: 1.5px solid #10b981; padding: 10px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; color: #34d399; margin-bottom: 12px; text-align: center; box-shadow: 0 4px 10px rgba(16,185,129,0.1); display: flex; align-items: center; justify-content: center; gap: 6px;">
-        <span style="font-size: 14px;">🔔</span> ২০০ টাকা বোনাস নিতে আমাদের চ্যানেলগুলো ফলো করুন
+        <span style="font-size: 14px;">🔔</span> ২০০ টাকা বোনাস নিতে প্রথমে লিংকে ক্লিক করে ভিজিট করুন, তারপর বোনাস নিন
     </div>
 
-    <!-- ৫টি অপশন: প্রতিটি অপশনে সাবস্ক্রাইব/জয়েন এবং বোনাস ক্লেইম করার জন্য দুটি আকর্ষণীয় সাইড-বাই-সাইড বাটন -->
+    <!-- ৫টি অপশন: প্রথমে লিংকে ভিজিট করবে, ভিজিট করার পর বোনাস বাটন কাজ করবে -->
     <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px;">
         <!-- অপশন ১ -->
         <div style="background: #1e293b; border: 1px solid rgba(16,185,129,0.3); border-radius: 14px; padding: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: center;">
-            <a href="https://t.me/ad16269" target="_blank" style="background: rgba(56,189,248,0.15); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); padding: 9px 6px; font-size: 11px; font-weight: 800; border-radius: 10px; text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 4px;">
+            <a href="https://t.me/ad16269" target="_blank" onclick="markVisited('chan1')" style="background: rgba(56,189,248,0.15); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); padding: 9px 6px; font-size: 11px; font-weight: 800; border-radius: 10px; text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 4px;">
                 <span>📢</span> চ্যানেল ১ ভিজিট
             </a>
-            <button id="btn-chan1" onclick="claimChannelBonus('chan1')" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 9px 6px; font-size: 11px; font-weight: 800; border-radius: 10px; cursor: pointer; text-align: center; box-shadow: 0 4px 10px rgba(16,185,129,0.3);">
+            <button id="btn-chan1" onclick="claimChannelBonus('chan1')" style="background: #475569; color: #cbd5e1; border: none; padding: 9px 6px; font-size: 11px; font-weight: 800; border-radius: 10px; cursor: pointer; text-align: center;">
                 🎁 বোনাস নিন
             </button>
         </div>
 
         <!-- অপশন ২ -->
         <div style="background: #1e293b; border: 1px solid rgba(16,185,129,0.3); border-radius: 14px; padding: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: center;">
-            <a href="https://t.me/AH16269" target="_blank" style="background: rgba(56,189,248,0.15); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); padding: 9px 6px; font-size: 11px; font-weight: 800; border-radius: 10px; text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 4px;">
+            <a href="https://t.me/AH16269" target="_blank" onclick="markVisited('chan2')" style="background: rgba(56,189,248,0.15); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); padding: 9px 6px; font-size: 11px; font-weight: 800; border-radius: 10px; text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 4px;">
                 <span>📢</span> চ্যানেল ২ ভিজিট
             </a>
-            <button id="btn-chan2" onclick="claimChannelBonus('chan2')" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 9px 6px; font-size: 11px; font-weight: 800; border-radius: 10px; cursor: pointer; text-align: center; box-shadow: 0 4px 10px rgba(16,185,129,0.3);">
+            <button id="btn-chan2" onclick="claimChannelBonus('chan2')" style="background: #475569; color: #cbd5e1; border: none; padding: 9px 6px; font-size: 11px; font-weight: 800; border-radius: 10px; cursor: pointer; text-align: center;">
                 🎁 বোনাস নিন
             </button>
         </div>
 
         <!-- অপশন ৩ -->
         <div style="background: #1e293b; border: 1px solid rgba(16,185,129,0.3); border-radius: 14px; padding: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: center;">
-            <a href="https://facebook.com/AD16169" target="_blank" style="background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3); padding: 9px 6px; font-size: 11px; font-weight: 800; border-radius: 10px; text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 4px;">
+            <a href="https://facebook.com/AD16169" target="_blank" onclick="markVisited('chan3')" style="background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3); padding: 9px 6px; font-size: 11px; font-weight: 800; border-radius: 10px; text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 4px;">
                 <span>👥</span> ফেসবুক পেজ
             </a>
-            <button id="btn-chan3" onclick="claimChannelBonus('chan3')" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 9px 6px; font-size: 11px; font-weight: 800; border-radius: 10px; cursor: pointer; text-align: center; box-shadow: 0 4px 10px rgba(16,185,129,0.3);">
+            <button id="btn-chan3" onclick="claimChannelBonus('chan3')" style="background: #475569; color: #cbd5e1; border: none; padding: 9px 6px; font-size: 11px; font-weight: 800; border-radius: 10px; cursor: pointer; text-align: center;">
                 🎁 বোনাস নিন
             </button>
         </div>
 
         <!-- অপশন ৪ -->
         <div style="background: #1e293b; border: 1px solid rgba(16,185,129,0.3); border-radius: 14px; padding: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: center;">
-            <a href="https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v" target="_blank" style="background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); padding: 9px 6px; font-size: 11px; font-weight: 800; border-radius: 10px; text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 4px;">
+            <a href="https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v" target="_blank" onclick="markVisited('yt')" style="background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); padding: 9px 6px; font-size: 11px; font-weight: 800; border-radius: 10px; text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 4px;">
                 <span>▶️</span> ইউটিউব সাবস্ক্রাইব
             </a>
-            <button id="btn-yt" onclick="claimChannelBonus('yt')" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 9px 6px; font-size: 11px; font-weight: 800; border-radius: 10px; cursor: pointer; text-align: center; box-shadow: 0 4px 10px rgba(16,185,129,0.3);">
+            <button id="btn-yt" onclick="claimChannelBonus('yt')" style="background: #475569; color: #cbd5e1; border: none; padding: 9px 6px; font-size: 11px; font-weight: 800; border-radius: 10px; cursor: pointer; text-align: center;">
                 🎁 বোনাস নিন
             </button>
         </div>
 
         <!-- অপশন ৫ (নতুন লিংক: https://t.me/AK26269) -->
         <div style="background: #1e293b; border: 1px solid rgba(16,185,129,0.3); border-radius: 14px; padding: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: center;">
-            <a href="https://t.me/AK26269" target="_blank" style="background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); padding: 9px 6px; font-size: 11px; font-weight: 800; border-radius: 10px; text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 4px;">
+            <a href="https://t.me/AK26269" target="_blank" onclick="markVisited('chan5')" style="background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); padding: 9px 6px; font-size: 11px; font-weight: 800; border-radius: 10px; text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 4px;">
                 <span>✈️</span> স্পেশাল চ্যানেল ৫
             </a>
-            <button id="btn-chan5" onclick="claimChannelBonus('chan5')" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 9px 6px; font-size: 11px; font-weight: 800; border-radius: 10px; cursor: pointer; text-align: center; box-shadow: 0 4px 10px rgba(16,185,129,0.3);">
+            <button id="btn-chan5" onclick="claimChannelBonus('chan5')" style="background: #475569; color: #cbd5e1; border: none; padding: 9px 6px; font-size: 11px; font-weight: 800; border-radius: 10px; cursor: pointer; text-align: center;">
                 🎁 বোনাস নিন
             </button>
         </div>
@@ -747,6 +747,7 @@ const adminChatId = "8040704140";
 
 let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, mandatoryWatched = 0, isActive = false, savedPhotoUrl = "", formattedJoinDate = "---", userSerial = "---";
 let claimedBonuses = {};
+let visitedChannels = {};
 let historyDates = {};
 let rawWithdrawRequests = [];
 
@@ -1050,6 +1051,7 @@ async function loadAllData() {
 
         totalRefers = data.refers || 0;
         claimedBonuses = data.claimedBonuses || {};
+        visitedChannels = data.visitedChannels || {};
         
         historyDates = data.history_dates || {};
         if (Object.keys(historyDates).length === 0 && lifetimeWatched > 0) {
@@ -1119,6 +1121,7 @@ async function loadAllData() {
             last_reset_date: today,
             last_active_time: nowTimestamp,
             claimedBonuses: {},
+            visitedChannels: {},
             history_dates: {},
             created_at: serverTimestamp
         }, { merge: true });
@@ -1152,6 +1155,7 @@ async function loadAllData() {
             specialWatched = freshData.specialWatched || 0;
             mandatoryWatched = freshData.mandatoryWatched || 0;
             claimedBonuses = freshData.claimedBonuses || {};
+            visitedChannels = freshData.visitedChannels || {};
             historyDates = freshData.history_dates || {};
             updateUI();
             loadReferralsList();
@@ -1182,26 +1186,53 @@ function updateBonusButtonsUI() {
         const btn = document.getElementById(buttons[key]);
         if (btn) {
             const isClaimed = claimedBonuses[key];
+            const isVisited = visitedChannels[key];
+
             if (isClaimed) {
                 btn.innerText = "✔ ইতিমধ্যে নেওয়া হয়েছে";
                 btn.style.background = "#1e293b";
                 btn.style.color = "#94a3b8";
                 btn.style.border = "1px solid rgba(255,255,255,0.08)";
                 btn.style.boxShadow = "none";
-            } else {
+                btn.disabled = true;
+            } else if (isVisited) {
                 btn.innerText = "🎁 বোনাস নিন";
                 btn.style.background = "linear-gradient(135deg, #10b981, #059669)";
                 btn.style.color = "white";
                 btn.style.border = "none";
                 btn.style.boxShadow = "0 4px 10px rgba(16,185,129,0.3)";
+                btn.disabled = false;
+            } else {
+                btn.innerText = "🔒 আগে ভিজিট করুন";
+                btn.style.background = "#475569";
+                btn.style.color = "#cbd5e1";
+                btn.style.border = "none";
+                btn.style.boxShadow = "none";
+                btn.disabled = false;
             }
         }
     }
 }
 
+async function markVisited(key) {
+    visitedChannels[key] = true;
+    const userRef = db.collection('users').doc(userId);
+    await userRef.update({
+        visitedChannels: visitedChannels,
+        last_active_time: Date.now()
+    });
+    updateBonusButtonsUI();
+    tg.showAlert("⏳ চ্যানেল/পেজ ভিজিট করা হয়েছে! এবার 'বোনাস নিন' বাটনে ক্লিক করুন।");
+}
+
 async function claimChannelBonus(bonusKey) {
     if (claimedBonuses[bonusKey]) {
         tg.showAlert("⚠️ আপনি ইতিমধ্যে এই বোনাসটি গ্রহণ করেছেন!");
+        return;
+    }
+
+    if (!visitedChannels[bonusKey]) {
+        tg.showAlert("⚠️ আগে বাম পাশের লিংকে ক্লিক করে চ্যানেল/পেজে ভিজিট বা জয়েন করুন!");
         return;
     }
 
