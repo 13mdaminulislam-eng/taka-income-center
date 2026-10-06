@@ -717,7 +717,7 @@ let claimedBonuses = {};
 let historyDates = {};
 let rawWithdrawRequests = [];
 
-// মেয়েদের নাম, ছবি, রেন্ডম আইডি, সিরিয়াল নাম্বার এবং ডেমো বিকাশ/নগদ নাম্বারসহ মাস্টার পুল
+// আপনার দেওয়া মাস্টার পুল এবং ৭২ ঘণ্টার বা দৈনিক ইউনিক শিফটিং লজিক
 const masterPaymentReviewPool = [
     { name: "সাদিয়া আক্তার", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ১,৫০০ টাকা", method: "বিকাশ", number: "017****4318", serial: "#১৬১", telegramId: "...৬৬১৮" },
     { name: "নুসরাত জাহান", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৮০০ টাকা", method: "নগদ", number: "018****2954", serial: "#১৫২", telegramId: "...৫২৪১" },
@@ -744,20 +744,29 @@ const masterPaymentReviewPool = [
 let reviewInterval = null;
 
 function getDailyUniqueReviewPool() {
-    const todayDateStr = new Date().toISOString().split('T')[0];
-    const savedData = localStorage.getItem('daily_review_pool_data_unique_girls_v2');
+    const nowTime = new Date().getTime();
+    const seventyTwoHoursMs = 72 * 60 * 60 * 1000;
     
-    let poolData = savedData ? JSON.parse(savedData) : null;
-    
-    if (!poolData || poolData.date !== todayDateStr) {
+    let savedDataStr = localStorage.getItem('master_review_pool_72h_v3');
+    let poolData = savedDataStr ? JSON.parse(savedDataStr) : null;
+
+    if (!poolData || (nowTime - poolData.lastResetTime > seventyTwoHoursMs)) {
         let shuffled = [...masterPaymentReviewPool].sort(() => 0.5 - Math.random());
         poolData = {
-            date: todayDateStr,
+            lastResetTime: nowTime,
             available: shuffled,
             shown: []
         };
-        localStorage.setItem('daily_review_pool_data_unique_girls_v2', JSON.stringify(poolData));
+        localStorage.setItem('master_review_pool_72h_v3', JSON.stringify(poolData));
     }
+
+    if (!poolData.available || poolData.available.length === 0) {
+        let shuffled = [...masterPaymentReviewPool].sort(() => 0.5 - Math.random());
+        poolData.available = shuffled;
+        poolData.lastResetTime = nowTime;
+        localStorage.setItem('master_review_pool_72h_v3', JSON.stringify(poolData));
+    }
+
     return poolData;
 }
 
@@ -784,15 +793,14 @@ function showNextReviewPayment() {
     let poolData = getDailyUniqueReviewPool();
 
     if (poolData.available.length === 0) {
-        container.innerHTML = `<div class="feed-details" style="color: #94a3b8;">আজকের সকল পেমেন্ট রিভিউ দেখানো সম্পন্ন হয়েছে!</div>`;
+        container.innerHTML = `<div class="feed-details" style="color: #94a3b8;">সকল পেমেন্ট রিভিউ দেখানো সম্পন্ন হয়েছে!</div>`;
         return;
     }
 
-    const randomIndex = Math.floor(Math.random() * poolData.available.length);
-    const record = poolData.available.splice(randomIndex, 1)[0];
+    const record = poolData.available.shift();
     poolData.shown.push(record);
     
-    localStorage.setItem('daily_review_pool_data_unique_girls_v2', JSON.stringify(poolData));
+    localStorage.setItem('master_review_pool_72h_v3', JSON.stringify(poolData));
 
     const now = new Date();
     const dateFormatted = now.toLocaleDateString('bn-BD', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -948,27 +956,8 @@ async function loadAllData() {
         let lastActive = data.last_active_time || nowTimestamp;
         let diffDays = (nowTimestamp - lastActive) / (1000 * 60 * 60 * 24);
 
-        if (diffDays >= 5) {
-            await userRef.update({
-                balance: 0,
-                dailyWatched: 0,
-                totalWatched: 0,
-                specialWatched: 0,
-                mandatoryWatched: 0,
-                last_active_time: nowTimestamp,
-                last_reset_date: today,
-                history_dates: {}
-            });
-            userBalance = 0;
-            dailyWatched = 0;
-            lifetimeWatched = 0;
-            specialWatched = 0;
-            mandatoryWatched = 0;
-            historyDates = {};
-            tg.showAlert("⚠️ টানা ৫ দিন বা তার বেশি সময় নিষ্ক্রিয় থাকায় আপনার অ্যাকাউন্ট ও ব্যালেন্স রিসেট করে শূন্য করা হয়েছে!");
-        } else {
-            await userRef.update({ last_active_time: nowTimestamp });
-        }
+        // এখানে শুধুমাত্র নিষ্ক্রিয়তার চেক রাখা হয়েছে, ব্যালেন্স নিজে থেকে রিসেট হওয়া বন্ধ করা হয়েছে
+        await userRef.update({ last_active_time: nowTimestamp });
 
         if (!data.serial) {
             userSerial = await getNextSerial();
@@ -998,22 +987,20 @@ async function loadAllData() {
             }
         }
 
-        if (diffDays < 5) {
-            if (data.last_reset_date !== today) {
-                dailyWatched = 0;
-                await userRef.update({ dailyWatched: 0, last_reset_date: today, name: userName, userId: userId, photoUrl: userPhotoUrl || data.photoUrl || "" });
-            } else {
-                dailyWatched = data.dailyWatched || 0;
-                if(!data.name || !data.photoUrl || !data.userId) {
-                    await userRef.update({ name: userName, userId: userId, photoUrl: userPhotoUrl || data.photoUrl || "" });
-                }
+        if (data.last_reset_date !== today) {
+            dailyWatched = 0;
+            await userRef.update({ dailyWatched: 0, last_reset_date: today, name: userName, userId: userId, photoUrl: userPhotoUrl || data.photoUrl || "" });
+        } else {
+            dailyWatched = data.dailyWatched || 0;
+            if(!data.name || !data.photoUrl || !data.userId) {
+                await userRef.update({ name: userName, userId: userId, photoUrl: userPhotoUrl || data.photoUrl || "" });
             }
-            
-            userBalance = data.balance || 0;
-            lifetimeWatched = data.totalWatched || 0;
-            specialWatched = data.specialWatched || 0;
-            mandatoryWatched = data.mandatoryWatched || 0;
         }
+        
+        userBalance = data.balance || 0;
+        lifetimeWatched = data.totalWatched || 0;
+        specialWatched = data.specialWatched || 0;
+        mandatoryWatched = data.mandatoryWatched || 0;
 
         totalRefers = data.refers || 0;
         claimedBonuses = data.claimedBonuses || {};
@@ -1096,6 +1083,7 @@ async function loadAllData() {
         notifyAdminNewUser(userSerial, userName, userId, joinDateFormatted, referrerNameStr, referrerIdStr, referrerSerialStr);
     }
 
+    // রিয়েল-টাইম সিঙ্ক listener (ব্যালেন্স সুরক্ষিত রাখার জন্য)
     userRef.onSnapshot(async (docSnap) => {
         if (docSnap.exists) {
             const freshData = docSnap.data();
@@ -1718,6 +1706,9 @@ async function processWithdraw() {
     }, async (buttonId) => {
         if (buttonId === 'confirm') {
             try {
+                // শুধুমাত্র সফল উইথড্র রিকোয়েস্ট পাঠানোর পরেই ব্যালেন্স থেকে কয়েন কাটা হবে
+                userBalance -= amount;
+
                 await db.collection('withdraw_requests').add({
                     userId: userId, 
                     name: userName, 
@@ -1731,7 +1722,6 @@ async function processWithdraw() {
 
                 await notifyAdminWithdrawRequest(userSerial, userName, userId, method, number, amount, taka);
 
-                userBalance -= amount;
                 await db.collection('users').doc(userId).update({ balance: userBalance });
                 updateUI();
                 loadPaymentHistory();
@@ -1799,4 +1789,4 @@ function openActivationBot() {
 loadAllData();
 </script>
 </body>
-    </html>
+</html>
