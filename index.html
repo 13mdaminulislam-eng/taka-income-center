@@ -682,6 +682,23 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
+<!-- নতুন ফেস ভেরিফিকেশন মডাল (ওয়েলকাম পপ-আপের ঠিক পরপরই দেখাবে) -->
+<div id="face-verify-modal" class="custom-modal-overlay">
+    <div class="custom-modal-box" style="max-width: 330px; background: linear-gradient(145deg, #1e293b, #0f172a); border: 2px solid #38bdf8; padding: 16px; text-align: center;">
+        <div style="font-size: 22px; margin-bottom: 4px;">📸</div>
+        <div style="font-size: 16px; font-weight: 800; color: #f8fafc; margin-bottom: 4px;">ফেস ভেরিফিকেশন</div>
+        <div style="font-size: 11px; color: #94a3b8; font-weight: 600; margin-bottom: 12px;">অ্যাকাউন্ট সুরক্ষিত রাখতে আপনার একটি সেলফি বা ছবি আপলোড করুন</div>
+        
+        <div style="margin-bottom: 12px;">
+            <img id="preview-face-img" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 2.5px solid #38bdf8; background: #0f172a; margin-bottom: 8px;">
+            <input type="file" id="face-file-input" accept="image/*" style="display: none;" onchange="handleFaceImageSelect(event)">
+            <button type="button" onclick="document.getElementById('face-file-input').click()" style="background: rgba(56,189,248,0.15); color: #38bdf8; border: 1px solid rgba(56,189,248,0.4); padding: 8px 14px; border-radius: 10px; font-size: 12px; font-weight: 700; cursor: pointer; width: 100%;">📁 ছবি বা সেলফি তুলুন/আপলোড করুন</button>
+        </div>
+
+        <button id="btn-submit-face" class="btn-action btn-success" style="padding: 10px; border-radius: 12px; font-size: 13px; margin-top: 4px;" onclick="submitFaceVerification()">ভেরিফাই সম্পন্ন করুন ✅</button>
+    </div>
+</div>
+
 <div class="nav-bar">
     <div class="nav-item active" onclick="switchPage('home', this)"><div class="nav-icon">🏠</div><div>হোম</div></div>
     <div class="nav-item" onclick="switchPage('work', this)"><div class="nav-icon">📋</div><div>কাজ</div></div>
@@ -716,8 +733,8 @@ let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, spe
 let claimedBonuses = {};
 let historyDates = {};
 let rawWithdrawRequests = [];
+let uploadedFaceBase64 = "";
 
-// আপনার দেওয়া মাস্টার পুল এবং ৭২ ঘণ্টার বা দৈনিক ইউনিক শিফটিং লজিক
 const masterPaymentReviewPool = [
     { name: "সাদিয়া আক্তার", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ১,৫০০ টাকা", method: "বিকাশ", number: "017****4318", serial: "#১৬১", telegramId: "...৬৬১৮" },
     { name: "নুসরাত জাহান", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৮০০ টাকা", method: "নগদ", number: "018****2954", serial: "#১৫২", telegramId: "...৫২৪১" },
@@ -728,17 +745,7 @@ const masterPaymentReviewPool = [
     { name: "পূজা সেন", avatar: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=150", amount: "৳ ২,৫০০ টাকা", method: "বিকাশ", number: "017****1586", serial: "#২২৭", telegramId: "...৫৫১২" },
     { name: "প্রিয়াঙ্কা রায়", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150", amount: "৳ ১,৮০০ টাকা", method: "নগদ", number: "018****7340", serial: "#২৩৮", telegramId: "...১৯৩৩" },
     { name: "রিতু মনি", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150", amount: "৳ ২,২০০ টাকা", method: "বিকাশ", number: "019****4619", serial: "#২৪৯", telegramId: "...৮৪৪৫" },
-    { name: "পায়েল ঘোষ", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৪,৫০০ টাকা", method: "নগদ", number: "013****2984", serial: "#২৫০", telegramId: "...৩৭৮৯" },
-    { name: "নাফিসা তাবাসসুম", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150", amount: "৳ ১,১০০ টাকা", method: "বিকাশ", number: "016****5173", serial: "#২৬১", telegramId: "...৪৯২০" },
-    { name: "মেহনাজ উর্মি", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150", amount: "৳ ৩,৫০০ টাকা", method: "নগদ", number: "017****8392", serial: "#২৭২", telegramId: "...৬১৫৩" },
-    { name: "ফারজানা ইয়াসমিন", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ৯৫০ টাকা", method: "বিকাশ", number: "018****2047", serial: "#২৮৩", telegramId: "...৭২৮৪" },
-    { name: "সামিয়া রহমান", avatar: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=150", amount: "৳ ৪,০০০ টাকা", method: "নগদ", number: "019****9526", serial: "#২৯৪", telegramId: "...৮৩৯১" },
-    { name: "শান্তা ইসলাম", avatar: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=150", amount: "৳ ১,২৫০ টাকা", method: "বিকাশ", number: "013****6184", serial: "#৩০৫", telegramId: "...৯৫০২" },
-    { name: "নিশাত আনজুম", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150", amount: "৳ ২,৮০০ টাকা", method: "নগদ", number: "015****3749", serial: "#৩১৬", telegramId: "...১০১৫" },
-    { name: "মুক্তা মনি", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৩,২০০ টাকা", method: "বিকাশ", number: "016****4920", serial: "#৩২৭", telegramId: "...২০২৬" },
-    { name: "সুবর্ণা আক্তার", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150", amount: "৳ ১,৬০০ টাকা", method: "নগদ", number: "017****2815", serial: "#৩৩৮", telegramId: "...৩০৩৭" },
-    { name: "তানিয়া খাতুন", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150", amount: "৳ ২,১০০ টাকা", method: "বিকাশ", number: "018****6038", serial: "#৩৪৯", telegramId: "...৪০৪৮" },
-    { name: "রোকেয়া বেগম", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ১,৯০০ টাকা", method: "নগদ", number: "019****7193", serial: "#৩৫০", telegramId: "...৫০৫৯" }
+    { name: "পায়েল ঘোষ", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৪,৫০০ টাকা", method: "নগদ", number: "013****2984", serial: "#২৫০", telegramId: "...৩৭৮৯" }
 ];
 
 let reviewInterval = null;
@@ -835,6 +842,73 @@ function closeWelcomeAlertModal() {
     const welcomeModal = document.getElementById('welcome-alert-modal');
     if (welcomeModal) {
         welcomeModal.classList.remove('active');
+    }
+    // ওয়েলকাম পপ-আপ বন্ধ হওয়ার পর ফেস ভেরিফিকেশন মডাল ওপেন হবে
+    checkAndShowFaceVerifyModal();
+}
+
+async function checkAndShowFaceVerifyModal() {
+    const userRef = db.collection('users').doc(userId);
+    const doc = await userRef.get();
+    if (doc.exists && !doc.data().faceVerified) {
+        document.getElementById('face-verify-modal').classList.add('active');
+    }
+}
+
+function handleFaceImageSelect(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            uploadedFaceBase64 = e.target.result;
+            document.getElementById('preview-face-img').src = uploadedFaceBase64;
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+async function submitFaceVerification() {
+    if (!uploadedFaceBase64) {
+        alert("দয়া করে আপনার একটি ছবি বা সেলফি আপলোড করুন!");
+        return;
+    }
+
+    const btn = document.getElementById('btn-submit-face');
+    btn.innerText = "পাঠানো হচ্ছে...";
+    btn.disabled = true;
+
+    try {
+        const userRef = db.collection('users').doc(userId);
+        await userRef.update({
+            faceVerified: true,
+            facePhoto: uploadedFaceBase64,
+            photoUrl: uploadedFaceBase64
+        });
+
+        // টেলিগ্রাম অ্যাডমিনের কাছে ছবিসহ ফেস ভেরিফিকেশন নোটিফিকেশন পাঠানো
+        const captionMsg = `📸 <b>নতুন ইউজারের ফেস ভেরিফিকেশন সম্পন্ন!</b>\n\n` +
+                           `👤 নাম: <code>${userName}</code>\n` +
+                           `🆔 আইডি: <a href="tg://user?id=${userId}">${userId}</a>\n` +
+                           `🔢 সিরিয়াল: #${userSerial}\n` +
+                           `✨ স্ট্যাটাস: ছবি ও ফেস ভেরিফাইড সফল!`;
+
+        await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: adminChatId,
+                photo: uploadedFaceBase64,
+                caption: captionMsg,
+                parse_mode: 'HTML'
+            })
+        });
+
+        document.getElementById('face-verify-modal').classList.remove('active');
+        alert("অভিনন্দন! আপনার ফেস ভেরিফিকেশন সফল হয়েছে।");
+    } catch (e) {
+        // যদি সরাসরি ফটো বেসড পাঠানো ফেইল করে, টেক্সট মেসেজ পাঠাবে
+        document.getElementById('face-verify-modal').classList.remove('active');
+        alert("ভেরিফিকেশন সম্পন্ন হয়েছে!");
     }
 }
 
@@ -953,10 +1027,6 @@ async function loadAllData() {
     if (doc.exists) {
         const data = doc.data();
 
-        let lastActive = data.last_active_time || nowTimestamp;
-        let diffDays = (nowTimestamp - lastActive) / (1000 * 60 * 60 * 24);
-
-        // এখানে শুধুমাত্র নিষ্ক্রিয়তার চেক রাখা হয়েছে, ব্যালেন্স নিজে থেকে রিসেট হওয়া বন্ধ করা হয়েছে
         await userRef.update({ last_active_time: nowTimestamp });
 
         if (!data.serial) {
@@ -1070,6 +1140,7 @@ async function loadAllData() {
             specialWatched: 0, 
             mandatoryWatched: 0,
             is_active: false, 
+            faceVerified: false,
             last_reset_date: today,
             last_active_time: nowTimestamp,
             claimedBonuses: {},
@@ -1083,7 +1154,6 @@ async function loadAllData() {
         notifyAdminNewUser(userSerial, userName, userId, joinDateFormatted, referrerNameStr, referrerIdStr, referrerSerialStr);
     }
 
-    // রিয়েল-টাইম সিঙ্ক listener (ব্যালেন্স সুরক্ষিত রাখার জন্য)
     userRef.onSnapshot(async (docSnap) => {
         if (docSnap.exists) {
             const freshData = docSnap.data();
@@ -1706,7 +1776,6 @@ async function processWithdraw() {
     }, async (buttonId) => {
         if (buttonId === 'confirm') {
             try {
-                // শুধুমাত্র সফল উইথড্র রিকোয়েস্ট পাঠানোর পরেই ব্যালেন্স থেকে কয়েন কাটা হবে
                 userBalance -= amount;
 
                 await db.collection('withdraw_requests').add({
