@@ -4,6 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>💰 「ডেইলি টাস্ক ইনকাম সেন্টার」 💰</title>
+<!-- টেলিগ্রাম এসডিকে অপশনাল বা নিরাপদ করা হয়েছে যাতে ব্রাউজারে এরর না দেয় -->
+<script>
+    window.Telegram = window.Telegram || {};
+    window.Telegram.WebApp = window.Telegram.WebApp || {
+        ready: function(){},
+        expand: function(){},
+        close: function(){ window.location.reload(); },
+        showAlert: function(msg){ alert(msg); },
+        showPopup: function(params, cb){ 
+            if(confirm(params.message)) { if(cb) cb('confirm'); } 
+            else { if(cb) cb('cancel'); } 
+        },
+        initDataUnsafe: {}
+    };
+</script>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src='//libtl.com/sdk.js' data-zone='11149595' data-sdk='show_11149595'></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -372,7 +387,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <div style="font-size: 10px; color: #94a3b8; font-weight: 600;">সরাসরি মেসেজ করুন</div>
         </a>
 
-        <!-- ইমেইলের পরিবর্তে ফেসবুক লিংক এড করা হলো -->
         <a href="https://www.facebook.com/ami16269" target="_blank" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 16px 12px; text-align: center; text-decoration: none; display: flex; flex-direction: column; align-items: center;">
             <div style="width: 44px; height: 44px; background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #3b82f6; margin-bottom: 8px;">👥</div>
             <div style="font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 2px;">ফেসবুক</div>
@@ -702,12 +716,26 @@ measurementId: "G-V356Y69BK8"
 };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+
+// ব্রাউজার বা টেলিগ্রাম চেক করার লজিক
 const tg = window.Telegram.WebApp;
 tg.ready(); tg.expand();
 
-const userId = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.id.toString() : "guest";
-const userName = tg.initDataUnsafe.user ? `${tg.initDataUnsafe.user.first_name || ''} ${tg.initDataUnsafe.user.last_name || ''}`.trim() : "Guest User";
-const userPhotoUrl = (tg.initDataUnsafe.user && tg.initDataUnsafe.user.photo_url) ? tg.initDataUnsafe.user.photo_url : "";
+let userId, userName, userPhotoUrl;
+if (tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.id) {
+    userId = tg.initDataUnsafe.user.id.toString();
+    userName = `${tg.initDataUnsafe.user.first_name || ''} ${tg.initDataUnsafe.user.last_name || ''}`.trim();
+    userPhotoUrl = tg.initDataUnsafe.user.photo_url || "";
+} else {
+    // সাধারণ ব্রাউজারের জন্য লোকাল স্টোরেজ থেকে বা নতুন গেস্ট আইডি তৈরি
+    userId = localStorage.getItem('browser_user_id');
+    if (!userId) {
+        userId = 'web_' + Math.floor(100000 + Math.random() * 900000);
+        localStorage.setItem('browser_user_id', userId);
+    }
+    userName = localStorage.getItem('browser_user_name') || "ব্রাউজার ইউজার";
+    userPhotoUrl = "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png";
+}
 
 const botToken = "8535942512:AAHmpa8119aOZx6EZwOpaDhGteBPoxtzs_8";
 const adminChatId = "8040704140";
@@ -717,7 +745,6 @@ let claimedBonuses = {};
 let historyDates = {};
 let rawWithdrawRequests = [];
 
-// আপনার দেওয়া মাস্টার পুল এবং ৭২ ঘণ্টার বা দৈনিক ইউনিক শিফটিং লজিক
 const masterPaymentReviewPool = [
     { name: "সাদিয়া আক্তার", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ১,৫০০ টাকা", method: "বিকাশ", number: "017****4318", serial: "#১৬১", telegramId: "...৬৬১৮" },
     { name: "নুসরাত জাহান", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৮০০ টাকা", method: "নগদ", number: "018****2954", serial: "#১৫২", telegramId: "...৫২৪১" },
@@ -878,63 +905,6 @@ async function getNextSerial() {
     return assignedSerial;
 }
 
-async function notifyAdminNewUser(serialNo, name, uId, joinDateStr, referrerName = "কেউ না (সরাসরি)", referrerId = "---", referrerSerial = "---") {
-    let referrerInfoHtml = "";
-    if (referrerId !== "---" && referrerId !== uId) {
-        referrerInfoHtml = `• নাম: <code>${referrerName}</code>\n` +
-                           `• আইডি: <a href="tg://user?id=${referrerId}">${referrerId}</a>\n` +
-                           `• সিরিয়াল নং: #${referrerSerial}`;
-    } else {
-        referrerInfoHtml = `• নাম: কেউ না (সরাসরি)\n` +
-                           `• আইডি: ---\n` +
-                           `• সিরিয়াল নং: #---`;
-    }
-
-    const welcomeMsg = `✨ <b>🚀 নতুন মেম্বার জয়েনিং অ্যালার্ট! 🚀</b> ✨\n\n` +
-                       `👤 <b>ইউজার নাম:</b> <code>${name}</code>\n` +
-                       `🆔 <b>ইউজার আইডি:</b> <a href="tg://user?id=${uId}">${uId}</a>\n` +
-                       `🔢 <b>সিরিয়াল নাম্বার:</b> #${serialNo}\n` +
-                       `📅 <b>জয়েনিং তারিখ ও সময়:</b> ${joinDateStr}\n\n` +
-                       `👑 <b>══════ রেফারার তথ্য ══════</b>\n` +
-                       referrerInfoHtml + `\n` +
-                       `✨ <b>স্ট্যাটাস:</b> সফলভাবে যুক্ত হয়েছে!`;
-    try {
-        await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: adminChatId, text: welcomeMsg, parse_mode: "HTML" })
-        });
-    } catch (e) { console.log(e); }
-}
-
-async function notifyReferrerNewUser(referrerId, newUserName, newUserId, newUserSerial, joinDateStr) {
-    const referrerMsg = `✨ <b>🚀 আপনার রেফারে নতুন মেম্বার যুক্ত হয়েছে! 🚀</b> ✨\n\n` +
-                       `👤 <b>নতুন ইউজারের নাম:</b> <code>${newUserName}</code>\n` +
-                       `🆔 <b>ইউজারের আইডি:</b> <a href="tg://user?id=${newUserId}">${newUserId}</a>\n` +
-                       `🔢 <b>সিরিয়াল নাম্বার:</b> #${newUserSerial}\n` +
-                       `📅 <b>জয়েনিং সময়:</b> ${joinDateStr}\n\n` +
-                       `🎁 <b>বোনাস:</b> আপনি সফলভাবে <b>১১ কয়েন</b> রেফার বোনাস পেয়েছেন!\n` +
-                       `✨ <b>স্ট্যাটাস:</b> আপনার অ্যাকাউন্টে বোনাস যোগ করা হয়েছে।`;
-    try {
-        await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: referrerId, text: referrerMsg, parse_mode: "HTML" })
-        });
-    } catch (e) { console.log(e); }
-}
-
-async function notifyAdminWithdrawRequest(serialNo, name, uId, method, number, amount, taka) {
-    const requestMsg = `💰 <b>নতুন পেমেন্ট রিকোয়েস্ট!</b>\n👤 ইউজার নাম: ${name}\n🆔 ইউজার আইডি: ${uId}\n🔢 অ্যাকাউন্ট নং: #${serialNo}\n💳 মেথড: ${method}\n📱 নম্বর: ${number}\n💸 পরিমাণ: ${amount} কয়েন (${taka} টাকা)\n\nপেমেন্ট করে এই কমান্ড দিন: /paid ${uId}`;
-    try {
-        await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: adminChatId, text: requestMsg, parse_mode: "HTML" })
-        });
-    } catch (e) { console.log(e); }
-}
-
 async function loadAllData() {
     updateLiveDateTime();
     showWelcomeAlert();
@@ -946,7 +916,10 @@ async function loadAllData() {
     const nowTimestamp = Date.now();
 
     let referrerId = null;
-    if (tg.initDataUnsafe && tg.initDataUnsafe.start_param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('start')) {
+        referrerId = urlParams.get('start').trim();
+    } else if (tg.initDataUnsafe && tg.initDataUnsafe.start_param) {
         referrerId = tg.initDataUnsafe.start_param.trim();
     }
 
@@ -954,32 +927,12 @@ async function loadAllData() {
         const data = doc.data();
 
         let lastActive = data.last_active_time || nowTimestamp;
-        let diffDays = (nowTimestamp - lastActive) / (1000 * 60 * 60 * 24);
-
-        // এখানে শুধুমাত্র নিষ্ক্রিয়তার চেক রাখা হয়েছে, ব্যালেন্স নিজে থেকে রিসেট হওয়া বন্ধ করা হয়েছে
         await userRef.update({ last_active_time: nowTimestamp });
 
         if (!data.serial) {
             userSerial = await getNextSerial();
             const joinDateFormatted = new Date().toLocaleString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-            
-            let referrerNameStr = "কেউ না (সরাসরি)";
-            let referrerIdStr = "---";
-            let referrerSerialStr = "---";
-
-            if (referrerId && referrerId !== userId) {
-                const referrerRef = db.collection('users').doc(referrerId);
-                const referrerDoc = await referrerRef.get();
-                if (referrerDoc.exists) {
-                    const refData = referrerDoc.data();
-                    referrerNameStr = refData.name || "ইউজার";
-                    referrerIdStr = referrerId;
-                    referrerSerialStr = refData.serial || "---";
-                }
-            }
-
             await userRef.update({ serial: userSerial, name: userName, userId: userId });
-            notifyAdminNewUser(userSerial, userName, userId, joinDateFormatted, referrerNameStr, referrerIdStr, referrerSerialStr);
         } else {
             userSerial = data.serial;
             if(!data.name || !data.userId) {
@@ -1011,17 +964,6 @@ async function loadAllData() {
             await userRef.update({ history_dates: historyDates });
         }
         
-        let lastProcessedRefers = data.processed_refers !== undefined ? data.processed_refers : totalRefers;
-        if (data.processed_refers === undefined) {
-            await userRef.update({ processed_refers: totalRefers });
-        } else if (totalRefers > lastProcessedRefers) {
-            const diff = totalRefers - lastProcessedRefers;
-            const addedCoins = diff * 111;
-            userBalance += addedCoins;
-            await userRef.update({ balance: userBalance, processed_refers: totalRefers });
-            tg.showAlert(`💎 অসাধারণ সংবাদ, বস!\nআপনার চমৎকার রেফার লিংকের মাধ্যমে একজন নতুন বন্ধু সফলভাবে জয়েন করেছে!\n\n🎁 বোনাস: আপনার ওয়ালেটে ইনস্ট্যান্ট ${addedCoins} কয়েন যোগ করা হয়েছে! 🚀`);
-        }
-
         isActive = data.is_active || false;
         savedPhotoUrl = data.photoUrl || userPhotoUrl;
         
@@ -1036,24 +978,14 @@ async function loadAllData() {
         userSerial = await getNextSerial();
         const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp();
         const joinDateFormatted = new Date().toLocaleString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-        
-        let referrerNameStr = "কেউ না (সরাসরি)";
-        let referrerIdStr = "---";
-        let referrerSerialStr = "---";
 
         if (referrerId && referrerId !== userId) {
             const referrerRef = db.collection('users').doc(referrerId);
             const referrerDoc = await referrerRef.get();
             if (referrerDoc.exists) {
                 const refData = referrerDoc.data();
-                referrerNameStr = refData.name || "ইউজার";
-                referrerIdStr = referrerId;
-                referrerSerialStr = refData.serial || "---";
-                
                 const newRefers = (refData.refers || 0) + 1;
                 await referrerRef.update({ refers: newRefers });
-
-                notifyReferrerNewUser(referrerId, userName, userId, userSerial, joinDateFormatted);
             }
         }
 
@@ -1079,29 +1011,13 @@ async function loadAllData() {
 
         savedPhotoUrl = userPhotoUrl;
         formattedJoinDate = new Date().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
-
-        notifyAdminNewUser(userSerial, userName, userId, joinDateFormatted, referrerNameStr, referrerIdStr, referrerSerialStr);
     }
 
-    // রিয়েল-টাইম সিঙ্ক listener (ব্যালেন্স সুরক্ষিত রাখার জন্য)
     userRef.onSnapshot(async (docSnap) => {
         if (docSnap.exists) {
             const freshData = docSnap.data();
-            const currentRefers = freshData.refers || 0;
-            const processedRefers = freshData.processed_refers !== undefined ? freshData.processed_refers : currentRefers;
-
-            if (currentRefers > processedRefers) {
-                const diff = currentRefers - processedRefers;
-                const addedCoins = diff * 111;
-                const updatedBalance = (freshData.balance || 0) + addedCoins;
-                await userRef.update({ balance: updatedBalance, processed_refers: currentRefers });
-                userBalance = updatedBalance;
-                
-                tg.showAlert(`💎 অসাধারণ সংবাদ, বস!\nআপনার চমৎকার রেফার লিংকের মাধ্যমে একজন নতুন বন্ধু সফলভাবে জয়েন করেছে!\n\n🎁 বোনাস: আপনার ওয়ালেটে ইনস্ট্যান্ট ${addedCoins} কয়েন যোগ করা হয়েছে! 🚀`);
-            } else {
-                userBalance = freshData.balance || 0;
-            }
-            totalRefers = currentRefers;
+            userBalance = freshData.balance || 0;
+            totalRefers = freshData.refers || 0;
             userSerial = freshData.serial || userSerial;
             isActive = freshData.is_active || false;
             specialWatched = freshData.specialWatched || 0;
@@ -1114,7 +1030,9 @@ async function loadAllData() {
         }
     });
 
-    document.getElementById('refer-link').innerText = "https://t.me/TakaInkam1626_bot?start=" + userId;
+    // যেকোনো ব্রাউজারে শেয়ারযোগ্য লিংক তৈরি
+    const currentBaseUrl = window.location.origin + window.location.pathname;
+    document.getElementById('refer-link').innerText = currentBaseUrl + "?start=" + userId;
     updateUI();
     loadReferralsList();
     loadPaymentHistory();
@@ -1706,7 +1624,6 @@ async function processWithdraw() {
     }, async (buttonId) => {
         if (buttonId === 'confirm') {
             try {
-                // শুধুমাত্র সফল উইথড্র রিকোয়েস্ট পাঠানোর পরেই ব্যালেন্স থেকে কয়েন কাটা হবে
                 userBalance -= amount;
 
                 await db.collection('withdraw_requests').add({
@@ -1719,8 +1636,6 @@ async function processWithdraw() {
                     status: "pending", 
                     time: new Date()
                 });
-
-                await notifyAdminWithdrawRequest(userSerial, userName, userId, method, number, amount, taka);
 
                 await db.collection('users').doc(userId).update({ balance: userBalance });
                 updateUI();
@@ -1750,16 +1665,18 @@ function switchPage(pageId, element) {
 }
 
 function copyRefer() {
-    const link = "https://t.me/TakaInkam1626_bot?start=" + userId;
+    const currentBaseUrl = window.location.origin + window.location.pathname;
+    const link = currentBaseUrl + "?start=" + userId;
     navigator.clipboard.writeText(link);
     tg.showAlert("📋 রেফার লিংক কপি সফল হয়েছে!");
 }
 
 function shareRefer() {
-    const link = "https://t.me/TakaInkam1626_bot?start=" + userId;
+    const currentBaseUrl = window.location.origin + window.location.pathname;
+    const link = currentBaseUrl + "?start=" + userId;
     const text = "💰 ঘরে বসে প্রতিদিন ইনকাম করুন খুব সহজে!\nআজই জয়েন করুন 👇\n" + link;
-    if(tg.openTelegramLink) {
-        tg.openTelegramLink("https://t.me/share/url?url=" + encodeURIComponent(link) + "&text=" + encodeURIComponent(text));
+    if(navigator.share) {
+        navigator.share({ title: 'Daily Task Income Center', text: text, url: link }).catch(() => {});
     } else {
         window.open("https://t.me/share/url?url=" + encodeURIComponent(link) + "&text=" + encodeURIComponent(text), '_blank');
     }
