@@ -269,7 +269,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             
             <div class="auth-input-box">
                 <span>📞</span>
-                <input type="number" id="login-phone" placeholder="ফোন নাম্বার">
+                <input type="text" id="login-phone" placeholder="ফোন নাম্বার">
             </div>
             <div class="auth-input-box">
                 <span>🔒</span>
@@ -345,7 +345,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             </div>
             <div class="auth-input-box">
                 <span>📞</span>
-                <input type="number" id="reg-phone" placeholder="ফোন নাম্বার">
+                <input type="text" id="reg-phone" placeholder="ফোন নাম্বার">
             </div>
             <div class="auth-input-box">
                 <span>🔒</span>
@@ -1014,7 +1014,7 @@ async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, 
     } catch (e) { console.log(e); }
 }
 
-// নিবন্ধন হ্যান্ডেল করা
+// নিবন্ধন হ্যান্ডেল করা (স্পেস ত্রুটি দূর করতে .trim() যুক্ত করা হয়েছে)
 async function handleRegister() {
     const name = document.getElementById('reg-name').value.trim();
     const phone = document.getElementById('reg-phone').value.trim();
@@ -1084,7 +1084,7 @@ async function saveUserDataAndLogin(phone, name, password, photoUrl, photoFile) 
     initDashboard(phone);
 }
 
-// লগইন হ্যান্ডেল করা
+// লগইন হ্যান্ডেল করা (.trim যুক্ত)
 async function handleLogin() {
     const phone = document.getElementById('login-phone').value.trim();
     const password = document.getElementById('login-password').value.trim();
@@ -1131,7 +1131,6 @@ function handleLogout() {
     window.location.reload();
 }
 
-// চেক করে লগইন থাকলে হোম পেজ বা অ্যাডমিন পেজ দেখাবে
 window.addEventListener('DOMContentLoaded', () => {
     if (isAdminLoggedIn) {
         initAdminDashboard();
@@ -1204,7 +1203,6 @@ async function initDashboard(phone) {
     showWelcomeAlert();
 }
 
-// অ্যাডমিন ড্যাশবোর্ড লোড
 async function initAdminDashboard() {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-admin-dashboard').classList.add('active');
@@ -1256,7 +1254,7 @@ function openAdminChat(phone) {
             chatBox.innerHTML = '';
             snapshot.forEach((doc) => {
                 const data = doc.data();
-                const sender = data.sender; // 'user' অথবা 'admin'
+                const sender = data.sender;
                 const text = data.text;
                 
                 const bubble = document.createElement('div');
@@ -1656,7 +1654,6 @@ async function processWithdraw() {
     alert("✅ পেমেন্ট রিকোয়েস্ট সফলভাবে পাঠানো হয়েছে!");
 }
 
-// ইন-অ্যাপ লাইভ চ্যাট ফাংশনালিটি (ইউজারের জন্য)
 function initChatListener(phone) {
     if (chatUnsubscribe) chatUnsubscribe();
     const chatBox = document.getElementById('chat-messages-box');
@@ -1667,7 +1664,7 @@ function initChatListener(phone) {
             chatBox.innerHTML = `<div class="chat-bubble admin">আসসালামু আলাইকুম! দারাজ প্লে ইনকাম সেন্টারে আপনাকে স্বাগতম। আপনার কী সমস্যা বা জিজ্ঞাসা রয়েছে এখানে লিখুন, আমরা দ্রুত উত্তর দিচ্ছি।</div>`;
             snapshot.forEach((doc) => {
                 const data = doc.data();
-                const sender = data.sender; // 'user' অথবা 'admin'
+                const sender = data.sender;
                 const text = data.text;
                 
                 const bubble = document.createElement('div');
@@ -1687,14 +1684,12 @@ async function sendChatMessage() {
     inputEl.value = '';
     
     try {
-        // ফায়ারবেসে মেসেজ সেভ করা
         await db.collection('chats').doc(currentUserPhone).collection('messages').add({
             sender: 'user',
             text: text,
             time: firebase.firestore.FieldValue.serverTimestamp()
         });
         
-        // অ্যাডমিন টেলিগ্রাম বটে নোটিফিকেশন পাঠানো
         const msgToAdmin = `💬 <b>নতুন লাইভ চ্যাট মেসেজ!</b>\n\n👤 <b>নাম:</b> ${userName}\n📞 <b>ফোন/ID:</b> ${currentUserPhone}\n✉️ <b>মেসেজ:</b> ${text}`;
         await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: 'POST',
