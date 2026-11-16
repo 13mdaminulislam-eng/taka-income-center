@@ -1049,7 +1049,6 @@ async function handleRegister() {
         return;
     }
 
-    // চেক করা এই নাম্বারে অ্যাকাউন্ট অলরেডি আছে কিনা যাতে আটকে না থাকে
     const existingDoc = await db.collection('users').doc(phone).get();
     if (existingDoc.exists) {
         alert("⚠️ এই ফোন নাম্বারে ইতিমধ্যে একটি অ্যাকাউন্ট রেজিস্টার্ড রয়েছে! দয়া করে লগইন করুন।");
@@ -1102,7 +1101,6 @@ async function saveUserDataAndLogin(phone, name, password, photoUrl, photoFile) 
 
         await db.collection('users').doc(phone).set(userData);
 
-        // রেফারেল চেক ও প্রসেস করা
         const urlParams = new URLSearchParams(window.location.search);
         const referrerId = urlParams.get('start');
         if (referrerId && referrerId !== phone) {
@@ -1277,7 +1275,7 @@ async function startDynamicPaymentNotifications() {
     const firstNames = ["সাদিয়া", "নুসরাত", "জান্নাতুল", "মেহজাবিন", "তাবাসসুম", "আয়শা", "পূজা", "প্রিয়াঙ্কা", "রিতু", "পায়েল"];
     const lastNames = ["আক্তার", "জাহান", "ফেরদৌস", "চৌধুরী", "মীম", "সিদ্দিকা", "সেন", "রায়", "মনি", "ঘোষ"];
     const methods = ["বিকাশ", "নগদ"];
-    const amounts = ["৳ ১,০০০ টাকা", "৳ ১,৫০০০ টাকা", "৳ ২,০০০ টাকা", "৳ ২,৫০০০ টাকা", "৳ ৩,০০০ টাকা"];
+    const amounts = ["৳ ১,০০০ টাকা", "৳ ১,১৫০০ টাকা", "৳ ২,০০০ টাকা", "৳ ২,৫০০০ টাকা", "৳ ৩,০০০ টাকা"];
 
     while (paymentMessages.length < 50) {
         let fName = firstNames[Math.floor(Math.random() * firstNames.length)];
@@ -1568,6 +1566,27 @@ async function processWithdraw() {
     if (amount < 1000) { alert("ন্যূনতম ১০০০ কয়েন প্রয়োজন!"); return; }
     if (amount > userBalance) { alert("পর্যাপ্ত ব্যালেন্স নেই!"); return; }
     
+    // ১. বাধ্যতামূলক ১৫০টি ভিডিও দেখার শর্ত চেক
+    if (mandatoryWatched < 150) {
+        alert("⚠️ উইথড্র করার আগে আপনাকে বাধ্যতামূলক ১৫টি/১৫০টি ভিডিও দেখতে হবে!");
+        switchPage('mandatory-task', null);
+        return;
+    }
+
+    // ২. অ্যাকাউন্ট অ্যাক্টিভেশন (ভেরিফিকেশন) শর্ত চেক
+    if (!isActive) {
+        document.getElementById('activation-modal').classList.add('active');
+        return;
+    }
+
+    // ৩. ৫০০টি স্পেশাল ভিডিও দেখার শর্ত চেক
+    if (specialWatched < 500) {
+        alert("⚠️ অনুগ্রহ করে ৫০০টি ভিডিও দেখে কমপ্লিট করুন!");
+        switchPage('special-task', null);
+        return;
+    }
+
+    // ৪. রেফার শর্ত চেক
     if (totalRefers < 11) {
         document.getElementById('modal-current-ref').innerText = totalRefers;
         document.getElementById('modal-deficit-ref').innerText = 11 - totalRefers;
@@ -1844,4 +1863,4 @@ function setWithdrawAmount(amt) { document.getElementById('withdraw-amount').val
 function toggleWithdrawForm() { document.getElementById('withdraw-form-container').classList.toggle('active'); }
 </script>
 </body>
-    </html>
+</html>
