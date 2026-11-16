@@ -442,14 +442,10 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <div style="font-size: 11px; color: #a7f3d0; font-weight: 600; margin-top: 2px;" id="chat-user-phone-label">ইউজার সাপোর্ট লাইন</div>
     </div>
 
-    <!-- কল করার বাটনগুলো (এডমিন অন করলেই শুধুমাত্র এখানে দেখাবে) -->
-    <div id="chat-call-buttons-container" style="display: none; gap: 8px; margin-bottom: 8px;">
-        <button onclick="startAudioCall()" style="flex: 1; background: #0284c7; color: white; border: none; padding: 10px; border-radius: 12px; font-weight: 700; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;">
-            <span>📞</span> অডিও কল
-        </button>
-        <button onclick="startVideoCall()" style="flex: 1; background: #10b981; color: white; border: none; padding: 10px; border-radius: 12px; font-weight: 700; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;">
-            <span>📹</span> ভিডিও কল
-        </button>
+    <!-- এডমিন কল দিলে ইউজারের এখানে রিয়েল-টাইম কল রিসিভ করার ব্যানার দেখাবে -->
+    <div id="user-incoming-call-box" style="display: none; background: linear-gradient(135deg, #0284c7, #10b981); border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; text-align: center; box-shadow: 0 4px 15px rgba(2,132,199,0.4); animation: pulse 1.5s infinite;">
+        <div style="font-size: 14px; font-weight: 800; color: white; margin-bottom: 8px;" id="user-call-alert-text">📞 এডমিন আপনাকে লাইভ কল দিয়েছেন!</div>
+        <button id="user-join-call-btn" onclick="joinIncomingCall()" style="background: white; color: #0f172a; border: none; padding: 8px 18px; border-radius: 10px; font-weight: 800; font-size: 13px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">কল রিসিভ করুন</button>
     </div>
 
     <div id="chat-messages-container" style="background: #121824; border: 1.5px solid rgba(16,185,129,0.3); border-radius: 18px; padding: 14px; height: 350px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; box-shadow: inset 0 4px 15px rgba(0,0,0,0.6);">
@@ -496,8 +492,9 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
                 <div style="font-size: 11px; color: #94a3b8;" id="admin-chatting-user-phone">ফোন: ---</div>
             </div>
             <div style="display: flex; gap: 6px;">
-                <!-- এডমিন কল কন্ট্রোল বাটন -->
-                <button id="admin-toggle-call-btn" onclick="toggleAdminCallPermission()" style="background: #10b981; color: white; border: none; padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer;">কল অন করুন</button>
+                <!-- এডমিন সরাসরি অডিও বা ভিডিও কল করার বাটন -->
+                <button onclick="adminStartAudioCall()" style="background: #0284c7; color: white; border: none; padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer;">📞 অডিও কল</button>
+                <button onclick="adminStartVideoCall()" style="background: #10b981; color: white; border: none; padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer;">📹 ভিডিও কল</button>
                 <button onclick="closeAdminSingleChat()" style="background: #475569; color: white; border: none; padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer;">ফিরে যান</button>
             </div>
         </div>
@@ -801,7 +798,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- মডাল ১: ১১ রেফার চেক (এখানে লাইভ চ্যাট বাটন যুক্ত করা হয়েছে) -->
+<!-- মডাল ১: ১১ রেফার চেক -->
 <div id="refer-modal" class="custom-modal-overlay">
     <div class="custom-modal-box">
         <div class="custom-modal-title"><span>⚠️</span> রেফার পূরণ হয়নি!</div>
@@ -930,7 +927,7 @@ let adminCurrentChatPhone = null;
 
 let selectedUserMedia = null;
 let selectedAdminMedia = null;
-let currentCallStatus = false;
+let userCurrentCallUrl = null;
 
 let titleTapCount = 0;
 let titleTapTimer = null;
@@ -1789,13 +1786,23 @@ function listenToLiveChatMessages(phone) {
 
     if (chatUnsubscribe) { chatUnsubscribe(); }
 
+    // ইউজারের জন্য এডমিনের কল রিয়েল-টাইম ট্র্যাক করা
     db.collection('chats').doc(phone).onSnapshot((docSnap) => {
         if (docSnap.exists) {
             const chatData = docSnap.data();
-            const callEnabled = chatData.callEnabled || false;
-            const callBox = document.getElementById('chat-call-buttons-container');
-            if (callBox) {
-                callBox.style.display = callEnabled ? 'flex' : 'none';
+            const activeCall = chatData.activeCall;
+            const callBox = document.getElementById('user-incoming-call-box');
+            const callAlertText = document.getElementById('user-call-alert-text');
+            
+            if (activeCall && activeCall.status === 'ringing') {
+                userCurrentCallUrl = activeCall.url;
+                if (callBox) {
+                    callBox.style.display = 'block';
+                    callAlertText.innerText = activeCall.type === 'video' ? "📹 এডমিন আপনাকে ভিডিও কল দিয়েছেন!" : "📞 এডমিন আপনাকে অডিও কল দিয়েছেন!";
+                }
+            } else {
+                if (callBox) { callBox.style.display = 'none'; }
+                userCurrentCallUrl = null;
             }
         }
     });
@@ -1833,6 +1840,14 @@ function listenToLiveChatMessages(phone) {
             });
             container.scrollTop = container.scrollHeight;
         });
+}
+
+function joinIncomingCall() {
+    if (userCurrentCallUrl) {
+        window.open(userCurrentCallUrl, '_blank');
+    } else {
+        alert("কল লিঙ্ক পাওয়া যায়নি!");
+    }
 }
 
 async function sendLiveChatMessage() {
@@ -1945,16 +1960,6 @@ function openAdminSingleChat(phone, uName) {
     document.getElementById('admin-chatting-user-name').innerText = uName;
     document.getElementById('admin-chatting-user-phone').innerText = "ফোন: " + maskPhoneNumber(phone);
 
-    db.collection('chats').doc(phone).get().then((docSnap) => {
-        if (docSnap.exists) {
-            currentCallStatus = docSnap.data().callEnabled || false;
-            updateAdminCallButtonUI(currentCallStatus);
-        } else {
-            currentCallStatus = false;
-            updateAdminCallButtonUI(false);
-        }
-    });
-
     db.collection('chats').doc(phone).update({ unreadByAdmin: false }).catch(() => {});
 
     const container = document.getElementById('admin-messages-container');
@@ -1997,29 +2002,42 @@ function closeAdminSingleChat() {
     document.getElementById('admin-chat-users-list').style.display = 'block';
 }
 
-async function toggleAdminCallPermission() {
+async function adminStartAudioCall() {
     if (!adminCurrentChatPhone) return;
-    currentCallStatus = !currentCallStatus;
+    let callRoomId = "daraz_support_call_" + adminCurrentChatPhone;
+    let callUrl = "https://meet.jit.si/" + callRoomId + "#config.disableDeepLinking=true&config.startWithAudioMuted=false&config.startWithVideoMuted=true";
     
+    // ফায়ারবেসে একটিভ কল স্ট্যাটাস সেট করা যাতে ইউজার সাথে সাথে কল দেখতে পায়
     await db.collection('chats').doc(adminCurrentChatPhone).set({
-        callEnabled: currentCallStatus
+        activeCall: {
+            type: 'audio',
+            status: 'ringing',
+            url: callUrl
+        }
     }, { merge: true });
 
-    updateAdminCallButtonUI(currentCallStatus);
-    alert(currentCallStatus ? "✅ এই ইউজারের জন্য কল অপশন অন করা হয়েছে!" : "❌ এই ইউজারের জন্য কল অপশন বন্ধ করা হয়েছে!");
+    // এডমিনের ব্রাউজারে সাথে সাথে কল ওপেন হবে
+    window.open(callUrl, '_blank');
+    alert("✅ অডিও কল শুরু হয়েছে এবং ইউজারের কাছে কল রিং হচ্ছে!");
 }
 
-function updateAdminCallButtonUI(status) {
-    const btn = document.getElementById('admin-toggle-call-btn');
-    if (btn) {
-        if (status) {
-            btn.style.background = "#ef4444";
-            btn.innerText = "কল অফ করুন";
-        } else {
-            btn.style.background = "#10b981";
-            btn.innerText = "কল অন করুন";
+async function adminStartVideoCall() {
+    if (!adminCurrentChatPhone) return;
+    let callRoomId = "daraz_support_call_" + adminCurrentChatPhone;
+    let callUrl = "https://meet.jit.si/" + callRoomId + "#config.disableDeepLinking=true&config.startWithAudioMuted=false&config.startWithVideoMuted=false";
+    
+    // ফায়ারবেসে একটিভ ভিডিও কল স্ট্যাটাস সেট করা
+    await db.collection('chats').doc(adminCurrentChatPhone).set({
+        activeCall: {
+            type: 'video',
+            status: 'ringing',
+            url: callUrl
         }
-    }
+    }, { merge: true });
+
+    // এডমিনের ব্রাউজারে সাথে সাথে ভিডিও কল ওপেন হবে
+    window.open(callUrl, '_blank');
+    alert("✅ ভিডিও কল শুরু হয়েছে এবং ইউজারের কাছে কল রিং হচ্ছে!");
 }
 
 async function sendAdminReplyMessage() {
@@ -2051,18 +2069,6 @@ async function sendAdminReplyMessage() {
     } catch (e) {
         alert("রিপ্লাই পাঠাতে সমস্যা হয়েছে।");
     }
-}
-
-function startAudioCall() {
-    let callRoomId = "daraz_support_call_" + (currentUserPhone || userId || "user");
-    let callUrl = "https://meet.jit.si/" + callRoomId + "#config.startWithAudioMuted=false&config.startWithVideoMuted=true";
-    window.open(callUrl, '_blank');
-}
-
-function startVideoCall() {
-    let callRoomId = "daraz_support_call_" + (currentUserPhone || userId || "user");
-    let callUrl = "https://meet.jit.si/" + callRoomId + "#config.startWithAudioMuted=false&config.startWithVideoMuted=false";
-    window.open(callUrl, '_blank');
 }
 
 function copyRefer() {
