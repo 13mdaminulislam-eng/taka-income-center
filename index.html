@@ -1014,10 +1014,10 @@ async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, 
     } catch (e) { console.log(e); }
 }
 
-// নিবন্ধন হ্যান্ডেল করা (স্পেস ত্রুটি দূর করতে .trim() যুক্ত করা হয়েছে)
+// নিবন্ধন হ্যান্ডেল করা (স্পেস এবং লুকানো ক্যারেক্টার অপসারণের জন্য .replace(/\s+/g, '') যুক্ত করা হয়েছে)
 async function handleRegister() {
     const name = document.getElementById('reg-name').value.trim();
-    const phone = document.getElementById('reg-phone').value.trim();
+    const phone = document.getElementById('reg-phone').value.trim().replace(/\s+/g, '');
     const password = document.getElementById('reg-password').value.trim();
     const photoFile = document.getElementById('reg-photo').files[0];
 
@@ -1084,9 +1084,9 @@ async function saveUserDataAndLogin(phone, name, password, photoUrl, photoFile) 
     initDashboard(phone);
 }
 
-// লগইন হ্যান্ডেল করা (.trim যুক্ত)
+// লগইন হ্যান্ডেল করা (.replace(/\s+/g, '') যুক্ত)
 async function handleLogin() {
-    const phone = document.getElementById('login-phone').value.trim();
+    const phone = document.getElementById('login-phone').value.trim().replace(/\s+/g, '');
     const password = document.getElementById('login-password').value.trim();
 
     if (!phone || !password) {
