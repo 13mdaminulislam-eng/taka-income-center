@@ -256,7 +256,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             
             <div class="auth-input-box">
                 <span>📞</span>
-                <input type="number" id="login-phone" placeholder="ফোন নাম্বার">
+                <input type="text" id="login-phone" placeholder="ফোন নাম্বার">
             </div>
             <div class="auth-input-box">
                 <span>🔒</span>
@@ -285,7 +285,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             </div>
             <div class="auth-input-box">
                 <span>📞</span>
-                <input type="number" id="reg-phone" placeholder="ফোন নাম্বার">
+                <input type="text" id="reg-phone" placeholder="ফোন নাম্বার">
             </div>
             <div class="auth-input-box">
                 <span>🔒</span>
@@ -605,7 +605,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         </select>
 
         <label class="wallet-label">আপনার বিকাশ/নগদ নাম্বার:</label>
-        <input type="number" class="input-field" id="withdraw-number" placeholder="০১৭xxxxxxxx">
+        <input type="text" class="input-field" id="withdraw-number" placeholder="০১৭xxxxxxxx">
 
         <label class="wallet-label">উত্তোলন করার কয়েনের পরিমাণ:</label>
         <input type="number" class="input-field" id="withdraw-amount" placeholder="যেমন: ১০০০">
@@ -885,6 +885,14 @@ function showLoginPage() {
     document.getElementById('page-login').classList.add('active');
 }
 
+// বাংলা ও ইংরেজি নাম্বার কনভার্ট করার ফাংশন
+function normalizePhoneNumber(inputStr) {
+    if (!inputStr) return '';
+    const bengaliToEnglishMap = {'০':'0', '১':'1', '২':'2', '৩':'3', '৪':'4', '৫':'5', '৬':'6', '৭':'7', '৮':'8', '৯':'9'};
+    let converted = String(inputStr).replace(/[০-৯]/g, match => bengaliToEnglishMap[match]);
+    return converted.replace(/\D/g, '');
+}
+
 async function getNextSerial() {
     const counterRef = db.collection('settings').doc('user_counter');
     let assignedSerial = 1;
@@ -938,7 +946,8 @@ async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, 
 // নিবন্ধন হ্যান্ডেল করা
 async function handleRegister() {
     const name = document.getElementById('reg-name').value.trim();
-    const phone = document.getElementById('reg-phone').value.trim();
+    const rawPhone = document.getElementById('reg-phone').value;
+    const phone = normalizePhoneNumber(rawPhone);
     const password = document.getElementById('reg-password').value.trim();
     const photoFile = document.getElementById('reg-photo').files[0];
 
@@ -946,11 +955,8 @@ async function handleRegister() {
         alert("দয়া করে নাম, ফোন নাম্বার এবং পাসওয়ার্ড পূরণ করুন।");
         return;
     }
-
-    const userRef = db.collection('users').doc(phone);
-    const doc = await userRef.get();
-    if (doc.exists) {
-        alert("এই ফোন নাম্বার দিয়ে ইতিমধ্যে একটি অ্যাকাউন্ট রেজিস্টার করা আছে!");
+    if (phone.length < 10) {
+        alert("দয়া করে সঠিক ফোন নাম্বার দিন।");
         return;
     }
 
@@ -1007,7 +1013,8 @@ async function saveUserDataAndLogin(phone, name, password, photoUrl, photoFile) 
 
 // লগইন হ্যান্ডেল করা
 async function handleLogin() {
-    const phone = document.getElementById('login-phone').value.trim();
+    const rawPhone = document.getElementById('login-phone').value;
+    const phone = normalizePhoneNumber(rawPhone);
     const password = document.getElementById('login-password').value.trim();
 
     if (!phone || !password) {
@@ -1438,7 +1445,8 @@ async function watchMandatoryAd() {
 
 async function processWithdraw() {
     const amountField = document.getElementById("withdraw-amount").value;
-    const number = document.getElementById("withdraw-number").value;
+    const rawNum = document.getElementById("withdraw-number").value;
+    const number = normalizePhoneNumber(rawNum);
     const method = document.getElementById("payment-method").value;
     const amount = parseFloat(amountField);
     let taka = isNaN(amount) ? 0 : (amount / 1000) * 20; 
