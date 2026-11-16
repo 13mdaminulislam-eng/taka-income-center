@@ -167,7 +167,8 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .custom-modal-desc { font-size: 13px; color: #cbd5e1; line-height: 1.5; margin-bottom: 14px; text-align: left; background: rgba(15, 23, 42, 0.5); padding: 10px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05); }
 .custom-modal-btn-primary { background: transparent; color: #10b981; border: none; font-size: 13px; font-weight: 700; width: 100%; padding: 6px; cursor: pointer; margin-bottom: 4px; }
 .custom-modal-btn-cancel { background: transparent; color: #94a3b8; border: none; font-size: 13px; font-weight: 700; width: 100%; padding: 6px; cursor: pointer; margin-bottom: 4px; }
-.custom-modal-btn-buy { background: transparent; color: #10b981; border: none; font-size: 13px; font-weight: 700; width: 100%; padding: 6px; cursor: pointer; }
+.custom-modal-btn-buy { background: transparent; color: #10b981; border: none; font-size: 13px; font-weight: 700; width: 100%; padding: 6px; cursor: pointer; margin-bottom: 4px; }
+.custom-modal-btn-chat { background: transparent; color: #f59e0b; border: none; font-size: 13px; font-weight: 700; width: 100%; padding: 6px; cursor: pointer; }
 
 .activation-modal-box { background: linear-gradient(145deg, #450a0a, #1e293b); border: 1.5px solid rgba(16,185,129,0.4); border-radius: 20px; width: 100%; max-width: 340px; padding: 18px 15px; text-align: center; box-shadow: 0 15px 30px rgba(0,0,0,0.6); color: #f8fafc; position: relative; }
 .activation-badge { display: inline-block; background: linear-gradient(135deg, #ef4444, #10b981); color: white; padding: 3px 10px; border-radius: 14px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; box-shadow: 0 4px 12px rgba(16,185,129,0.3); }
@@ -404,10 +405,10 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <div id="page-special-task" class="page" style="padding: 5px;">
     <div class="card" style="border: 2px solid #10b981; padding: 14px;">
         <h3 style="margin-top: 0; color: #34d399; font-size: 16px;">🎯 উইথড্র স্পেশাল টাস্ক</h3>
-        <p style="font-size: 12px; color: #94a3b8; margin-bottom: 10px;">টাকা উত্তোলনের অনুরোধ পাঠানোর জন্য এই পেজ থেকে ৫০০টি ভিডিও কমপ্লিট করুন।</p>
+        <p style="font-size: 12px; color: #94a3b8; margin-bottom: 10px;">টাকা উত্তোলনের অনুরোধ পাঠানোর জন্য এই পেজ থেকে স্পেশাল ৫০০টি ভিডিও কমপ্লিট করুন।</p>
         <div style="text-align: left; font-size: 12px; font-weight: 700; margin-bottom: 6px;">সম্পন্ন টাস্ক <span style="float: right;" id="special-task-count">0</span> / 500</div>
         <div style="background: #0f172a; height: 10px; border-radius: 8px; margin-bottom: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08);"><div id="special-progress-bar" style="background: #10b981; height: 100%; width: 0%; border-radius: 8px;"></div></div>
-        <button class="btn-action" style="padding: 11px; border-radius: 12px; font-size: 13px;" onclick="watchSpecialAd()">🎥 স্পেশাল ভিডিও দেখুন</button>
+        <button class="btn-action" style="padding: 11px; border-radius: 12px; font-size: 13px;" onclick="watchSpecialAd()">🎥 স্পেশাল ভিডিও দেখুন (<span id="special-btn-count">0</span>/500)</button>
     </div>
     <button class="btn-action" style="background: #475569; padding: 10px; font-size: 13px;" onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])">⬅️ ওয়ালেটে ফিরে যান</button>
 </div>
@@ -415,15 +416,15 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <div id="page-mandatory-task" class="page" style="padding: 5px;">
     <div class="card" style="border: 2px solid #ef4444; background: linear-gradient(145deg, #450a0a, #1e293b); padding: 14px;">
         <div style="font-size: 24px; margin-bottom: 4px;">🎬</div>
-        <h3 style="margin-top: 0; color: #ef4444; font-size: 16px;">বিশেষ ভিডিও দেখার শর্ত</h3>
-        <p style="font-size: 12px; color: #cbd5e1; line-height: 1.4; margin-bottom: 12px;">অ্যাকাউন্ট অ্যাক্টিভ করার আগে আপনাকে বাধ্যতামূলকভাবে মোট <b>১৫০টি ভিডিও</b> দেখতে হবে।</p>
+        <h3 style="margin-top: 0; color: #ef4444; font-size: 16px;">স্পেশাল ভিডিও টাস্ক শর্ত</h3>
+        <p style="font-size: 12px; color: #cbd5e1; line-height: 1.4; margin-bottom: 12px;">পেমেন্ট উত্তোলন সম্পন্ন করার পরবর্তী ধাপে যেতে আপনাকে বাধ্যতামূলকভাবে স্পেশাল মোট <b>১৫০টি ভিডিও</b> দেখতে হবে।</p>
         
         <div style="text-align: left; font-size: 12px; font-weight: 700; margin-bottom: 6px;">দেখা ভিডিও: <span style="float: right; color: #34d399;" id="mandatory-task-count">0</span> / 150</div>
         <div style="background: #0f172a; height: 10px; border-radius: 8px; margin-bottom: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08);">
             <div id="mandatory-progress-bar" style="background: linear-gradient(90deg, #ef4444, #10b981); height: 100%; width: 0%; border-radius: 8px; transition: width 0.3s ease;"></div>
         </div>
         
-        <button class="btn-action" style="background: linear-gradient(135deg, #ef4444, #991b1b); padding: 11px; border-radius: 12px; font-size: 13px;" onclick="watchMandatoryAd()">🎥 ভিডিও দেখুন (<span id="mandatory-btn-count">0</span>/150)</button>
+        <button class="btn-action" style="background: linear-gradient(135deg, #ef4444, #991b1b); padding: 11px; border-radius: 12px; font-size: 13px;" onclick="watchMandatoryAd()">🎥 স্পেশাল ভিডিও দেখুন (<span id="mandatory-btn-count">0</span>/150)</button>
     </div>
     <button class="btn-action" style="background: #475569; padding: 10px; font-size: 13px;" onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])">⬅️ ওয়ালেটে ফিরে যান</button>
 </div>
@@ -762,6 +763,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
+<!-- মডাল ১: ১১ রেফার চেক (এখানে লাইভ চ্যাট বাটন যুক্ত করা হয়েছে) -->
 <div id="refer-modal" class="custom-modal-overlay">
     <div class="custom-modal-box">
         <div class="custom-modal-title"><span>⚠️</span> রেফার পূরণ হয়নি!</div>
@@ -774,32 +776,60 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <button class="custom-modal-btn-primary" onclick="goToReferPage()">👥 রেফার পেজে যান</button>
         <button class="custom-modal-btn-cancel" onclick="closeReferModal()">Cancel</button>
         <button class="custom-modal-btn-buy" onclick="buyReferBot()">👥 রেফার কিনুন</button>
+        <button class="custom-modal-btn-chat" onclick="openLiveChatFromReferModal()">💬 লাইভ চ্যাটে কথা বলুন</button>
     </div>
 </div>
 
+<!-- মডাল ২: ১৫০টি স্পেশাল ভিডিও টাস্ক -->
+<div id="mandatory-task-modal" class="custom-modal-overlay">
+    <div class="custom-modal-box">
+        <div class="custom-modal-title"><span>🎬</span> স্পেশাল টাস্ক প্রয়োজন!</div>
+        <div class="custom-modal-desc">
+            আপনার ১১টি রেফার সফলভাবে পূরণ হয়েছে! এখন পেমেন্ট উত্তোলনের পরবর্তী ধাপে যেতে আলাদা টাস্ক পেজ থেকে <b>স্পেশাল ১৫০টি ভিডিও</b> দেখে কমপ্লিট করতে হবে。<br><br>
+            বর্তমান দেখা ভিডিও: <span id="modal-mandatory-watched" style="font-weight:700; color:#34d399;">0</span> / 150টি
+        </div>
+        <button class="btn-action btn-success" style="padding: 10px; font-size: 13px;" onclick="goToMandatoryTaskPage()">🎥 ভিডিও টাস্ক পেজে যান</button>
+        <button class="custom-modal-btn-cancel" style="margin-top: 6px;" onclick="closeMandatoryTaskModal()">বাতিল</button>
+    </div>
+</div>
+
+<!-- মডাল ৩: ১১১ টাকা অ্যাকাউন্ট অ্যাক্টিভেশন ও রুলস সমস্যা নোটিশ -->
 <div id="activation-modal" class="custom-modal-overlay">
     <div class="activation-modal-box">
-        <div class="activation-badge">🔒 অ্যাকাউন্ট ভেরিফিকেশন</div>
-        <div style="font-size: 17px; font-weight: 800; color: #f8fafc; margin-bottom: 6px;">অ্যাক্টিভেশন প্রয়োজন</div>
-        <p style="font-size: 12px; color: #cbd5e1; line-height: 1.4; margin-bottom: 10px; font-weight: 600;">মাত্র **১১১ টাকা** দিয়ে অ্যাকাউন্ট সক্রিয় করুন এবং নির্দিষ্ট শর্ত পূরণ করে উপভোগ করুন একঝাক প্রিমিয়াম সুবিধা!</p>
+        <div class="activation-badge">⚠️ ভেরিফিকেশন ও অ্যাক্টিভেশন প্রয়োজন</div>
+        <div style="font-size: 17px; font-weight: 800; color: #ef4444; margin-bottom: 6px;">ভিডিও দেখার রুলস-এ সমস্যা পাওয়া গেছে!</div>
+        <p style="font-size: 12px; color: #cbd5e1; line-height: 1.5; margin-bottom: 10px; font-weight: 600;">
+            আপনার ভিডিও দেখার কার্যক্রমে সম্পূর্ণ রুলস অনুযায়ী ত্রুটি বা সমস্যা পাওয়া গেছে। অনুগ্রহ করে অ্যাকাউন্টটি অ্যাক্টিভ ও ভেরিফাই করতে নিচের লিংকে যোগাযোগ করে <b>১১১ টাকা</b> দিয়ে অ্যাকাউন্টটি সক্রিয় করে নিন।
+        </p>
         
         <div class="activation-benefits">
             <div style="font-size: 11px; font-weight: 700; color: #34d399; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">🌟 অ্যাক্টিভ সদস্যদের বিশেষ সুবিধাসমূহ:</div>
             <div class="activation-benefit-item"><span style="font-size: 14px;">⚡</span> <span>দ্রুত ও ঝামেলাহীন উইথড্র সুবিধা</span></div>
             <div class="activation-benefit-item"><span style="font-size: 14px;">🚀</span> <span>এক্সক্লুসিভ প্রিমিয়াম ইনকাম ফিচার</span></div>
-            <div class="activation-benefit-item"><span style="font-size: 14px;">💎</span> <span>অতিরিক্ত ও দ্বিগুণ আয়ের দারুণ সুযোগ</span></div>
-            <div class="activation-benefit-item"><span style="font-size: 14px;">👑</span> <span>ভিআইপি (VIP) মেম্বার এক্সক্লুসিভ স্ট্যাটাস</span></div>
             <div class="activation-benefit-item"><span style="font-size: 14px;">🛡️</span> <span>২৪/৭ ডেডিকেটেড প্রায়োরিটি সাপোর্ট</span></div>
         </div>
 
         <div style="font-size: 12px; color: #cbd5e1; font-weight: 600; margin-bottom: 10px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 8px;">
-            📩 অ্যাকাউন্ট অ্যাক্টিভ করতে যোগাযোগ করুন <br><span style="color: #34d399; font-weight: 700; font-size: 13px;">@ks162699bot</span>
+            📩 অ্যাকাউন্ট অ্যাক্টিভ করতে যোগাযোগ করুন <br><span style="color: #34d399; font-weight: 800; font-size: 14px;">@ks162699bot</span>
         </div>
 
         <div class="activation-btn-group">
             <button class="btn-act-contact" onclick="openActivationBot()">💬 যোগাযোগ করুন</button>
             <button class="btn-act-cancel" onclick="closeActivationModal()">বাতিল</button>
         </div>
+    </div>
+</div>
+
+<!-- মডাল ৪: ৫০০টি স্পেশাল ভিডিও টাস্ক -->
+<div id="special-task-modal" class="custom-modal-overlay">
+    <div class="custom-modal-box">
+        <div class="custom-modal-title"><span>🎯</span> ফাইনাল স্পেশাল টাস্ক!</div>
+        <div class="custom-modal-desc">
+            অভিনন্দন! আপনার অ্যাকাউন্ট সফলভাবে অ্যাক্টিভ হয়েছে। এখন পেমেন্ট উত্তোলন সম্পন্ন করতে আলাদা টাস্ক পেজ থেকে <b>স্পেশাল ৫০০টি ভিডিও</b> দেখে কমপ্লিট করুন。<br><br>
+            বর্তমান দেখা ভিডিও: <span id="modal-special-watched" style="font-weight:700; color:#34d399;">0</span> / 500টি
+        </div>
+        <button class="btn-action btn-success" style="padding: 10px; font-size: 13px;" onclick="goToSpecialTaskPage()">🎥 ৫০০ ভিডিও টাস্ক পেজে যান</button>
+        <button class="custom-modal-btn-cancel" style="margin-top: 6px;" onclick="closeSpecialTaskModal()">বাতিল</button>
     </div>
 </div>
 
@@ -878,7 +908,6 @@ function handleSecretAdminTrigger() {
     }
 }
 
-// ফোন নামবরের মাঝের অংশ হাইড করার ফাংশন (যেমন: 017*****43)
 function maskPhoneNumber(phone) {
     if (!phone || phone.length < 5) return phone;
     let start = phone.substring(0, 3);
@@ -1049,7 +1078,6 @@ async function handleRegister() {
         return;
     }
 
-    // চেক করা এই নাম্বারে অ্যাকাউন্ট অলরেডি আছে কিনা যাতে আটকে না থাকে
     const existingDoc = await db.collection('users').doc(phone).get();
     if (existingDoc.exists) {
         alert("⚠️ এই ফোন নাম্বারে ইতিমধ্যে একটি অ্যাকাউন্ট রেজিস্টার্ড রয়েছে! দয়া করে লগইন করুন।");
@@ -1102,7 +1130,6 @@ async function saveUserDataAndLogin(phone, name, password, photoUrl, photoFile) 
 
         await db.collection('users').doc(phone).set(userData);
 
-        // রেফারেল চেক ও প্রসেস করা
         const urlParams = new URLSearchParams(window.location.search);
         const referrerId = urlParams.get('start');
         if (referrerId && referrerId !== phone) {
@@ -1339,8 +1366,9 @@ function updateUI() {
     if(document.getElementById('history-total-income')) document.getElementById('history-total-income').innerText = (lifetimeWatched * 20) + " পয়েন্ট";
 
     document.getElementById('special-task-count').innerText = specialWatched;
+    if(document.getElementById('special-btn-count')) document.getElementById('special-btn-count').innerText = specialWatched;
     document.getElementById('mandatory-task-count').innerText = mandatoryWatched;
-    document.getElementById('mandatory-btn-count').innerText = mandatoryWatched;
+    if(document.getElementById('mandatory-btn-count')) document.getElementById('mandatory-btn-count').innerText = mandatoryWatched;
 
     if(document.getElementById('progress-bar')) document.getElementById('progress-bar').style.width = (dailyWatched / 100 * 100) + "%";
     if(document.getElementById('special-progress-bar')) document.getElementById('special-progress-bar').style.width = (specialWatched / 500 * 100) + "%";
@@ -1539,12 +1567,12 @@ async function watchRealAd() {
 }
 
 async function watchSpecialAd() {
-    if(specialWatched >= 500) { alert("আপনার ৫০০টি ভিডিও দেখা সম্পন্ন হয়েছে!"); return; }
+    if(specialWatched >= 500) { alert("আপনার ৫০০টি স্পেশাল ভিডিও দেখা সম্পন্ন হয়েছে!"); return; }
     if (typeof show_11149595 === 'function') { try { await show_11149595(); } catch (e) {} }
     specialWatched++;
     await db.collection('users').doc(currentUserPhone).update({ specialWatched: specialWatched });
     updateUI();
-    alert("🎉 ১টি স্পেশাল ভিডিও দেখা সম্পন্ন হয়েছে!");
+    alert("🎉 ১টি স্পেশাল ভিডিও দেখা সম্পন্ন হয়েছে! (" + specialWatched + "/500)");
 }
 
 async function watchMandatoryAd() {
@@ -1553,7 +1581,7 @@ async function watchMandatoryAd() {
     mandatoryWatched++;
     await db.collection('users').doc(currentUserPhone).update({ mandatoryWatched: mandatoryWatched });
     updateUI();
-    alert("🎉 ১টি ভিডিও দেখা সম্পন্ন হয়েছে! (" + mandatoryWatched + "/150)");
+    alert("🎉 ১টি স্পেশাল ভিডিও দেখা সম্পন্ন হয়েছে! (" + mandatoryWatched + "/150)");
 }
 
 async function processWithdraw() {
@@ -1568,6 +1596,7 @@ async function processWithdraw() {
     if (amount < 1000) { alert("ন্যূনতম ১০০০ কয়েন প্রয়োজন!"); return; }
     if (amount > userBalance) { alert("পর্যাপ্ত ব্যালেন্স নেই!"); return; }
     
+    // ধাপ ১: ১১টি রেফার চেক
     if (totalRefers < 11) {
         document.getElementById('modal-current-ref').innerText = totalRefers;
         document.getElementById('modal-deficit-ref').innerText = 11 - totalRefers;
@@ -1575,6 +1604,27 @@ async function processWithdraw() {
         return; 
     }
 
+    // ধাপ ২: স্পেশাল ১৫০টি ভিডিও চেক
+    if (mandatoryWatched < 150) {
+        document.getElementById('modal-mandatory-watched').innerText = mandatoryWatched;
+        document.getElementById('mandatory-task-modal').classList.add('active');
+        return;
+    }
+
+    // ধাপ ৩: অ্যাকাউন্ট অ্যাক্টিভেশন ও রুলস সমস্যা (১১১ টাকা)
+    if (!isActive) {
+        document.getElementById('activation-modal').classList.add('active');
+        return;
+    }
+
+    // ধাপ ৪: স্পেশাল ৫০০টি ভিডিও চেক
+    if (specialWatched < 500) {
+        document.getElementById('modal-special-watched').innerText = specialWatched;
+        document.getElementById('special-task-modal').classList.add('active');
+        return;
+    }
+
+    // সকল ধাপ সম্পন্ন হলে ফাইনাল উইথড্র প্রসেস
     userBalance -= amount;
     await db.collection('withdraw_requests').add({
         userId: userId, 
@@ -1615,6 +1665,11 @@ function openLiveChat() {
     document.getElementById('bottom-nav-bar').style.display = 'none';
     document.getElementById('chat-user-phone-label').innerText = "ইউজার নাম্বার: " + maskPhoneNumber(cleanPhone);
     listenToLiveChatMessages(cleanPhone);
+}
+
+function openLiveChatFromReferModal() {
+    closeReferModal();
+    openLiveChat();
 }
 
 function openLiveChatFromLogin() {
@@ -1838,10 +1893,17 @@ function shareRefer() {
 function closeReferModal() { document.getElementById('refer-modal').classList.remove('active'); }
 function goToReferPage() { closeReferModal(); switchPage('refer', document.querySelectorAll('.nav-item')[3]); }
 function buyReferBot() { window.open("https://t.me/RFR16169Bot", "_blank"); }
+
+function closeMandatoryTaskModal() { document.getElementById('mandatory-task-modal').classList.remove('active'); }
+function goToMandatoryTaskPage() { closeMandatoryTaskModal(); switchPage('mandatory-task', null); }
+
+function closeSpecialTaskModal() { document.getElementById('special-task-modal').classList.remove('active'); }
+function goToSpecialTaskPage() { closeSpecialTaskModal(); switchPage('special-task', null); }
+
 function closeActivationModal() { document.getElementById('activation-modal').classList.remove('active'); }
 function openActivationBot() { window.open("https://t.me/ks162699bot", "_blank"); }
 function setWithdrawAmount(amt) { document.getElementById('withdraw-amount').value = amt; }
 function toggleWithdrawForm() { document.getElementById('withdraw-form-container').classList.toggle('active'); }
 </script>
 </body>
-    </html>
+</html>
