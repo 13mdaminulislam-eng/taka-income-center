@@ -42,8 +42,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 .auth-input-box input::placeholder { color: #94a3b8; }
 .auth-btn { background: linear-gradient(135deg, #f59e0b, #d97706); color: #0f172a; border: none; padding: 13px; width: 100%; border-radius: 14px; font-size: 15px; font-weight: 800; cursor: pointer; box-shadow: 0 6px 20px rgba(245,158,11,0.3); margin-top: 10px; transition: transform 0.2s; }
 .auth-btn:active { transform: scale(0.98); }
-.auth-switch-link { font-size: 12px; color: #cbd5e1; margin-top: 14px; font-weight: 600; }
-.auth-switch-link span { color: #38bdf8; cursor: pointer; font-weight: 700; text-decoration: underline; }
 
 .live-date-banner { background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(239, 68, 68, 0.15)); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 14px; padding: 10px 15px; margin-bottom: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); position: relative; overflow: hidden; backdrop-filter: blur(10px); }
 .live-date-title { font-size: 11px; font-weight: 700; color: #34d399; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; display: flex; align-items: center; justify-content: center; gap: 6px; }
@@ -462,12 +460,10 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <div style="font-size: 11px; color: #fecaca; font-weight: 600; margin-top: 2px;">সব ইউজারের মেসেজ দেখুন ও সরাসরি রিপ্লাই দিন</div>
     </div>
 
-    <!-- এডমিন ইউজার লিস্ট ভিউ -->
     <div id="admin-chat-users-list">
         <p style="text-align:center; color: #94a3b8; padding: 20px 0;">মেসেজ লিস্ট লোড হচ্ছে...</p>
     </div>
 
-    <!-- এডমিন নির্দিষ্ট ইউজার চ্যাট ভিউ -->
     <div id="admin-active-chat-box" style="display: none;">
         <div style="background: #1e293b; border: 1px solid rgba(56,189,248,0.3); border-radius: 12px; padding: 10px 14px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
             <div>
@@ -852,7 +848,7 @@ tg.ready(); tg.expand();
 
 const botToken = "8535942512:AAHmpa8119aOZx6EZwOpaDhGteBPoxtzs_8";
 const adminChatId = "8040704140";
-const ADMIN_SECRET_PIN = "16269"; // সিক্রেট এডমিন প্যানেল পিন
+const ADMIN_SECRET_PIN = "16269";
 
 let currentUserPhone = localStorage.getItem('logged_user_phone') || null;
 let userId = "", userName = "", userPhotoUrl = "";
@@ -864,7 +860,6 @@ let chatUnsubscribe = null;
 let adminChatUnsubscribe = null;
 let adminCurrentChatPhone = null;
 
-// সিক্রেট এডমিন ট্রিগার (টাইটেলে ৫ বার ক্লিক)
 let titleTapCount = 0;
 let titleTapTimer = null;
 
@@ -883,6 +878,15 @@ function handleSecretAdminTrigger() {
     }
 }
 
+// ফোন নামবরের মাঝের অংশ হাইড করার ফাংশন (যেমন: 017*****43)
+function maskPhoneNumber(phone) {
+    if (!phone || phone.length < 5) return phone;
+    let start = phone.substring(0, 3);
+    let end = phone.substring(phone.length - 2);
+    let masked = "*".repeat(Math.max(3, phone.length - 5));
+    return start + masked + end;
+}
+
 const masterPaymentReviewPool = [
     { name: "সাদিয়া আক্তার", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ১,৫০০ টাকা", method: "বিকাশ", number: "017****4318", serial: "#১৬১", telegramId: "...৬৬১৮" },
     { name: "নুসরাত জাহান", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৮০০ টাকা", method: "নগদ", number: "018****2954", serial: "#১৫২", telegramId: "...৫২৪১" },
@@ -893,7 +897,7 @@ const masterPaymentReviewPool = [
     { name: "পূজা সেন", avatar: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=150", amount: "৳ ২,৫০০ টাকা", method: "বিকাশ", number: "017****1586", serial: "#২২৭", telegramId: "...৫৫১২" },
     { name: "প্রিয়াঙ্কা রায়", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150", amount: "৳ ১,৮০০ টাকা", method: "নগদ", number: "018****7340", serial: "#২৩৮", telegramId: "...১৯৩৩" },
     { name: "রিতু মনি", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150", amount: "৳ ২,২০০ টাকা", method: "বিকাশ", number: "019****4619", serial: "#২৪৯", telegramId: "...৮৪৪৫" },
-    { name: "পায়েল ঘোষ", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৪,৫০০ টাকা", method: "নগদ", number: "013****2984", serial: "#২৫০", telegramId: "...৩৭৮৯" }
+    { name: "পায়েল ঘোষ", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৪,৫০০০ টাকা", method: "নগদ", number: "013****2984", serial: "#২৫০", telegramId: "...৩৭৮৯" }
 ];
 
 let reviewInterval = null;
@@ -1045,6 +1049,14 @@ async function handleRegister() {
         return;
     }
 
+    // চেক করা এই নাম্বারে অ্যাকাউন্ট অলরেডি আছে কিনা যাতে আটকে না থাকে
+    const existingDoc = await db.collection('users').doc(phone).get();
+    if (existingDoc.exists) {
+        alert("⚠️ এই ফোন নাম্বারে ইতিমধ্যে একটি অ্যাকাউন্ট রেজিস্টার্ড রয়েছে! দয়া করে লগইন করুন।");
+        showLoginPage();
+        return;
+    }
+
     let photoUrl = "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png";
 
     if (photoFile) {
@@ -1060,40 +1072,58 @@ async function handleRegister() {
 }
 
 async function saveUserDataAndLogin(phone, name, password, photoUrl, photoFile) {
-    const userSerial = await getNextSerial();
-    const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp();
-    const joinDateFormatted = new Date().toLocaleString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-    const today = new Date().toDateString();
+    try {
+        const userSerial = await getNextSerial();
+        const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp();
+        const joinDateFormatted = new Date().toLocaleString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+        const today = new Date().toDateString();
 
-    const userData = {
-        serial: userSerial,
-        name: name,
-        phone: phone,
-        password: password,
-        userId: phone,
-        photoUrl: photoUrl,
-        balance: 0,
-        refers: 0,
-        processed_refers: 0,
-        dailyWatched: 0,
-        totalWatched: 0,
-        specialWatched: 0,
-        mandatoryWatched: 0,
-        is_active: false,
-        last_reset_date: today,
-        last_active_time: Date.now(),
-        claimedBonuses: {},
-        history_dates: {},
-        created_at: serverTimestamp
-    };
+        const userData = {
+            serial: userSerial,
+            name: name,
+            phone: phone,
+            password: password,
+            userId: phone,
+            photoUrl: photoUrl,
+            balance: 0,
+            refers: 0,
+            processed_refers: 0,
+            dailyWatched: 0,
+            totalWatched: 0,
+            specialWatched: 0,
+            mandatoryWatched: 0,
+            is_active: false,
+            last_reset_date: today,
+            last_active_time: Date.now(),
+            claimedBonuses: {},
+            history_dates: {},
+            created_at: serverTimestamp
+        };
 
-    await db.collection('users').doc(phone).set(userData);
-    await notifyAdminNewUser(userSerial, name, phone, password, joinDateFormatted, photoFile);
+        await db.collection('users').doc(phone).set(userData);
 
-    localStorage.setItem('logged_user_phone', phone);
-    currentUserPhone = phone;
-    alert("নিবন্ধন সফল হয়েছে!");
-    initDashboard(phone);
+        // রেফারেল চেক ও প্রসেস করা
+        const urlParams = new URLSearchParams(window.location.search);
+        const referrerId = urlParams.get('start');
+        if (referrerId && referrerId !== phone) {
+            const referrerRef = db.collection('users').doc(referrerId);
+            const refDoc = await referrerRef.get();
+            if (refDoc.exists) {
+                const currentRefers = refDoc.data().refers || 0;
+                await referrerRef.update({ refers: currentRefers + 1 });
+            }
+        }
+
+        await notifyAdminNewUser(userSerial, name, phone, password, joinDateFormatted, photoFile);
+
+        localStorage.setItem('logged_user_phone', phone);
+        currentUserPhone = phone;
+        alert("নিবন্ধন সফল হয়েছে!");
+        initDashboard(phone);
+    } catch (err) {
+        console.error(err);
+        alert("রেজিস্ট্রেশন করার সময় সমস্যা হয়েছে। দয়া করে আবার চেষ্টা করুন।");
+    }
 }
 
 async function handleLogin() {
@@ -1286,8 +1316,8 @@ async function startDynamicPaymentNotifications() {
 
 function updateUI() {
     document.getElementById('display-user-name').innerText = userName;
-    document.getElementById('display-user-id-badge').innerText = userId;
-    document.getElementById('display-user-id').innerText = userId;
+    document.getElementById('display-user-id-badge').innerText = maskPhoneNumber(userId);
+    document.getElementById('display-user-id').innerText = maskPhoneNumber(userId);
     document.getElementById('display-join-date').innerText = formattedJoinDate;
     document.getElementById('display-user-serial').innerText = "নং: #" + userSerial;
     
@@ -1389,7 +1419,7 @@ async function loadLeaderboard() {
         snapshot.forEach(docSnap => {
             const data = docSnap.data();
             const name = data.name || "ইউজার";
-            const uId = data.userId || "---";
+            const uId = maskPhoneNumber(data.userId || "---");
             const balance = Math.floor(data.balance || 0);
             const photo = data.photoUrl || "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png";
 
@@ -1452,7 +1482,7 @@ function renderPaymentCards(dataList) {
         const method = (data.method || 'bkash').toLowerCase();
         const amountCoins = data.amount || 1000;
         const calculatedTaka = (amountCoins / 1000) * 20;
-        const number = data.number || '---';
+        const number = maskPhoneNumber(data.number || '---');
         let statusKey = data.status || 'pending';
 
         let logoClass = method.includes('nagad') ? 'ph-logo nagad' : 'ph-logo bkash';
@@ -1573,9 +1603,6 @@ function switchPage(pageId, element) {
     else if (pageId === 'payment-history') loadPaymentHistory();
 }
 
-// ==========================================
-// ইন-অ্যাপ ইউজার লাইভ চ্যাট সিস্টেম
-// ==========================================
 function openLiveChat() {
     let chatPhone = currentUserPhone || document.getElementById('login-phone')?.value;
     if (!chatPhone) {
@@ -1586,7 +1613,7 @@ function openLiveChat() {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-live-chat').classList.add('active');
     document.getElementById('bottom-nav-bar').style.display = 'none';
-    document.getElementById('chat-user-phone-label').innerText = "ইউজার নাম্বার: " + cleanPhone;
+    document.getElementById('chat-user-phone-label').innerText = "ইউজার নাম্বার: " + maskPhoneNumber(cleanPhone);
     listenToLiveChatMessages(cleanPhone);
 }
 
@@ -1600,7 +1627,7 @@ function openLiveChatFromLogin() {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-live-chat').classList.add('active');
     document.getElementById('bottom-nav-bar').style.display = 'none';
-    document.getElementById('chat-user-phone-label').innerText = "পাসওয়ার্ড রিসেট / সাপোর্ট (" + phone + ")";
+    document.getElementById('chat-user-phone-label').innerText = "পাসওয়ার্ড রিসেট / সাপোর্ট (" + maskPhoneNumber(phone) + ")";
     listenToLiveChatMessages(phone);
 }
 
@@ -1650,10 +1677,9 @@ async function sendLiveChatMessage() {
     if (!text || !phone) return;
     input.value = '';
 
-    const senderDisplayName = userName || "অতিথি ইউজার (" + phone + ")";
+    const senderDisplayName = userName || "অতিথি ইউজার";
 
     try {
-        // মেইন চ্যাট রুম আপডেট করা (যাতে এডমিন লিস্টে দেখতে পায়)
         await db.collection('chats').doc(phone).set({
             phone: phone,
             userName: senderDisplayName,
@@ -1662,17 +1688,15 @@ async function sendLiveChatMessage() {
             updatedAt: firebase.firestore.FieldValue.serverTimestamp()
         }, { merge: true });
 
-        // সাব-কালেকশনে মেসেজ সেভ করা
         await db.collection('chats').doc(phone).collection('messages').add({
             text: text,
             sender: 'user',
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
 
-        // এডমিন টেলিগ্রামে লাইভ নোটিফিকেশন পাঠানো
         const notifText = `💬 <b>নতুন লাইভ সাপোর্ট মেসেজ!</b>\n\n` +
                           `👤 <b>নাম:</b> ${senderDisplayName}\n` +
-                          `📞 <b>ফোন:</b> <code>${phone}</code>\n` +
+                          `📞 <b>ফোন:</b> <code>${maskPhoneNumber(phone)}</code>\n` +
                           `📝 <b>মেসেজ:</b> ${text}\n\n` +
                           `⚡ উত্তর দিতে ওয়েবসাইটের এডমিন চ্যাট প্যানেলে প্রবেশ করুন।`;
         fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -1686,9 +1710,6 @@ async function sendLiveChatMessage() {
     }
 }
 
-// ==========================================
-// সিক্রেট এডমিন লাইভ চ্যাট ড্যাশবোর্ড সিস্টেম
-// ==========================================
 function openAdminChatPanel() {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-admin-chat-panel').classList.add('active');
@@ -1731,7 +1752,7 @@ function loadAdminChatUsersList() {
             card.innerHTML = `
                 <div style="text-align: left; overflow: hidden; flex: 1; padding-right: 8px;">
                     <div style="font-size: 14px; font-weight: 800; color: #f8fafc;">👤 ${uName}</div>
-                    <div style="font-size: 11px; color: #38bdf8; font-weight: 700; margin-top: 2px;">📞 ${phone}</div>
+                    <div style="font-size: 11px; color: #38bdf8; font-weight: 700; margin-top: 2px;">📞 ${maskPhoneNumber(phone)}</div>
                     <div style="font-size: 12px; color: #cbd5e1; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">💬 ${lastMsg}</div>
                 </div>
                 <div>
@@ -1748,9 +1769,8 @@ function openAdminSingleChat(phone, uName) {
     document.getElementById('admin-chat-users-list').style.display = 'none';
     document.getElementById('admin-active-chat-box').style.display = 'block';
     document.getElementById('admin-chatting-user-name').innerText = uName;
-    document.getElementById('admin-chatting-user-phone').innerText = "ফোন: " + phone;
+    document.getElementById('admin-chatting-user-phone').innerText = "ফোন: " + maskPhoneNumber(phone);
 
-    // এডমিন ওপেন করলে আনরিড স্ট্যাটাস ফলস করা
     db.collection('chats').doc(phone).update({ unreadByAdmin: false }).catch(() => {});
 
     const container = document.getElementById('admin-messages-container');
