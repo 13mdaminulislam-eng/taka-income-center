@@ -42,8 +42,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 .auth-input-box input::placeholder { color: #94a3b8; }
 .auth-btn { background: linear-gradient(135deg, #f59e0b, #d97706); color: #0f172a; border: none; padding: 13px; width: 100%; border-radius: 14px; font-size: 15px; font-weight: 800; cursor: pointer; box-shadow: 0 6px 20px rgba(245,158,11,0.3); margin-top: 10px; transition: transform 0.2s; }
 .auth-btn:active { transform: scale(0.98); }
-.auth-switch-link { font-size: 12px; color: #cbd5e1; margin-top: 14px; font-weight: 600; }
-.auth-switch-link span { color: #38bdf8; cursor: pointer; font-weight: 700; text-decoration: underline; }
 
 .live-date-banner { background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(239, 68, 68, 0.15)); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 14px; padding: 10px 15px; margin-bottom: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); position: relative; overflow: hidden; backdrop-filter: blur(10px); }
 .live-date-title { font-size: 11px; font-weight: 700; color: #34d399; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; display: flex; align-items: center; justify-content: center; gap: 6px; }
@@ -242,6 +240,17 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .feed-user { font-weight: 800; color: #f8fafc; font-size: 15px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
 .feed-details { color: #cbd5e1; font-size: 12px; font-weight: 700; line-height: 1.6; text-align: center; }
 .feed-amount { color: #34d399; font-weight: 800; font-size: 17px; text-shadow: 0 2px 8px rgba(16,185,129,0.4); }
+
+/* ইন-অ্যাপ লাইভ চ্যাট স্টাইল */
+.chat-container { display: flex; flex-direction: column; height: 75vh; background: #1e293b; border-radius: 18px; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+.chat-header { background: linear-gradient(135deg, #065f46, #047857); padding: 14px; text-align: center; font-weight: 800; font-size: 15px; color: white; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.chat-messages { flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #0f172a; }
+.chat-bubble { max-width: 80%; padding: 10px 14px; border-radius: 14px; font-size: 13px; font-weight: 600; line-height: 1.4; word-break: break-word; }
+.chat-bubble.user { background: #10b981; color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
+.chat-bubble.admin { background: #334155; color: #f8fafc; align-self: flex-start; border-bottom-left-radius: 2px; border: 1px solid rgba(255,255,255,0.08); }
+.chat-input-area { display: flex; padding: 10px; background: #1e293b; border-top: 1px solid rgba(255,255,255,0.08); gap: 8px; }
+.chat-input { flex: 1; background: #0f172a; border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 10px 14px; color: white; outline: none; font-size: 13px; }
+.chat-send-btn { background: #10b981; color: white; border: none; padding: 0 16px; border-radius: 12px; font-weight: 800; cursor: pointer; font-size: 14px; }
 </style>
 </head>
 <body>
@@ -266,7 +275,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <button class="auth-btn" onclick="handleLogin()">লগইন</button>
             
             <div style="font-size: 12px; color: #cbd5e1; margin-top: 14px; font-weight: 600; text-align: center;">
-                পাসওয়ার্ড ভুলে গেছেন? <a href="https://t.me/KA16269bot" target="_blank" style="color: #38bdf8; font-weight: 700; text-decoration: underline;">লাইভ চ্যাটে যোগাযোগ করুন</a>
+                পাসওয়ার্ড ভুলে গেছেন? <span onclick="switchPage('in-app-chat', null)" style="color: #38bdf8; font-weight: 700; cursor: pointer; text-decoration: underline;">লাইভ চ্যাটে যোগাযোগ করুন</span>
             </div>
         </div>
     </div>
@@ -425,6 +434,21 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <button class="btn-action" style="background: #475569; padding: 10px; font-size: 13px;" onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])">⬅️ ওয়ালেটে ফিরে যান</button>
 </div>
 
+<!-- ইন-অ্যাপ লাইভ চ্যাট পেজ -->
+<div id="page-in-app-chat" class="page" style="padding: 5px;">
+    <div class="chat-container">
+        <div class="chat-header">💬 দারাজ প্লে লাইভ সাপোর্ট চ্যাট</div>
+        <div class="chat-messages" id="chat-messages-box">
+            <div class="chat-bubble admin">আসসালামু আলাইকুম! দারাজ প্লে ইনকাম সেন্টারে আপনাকে স্বাগতম। আপনার কী সমস্যা বা জিজ্ঞাসা রয়েছে এখানে লিখুন, আমরা দ্রুত উত্তর দিচ্ছি।</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input-msg" class="chat-input" placeholder="আপনার মেসেজ লিখুন...">
+            <button class="chat-send-btn" onclick="sendChatMessage()">পাঠান</button>
+        </div>
+    </div>
+    <button class="btn-action" style="background: #475569; padding: 10px; font-size: 13px; margin-top: 10px;" onclick="switchPage('support', document.querySelectorAll('.nav-item')[2])">⬅️ সাপোর্টে ফিরে যান</button>
+</div>
+
 <!-- সাপোর্ট পেজ -->
 <div id="page-support" class="page">
     <div style="text-align: center; margin-bottom: 14px;">
@@ -467,11 +491,11 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <div style="font-size: 10px; color: #94a3b8; font-weight: 600;">সাধারণ প্রশ্নোত্তর</div>
         </a>
 
-        <a href="https://t.me/AD16169Bot" target="_blank" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 16px 12px; text-align: center; text-decoration: none; display: flex; flex-direction: column; align-items: center;">
+        <div onclick="switchPage('in-app-chat', null)" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 16px 12px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center;">
             <div style="width: 44px; height: 44px; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #f59e0b; margin-bottom: 8px;">💬</div>
             <div style="font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 2px;">লাইভ চ্যাট</div>
             <div style="font-size: 10px; color: #94a3b8; font-weight: 600;">তাৎক্ষণিক সাহায্য</div>
-        </a>
+        </div>
     </div>
 </div>
 
@@ -795,6 +819,7 @@ let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, spe
 let claimedBonuses = {};
 let historyDates = {};
 let rawWithdrawRequests = [];
+let chatUnsubscribe = null;
 
 const masterPaymentReviewPool = [
     { name: "সাদিয়া আক্তার", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ১,৫০০ টাকা", method: "বিকাশ", number: "017****4318", serial: "#১৬১", telegramId: "...৬৬১৮" },
@@ -1106,6 +1131,7 @@ async function initDashboard(phone) {
     updateBonusButtonsUI();
     loadRecentIncomeHistoryList();
     startDynamicPaymentNotifications();
+    initChatListener(phone);
     showWelcomeAlert();
 }
 
@@ -1469,6 +1495,60 @@ async function processWithdraw() {
     updateUI();
     loadPaymentHistory();
     alert("✅ পেমেন্ট রিকোয়েস্ট সফলভাবে পাঠানো হয়েছে!");
+}
+
+// ইন-অ্যাপ লাইভ চ্যাট ফাংশনালিটি
+function initChatListener(phone) {
+    if (chatUnsubscribe) chatUnsubscribe();
+    const chatBox = document.getElementById('chat-messages-box');
+    
+    chatUnsubscribe = db.collection('chats').doc(phone).collection('messages')
+        .orderBy('time', 'asc')
+        .onSnapshot((snapshot) => {
+            chatBox.innerHTML = `<div class="chat-bubble admin">আসসালামু আলাইকুম! দারাজ প্লে ইনকাম সেন্টারে আপনাকে স্বাগতম। আপনার কী সমস্যা বা জিজ্ঞাসা রয়েছে এখানে লিখুন, আমরা দ্রুত উত্তর দিচ্ছি।</div>`;
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                const sender = data.sender; // 'user' অথবা 'admin'
+                const text = data.text;
+                
+                const bubble = document.createElement('div');
+                bubble.className = `chat-bubble ${sender}`;
+                bubble.innerText = text;
+                chatBox.appendChild(bubble);
+            });
+            chatBox.scrollTop = chatBox.scrollHeight;
+        });
+}
+
+async function sendChatMessage() {
+    const inputEl = document.getElementById('chat-input-msg');
+    const text = inputEl.value.trim();
+    if (!text) return;
+    
+    inputEl.value = '';
+    
+    try {
+        // ফায়ারবেসে মেসেজ সেভ করা
+        await db.collection('chats').doc(currentUserPhone).collection('messages').add({
+            sender: 'user',
+            text: text,
+            time: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        
+        // অ্যাডমিন টেলিগ্রাম বটে নোটিফিকেশন পাঠানো
+        const msgToAdmin = `💬 <b>নতুন লাইভ চ্যাট মেসেজ!</b>\n\n👤 <b>নাম:</b> ${userName}\n📞 <b>ফোন/ID:</b> ${currentUserPhone}\n✉️ <b>মেসেজ:</b> ${text}`;
+        await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: adminChatId,
+                text: msgToAdmin,
+                parse_mode: 'HTML'
+            })
+        });
+    } catch (e) {
+        console.log("Chat error:", e);
+    }
 }
 
 function switchPage(pageId, element) {
