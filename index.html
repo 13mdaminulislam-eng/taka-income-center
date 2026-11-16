@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>💰 「ডেইলি টাস্ক ইনকাম সেন্টার」 💰</title>
-<!-- টেলিগ্রাম এসডিকে অপশনাল বা নিরাপদ করা হয়েছে যাতে ব্রাউজারে এরর না দেয় -->
 <script>
     window.Telegram = window.Telegram || {};
     window.Telegram.WebApp = window.Telegram.WebApp || {
@@ -32,6 +31,19 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 .page { display: none; animation: fadeIn 0.3s ease; }
 .page.active { display: block; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* লগইন ও নিবন্ধন পেজ ডিজাইন (স্ক্রিনশট অনুযায়ী) */
+.auth-wrapper { display: flex; align-items: center; justify-content: center; min-height: 85vh; padding: 10px; }
+.auth-card { background: linear-gradient(145deg, #063822, #021c10); border: 2px solid rgba(16, 185, 129, 0.4); border-radius: 24px; width: 100%; max-width: 380px; padding: 24px 20px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
+.auth-logo { font-size: 24px; font-weight: 800; color: #f8fafc; margin-bottom: 4px; }
+.auth-subtitle { font-size: 13px; color: #34d399; font-weight: 700; margin-bottom: 20px; }
+.auth-input-box { width: 100%; background: #0f172a; border: 1px solid rgba(255,255,255,0.15); border-radius: 14px; padding: 12px 14px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: white; }
+.auth-input-box input { background: transparent; border: none; outline: none; color: white; width: 100%; font-size: 14px; font-family: 'Plus Jakarta Sans', sans-serif; }
+.auth-input-box input::placeholder { color: #94a3b8; }
+.auth-btn { background: linear-gradient(135deg, #f59e0b, #d97706); color: #0f172a; border: none; padding: 13px; width: 100%; border-radius: 14px; font-size: 15px; font-weight: 800; cursor: pointer; box-shadow: 0 6px 20px rgba(245,158,11,0.3); margin-top: 10px; transition: transform 0.2s; }
+.auth-btn:active { transform: scale(0.98); }
+.auth-switch-link { font-size: 12px; color: #cbd5e1; margin-top: 14px; font-weight: 600; }
+.auth-switch-link span { color: #38bdf8; cursor: pointer; font-weight: 700; text-decoration: underline; }
 
 .live-date-banner { background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(239, 68, 68, 0.15)); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 14px; padding: 10px 15px; margin-bottom: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); position: relative; overflow: hidden; backdrop-filter: blur(10px); }
 .live-date-title { font-size: 11px; font-weight: 700; color: #34d399; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; display: flex; align-items: center; justify-content: center; gap: 6px; }
@@ -235,7 +247,59 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <body>
 <div class="top-app-title">💰 「ডেইলি টাস্ক ইনকাম সেন্টার」 💰</div>
 
-<div id="page-home" class="page active">
+<!-- লগইন পেজ -->
+<div id="page-login" class="page active">
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            <div class="auth-logo">লগইন</div>
+            <div class="auth-subtitle">এখনো কোনো অ্যাকাউন্ট নেই? <span onclick="showRegisterPage()">নিবন্ধন</span></div>
+            
+            <div class="auth-input-box">
+                <span>📞</span>
+                <input type="number" id="login-phone" placeholder="ফোন নাম্বার">
+            </div>
+            <div class="auth-input-box">
+                <span>🔒</span>
+                <input type="password" id="login-password" placeholder="পাসওয়ার্ড">
+            </div>
+            
+            <button class="auth-btn" onclick="handleLogin()">লগইন</button>
+        </div>
+    </div>
+</div>
+
+<!-- নিবন্ধন পেজ -->
+<div id="page-register" class="page">
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            <div class="auth-logo">নিবন্ধন</div>
+            <div class="auth-subtitle">ইতিমধ্যেই একটি অ্যাকাউন্ট আছে? <span onclick="showLoginPage()">লগইন</span></div>
+            
+            <div class="auth-input-box">
+                <span>👤</span>
+                <input type="text" id="reg-name" placeholder="আপনার পূর্ণ নাম">
+            </div>
+            <div class="auth-input-box">
+                <span>📞</span>
+                <input type="number" id="reg-phone" placeholder="ফোন নাম্বার">
+            </div>
+            <div class="auth-input-box">
+                <span>🔒</span>
+                <input type="password" id="reg-password" placeholder="পাসওয়ার্ড">
+            </div>
+            
+            <div style="background: rgba(15,23,42,0.6); border: 1px dashed rgba(16,185,129,0.4); border-radius: 12px; padding: 10px; margin-bottom: 12px; text-align: left;">
+                <label style="font-size: 11px; color: #34d399; font-weight: 700; display: block; margin-bottom: 4px;">📸 ফেস ভেরিফিকেশন ছবি (সেলফি):</label>
+                <input type="file" id="reg-photo" accept="image/*" style="font-size: 11px; color: #94a3b8; width: 100%;">
+            </div>
+
+            <button class="auth-btn" onclick="handleRegister()">নিবন্ধন</button>
+        </div>
+    </div>
+</div>
+
+<!-- হোম পেজ -->
+<div id="page-home" class="page">
     <div class="live-date-banner">
         <div class="live-date-title">📅 আজকের রিয়েল-টাইম তারিখ</div>
         <div class="live-date-value" id="live-current-date-time">লোড হচ্ছে...</div>
@@ -608,7 +672,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <div class="wallet-menu-arrow">›</div>
     </a>
 
-    <a href="#" class="wallet-menu-card" onclick="tg.close()">
+    <a href="#" class="wallet-menu-card" onclick="handleLogout()">
         <div class="wallet-menu-left" style="color: #ef4444;">
             <div class="wallet-menu-icon" style="background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.2); color: #ef4444;">🚪</div>
             <div>
@@ -675,7 +739,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- ইউজার এন্ট্রি এক ফ্রেমে দেখার উপযোগী প্রিমিয়াম ওয়েলকাম পপ-আপ মডাল -->
 <div id="welcome-alert-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="max-width: 330px; background: linear-gradient(145deg, #1e293b, #0f172a); border: 2px solid #10b981; padding: 14px; text-align: left; display: flex; flex-direction: column;">
         <div style="text-align: center; font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 1px;">🔥 ডেইলি টাস্ক ইনকাম সেন্টার 🔥</div>
@@ -696,7 +759,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<div class="nav-bar">
+<div class="nav-bar" id="bottom-nav-bar" style="display: none;">
     <div class="nav-item active" onclick="switchPage('home', this)"><div class="nav-icon">🏠</div><div>হোম</div></div>
     <div class="nav-item" onclick="switchPage('work', this)"><div class="nav-icon">📋</div><div>কাজ</div></div>
     <div class="nav-item" onclick="switchPage('support', this)"><div class="nav-icon">🎧</div><div>সাপোর্ট</div></div>
@@ -716,31 +779,15 @@ measurementId: "G-V356Y69BK8"
 };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
-
-// ব্রাউজার বা টেলিগ্রাম চেক করার লজিক
 const tg = window.Telegram.WebApp;
 tg.ready(); tg.expand();
-
-let userId, userName, userPhotoUrl;
-if (tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.id) {
-    userId = tg.initDataUnsafe.user.id.toString();
-    userName = `${tg.initDataUnsafe.user.first_name || ''} ${tg.initDataUnsafe.user.last_name || ''}`.trim();
-    userPhotoUrl = tg.initDataUnsafe.user.photo_url || "";
-} else {
-    // সাধারণ ব্রাউজারের জন্য লোকাল স্টোরেজ থেকে বা নতুন গেস্ট আইডি তৈরি
-    userId = localStorage.getItem('browser_user_id');
-    if (!userId) {
-        userId = 'web_' + Math.floor(100000 + Math.random() * 900000);
-        localStorage.setItem('browser_user_id', userId);
-    }
-    userName = localStorage.getItem('browser_user_name') || "ব্রাউজার ইউজার";
-    userPhotoUrl = "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png";
-}
 
 const botToken = "8535942512:AAHmpa8119aOZx6EZwOpaDhGteBPoxtzs_8";
 const adminChatId = "8040704140";
 
-let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, mandatoryWatched = 0, isActive = false, savedPhotoUrl = "", formattedJoinDate = "---", userSerial = "---";
+let currentUserPhone = localStorage.getItem('logged_user_phone') || null;
+let userId = "", userName = "", userPhotoUrl = "";
+let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, mandatoryWatched = 0, isActive = false, formattedJoinDate = "---", userSerial = "---";
 let claimedBonuses = {};
 let historyDates = {};
 let rawWithdrawRequests = [];
@@ -755,17 +802,7 @@ const masterPaymentReviewPool = [
     { name: "পূজা সেন", avatar: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=150", amount: "৳ ২,৫০০ টাকা", method: "বিকাশ", number: "017****1586", serial: "#২২৭", telegramId: "...৫৫১২" },
     { name: "প্রিয়াঙ্কা রায়", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150", amount: "৳ ১,৮০০ টাকা", method: "নগদ", number: "018****7340", serial: "#২৩৮", telegramId: "...১৯৩৩" },
     { name: "রিতু মনি", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150", amount: "৳ ২,২০০ টাকা", method: "বিকাশ", number: "019****4619", serial: "#২৪৯", telegramId: "...৮৪৪৫" },
-    { name: "পায়েল ঘোষ", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৪,৫০০ টাকা", method: "নগদ", number: "013****2984", serial: "#২৫০", telegramId: "...৩৭৮৯" },
-    { name: "নাফিসা তাবাসসুম", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150", amount: "৳ ১,১০০ টাকা", method: "বিকাশ", number: "016****5173", serial: "#২৬১", telegramId: "...৪৯২০" },
-    { name: "মেহনাজ উর্মি", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150", amount: "৳ ৩,৫০০ টাকা", method: "নগদ", number: "017****8392", serial: "#২৭২", telegramId: "...৬১৫৩" },
-    { name: "ফারজানা ইয়াসমিন", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ৯৫০ টাকা", method: "বিকাশ", number: "018****2047", serial: "#২৮৩", telegramId: "...৭২৮৪" },
-    { name: "সামিয়া রহমান", avatar: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=150", amount: "৳ ৪,০০০ টাকা", method: "নগদ", number: "019****9526", serial: "#২৯৪", telegramId: "...৮৩৯১" },
-    { name: "শান্তা ইসলাম", avatar: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=150", amount: "৳ ১,২৫০ টাকা", method: "বিকাশ", number: "013****6184", serial: "#৩০৫", telegramId: "...৯৫০২" },
-    { name: "নিশাত আনজুম", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150", amount: "৳ ২,৮০০ টাকা", method: "নগদ", number: "015****3749", serial: "#৩১৬", telegramId: "...১০১৫" },
-    { name: "মুক্তা মনি", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৩,২০০ টাকা", method: "বিকাশ", number: "016****4920", serial: "#৩২৭", telegramId: "...২০২৬" },
-    { name: "সুবর্ণা আক্তার", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150", amount: "৳ ১,৬০০ টাকা", method: "নগদ", number: "017****2815", serial: "#৩৩৮", telegramId: "...৩০৩৭" },
-    { name: "তানিয়া খাতুন", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150", amount: "৳ ২,১০০ টাকা", method: "বিকাশ", number: "018****6038", serial: "#৩৪৯", telegramId: "...৪০৪৮" },
-    { name: "রোকেয়া বেগম", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ১,৯০০ টাকা", method: "নগদ", number: "019****7193", serial: "#৩৫০", telegramId: "...৫০৫৯" }
+    { name: "পায়েল ঘোষ", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৪,৫০০ টাকা", method: "নগদ", number: "013****2984", serial: "#২৫০", telegramId: "...৩৭৮৯" }
 ];
 
 let reviewInterval = null;
@@ -773,70 +810,41 @@ let reviewInterval = null;
 function getDailyUniqueReviewPool() {
     const nowTime = new Date().getTime();
     const seventyTwoHoursMs = 72 * 60 * 60 * 1000;
-    
     let savedDataStr = localStorage.getItem('master_review_pool_72h_v3');
     let poolData = savedDataStr ? JSON.parse(savedDataStr) : null;
 
     if (!poolData || (nowTime - poolData.lastResetTime > seventyTwoHoursMs)) {
         let shuffled = [...masterPaymentReviewPool].sort(() => 0.5 - Math.random());
-        poolData = {
-            lastResetTime: nowTime,
-            available: shuffled,
-            shown: []
-        };
+        poolData = { lastResetTime: nowTime, available: shuffled, shown: [] };
         localStorage.setItem('master_review_pool_72h_v3', JSON.stringify(poolData));
     }
-
-    if (!poolData.available || poolData.available.length === 0) {
-        let shuffled = [...masterPaymentReviewPool].sort(() => 0.5 - Math.random());
-        poolData.available = shuffled;
-        poolData.lastResetTime = nowTime;
-        localStorage.setItem('master_review_pool_72h_v3', JSON.stringify(poolData));
-    }
-
     return poolData;
 }
 
 function openPaymentReviewModal() {
     document.getElementById('payment-review-modal').classList.add('active');
     showNextReviewPayment();
-    if (!reviewInterval) {
-        reviewInterval = setInterval(showNextReviewPayment, 4000);
-    }
+    if (!reviewInterval) { reviewInterval = setInterval(showNextReviewPayment, 4000); }
 }
 
 function closePaymentReviewModal() {
     document.getElementById('payment-review-modal').classList.remove('active');
-    if (reviewInterval) {
-        clearInterval(reviewInterval);
-        reviewInterval = null;
-    }
+    if (reviewInterval) { clearInterval(reviewInterval); reviewInterval = null; }
 }
 
 function showNextReviewPayment() {
     const container = document.getElementById('live-payment-feed-container');
     if (!container) return;
-
     let poolData = getDailyUniqueReviewPool();
-
     if (poolData.available.length === 0) {
         container.innerHTML = `<div class="feed-details" style="color: #94a3b8;">সকল পেমেন্ট রিভিউ দেখানো সম্পন্ন হয়েছে!</div>`;
         return;
     }
-
     const record = poolData.available.shift();
-    poolData.shown.push(record);
-    
     localStorage.setItem('master_review_pool_72h_v3', JSON.stringify(poolData));
-
     const now = new Date();
     const dateFormatted = now.toLocaleDateString('bn-BD', { day: 'numeric', month: 'long', year: 'numeric' });
     const timeFormatted = now.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' });
-    const fullDateTimeStr = `${dateFormatted}, ${timeFormatted}`;
-
-    container.style.animation = 'none';
-    container.offsetHeight; 
-    container.style.animation = 'fadeInModal 0.4s ease-in-out';
 
     container.innerHTML = `
         <div class="feed-user-row">
@@ -847,47 +855,30 @@ function showNextReviewPayment() {
             অ্যাকাউন্ট: <span style="color:#f38ba8;">${record.serial}</span> | মাধ্যম: <span style="color:#38bdf8;">${record.method}</span> (${record.number})<br>
             পেমেন্ট সফল: <span class="feed-amount">${record.amount}</span>
         </div>
-        <div style="font-size: 10px; color: #34d399; margin-top: 4px; font-weight: 700;">📅 ${fullDateTimeStr}</div>
+        <div style="font-size: 10px; color: #34d399; margin-top: 4px; font-weight: 700;">📅 ${dateFormatted}, ${timeFormatted}</div>
     `;
 }
 
-function showWelcomeAlert() {
-    const welcomeModal = document.getElementById('welcome-alert-modal');
-    if (welcomeModal) {
-        welcomeModal.classList.add('active');
-    }
-}
-
-function closeWelcomeAlertModal() {
-    const welcomeModal = document.getElementById('welcome-alert-modal');
-    if (welcomeModal) {
-        welcomeModal.classList.remove('active');
-    }
-}
+function showWelcomeAlert() { document.getElementById('welcome-alert-modal').classList.add('active'); }
+function closeWelcomeAlertModal() { document.getElementById('welcome-alert-modal').classList.remove('active'); }
 
 function updateLiveDateTime() {
     const now = new Date();
     const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
     let dateStr = now.toLocaleDateString('bn-BD', options);
-    
     const dateTimeElement = document.getElementById('live-current-date-time');
-    if (dateTimeElement) {
-        dateTimeElement.innerText = dateStr;
-    }
+    if (dateTimeElement) { dateTimeElement.innerText = dateStr; }
 }
 updateLiveDateTime();
 
-function setWithdrawAmount(amount) {
-    document.getElementById('withdraw-amount').value = amount;
+function showRegisterPage() {
+    document.getElementById('page-login').classList.remove('active');
+    document.getElementById('page-register').classList.add('active');
 }
 
-function toggleWithdrawForm() {
-    const formBox = document.getElementById('withdraw-form-container');
-    if (formBox.classList.contains('active')) {
-        formBox.classList.remove('active');
-    } else {
-        formBox.classList.add('active');
-    }
+function showLoginPage() {
+    document.getElementById('page-register').classList.remove('active');
+    document.getElementById('page-login').classList.add('active');
 }
 
 async function getNextSerial() {
@@ -905,115 +896,168 @@ async function getNextSerial() {
     return assignedSerial;
 }
 
-async function loadAllData() {
-    updateLiveDateTime();
-    showWelcomeAlert();
+async function notifyAdminNewUser(serialNo, name, phone, joinDateStr) {
+    const welcomeMsg = `✨ <b>🚀 নতুন মেম্বার রেজিস্ট্রেশন অ্যালার্ট! 🚀</b> ✨\n\n` +
+                       `👤 <b>ইউজার নাম:</b> <code>${name}</code>\n` +
+                       `📞 <b>ফোন নম্বর:</b> <code>${phone}</code>\n` +
+                       `🔢 <b>সিরিয়াল নাম্বার:</b> #${serialNo}\n` +
+                       `📅 <b>তারিখ ও সময়:</b> ${joinDateStr}\n\n` +
+                       `✨ <b>স্ট্যাটাস:</b> সফলভাবে অ্যাকাউন্ট নিবন্ধন করেছে!`;
+    try {
+        await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: adminChatId, text: welcomeMsg, parse_mode: "HTML" })
+        });
+    } catch (e) { console.log(e); }
+}
 
-    const userRef = db.collection('users').doc(userId);
-    const doc = await userRef.get();
-    const today = new Date().toDateString();
-    const todayKey = new Date().toISOString().split('T')[0];
-    const nowTimestamp = Date.now();
+// নিবন্ধন হ্যান্ডেল করা
+async function handleRegister() {
+    const name = document.getElementById('reg-name').value.trim();
+    const phone = document.getElementById('reg-phone').value.trim();
+    const password = document.getElementById('reg-password').value.trim();
+    const photoFile = document.getElementById('reg-photo').files[0];
 
-    let referrerId = null;
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has('start')) {
-        referrerId = urlParams.get('start').trim();
-    } else if (tg.initDataUnsafe && tg.initDataUnsafe.start_param) {
-        referrerId = tg.initDataUnsafe.start_param.trim();
+    if (!name || !phone || !password) {
+        alert("দয়া করে নাম, ফোন নাম্বার এবং পাসওয়ার্ড পূরণ করুন।");
+        return;
     }
 
+    const userRef = db.collection('users').doc(phone);
+    const doc = await userRef.get();
     if (doc.exists) {
-        const data = doc.data();
+        alert("এই ফোন নাম্বার দিয়ে ইতিমধ্যে একটি অ্যাকাউন্ট রেজিস্টার করা আছে!");
+        return;
+    }
 
-        let lastActive = data.last_active_time || nowTimestamp;
-        await userRef.update({ last_active_time: nowTimestamp });
+    let photoUrl = "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png";
 
-        if (!data.serial) {
-            userSerial = await getNextSerial();
-            const joinDateFormatted = new Date().toLocaleString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-            await userRef.update({ serial: userSerial, name: userName, userId: userId });
-        } else {
-            userSerial = data.serial;
-            if(!data.name || !data.userId) {
-                await userRef.update({ name: userName, userId: userId });
-            }
-        }
-
-        if (data.last_reset_date !== today) {
-            dailyWatched = 0;
-            await userRef.update({ dailyWatched: 0, last_reset_date: today, name: userName, userId: userId, photoUrl: userPhotoUrl || data.photoUrl || "" });
-        } else {
-            dailyWatched = data.dailyWatched || 0;
-            if(!data.name || !data.photoUrl || !data.userId) {
-                await userRef.update({ name: userName, userId: userId, photoUrl: userPhotoUrl || data.photoUrl || "" });
-            }
-        }
-        
-        userBalance = data.balance || 0;
-        lifetimeWatched = data.totalWatched || 0;
-        specialWatched = data.specialWatched || 0;
-        mandatoryWatched = data.mandatoryWatched || 0;
-
-        totalRefers = data.refers || 0;
-        claimedBonuses = data.claimedBonuses || {};
-        
-        historyDates = data.history_dates || {};
-        if (Object.keys(historyDates).length === 0 && lifetimeWatched > 0) {
-            historyDates[todayKey] = dailyWatched > 0 ? dailyWatched : lifetimeWatched;
-            await userRef.update({ history_dates: historyDates });
-        }
-        
-        isActive = data.is_active || false;
-        savedPhotoUrl = data.photoUrl || userPhotoUrl;
-        
-        if (data.created_at && data.created_at.toDate) {
-            formattedJoinDate = data.created_at.toDate().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
-        } else {
-            const currentDate = new Date();
-            await userRef.update({ created_at: firebase.firestore.FieldValue.serverTimestamp() });
-            formattedJoinDate = currentDate.toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
-        }
+    if (photoFile) {
+        const reader = new FileReader();
+        reader.readAsDataURL(photoFile);
+        reader.onload = async function () {
+            photoUrl = reader.result;
+            await saveUserDataAndLogin(phone, name, password, photoUrl);
+        };
     } else {
-        userSerial = await getNextSerial();
-        const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp();
-        const joinDateFormatted = new Date().toLocaleString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+        await saveUserDataAndLogin(phone, name, password, photoUrl);
+    }
+}
 
-        if (referrerId && referrerId !== userId) {
-            const referrerRef = db.collection('users').doc(referrerId);
-            const referrerDoc = await referrerRef.get();
-            if (referrerDoc.exists) {
-                const refData = referrerDoc.data();
-                const newRefers = (refData.refers || 0) + 1;
-                await referrerRef.update({ refers: newRefers });
-            }
-        }
+async function saveUserDataAndLogin(phone, name, password, photoUrl) {
+    const userSerial = await getNextSerial();
+    const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp();
+    const joinDateFormatted = new Date().toLocaleString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+    const today = new Date().toDateString();
 
-        await userRef.set({ 
-            serial: userSerial,
-            name: userName,
-            userId: userId,
-            photoUrl: userPhotoUrl,
-            balance: 0, 
-            refers: 0, 
-            processed_refers: 0,
-            dailyWatched: 0, 
-            totalWatched: 0, 
-            specialWatched: 0, 
-            mandatoryWatched: 0,
-            is_active: false, 
-            last_reset_date: today,
-            last_active_time: nowTimestamp,
-            claimedBonuses: {},
-            history_dates: {},
-            created_at: serverTimestamp
-        }, { merge: true });
+    const userData = {
+        serial: userSerial,
+        name: name,
+        phone: phone,
+        password: password,
+        userId: phone,
+        photoUrl: photoUrl,
+        balance: 0,
+        refers: 0,
+        processed_refers: 0,
+        dailyWatched: 0,
+        totalWatched: 0,
+        specialWatched: 0,
+        mandatoryWatched: 0,
+        is_active: false,
+        last_reset_date: today,
+        last_active_time: Date.now(),
+        claimedBonuses: {},
+        history_dates: {},
+        created_at: serverTimestamp
+    };
 
-        savedPhotoUrl = userPhotoUrl;
+    await db.collection('users').doc(phone).set(userData);
+    await notifyAdminNewUser(userSerial, name, phone, joinDateFormatted);
+
+    localStorage.setItem('logged_user_phone', phone);
+    currentUserPhone = phone;
+    alert("নিবন্ধন সফল হয়েছে!");
+    initDashboard(phone);
+}
+
+// লগইন হ্যান্ডেল করা
+async function handleLogin() {
+    const phone = document.getElementById('login-phone').value.trim();
+    const password = document.getElementById('login-password').value.trim();
+
+    if (!phone || !password) {
+        alert("ফোন নাম্বার এবং পাসওয়ার্ড দিন।");
+        return;
+    }
+
+    const userRef = db.collection('users').doc(phone);
+    const doc = await userRef.get();
+
+    if (!doc.exists) {
+        alert("এই নাম্বারে কোনো অ্যাকাউন্ট পাওয়া যায়নি! দয়া করে আগে নিবন্ধন করুন।");
+        return;
+    }
+
+    const data = doc.data();
+    if (data.password !== password) {
+        alert("ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিয়ে আবার চেষ্টা করুন।");
+        return;
+    }
+
+    localStorage.setItem('logged_user_phone', phone);
+    currentUserPhone = phone;
+    initDashboard(phone);
+}
+
+function handleLogout() {
+    localStorage.removeItem('logged_user_phone');
+    window.location.reload();
+}
+
+// চেক করে লগইন থাকলে হোম পেজ দেখাবে, না থাকলে লগইন পেজ
+window.addEventListener('DOMContentLoaded', () => {
+    if (currentUserPhone) {
+        initDashboard(currentUserPhone);
+    } else {
+        document.getElementById('page-login').classList.add('active');
+        document.getElementById('bottom-nav-bar').style.display = 'none';
+    }
+});
+
+async function initDashboard(phone) {
+    document.getElementById('page-login').classList.remove('active');
+    document.getElementById('page-register').classList.remove('active');
+    document.getElementById('bottom-nav-bar').style.display = 'flex';
+    switchPage('home', document.querySelectorAll('.nav-item')[0]);
+
+    const userRef = db.collection('users').doc(phone);
+    const doc = await userRef.get();
+    if (!doc.exists) return;
+
+    const data = doc.data();
+    userId = data.userId || phone;
+    userName = data.name || "ইউজার";
+    userPhotoUrl = data.photoUrl || "";
+    userSerial = data.serial || "---";
+    userBalance = data.balance || 0;
+    dailyWatched = data.dailyWatched || 0;
+    lifetimeWatched = data.totalWatched || 0;
+    specialWatched = data.specialWatched || 0;
+    mandatoryWatched = data.mandatoryWatched || 0;
+    totalRefers = data.refers || 0;
+    claimedBonuses = data.claimedBonuses || {};
+    historyDates = data.history_dates || {};
+    isActive = data.is_active || false;
+
+    if (data.created_at && data.created_at.toDate) {
+        formattedJoinDate = data.created_at.toDate().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
+    } else {
         formattedJoinDate = new Date().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
     }
 
-    userRef.onSnapshot(async (docSnap) => {
+    userRef.onSnapshot((docSnap) => {
         if (docSnap.exists) {
             const freshData = docSnap.data();
             userBalance = freshData.balance || 0;
@@ -1030,7 +1074,6 @@ async function loadAllData() {
         }
     });
 
-    // যেকোনো ব্রাউজারে শেয়ারযোগ্য লিংক তৈরি
     const currentBaseUrl = window.location.origin + window.location.pathname;
     document.getElementById('refer-link').innerText = currentBaseUrl + "?start=" + userId;
     updateUI();
@@ -1040,57 +1083,24 @@ async function loadAllData() {
     updateBonusButtonsUI();
     loadRecentIncomeHistoryList();
     startDynamicPaymentNotifications();
+    showWelcomeAlert();
 }
 
 function updateBonusButtonsUI() {
     const buttons = {
-        'chan1': { 
-            id: 'btn-chan1', 
-            html: (claimed) => claimed ? 
-                `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
-                `<span style="background: rgba(16,185,129,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">✨</span><span>চ্যানেল ১ বোনাস (৫০ কয়েন অফিসিয়াল)</span>`
-        },
-        'chan2': { 
-            id: 'btn-chan2', 
-            html: (claimed) => claimed ? 
-                `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
-                `<span style="background: rgba(16,185,129,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">✨</span><span>চ্যানেল ২ বোনাস (৫০ কয়েন অফিসিয়াল)</span>`
-        },
-        'chan3': { 
-            id: 'btn-chan3', 
-            html: (claimed) => claimed ? 
-                `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
-                `<span style="background: rgba(239,68,68,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #ef4444;">👥</span><span>ফেসবুক পেজ বোনাস (৫০ কয়েন)</span>`
-        },
-        'yt': { 
-            id: 'btn-yt', 
-            html: (claimed) => claimed ? 
-                `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span><span>ইতিমধ্যে নেওয়া হয়েছে</span>` : 
-                `<span style="background: rgba(255,255,255,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #34d399;">▶️</span><span>ইউটিউব বোনাস (৫০ কয়েন)</span>`,
-            isRed: true
-        }
+        'chan1': { id: 'btn-chan1', text: 'চ্যানেল ১ বোনাস (৫০ কয়েন অফিসিয়াল)' },
+        'chan2': { id: 'btn-chan2', text: 'চ্যানেল ২ বোনাস (৫০ কয়েন অফিসিয়াল)' },
+        'chan3': { id: 'btn-chan3', text: 'ফেসবুক পেজ বোনাস (৫০ কয়েন)' },
+        'yt': { id: 'btn-yt', text: 'ইউটিউব বোনাস (৫০ কয়েন)', isRed: true }
     };
-
     for (let key in buttons) {
         const btn = document.getElementById(buttons[key].id);
         if (btn) {
             const isClaimed = claimedBonuses[key];
-            btn.innerHTML = buttons[key].html(isClaimed);
-            
             if (isClaimed) {
+                btn.innerHTML = `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px;">✔</span> <span>ইতিমধ্যে নেওয়া হয়েছে</span>`;
                 btn.style.background = "#1e293b";
                 btn.style.color = "#94a3b8";
-                btn.style.border = "1px solid rgba(255,255,255,0.08)";
-            } else {
-                if (buttons[key].isRed) {
-                    btn.style.background = "linear-gradient(135deg, #ef4444, #dc2626)";
-                    btn.style.color = "white";
-                    btn.style.border = "none";
-                } else {
-                    btn.style.background = "#1e293b";
-                    btn.style.color = "#f8fafc";
-                    btn.style.border = "1px solid rgba(16,185,129,0.3)";
-                }
             }
         }
     }
@@ -1098,50 +1108,41 @@ function updateBonusButtonsUI() {
 
 async function claimChannelBonus(bonusKey, url) {
     if (claimedBonuses[bonusKey]) {
-        tg.showAlert("⚠️ আপনি ইতিমধ্যে এই বোনাসটি গ্রহণ করেছেন!");
+        alert("⚠️ আপনি ইতিমধ্যে এই বোনাসটি গ্রহণ করেছেন!");
         return;
     }
-
     window.open(url, '_blank');
-    tg.showAlert("⏳ চ্যানেল/পেজ ভিজিট করার পর অ্যাপে ফিরে আসুন। ১০ সেকেন্ড পর আপনার বোনাস ক্লেম হয়ে যাবে!");
+    alert("⏳ চ্যানেল/পেজ ভিজিট করার পর অ্যাপে ফিরে আসুন। ১০ সেকেন্ড পর আপনার বোনাস ক্লেম হয়ে যাবে!");
 
     setTimeout(async () => {
         if (claimedBonuses[bonusKey]) return;
-
         userBalance += 50;
         claimedBonuses[bonusKey] = true;
-
-        const userRef = db.collection('users').doc(userId);
-        await userRef.update({
+        await db.collection('users').doc(currentUserPhone).update({
             balance: userBalance,
             claimedBonuses: claimedBonuses,
             last_active_time: Date.now()
         });
-
         updateUI();
         updateBonusButtonsUI();
-        tg.showAlert("🎉 অভিনন্দন! সফলভাবে ৫০ কয়েন বোনাস পেয়ে গেছেন!");
+        alert("🎉 অভিনন্দন! সফলভাবে ৫০ কয়েন বোনাস পেয়ে গেছেন!");
     }, 10000);
 }
 
 async function startDynamicPaymentNotifications() {
     let paymentMessages = [];
-    const firstNames = ["সাদিয়া", "নুসরাত", "জান্নাতুল", "মেহজাবিন", "তাবাসসুম", "আয়শা", "পূজা", "প্রিয়াঙ্কা", "রিতু", "পায়েল", "নাফিসা", "মেহনাজ", "ফারজানা", "সামিয়া", "শান্তা", "নিশাত", "মুক্তা", "সুবর্ণা", "তানিয়া", "রোকেয়া"];
-    const lastNames = ["আক্তার", "জাহান", "ফেরদৌস", "চৌধুরী", "মীম", "সিদ্দিকা", "সেন", "রায়", "মনি", "ঘোষ", "তাবাসসুম", "উর্মি", "ইয়াসমিন", "রহমান", "ইসলাম", "আনজুম", "বেগম"];
+    const firstNames = ["সাদিয়া", "নুসরাত", "জান্নাতুল", "মেহজাবিন", "তাবাসসুম", "আয়শা", "পূজা", "প্রিয়াঙ্কা", "রিতু", "পায়েল"];
+    const lastNames = ["আক্তার", "জাহান", "ফেরদৌস", "চৌধুরী", "মীম", "সিদ্দিকা", "সেন", "রায়", "মনি", "ঘোষ"];
     const methods = ["বিকাশ", "নগদ"];
-    const amounts = ["৳ ১,০০০ টাকা", "৳ ১,৫০০ টাকা", "৳ ২,০০০ টাকা", "৳ ২,৫০০ টাকা", "৳ ৩,০০০ টাকা", "৳ ৪,০০০ টাকা", "৳ ৫,০০০ টাকা"];
-    const emojis = ["🔥", "🚀", "🎉", "⚡", "✨", "💎", "🎯", "💖", "🌟", "💰"];
+    const amounts = ["৳ ১,০০০ টাকা", "৳ ১,৫০০ টাকা", "৳ ২,০০০ টাকা", "৳ ২,৫০০ টাকা", "৳ ৩,০০০ টাকা"];
 
-    while (paymentMessages.length < 200) {
+    while (paymentMessages.length < 50) {
         let fName = firstNames[Math.floor(Math.random() * firstNames.length)];
         let lName = lastNames[Math.floor(Math.random() * lastNames.length)];
         let method = methods[Math.floor(Math.random() * methods.length)];
         let amount = amounts[Math.floor(Math.random() * amounts.length)];
         let rndId = Math.floor(1000 + Math.random() * 9000);
-        let emoji = emojis[Math.floor(Math.random() * emojis.length)];
-        let emojiEnd = emojis[Math.floor(Math.random() * emojis.length)];
-        
-        paymentMessages.push(`${emoji} পেমেন্ট সফল: ${fName} ${lName} (ID: ...${rndId}) ${method}-এর মাধ্যমে ${amount} পেমেন্ট পেয়েছেন! ${emojiEnd}`);
+        paymentMessages.push(`🔥 পেমেন্ট সফল: ${fName} ${lName} (ID: ...${rndId}) ${method}-এর মাধ্যমে ${amount} পেমেন্ট পেয়েছেন! 💰`);
     }
 
     const noticeBar = document.querySelector('.notice-bar');
@@ -1152,23 +1153,19 @@ async function startDynamicPaymentNotifications() {
     function runMarquee() {
         noticeEl.innerText = paymentMessages[currentIndex];
         currentIndex = (currentIndex + 1) % paymentMessages.length;
-
         let containerWidth = noticeBar.offsetWidth;
         let textWidth = noticeEl.offsetWidth;
         let startX = containerWidth;
         let endX = -textWidth;
         let distance = startX - endX;
-        let speed = 75;
-        let duration = distance / speed;
+        let duration = distance / 75;
 
         noticeEl.style.transition = 'none';
         noticeEl.style.transform = `translateX(${startX}px)`;
-
         setTimeout(() => {
             noticeEl.style.transition = `transform ${duration}s linear`;
             noticeEl.style.transform = `translateX(${endX}px)`;
         }, 50);
-
         setTimeout(runMarquee, duration * 1000);
     }
     runMarquee();
@@ -1181,8 +1178,8 @@ function updateUI() {
     document.getElementById('display-join-date').innerText = formattedJoinDate;
     document.getElementById('display-user-serial').innerText = "নং: #" + userSerial;
     
-    if(savedPhotoUrl) {
-        document.getElementById('user-profile-pic').src = savedPhotoUrl;
+    if(userPhotoUrl) {
+        document.getElementById('user-profile-pic').src = userPhotoUrl;
     }
 
     document.getElementById('main-balance').innerText = Math.floor(userBalance);
@@ -1226,29 +1223,16 @@ function loadReferralsList() {
 function loadRecentIncomeHistoryList() {
     const container = document.getElementById('recent-income-list-container');
     if(!container) return;
-    
     container.innerHTML = '';
     const datesKeys = Object.keys(historyDates).sort().reverse();
-
     if (datesKeys.length === 0) {
         container.innerHTML = '<div style="text-align:center; padding:15px; color:#94a3b8; font-weight:700; background: #1e293b; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">এখনো কোনো ইনকাম হিস্টোরি নেই</div>';
         return;
     }
-
     datesKeys.forEach(dateStr => {
         const watchedCount = historyDates[dateStr] || 0;
         if (watchedCount > 0) {
             const pointsEarned = watchedCount * 20;
-            
-            let formattedDateLabel = dateStr;
-            try {
-                const d = new Date(dateStr);
-                formattedDateLabel = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-            } catch(e) {}
-
-            const dayPart = formattedDateLabel.split(' ')[0] || '';
-            const monthYearPart = (formattedDateLabel.split(' ')[1] || '') + ' ' + (formattedDateLabel.split(' ')[2] || '');
-
             const card = document.createElement('div');
             card.style.background = "#1e293b";
             card.style.border = "1px solid rgba(255,255,255,0.06)";
@@ -1258,13 +1242,10 @@ function loadRecentIncomeHistoryList() {
             card.style.display = "flex";
             card.style.alignItems = "center";
             card.style.justifyContent = "space-between";
-            card.style.boxShadow = "0 4px 15px rgba(0,0,0,0.2)";
-
             card.innerHTML = `
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <div style="background: linear-gradient(135deg, #3b82f6, #6366f1); border-radius: 10px; padding: 8px 10px; text-align: center; min-width: 48px;">
-                        <div style="font-size: 13px; font-weight: 800; color: white; line-height: 1;">${dayPart}</div>
-                        <div style="font-size: 9px; font-weight: 700; color: #cbd5e1; margin-top: 2px;">${monthYearPart}</div>
+                        <div style="font-size: 13px; font-weight: 800; color: white;">${dateStr}</div>
                     </div>
                     <div>
                         <div style="font-size: 11px; color: #94a3b8; font-weight: 700;">ভিডিও দেখা</div>
@@ -1284,23 +1265,17 @@ function loadRecentIncomeHistoryList() {
 async function loadLeaderboard() {
     const lbContainer = document.getElementById('leaderboard-list-container');
     if (!lbContainer) return;
-
     try {
-        const snapshot = await db.collection('users')
-            .orderBy('balance', 'desc')
-            .limit(100)
-            .get();
-
+        const snapshot = await db.collection('users').orderBy('balance', 'desc').limit(100).get();
         if (snapshot.empty) {
             lbContainer.innerHTML = '<p style="text-align:center; color: #94a3b8; padding: 20px 0;">কোনো ইউজার পাওয়া যায়নি।</p>';
             return;
         }
-
         lbContainer.innerHTML = '';
         let rank = 1;
         snapshot.forEach(docSnap => {
             const data = docSnap.data();
-            const name = data.name || "গেস্ট ইউজার";
+            const name = data.name || "ইউজার";
             const uId = data.userId || "---";
             const balance = Math.floor(data.balance || 0);
             const photo = data.photoUrl || "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png";
@@ -1337,24 +1312,15 @@ async function loadLeaderboard() {
 async function loadPaymentHistory() {
     const listContainer = document.getElementById('payment-history-list-container');
     if (!listContainer) return;
-
     try {
-        const querySnapshot = await db.collection('withdraw_requests')
-            .where('userId', '==', userId)
-            .orderBy('time', 'desc')
-            .get();
-
+        const querySnapshot = await db.collection('withdraw_requests').where('userId', '==', userId).orderBy('time', 'desc').get();
         if (querySnapshot.empty) {
             listContainer.innerHTML = '<p style="text-align:center; color: #94a3b8; padding: 20px 0;">কোনো উইথড্র রিকোয়েস্ট পাওয়া যায়নি।</p>';
             rawWithdrawRequests = [];
             return;
         }
-
         rawWithdrawRequests = [];
-        querySnapshot.forEach((docSnap) => {
-            rawWithdrawRequests.push(docSnap.data());
-        });
-
+        querySnapshot.forEach((docSnap) => { rawWithdrawRequests.push(docSnap.data()); });
         renderPaymentCards(rawWithdrawRequests);
     } catch (e) {
         listContainer.innerHTML = '<p style="text-align:center; color:#ef4444; padding: 20px 0;">হিস্ট্রি লোড করতে সমস্যা হয়েছে।</p>';
@@ -1364,74 +1330,33 @@ async function loadPaymentHistory() {
 function renderPaymentCards(dataList) {
     const listContainer = document.getElementById('payment-history-list-container');
     if (!listContainer) return;
-
     if (dataList.length === 0) {
         listContainer.innerHTML = '<p style="text-align:center; color: #94a3b8; padding: 20px 0;">এই ফিল্টারে কোনো হিস্ট্রি নেই।</p>';
         return;
     }
-
     listContainer.innerHTML = '';
     dataList.forEach(data => {
         const method = (data.method || 'bkash').toLowerCase();
         const amountCoins = data.amount || 1000;
         const calculatedTaka = (amountCoins / 1000) * 20;
         const number = data.number || '---';
-        
-        let maskedNumber = number;
-        if(number.length >= 11) {
-            maskedNumber = number.slice(0, 3) + 'XXXX' + number.slice(7);
-        }
+        let statusKey = data.status || 'pending';
 
-        let timeString = '---';
-        if (data.time && data.time.toDate) {
-            timeString = data.time.toDate().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) + ', ' + data.time.toDate().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-        }
+        let logoClass = method.includes('nagad') ? 'ph-logo nagad' : 'ph-logo bkash';
+        let logoText = method.includes('nagad') ? 'নগদ' : 'bKash';
 
-        let statusKey = 'pending';
-        if (data.status === 'paid') statusKey = 'success';
-        else if (data.status === 'failed') statusKey = 'failed';
-        else statusKey = 'pending';
-
-        let logoClass = 'ph-logo bkash';
-        let logoText = 'bKash';
-        if (method.includes('nagad')) {
-            logoClass = 'ph-logo nagad';
-            logoText = 'নগদ';
-        }
-
-        let badgeHtml = '';
-        if (statusKey === 'success') {
-            badgeHtml = `
-                <div class="ph-status-badge success">
-                    <span style="display: flex; align-items: center; gap: 4px;">✅ পেমেন্ট সফল</span>
-                    <span style="font-size: 9px; font-weight: 600;">Payment Successful</span>
-                </div>
-            `;
-        } else if (statusKey === 'pending') {
-            badgeHtml = `
-                <div class="ph-status-badge pending">
-                    <span style="display: flex; align-items: center; gap: 4px;">⏳ পেন্ডিং</span>
-                    <span style="font-size: 9px; font-weight: 600;">Payment Processing</span>
-                </div>
-            `;
-        } else {
-            badgeHtml = `
-                <div class="ph-status-badge failed">
-                    <span style="display: flex; align-items: center; gap: 4px;">❌ ব্যর্থ হয়েছে</span>
-                    <span style="font-size: 9px; font-weight: 600;">Payment Failed</span>
-                </div>
-            `;
-        }
+        let badgeHtml = statusKey === 'paid' ? 
+            `<div class="ph-status-badge success"><span>✅ পেমেন্ট সফল</span></div>` :
+            `<div class="ph-status-badge pending"><span>⏳ পেন্ডিং</span></div>`;
 
         const card = document.createElement('div');
-        card.className = `payment-history-card ${statusKey}`;
+        card.className = `payment-history-card ${statusKey === 'paid' ? 'success' : 'pending'}`;
         card.innerHTML = `
             <div class="ph-left">
                 <div class="${logoClass}">${logoText}</div>
                 <div class="ph-info">
                     <div class="ph-amount">${calculatedTaka} টাকা</div>
-                    <div class="ph-details">নাম্বার: ${maskedNumber}</div>
-                    <div class="ph-details">তারিখ: ${timeString}</div>
+                    <div class="ph-details">নাম্বার: ${number}</div>
                 </div>
             </div>
             <div>${badgeHtml}</div>
@@ -1443,209 +1368,84 @@ function renderPaymentCards(dataList) {
 function filterPaymentHistory(filterType, btnElement) {
     document.querySelectorAll('.history-filter-btn').forEach(btn => btn.classList.remove('active'));
     if(btnElement) btnElement.classList.add('active');
-
-    if (filterType === 'all') {
-        renderPaymentCards(rawWithdrawRequests);
-    } else if (filterType === 'success') {
-        const filtered = rawWithdrawRequests.filter(item => item.status === 'paid');
-        renderPaymentCards(filtered);
-    } else if (filterType === 'pending') {
-        const filtered = rawWithdrawRequests.filter(item => item.status === 'pending' || !item.status);
-        renderPaymentCards(filtered);
-    } else if (filterType === 'failed') {
-        const filtered = rawWithdrawRequests.filter(item => item.status === 'failed');
-        renderPaymentCards(filtered);
-    }
+    if (filterType === 'all') renderPaymentCards(rawWithdrawRequests);
+    else if (filterType === 'success') renderPaymentCards(rawWithdrawRequests.filter(i => i.status === 'paid'));
+    else if (filterType === 'pending') renderPaymentCards(rawWithdrawRequests.filter(i => i.status !== 'paid'));
 }
 
 async function watchRealAd() {
-    if(dailyWatched >= 100) { tg.showAlert("আজকের লিমিট শেষ!"); return; }
-    
-    let adCompleted = false;
-    if (typeof show_11149595 === 'function') {
-        try {
-            await show_11149595();
-            adCompleted = true;
-        } catch (e) {
-            adCompleted = true;
-        }
-    } else {
-        adCompleted = true;
-    }
+    if(dailyWatched >= 100) { alert("আজকের লিমিট শেষ!"); return; }
+    if (typeof show_11149595 === 'function') { try { await show_11149595(); } catch (e) {} }
 
-    if (adCompleted) {
-        userBalance += 20; 
-        dailyWatched++; 
-        lifetimeWatched++;
+    userBalance += 20; 
+    dailyWatched++; 
+    lifetimeWatched++;
+    const todayKey = new Date().toISOString().split('T')[0];
+    historyDates[todayKey] = dailyWatched;
 
-        const todayKey = new Date().toISOString().split('T')[0];
-        historyDates[todayKey] = dailyWatched;
-
-        try {
-            await db.collection('users').doc(userId).update({ 
-                balance: userBalance, 
-                dailyWatched: dailyWatched, 
-                totalWatched: lifetimeWatched,
-                history_dates: historyDates,
-                last_active_time: Date.now()
-            });
-            updateUI();
-            loadRecentIncomeHistoryList();
-            tg.showAlert("🎉 ২০ কয়েন সফলভাবে যোগ হয়েছে!");
-        } catch (err) {
-            tg.showAlert("❌ ডাটাবেসে সেভ করতে সমস্যা হয়েছে!");
-        }
-    }
+    await db.collection('users').doc(currentUserPhone).update({ 
+        balance: userBalance, 
+        dailyWatched: dailyWatched, 
+        totalWatched: lifetimeWatched,
+        history_dates: historyDates,
+        last_active_time: Date.now()
+    });
+    updateUI();
+    loadRecentIncomeHistoryList();
+    alert("🎉 ২০ কয়েন সফলভাবে যোগ হয়েছে!");
 }
 
 async function watchSpecialAd() {
-    if(specialWatched >= 500) { tg.showAlert("আপনার ৫০০টি ভিডিও দেখা সম্পন্ন হয়েছে!"); return; }
-    
-    let adCompleted = false;
-    if (typeof show_11149595 === 'function') {
-        try {
-            await show_11149595();
-            adCompleted = true;
-        } catch (e) {
-            adCompleted = true;
-        }
-    } else {
-        adCompleted = true;
-    }
-
-    if (adCompleted) {
-        specialWatched++;
-        try {
-            await db.collection('users').doc(userId).update({ 
-                specialWatched: specialWatched,
-                last_active_time: Date.now()
-            });
-            updateUI();
-            tg.showAlert("🎉 ১টি স্পেশাল ভিডিও দেখা সম্পন্ন হয়েছে!");
-        } catch (err) {
-            tg.showAlert("❌ সেভ করতে সমস্যা হয়েছে!");
-        }
-    }
+    if(specialWatched >= 500) { alert("আপনার ৫০০টি ভিডিও দেখা সম্পন্ন হয়েছে!"); return; }
+    if (typeof show_11149595 === 'function') { try { await show_11149595(); } catch (e) {} }
+    specialWatched++;
+    await db.collection('users').doc(currentUserPhone).update({ specialWatched: specialWatched });
+    updateUI();
+    alert("🎉 ১টি স্পেশাল ভিডিও দেখা সম্পন্ন হয়েছে!");
 }
 
 async function watchMandatoryAd() {
-    if(mandatoryWatched >= 150) { tg.showAlert("আপনার ১৫০টি ভিডিও দেখা সম্পন্ন হয়েছে!"); return; }
-    
-    let adCompleted = false;
-    if (typeof show_11149595 === 'function') {
-        try {
-            await show_11149595();
-            adCompleted = true;
-        } catch (e) {
-            adCompleted = true;
-        }
-    } else {
-        adCompleted = true;
-    }
-
-    if (adCompleted) {
-        mandatoryWatched++;
-        try {
-            await db.collection('users').doc(userId).update({ 
-                mandatoryWatched: mandatoryWatched,
-                last_active_time: Date.now()
-            });
-            updateUI();
-            tg.showAlert("🎉 ১টি ভিডিও দেখা সম্পন্ন হয়েছে! (" + mandatoryWatched + "/150)");
-        } catch (err) {
-            tg.showAlert("❌ সেভ করতে সমস্যা হয়েছে!");
-        }
-    }
+    if(mandatoryWatched >= 150) { alert("আপনার ১৫০টি ভিডিও দেখা সম্পন্ন হয়েছে!"); return; }
+    if (typeof show_11149595 === 'function') { try { await show_11149595(); } catch (e) {} }
+    mandatoryWatched++;
+    await db.collection('users').doc(currentUserPhone).update({ mandatoryWatched: mandatoryWatched });
+    updateUI();
+    alert("🎉 ১টি ভিডিও দেখা সম্পন্ন হয়েছে! (" + mandatoryWatched + "/150)");
 }
 
 async function processWithdraw() {
     const amountField = document.getElementById("withdraw-amount").value;
     const number = document.getElementById("withdraw-number").value;
     const method = document.getElementById("payment-method").value;
-    
     const amount = parseFloat(amountField);
     let taka = isNaN(amount) ? 0 : (amount / 1000) * 20; 
     
-    if (!number || !amountField) { tg.showAlert("সব তথ্য পূরণ করুন।"); return; }
-    if (amount < 1000) { tg.showAlert("ন্যূনতম ১০০০ কয়েন প্রয়োজন!"); return; }
-    if (amount > userBalance) { tg.showAlert("পর্যাপ্ত ব্যালেন্স নেই!"); return; }
+    if (!number || !amountField) { alert("সব তথ্য পূরণ করুন।"); return; }
+    if (amount < 1000) { alert("ন্যূনতম ১০০০ কয়েন প্রয়োজন!"); return; }
+    if (amount > userBalance) { alert("পর্যাপ্ত ব্যালেন্স নেই!"); return; }
     
     if (totalRefers < 11) {
-        let deficit = 11 - totalRefers;
         document.getElementById('modal-current-ref').innerText = totalRefers;
-        document.getElementById('modal-deficit-ref').innerText = deficit;
+        document.getElementById('modal-deficit-ref').innerText = 11 - totalRefers;
         document.getElementById('refer-modal').classList.add('active');
         return; 
     }
-    
-    if (mandatoryWatched < 150) {
-        tg.showPopup({
-            title: 'শর্ত পূরণ বাকি আছে',
-            message: `অ্যাকাউন্ট অ্যাক্টিভ করার আগে আপনাকে বাধ্যতামূলকভাবে মোট ১৫০টি ভিডিও দেখতে হবে। আপনার দেখা হয়েছে: ${mandatoryWatched} / 150টি। ভিডিও দেখার পেজে যেতে 'ঠিক আছে' চাপুন।`,
-            buttons: [
-                {id: 'gotomandatory', type: 'default', text: 'ঠিক আছে'}, 
-                {type: 'cancel', text: 'বাতিল'}
-            ]
-        }, (buttonId) => {
-            if (buttonId === 'gotomandatory') {
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                document.getElementById('page-mandatory-task').classList.add('active');
-            }
-        });
-        return;
-    }
 
-    if (!isActive) {
-        document.getElementById('activation-modal').classList.add('active');
-        return;
-    }
-
-    if (specialWatched < 500) {
-        tg.showPopup({
-            title: 'স্পেশাল টাস্ক অসমাপ্ত',
-            message: `টাকা উত্তোলনের অনুরোধ পাঠাতে হলে ৫০০টি স্পেশাল ভিডিও দেখতে হবে। আপনার দেখা হয়েছে: ${specialWatched} / 500টি। স্পেশাল ভিডিও পেজে যেতে 'ঠিক আছে' চাপুন।`,
-            buttons: [
-                {id: 'gotospecial', type: 'default', text: 'ঠিক আছে'}, 
-                {type: 'cancel', text: 'বাতিল'}
-            ]
-        }, (buttonId) => {
-            if (buttonId === 'gotospecial') {
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                document.getElementById('page-special-task').classList.add('active');
-            }
-        });
-        return;
-    }
-
-    tg.showPopup({
-        title: 'পেমেন্ট নিশ্চিত করুন',
-        message: `আপনি ${amount} কয়েন উইথড্র করছেন। আপনি কি নিশ্চিত?`,
-        buttons: [{id: 'confirm', type: 'default', text: 'হ্যাঁ, নিশ্চিত'}, {type: 'cancel', text: 'বাতিল'}]
-    }, async (buttonId) => {
-        if (buttonId === 'confirm') {
-            try {
-                userBalance -= amount;
-
-                await db.collection('withdraw_requests').add({
-                    userId: userId, 
-                    name: userName, 
-                    number: number, 
-                    amount: amount, 
-                    taka: taka, 
-                    method: method, 
-                    status: "pending", 
-                    time: new Date()
-                });
-
-                await db.collection('users').doc(userId).update({ balance: userBalance });
-                updateUI();
-                loadPaymentHistory();
-                tg.showAlert("✅ পেমেন্ট রিকোয়েস্ট সফলভাবে পাঠানো হয়েছে!");
-            } catch (err) {
-                tg.showAlert("❌ পেমেন্ট রিকোয়েস্ট পাঠাতে সমস্যা হয়েছে!");
-            }
-        }
+    userBalance -= amount;
+    await db.collection('withdraw_requests').add({
+        userId: userId, 
+        name: userName, 
+        number: number, 
+        amount: amount, 
+        taka: taka, 
+        method: method, 
+        status: "pending", 
+        time: new Date()
     });
+    await db.collection('users').doc(currentUserPhone).update({ balance: userBalance });
+    updateUI();
+    loadPaymentHistory();
+    alert("✅ পেমেন্ট রিকোয়েস্ট সফলভাবে পাঠানো হয়েছে!");
 }
 
 function switchPage(pageId, element) {
@@ -1654,56 +1454,29 @@ function switchPage(pageId, element) {
     document.getElementById('page-' + pageId).classList.add('active');
     if(element) element.classList.add('active');
     
-    if (pageId === 'leaderboard') {
-        loadLeaderboard();
-    } else if (pageId === 'income-history') {
-        updateUI();
-        loadRecentIncomeHistoryList();
-    } else if (pageId === 'payment-history') {
-        loadPaymentHistory();
-    }
+    if (pageId === 'leaderboard') loadLeaderboard();
+    else if (pageId === 'income-history') loadRecentIncomeHistoryList();
+    else if (pageId === 'payment-history') loadPaymentHistory();
 }
 
 function copyRefer() {
-    const currentBaseUrl = window.location.origin + window.location.pathname;
-    const link = currentBaseUrl + "?start=" + userId;
+    const link = "https://13mdaminulislam-eng.github.io/taka-income-center/?start=" + userId;
     navigator.clipboard.writeText(link);
-    tg.showAlert("📋 রেফার লিংক কপি সফল হয়েছে!");
+    alert("📋 রেফার লিংক কপি সফল হয়েছে!");
 }
 
 function shareRefer() {
-    const currentBaseUrl = window.location.origin + window.location.pathname;
-    const link = currentBaseUrl + "?start=" + userId;
-    const text = "💰 ঘরে বসে প্রতিদিন ইনকাম করুন খুব সহজে!\nআজই জয়েন করুন 👇\n" + link;
-    if(navigator.share) {
-        navigator.share({ title: 'Daily Task Income Center', text: text, url: link }).catch(() => {});
-    } else {
-        window.open("https://t.me/share/url?url=" + encodeURIComponent(link) + "&text=" + encodeURIComponent(text), '_blank');
-    }
+    const link = "https://13mdaminulislam-eng.github.io/taka-income-center/?start=" + userId;
+    window.open("https://t.me/share/url?url=" + encodeURIComponent(link), '_blank');
 }
 
-function closeReferModal() {
-    document.getElementById('refer-modal').classList.remove('active');
-}
-
-function goToReferPage() {
-    closeReferModal();
-    switchPage('refer', document.querySelectorAll('.nav-item')[3]);
-}
-
-function buyReferBot() {
-    window.open("https://t.me/RFR16169Bot", "_blank");
-}
-
-function closeActivationModal() {
-    document.getElementById('activation-modal').classList.remove('active');
-}
-
-function openActivationBot() {
-    window.open("https://t.me/ks162699bot", "_blank");
-}
-
-loadAllData();
+function closeReferModal() { document.getElementById('refer-modal').classList.remove('active'); }
+function goToReferPage() { closeReferModal(); switchPage('refer', document.querySelectorAll('.nav-item')[3]); }
+function buyReferBot() { window.open("https://t.me/RFR16169Bot", "_blank"); }
+function closeActivationModal() { document.getElementById('activation-modal').classList.remove('active'); }
+function openActivationBot() { window.open("https://t.me/ks162699bot", "_blank"); }
+function setWithdrawAmount(amt) { document.getElementById('withdraw-amount').value = amt; }
+function toggleWithdrawForm() { document.getElementById('withdraw-form-container').classList.toggle('active'); }
 </script>
 </body>
 </html>
