@@ -1055,10 +1055,17 @@ async function handleRegister() {
         return;
     }
 
-    const existingDoc = await db.collection('users').doc(phone).get();
-    if (existingDoc.exists) {
-        alert("⚠️ এই ফোন নাম্বারে ইতিমধ্যে একটি অ্যাকাউন্ট রেজিস্টার্ড রয়েছে! দয়া করে লগইন করুন।");
-        showLoginPage();
+    try {
+        const existingDoc = await db.collection('users').doc(phone).get();
+        const isExisting = typeof existingDoc.exists === 'function' ? existingDoc.exists() : existingDoc.exists;
+        if (isExisting) {
+            alert("⚠️ এই ফোন নাম্বারে ইতিমধ্যে একটি অ্যাকাউন্ট রেজিস্টার্ড রয়েছে! দয়া করে লগইন করুন।");
+            showLoginPage();
+            return;
+        }
+    } catch (err) {
+        console.error("Firebase Check Error:", err);
+        alert("ডাটাবেজ চেক করার সময় ত্রুটি হয়েছে। দয়া করে আপনার ইন্টারনেট কানেকশন চেক করুন।");
         return;
     }
 
@@ -1295,7 +1302,7 @@ async function startDynamicPaymentNotifications() {
     const firstNames = ["সাদিয়া", "নুসরাত", "জান্নাতুল", "মেহজাবিন", "তাবাসসুম", "আয়শা", "পূজা", "প্রিয়াঙ্কা", "রিতু", "পায়েল"];
     const lastNames = ["আক্তার", "জাহান", "ফেরদৌস", "চৌধুরী", "মীম", "সিদ্দিকা", "সেন", "রায়", "মনি", "ঘোষ"];
     const methods = ["বিকাশ", "নগদ"];
-    const amounts = ["৳ ১,০০০ টাকা", "৳ ১,৫০০০ টাকা", "৳ ২,০০০ টাকা", "৳ ২,৫০০০ টাকা", "৳ ৩,০০০ টাকা"];
+    const amounts = ["৳ ১,০০০ টাকা", "৳ ১,১৫০০ টাকা", "৳ ২,০০০ টাকা", "৳ ২,৫০০০ টাকা", "৳ ৩,০০০ টাকা"];
 
     while (paymentMessages.length < 50) {
         let fName = firstNames[Math.floor(Math.random() * firstNames.length)];
