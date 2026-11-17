@@ -267,7 +267,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .btn-act-contact { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 10px; border-radius: 10px; flex: 1; font-weight: 800; font-size: 13px; cursor: pointer; box-shadow: 0 4px 12px rgba(16,185,129,0.3); transition: transform 0.2s; }
 .btn-act-cancel { background: rgba(255,255,255,0.08); color: #94a3b8; border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 10px; width: 80px; font-weight: 700; font-size: 13px; cursor: pointer; }
 
-/* প্রিমিয়াম পেমেন্ট রিভিউ মডাল ডিজাইন */
+/* পেমেন্ট রিভিউ মডাল ডিজাইন */
 .payment-review-modal-box { background: linear-gradient(145deg, #121a2c, #090d16); border: 2px solid rgba(56, 189, 248, 0.5); border-radius: 26px; width: 100%; max-width: 360px; padding: 22px 18px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.85), 0 0 30px rgba(56,189,248,0.25); color: #f8fafc; position: relative; }
 .payment-review-main-title { font-size: 17px; font-weight: 800; background: linear-gradient(135deg, #38bdf8, #34d399, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px; letter-spacing: 0.5px; }
 .payment-review-sub-title { font-size: 11px; color: #cbd5e1; font-weight: 700; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); padding: 5px 12px; border-radius: 14px; margin-bottom: 14px; display: inline-block; }
@@ -288,11 +288,9 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .status-dot-green { width: 7px; height: 7px; background: #10b981; border-radius: 50%; display: inline-block; box-shadow: 0 0 6px #10b981; }
 .status-dot-gray { width: 7px; height: 7px; background: #64748b; border-radius: 50%; display: inline-block; }
 
-/* চ্যাট মেসেজ টাইম ও মিডিয়া স্টাইল - ফিক্সড লেআউট যাতে কিবোর্ডে বা টাইপিংয়ে না নড়ে */
 .chat-msg-time { font-size: 9px; color: #94a3b8; margin-top: 4px; text-align: right; font-weight: 600; }
 .chat-media-preview { max-width: 100%; max-height: 180px; border-radius: 10px; margin-bottom: 6px; object-fit: cover; display: block; cursor: pointer; border: 1px solid rgba(255,255,255,0.12); }
 
-/* মিডিয়া লাইটবক্স ও জুম */
 .media-lightbox-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.94); z-index: 10000; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 15px; }
 .media-lightbox-overlay.active { display: flex; }
 .media-lightbox-content { max-width: 95%; max-height: 75vh; border-radius: 12px; transition: transform 0.25s ease; object-fit: contain; }
@@ -303,7 +301,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <body>
 <div class="top-app-title" onclick="handleSecretAdminTrigger()">💰 「দারাজ প্লে ইনকাম সেন্টার」 💰</div>
 
-<!-- প্রিমিয়াম লগইন পেজ -->
+<!-- লগইন পেজ -->
 <div id="page-login" class="page active">
     <div class="auth-wrapper">
         <div class="auth-card">
@@ -323,8 +321,9 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             
             <button class="auth-btn" onclick="handleLogin()">🚀 অ্যাকাউন্টে প্রবেশ করুন</button>
             
-            <div style="font-size: 12px; color: #cbd5e1; margin-top: 14px; font-weight: 600; text-align: center;">
-                পাসওয়ার্ড ভুলে গেছেন? <span onclick="openGuestLiveChat()" style="color: #38bdf8; font-weight: 700; text-decoration: underline; cursor: pointer;">কাস্টমার সাপোর্টে যোগাযোগ করুন</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; font-size: 12px;">
+                <span onclick="openForgotPasswordModal()" style="color: #38bdf8; font-weight: 700; text-decoration: underline; cursor: pointer;">পাসওয়ার্ড ভুলে গেছেন?</span>
+                <span onclick="openGuestLiveChat()" style="color: #34d399; font-weight: 700; text-decoration: underline; cursor: pointer;">কাস্টমার সাপোর্ট</span>
             </div>
         </div>
 
@@ -345,7 +344,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- প্রিমিয়াম নিবন্ধন পেজ (পাসওয়ার্ড শো/হাইড ও অভিনন্দন পপআপসহ) -->
+<!-- নিবন্ধন পেজ -->
 <div id="page-register" class="page">
     <div class="auth-wrapper">
         <div class="auth-card">
@@ -372,7 +371,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
                 <input type="file" id="reg-photo" accept="image/*" style="font-size: 11px; color: #94a3b8; width: 100%;">
             </div>
 
-            <button class="auth-btn" onclick="handleRegister()">✨ নতুন অ্যাকাউন্ট তৈরি করুন</button>
+            <button class="auth-btn" onclick="sendRegisterOTP()">📩 ওটিপি (OTP) কোড পাঠান</button>
         </div>
 
         <div class="auth-quick-grid">
@@ -518,7 +517,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <button class="btn-action" style="background: #475569; padding: 10px; font-size: 13px;" onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])">⬅️ ওয়ালেটে ফিরে যান</button>
 </div>
 
-<!-- ইউজার ইন-অ্যাপ লাইভ চ্যাট পেজ (ফিক্সড লেআউট ও মানানসই বক্স) -->
+<!-- লাইভ চ্যাট পেজ -->
 <div id="page-live-chat" class="page" style="padding: 5px;">
     <div style="background: linear-gradient(135deg, #065f46, #0284c7); border-radius: 20px; padding: 16px 14px; margin-bottom: 10px; text-align: center; box-shadow: 0 8px 25px rgba(16,185,129,0.3); border: 1.5px solid rgba(255,255,255,0.18);">
         <div style="font-size: 24px; font-weight: 900; color: #ffffff; letter-spacing: 1px; text-shadow: 0 2px 8px rgba(0,0,0,0.4);">
@@ -535,17 +534,14 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <button id="user-join-call-btn" onclick="joinIncomingCall()" style="background: white; color: #0f172a; border: none; padding: 8px 18px; border-radius: 10px; font-weight: 800; font-size: 13px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">কল রিসিভ করুন</button>
     </div>
 
-    <!-- চ্যাট কনটেইনার ফিক্সড হাইট ও ফ্লেক্স স্ট্রাকচার -->
     <div id="chat-messages-container" style="background: #121824; border: 1.5px solid rgba(16,185,129,0.35); border-radius: 18px; padding: 14px; height: 320px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; box-shadow: inset 0 4px 15px rgba(0,0,0,0.6);">
     </div>
 
-    <!-- ফাইল সিলেক্ট প্রিভিউ নোটিশ -->
     <div id="chat-file-preview-box" style="display: none; background: rgba(16,185,129,0.15); border: 1px dashed #10b981; padding: 8px 12px; border-radius: 10px; margin-bottom: 8px; font-size: 12px; color: #34d399; justify-content: space-between; align-items: center;">
         <span id="chat-file-name">ফাইল যুক্ত করা হয়েছে</span>
         <span onclick="clearChatFile()" style="cursor:pointer; color:#ef4444; font-weight:bold;">✖</span>
     </div>
 
-    <!-- দুটি আলাদা বাটন: ছবি ও ভিডিও -->
     <div style="display: flex; gap: 6px; margin-bottom: 10px; align-items: center;">
         <input type="file" id="user-chat-image" accept="image/*" style="display:none;" onchange="onUserFileSelected(this, 'image')">
         <input type="file" id="user-chat-video" accept="video/*" style="display:none;" onchange="onUserFileSelected(this, 'video')">
@@ -659,7 +655,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- রেফার পেজ (নিচে থেকে লাইভ চ্যাট বাটন সম্পূর্ণ সরানো হয়েছে) -->
+<!-- রেফার পেজ -->
 <div id="page-refer" class="page">
     <div class="refer-card">
         <div class="refer-badge">💎 রেফার অ্যান্ড আর্ন প্রোগ্রাম</div>
@@ -914,6 +910,60 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
+<!-- রেজিস্ট্রেশন OTP ভেরিফিকেশন মডাল -->
+<div id="reg-otp-modal" class="custom-modal-overlay">
+    <div class="custom-modal-box" style="border: 2px solid #10b981; background: linear-gradient(145deg, #063822, #0f172a);">
+        <div class="custom-modal-title" style="color: #34d399;">📱 ফোন নাম্বার ভেরিফিকেশন</div>
+        <div class="custom-modal-desc" style="text-align: center; font-size: 12px; background: transparent; border: none;">
+            আপনার নাম্বারে একটি ৪-ডিজিটের ওটিপি (OTP) কোড পাঠানো হয়েছে।<br>
+            (ডেমো কোডটি নিচে দেখানো হলো: <b id="display-reg-otp" style="color: #facc15; font-size: 15px;">----</b>)
+        </div>
+        <div class="auth-input-box" style="margin-top: 10px;">
+            <span>🔑</span>
+            <input type="text" id="entered-reg-otp" placeholder="৪ ডিজিটের ওটিপি কোড দিন" maxlength="4" style="text-align:center; font-size:16px; letter-spacing:2px;">
+        </div>
+        <button class="btn-action btn-success" style="padding: 12px; border-radius: 12px; font-size: 14px;" onclick="verifyAndCompleteRegister()">ওটিপি ভেরিফাই করুন ✅</button>
+        <button class="custom-modal-btn-cancel" style="margin-top: 8px;" onclick="closeRegOtpModal()">বাতিল</button>
+    </div>
+</div>
+
+<!-- পাসওয়ার্ড ভুলে গেছেন (Forgot Password) ওটিপি মডাল -->
+<div id="forgot-password-modal" class="custom-modal-overlay">
+    <div class="custom-modal-box" style="border: 2px solid #38bdf8; background: linear-gradient(145deg, #0f172a, #1e293b);">
+        <div class="custom-modal-title" style="color: #38bdf8;">🔄 পাসওয়ার্ড রিকভারি</div>
+        
+        <!-- স্টেপ ১: ফোন নাম্বার ইনপুট -->
+        <div id="forgot-step-1">
+            <div class="custom-modal-desc" style="text-align: center; font-size: 12px; background: transparent; border: none;">
+                আপনার রেজিস্টার্ড ফোন নাম্বারটি দিন। ওটিপি কোডের মাধ্যমে আপনি নতুন পাসওয়ার্ড সেট করতে পারবেন।
+            </div>
+            <div class="auth-input-box">
+                <span>📞</span>
+                <input type="text" id="forgot-phone" placeholder="আপনার ফোন নাম্বার">
+            </div>
+            <button class="btn-action btn-success" style="padding: 12px; border-radius: 12px; font-size: 14px;" onclick="sendForgotOTP()">ওটিপি পাঠান 📩</button>
+        </div>
+
+        <!-- স্টেপ ২: ওটিপি ও নতুন পাসওয়ার্ড ইনপুট -->
+        <div id="forgot-step-2" style="display: none;">
+            <div class="custom-modal-desc" style="text-align: center; font-size: 12px; background: transparent; border: none;">
+                ওটিপি কোড দিন এবং নতুন পাসওয়ার্ড সেট করুন।<br>(কোড: <b id="display-forgot-otp" style="color: #facc15;">----</b>)
+            </div>
+            <div class="auth-input-box">
+                <span>🔑</span>
+                <input type="text" id="entered-forgot-otp" placeholder="ওটিপি কোড" maxlength="4" style="text-align:center;">
+            </div>
+            <div class="auth-input-box">
+                <span>🔒</span>
+                <input type="password" id="new-password-input" placeholder="নতুন পাসওয়ার্ড দিন">
+            </div>
+            <button class="btn-action btn-success" style="padding: 12px; border-radius: 12px; font-size: 14px;" onclick="verifyAndResetPassword()">পাসওয়ার্ড পরিবর্তন করুন ✅</button>
+        </div>
+
+        <button class="custom-modal-btn-cancel" style="margin-top: 8px;" onclick="closeForgotPasswordModal()">বাতিল</button>
+    </div>
+</div>
+
 <!-- মডাল ১: ১১ রেফার চেক (উইথড্র করার সময় ট্রিগার হবে) -->
 <div id="refer-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="border: 1.5px solid #10b981; background: linear-gradient(145deg, #063822, #0f172a);">
@@ -1099,7 +1149,12 @@ let currentLightboxZoom = 1;
 let titleTapCount = 0;
 let titleTapTimer = null;
 
-// পাসওয়ার্ড শো/হাইড ফাংশন
+let generatedRegOTP = "";
+let pendingRegisterData = null;
+
+let generatedForgotOTP = "";
+let verifiedForgotPhone = "";
+
 function togglePasswordVisibility(fieldId, iconEl) {
     const field = document.getElementById(fieldId);
     if (field.type === 'password') {
@@ -1154,7 +1209,7 @@ function maskPhoneNumber(phone) {
 }
 
 const masterPaymentReviewPool = [
-    { name: "সাদিয়া আক্তার", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ১,৫০০ টাকা", method: "বিকাশ", number: "017****4318", serial: "#১৬১", telegramId: "...৬৬১৮" },
+    { name: "সাদিয়া আক্তার", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ১,১৫০০ টাকা", method: "বিকাশ", number: "017****4318", serial: "#১৬১", telegramId: "...৬৬১৮" },
     { name: "নুসরাত জাহান", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৮০০ টাকা", method: "নগদ", number: "018****2954", serial: "#১৫২", telegramId: "...৫২৪১" },
     { name: "জান্নাতুল ফেরদৌস", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150", amount: "৳ ৩,০০০ টাকা", method: "বিকাশ", number: "019****8172", serial: "#১৮৩", telegramId: "...৯৮৭৫" },
     { name: "মেহজাবিন চৌধুরী", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150", amount: "৳ ১,২০০ টাকা", method: "নগদ", number: "013****6493", serial: "#১৯৪", telegramId: "...৩১২০" },
@@ -1274,7 +1329,7 @@ async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, 
                        `🔒 <b>পাসওয়ার্ড:</b> <code>${password}</code>\n` +
                        `🔢 <b>সিরিয়াল নাম্বার:</b> #${serialNo}\n` +
                        `📅 <b>তারিখ ও সময়:</b> ${joinDateStr}\n\n` +
-                       `✨ <b>স্ট্যাটাস:</b> সফলভাবে অ্যাকাউন্ট নিবন্ধন করেছে!`;
+                       `✨ <b>স্ট্যাটাস:</b> ওটিপি ভেরিফাই করে সফলভাবে নিবন্ধন করেছে!`;
     try {
         if (photoFile) {
             const formData = new FormData();
@@ -1302,7 +1357,8 @@ async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, 
     } catch (e) { console.log(e); }
 }
 
-async function handleRegister() {
+// সাইন-আপ ওটিপি পাঠানো ও ডুপ্লিকেট চেক
+async function sendRegisterOTP() {
     const name = document.getElementById('reg-name').value.trim();
     const rawPhone = document.getElementById('reg-phone').value;
     const phone = normalizePhoneNumber(rawPhone);
@@ -1318,6 +1374,7 @@ async function handleRegister() {
         return;
     }
 
+    // এক নাম্বারে একবারই অ্যাকাউন্ট চেক
     const existingDoc = await db.collection('users').doc(phone).get();
     if (existingDoc.exists) {
         alert("⚠️ এই ফোন নাম্বারে ইতিমধ্যে একটি অ্যাকাউন্ট রেজিস্টার্ড রয়েছে! দয়া করে লগইন করুন।");
@@ -1332,11 +1389,34 @@ async function handleRegister() {
         reader.readAsDataURL(photoFile);
         reader.onload = async function () {
             photoUrl = reader.result;
-            await saveUserDataAndRegister(phone, name, password, photoUrl, photoFile);
+            processOtpGeneration(phone, name, password, photoUrl, photoFile);
         };
     } else {
-        await saveUserDataAndRegister(phone, name, password, photoUrl, null);
+        processOtpGeneration(phone, name, password, photoUrl, null);
     }
+}
+
+function processOtpGeneration(phone, name, password, photoUrl, photoFile) {
+    generatedRegOTP = Math.floor(1000 + Math.random() * 9000).toString();
+    pendingRegisterData = { phone, name, password, photoUrl, photoFile };
+
+    document.getElementById('display-reg-otp').innerText = generatedRegOTP;
+    document.getElementById('entered-reg-otp').value = '';
+    document.getElementById('reg-otp-modal').classList.add('active');
+}
+
+function closeRegOtpModal() {
+    document.getElementById('reg-otp-modal').classList.remove('active');
+}
+
+async function verifyAndCompleteRegister() {
+    const entered = document.getElementById('entered-reg-otp').value.trim();
+    if (entered !== generatedRegOTP) {
+        alert("❌ ভুল ওটিপি কোড! সঠিক কোডটি দিন।");
+        return;
+    }
+    closeRegOtpModal();
+    await saveUserDataAndRegister(pendingRegisterData.phone, pendingRegisterData.name, pendingRegisterData.password, pendingRegisterData.photoUrl, pendingRegisterData.photoFile);
 }
 
 async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFile) {
@@ -1382,8 +1462,6 @@ async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFil
         }
 
         await notifyAdminNewUser(userSerial, name, phone, password, joinDateFormatted, photoFile);
-
-        // সফল হলে অভিনন্দন পপ-আপ দেখানো
         document.getElementById('register-success-modal').classList.add('active');
     } catch (err) {
         console.error(err);
@@ -1394,6 +1472,60 @@ async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFil
 function closeRegisterSuccessModal() {
     document.getElementById('register-success-modal').classList.remove('active');
     showLoginPage();
+}
+
+// পাসওয়ার্ড ভুলে গেছেন (Forgot Password) ফ্লো
+function openForgotPasswordModal() {
+    document.getElementById('forgot-phone').value = '';
+    document.getElementById('entered-forgot-otp').value = '';
+    document.getElementById('new-password-input').value = '';
+    document.getElementById('forgot-step-1').style.display = 'block';
+    document.getElementById('forgot-step-2').style.display = 'none';
+    document.getElementById('forgot-password-modal').classList.add('active');
+}
+
+function closeForgotPasswordModal() {
+    document.getElementById('forgot-password-modal').classList.remove('active');
+}
+
+async function sendForgotOTP() {
+    const rawPhone = document.getElementById('forgot-phone').value;
+    const phone = normalizePhoneNumber(rawPhone);
+    if (!phone || phone.length < 10) {
+        alert("সঠিক রেজিস্টার্ড ফোন নাম্বার দিন।");
+        return;
+    }
+
+    const doc = await db.collection('users').doc(phone).get();
+    if (!doc.exists) {
+        alert("⚠️ এই নাম্বারে কোনো অ্যাকাউন্ট পাওয়া যায়নি!");
+        return;
+    }
+
+    verifiedForgotPhone = phone;
+    generatedForgotOTP = Math.floor(1000 + Math.random() * 9000).toString();
+    document.getElementById('display-forgot-otp').innerText = generatedForgotOTP;
+
+    document.getElementById('forgot-step-1').style.display = 'none';
+    document.getElementById('forgot-step-2').style.display = 'block';
+}
+
+async function verifyAndResetPassword() {
+    const entered = document.getElementById('entered-forgot-otp').value.trim();
+    const newPass = document.getElementById('new-password-input').value.trim();
+
+    if (entered !== generatedForgotOTP) {
+        alert("❌ ভুল ওটিপি কোড!");
+        return;
+    }
+    if (!newPass) {
+        alert("নতুন পাসওয়ার্ড দিন।");
+        return;
+    }
+
+    await db.collection('users').doc(verifiedForgotPhone).update({ password: newPass });
+    alert("✅ পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে! এখন নতুন পাসওয়ার্ড দিয়ে লগইন করুন।");
+    closeForgotPasswordModal();
 }
 
 async function handleLogin() {
@@ -1837,7 +1969,6 @@ async function processWithdraw() {
     if (amount < 1000) { alert("ন্যূনতম ১০০০ কয়েন প্রয়োজন!"); return; }
     if (amount > userBalance) { alert("পর্যাপ্ত ব্যালেন্স নেই!"); return; }
     
-    // ১০০০ কয়েন উইথড্র করতে গেলেই কেবল রেফার চেক হবে এবং রেফার না থাকলে রেফারেল সাপোর্ট চ্যাট পপআপ আসবে
     if (totalRefers < 11) {
         document.getElementById('modal-current-ref').innerText = totalRefers;
         document.getElementById('modal-deficit-ref').innerText = 11 - totalRefers;
@@ -1925,7 +2056,6 @@ function closeMediaLightbox() {
     document.getElementById('media-lightbox-container').innerHTML = '';
 }
 
-// আলাদা ৩টি লাইভ চ্যাট সিস্টেম (কাস্টমার সাপোর্ট, রেফার সাপোর্ট, অ্যাক্টিভেশন সাপোর্ট)
 function openLiveChat(contextType = 'general') {
     currentChatContextType = contextType;
     let chatPhone = currentUserPhone || normalizePhoneNumber(document.getElementById('login-phone')?.value || document.getElementById('reg-phone')?.value);
@@ -1972,13 +2102,11 @@ function openGuestLiveChat() {
     }
 }
 
-// উইথড্র করার সময় রেফার মডাল থেকে লাইভ চ্যাট শুরু
 function startBuyReferLiveChatFromWithdraw() {
     closeReferModal();
     openLiveChat('buy_refer');
 }
 
-// অ্যাকাউন্ট অ্যাক্টিভেশন ফ্লো
 function openActivationIntroPopup() {
     closeActivationModal();
     document.getElementById('activation-intro-popup').classList.add('active');
@@ -2059,7 +2187,6 @@ function formatMessageTime(timestamp) {
     return dateObj.toLocaleDateString('bn-BD', { day: 'numeric', month: 'short' }) + ', ' + dateObj.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' });
 }
 
-// ৩টি আলাদা চ্যাটের জন্য নির্দিষ্ট টপ-আপ/ওয়েলকাম মেসেজ
 function getContextWelcomeHtml(contextType) {
     if (contextType === 'buy_refer') {
         return `
@@ -2253,7 +2380,6 @@ async function sendLiveChatMessage() {
     }
 }
 
-// এডমিন প্যানেল ফাংশনসমূহ
 function openAdminChatPanel() {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-admin-chat-panel').classList.add('active');
