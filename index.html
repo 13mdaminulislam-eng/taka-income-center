@@ -323,7 +323,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; font-size: 12px;">
                 <span onclick="openForgotPasswordModal()" style="color: #38bdf8; font-weight: 700; text-decoration: underline; cursor: pointer;">পাসওয়ার্ড ভুলে গেছেন?</span>
-                <span onclick="openGuestLiveChat()" style="color: #34d399; font-weight: 700; text-decoration: underline; cursor: pointer;">কাস্টমার সাপোর্ট</span>
+                <span style="color: #cbd5e1; font-weight: 700;">কাস্টমার সাপোর্ট</span>
             </div>
         </div>
 
@@ -331,9 +331,9 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <a href="https://youtube.com/shorts/7ljXq-ArTNw?si=92ieAqcu9ns5Lj-k" target="_blank" class="auth-quick-btn">
                 <span>📺</span> কাজের ভিডিও দেখুন
             </a>
-            <div onclick="openGuestLiveChat()" class="auth-quick-btn">
-                <span>💬</span> কাস্টমার সাপোর্ট
-            </div>
+            <a href="https://www.facebook.com/ami16269" target="_blank" class="auth-quick-btn">
+                <span>👥</span> ফেসবুক সাপোর্ট
+            </a>
             <a href="https://t.me/KA16269bot" target="_blank" class="auth-quick-btn">
                 <span>✈️</span> টেলিগ্রাম সাপোর্ট
             </a>
@@ -378,9 +378,9 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <a href="https://youtube.com/shorts/7ljXq-ArTNw?si=92ieAqcu9ns5Lj-k" target="_blank" class="auth-quick-btn">
                 <span>📺</span> কাজের ভিডিও দেখুন
             </a>
-            <div onclick="openGuestLiveChat()" class="auth-quick-btn">
-                <span>💬</span> কাস্টমার সাপোর্ট
-            </div>
+            <a href="https://www.facebook.com/ami16269" target="_blank" class="auth-quick-btn">
+                <span>👥</span> ফেসবুক সাপোর্ট
+            </a>
             <a href="https://t.me/KA16269bot" target="_blank" class="auth-quick-btn">
                 <span>✈️</span> টেলিগ্রাম সাপোর্ট
             </a>
@@ -579,8 +579,8 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
                 <div style="font-size: 11px; color: #94a3b8; margin-top: 2px;" id="admin-chatting-user-phone">ফোন: ---</div>
             </div>
             <div style="display: flex; gap: 6px;">
-                <button onclick="adminStartAudioCall()" style="background: #0284c7; color: white; border: none; padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer;">📞 অডিও</button>
-                <button onclick="adminStartVideoCall()" style="background: #10b981; color: white; border: none; padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer;">📹 ভিডিও</button>
+                <button onclick="adminDeleteUserAccount()" style="background: #ef4444; color: white; border: none; padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer;">🗑️ অ্যাকাউন্ট ডিলিট</button>
+                <button onclick="adminActivateUserAccount()" style="background: #10b981; color: white; border: none; padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer;">✅ অ্যাক্টিভ করুন</button>
                 <button onclick="closeAdminSingleChat()" style="background: #475569; color: white; border: none; padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer;">ফিরে যান</button>
             </div>
         </div>
@@ -910,6 +910,20 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
+<!-- ইতিমধ্যে অ্যাকাউন্ট থাকা সংক্রান্ত প্রিমিয়াম অ্যালার্ট মডাল (লাইভ চ্যাট লিংকসহ) -->
+<div id="existing-account-modal" class="custom-modal-overlay">
+    <div class="custom-modal-box" style="border: 2px solid #ef4444; background: linear-gradient(145deg, #450a0a, #0f172a); text-align: center;">
+        <div style="font-size: 32px; margin-bottom: 6px;">⚠️</div>
+        <div class="custom-modal-title" style="color: #f87171; justify-content: center;">অ্যাকাউন্ট ইতিমধ্যে বিদ্যমান!</div>
+        <div class="custom-modal-desc" style="text-align: center; font-size: 12.5px; line-height: 1.5; background: transparent; border: none; color: #cbd5e1;">
+            এই ফোন নাম্বারে ইতিমধ্যে একটি অ্যাকাউন্ট রেজিস্টার্ড রয়েছে!<br>
+            আপনি যদি নতুন করে অ্যাকাউন্ট খুলতে চান, তবে নিচের বাটনে ক্লিক করে লাইভ চ্যাটে এডমিনের সাথে যোগাযোগ করুন। এডমিন চাইলে আপনার পুরনো অ্যাকাউন্ট ডিলিট বা অ্যাক্টিভ করে দিতে পারবেন।
+        </div>
+        <button class="btn-action" style="background: linear-gradient(135deg, #0284c7, #0369a1); padding: 12px; border-radius: 12px; font-size: 13px; margin-bottom: 8px;" onclick="openLiveChatFromExistingModal()">💬 লাইভ চ্যাটে যোগাযোগ করুন</button>
+        <button class="custom-modal-btn-cancel" onclick="closeExistingAccountModal()">বাতিল</button>
+    </div>
+</div>
+
 <!-- রেজিস্ট্রেশন OTP ভেরিফিকেশন মডাল -->
 <div id="reg-otp-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="border: 2px solid #10b981; background: linear-gradient(145deg, #063822, #0f172a);">
@@ -1071,19 +1085,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- সাইন-আপ সফল অভিনন্দন পপআপ -->
-<div id="register-success-modal" class="custom-modal-overlay">
-    <div class="custom-modal-box" style="border: 2px solid #10b981; background: linear-gradient(145deg, #063822, #0f172a); text-align: center;">
-        <div style="font-size: 32px; margin-bottom: 6px;">🎉</div>
-        <div class="custom-modal-title" style="color: #34d399; justify-content: center;">অভিনন্দন!</div>
-        <div class="custom-modal-desc" style="text-align: center; font-size: 13px; line-height: 1.5; background: transparent; border: none;">
-            আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে! 🚀<br>
-            এখন আপনার ফোন নাম্বার ও পাসওয়ার্ড দিয়ে লগইন করে কাজ শুরু করুন।
-        </div>
-        <button class="btn-action btn-success" style="padding: 12px; border-radius: 12px; font-size: 14px;" onclick="closeRegisterSuccessModal()">লগইন পেজে যান ✅</button>
-    </div>
-</div>
-
 <!-- ওয়েলকাম অ্যালার্ট মডাল -->
 <div id="welcome-alert-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="max-width: 330px; background: linear-gradient(145deg, #1e293b, #0f172a); border: 2px solid #10b981; padding: 14px; text-align: left; display: flex; flex-direction: column;">
@@ -1151,6 +1152,7 @@ let titleTapTimer = null;
 
 let generatedRegOTP = "";
 let pendingRegisterData = null;
+let existingAttemptPhone = "";
 
 let generatedForgotOTP = "";
 let verifiedForgotPhone = "";
@@ -1209,7 +1211,7 @@ function maskPhoneNumber(phone) {
 }
 
 const masterPaymentReviewPool = [
-    { name: "সাদিয়া আক্তার", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ১,১৫০০ টাকা", method: "বিকাশ", number: "017****4318", serial: "#১৬১", telegramId: "...৬৬১৮" },
+    { name: "সাদিয়া আক্তার", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ১,৫০০ টাকা", method: "বিকাশ", number: "017****4318", serial: "#১৬১", telegramId: "...৬৬১৮" },
     { name: "নুসরাত জাহান", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৮০০ টাকা", method: "নগদ", number: "018****2954", serial: "#১৫২", telegramId: "...৫২৪১" },
     { name: "জান্নাতুল ফেরদৌস", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150", amount: "৳ ৩,০০০ টাকা", method: "বিকাশ", number: "019****8172", serial: "#১৮৩", telegramId: "...৯৮৭৫" },
     { name: "মেহজাবিন চৌধুরী", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150", amount: "৳ ১,২০০ টাকা", method: "নগদ", number: "013****6493", serial: "#১৯৪", telegramId: "...৩১২০" },
@@ -1329,7 +1331,7 @@ async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, 
                        `🔒 <b>পাসওয়ার্ড:</b> <code>${password}</code>\n` +
                        `🔢 <b>সিরিয়াল নাম্বার:</b> #${serialNo}\n` +
                        `📅 <b>তারিখ ও সময়:</b> ${joinDateStr}\n\n` +
-                       `✨ <b>স্ট্যাটাস:</b> ওটিপি ভেরিফাই করে সফলভাবে নিবন্ধন করেছে!`;
+                       `✨ <b>স্ট্যাটাস:</b> ওটিপি ভেরিফাই করে সফলভাবে নিবন্ধন করেছে এবং অটো-লগইন হয়েছে!`;
     try {
         if (photoFile) {
             const formData = new FormData();
@@ -1357,7 +1359,7 @@ async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, 
     } catch (e) { console.log(e); }
 }
 
-// সাইন-আপ ওটিপি পাঠানো ও ডুপ্লিকেট চেক
+// সাইন-আপ ওটিপি পাঠানো ও প্রিমিয়াম ডুপ্লিকেট চেক মডাল
 async function sendRegisterOTP() {
     const name = document.getElementById('reg-name').value.trim();
     const rawPhone = document.getElementById('reg-phone').value;
@@ -1374,11 +1376,11 @@ async function sendRegisterOTP() {
         return;
     }
 
-    // এক নাম্বারে একবারই অ্যাকাউন্ট চেক
+    // নাম্বার আগে থেকে থাকলে প্রিমিয়াম অ্যালার্ট মডাল ওপেন হবে যেখানে লাইভ চ্যাট লিংক থাকবে
     const existingDoc = await db.collection('users').doc(phone).get();
     if (existingDoc.exists) {
-        alert("⚠️ এই ফোন নাম্বারে ইতিমধ্যে একটি অ্যাকাউন্ট রেজিস্টার্ড রয়েছে! দয়া করে লগইন করুন।");
-        showLoginPage();
+        existingAttemptPhone = phone;
+        document.getElementById('existing-account-modal').classList.add('active');
         return;
     }
 
@@ -1394,6 +1396,16 @@ async function sendRegisterOTP() {
     } else {
         processOtpGeneration(phone, name, password, photoUrl, null);
     }
+}
+
+function closeExistingAccountModal() {
+    document.getElementById('existing-account-modal').classList.remove('active');
+}
+
+function openLiveChatFromExistingModal() {
+    closeExistingAccountModal();
+    currentUserPhone = existingAttemptPhone;
+    openLiveChat('general');
 }
 
 function processOtpGeneration(phone, name, password, photoUrl, photoFile) {
@@ -1419,6 +1431,7 @@ async function verifyAndCompleteRegister() {
     await saveUserDataAndRegister(pendingRegisterData.phone, pendingRegisterData.name, pendingRegisterData.password, pendingRegisterData.photoUrl, pendingRegisterData.photoFile);
 }
 
+// সাইন-আপ সফল হলে সরাসরি অটো-লগইন হয়ে অ্যাপের ভেতরে প্রবেশ করবে
 async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFile) {
     try {
         const userSerial = await getNextSerial();
@@ -1462,16 +1475,16 @@ async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFil
         }
 
         await notifyAdminNewUser(userSerial, name, phone, password, joinDateFormatted, photoFile);
-        document.getElementById('register-success-modal').classList.add('active');
+        
+        // অটো লগইন ও ড্যাশবোর্ড ইনিশিয়ালাইজেশন
+        localStorage.setItem('logged_user_phone', phone);
+        currentUserPhone = phone;
+        initDashboard(phone);
+        alert("🎉 অভিনন্দন! আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে এবং স্বয়ংক্রিয়ভাবে লগইন হয়ে গেছে!");
     } catch (err) {
         console.error(err);
         alert("রেজিস্ট্রেশন করার সময় সমস্যা হয়েছে। দয়া করে আবার চেষ্টা করুন।");
     }
-}
-
-function closeRegisterSuccessModal() {
-    document.getElementById('register-success-modal').classList.remove('active');
-    showLoginPage();
 }
 
 // পাসওয়ার্ড ভুলে গেছেন (Forgot Password) ফ্লো
@@ -2521,6 +2534,31 @@ function openAdminSingleChat(docId, uName, phone, contextName) {
         });
 }
 
+// এডমিন চাইলে চ্যাট প্যানেল থেকে ইউজারের অ্যাকাউন্ট ডিলিট বা অ্যাক্টিভ করতে পারবেন
+async function adminDeleteUserAccount() {
+    if (!adminCurrentChatPhone) return;
+    const targetPhone = adminCurrentChatPhone.split('_')[0];
+    if (!confirm(`আপনি কি নিশ্চিতভাবে এই ইউজার (${targetPhone}) অ্যাকাউন্টটি ডিলিট করতে চান?`)) return;
+    try {
+        await db.collection('users').doc(targetPhone).delete();
+        alert("✅ ইউজারের অ্যাকাউন্ট সফলভাবে ডিলিট করা হয়েছে। এখন ইউজার চাইলে নতুন করে রেজিস্ট্রেশন করতে পারবে।");
+        closeAdminSingleChat();
+    } catch (e) {
+        alert("অ্যাকাউন্ট ডিলিট করতে সমস্যা হয়েছে।");
+    }
+}
+
+async function adminActivateUserAccount() {
+    if (!adminCurrentChatPhone) return;
+    const targetPhone = adminCurrentChatPhone.split('_')[0];
+    try {
+        await db.collection('users').doc(targetPhone).update({ is_active: true });
+        alert(`✅ ইউজারের অ্যাকাউন্ট সফলভাবে অ্যাক্টিভ (Active) করা হয়েছে!`);
+    } catch (e) {
+        alert("অ্যাকাউন্ট অ্যাক্টিভ করতে সমস্যা হয়েছে।");
+    }
+}
+
 async function adminDeleteMessage(docId, msgId) {
     if (!confirm("আপনি কি নিশ্চিত এই মেসেজটি ডিলিট করতে চান?")) return;
     try {
@@ -2535,40 +2573,6 @@ function closeAdminSingleChat() {
     adminCurrentChatPhone = null;
     document.getElementById('admin-active-chat-box').style.display = 'none';
     document.getElementById('admin-chat-users-list').style.display = 'block';
-}
-
-async function adminStartAudioCall() {
-    if (!adminCurrentChatPhone) return;
-    let callRoomId = "daraz_support_call_" + adminCurrentChatPhone;
-    let callUrl = "https://meet.jit.si/" + callRoomId + "#config.disableDeepLinking=true&config.startWithAudioMuted=false&config.startWithVideoMuted=true";
-    
-    await db.collection('chats').doc(adminCurrentChatPhone).set({
-        activeCall: {
-            type: 'audio',
-            status: 'ringing',
-            url: callUrl
-        }
-    }, { merge: true });
-
-    window.open(callUrl, '_blank');
-    alert("✅ অডিও কল শুরু হয়েছে এবং ইউজারের কাছে কল রিং হচ্ছে!");
-}
-
-async function adminStartVideoCall() {
-    if (!adminCurrentChatPhone) return;
-    let callRoomId = "daraz_support_call_" + adminCurrentChatPhone;
-    let callUrl = "https://meet.jit.si/" + callRoomId + "#config.disableDeepLinking=true&config.startWithAudioMuted=false&config.startWithVideoMuted=false";
-    
-    await db.collection('chats').doc(adminCurrentChatPhone).set({
-        activeCall: {
-            type: 'video',
-            status: 'ringing',
-            url: callUrl
-        }
-    }, { merge: true });
-
-    window.open(callUrl, '_blank');
-    alert("✅ ভিডিও কল শুরু হয়েছে এবং ইউজারের কাছে কল রিং হচ্ছে!");
 }
 
 async function sendAdminReplyMessage() {
