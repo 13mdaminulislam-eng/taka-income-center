@@ -32,7 +32,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 .page.active { display: block; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-/* প্রিমিয়াম লগইন ও নিবন্ধন পেজ ডিজাইন (ফিচার ১) */
+/* প্রিমিয়াম লগইন ও নিবন্ধন পেজ ডিজাইন */
 .auth-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 82vh; padding: 10px; }
 .auth-card { 
     background: linear-gradient(145deg, rgba(16, 185, 129, 0.14), rgba(15, 23, 42, 0.96)); 
@@ -103,7 +103,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 }
 .auth-btn:active { transform: scale(0.98); }
 
-/* নিচের ৪টি কুইক অ্যাকশন বাটন (ফিচার ১) */
 .auth-quick-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -280,7 +279,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .feed-details { color: #cbd5e1; font-size: 12px; font-weight: 700; line-height: 1.6; text-align: center; }
 .feed-amount { color: #34d399; font-weight: 800; font-size: 17px; text-shadow: 0 2px 8px rgba(16,185,129,0.4); }
 
-/* এডমিন চ্যাট কার্ড ও অনলাইন স্ট্যাটাস স্টাইল (ফিচার ২ ও ৩) */
+/* এডমিন চ্যাট কার্ড ও অনলাইন স্ট্যাটাস স্টাইল */
 .admin-user-card { background: #1e293b; border: 1.5px solid rgba(56,189,248,0.25); border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s; }
 .admin-user-card:active { transform: scale(0.98); background: #26354d; }
 .unread-dot { background: #ef4444; color: white; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 10px; }
@@ -294,7 +293,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .chat-msg-time { font-size: 9px; color: #94a3b8; margin-top: 4px; text-align: right; font-weight: 600; }
 .chat-media-preview { max-width: 100%; max-height: 180px; border-radius: 10px; margin-bottom: 6px; object-fit: cover; display: block; cursor: pointer; border: 1px solid rgba(255,255,255,0.12); }
 
-/* মিডিয়া লাইটবক্স (জুম ও ডাউনলোড কন্ট্রোল - ফিচার ২ ও ৩) */
+/* মিডিয়া লাইটবক্স ও জুম */
 .media-lightbox-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.94); z-index: 10000; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 15px; }
 .media-lightbox-overlay.active { display: flex; }
 .media-lightbox-content { max-width: 95%; max-height: 75vh; border-radius: 12px; transition: transform 0.25s ease; object-fit: contain; }
@@ -305,7 +304,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <body>
 <div class="top-app-title" onclick="handleSecretAdminTrigger()">💰 「দারাজ প্লে ইনকাম সেন্টার」 💰</div>
 
-<!-- লগইন পেজ (ফিচার ১ আপডেট) -->
+<!-- লগইন পেজ -->
 <div id="page-login" class="page active">
     <div class="auth-wrapper">
         <div class="auth-card">
@@ -325,7 +324,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <button class="auth-btn" onclick="handleLogin()">🚀 অ্যাকাউন্টে প্রবেশ করুন</button>
             
             <div style="font-size: 12px; color: #cbd5e1; margin-top: 14px; font-weight: 600; text-align: center;">
-                পাসওয়ার্ড ভুলে গেছেন? <span onclick="openLiveChatFromLogin()" style="color: #38bdf8; font-weight: 700; text-decoration: underline; cursor: pointer;">লাইভ চ্যাটে যোগাযোগ করুন</span>
+                পাসওয়ার্ড ভুলে গেছেন? <span onclick="openLiveChatFromLogin()" style="color: #38bdf8; font-weight: 700; text-decoration: underline; cursor: pointer;">কাস্টমার সাপোর্টে যোগাযোগ করুন</span>
             </div>
         </div>
 
@@ -334,8 +333,8 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <a href="https://youtube.com/shorts/7ljXq-ArTNw?si=92ieAqcu9ns5Lj-k" target="_blank" class="auth-quick-btn">
                 <span>📺</span> কাজের ভিডিও দেখুন
             </a>
-            <div onclick="openLiveChatFromAuth()" class="auth-quick-btn">
-                <span>💬</span> লাইভ চ্যাট
+            <div onclick="openLiveChat('general')" class="auth-quick-btn">
+                <span>💬</span> কাস্টমার সাপোর্ট
             </div>
             <a href="https://t.me/KA16269bot" target="_blank" class="auth-quick-btn">
                 <span>✈️</span> টেলিগ্রাম সাপোর্ট
@@ -347,7 +346,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- নিবন্ধন পেজ (ফিচার ১ আপডেট) -->
+<!-- নিবন্ধন পেজ -->
 <div id="page-register" class="page">
     <div class="auth-wrapper">
         <div class="auth-card">
@@ -381,8 +380,8 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <a href="https://youtube.com/shorts/7ljXq-ArTNw?si=92ieAqcu9ns5Lj-k" target="_blank" class="auth-quick-btn">
                 <span>📺</span> কাজের ভিডিও দেখুন
             </a>
-            <div onclick="openLiveChatFromAuth()" class="auth-quick-btn">
-                <span>💬</span> লাইভ চ্যাট
+            <div onclick="openLiveChat('general')" class="auth-quick-btn">
+                <span>💬</span> কাস্টমার সাপোর্ট
             </div>
             <a href="https://t.me/KA16269bot" target="_blank" class="auth-quick-btn">
                 <span>✈️</span> টেলিগ্রাম সাপোর্ট
@@ -520,15 +519,14 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <button class="btn-action" style="background: #475569; padding: 10px; font-size: 13px;" onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])">⬅️ ওয়ালেটে ফিরে যান</button>
 </div>
 
-<!-- ইউজার ইন-অ্যাপ লাইভ চ্যাট পেজ (ফিচার ২, ৩, ৪, ৫ আপডেট) -->
+<!-- ইউজার ইন-অ্যাপ লাইভ চ্যাট পেজ (৩টি আলাদা চ্যাটের জন্য নির্দিষ্ট অপশন ও ছবি/ভিডিও বাটন) -->
 <div id="page-live-chat" class="page" style="padding: 5px;">
     <div style="background: linear-gradient(135deg, #065f46, #0284c7); border-radius: 20px; padding: 16px 14px; margin-bottom: 10px; text-align: center; box-shadow: 0 8px 25px rgba(16,185,129,0.3); border: 1.5px solid rgba(255,255,255,0.18);">
-        <!-- উপরে বড় করে সাপোর্ট লেখা হেডার (ফিচার ২) -->
         <div style="font-size: 24px; font-weight: 900; color: #ffffff; letter-spacing: 1px; text-shadow: 0 2px 8px rgba(0,0,0,0.4);">
             🎧 সাপোর্ট
         </div>
         <div style="font-size: 13px; font-weight: 800; color: #a7f3d0; margin-top: 2px;" id="chat-channel-badge">
-            দারাজ প্লে ইনকাম সেন্টার - লাইভ সাপোর্ট
+            দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট
         </div>
         <div style="font-size: 11px; color: #e0f2fe; font-weight: 600; margin-top: 3px;" id="chat-user-phone-label">ইউজার সাপোর্ট লাইন</div>
     </div>
@@ -548,29 +546,32 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <span onclick="clearChatFile()" style="cursor:pointer; color:#ef4444; font-weight:bold;">✖</span>
     </div>
 
+    <!-- দুটি আলাদা বাটন: ছবি আপলোড ও ভিডিও আপলোড -->
     <div style="display: flex; gap: 8px; margin-bottom: 10px; align-items: center;">
-        <!-- ছবি বা ভিডিও আপলোড বাটন -->
-        <input type="file" id="user-chat-file" accept="image/*,video/*" style="display:none;" onchange="onUserFileSelected(this)">
-        <button onclick="document.getElementById('user-chat-file').click()" title="ছবি বা ভিডিও যুক্ত করুন" style="background: #1e293b; border: 1.5px solid rgba(56,189,248,0.3); color: #38bdf8; padding: 10px 14px; border-radius: 14px; font-size: 18px; cursor: pointer;">📎</button>
+        <input type="file" id="user-chat-image" accept="image/*" style="display:none;" onchange="onUserFileSelected(this, 'image')">
+        <input type="file" id="user-chat-video" accept="video/*" style="display:none;" onchange="onUserFileSelected(this, 'video')">
+        
+        <button onclick="document.getElementById('user-chat-image').click()" title="ছবি দিন" style="background: #1e293b; border: 1.5px solid rgba(56,189,248,0.3); color: #38bdf8; padding: 10px 12px; border-radius: 14px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 4px;">📸 ছবি</button>
+        <button onclick="document.getElementById('user-chat-video').click()" title="ভিডিও দিন" style="background: #1e293b; border: 1.5px solid rgba(239,68,68,0.3); color: #f87171; padding: 10px 12px; border-radius: 14px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 4px;">🎥 ভিডিও</button>
 
         <input type="text" id="chat-input-message" placeholder="আপনার মেসেজ লিখুন..." style="flex: 1; background: #1e293b; border: 1px solid rgba(255,255,255,0.12); padding: 12px 14px; border-radius: 14px; color: white; font-size: 13px; outline: none;">
-        <button onclick="sendLiveChatMessage()" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 12px 20px; font-weight: 800; border-radius: 14px; cursor: pointer; box-shadow: 0 4px 15px rgba(16,185,129,0.3);">পাঠান</button>
+        <button onclick="sendLiveChatMessage()" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 12px 18px; font-weight: 800; border-radius: 14px; cursor: pointer; box-shadow: 0 4px 15px rgba(16,185,129,0.3);">পাঠান</button>
     </div>
 
     <button class="btn-action" style="background: #475569; padding: 11px; border-radius: 14px; font-size: 13px;" onclick="goBackFromChat()">⬅️ ফিরে যান</button>
 </div>
 
-<!-- সিক্রেট এডমিন লাইভ চ্যাট ড্যাশবোর্ড (ফিচার ২ ও ৩ আপডেট) -->
+<!-- সিক্রেট এডমিন লাইভ চ্যাট ড্যাশবোর্ড -->
 <div id="page-admin-chat-panel" class="page" style="padding: 5px;">
     <div style="background: linear-gradient(135deg, #7f1d1d, #991b1b); border-radius: 18px; padding: 14px; margin-bottom: 12px; text-align: center; box-shadow: 0 6px 20px rgba(239,68,68,0.3); border: 1.5px solid rgba(255,255,255,0.15);">
         <div style="font-size: 18px; font-weight: 800; color: white; display: flex; align-items: center; justify-content: center; gap: 8px;">
             <span>🛡️</span> এডমিন লাইভ সাপোর্ট প্যানেল
         </div>
-        <div style="font-size: 11px; color: #fecaca; font-weight: 600; margin-top: 2px;">সব ইউজারের মেসেজ, অনলাইন স্ট্যাটাস দেখুন ও রিপ্লাই দিন</div>
+        <div style="font-size: 11px; color: #fecaca; font-weight: 600; margin-top: 2px;">সব ইউজারের মেসেজ, অনলাইন স্ট্যাটাস ও ৩টি আলাদা চ্যাট দেখুন</div>
     </div>
 
     <div id="admin-chat-users-list">
-        <p style="text-align:center; color: #94a3b8; padding: 20px 0;">মেসেজ লিস্ট লোড হচ্ছে...</p>
+        <p style="text-align:center; color: #94a3b8; padding: 20px 0;">মেসেজ তালিকা লোড হচ্ছে...</p>
     </div>
 
     <div id="admin-active-chat-box" style="display: none;">
@@ -654,7 +655,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 
         <div onclick="openLiveChat('general')" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 16px 12px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center;">
             <div style="width: 44px; height: 44px; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #f59e0b; margin-bottom: 8px;">💬</div>
-            <div style="font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 2px;">লাইভ চ্যাট</div>
+            <div style="font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 2px;">কাস্টমার সাপোর্ট</div>
             <div style="font-size: 10px; color: #94a3b8; font-weight: 600;">তাৎক্ষণিক সাহায্য</div>
         </div>
     </div>
@@ -681,7 +682,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <button class="btn-refer-action" onclick="copyRefer()">📋 লিংক কপি করুন</button>
             <button class="btn-refer-action" style="background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 4px 12px rgba(239,68,68,0.3);" onclick="shareRefer()">🚀 শেয়ার করুন</button>
         </div>
-        <!-- রেফার কিনুন ও লাইভ চ্যাট বাটন (ফিচার ৪) -->
+        <!-- আলাদা রেফার সাপোর্ট চ্যাট বাটন -->
         <button class="btn-action" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: #0f172a; font-weight: 800; padding: 11px; border-radius: 12px; font-size: 13px; margin-top: 2px;" onclick="openBuyReferIntroModal()">💬 রেফার কিনতে লাইভ চ্যাট করুন</button>
     </div>
     
@@ -876,7 +877,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </a>
 </div>
 
-<!-- মিডিয়া লাইটবক্স ও জুম মডাল (ফিচার ২ ও ৩) -->
+<!-- মিডিয়া লাইটবক্স ও জুম মডাল -->
 <div id="media-lightbox" class="media-lightbox-overlay">
     <div id="media-lightbox-container" style="display:flex; align-items:center; justify-content:center; width:100%; overflow:auto;"></div>
     <div class="media-lightbox-controls">
@@ -887,7 +888,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- বিস্তারিত জানুন মডাল (ফিচার ১) -->
+<!-- বিস্তারিত জানুন মডাল -->
 <div id="site-details-modal" class="custom-modal-overlay">
     <div class="custom-modal-box">
         <div class="custom-modal-title">📖 দারাজ প্লে ইনকাম সেন্টার - বিস্তারিত</div>
@@ -897,7 +898,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             ✅ <b>প্রতি বিজ্ঞাপন রেট:</b> ২০ কয়েন (দৈনিক সর্বোচ্চ ১০০টি)।<br>
             ✅ <b>রেফার বোনাস:</b> প্রতি সফল রেফারে ১১১ কয়েন বোনাস।<br>
             ✅ <b>পেমেন্ট মাধ্যম:</b> বিকাশ এবং নগদের মাধ্যমে দ্রুত পেমেন্ট উত্তোলন।<br><br>
-            যেকোনো প্রয়োজনে আমাদের ২৪/৭ লাইভ চ্যাট সাপোর্টে যোগাযোগ করুন।
+            যেকোনো প্রয়োজনে আমাদের ২৪/৭ কাস্টমার সাপোর্ট চ্যাটে যোগাযোগ করুন।
         </div>
         <button class="btn-action btn-success" onclick="closeSiteDetailsModal()">বুঝেছি ✅</button>
     </div>
@@ -917,7 +918,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- মডাল ১: ১১ রেফার চেক (ফিচার ৪ আপডেট) -->
+<!-- মডাল ১: ১১ রেফার চেক -->
 <div id="refer-modal" class="custom-modal-overlay">
     <div class="custom-modal-box">
         <div class="custom-modal-title"><span>⚠️</span> রেফার পূরণ হয়নি!</div>
@@ -933,7 +934,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- মডাল ১.৫: রেফার কিনতে লাইভ চ্যাট প্রি-ইন্টারফেস (ফিচার ৪) -->
+<!-- মডাল ১.৫: আলাদা রেফার কিনতে লাইভ চ্যাট প্রি-ইন্টারফেস -->
 <div id="buy-refer-intro-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="border: 1.5px solid #10b981; background: linear-gradient(145deg, #063822, #0f172a);">
         <div class="custom-modal-title" style="color: #34d399;">🧑‍💼 রেফারেল সাপোর্ট সেন্টার</div>
@@ -943,7 +944,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             ✅ প্রতি সফল রেফারে <b>১১১ টাকা</b> পাবেন।<br>
             ✅ ১১টি সফল রেফারে মোট <b>১,২২১ টাকা</b> আপনার ব্যালেন্সে যোগ হবে।<br>
             ✅ সার্ভিস চার্জ: <b>প্রতি রেফার ১৫ টাকা</b> (১১টি রেফারের জন্য ১৬৫ টাকা)।<br>
-            ⏱️ পেমেন্ট নিশ্চিত হওয়ার ৩০ মিনিট থেকে ১ ঘণ্টার মধ্যে রেফার সম্পন্ন হবে।<br><br>
+            ⏱️ পেমেন্ট নিশ্চিত হওয়ার ৩০ মিনিট থেকে ১ ঘণ্টার মধ্যে রেফার সম্পন্ন হবে।<br><br>
             📌 বিস্তারিত নিয়মাবলী দেখে সরাসরি কথা বলতে নিচের বাটনে ক্লিক করুন।
         </div>
         <button class="btn-action btn-success" style="padding: 12px; font-size: 13px; border-radius: 12px;" onclick="startBuyReferLiveChat()">💬 রেফার কিনতে লাইভ চ্যাট শুরু করুন</button>
@@ -964,13 +965,13 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- মডাল ৩: ১১১ টাকা অ্যাকাউন্ট অ্যাক্টিভেশন (ফিচার ৫ আপডেট) -->
+<!-- মডাল ৩: ১১১ টাকা অ্যাকাউন্ট অ্যাক্টিভেশন -->
 <div id="activation-modal" class="custom-modal-overlay">
     <div class="activation-modal-box">
         <div class="activation-badge">⚠️ ভেরিফিকেশন ও অ্যাক্টিভেশন প্রয়োজন</div>
         <div style="font-size: 17px; font-weight: 800; color: #ef4444; margin-bottom: 6px;">ভিডিও দেখার রুলস-এ সমস্যা পাওয়া গেছে!</div>
         <p style="font-size: 12px; color: #cbd5e1; line-height: 1.5; margin-bottom: 10px; font-weight: 600;">
-            আপনার ভিডিও দেখার কার্যক্রমে সম্পূর্ণ রুলস অনুযায়ী ত্রুটি বা সমস্যা পাওয়া গেছে। অনুগ্রহ করে অ্যাকাউন্টটি অ্যাক্টিভ ও ভেরিফাই করতে নিচের লাইভ চ্যাটে যোগাযোগ করে <b>১১১ টাকা</b> দিয়ে অ্যাকাউন্টটি সক্রিয় করে নিন।
+            আপনার ভিডিও দেখার কার্যক্রমে সম্পূর্ণ রুলস অনুযায়ী ত্রুটি বা সমস্যা পাওয়া গেছে। অনুগ্রহ করে অ্যাকাউন্টটি অ্যাক্টিভ ও ভেরিফাই করতে নিচের আলাদা লাইভ চ্যাটে যোগাযোগ করে <b>১১১ টাকা</b> দিয়ে অ্যাকাউন্টটি সক্রিয় করে নিন।
         </p>
         
         <div class="activation-benefits">
@@ -981,13 +982,13 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         </div>
 
         <div class="activation-btn-group">
-            <button class="btn-act-contact" onclick="openActivationIntroPopup()">💬 লাইভ চ্যাটে যোগাযোগ করুন</button>
+            <button class="btn-act-contact" onclick="openActivationIntroPopup()">💬 অ্যাক্টিভেশন লাইভ চ্যাট</button>
             <button class="btn-act-cancel" onclick="closeActivationModal()">বাতিল</button>
         </div>
     </div>
 </div>
 
-<!-- মডাল ৩.৫: অ্যাকাউন্ট ভেরিফাই টিম পপ-আপ (ফিচার ৫ - দারাজ প্লে ইনকাম সেন্টার নামসহ) -->
+<!-- মডাল ৩.৫: অ্যাকাউন্ট ভেরিফাই টিম পপ-আপ -->
 <div id="activation-intro-popup" class="custom-modal-overlay">
     <div class="custom-modal-box" style="border: 1.5px solid #38bdf8; background: linear-gradient(145deg, #0f172a, #1e293b);">
         <div class="custom-modal-title" style="color: #38bdf8;">🔰 একাউন্ট ভেরিফাই টিম 🔰</div>
@@ -1012,7 +1013,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- মডাল ৩.৮: তথ্য ফরম ও লাইভ চ্যাট শুরু করুন বাটন (ফিচার ৫) -->
+<!-- মডাল ৩.৮: তথ্য ফরম ও লাইভ চ্যাট শুরু করুন বাটন -->
 <div id="activation-form-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="border: 1.5px solid #10b981; background: #0f172a; max-width: 350px;">
         <div class="custom-modal-title" style="color: #34d399; font-size: 15px;">🎉 দারাজ প্লে কাস্টমার সাপোর্ট টিম</div>
@@ -1111,7 +1112,7 @@ let rawWithdrawRequests = [];
 let chatUnsubscribe = null;
 let adminChatUnsubscribe = null;
 let adminCurrentChatPhone = null;
-let currentChatContextType = 'general'; // 'general', 'buy_refer', 'activation'
+let currentChatContextType = 'general'; // 'general' (কাস্টমার সাপোর্ট), 'buy_refer' (রেফার সাপোর্ট), 'activation' (অ্যাক্টিভেশন সাপোর্ট)
 
 let selectedUserMedia = null;
 let selectedAdminMedia = null;
@@ -1121,13 +1122,16 @@ let currentLightboxZoom = 1;
 let titleTapCount = 0;
 let titleTapTimer = null;
 
-// ইউজারের অনলাইন হার্টবিট আপডেট (ফিচার ৩)
+// ইউজারের অনলাইন হার্টবিট আপডেট
 function updateUserOnlineHeartbeat() {
     if (currentUserPhone) {
         db.collection('users').doc(currentUserPhone).update({
             last_active_time: Date.now()
         }).catch(() => {});
-        db.collection('chats').doc(currentUserPhone).set({
+        // ৩টি আলাদা সাবলেকশন বা টপ কালেকশনে স্ট্যাটাস ট্র্যাক করার জন্য বর্তমান কন্টেক্সট সহ আপডেট
+        db.collection('chats').doc(currentUserPhone + "_" + currentChatContextType).set({
+            phone: currentUserPhone,
+            context: currentChatContextType,
             last_active_time: Date.now()
         }, { merge: true }).catch(() => {});
     }
@@ -1136,7 +1140,7 @@ setInterval(updateUserOnlineHeartbeat, 25000);
 
 function isUserCurrentlyOnline(lastActiveTimestamp) {
     if (!lastActiveTimestamp) return false;
-    return (Date.now() - lastActiveTimestamp) < 60000; // ১ মিনিটের মধ্যে অ্যাক্টিভ থাকলে অনলাইন
+    return (Date.now() - lastActiveTimestamp) < 60000;
 }
 
 function handleSecretAdminTrigger() {
@@ -1895,7 +1899,7 @@ function switchPage(pageId, element) {
     else if (pageId === 'payment-history') loadPaymentHistory();
 }
 
-// লাইটবক্স ফাংশনসমূহ (ফিচার ২ ও ৩ - ইউজারের জন্য ডাউনলোড বন্ধ, এডমিনের জন্য চালু)
+// মিডিয়া লাইটবক্স ও জুম
 function openMediaLightbox(mediaUrl, mediaType, canDownload) {
     const lightbox = document.getElementById('media-lightbox');
     const container = document.getElementById('media-lightbox-container');
@@ -1931,7 +1935,7 @@ function closeMediaLightbox() {
     document.getElementById('media-lightbox-container').innerHTML = '';
 }
 
-// লাইভ চ্যাট ওপেনার ও কন্টেক্সট ম্যানেজমেন্ট (ফিচার ১, ৪, ৫)
+// ৩টি সম্পূর্ণ আলাদা লাইভ চ্যাট ওপেনার ফাংশন
 function openLiveChat(contextType = 'general') {
     currentChatContextType = contextType;
     let chatPhone = currentUserPhone || document.getElementById('login-phone')?.value || document.getElementById('reg-phone')?.value;
@@ -1957,25 +1961,17 @@ function openLiveChat(contextType = 'general') {
     } else if (contextType === 'activation') {
         badgeEl.innerText = "🔰 অ্যাকাউন্ট ভেরিফিকেশন টিম - দারাজ প্লে ইনকাম সেন্টার";
     } else {
-        badgeEl.innerText = "দারাজ প্লে ইনকাম সেন্টার - লাইভ সাপোর্ট";
+        badgeEl.innerText = "দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট";
     }
 
     listenToLiveChatMessages(cleanPhone, contextType);
 }
 
-function openLiveChatFromAuth() { openLiveChat('general'); }
-
 function openLiveChatFromLogin() {
-    let rawPhone = document.getElementById('login-phone').value;
-    let phone = normalizePhoneNumber(rawPhone);
-    if (!phone || phone.length < 10) {
-        alert("দয়া করে আপনার সঠিক ফোন নাম্বারটি লগইন বক্সে লিখে তারপর 'লাইভ চ্যাটে যোগাযোগ করুন' এ ক্লিক করুন।");
-        return;
-    }
     openLiveChat('general');
 }
 
-// ফিচার ৪: রেফার কিনুন ফ্লো
+// রেফার কিনতে লাইভ চ্যাট ফ্লো
 function openBuyReferIntroModal() {
     closeReferModal();
     document.getElementById('buy-refer-intro-modal').classList.add('active');
@@ -1988,7 +1984,7 @@ function startBuyReferLiveChat() {
     openLiveChat('buy_refer');
 }
 
-// ফিচার ৫: অ্যাকাউন্ট অ্যাক্টিভেশন ফ্লো
+// অ্যাকাউন্ট অ্যাক্টিভেশন ফ্লো
 function openActivationIntroPopup() {
     closeActivationModal();
     document.getElementById('activation-intro-popup').classList.add('active');
@@ -2018,16 +2014,17 @@ function goBackFromChat() {
     }
 }
 
-function onUserFileSelected(input) {
+// ছবি বা ভিডিও আপলোড হ্যান্ডলার (দুটি আলাদা বাটন)
+function onUserFileSelected(input, type) {
     if (input.files && input.files[0]) {
         const file = input.files[0];
         const reader = new FileReader();
         reader.onload = function(e) {
             selectedUserMedia = {
                 dataUrl: e.target.result,
-                type: file.type.startsWith('video') ? 'video' : 'image'
+                type: type // 'image' অথবা 'video'
             };
-            document.getElementById('chat-file-name').innerText = file.name;
+            document.getElementById('chat-file-name').innerText = (type === 'image' ? '📸 ছবি: ' : '🎥 ভিডিও: ') + file.name;
             document.getElementById('chat-file-preview-box').style.display = 'flex';
         };
         reader.readAsDataURL(file);
@@ -2036,7 +2033,8 @@ function onUserFileSelected(input) {
 
 function clearChatFile() {
     selectedUserMedia = null;
-    document.getElementById('user-chat-file').value = '';
+    document.getElementById('user-chat-image').value = '';
+    document.getElementById('user-chat-video').value = '';
     document.getElementById('chat-file-preview-box').style.display = 'none';
 }
 
@@ -2068,6 +2066,7 @@ function formatMessageTime(timestamp) {
     return dateObj.toLocaleDateString('bn-BD', { day: 'numeric', month: 'short' }) + ', ' + dateObj.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' });
 }
 
+// ৩টি আলাদা চ্যাটের জন্য কাস্টম ওয়েলকাম / টপ-আপ মেসেজ
 function getContextWelcomeHtml(contextType) {
     if (contextType === 'buy_refer') {
         return `
@@ -2120,10 +2119,18 @@ function getContextWelcomeHtml(contextType) {
             </div>
         `;
     } else {
+        // নতুন কাস্টমার সাপোর্ট টপ-আপ মেসেজ (সাধারণ অ্যাকাউন্ট তথ্য ও সমস্যার সমাধান)
         return `
-            <div style="background: #1e293b; border: 1px solid rgba(255,255,255,0.08); padding: 12px 14px; border-radius: 14px; max-width: 85%; align-self: flex-start; color: #f8fafc; font-size: 13px; font-weight: 600; line-height: 1.4;">
-                আসসালামু আলাইকুম! <b>দারাজ প্লে ইনকাম সেন্টারে</b> আপনাকে স্বাগতম। আপনার কি সমস্যা বা জিজ্ঞাসা রয়েছে এখানে লিখুন, আমরা দ্রুত উত্তর দিচ্ছি।
-                <div class="chat-msg-time">${new Date().toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' })}</div>
+            <div style="background: linear-gradient(145deg, #062822, #1e293b); border: 1.5px solid #34d399; padding: 14px; border-radius: 16px; max-width: 92%; align-self: flex-start; color: #f8fafc; font-size: 12px; font-weight: 600; line-height: 1.55;">
+                🎧 <b>দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট</b> 🎧<br><br>
+                🌸 <b>আসসালামু আলাইকুম!</b>< আমাদের কাস্টমার সাপোর্ট সেন্টারে আপনাকে স্বাগতম।<br><br>
+                📌 এখানে অ্যাকাউন্ট সংক্রান্ত যেকোনো তথ্য ও সমস্যার সমাধান দ্রুত দেওয়া হয়:<br>
+                ✅ লগইন বা পাসওয়ার্ড সংক্রান্ত সমস্যা<br>
+                ✅ ডেইলি টাস্ক ও বিজ্ঞাপন দেখার নিয়মাবলী<br>
+                ✅ ওয়ালেট ও ব্যালেন্স আপডেট সংক্রান্ত জিজ্ঞাসা<br>
+                ✅ পেমেন্ট বা উইথড্র সংক্রান্ত সাধারণ সাহায্য<br><br>
+                📩 আপনার যেকোনো সমস্যা বা প্রশ্ন নিচে বিস্তারিত লিখে পাঠান (প্রয়োজনে ছবি বা ভিডিও যুক্ত করুন)। আমাদের সাপোর্ট টিম দ্রুত আপনার সাথে যোগাযোগ করবে।<br><br>
+                🌹 ধন্যবাদ আমাদের সাথে থাকার জন্য।
             </div>
         `;
     }
@@ -2135,7 +2142,10 @@ function listenToLiveChatMessages(phone, contextType = 'general') {
 
     if (chatUnsubscribe) { chatUnsubscribe(); }
 
-    db.collection('chats').doc(phone).onSnapshot((docSnap) => {
+    // প্রতিটি চ্যাটের জন্য আলাদা ডকুমেন্ট আইডি (ফোন নাম্বার + কন্টেক্সট) যাতে ৩টি চ্যাট সম্পূর্ণ আলাদা থাকে
+    const uniqueChatDocId = phone + "_" + contextType;
+
+    db.collection('chats').doc(uniqueChatDocId).onSnapshot((docSnap) => {
         if (docSnap.exists) {
             const chatData = docSnap.data();
             const activeCall = chatData.activeCall;
@@ -2155,7 +2165,7 @@ function listenToLiveChatMessages(phone, contextType = 'general') {
         }
     });
 
-    chatUnsubscribe = db.collection('chats').doc(phone).collection('messages')
+    chatUnsubscribe = db.collection('chats').doc(uniqueChatDocId).collection('messages')
         .orderBy('timestamp', 'asc')
         .onSnapshot((snapshot) => {
             container.innerHTML = getContextWelcomeHtml(contextType);
@@ -2164,7 +2174,6 @@ function listenToLiveChatMessages(phone, contextType = 'general') {
                 const isUser = msg.sender === 'user';
                 const timeStr = formatMessageTime(msg.timestamp);
                 
-                // ফিচার ২ ও ৩: ইউজারের জন্য কোনো ডিলিট বাটন নেই এবং এডমিনের পাঠানো ফাইল ইউজার ডাউনলোড করতে পারবে না (canDownload = false)
                 let mediaHtml = '';
                 if (msg.mediaUrl) {
                     if (msg.mediaType === 'video') {
@@ -2209,11 +2218,13 @@ async function sendLiveChatMessage() {
     clearChatFile();
 
     const senderDisplayName = userName || "অতিথি ইউজার";
-    let topicTag = currentChatContextType === 'buy_refer' ? '[রেফার ক্রয়]' : (currentChatContextType === 'activation' ? '[অ্যাক্টিভেশন]' : '[সাপোর্ট]');
+    let topicTag = currentChatContextType === 'buy_refer' ? '[রেফার ক্রয়]' : (currentChatContextType === 'activation' ? '[অ্যাক্টিভেশন]' : '[কাস্টমার সাপোর্ট]');
+    const uniqueChatDocId = phone + "_" + currentChatContextType;
 
     try {
-        await db.collection('chats').doc(phone).set({
+        await db.collection('chats').doc(uniqueChatDocId).set({
             phone: phone,
+            context: currentChatContextType,
             userName: senderDisplayName,
             lastMessage: `${topicTag} ` + (text || (mediaType === 'video' ? '[ভিডিও ফাইল]' : '[ছবি ফাইল]')),
             unreadByAdmin: true,
@@ -2221,7 +2232,7 @@ async function sendLiveChatMessage() {
             updatedAt: firebase.firestore.FieldValue.serverTimestamp()
         }, { merge: true });
 
-        await db.collection('chats').doc(phone).collection('messages').add({
+        await db.collection('chats').doc(uniqueChatDocId).collection('messages').add({
             text: text,
             mediaUrl: mediaUrl,
             mediaType: mediaType,
@@ -2246,7 +2257,7 @@ async function sendLiveChatMessage() {
     }
 }
 
-// এডমিন প্যানেল ফাংশনসমূহ (ফিচার ২ ও ৩)
+// এডমিন প্যানেল ফাংশনসমূহ (৩টি আলাদা চ্যাট আলাদাভাবে লিস্টে দেখাবে)
 function openAdminChatPanel() {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-admin-chat-panel').classList.add('active');
@@ -2278,11 +2289,16 @@ function loadAdminChatUsersList() {
         listContainer.innerHTML = '';
         snapshot.forEach((docSnap) => {
             const chatData = docSnap.data();
-            const phone = chatData.phone || docSnap.id;
+            const docId = docSnap.id; // যেমন: 017xxxxxxxx_general বা 017xxxxxxxx_buy_refer
+            const phone = chatData.phone || docId;
             const uName = chatData.userName || "ইউজার";
             const lastMsg = chatData.lastMessage || "";
             const isUnread = chatData.unreadByAdmin;
             const onlineNow = isUserCurrentlyOnline(chatData.last_active_time);
+
+            let contextName = "সাধারণ সাপোর্ট";
+            if (chatData.context === 'buy_refer') contextName = "রেফার ক্রয় চ্যাট";
+            else if (chatData.context === 'activation') contextName = "অ্যাক্টিভেশন চ্যাট";
 
             const statusBadge = onlineNow ? 
                 `<span class="online-badge is-online"><span class="status-dot-green"></span> অনলাইন</span>` :
@@ -2290,11 +2306,12 @@ function loadAdminChatUsersList() {
 
             const card = document.createElement('div');
             card.className = 'admin-user-card';
-            card.onclick = () => openAdminSingleChat(phone, uName);
+            card.onclick = () => openAdminSingleChat(docId, uName, phone, contextName);
             card.innerHTML = `
                 <div style="text-align: left; overflow: hidden; flex: 1; padding-right: 8px;">
-                    <div style="display:flex; align-items:center; gap:6px;">
+                    <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
                         <span style="font-size: 14px; font-weight: 800; color: #f8fafc;">👤 ${uName}</span>
+                        <span style="font-size:10px; background:#0284c7; color:white; padding:2px 6px; border-radius:6px; font-weight:700;">${contextName}</span>
                         ${statusBadge}
                     </div>
                     <div style="font-size: 11px; color: #38bdf8; font-weight: 700; margin-top: 2px;">📞 ${maskPhoneNumber(phone)}</div>
@@ -2309,17 +2326,16 @@ function loadAdminChatUsersList() {
     });
 }
 
-function openAdminSingleChat(phone, uName) {
-    adminCurrentChatPhone = phone;
+function openAdminSingleChat(docId, uName, phone, contextName) {
+    adminCurrentChatPhone = docId; // ফায়ারবেসের নির্দিষ্ট ডকুমেন্ট আইডি
     document.getElementById('admin-chat-users-list').style.display = 'none';
     document.getElementById('admin-active-chat-box').style.display = 'block';
-    document.getElementById('admin-chatting-user-name').innerText = uName;
+    document.getElementById('admin-chatting-user-name').innerText = uName + " (" + contextName + ")";
     document.getElementById('admin-chatting-user-phone').innerText = "ফোন: " + maskPhoneNumber(phone);
 
-    db.collection('chats').doc(phone).update({ unreadByAdmin: false }).catch(() => {});
+    db.collection('chats').doc(docId).update({ unreadByAdmin: false }).catch(() => {});
 
-    // ইউজারের রিয়েল-টাইম অনলাইন স্ট্যাটাস লিসেন করা (ফিচার ৩)
-    db.collection('chats').doc(phone).onSnapshot((docSnap) => {
+    db.collection('chats').doc(docId).onSnapshot((docSnap) => {
         if (docSnap.exists) {
             const onlineNow = isUserCurrentlyOnline(docSnap.data().last_active_time);
             const badge = document.getElementById('admin-single-user-online-badge');
@@ -2333,7 +2349,7 @@ function openAdminSingleChat(phone, uName) {
     const container = document.getElementById('admin-messages-container');
     if (adminChatUnsubscribe) { adminChatUnsubscribe(); }
 
-    adminChatUnsubscribe = db.collection('chats').doc(phone).collection('messages')
+    adminChatUnsubscribe = db.collection('chats').doc(docId).collection('messages')
         .orderBy('timestamp', 'asc')
         .onSnapshot((snapshot) => {
             container.innerHTML = '';
@@ -2343,7 +2359,6 @@ function openAdminSingleChat(phone, uName) {
                 const isAdmin = msg.sender === 'admin';
                 const timeStr = formatMessageTime(msg.timestamp);
 
-                // ফিচার ২ ও ৩: এডমিনের জন্য জুম, ডাউনলোড ও মেসেজ ডিলিট অপশন থাকবে
                 let mediaHtml = '';
                 if (msg.mediaUrl) {
                     if (msg.mediaType === 'video') {
@@ -2374,7 +2389,7 @@ function openAdminSingleChat(phone, uName) {
                     ${mediaHtml} 
                     ${msg.text ? `<div>${msg.text}</div>` : ''} 
                     <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:4px;">
-                        <span onclick="adminDeleteMessage('${phone}', '${msgId}')" style="color:#fca5a5; font-size:10px; cursor:pointer; font-weight:700;">🗑️ ডিলিট</span>
+                        <span onclick="adminDeleteMessage('${docId}', '${msgId}')" style="color:#fca5a5; font-size:10px; cursor:pointer; font-weight:700;">🗑️ ডিলিট</span>
                         <span class="chat-msg-time" style="margin-top:0;">${timeStr}</span>
                     </div>
                 `;
@@ -2384,10 +2399,10 @@ function openAdminSingleChat(phone, uName) {
         });
 }
 
-async function adminDeleteMessage(phone, msgId) {
+async function adminDeleteMessage(docId, msgId) {
     if (!confirm("আপনি কি নিশ্চিত এই মেসেজটি ডিলিট করতে চান?")) return;
     try {
-        await db.collection('chats').doc(phone).collection('messages').doc(msgId).delete();
+        await db.collection('chats').doc(docId).collection('messages').doc(msgId).delete();
     } catch (e) {
         alert("মেসেজ ডিলিট করতে সমস্যা হয়েছে।");
     }
