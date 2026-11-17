@@ -910,16 +910,16 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- ইতিমধ্যে অ্যাকাউন্ট থাকা সংক্রান্ত প্রিমিয়াম অ্যালার্ট মডাল (লাইভ চ্যাট লিংকসহ) -->
+<!-- ইতিমধ্যে অ্যাকাউন্ট থাকা সংক্রান্ত প্রিমিয়াম অ্যালার্ট মডাল -->
 <div id="existing-account-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="border: 2px solid #ef4444; background: linear-gradient(145deg, #450a0a, #0f172a); text-align: center;">
         <div style="font-size: 32px; margin-bottom: 6px;">⚠️</div>
         <div class="custom-modal-title" style="color: #f87171; justify-content: center;">অ্যাকাউন্ট ইতিমধ্যে বিদ্যমান!</div>
         <div class="custom-modal-desc" style="text-align: center; font-size: 12.5px; line-height: 1.5; background: transparent; border: none; color: #cbd5e1;">
             এই ফোন নাম্বারে ইতিমধ্যে একটি অ্যাকাউন্ট রেজিস্টার্ড রয়েছে!<br>
-            আপনি যদি নতুন করে অ্যাকাউন্ট খুলতে চান, তবে নিচের বাটনে ক্লিক করে লাইভ চ্যাটে এডমিনের সাথে যোগাযোগ করুন। এডমিন চাইলে আপনার পুরনো অ্যাকাউন্ট ডিলিট বা অ্যাক্টিভ করে দিতে পারবেন।
+            দয়া করে আপনার সঠিক পাসওয়ার্ড দিয়ে লগইন করুন।
         </div>
-        <button class="btn-action" style="background: linear-gradient(135deg, #0284c7, #0369a1); padding: 12px; border-radius: 12px; font-size: 13px; margin-bottom: 8px;" onclick="openLiveChatFromExistingModal()">💬 লাইভ চ্যাটে যোগাযোগ করুন</button>
+        <button class="btn-action btn-success" style="padding: 12px; border-radius: 12px; font-size: 13px; margin-bottom: 8px;" onclick="closeExistingAccountModal(); showLoginPage();">লগইন পেজে যান ✅</button>
         <button class="custom-modal-btn-cancel" onclick="closeExistingAccountModal()">বাতিল</button>
     </div>
 </div>
@@ -1152,7 +1152,6 @@ let titleTapTimer = null;
 
 let generatedRegOTP = "";
 let pendingRegisterData = null;
-let existingAttemptPhone = "";
 
 let generatedForgotOTP = "";
 let verifiedForgotPhone = "";
@@ -1359,7 +1358,7 @@ async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, 
     } catch (e) { console.log(e); }
 }
 
-// সাইন-আপ ওটিপি পাঠানো ও প্রিমিয়াম ডুপ্লিকেট চেক মডাল
+// সাইন-আপ ওটিপি পাঠানো ও ডুপ্লিকেট চেক
 async function sendRegisterOTP() {
     const name = document.getElementById('reg-name').value.trim();
     const rawPhone = document.getElementById('reg-phone').value;
@@ -1376,10 +1375,9 @@ async function sendRegisterOTP() {
         return;
     }
 
-    // নাম্বার আগে থেকে থাকলে প্রিমিয়াম অ্যালার্ট মডাল ওপেন হবে যেখানে লাইভ চ্যাট লিংক থাকবে
+    // নাম্বার আগে থেকে থাকলে সাধারণ সতর্কবার্তা মডাল দেখাবে
     const existingDoc = await db.collection('users').doc(phone).get();
     if (existingDoc.exists) {
-        existingAttemptPhone = phone;
         document.getElementById('existing-account-modal').classList.add('active');
         return;
     }
@@ -1400,12 +1398,6 @@ async function sendRegisterOTP() {
 
 function closeExistingAccountModal() {
     document.getElementById('existing-account-modal').classList.remove('active');
-}
-
-function openLiveChatFromExistingModal() {
-    closeExistingAccountModal();
-    currentUserPhone = existingAttemptPhone;
-    openLiveChat('general');
 }
 
 function processOtpGeneration(phone, name, password, photoUrl, photoFile) {
@@ -2247,7 +2239,7 @@ function getContextWelcomeHtml(contextType) {
                 📌 <b>গুরুত্বপূর্ণ নির্দেশনা</b><br>
                 ⚠️ সকল তথ্য সঠিকভাবে প্রদান করুন।<br>
                 ⚠️ ভুল তথ্য বা ভুয়া স্ক্রিনশট প্রদান করলে আবেদন বাতিল করা হবে।<br>
-                📩 তথ্য জমা দেওয়ার পর আমাদের কাস্টমার সাপোর্ট টিম দ্রুত যাচাই করে আপনার সাথে যোগাযোগ করবে।<br><br>
+                📩 তথ্য জমা দেওয়ার পর আমাদের কাস্টমার সাপোর্ট টিম যাচাই করে আপনার সাথে যোগাযোগ করবে।<br><br>
                 🌹 ধন্যবাদ। <b>দারাজ প্লে ইনকাম সেন্টারের</b> সাথে থাকার জন্য।
             </div>
         `;
