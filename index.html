@@ -25,33 +25,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; }
-body { font-family: 'Plus Jakarta Sans', sans-serif; background: #07090e; margin: 0; padding: 10px; padding-bottom: 80px; color: #f8fafc; }
-.top-app-title { font-size: 22px; font-weight: 800; text-align: center; color: #f8fafc; margin: 12px 0; background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 0.5px; cursor: pointer; user-select: none; }
+body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin: 0; padding: 10px; padding-bottom: 80px; color: #f8fafc; }
+.top-app-title { font-size: 20px; font-weight: 800; text-align: center; color: #f8fafc; margin: 10px 0; background: linear-gradient(135deg, #ef4444, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 0.5px; cursor: pointer; user-select: none; }
 
 .page { display: none; animation: fadeIn 0.3s ease; }
 .page.active { display: block; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-/* প্রিমিয়াম Bk666 স্টাইল লগইন ও নিবন্ধন পেজ ডিজাইন */
-.auth-wrapper { display: flex; align-items: center; justify-content: center; min-height: 88vh; padding: 5px; }
-.auth-card { background: linear-gradient(145deg, #111827, #0b0f19); border: 1.5px solid rgba(245, 158, 11, 0.35); border-radius: 24px; width: 100%; max-width: 380px; padding: 22px 18px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 25px rgba(245,158,11,0.15); position: relative; }
-.auth-brand-logo { font-size: 32px; font-weight: 900; background: linear-gradient(135deg, #facc15, #f59e0b, #d97706); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 2px; letter-spacing: 1px; font-style: italic; text-shadow: 0 2px 10px rgba(245,158,11,0.3); }
-.auth-logo { font-size: 19px; font-weight: 800; color: #f8fafc; margin-bottom: 4px; }
-.auth-subtitle { font-size: 12px; color: #94a3b8; font-weight: 600; margin-bottom: 18px; }
-.auth-subtitle span { color: #facc15; font-weight: 700; cursor: pointer; }
-
-.auth-input-box { width: 100%; background: #0f172a; border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 11px 14px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: white; text-align: left; }
-.auth-input-box input { background: transparent; border: none; outline: none; color: white; width: 100%; font-size: 13px; font-family: 'Plus Jakarta Sans', sans-serif; }
-.auth-input-box input::placeholder { color: #64748b; }
-
-.auth-btn { background: linear-gradient(135deg, #facc15, #f59e0b, #d97706); color: #0f172a; border: none; padding: 13px; width: 100%; border-radius: 14px; font-size: 15px; font-weight: 800; cursor: pointer; box-shadow: 0 6px 20px rgba(245,158,11,0.35); margin-top: 6px; transition: transform 0.2s; }
+/* লগইন ও নিবন্ধন পেজ ডিজাইন */
+.auth-wrapper { display: flex; align-items: center; justify-content: center; min-height: 85vh; padding: 10px; }
+.auth-card { background: linear-gradient(145deg, #063822, #021c10); border: 2px solid rgba(16, 185, 129, 0.4); border-radius: 24px; width: 100%; max-width: 380px; padding: 24px 20px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
+.auth-logo { font-size: 24px; font-weight: 800; color: #f8fafc; margin-bottom: 4px; }
+.auth-subtitle { font-size: 13px; color: #34d399; font-weight: 700; margin-bottom: 20px; }
+.auth-input-box { width: 100%; background: #0f172a; border: 1px solid rgba(255,255,255,0.15); border-radius: 14px; padding: 12px 14px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: white; }
+.auth-input-box input { background: transparent; border: none; outline: none; color: white; width: 100%; font-size: 14px; font-family: 'Plus Jakarta Sans', sans-serif; }
+.auth-input-box input::placeholder { color: #94a3b8; }
+.auth-btn { background: linear-gradient(135deg, #f59e0b, #d97706); color: #0f172a; border: none; padding: 13px; width: 100%; border-radius: 14px; font-size: 15px; font-weight: 800; cursor: pointer; box-shadow: 0 6px 20px rgba(245,158,11,0.3); margin-top: 10px; transition: transform 0.2s; }
 .auth-btn:active { transform: scale(0.98); }
-
-/* ৪টি শর্টকাট গোল আইকন নেভিগেশন (Bk666 স্টাইল) */
-.auth-quick-nav { display: flex; justify-content: space-around; margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.08); }
-.auth-quick-item { text-align: center; cursor: pointer; flex: 1; }
-.auth-quick-icon { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; margin: 0 auto 4px auto; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
-.auth-quick-label { font-size: 10px; color: #cbd5e1; font-weight: 700; }
 
 .live-date-banner { background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(239, 68, 68, 0.15)); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 14px; padding: 10px 15px; margin-bottom: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); position: relative; overflow: hidden; backdrop-filter: blur(10px); }
 .live-date-title { font-size: 11px; font-weight: 700; color: #34d399; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; display: flex; align-items: center; justify-content: center; gap: 6px; }
@@ -260,105 +250,54 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 /* চ্যাট মেসেজ টাইম ও মিডিয়া স্টাইল */
 .chat-msg-time { font-size: 9px; color: #94a3b8; margin-top: 4px; text-align: right; font-weight: 600; }
 .chat-media-preview { max-width: 100%; max-height: 180px; border-radius: 10px; margin-bottom: 6px; object-fit: cover; display: block; }
-
-/* ইনট্রো স্প্ল্যাশ অ্যাডস মডাল ডিজাইন */
-.splash-modal-box { background: linear-gradient(145deg, #091e14, #040d09); border: 2px solid #10b981; border-radius: 22px; width: 100%; max-width: 350px; padding: 20px 16px; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.9), 0 0 25px rgba(16,185,129,0.3); color: #f8fafc; position: relative; max-height: 90vh; overflow-y: auto; }
-.splash-skip-btn { position: absolute; top: 12px; right: 14px; background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 800; cursor: pointer; }
-.splash-skip-btn:active { transform: scale(0.95); }
 </style>
 </head>
 <body>
 <div class="top-app-title" onclick="handleSecretAdminTrigger()">💰 「দারাজ প্লে ইনকাম সেন্টার」 💰</div>
 
-{/* প্রবেশ করার সাথে সাথে পপ-আপ অ্যাডস মডাল */}
-<div id="intro-splash-modal" class="custom-modal-overlay active">
-    <div class="splash-modal-box">
-        <button class="splash-skip-btn" onclick="closeSplashModal()">স্কিপ করুন ⏭️</button>
-        <div id="splash-slide-content">
-            {/* স্লাইড ১ */}
-            <div class="splash-slide active">
-                <div style="font-size: 32px; margin-bottom: 6px;">🎉</div>
-                <div style="font-size: 18px; font-weight: 800; color: #34d399; margin-bottom: 6px;">দারাজ প্লে ইনকাম সেন্টারে স্বাগতম!</div>
-                <p style="font-size: 12px; color: #cbd5e1; line-height: 1.5; margin-bottom: 14px;">
-                    এখানে আপনাকে কোনো ইনভেস্টমেন্ট করতে হবে না! একদম <b>ফ্রিতে</b> কাজ করে প্রতিদিন হাজার হাজার টাকা ইনকাম করার সুবর্ণ সুযোগ।
-                </p>
-                <div style="background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); border-radius: 12px; padding: 10px; margin-bottom: 14px; text-align: left; font-size: 12px; font-weight: 700; color: #34d399;">
-                    ✨ সুবিধা সমুহ:<br>
-                    • প্রতি ভিডিও দেখায় ৳২০ করে আয়<br>
-                    • কাউকে কল বা রেফার করা বাধ্যতামূলক নয়<br>
-                    • প্রতিদিনের পেমেন্ট প্রতিদিন বিকাশ ও নগদে নিন!
-                </div>
-            </div>
-        </div>
-        <button class="btn-action btn-success" style="padding: 11px; border-radius: 12px; font-size: 13px;" onclick="nextSplashSlide()">পরবর্তী দেখুন ➡️</button>
-    </div>
-</div>
-
-<!-- লগইন পেজ (Bk666 প্রিমিয়াম স্টাইল) -->
-<div id="page-login" class="page">
+<!-- লগইন পেজ -->
+<div id="page-login" class="page active">
     <div class="auth-wrapper">
         <div class="auth-card">
-            <div class="auth-brand-logo">Daraz Play</div>
             <div class="auth-logo">লগইন</div>
-            <div class="auth-subtitle">এখনো কোনো অ্যাকাউন্ট নেই? <span onclick="showRegisterPage()">সাইন আপ করুন</span></div>
+            <div class="auth-subtitle">এখনো কোনো অ্যাকাউন্ট নেই? <span onclick="showRegisterPage()">নিবন্ধন</span></div>
             
             <div class="auth-input-box">
                 <span>📞</span>
-                <input type="text" id="login-phone" placeholder="ফোন নাম্বার দিন">
+                <input type="text" id="login-phone" placeholder="ফোন নাম্বার">
             </div>
             <div class="auth-input-box">
                 <span>🔒</span>
-                <input type="password" id="login-password" placeholder="পাসওয়ার্ড প্রবেশ করুন">
+                <input type="password" id="login-password" placeholder="পাসওয়ার্ড">
             </div>
             
             <button class="auth-btn" onclick="handleLogin()">লগইন</button>
             
-            <div style="font-size: 11px; color: #94a3b8; margin-top: 12px; font-weight: 600; text-align: center;">
+            <div style="font-size: 12px; color: #cbd5e1; margin-top: 14px; font-weight: 600; text-align: center;">
                 পাসওয়ার্ড ভুলে গেছেন? <span onclick="openLiveChatFromLogin()" style="color: #38bdf8; font-weight: 700; text-decoration: underline; cursor: pointer;">লাইভ চ্যাটে যোগাযোগ করুন</span>
-            </div>
-
-            <!-- ৪টি শর্টকাট গোল আইকন নেভিগেশন -->
-            <div class="auth-quick-nav">
-                <div class="auth-quick-item" onclick="showLoginPage()">
-                    <div class="auth-quick-icon" style="background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3);">🏠</div>
-                    <div class="auth-quick-label">হোম</div>
-                </div>
-                <div class="auth-quick-item" onclick="showRegisterPage()">
-                    <div class="auth-quick-icon" style="background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3);">👤</div>
-                    <div class="auth-quick-label">নিবন্ধন</div>
-                </div>
-                <div class="auth-quick-item" onclick="openLiveChatFromLogin()">
-                    <div class="auth-quick-icon" style="background: rgba(56,189,248,0.15); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3);">❓</div>
-                    <div class="auth-quick-label">রিসেট করুন</div>
-                </div>
-                <div class="auth-quick-item" onclick="openLiveChatFromLogin()">
-                    <div class="auth-quick-icon" style="background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3);">💬</div>
-                    <div class="auth-quick-label">পরিষেবাগুলি</div>
-                </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- নিবন্ধন পেজ (Bk666 প্রিমিয়াম স্টাইল) -->
+<!-- নিবন্ধন পেজ -->
 <div id="page-register" class="page">
     <div class="auth-wrapper">
         <div class="auth-card">
-            <div class="auth-brand-logo">Daraz Play</div>
             <div class="auth-logo">নিবন্ধন</div>
-            <div class="auth-subtitle">ইতিমধ্যেই একটি অ্যাকাউন্ট আছে? <span onclick="showLoginPage()">লগইন করুন</span></div>
+            <div class="auth-subtitle">ইতিমধ্যেই একটি অ্যাকাউন্ট আছে? <span onclick="showLoginPage()">লগইন</span></div>
             
             <div class="auth-input-box">
                 <span>👤</span>
-                <input type="text" id="reg-name" placeholder="আপনার পূর্ণ নাম দিন">
+                <input type="text" id="reg-name" placeholder="আপনার পূর্ণ নাম">
             </div>
             <div class="auth-input-box">
                 <span>📞</span>
-                <input type="text" id="reg-phone" placeholder="ফোন নাম্বার দিন">
+                <input type="text" id="reg-phone" placeholder="ফোন নাম্বার">
             </div>
             <div class="auth-input-box">
                 <span>🔒</span>
-                <input type="password" id="reg-password" placeholder="পাসওয়ার্ড তৈরি করুন">
+                <input type="password" id="reg-password" placeholder="পাসওয়ার্ড">
             </div>
             
             <div style="background: rgba(15,23,42,0.6); border: 1px dashed rgba(16,185,129,0.4); border-radius: 12px; padding: 10px; margin-bottom: 12px; text-align: left;">
@@ -367,26 +306,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             </div>
 
             <button class="auth-btn" onclick="handleRegister()">নিবন্ধন</button>
-
-            <!-- ৪টি শর্টকাট গোল আইকন নেভিগেশন -->
-            <div class="auth-quick-nav">
-                <div class="auth-quick-item" onclick="showLoginPage()">
-                    <div class="auth-quick-icon" style="background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3);">🏠</div>
-                    <div class="auth-quick-label">হোম</div>
-                </div>
-                <div class="auth-quick-item" onclick="showLoginPage()">
-                    <div class="auth-quick-icon" style="background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3);">🔑</div>
-                    <div class="auth-quick-label">লগইন</div>
-                </div>
-                <div class="auth-quick-item" onclick="openLiveChatFromLogin()">
-                    <div class="auth-quick-icon" style="background: rgba(56,189,248,0.15); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3);">❓</div>
-                    <div class="auth-quick-label">রিসেট করুন</div>
-                </div>
-                <div class="auth-quick-item" onclick="openLiveChatFromLogin()">
-                    <div class="auth-quick-icon" style="background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3);">💬</div>
-                    <div class="auth-quick-label">পরিষেবাগুলি</div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -797,7 +716,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <button class="btn-action btn-success" style="margin-top: 10px; padding: 12px; border-radius: 12px; font-size: 14px;" onclick="processWithdraw()">🚀 পেমেন্ট অনুরোধ পাঠান</button>
     </div>
 
-    {/* পেমেন্ট রিভিউ বাটন */}
+    <!-- পেমেন্ট রিভিউ বাটন -->
     <a href="#" class="wallet-menu-card" onclick="openPaymentReviewModal()">
         <div class="wallet-menu-left">
             <div class="wallet-menu-icon" style="background: rgba(56,189,248,0.1); border-color: rgba(56,189,248,0.2); color: #38bdf8;">💳</div>
@@ -1012,45 +931,6 @@ let userCurrentCallUrl = null;
 
 let titleTapCount = 0;
 let titleTapTimer = null;
-
-let splashSlideIndex = 0;
-const splashSlides = [
-    {
-        icon: "🎉",
-        title: "দারাজ প্লে ইনকাম সেন্টারে স্বাগতম!",
-        desc: "এখানে আপনাকে কোনো ইনভেস্টমেন্ট করতে হবে না! একদম <b>ফ্রিতে</b> কাজ করে প্রতিদিন হাজার হাজার টাকা ইনকাম করার সুবর্ণ সুযোগ।",
-        box: "✨ সুবিধা সমুহ:<br>• প্রতি ভিডিও দেখায় ৳২০ করে আয়<br>• কাউকে কল বা রেফার করা বাধ্যতামূলক নয়<br>• প্রতিদিনের পেমেন্ট প্রতিদিন বিকাশ ও নগদে নিন!"
-    },
-    {
-        icon: "💡",
-        title: "কীভাবে কাজ করবেন এবং সাইন আপ?",
-        desc: "১. প্রথমে আপনার নাম, ফোন নম্বর, পাসওয়ার্ড এবং সেলফি দিয়ে <b>নিবন্ধন</b> করুন।<br>২. 'কাজ' অপশনে গিয়ে প্রতিদিন ১০০টি পর্যন্ত ভিডিও দেখে প্রতিটিতে ২০ কয়েন করে ইনকাম করুন।",
-        box: "🚀 পেমেন্ট ও উইথড্র নিয়ম:<br>• ন্যূনতম ১০০০ কয়েন হলে উইথড্র করতে পারবেন।<br>• কোনো সমস্যা হলে লাইভ চ্যাটে যোগাযোগ করুন।"
-    }
-];
-
-function nextSplashSlide() {
-    splashSlideIndex++;
-    const contentEl = document.getElementById('splash-slide-content');
-    if (splashSlideIndex < splashSlides.length) {
-        let slide = splashSlides[splashSlideIndex];
-        contentEl.innerHTML = `
-            <div style="font-size: 32px; margin-bottom: 6px;">${slide.icon}</div>
-            <div style="font-size: 18px; font-weight: 800; color: #34d399; margin-bottom: 6px;">${slide.title}</div>
-            <p style="font-size: 12px; color: #cbd5e1; line-height: 1.5; margin-bottom: 14px;">${slide.desc}</p>
-            <div style="background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); border-radius: 12px; padding: 10px; margin-bottom: 14px; text-align: left; font-size: 12px; font-weight: 700; color: #34d399;">${slide.box}</div>
-        `;
-        if (splashSlideIndex === splashSlides.length - 1) {
-            document.querySelector('#intro-splash-modal .btn-success').innerText = "শুরু করুন 🚀";
-        }
-    } else {
-        closeSplashModal();
-    }
-}
-
-function closeSplashModal() {
-    document.getElementById('intro-splash-modal').classList.remove('active');
-}
 
 function handleSecretAdminTrigger() {
     titleTapCount++;
@@ -1906,6 +1786,7 @@ function listenToLiveChatMessages(phone) {
 
     if (chatUnsubscribe) { chatUnsubscribe(); }
 
+    // ইউজারের জন্য এডমিনের কল রিয়েল-টাইম ট্র্যাক করা
     db.collection('chats').doc(phone).onSnapshot((docSnap) => {
         if (docSnap.exists) {
             const chatData = docSnap.data();
@@ -2126,6 +2007,7 @@ async function adminStartAudioCall() {
     let callRoomId = "daraz_support_call_" + adminCurrentChatPhone;
     let callUrl = "https://meet.jit.si/" + callRoomId + "#config.disableDeepLinking=true&config.startWithAudioMuted=false&config.startWithVideoMuted=true";
     
+    // ফায়ারবেসে একটিভ কল স্ট্যাটাস সেট করা যাতে ইউজার সাথে সাথে কল দেখতে পায়
     await db.collection('chats').doc(adminCurrentChatPhone).set({
         activeCall: {
             type: 'audio',
@@ -2134,6 +2016,7 @@ async function adminStartAudioCall() {
         }
     }, { merge: true });
 
+    // এডমিনের ব্রাউজারে সাথে সাথে কল ওপেন হবে
     window.open(callUrl, '_blank');
     alert("✅ অডিও কল শুরু হয়েছে এবং ইউজারের কাছে কল রিং হচ্ছে!");
 }
@@ -2143,6 +2026,7 @@ async function adminStartVideoCall() {
     let callRoomId = "daraz_support_call_" + adminCurrentChatPhone;
     let callUrl = "https://meet.jit.si/" + callRoomId + "#config.disableDeepLinking=true&config.startWithAudioMuted=false&config.startWithVideoMuted=false";
     
+    // ফায়ারবেসে একটিভ ভিডিও কল স্ট্যাটাস সেট করা
     await db.collection('chats').doc(adminCurrentChatPhone).set({
         activeCall: {
             type: 'video',
@@ -2151,6 +2035,7 @@ async function adminStartVideoCall() {
         }
     }, { merge: true });
 
+    // এডমিনের ব্রাউজারে সাথে সাথে ভিডিও কল ওপেন হবে
     window.open(callUrl, '_blank');
     alert("✅ ভিডিও কল শুরু হয়েছে এবং ইউজারের কাছে কল রিং হচ্ছে!");
 }
@@ -2213,4 +2098,4 @@ function setWithdrawAmount(amt) { document.getElementById('withdraw-amount').val
 function toggleWithdrawForm() { document.getElementById('withdraw-form-container').classList.toggle('active'); }
 </script>
 </body>
-</html>
+    </html>
