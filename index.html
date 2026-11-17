@@ -2,7 +2,7 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>💰 「দারাজ প্লে ইনকাম সেন্টার」 💰</title>
 <script>
     window.Telegram = window.Telegram || {};
@@ -24,81 +24,85 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; }
-body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin: 0; padding: 10px; padding-bottom: 80px; color: #f8fafc; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin: 0; padding: 10px; padding-bottom: 80px; color: #f8fafc; overflow-x: hidden; }
 .top-app-title { font-size: 20px; font-weight: 800; text-align: center; color: #f8fafc; margin: 10px 0; background: linear-gradient(135deg, #ef4444, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 0.5px; cursor: pointer; user-select: none; }
 
 .page { display: none; animation: fadeIn 0.3s ease; }
 .page.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-/* প্রিমিয়াম লগইন ও নিবন্ধন পেজ ডিজাইন */
+/* প্রিমিয়াম ও আকর্ষণীয় লগইন/সাইন-আপ ডিজাইন */
 .auth-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 82vh; padding: 10px; }
 .auth-card { 
-    background: linear-gradient(145deg, rgba(16, 185, 129, 0.14), rgba(15, 23, 42, 0.96)); 
-    backdrop-filter: blur(18px);
-    border: 1.5px solid rgba(16, 185, 129, 0.45); 
-    border-radius: 26px; 
+    background: linear-gradient(145deg, rgba(16, 185, 129, 0.16), rgba(15, 23, 42, 0.98)); 
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(16, 185, 129, 0.5); 
+    border-radius: 28px; 
     width: 100%; 
     max-width: 390px; 
-    padding: 26px 22px; 
+    padding: 28px 22px; 
     text-align: center; 
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 25px rgba(16, 185, 129, 0.15); 
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(16, 185, 129, 0.2); 
     position: relative;
     overflow: hidden;
 }
 .auth-card::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; height: 4px;
+    top: 0; left: 0; right: 0; height: 4.5px;
     background: linear-gradient(90deg, #10b981, #38bdf8, #f59e0b, #ef4444);
 }
 .auth-badge {
     display: inline-block;
-    background: rgba(16, 185, 129, 0.15);
-    border: 1px solid rgba(16, 185, 129, 0.35);
+    background: rgba(16, 185, 129, 0.18);
+    border: 1px solid rgba(16, 185, 129, 0.4);
     color: #34d399;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 800;
-    padding: 4px 12px;
+    padding: 5px 14px;
     border-radius: 20px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     letter-spacing: 0.5px;
+    box-shadow: 0 0 10px rgba(16,185,129,0.15);
 }
-.auth-logo { font-size: 26px; font-weight: 800; color: #f8fafc; margin-bottom: 4px; letter-spacing: 0.5px; }
+.auth-logo { font-size: 28px; font-weight: 800; color: #f8fafc; margin-bottom: 4px; letter-spacing: 0.5px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
 .auth-subtitle { font-size: 13px; color: #94a3b8; font-weight: 600; margin-bottom: 22px; }
 .auth-subtitle span { color: #34d399; font-weight: 800; text-decoration: underline; cursor: pointer; }
+
 .auth-input-box { 
     width: 100%; 
-    background: rgba(15, 23, 42, 0.85); 
+    background: rgba(15, 23, 42, 0.9); 
     border: 1.5px solid rgba(255, 255, 255, 0.12); 
-    border-radius: 15px; 
-    padding: 13px 15px; 
-    margin-bottom: 13px; 
+    border-radius: 16px; 
+    padding: 12px 15px; 
+    margin-bottom: 14px; 
     display: flex; 
     align-items: center; 
     gap: 10px; 
     color: white; 
-    transition: all 0.25s ease;
+    transition: all 0.3s ease;
 }
 .auth-input-box:focus-within {
     border-color: #10b981;
-    box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+    background: rgba(15, 23, 42, 0.98);
 }
 .auth-input-box input { background: transparent; border: none; outline: none; color: white; width: 100%; font-size: 14px; font-family: 'Plus Jakarta Sans', sans-serif; }
 .auth-input-box input::placeholder { color: #64748b; }
+
 .auth-btn { 
     background: linear-gradient(135deg, #10b981, #059669); 
     color: #ffffff; 
     border: none; 
-    padding: 14px; 
+    padding: 15px; 
     width: 100%; 
-    border-radius: 15px; 
+    border-radius: 16px; 
     font-size: 15px; 
     font-weight: 800; 
     cursor: pointer; 
-    box-shadow: 0 8px 22px rgba(16, 185, 129, 0.35); 
-    margin-top: 8px; 
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4); 
+    margin-top: 6px; 
     transition: transform 0.2s, box-shadow 0.2s; 
 }
 .auth-btn:active { transform: scale(0.98); }
@@ -254,18 +258,14 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .custom-modal-desc { font-size: 13px; color: #cbd5e1; line-height: 1.5; margin-bottom: 14px; text-align: left; background: rgba(15, 23, 42, 0.6); padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); }
 .custom-modal-btn-primary { background: transparent; color: #10b981; border: none; font-size: 13px; font-weight: 700; width: 100%; padding: 6px; cursor: pointer; margin-bottom: 4px; }
 .custom-modal-btn-cancel { background: transparent; color: #94a3b8; border: none; font-size: 13px; font-weight: 700; width: 100%; padding: 6px; cursor: pointer; margin-bottom: 4px; }
-.custom-modal-btn-buy { background: transparent; color: #10b981; border: none; font-size: 13px; font-weight: 700; width: 100%; padding: 6px; cursor: pointer; margin-bottom: 4px; }
-.custom-modal-btn-chat { background: transparent; color: #f59e0b; border: none; font-size: 13px; font-weight: 700; width: 100%; padding: 6px; cursor: pointer; }
 
 .activation-modal-box { background: linear-gradient(145deg, #450a0a, #1e293b); border: 1.5px solid rgba(16,185,129,0.4); border-radius: 22px; width: 100%; max-width: 350px; padding: 18px 16px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.6); color: #f8fafc; position: relative; max-height: 90vh; overflow-y: auto; }
 .activation-badge { display: inline-block; background: linear-gradient(135deg, #ef4444, #10b981); color: white; padding: 3px 10px; border-radius: 14px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; box-shadow: 0 4px 12px rgba(16,185,129,0.3); }
 .activation-benefits { background: rgba(15, 23, 42, 0.65); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 10px; margin: 10px 0; text-align: left; }
 .activation-benefit-item { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; margin-bottom: 6px; color: #e2e8f0; }
-.activation-benefit-item:last-child { margin-bottom: 0; }
 .activation-btn-group { display: flex; gap: 8px; margin-top: 10px; }
 .btn-act-contact { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 10px; border-radius: 10px; flex: 1; font-weight: 800; font-size: 13px; cursor: pointer; box-shadow: 0 4px 12px rgba(16,185,129,0.3); transition: transform 0.2s; }
 .btn-act-cancel { background: rgba(255,255,255,0.08); color: #94a3b8; border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 10px; width: 80px; font-weight: 700; font-size: 13px; cursor: pointer; }
-.btn-act-contact:active, .btn-act-cancel:active { transform: scale(0.98); }
 
 /* প্রিমিয়াম পেমেন্ট রিভিউ মডাল ডিজাইন */
 .payment-review-modal-box { background: linear-gradient(145deg, #121a2c, #090d16); border: 2px solid rgba(56, 189, 248, 0.5); border-radius: 26px; width: 100%; max-width: 360px; padding: 22px 18px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.85), 0 0 30px rgba(56,189,248,0.25); color: #f8fafc; position: relative; }
@@ -281,7 +281,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 
 /* এডমিন চ্যাট কার্ড ও অনলাইন স্ট্যাটাস স্টাইল */
 .admin-user-card { background: #1e293b; border: 1.5px solid rgba(56,189,248,0.25); border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s; }
-.admin-user-card:active { transform: scale(0.98); background: #26354d; }
 .unread-dot { background: #ef4444; color: white; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 10px; }
 .online-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 10px; }
 .online-badge.is-online { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
@@ -289,7 +288,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .status-dot-green { width: 7px; height: 7px; background: #10b981; border-radius: 50%; display: inline-block; box-shadow: 0 0 6px #10b981; }
 .status-dot-gray { width: 7px; height: 7px; background: #64748b; border-radius: 50%; display: inline-block; }
 
-/* চ্যাট মেসেজ টাইম ও মিডিয়া স্টাইল */
+/* চ্যাট মেসেজ টাইম ও মিডিয়া স্টাইল - ফিক্সড লেআউট যাতে কিবোর্ডে বা টাইপিংয়ে না নড়ে */
 .chat-msg-time { font-size: 9px; color: #94a3b8; margin-top: 4px; text-align: right; font-weight: 600; }
 .chat-media-preview { max-width: 100%; max-height: 180px; border-radius: 10px; margin-bottom: 6px; object-fit: cover; display: block; cursor: pointer; border: 1px solid rgba(255,255,255,0.12); }
 
@@ -304,7 +303,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <body>
 <div class="top-app-title" onclick="handleSecretAdminTrigger()">💰 「দারাজ প্লে ইনকাম সেন্টার」 💰</div>
 
-<!-- লগইন পেজ -->
+<!-- প্রিমিয়াম লগইন পেজ -->
 <div id="page-login" class="page active">
     <div class="auth-wrapper">
         <div class="auth-card">
@@ -319,21 +318,21 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <div class="auth-input-box">
                 <span>🔒</span>
                 <input type="password" id="login-password" placeholder="আপনার পাসওয়ার্ড">
+                <span id="login-eye-icon" onclick="togglePasswordVisibility('login-password', this)" style="cursor:pointer; font-size:16px;">👁️‍🗨️</span>
             </div>
             
             <button class="auth-btn" onclick="handleLogin()">🚀 অ্যাকাউন্টে প্রবেশ করুন</button>
             
             <div style="font-size: 12px; color: #cbd5e1; margin-top: 14px; font-weight: 600; text-align: center;">
-                পাসওয়ার্ড ভুলে গেছেন? <span onclick="openLiveChatFromLogin()" style="color: #38bdf8; font-weight: 700; text-decoration: underline; cursor: pointer;">কাস্টমার সাপোর্টে যোগাযোগ করুন</span>
+                পাসওয়ার্ড ভুলে গেছেন? <span onclick="openGuestLiveChat()" style="color: #38bdf8; font-weight: 700; text-decoration: underline; cursor: pointer;">কাস্টমার সাপোর্টে যোগাযোগ করুন</span>
             </div>
         </div>
 
-        <!-- নিচের ৪টি কুইক অ্যাকশন বাটন -->
         <div class="auth-quick-grid">
             <a href="https://youtube.com/shorts/7ljXq-ArTNw?si=92ieAqcu9ns5Lj-k" target="_blank" class="auth-quick-btn">
                 <span>📺</span> কাজের ভিডিও দেখুন
             </a>
-            <div onclick="openLiveChat('general')" class="auth-quick-btn">
+            <div onclick="openGuestLiveChat()" class="auth-quick-btn">
                 <span>💬</span> কাস্টমার সাপোর্ট
             </div>
             <a href="https://t.me/KA16269bot" target="_blank" class="auth-quick-btn">
@@ -346,7 +345,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- নিবন্ধন পেজ -->
+<!-- প্রিমিয়াম নিবন্ধন পেজ (পাসওয়ার্ড শো/হাইড ও অভিনন্দন পপআপসহ) -->
 <div id="page-register" class="page">
     <div class="auth-wrapper">
         <div class="auth-card">
@@ -365,6 +364,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <div class="auth-input-box">
                 <span>🔒</span>
                 <input type="password" id="reg-password" placeholder="পাসওয়ার্ড তৈরি করুন">
+                <span id="reg-eye-icon" onclick="togglePasswordVisibility('reg-password', this)" style="cursor:pointer; font-size:16px;">👁️‍🗨️</span>
             </div>
             
             <div style="background: rgba(15,23,42,0.75); border: 1.5px dashed rgba(16,185,129,0.45); border-radius: 14px; padding: 11px; margin-bottom: 12px; text-align: left;">
@@ -375,12 +375,11 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <button class="auth-btn" onclick="handleRegister()">✨ নতুন অ্যাকাউন্ট তৈরি করুন</button>
         </div>
 
-        <!-- নিচের ৪টি কুইক অ্যাকশন বাটন -->
         <div class="auth-quick-grid">
             <a href="https://youtube.com/shorts/7ljXq-ArTNw?si=92ieAqcu9ns5Lj-k" target="_blank" class="auth-quick-btn">
                 <span>📺</span> কাজের ভিডিও দেখুন
             </a>
-            <div onclick="openLiveChat('general')" class="auth-quick-btn">
+            <div onclick="openGuestLiveChat()" class="auth-quick-btn">
                 <span>💬</span> কাস্টমার সাপোর্ট
             </div>
             <a href="https://t.me/KA16269bot" target="_blank" class="auth-quick-btn">
@@ -519,7 +518,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <button class="btn-action" style="background: #475569; padding: 10px; font-size: 13px;" onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])">⬅️ ওয়ালেটে ফিরে যান</button>
 </div>
 
-<!-- ইউজার ইন-অ্যাপ লাইভ চ্যাট পেজ (৩টি আলাদা চ্যাটের জন্য নির্দিষ্ট অপশন ও ছবি/ভিডিও বাটন) -->
+<!-- ইউজার ইন-অ্যাপ লাইভ চ্যাট পেজ (ফিক্সড লেআউট ও মানানসই বক্স) -->
 <div id="page-live-chat" class="page" style="padding: 5px;">
     <div style="background: linear-gradient(135deg, #065f46, #0284c7); border-radius: 20px; padding: 16px 14px; margin-bottom: 10px; text-align: center; box-shadow: 0 8px 25px rgba(16,185,129,0.3); border: 1.5px solid rgba(255,255,255,0.18);">
         <div style="font-size: 24px; font-weight: 900; color: #ffffff; letter-spacing: 1px; text-shadow: 0 2px 8px rgba(0,0,0,0.4);">
@@ -531,13 +530,13 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <div style="font-size: 11px; color: #e0f2fe; font-weight: 600; margin-top: 3px;" id="chat-user-phone-label">ইউজার সাপোর্ট লাইন</div>
     </div>
 
-    <!-- এডমিন কল দিলে ইউজারের এখানে রিয়েল-টাইম কল রিসিভ করার ব্যানার দেখাবে -->
     <div id="user-incoming-call-box" style="display: none; background: linear-gradient(135deg, #0284c7, #10b981); border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; text-align: center; box-shadow: 0 4px 15px rgba(2,132,199,0.4);">
         <div style="font-size: 14px; font-weight: 800; color: white; margin-bottom: 8px;" id="user-call-alert-text">📞 এডমিন আপনাকে লাইভ কল দিয়েছেন!</div>
         <button id="user-join-call-btn" onclick="joinIncomingCall()" style="background: white; color: #0f172a; border: none; padding: 8px 18px; border-radius: 10px; font-weight: 800; font-size: 13px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">কল রিসিভ করুন</button>
     </div>
 
-    <div id="chat-messages-container" style="background: #121824; border: 1.5px solid rgba(16,185,129,0.35); border-radius: 18px; padding: 14px; height: 360px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; box-shadow: inset 0 4px 15px rgba(0,0,0,0.6);">
+    <!-- চ্যাট কনটেইনার ফিক্সড হাইট ও ফ্লেক্স স্ট্রাকচার -->
+    <div id="chat-messages-container" style="background: #121824; border: 1.5px solid rgba(16,185,129,0.35); border-radius: 18px; padding: 14px; height: 320px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; box-shadow: inset 0 4px 15px rgba(0,0,0,0.6);">
     </div>
 
     <!-- ফাইল সিলেক্ট প্রিভিউ নোটিশ -->
@@ -546,16 +545,16 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <span onclick="clearChatFile()" style="cursor:pointer; color:#ef4444; font-weight:bold;">✖</span>
     </div>
 
-    <!-- দুটি আলাদা বাটন: ছবি আপলোড ও ভিডিও আপলোড -->
-    <div style="display: flex; gap: 8px; margin-bottom: 10px; align-items: center;">
+    <!-- দুটি আলাদা বাটন: ছবি ও ভিডিও -->
+    <div style="display: flex; gap: 6px; margin-bottom: 10px; align-items: center;">
         <input type="file" id="user-chat-image" accept="image/*" style="display:none;" onchange="onUserFileSelected(this, 'image')">
         <input type="file" id="user-chat-video" accept="video/*" style="display:none;" onchange="onUserFileSelected(this, 'video')">
         
-        <button onclick="document.getElementById('user-chat-image').click()" title="ছবি দিন" style="background: #1e293b; border: 1.5px solid rgba(56,189,248,0.3); color: #38bdf8; padding: 10px 12px; border-radius: 14px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 4px;">📸 ছবি</button>
-        <button onclick="document.getElementById('user-chat-video').click()" title="ভিডিও দিন" style="background: #1e293b; border: 1.5px solid rgba(239,68,68,0.3); color: #f87171; padding: 10px 12px; border-radius: 14px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 4px;">🎥 ভিডিও</button>
+        <button onclick="document.getElementById('user-chat-image').click()" style="background: #1e293b; border: 1.5px solid rgba(56,189,248,0.3); color: #38bdf8; padding: 9px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; cursor: pointer; flex-shrink: 0;">📸 ছবি</button>
+        <button onclick="document.getElementById('user-chat-video').click()" style="background: #1e293b; border: 1.5px solid rgba(239,68,68,0.3); color: #f87171; padding: 9px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; cursor: pointer; flex-shrink: 0;">🎥 ভিডিও</button>
 
-        <input type="text" id="chat-input-message" placeholder="আপনার মেসেজ লিখুন..." style="flex: 1; background: #1e293b; border: 1px solid rgba(255,255,255,0.12); padding: 12px 14px; border-radius: 14px; color: white; font-size: 13px; outline: none;">
-        <button onclick="sendLiveChatMessage()" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 12px 18px; font-weight: 800; border-radius: 14px; cursor: pointer; box-shadow: 0 4px 15px rgba(16,185,129,0.3);">পাঠান</button>
+        <input type="text" id="chat-input-message" placeholder="আপনার মেসেজ লিখুন..." style="flex: 1; min-width: 0; background: #1e293b; border: 1px solid rgba(255,255,255,0.12); padding: 11px 12px; border-radius: 12px; color: white; font-size: 13px; outline: none;">
+        <button onclick="sendLiveChatMessage()" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 11px 16px; font-weight: 800; border-radius: 12px; cursor: pointer; flex-shrink: 0; box-shadow: 0 4px 15px rgba(16,185,129,0.3);">পাঠান</button>
     </div>
 
     <button class="btn-action" style="background: #475569; padding: 11px; border-radius: 14px; font-size: 13px;" onclick="goBackFromChat()">⬅️ ফিরে যান</button>
@@ -590,10 +589,9 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             </div>
         </div>
 
-        <div id="admin-messages-container" style="background: #121824; border: 1.5px solid rgba(56,189,248,0.3); border-radius: 18px; padding: 14px; height: 330px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px;">
+        <div id="admin-messages-container" style="background: #121824; border: 1.5px solid rgba(56,189,248,0.3); border-radius: 18px; padding: 14px; height: 300px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px;">
         </div>
 
-        <!-- এডমিন ফাইল প্রিভিউ নোটিশ -->
         <div id="admin-file-preview-box" style="display: none; background: rgba(2,132,199,0.15); border: 1px dashed #38bdf8; padding: 8px 12px; border-radius: 10px; margin-bottom: 8px; font-size: 12px; color: #38bdf8; justify-content: space-between; align-items: center;">
             <span id="admin-file-name">ফাইল যুক্ত করা হয়েছে</span>
             <span onclick="clearAdminFile()" style="cursor:pointer; color:#ef4444; font-weight:bold;">✖</span>
@@ -661,7 +659,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- রেফার পেজ -->
+<!-- রেফার পেজ (নিচে থেকে লাইভ চ্যাট বাটন সম্পূর্ণ সরানো হয়েছে) -->
 <div id="page-refer" class="page">
     <div class="refer-card">
         <div class="refer-badge">💎 রেফার অ্যান্ড আর্ন প্রোগ্রাম</div>
@@ -678,12 +676,10 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <span id="refer-link" style="font-size: 11px; color: #34d399; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 200px;">লিংক তৈরি হচ্ছে...</span>
             <span onclick="copyRefer()" style="cursor:pointer; font-size: 16px; padding-left: 4px;" title="কপি করুন">📋</span>
         </div>
-        <div style="display: flex; justify-content: space-between; gap: 8px; margin-bottom: 8px;">
+        <div style="display: flex; justify-content: space-between; gap: 8px; margin-bottom: 4px;">
             <button class="btn-refer-action" onclick="copyRefer()">📋 লিংক কপি করুন</button>
             <button class="btn-refer-action" style="background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 4px 12px rgba(239,68,68,0.3);" onclick="shareRefer()">🚀 শেয়ার করুন</button>
         </div>
-        <!-- আলাদা রেফার সাপোর্ট চ্যাট বাটন -->
-        <button class="btn-action" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: #0f172a; font-weight: 800; padding: 11px; border-radius: 12px; font-size: 13px; margin-top: 2px;" onclick="openBuyReferIntroModal()">💬 রেফার কিনতে লাইভ চ্যাট করুন</button>
     </div>
     
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 0 2px;">
@@ -877,7 +873,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </a>
 </div>
 
-<!-- মিডিয়া লাইটবক্স ও জুম মডাল -->
+<!-- মিডিয়া লাইটবক্স ও জুম -->
 <div id="media-lightbox" class="media-lightbox-overlay">
     <div id="media-lightbox-container" style="display:flex; align-items:center; justify-content:center; width:100%; overflow:auto;"></div>
     <div class="media-lightbox-controls">
@@ -918,37 +914,24 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- মডাল ১: ১১ রেফার চেক -->
+<!-- মডাল ১: ১১ রেফার চেক (উইথড্র করার সময় ট্রিগার হবে) -->
 <div id="refer-modal" class="custom-modal-overlay">
-    <div class="custom-modal-box">
-        <div class="custom-modal-title"><span>⚠️</span> রেফার পূরণ হয়নি!</div>
-        <div class="custom-modal-desc">
-            রিডিম বা পেমেন্ট নিতে হলে অন্তত ১১টি রেফার প্রয়োজন!<br><br>
-            আপনার বর্তমান রেফার: <span id="modal-current-ref" style="font-weight:700; color:#34d399;">0</span>টি<br>
-            ঘাটতি রেফার: <span id="modal-deficit-ref" style="font-weight:700; color:#ef4444;">0</span>টি<br><br>
-            দ্রুত রেফার কিনতে বা পূরণ করতে নিচের <b>"রেফার কিনতে লাইভ চ্যাট করুন"</b> বাটনে ক্লিক করুন।
-        </div>
-        <button class="btn-action btn-success" style="padding: 10px; font-size: 13px; margin-bottom: 6px;" onclick="openBuyReferIntroModal()">💬 রেফার কিনতে লাইভ চ্যাট করুন</button>
-        <button class="custom-modal-btn-primary" onclick="goToReferPage()">👥 রেফার পেজে যান</button>
-        <button class="custom-modal-btn-cancel" onclick="closeReferModal()">বাতিল</button>
-    </div>
-</div>
-
-<!-- মডাল ১.৫: আলাদা রেফার কিনতে লাইভ চ্যাট প্রি-ইন্টারফেস -->
-<div id="buy-refer-intro-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="border: 1.5px solid #10b981; background: linear-gradient(145deg, #063822, #0f172a);">
         <div class="custom-modal-title" style="color: #34d399;">🧑‍💼 রেফারেল সাপোর্ট সেন্টার</div>
         <div class="custom-modal-desc" style="font-size: 12px; line-height: 1.5;">
             💰 <b>「দারাজ প্লে ইনকাম সেন্টার」</b> 💰<br>
             🎉 <b>রেফারেল সাপোর্ট টিমে স্বাগতম!</b><br><br>
+            ⚠️ রিডিম করতে হলে অন্তত **১১টি রেফার** প্রয়োজন!<br>
+            আপনার বর্তমান রেফার: <span id="modal-current-ref" style="font-weight:700; color:#34d399;">0</span>টি<br>
+            ঘাটতি রেফার: <span id="modal-deficit-ref" style="font-weight:700; color:#ef4444;">0</span>টি<br><br>
             ✅ প্রতি সফল রেফারে <b>১১১ টাকা</b> পাবেন।<br>
             ✅ ১১টি সফল রেফারে মোট <b>১,২২১ টাকা</b> আপনার ব্যালেন্সে যোগ হবে।<br>
             ✅ সার্ভিস চার্জ: <b>প্রতি রেফার ১৫ টাকা</b> (১১টি রেফারের জন্য ১৬৫ টাকা)।<br>
             ⏱️ পেমেন্ট নিশ্চিত হওয়ার ৩০ মিনিট থেকে ১ ঘণ্টার মধ্যে রেফার সম্পন্ন হবে।<br><br>
             📌 বিস্তারিত নিয়মাবলী দেখে সরাসরি কথা বলতে নিচের বাটনে ক্লিক করুন।
         </div>
-        <button class="btn-action btn-success" style="padding: 12px; font-size: 13px; border-radius: 12px;" onclick="startBuyReferLiveChat()">💬 রেফার কিনতে লাইভ চ্যাট শুরু করুন</button>
-        <button class="custom-modal-btn-cancel" style="margin-top: 6px;" onclick="closeBuyReferIntroModal()">বাতিল</button>
+        <button class="btn-action btn-success" style="padding: 12px; font-size: 13px; border-radius: 12px;" onclick="startBuyReferLiveChatFromWithdraw()">💬 রেফার কিনতে লাইভ চ্যাট শুরু করুন</button>
+        <button class="custom-modal-btn-cancel" style="margin-top: 6px;" onclick="closeReferModal()">বাতিল</button>
     </div>
 </div>
 
@@ -971,14 +954,13 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <div class="activation-badge">⚠️ ভেরিফিকেশন ও অ্যাক্টিভেশন প্রয়োজন</div>
         <div style="font-size: 17px; font-weight: 800; color: #ef4444; margin-bottom: 6px;">ভিডিও দেখার রুলস-এ সমস্যা পাওয়া গেছে!</div>
         <p style="font-size: 12px; color: #cbd5e1; line-height: 1.5; margin-bottom: 10px; font-weight: 600;">
-            আপনার ভিডিও দেখার কার্যক্রমে সম্পূর্ণ রুলস অনুযায়ী ত্রুটি বা সমস্যা পাওয়া গেছে। অনুগ্রহ করে অ্যাকাউন্টটি অ্যাক্টিভ ও ভেরিফাই করতে নিচের আলাদা লাইভ চ্যাটে যোগাযোগ করে <b>১১১ টাকা</b> দিয়ে অ্যাকাউন্টটি সক্রিয় করে নিন।
+            আপনার ভিডিও দেখার কার্যক্রমে রুলস অনুযায়ী ত্রুটি পাওয়া গেছে। অ্যাকাউন্টটি অ্যাক্টিভ করতে নিচের লাইভ চ্যাটে যোগাযোগ করে <b>১১১ টাকা</b> দিয়ে সক্রিয় করুন।
         </p>
         
         <div class="activation-benefits">
-            <div style="font-size: 11px; font-weight: 700; color: #34d399; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">🌟 অ্যাক্টিভ সদস্যদের বিশেষ সুবিধাসমূহ:</div>
+            <div style="font-size: 11px; font-weight: 700; color: #34d399; margin-bottom: 6px; text-transform: uppercase;">🌟 বিশেষ সুবিধাসমূহ:</div>
             <div class="activation-benefit-item"><span style="font-size: 14px;">⚡</span> <span>দ্রুত ও ঝামেলাহীন উইথড্র সুবিধা</span></div>
             <div class="activation-benefit-item"><span style="font-size: 14px;">🚀</span> <span>এক্সক্লুসিভ প্রিমিয়াম ইনকাম ফিচার</span></div>
-            <div class="activation-benefit-item"><span style="font-size: 14px;">🛡️</span> <span>২৪/৭ ডেডিকেটেড প্রায়োরিটি সাপোর্ট</span></div>
         </div>
 
         <div class="activation-btn-group">
@@ -1000,12 +982,10 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             ✅ নিয়মিত আয়ের সুবিধা<br>
             ✅ সহজ ও দ্রুত টাকা উত্তোলন<br>
             ✅ রেফার বোনাস ও বিশেষ অফার<br>
-            ✅ কাস্টমার সাপোর্ট থেকে দ্রুত সহায়তা<br>
-            ✅ বিভিন্ন প্রমোশন ও ইনসেনটিভ পাওয়ার সুযোগ<br>
             ━━━━━━━━━━━━━━━<br>
             💳 <b>অ্যাকাউন্ট অ্যাক্টিভ করতে ১১১ টাকা পেমেন্ট করতে হবে।</b><br>
             📱 <b>পেমেন্ট মাধ্যম:</b> বিকাশ / নগদ<br>
-            📌 পেমেন্ট করতে আগ্রহী হলে নিচের বাটনে ক্লিক করে প্রয়োজনীয় তথ্য প্রদান করুন।<br><br>
+            📌 পেমেন্ট করতে আগ্রহী হলে নিচের বাটনে ক্লিক করুন।<br><br>
             🌹 ধন্যবাদ।
         </div>
         <button class="btn-action btn-success" style="padding: 12px; font-size: 13px; border-radius: 12px;" onclick="showActivationFormNotice()">✅ বুঝতে পেরেছি / তথ্য ফরম দেখুন</button>
@@ -1013,7 +993,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- মডাল ৩.৮: তথ্য ফরম ও লাইভ চ্যাট শুরু করুন বাটন -->
+<!-- মডাল ৩.৮: তথ্য ফরম ও লাইভ চ্যাট শুরু করুন -->
 <div id="activation-form-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="border: 1.5px solid #10b981; background: #0f172a; max-width: 350px;">
         <div class="custom-modal-title" style="color: #34d399; font-size: 15px;">🎉 দারাজ প্লে কাস্টমার সাপোর্ট টিম</div>
@@ -1033,25 +1013,24 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             ━━━━━━━━━━━━━━━<br>
             📌 <b>গুরুত্বপূর্ণ নির্দেশনা</b><br>
             ⚠️ সকল তথ্য সঠিকভাবে প্রদান করুন।<br>
-            ⚠️ ভুল তথ্য বা ভুয়া স্ক্রিনশট প্রদান করলে আবেদন বাতিল করা হবে।<br>
-            📩 তথ্য জমা দেওয়ার পর আমাদের কাস্টমার সাপোর্ট টিম দ্রুত যাচাই করে আপনার সাথে যোগাযোগ করবে।<br><br>
-            🌹 ধন্যবাদ। <b>দারাজ প্লে ইনকাম সেন্টারের</b> সাথে থাকার জন্য।
+            📩 তথ্য জমা দেওয়ার পর আমাদের কাস্টমার সাপোর্ট টিম যাচাই করবে।<br><br>
+            🌹 ধন্যবাদ।
         </div>
         <button class="btn-action btn-success" style="padding: 12px; font-size: 13px; border-radius: 12px;" onclick="startActivationLiveChat()">💬 লাইভ চ্যাট শুরু করুন</button>
         <button class="custom-modal-btn-cancel" style="margin-top: 6px;" onclick="closeActivationFormModal()">বাতিল</button>
     </div>
 </div>
 
-<!-- মডাল ৪: ৫০০টি স্পেশাল ভিডিও টাস্ক -->
-<div id="special-task-modal" class="custom-modal-overlay">
-    <div class="custom-modal-box">
-        <div class="custom-modal-title"><span>🎯</span> ফাইনাল স্পেশাল টাস্ক!</div>
-        <div class="custom-modal-desc">
-            অভিনন্দন! আপনার অ্যাকাউন্ট সফলভাবে অ্যাক্টিভ হয়েছে। এখন পেমেন্ট উত্তোলন সম্পন্ন করতে আলাদা টাস্ক পেজ থেকে <b>স্পেশাল ৫০০টি ভিডিও</b> দেখে কমপ্লিট করুন。<br><br>
-            বর্তমান দেখা ভিডিও: <span id="modal-special-watched" style="font-weight:700; color:#34d399;">0</span> / 500টি
+<!-- সাইন-আপ সফল অভিনন্দন পপআপ -->
+<div id="register-success-modal" class="custom-modal-overlay">
+    <div class="custom-modal-box" style="border: 2px solid #10b981; background: linear-gradient(145deg, #063822, #0f172a); text-align: center;">
+        <div style="font-size: 32px; margin-bottom: 6px;">🎉</div>
+        <div class="custom-modal-title" style="color: #34d399; justify-content: center;">অভিনন্দন!</div>
+        <div class="custom-modal-desc" style="text-align: center; font-size: 13px; line-height: 1.5; background: transparent; border: none;">
+            আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে! 🚀<br>
+            এখন আপনার ফোন নাম্বার ও পাসওয়ার্ড দিয়ে লগইন করে কাজ শুরু করুন।
         </div>
-        <button class="btn-action btn-success" style="padding: 10px; font-size: 13px;" onclick="goToSpecialTaskPage()">🎥 ৫০০ ভিডিও টাস্ক পেজে যান</button>
-        <button class="custom-modal-btn-cancel" style="margin-top: 6px;" onclick="closeSpecialTaskModal()">বাতিল</button>
+        <button class="btn-action btn-success" style="padding: 12px; border-radius: 12px; font-size: 14px;" onclick="closeRegisterSuccessModal()">লগইন পেজে যান ✅</button>
     </div>
 </div>
 
@@ -1067,9 +1046,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             📌 কোনো ইনভেস্টমেন্ট ছাড়াই নিয়ম মেনে কাজ।<br><br>
             🎥 <b>বিজ্ঞাপন টাস্ক:</b> প্রতি বিজ্ঞাপনে <b>৳২০</b><br>
             📊 <b>দৈনিক সুযোগ:</b> প্রতিদিন সর্বোচ্চ <b>১০০টি বিজ্ঞাপন</b><br>
-            🆓 সম্পূর্ণ ফ্রিতে কাজ করার সুযোগ<br><br>
-            💳 <b>পেমেন্ট মাধ্যম:</b> বিকাশ, নগদ<br>
-            🤝 <b>আমাদের লক্ষ্য:</b> সঠিক সময়ে পেমেন্ট প্রদান করা।
+            💳 <b>পেমেন্ট মাধ্যম:</b> বিকাশ, নগদ
         </div>
         
         <button class="btn-action btn-success" style="padding: 9px; border-radius: 10px; font-size: 13px; margin-top: 0; text-align: center;" onclick="closeWelcomeAlertModal()">বুঝেছি ✅</button>
@@ -1112,7 +1089,7 @@ let rawWithdrawRequests = [];
 let chatUnsubscribe = null;
 let adminChatUnsubscribe = null;
 let adminCurrentChatPhone = null;
-let currentChatContextType = 'general'; // 'general' (কাস্টমার সাপোর্ট), 'buy_refer' (রেফার সাপোর্ট), 'activation' (অ্যাক্টিভেশন সাপোর্ট)
+let currentChatContextType = 'general';
 
 let selectedUserMedia = null;
 let selectedAdminMedia = null;
@@ -1122,13 +1099,23 @@ let currentLightboxZoom = 1;
 let titleTapCount = 0;
 let titleTapTimer = null;
 
-// ইউজারের অনলাইন হার্টবিট আপডেট
+// পাসওয়ার্ড শো/হাইড ফাংশন
+function togglePasswordVisibility(fieldId, iconEl) {
+    const field = document.getElementById(fieldId);
+    if (field.type === 'password') {
+        field.type = 'text';
+        iconEl.innerText = '👁️';
+    } else {
+        field.type = 'password';
+        iconEl.innerText = '👁️‍🗨️';
+    }
+}
+
 function updateUserOnlineHeartbeat() {
     if (currentUserPhone) {
         db.collection('users').doc(currentUserPhone).update({
             last_active_time: Date.now()
         }).catch(() => {});
-        // ৩টি আলাদা সাবলেকশন বা টপ কালেকশনে স্ট্যাটাস ট্র্যাক করার জন্য বর্তমান কন্টেক্সট সহ আপডেট
         db.collection('chats').doc(currentUserPhone + "_" + currentChatContextType).set({
             phone: currentUserPhone,
             context: currentChatContextType,
@@ -1345,14 +1332,14 @@ async function handleRegister() {
         reader.readAsDataURL(photoFile);
         reader.onload = async function () {
             photoUrl = reader.result;
-            await saveUserDataAndLogin(phone, name, password, photoUrl, photoFile);
+            await saveUserDataAndRegister(phone, name, password, photoUrl, photoFile);
         };
     } else {
-        await saveUserDataAndLogin(phone, name, password, photoUrl, null);
+        await saveUserDataAndRegister(phone, name, password, photoUrl, null);
     }
 }
 
-async function saveUserDataAndLogin(phone, name, password, photoUrl, photoFile) {
+async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFile) {
     try {
         const userSerial = await getNextSerial();
         const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp();
@@ -1396,14 +1383,17 @@ async function saveUserDataAndLogin(phone, name, password, photoUrl, photoFile) 
 
         await notifyAdminNewUser(userSerial, name, phone, password, joinDateFormatted, photoFile);
 
-        localStorage.setItem('logged_user_phone', phone);
-        currentUserPhone = phone;
-        alert("নিবন্ধন সফল হয়েছে!");
-        initDashboard(phone);
+        // সফল হলে অভিনন্দন পপ-আপ দেখানো
+        document.getElementById('register-success-modal').classList.add('active');
     } catch (err) {
         console.error(err);
         alert("রেজিস্ট্রেশন করার সময় সমস্যা হয়েছে। দয়া করে আবার চেষ্টা করুন।");
     }
+}
+
+function closeRegisterSuccessModal() {
+    document.getElementById('register-success-modal').classList.remove('active');
+    showLoginPage();
 }
 
 async function handleLogin() {
@@ -1847,6 +1837,7 @@ async function processWithdraw() {
     if (amount < 1000) { alert("ন্যূনতম ১০০০ কয়েন প্রয়োজন!"); return; }
     if (amount > userBalance) { alert("পর্যাপ্ত ব্যালেন্স নেই!"); return; }
     
+    // ১০০০ কয়েন উইথড্র করতে গেলেই কেবল রেফার চেক হবে এবং রেফার না থাকলে রেফারেল সাপোর্ট চ্যাট পপআপ আসবে
     if (totalRefers < 11) {
         document.getElementById('modal-current-ref').innerText = totalRefers;
         document.getElementById('modal-deficit-ref').innerText = 11 - totalRefers;
@@ -1899,7 +1890,6 @@ function switchPage(pageId, element) {
     else if (pageId === 'payment-history') loadPaymentHistory();
 }
 
-// মিডিয়া লাইটবক্স ও জুম
 function openMediaLightbox(mediaUrl, mediaType, canDownload) {
     const lightbox = document.getElementById('media-lightbox');
     const container = document.getElementById('media-lightbox-container');
@@ -1935,17 +1925,16 @@ function closeMediaLightbox() {
     document.getElementById('media-lightbox-container').innerHTML = '';
 }
 
-// ৩টি সম্পূর্ণ আলাদা লাইভ চ্যাট ওপেনার ফাংশন
+// আলাদা ৩টি লাইভ চ্যাট সিস্টেম (কাস্টমার সাপোর্ট, রেফার সাপোর্ট, অ্যাক্টিভেশন সাপোর্ট)
 function openLiveChat(contextType = 'general') {
     currentChatContextType = contextType;
-    let chatPhone = currentUserPhone || document.getElementById('login-phone')?.value || document.getElementById('reg-phone')?.value;
-    if (!chatPhone) {
-        let promptPhone = prompt("লাইভ চ্যাট শুরু করতে আপনার ফোন নাম্বারটি লিখুন:");
+    let chatPhone = currentUserPhone || normalizePhoneNumber(document.getElementById('login-phone')?.value || document.getElementById('reg-phone')?.value);
+    if (!chatPhone || chatPhone.length < 10) {
+        let promptPhone = prompt("লাইভ চ্যাট শুরু করতে আপনার সঠিক ফোন নাম্বারটি লিখুন:");
         if (!promptPhone) return;
-        chatPhone = promptPhone;
+        chatPhone = normalizePhoneNumber(promptPhone);
     }
-    const cleanPhone = normalizePhoneNumber(chatPhone);
-    if (cleanPhone.length < 10) {
+    if (chatPhone.length < 10) {
         alert("দয়া করে সঠিক ফোন নাম্বার দিন।");
         return;
     }
@@ -1953,7 +1942,7 @@ function openLiveChat(contextType = 'general') {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-live-chat').classList.add('active');
     document.getElementById('bottom-nav-bar').style.display = 'none';
-    document.getElementById('chat-user-phone-label').innerText = "ইউজার নাম্বার: " + maskPhoneNumber(cleanPhone);
+    document.getElementById('chat-user-phone-label').innerText = "ইউজার নাম্বার: " + maskPhoneNumber(chatPhone);
 
     const badgeEl = document.getElementById('chat-channel-badge');
     if (contextType === 'buy_refer') {
@@ -1964,23 +1953,28 @@ function openLiveChat(contextType = 'general') {
         badgeEl.innerText = "দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট";
     }
 
-    listenToLiveChatMessages(cleanPhone, contextType);
+    listenToLiveChatMessages(chatPhone, contextType);
 }
 
-function openLiveChatFromLogin() {
-    openLiveChat('general');
+function openGuestLiveChat() {
+    let rawPhone = document.getElementById('login-phone')?.value || document.getElementById('reg-phone')?.value;
+    let phone = normalizePhoneNumber(rawPhone);
+    if (!phone || phone.length < 10) {
+        let promptPhone = prompt("কাস্টমার সাপোর্টের সাথে কথা বলতে আপনার ফোন নাম্বারটি লিখুন:");
+        if (!promptPhone) return;
+        phone = normalizePhoneNumber(promptPhone);
+    }
+    if (phone && phone.length >= 10) {
+        currentUserPhone = phone;
+        openLiveChat('general');
+    } else {
+        alert("দয়া করে সঠিক ফোন নাম্বার দিন।");
+    }
 }
 
-// রেফার কিনতে লাইভ চ্যাট ফ্লো
-function openBuyReferIntroModal() {
+// উইথড্র করার সময় রেফার মডাল থেকে লাইভ চ্যাট শুরু
+function startBuyReferLiveChatFromWithdraw() {
     closeReferModal();
-    document.getElementById('buy-refer-intro-modal').classList.add('active');
-}
-function closeBuyReferIntroModal() {
-    document.getElementById('buy-refer-intro-modal').classList.remove('active');
-}
-function startBuyReferLiveChat() {
-    closeBuyReferIntroModal();
     openLiveChat('buy_refer');
 }
 
@@ -2014,7 +2008,6 @@ function goBackFromChat() {
     }
 }
 
-// ছবি বা ভিডিও আপলোড হ্যান্ডলার (দুটি আলাদা বাটন)
 function onUserFileSelected(input, type) {
     if (input.files && input.files[0]) {
         const file = input.files[0];
@@ -2022,7 +2015,7 @@ function onUserFileSelected(input, type) {
         reader.onload = function(e) {
             selectedUserMedia = {
                 dataUrl: e.target.result,
-                type: type // 'image' অথবা 'video'
+                type: type
             };
             document.getElementById('chat-file-name').innerText = (type === 'image' ? '📸 ছবি: ' : '🎥 ভিডিও: ') + file.name;
             document.getElementById('chat-file-preview-box').style.display = 'flex';
@@ -2066,7 +2059,7 @@ function formatMessageTime(timestamp) {
     return dateObj.toLocaleDateString('bn-BD', { day: 'numeric', month: 'short' }) + ', ' + dateObj.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' });
 }
 
-// ৩টি আলাদা চ্যাটের জন্য কাস্টম ওয়েলকাম / টপ-আপ মেসেজ
+// ৩টি আলাদা চ্যাটের জন্য নির্দিষ্ট টপ-আপ/ওয়েলকাম মেসেজ
 function getContextWelcomeHtml(contextType) {
     if (contextType === 'buy_refer') {
         return `
@@ -2119,11 +2112,10 @@ function getContextWelcomeHtml(contextType) {
             </div>
         `;
     } else {
-        // নতুন কাস্টমার সাপোর্ট টপ-আপ মেসেজ (সাধারণ অ্যাকাউন্ট তথ্য ও সমস্যার সমাধান)
         return `
             <div style="background: linear-gradient(145deg, #062822, #1e293b); border: 1.5px solid #34d399; padding: 14px; border-radius: 16px; max-width: 92%; align-self: flex-start; color: #f8fafc; font-size: 12px; font-weight: 600; line-height: 1.55;">
                 🎧 <b>দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট</b> 🎧<br><br>
-                🌸 <b>আসসালামু আলাইকুম!</b>< আমাদের কাস্টমার সাপোর্ট সেন্টারে আপনাকে স্বাগতম।<br><br>
+                🌸 <b>আসসালামু আলাইকুম!</b> আমাদের কাস্টমার সাপোর্ট সেন্টারে আপনাকে স্বাগতম।<br><br>
                 📌 এখানে অ্যাকাউন্ট সংক্রান্ত যেকোনো তথ্য ও সমস্যার সমাধান দ্রুত দেওয়া হয়:<br>
                 ✅ লগইন বা পাসওয়ার্ড সংক্রান্ত সমস্যা<br>
                 ✅ ডেইলি টাস্ক ও বিজ্ঞাপন দেখার নিয়মাবলী<br>
@@ -2142,7 +2134,6 @@ function listenToLiveChatMessages(phone, contextType = 'general') {
 
     if (chatUnsubscribe) { chatUnsubscribe(); }
 
-    // প্রতিটি চ্যাটের জন্য আলাদা ডকুমেন্ট আইডি (ফোন নাম্বার + কন্টেক্সট) যাতে ৩টি চ্যাট সম্পূর্ণ আলাদা থাকে
     const uniqueChatDocId = phone + "_" + contextType;
 
     db.collection('chats').doc(uniqueChatDocId).onSnapshot((docSnap) => {
@@ -2209,7 +2200,12 @@ async function sendLiveChatMessage() {
     let phone = currentUserPhone || normalizePhoneNumber(document.getElementById('login-phone')?.value || document.getElementById('reg-phone')?.value);
 
     if (!text && !selectedUserMedia) return;
-    if (!phone) return;
+    if (!phone) {
+        let promptPhone = prompt("মেসেজ পাঠানোর জন্য আপনার ফোন নাম্বারটি লিখুন:");
+        if (!promptPhone) return;
+        phone = normalizePhoneNumber(promptPhone);
+        currentUserPhone = phone;
+    }
 
     let mediaUrl = selectedUserMedia ? selectedUserMedia.dataUrl : null;
     let mediaType = selectedUserMedia ? selectedUserMedia.type : null;
@@ -2257,7 +2253,7 @@ async function sendLiveChatMessage() {
     }
 }
 
-// এডমিন প্যানেল ফাংশনসমূহ (৩টি আলাদা চ্যাট আলাদাভাবে লিস্টে দেখাবে)
+// এডমিন প্যানেল ফাংশনসমূহ
 function openAdminChatPanel() {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-admin-chat-panel').classList.add('active');
@@ -2289,7 +2285,7 @@ function loadAdminChatUsersList() {
         listContainer.innerHTML = '';
         snapshot.forEach((docSnap) => {
             const chatData = docSnap.data();
-            const docId = docSnap.id; // যেমন: 017xxxxxxxx_general বা 017xxxxxxxx_buy_refer
+            const docId = docSnap.id;
             const phone = chatData.phone || docId;
             const uName = chatData.userName || "ইউজার";
             const lastMsg = chatData.lastMessage || "";
@@ -2327,7 +2323,7 @@ function loadAdminChatUsersList() {
 }
 
 function openAdminSingleChat(docId, uName, phone, contextName) {
-    adminCurrentChatPhone = docId; // ফায়ারবেসের নির্দিষ্ট ডকুমেন্ট আইডি
+    adminCurrentChatPhone = docId;
     document.getElementById('admin-chat-users-list').style.display = 'none';
     document.getElementById('admin-active-chat-box').style.display = 'block';
     document.getElementById('admin-chatting-user-name').innerText = uName + " (" + contextName + ")";
@@ -2492,14 +2488,10 @@ function shareRefer() {
 }
 
 function closeReferModal() { document.getElementById('refer-modal').classList.remove('active'); }
-function goToReferPage() { closeReferModal(); switchPage('refer', document.querySelectorAll('.nav-item')[3]); }
-
 function closeMandatoryTaskModal() { document.getElementById('mandatory-task-modal').classList.remove('active'); }
 function goToMandatoryTaskPage() { closeMandatoryTaskModal(); switchPage('mandatory-task', null); }
-
 function closeSpecialTaskModal() { document.getElementById('special-task-modal').classList.remove('active'); }
 function goToSpecialTaskPage() { closeSpecialTaskModal(); switchPage('special-task', null); }
-
 function closeActivationModal() { document.getElementById('activation-modal').classList.remove('active'); }
 function setWithdrawAmount(amt) { document.getElementById('withdraw-amount').value = amt; }
 function toggleWithdrawForm() { document.getElementById('withdraw-form-container').classList.toggle('active'); }
