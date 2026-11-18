@@ -279,9 +279,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .activation-badge { display: inline-block; background: linear-gradient(135deg, #ef4444, #10b981); color: white; padding: 3px 10px; border-radius: 14px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; box-shadow: 0 4px 12px rgba(16,185,129,0.3); }
 .activation-benefits { background: rgba(15, 23, 42, 0.65); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 10px; margin: 10px 0; text-align: left; }
 .activation-benefit-item { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; margin-bottom: 6px; color: #e2e8f0; }
-.activation-btn-group { display: flex; gap: 8px; margin-top: 10px; }
-.btn-act-contact { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 10px; border-radius: 10px; flex: 1; font-weight: 800; font-size: 13px; cursor: pointer; box-shadow: 0 4px 12px rgba(16,185,129,0.3); transition: transform 0.2s; }
-.btn-act-cancel { background: rgba(255,255,255,0.08); color: #94a3b8; border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 10px; width: 80px; font-weight: 700; font-size: 13px; cursor: pointer; }
 
 .payment-review-modal-box { background: linear-gradient(145deg, #121a2c, #090d16); border: 2px solid rgba(56, 189, 248, 0.5); border-radius: 26px; width: 100%; max-width: 360px; padding: 22px 18px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.85), 0 0 30px rgba(56,189,248,0.25); color: #f8fafc; position: relative; }
 .payment-review-main-title { font-size: 17px; font-weight: 800; background: linear-gradient(135deg, #38bdf8, #34d399, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px; letter-spacing: 0.5px; }
@@ -293,17 +290,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .feed-user { font-weight: 800; color: #f8fafc; font-size: 15px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
 .feed-details { color: #cbd5e1; font-size: 12px; font-weight: 700; line-height: 1.6; text-align: center; }
 .feed-amount { color: #34d399; font-weight: 800; font-size: 17px; text-shadow: 0 2px 8px rgba(16,185,129,0.4); }
-
-.admin-user-card { background: #1e293b; border: 1.5px solid rgba(56,189,248,0.25); border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s; }
-.unread-dot { background: #ef4444; color: white; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 10px; }
-.online-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 10px; }
-.online-badge.is-online { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
-.online-badge.is-offline { background: rgba(148, 163, 184, 0.15); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.25); }
-.status-dot-green { width: 7px; height: 7px; background: #10b981; border-radius: 50%; display: inline-block; box-shadow: 0 0 6px #10b981; }
-.status-dot-gray { width: 7px; height: 7px; background: #64748b; border-radius: 50%; display: inline-block; }
-
-.chat-msg-time { font-size: 9px; color: #94a3b8; margin-top: 4px; text-align: right; font-weight: 600; }
-.chat-media-preview { max-width: 100%; max-height: 180px; border-radius: 10px; margin-bottom: 6px; object-fit: cover; display: block; cursor: pointer; border: 1px solid rgba(255,255,255,0.12); }
 
 .media-lightbox-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.94); z-index: 10000; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 15px; }
 .media-lightbox-overlay.active { display: flex; }
@@ -338,7 +324,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; font-size: 12px;">
                 <span onclick="openForgotPasswordModal()" style="color: #38bdf8; font-weight: 700; text-decoration: underline; cursor: pointer;">পাসওয়ার্ড ভুলে গেছেন?</span>
-                <span onclick="openGuestLiveChat()" style="color: #34d399; font-weight: 700; text-decoration: underline; cursor: pointer;">কাস্টমার সাপোর্ট</span>
+                <span onclick="openLiveChat('general')" style="color: #34d399; font-weight: 700; text-decoration: underline; cursor: pointer;">কাস্টমার সাপোর্ট</span>
             </div>
         </div>
 
@@ -479,6 +465,16 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         </button>
     </div>
     
+    <!-- স্পেশাল ভিডিও টাস্ক সেকশন (ডাইনামিকালি ট্রিগার হবে) -->
+    <div id="special-task-container" style="display:none; background: linear-gradient(135deg, #1e1b4b, #312e81); border: 2px solid #6366f1; border-radius: 18px; padding: 16px; margin-bottom: 12px; text-align: center; color: white;">
+        <h3 id="special-task-title" style="margin-top: 0; font-size: 16px; color: #818cf8;">⭐ স্পেশাল ভিডিও টাস্ক</h3>
+        <p id="special-task-desc" style="font-size: 12px; color: #c7d2fe; margin-bottom: 10px;"></p>
+        <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 10px; margin-bottom: 10px; font-weight: 700; font-size: 13px;">
+            সম্পন্ন: <span id="special-task-progress">0</span> / <span id="special-task-target">150</span>
+        </div>
+        <button onclick="watchSpecialTaskAd()" class="btn-action" style="background: linear-gradient(135deg, #6366f1, #4f46e5); margin-top: 0;">🎥 স্পেশাল ভিডিও দেখুন</button>
+    </div>
+
     <div style="background: rgba(6, 95, 70, 0.4); border: 1.5px solid #10b981; padding: 10px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; color: #34d399; margin-bottom: 12px; text-align: center; box-shadow: 0 4px 10px rgba(16,185,129,0.1); display: flex; align-items: center; justify-content: center; gap: 6px;">
         <span style="font-size: 14px;">🔔</span> ২০০ টাকা বোনাস নিতে আমাদের চ্যানেলগুলো ফলো করুন
     </div>
@@ -503,24 +499,25 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- লাইভ চ্যাট পেজ -->
+<!-- স্বতন্ত্র ইউনিক লাইভ চ্যাট পেজ (রেফার, অ্যাক্টিভেশন এবং জেনারেল চ্যাট আলাদা) -->
 <div id="page-live-chat" class="page" style="padding: 5px;">
     <div style="background: linear-gradient(135deg, #065f46, #0284c7); border-radius: 20px; padding: 16px 14px; margin-bottom: 10px; text-align: center; box-shadow: 0 8px 25px rgba(16,185,129,0.3); border: 1.5px solid rgba(255,255,255,0.18);">
-        <div style="font-size: 24px; font-weight: 900; color: #ffffff; letter-spacing: 1px; text-shadow: 0 2px 8px rgba(0,0,0,0.4);">
-            🎧 সাপোর্ট
+        <div style="font-size: 20px; font-weight: 900; color: #ffffff; letter-spacing: 1px; text-shadow: 0 2px 8px rgba(0,0,0,0.4);" id="chat-page-header-title">
+            🎧 সাপোর্ট সেন্টার
         </div>
-        <div style="font-size: 13px; font-weight: 800; color: #a7f3d0; margin-top: 2px;" id="chat-channel-badge">
-            দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট
+        <div style="font-size: 12px; font-weight: 800; color: #a7f3d0; margin-top: 2px;" id="chat-channel-badge">
+            দারাজ প্লে ইনকাম সেন্টার
         </div>
         <div style="font-size: 11px; color: #e0f2fe; font-weight: 600; margin-top: 3px;" id="chat-user-phone-label">ইউজার সাপোর্ট লাইন</div>
     </div>
 
-    <div id="user-incoming-call-box" style="display: none; background: linear-gradient(135deg, #0284c7, #10b981); border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; text-align: center; box-shadow: 0 4px 15px rgba(2,132,199,0.4);">
-        <div style="font-size: 14px; font-weight: 800; color: white; margin-bottom: 8px;" id="user-call-alert-text">📞 এডমিন আপনাকে লাইভ কল দিয়েছেন!</div>
-        <button id="user-join-call-btn" onclick="joinIncomingCall()" style="background: white; color: #0f172a; border: none; padding: 8px 18px; border-radius: 10px; font-weight: 800; font-size: 13px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">কল রিসিভ করুন</button>
+    <!-- চ্যাটের ওপর নির্দিষ্ট ব্যানার বা নোটিশ দেখানোর জায়গা -->
+    <div id="chat-banner-notice-box" style="background: #1e293b; border: 1.5px solid rgba(16,185,129,0.4); border-radius: 16px; padding: 14px; margin-bottom: 10px; font-size: 12px; color: #cbd5e1; line-height: 1.5; text-align: left; display: none;">
+        <div id="chat-banner-content"></div>
+        <button onclick="dismissChatBanner()" class="btn-action btn-success" style="padding: 8px; font-size: 12px; margin-top: 10px;">বুঝেছি ও অ্যাকাউন্ট অ্যাক্টিভ করতে চাচ্ছি ✅</button>
     </div>
 
-    <div id="chat-messages-container" style="background: #121824; border: 1.5px solid rgba(16,185,129,0.35); border-radius: 18px; padding: 14px; height: 320px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; box-shadow: inset 0 4px 15px rgba(0,0,0,0.6);">
+    <div id="chat-messages-container" style="background: #121824; border: 1.5px solid rgba(16,185,129,0.35); border-radius: 18px; padding: 14px; height: 280px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; box-shadow: inset 0 4px 15px rgba(0,0,0,0.6);">
     </div>
 
     <div id="chat-file-preview-box" style="display: none; background: rgba(16,185,129,0.15); border: 1px dashed #10b981; padding: 8px 12px; border-radius: 10px; margin-bottom: 8px; font-size: 12px; color: #34d399; justify-content: space-between; align-items: center;">
@@ -535,60 +532,11 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <button onclick="document.getElementById('user-chat-image').click()" style="background: #1e293b; border: 1.5px solid rgba(56,189,248,0.3); color: #38bdf8; padding: 9px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; cursor: pointer; flex-shrink: 0;">📸 ছবি</button>
         <button onclick="document.getElementById('user-chat-video').click()" style="background: #1e293b; border: 1.5px solid rgba(239,68,68,0.3); color: #f87171; padding: 9px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; cursor: pointer; flex-shrink: 0;">🎥 ভিডিও</button>
 
-        <input type="text" id="chat-input-message" placeholder="আপনার মেসেজ লিখুন..." style="flex: 1; min-width: 0; background: #1e293b; border: 1px solid rgba(255,255,255,0.12); padding: 11px 12px; border-radius: 12px; color: white; font-size: 13px; outline: none;">
+        <input type="text" id="chat-input-message" placeholder="আপনার মেসেজ বা তথ্য লিখুন..." style="flex: 1; min-width: 0; background: #1e293b; border: 1px solid rgba(255,255,255,0.12); padding: 11px 12px; border-radius: 12px; color: white; font-size: 13px; outline: none;">
         <button onclick="sendLiveChatMessage()" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 11px 16px; font-weight: 800; border-radius: 12px; cursor: pointer; flex-shrink: 0; box-shadow: 0 4px 15px rgba(16,185,129,0.3);">পাঠান</button>
     </div>
 
     <button class="btn-action" style="background: #475569; padding: 11px; border-radius: 14px; font-size: 13px;" onclick="goBackFromChat()">⬅️ ফিরে যান</button>
-</div>
-
-<!-- সিক্রেট এডমিন লাইভ চ্যাট ড্যাশবোর্ড -->
-<div id="page-admin-chat-panel" class="page" style="padding: 5px;">
-    <div style="background: linear-gradient(135deg, #7f1d1d, #991b1b); border-radius: 18px; padding: 14px; margin-bottom: 12px; text-align: center; box-shadow: 0 6px 20px rgba(239,68,68,0.3); border: 1.5px solid rgba(255,255,255,0.15);">
-        <div style="font-size: 18px; font-weight: 800; color: white; display: flex; align-items: center; justify-content: center; gap: 8px;">
-            <span>🛡️</span> এডমিন লাইভ সাপোর্ট প্যানেল
-        </div>
-        <div style="font-size: 11px; color: #fecaca; font-weight: 600; margin-top: 2px;">সব ইউজারের মেসেজ, অনলাইন স্ট্যাটাস ও ৩টি আলাদা চ্যাট দেখুন</div>
-    </div>
-
-    <div id="admin-chat-users-list">
-        <p style="text-align:center; color: #94a3b8; padding: 20px 0;">মেসেজ তালিকা লোড হচ্ছে...</p>
-    </div>
-
-    <div id="admin-active-chat-box" style="display: none;">
-        <div style="background: #1e293b; border: 1px solid rgba(56,189,248,0.3); border-radius: 12px; padding: 10px 14px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
-            <div>
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <span style="font-size: 14px; font-weight: 800; color: #38bdf8;" id="admin-chatting-user-name">ইউজার</span>
-                    <span id="admin-single-user-online-badge" class="online-badge is-offline"><span class="status-dot-gray"></span> অফলাইন</span>
-                </div>
-                <div style="font-size: 11px; color: #94a3b8; margin-top: 2px;" id="admin-chatting-user-phone">ফোন: ---</div>
-            </div>
-            <div style="display: flex; gap: 6px;">
-                <button onclick="adminStartAudioCall()" style="background: #0284c7; color: white; border: none; padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer;">📞 অডিও</button>
-                <button onclick="adminStartVideoCall()" style="background: #10b981; color: white; border: none; padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer;">📹 ভিডিও</button>
-                <button onclick="closeAdminSingleChat()" style="background: #475569; color: white; border: none; padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer;">ফিরে যান</button>
-            </div>
-        </div>
-
-        <div id="admin-messages-container" style="background: #121824; border: 1.5px solid rgba(56,189,248,0.3); border-radius: 18px; padding: 14px; height: 300px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px;">
-        </div>
-
-        <div id="admin-file-preview-box" style="display: none; background: rgba(2,132,199,0.15); border: 1px dashed #38bdf8; padding: 8px 12px; border-radius: 10px; margin-bottom: 8px; font-size: 12px; color: #38bdf8; justify-content: space-between; align-items: center;">
-            <span id="admin-file-name">ফাইল যুক্ত করা হয়েছে</span>
-            <span onclick="clearAdminFile()" style="cursor:pointer; color:#ef4444; font-weight:bold;">✖</span>
-        </div>
-
-        <div style="display: flex; gap: 8px; margin-bottom: 10px; align-items: center;">
-            <input type="file" id="admin-chat-file" accept="image/*,video/*" style="display:none;" onchange="onAdminFileSelected(this)">
-            <button onclick="document.getElementById('admin-chat-file').click()" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.15); color: #38bdf8; padding: 10px 14px; border-radius: 14px; font-size: 18px; cursor: pointer;">📎</button>
-
-            <input type="text" id="admin-reply-input" placeholder="ইউজারের উত্তর লিখুন..." style="flex: 1; background: #1e293b; border: 1px solid rgba(255,255,255,0.12); padding: 12px 14px; border-radius: 14px; color: white; font-size: 13px; outline: none;">
-            <button onclick="sendAdminReplyMessage()" style="background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border: none; padding: 12px 20px; font-weight: 800; border-radius: 14px; cursor: pointer;">রিপ্লাই</button>
-        </div>
-    </div>
-
-    <button class="btn-action" style="background: #475569; padding: 11px; border-radius: 14px; font-size: 13px;" onclick="exitAdminPanel()">🚪 এডমিন প্যানেল বন্ধ করুন</button>
 </div>
 
 <!-- সাপোর্ট পেজ -->
@@ -881,7 +829,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <div class="custom-modal-box" style="border: 2px solid #10b981; background: linear-gradient(145deg, #063822, #0f172a);">
         <div class="custom-modal-title" style="color: #34d399;">📱 ফোন নাম্বার ভেরিফিকেশন</div>
         <div class="custom-modal-desc" style="text-align: center; font-size: 12px; background: transparent; border: none;">
-            আপনার নাম্বারে একটি ৪-ডিজিটের ওটিপি (OTP) কোড পাঠানো হয়েছে।<br>
+            আপনার নাম্বারে একটি ৪-ডিজিটের ওটিপি (OTP) কোড পাঠানো হয়েছে。<br>
             (ডেমো কোডটি নিচে দেখানো হলো: <b id="display-reg-otp" style="color: #facc15; font-size: 15px;">----</b>)
         </div>
         <div class="auth-input-box" style="margin-top: 10px;">
@@ -927,14 +875,35 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
+<!-- ১. রেফার অপূর্ণতার পপআপ -->
+<div id="refer-warning-modal" class="custom-modal-overlay">
+    <div class="activation-modal-box" style="border: 2px solid #f59e0b;">
+        <div class="activation-badge" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">⚠️ রেফার পূরণ হয়নি!</div>
+        <div style="font-size: 16px; font-weight: 800; color: #f8fafc; margin-bottom: 8px;">রিডিম বা পেমেন্ট নিতে হলে অন্তত ১১টি রেফার প্রয়োজন!</div>
+        <p style="font-size: 12px; color: #cbd5e1; line-height: 1.5; margin-bottom: 12px; font-weight: 600; text-align: left; background: rgba(15,23,42,0.6); padding: 10px; border-radius: 10px;">
+            আপনার বর্তমান রেফার: <span id="popup-current-refers" style="color:#34d399; font-weight:800;">0</span> টি<br>
+            ঘাটতি রেফার: <span id="popup-missing-refers" style="color:#ef4444; font-weight:800;">11</span> টি<br><br>
+            দ্রুত রেফার কিনতে বা পূরণ করতে নিচের "রেফার কিনতে লাইভ চ্যাট করুন" বাটনে ক্লিক করুন।
+        </p>
+        <button class="btn-action" style="background: linear-gradient(135deg, #10b981, #059669); margin-bottom: 6px; padding: 11px; font-size: 13px;" onclick="openReferLiveChat()">💬 রেফার কিনতে লাইভ চ্যাট করুন</button>
+        <button class="btn-action" style="background: rgba(255,255,255,0.08); color: #94a3b8; border: 1px solid rgba(255,255,255,0.05); padding: 9px; font-size: 12px;" onclick="closeReferWarningModal()">বাতিল</button>
+    </div>
+</div>
+
+<!-- ২. অ্যাকাউন্ট অ্যাক্টিভেশনের পপআপ -->
 <div id="activation-modal" class="custom-modal-overlay">
     <div class="activation-modal-box">
         <div class="activation-badge">⚠️ ভেরিফিকেশন ও অ্যাক্টিভেশন প্রয়োজন</div>
-        <div style="font-size: 17px; font-weight: 800; color: #ef4444; margin-bottom: 6px;">অ্যাকাউন্ট এখনও ভেরিফাই বা অ্যাক্টিভ হয়নি!</div>
-        <p style="font-size: 12px; color: #cbd5e1; line-height: 1.5; margin-bottom: 10px; font-weight: 600;">
-            এডমিন কর্তৃক আপনার অ্যাকাউন্টটি এখনও অ্যাক্টিভ (`is_active: true`) করা হয়নি। এডমিন প্যানেল থেকে অ্যাকাউন্ট অ্যাক্টিভ করার পর আপনি পেমেন্ট অনুরোধ পাঠাতে পারবেন।
+        <div style="font-size: 16px; font-weight: 800; color: #ef4444; margin-bottom: 6px;">ভিডিও দেখার রুলস-এ সমস্যা পাওয়া গেছে!</div>
+        <p style="font-size: 12px; color: #cbd5e1; line-height: 1.5; margin-bottom: 10px; font-weight: 600; text-align: left; background: rgba(15,23,42,0.6); padding: 10px; border-radius: 10px;">
+            আপনার ভিডিও দেখার কার্যক্রমে রুলস অনুযায়ী ত্রুটি পাওয়া গেছে। অ্যাকাউন্টটি অ্যাক্টিভ করতে নিচের লাইভ চ্যাটে যোগাযোগ করে ১১১ টাকা দিয়ে সক্রিয় করুন।
         </p>
-        <button class="btn-action btn-success" style="padding: 10px; font-size: 13px;" onclick="closeActivationModal()">বুঝেছি</button>
+        <div class="activation-benefits">
+            <div class="activation-benefit-item"><span style="font-size: 14px;">⚡</span> <span>দ্রুত ও ঝামেলাহীন উইথড্র সুবিধা</span></div>
+            <div class="activation-benefit-item"><span style="font-size: 14px;">🚀</span> <span>এক্সক্লুসিভ প্রিমিয়াম ইনকাম ফিচার</span></div>
+        </div>
+        <button class="btn-action btn-success" style="padding: 11px; font-size: 13px; margin-bottom: 6px;" onclick="openActivationLiveChat()">💬 অ্যাক্টিভেশন লাইভ চ্যাট</button>
+        <button class="btn-action" style="background: rgba(255,255,255,0.08); color: #94a3b8; border: 1px solid rgba(255,255,255,0.05); padding: 9px; font-size: 12px;" onclick="closeActivationModal()">বাতিল</button>
     </div>
 </div>
 
@@ -1039,17 +1008,13 @@ const ADMIN_SECRET_PIN = "16269";
 let currentUserPhone = localStorage.getItem('logged_user_phone') || null;
 let userId = "", userName = "", userPhotoUrl = "";
 let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, isActive = false, formattedJoinDate = "---", userSerial = "---";
+let special150Watched = 0, special500Watched = 0;
 let claimedBonuses = {};
 let historyDates = {};
 let rawWithdrawRequests = [];
-let chatUnsubscribe = null;
-let adminChatUnsubscribe = null;
-let adminCurrentChatPhone = null;
 let currentChatContextType = 'general';
 
 let selectedUserMedia = null;
-let selectedAdminMedia = null;
-let userCurrentCallUrl = null;
 let currentLightboxZoom = 1;
 
 let titleTapCount = 0;
@@ -1085,11 +1050,6 @@ function updateUserOnlineHeartbeat() {
     }
 }
 setInterval(updateUserOnlineHeartbeat, 25000);
-
-function isUserCurrentlyOnline(lastActiveTimestamp) {
-    if (!lastActiveTimestamp) return false;
-    return (Date.now() - lastActiveTimestamp) < 60000;
-}
 
 function handleSecretAdminTrigger() {
     titleTapCount++;
@@ -1354,6 +1314,8 @@ async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFil
             processed_refers: 0,
             dailyWatched: 0,
             totalWatched: 0,
+            special150Watched: 0,
+            special500Watched: 0,
             is_active: false,
             last_reset_date: today,
             last_active_time: Date.now(),
@@ -1506,6 +1468,8 @@ async function initDashboard(phone) {
     dailyWatched = data.dailyWatched || 0;
     lifetimeWatched = data.totalWatched || 0;
     totalRefers = data.refers || 0;
+    special150Watched = data.special150Watched || 0;
+    special500Watched = data.special500Watched || 0;
     claimedBonuses = data.claimedBonuses || {};
     historyDates = data.history_dates || {};
     isActive = data.is_active || false;
@@ -1523,6 +1487,8 @@ async function initDashboard(phone) {
             totalRefers = freshData.refers || 0;
             userSerial = freshData.serial || userSerial;
             isActive = freshData.is_active || false;
+            special150Watched = freshData.special150Watched || 0;
+            special500Watched = freshData.special500Watched || 0;
             claimedBonuses = freshData.claimedBonuses || {};
             historyDates = freshData.history_dates || {};
             updateUI();
@@ -1650,6 +1616,24 @@ function updateUI() {
     if(document.getElementById('history-total-income')) document.getElementById('history-total-income').innerText = (lifetimeWatched * 20) + " পয়েন্ট";
 
     if(document.getElementById('progress-bar')) document.getElementById('progress-bar').style.width = (dailyWatched / 100 * 100) + "%";
+
+    // স্পেশাল টাস্ক উইজেট আপডেট
+    const specialContainer = document.getElementById('special-task-container');
+    if (totalRefers >= 11 && special150Watched < 150) {
+        specialContainer.style.display = 'block';
+        document.getElementById('special-task-title').innerText = "⭐ ১৫০টি স্পেশাল ভিডিও টাস্ক";
+        document.getElementById('special-task-desc').innerText = "উইথড্র করার জন্য আপনার ১৫০টি স্পেশাল ভিডিও দেখা আবশ্যক।";
+        document.getElementById('special-task-progress').innerText = special150Watched;
+        document.getElementById('special-task-target').innerText = "150";
+    } else if (isActive && special500Watched < 500) {
+        specialContainer.style.display = 'block';
+        document.getElementById('special-task-title').innerText = "⭐ ৫০০টি স্পেশাল ভিডিও টাস্ক";
+        document.getElementById('special-task-desc').innerText = "উইথড্র করার জন্য আপনার ৫০০টি স্পেশাল ভিডিও দেখা আবশ্যক।";
+        document.getElementById('special-task-progress').innerText = special500Watched;
+        document.getElementById('special-task-target').innerText = "500";
+    } else {
+        specialContainer.style.display = 'none';
+    }
 }
 
 function loadReferralsList() {
@@ -1849,15 +1833,67 @@ async function watchRealAd() {
     alert("🎉 ২০ কয়েন সফলভাবে যোগ হয়েছে!");
 }
 
-// ওয়ালেট পেজে is_active চেক করে সরাসরি উইথড্র ফর্ম ওপেন করার ফাংশন
+async function watchSpecialTaskAd() {
+    if (typeof show_11149595 === 'function') { try { await show_11149595(); } catch (e) {} }
+
+    if (totalRefers < 11) {
+        alert("⚠️ আপনার ১১টি রেফার এখনও পূর্ণ হয়নি!");
+        return;
+    }
+    if (special150Watched < 150) {
+        special150Watched++;
+        await db.collection('users').doc(currentUserPhone).update({ special150Watched: special150Watched });
+        updateUI();
+        if (special150Watched >= 150) {
+            alert("🎉 অভিনন্দন! আপনার ১৫০টি স্পেশাল ভিডিও দেখা সম্পন্ন হয়েছে। এখন ওয়ালেট থেকে পরবর্তী ধাপে যেতে পারবেন।");
+        } else {
+            alert(`✅ স্পেশাল ভিডিও দেখা হয়েছে (${special150Watched}/150)`);
+        }
+    } else if (isActive && special500Watched < 500) {
+        special500Watched++;
+        await db.collection('users').doc(currentUserPhone).update({ special500Watched: special500Watched });
+        updateUI();
+        if (special500Watched >= 500) {
+            alert("🎉 অভিনন্দন! আপনার ৫০০টি স্পেশাল ভিডিও দেখা সম্পন্ন হয়েছে। এখন সরাসরি পেমেন্ট অনুরোধ পাঠাতে পারবেন।");
+        } else {
+            alert(`✅ স্পেশাল ভিডিও দেখা হয়েছে (${special500Watched}/500)`);
+        }
+    }
+}
+
+// মাল্টি-স্টেপ উইথড্র গেটওয়ে লজিক
 function processWithdraw() {
     if (userBalance < 1000) { alert("⚠️ ন্যূনতম ১০০০ কয়েন প্রয়োজন!"); return; }
     
+    // ধাপ ১: ১১টি রেফার চেক
+    if (totalRefers < 11) {
+        document.getElementById('popup-current-refers').innerText = totalRefers;
+        document.getElementById('popup-missing-refers').innerText = (11 - totalRefers);
+        document.getElementById('refer-warning-modal').classList.add('active');
+        return;
+    }
+
+    // ধাপ ২: ১৫০টি স্পেশাল ভিডিও চেক
+    if (special150Watched < 150) {
+        alert(`⚠️ উইথড্র করার জন্য আপনাকে মোট ১৫০টি স্পেশাল ভিডিও দেখতে হবে। আপনার দেখা হয়েছে: ${special150Watched}/150 টি।`);
+        switchPage('work', document.querySelectorAll('.nav-item')[1]);
+        return;
+    }
+
+    // ধাপ ৩: অ্যাকাউন্ট অ্যাক্টিভেশন চেক (`is_active: true`)
     if (!isActive) {
         document.getElementById('activation-modal').classList.add('active');
         return;
     }
 
+    // ধাপ ৪: ৫০০টি স্পেশাল ভিডিও চেক
+    if (special500Watched < 500) {
+        alert(`⚠️ উত্তোলনের জন্য আপনাকে আরও ৫০০টি স্পেশাল ভিডিও দেখতে হবে। আপনার দেখা হয়েছে: ${special500Watched}/500 টি।`);
+        switchPage('work', document.querySelectorAll('.nav-item')[1]);
+        return;
+    }
+
+    // সব শর্ত পূর্ণ হলে সরাসরি পেমেন্ট ফরম ওপেন হবে
     document.getElementById('wd-full-name').value = userName || '';
     document.getElementById('wd-phone-number').value = '';
     document.getElementById('wd-coin-amount').value = '';
@@ -1866,6 +1902,12 @@ function processWithdraw() {
 
 function closeWithdrawModal() {
     document.getElementById('withdraw-modal').classList.remove('active');
+}
+function closeReferWarningModal() {
+    document.getElementById('refer-warning-modal').classList.remove('active');
+}
+function closeActivationModal() {
+    document.getElementById('activation-modal').classList.remove('active');
 }
 
 // পেমেন্ট সাবমিট এবং টেলিগ্রাম বটে নোটিফিকেশন পাঠানোর ফাংশন
@@ -1986,43 +2028,9 @@ function switchPage(pageId, element) {
     else if (pageId === 'payment-history') loadPaymentHistory();
 }
 
-function openMediaLightbox(mediaUrl, mediaType, canDownload) {
-    const lightbox = document.getElementById('media-lightbox');
-    const container = document.getElementById('media-lightbox-container');
-    const dlBtn = document.getElementById('lb-download-btn');
-    currentLightboxZoom = 1;
-
-    if (mediaType === 'video') {
-        container.innerHTML = `<video id="lb-active-media" src="${mediaUrl}" controls autoplay ${!canDownload ? 'controlsList="nodownload" oncontextmenu="return false;"' : ''} class="media-lightbox-content"></video>`;
-    } else {
-        container.innerHTML = `<img id="lb-active-media" src="${mediaUrl}" ${!canDownload ? 'oncontextmenu="return false;"' : ''} class="media-lightbox-content" alt="Preview">`;
-    }
-
-    if (canDownload) {
-        dlBtn.style.display = 'inline-flex';
-        dlBtn.href = mediaUrl;
-    } else {
-        dlBtn.style.display = 'none';
-        dlBtn.href = '#';
-    }
-
-    lightbox.classList.add('active');
-}
-
-function zoomLightboxMedia(delta) {
-    const el = document.getElementById('lb-active-media');
-    if (!el) return;
-    currentLightboxZoom = Math.min(3, Math.max(0.6, currentLightboxZoom + delta));
-    el.style.transform = `scale(${currentLightboxZoom})`;
-}
-
-function closeMediaLightbox() {
-    document.getElementById('media-lightbox').classList.remove('active');
-    document.getElementById('media-lightbox-container').innerHTML = '';
-}
-
+// ৪টি সম্পূর্ণ স্বাধীন ইউনিক লাইভ চ্যাট সিস্টেম
 function openLiveChat(contextType = 'general') {
-    currentChatContextType = contextType;
+    currentChatContextType = contextType; // 'general', 'refer', 'activation' ইত্যাদি স্বাধীন কন্টেক্সট
     let chatPhone = currentUserPhone || normalizePhoneNumber(document.getElementById('login-phone')?.value || document.getElementById('reg-phone')?.value);
     if (!chatPhone || chatPhone.length < 10) {
         let promptPhone = prompt("লাইভ চ্যাট শুরু করতে আপনার সঠিক ফোন নাম্বারটি লিখুন:");
@@ -2040,28 +2048,86 @@ function openLiveChat(contextType = 'general') {
     document.getElementById('chat-user-phone-label').innerText = "ইউজার নাম্বার: " + maskPhoneNumber(chatPhone);
 
     const badgeEl = document.getElementById('chat-channel-badge');
-    badgeEl.innerText = "দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট";
+    const bannerBox = document.getElementById('chat-banner-notice-box');
+    const bannerContent = document.getElementById('chat-banner-content');
+    const headerTitle = document.getElementById('chat-page-header-title');
+
+    // সম্পূর্ণ পৃথক ও ইউনিক কনটেন্ট এবং ব্যানার সেটআপ
+    if (contextType === 'refer') {
+        headerTitle.innerText = "🧑‍💼 রেফারেল সাপোর্ট টিম 🧑‍💼";
+        badgeEl.innerText = "রেফারেল সাপোর্ট সেন্টার";
+        bannerBox.style.display = 'block';
+        bannerContent.innerHTML = `
+            <b>🧑‍💼 রেফারেল সাপোর্ট সেন্টার 🧑‍💼</b><br>
+            <b>🌺 স্বাগতম ও শুভেচ্ছা 🌺</b><br><br>
+            আসসালামু আলাইকুম। 😊<br>
+            আমাদের রেফারেল সাপোর্ট সেন্টারে আপনাকে আন্তরিক স্বাগতম। এখানে রেফারেল সংক্রান্ত সকল ধরনের সহযোগিতা দ্রুত ও নির্ভরযোগ্যভাবে প্রদান করা হয়。<br><br>
+            🎁 <b>রেফারেল সুবিধাসমূহ:</b><br>
+            ✅ প্রতি সফল রেফারে ১১১ টাকা পাবেন।<br>
+            ✅ ১১টি সফল রেফারে মোট ১,২২১ টাকা পাবেন, যা আপনার বর্তমান ব্যালেন্সের সাথে যোগ হয়ে উত্তোলন করতে পারবেন।<br>
+            ✅ একবার রেফার সম্পন্ন হলে পুনরায় রেফারের কোনো ঝামেলা থাকবে না।<br>
+            ✅ এরপর আপনার সুবিধামতো যেকোনো সময় টাকা উত্তোলন করতে পারবেন।<br><br>
+            💰 <b>সার্ভিস চার্জ:</b> প্রতি রেফার ১৫ টাকা<br>
+            📊 <b>উদাহরণ:</b> ১১টি রেফারের জন্য মোট চার্জ ১৬৫ টাকা<br><br>
+            ⏱️ <b>সময়সীমা:</b> পেমেন্ট নিশ্চিত হওয়ার ৩০ মিনিট থেকে ১ ঘণ্টার মধ্যে রেফার সম্পন্ন করা হবে।<br><br>
+            ⚠️ <b>গুরুত্বপূর্ণ:</b><br>
+            🔸 নির্ধারিত সার্ভিস চার্জ অগ্রিম প্রদান করতে হবে।<br>
+            🔸 পেমেন্ট নিশ্চিত হওয়ার পরই রেফারেল কাজ শুরু হবে।<br>
+            🔸 আপনি যদি সার্ভিস চার্জ প্রদান করতে সক্ষম হন, তাহলেই ইনবক্সে যোগাযোগ করুন। অযথা মেসেজ দিয়ে নিজের ও আমাদের মূল্যবান সময় নষ্ট করবেন না।<br><br>
+            📩 <b>রেফার করতে চাইলে ইনবক্সে নিচের তথ্যগুলো পাঠান—</b><br>
+            👤 আপনার নাম<br>
+            📊 কতটি রেফার প্রয়োজন<br>
+            🆔 আপনার আইডির একটি পরিষ্কার স্ক্রিনশট<br><br>
+            🙏 ধন্যবাদ আমাদের সাথে থাকার জন্য। ❤️
+        `;
+    } else if (contextType === 'activation') {
+        headerTitle.innerText = "⭐ অ্যাকাউন্ট অ্যাক্টিভেশন সাপোর্ট ⭐";
+        badgeEl.innerText = "টাকার শহর কাস্টমার সাপোর্ট টিম";
+        bannerBox.style.display = 'block';
+        bannerContent.innerHTML = `
+            🎉 <b>টাকার শহর কাস্টমার সাপোর্ট টিমে স্বাগতম</b> 🎉<br><br>
+            🌸 আসসালামু আলাইকুম।<br>
+            কাজ, রেফার, অ্যাকাউন্ট অ্যাক্টিভেশন অথবা পেমেন্ট সংক্রান্ত সহায়তার জন্য অনুগ্রহ করে নিচের তথ্যগুলো পূরণ করে পাঠান।<br>
+            ━━━━━━━━━━━━━━━<br>
+            📋 <b>তথ্য ফরম</b><br>
+            👤 পূর্ণ নাম:<br>
+            🆔 ইউজারনেম / ইউজার আইডি:<br>
+            📱 মোবাইল নম্বর:<br>
+            💰 এমাউন্ট (৳):<br>
+            📸 পেমেন্ট / ট্রানজেকশনের স্ক্রিনশট:<br>
+            🖼️ নিজের একটি স্পষ্ট ছবি:<br>
+            🎥 নিজের একটি সংক্ষিপ্ত ভিডিও:<br>
+            📝 সমস্যা বা অনুরোধের বিবরণ:<br>
+            ━━━━━━━━━━━━━━━<br>
+            📌 <b>গুরুত্বপূর্ণ নির্দেশনা</b><br>
+            ⚠️ সকল তথ্য সঠিকভাবে প্রদান করুন।<br>
+            ⚠️ ভুল তথ্য বা ভুয়া স্ক্রিনশট প্রদান করলে আবেদন বাতিল করা হবে।<br>
+            📩 তথ্য জমা দেওয়ার পর আমাদের কাস্টমার সাপোর্ট টিম দ্রুত যাচাই করে আপনার সাথে যোগাযোগ করবে।<br><br>
+            🌹 ধন্যবাদ। টাকার শহরের সাথে থাকার জন্য।
+        `;
+    } else {
+        headerTitle.innerText = "🎧 কাস্টমার সাপোর্ট সেন্টার";
+        badgeEl.innerText = "দারাজ প্লে ইনকাম সেন্টার";
+        bannerBox.style.display = 'none';
+    }
 
     listenToLiveChatMessages(chatPhone, contextType);
 }
 
-function openGuestLiveChat() {
-    let rawPhone = document.getElementById('login-phone')?.value || document.getElementById('reg-phone')?.value;
-    let phone = normalizePhoneNumber(rawPhone);
-    if (!phone || phone.length < 10) {
-        let promptPhone = prompt("কাস্টমার সাপোর্টের সাথে কথা বলতে আপনার ফোন নাম্বারটি লিখুন:");
-        if (!promptPhone) return;
-        phone = normalizePhoneNumber(promptPhone);
-    }
-    if (phone && phone.length >= 10) {
-        currentUserPhone = phone;
-        openLiveChat('general');
-    } else {
-        alert("দয়া করে সঠিক ফোন নাম্বার দিন।");
-    }
+function dismissChatBanner() {
+    document.getElementById('chat-banner-notice-box').style.display = 'none';
 }
 
-function closeActivationModal() { document.getElementById('activation-modal').classList.remove('active'); }
+function openReferLiveChat() {
+    closeReferWarningModal();
+    openLiveChat('refer');
+}
+
+function openActivationLiveChat() {
+    closeActivationModal();
+    openLiveChat('activation');
+}
+
 function setWithdrawAmount(amt) { document.getElementById('wd-coin-amount').value = amt; }
 </script>
 </body>
