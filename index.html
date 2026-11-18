@@ -1425,10 +1425,17 @@ async function sendRegisterOTP() {
         return;
     }
 
-    // নিখুঁতভাবে চেক করা হচ্ছে নাম্বারটি ফায়ারবেসে অলরেডি আছে কিনা
+    // নিখুঁতভাবে চেক করা হচ্ছে নাম্বারটি ফায়ারবেসে অলরেডি আছে কিনা (ডকুমেন্ট আইডি এবং ফিল্ড দুটোই চেক করা হবে)
     try {
-        const existingDoc = await db.collection('users').doc(phone).get();
-        if (existingDoc.exists) {
+        const docRef = await db.collection('users').doc(phone).get();
+        if (docRef.exists) {
+            alert("⚠️ এই ফোন নাম্বারে ইতিমধ্যে একটি অ্যাকাউন্ট রেজিস্টার্ড রয়েছে! দয়া করে লগইন করুন।");
+            showLoginPage();
+            return;
+        }
+
+        const querySnap = await db.collection('users').where('phone', '==', phone).get();
+        if (!querySnap.empty) {
             alert("⚠️ এই ফোন নাম্বারে ইতিমধ্যে একটি অ্যাকাউন্ট রেজিস্টার্ড রয়েছে! দয়া করে লগইন করুন।");
             showLoginPage();
             return;
