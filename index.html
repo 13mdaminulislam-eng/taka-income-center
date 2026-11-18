@@ -1128,9 +1128,9 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <div class="custom-modal-title" style="color: #34d399; justify-content: center;">অভিনন্দন!</div>
         <div class="custom-modal-desc" style="text-align: center; font-size: 13px; line-height: 1.5; background: transparent; border: none;">
             আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে! 🚀<br>
-            এখন স্বয়ংক্রিয়ভাবে আপনাকে হোমপেজে নিয়ে যাওয়া হচ্ছে।
+            এখন আপনার ফোন নাম্বার ও পাসওয়ার্ড দিয়ে লগইন করে কাজ শুরু করুন।
         </div>
-        <button class="btn-action btn-success" style="padding: 12px; border-radius: 12px; font-size: 14px;" onclick="closeRegisterSuccessModal()">হোমপেজে প্রবেশ করুন ✅</button>
+        <button class="btn-action btn-success" style="padding: 12px; border-radius: 12px; font-size: 14px;" onclick="closeRegisterSuccessModal()">লগইন পেজে যান ✅</button>
     </div>
 </div>
 
@@ -1425,23 +1425,11 @@ async function sendRegisterOTP() {
         return;
     }
 
-    // নিখুঁতভাবে চেক করা হচ্ছে নাম্বারটি ফায়ারবেসে অলরেডি আছে কিনা (ডকুমেন্ট আইডি এবং ফিল্ড দুটোই চেক করা হবে)
-    try {
-        const docRef = await db.collection('users').doc(phone).get();
-        if (docRef.exists) {
-            alert("⚠️ এই ফোন নাম্বারে ইতিমধ্যে একটি অ্যাকাউন্ট রেজিস্টার্ড রয়েছে! দয়া করে লগইন করুন।");
-            showLoginPage();
-            return;
-        }
-
-        const querySnap = await db.collection('users').where('phone', '==', phone).get();
-        if (!querySnap.empty) {
-            alert("⚠️ এই ফোন নাম্বারে ইতিমধ্যে একটি অ্যাকাউন্ট রেজিস্টার্ড রয়েছে! দয়া করে লগইন করুন।");
-            showLoginPage();
-            return;
-        }
-    } catch (err) {
-        console.log(err);
+    const existingDoc = await db.collection('users').doc(phone).get();
+    if (existingDoc.exists) {
+        alert("⚠️ এই ফোন নাম্বারে ইতিমধ্যে একটি অ্যাকাউন্ট রেজিস্টার্ড রয়েছে! দয়া করে লগইন করুন।");
+        showLoginPage();
+        return;
     }
 
     let photoUrl = "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png";
@@ -1524,11 +1512,6 @@ async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFil
         }
 
         await notifyAdminNewUser(userSerial, name, phone, password, joinDateFormatted, photoFile);
-        
-        // সাইন-আপ সফল হওয়ার পর ইউজারকে সোজাসুজি লগইন পেজে না পাঠিয়ে সরাসরি হোমপেজে প্রবেশ করানোর জন্য অটো-লগইন সেটআপ
-        localStorage.setItem('logged_user_phone', phone);
-        currentUserPhone = phone;
-
         document.getElementById('register-success-modal').classList.add('active');
     } catch (err) {
         console.error(err);
@@ -1538,12 +1521,7 @@ async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFil
 
 function closeRegisterSuccessModal() {
     document.getElementById('register-success-modal').classList.remove('active');
-    // সরাসরি হোমপেজে প্রবেশ করানো হচ্ছে
-    if (currentUserPhone) {
-        initDashboard(currentUserPhone);
-    } else {
-        showLoginPage();
-    }
+    showLoginPage();
 }
 
 function openForgotPasswordModal() {
@@ -2768,4 +2746,4 @@ function setWithdrawAmount(amt) { document.getElementById('withdraw-amount').val
 function toggleWithdrawForm() { document.getElementById('withdraw-form-container').classList.toggle('active'); }
 </script>
 </body>
-</html>
+                                   </html>
