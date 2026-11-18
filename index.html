@@ -503,35 +503,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- স্পেশাল টাস্ক ৫০০ -->
-<div id="page-special-task" class="page" style="padding: 5px;">
-    <div class="card" style="border: 2px solid #10b981; padding: 14px;">
-        <h3 style="margin-top: 0; color: #34d399; font-size: 16px;">🎯 উইথড্র স্পেশাল টাস্ক</h3>
-        <p style="font-size: 12px; color: #94a3b8; margin-bottom: 10px;">টাকা উত্তোলনের অনুরোধ পাঠানোর জন্য এই পেজ থেকে স্পেশাল ৫০০টি ভিডিও কমপ্লিট করুন।</p>
-        <div style="text-align: left; font-size: 12px; font-weight: 700; margin-bottom: 6px;">সম্পন্ন টাস্ক <span style="float: right;" id="special-task-count">0</span> / 500</div>
-        <div style="background: #0f172a; height: 10px; border-radius: 8px; margin-bottom: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08);"><div id="special-progress-bar" style="background: #10b981; height: 100%; width: 0%; border-radius: 8px;"></div></div>
-        <button class="btn-action" style="padding: 11px; border-radius: 12px; font-size: 13px;" onclick="watchSpecialAd()">🎥 স্পেশাল ভিডিও দেখুন (<span id="special-btn-count">0</span>/500)</button>
-    </div>
-    <button class="btn-action" style="background: #475569; padding: 10px; font-size: 13px;" onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])">⬅️ ওয়ালেটে ফিরে যান</button>
-</div>
-
-<!-- ম্যান্ডেটরি টাস্ক ১৫০ -->
-<div id="page-mandatory-task" class="page" style="padding: 5px;">
-    <div class="card" style="border: 2px solid #ef4444; background: linear-gradient(145deg, #450a0a, #1e293b); padding: 14px;">
-        <div style="font-size: 24px; margin-bottom: 4px;">🎬</div>
-        <h3 style="margin-top: 0; color: #ef4444; font-size: 16px;">স্পেশাল ভিডিও টাস্ক শর্ত</h3>
-        <p style="font-size: 12px; color: #cbd5e1; line-height: 1.4; margin-bottom: 12px;">পেমেন্ট উত্তোলন সম্পন্ন করার পরবর্তী ধাপে যেতে আপনাকে বাধ্যতামূলকভাবে স্পেশাল মোট <b>১৫০টি ভিডিও</b> দেখতে হবে।</p>
-        
-        <div style="text-align: left; font-size: 12px; font-weight: 700; margin-bottom: 6px;">দেখা ভিডিও: <span style="float: right; color: #34d399;" id="mandatory-task-count">0</span> / 150</div>
-        <div style="background: #0f172a; height: 10px; border-radius: 8px; margin-bottom: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08);">
-            <div id="mandatory-progress-bar" style="background: linear-gradient(90deg, #ef4444, #10b981); height: 100%; width: 0%; border-radius: 8px; transition: width 0.3s ease;"></div>
-        </div>
-        
-        <button class="btn-action" style="background: linear-gradient(135deg, #ef4444, #991b1b); padding: 11px; border-radius: 12px; font-size: 13px;" onclick="watchMandatoryAd()">🎥 স্পেশাল ভিডিও দেখুন (<span id="mandatory-btn-count">0</span>/150)</button>
-    </div>
-    <button class="btn-action" style="background: #475569; padding: 10px; font-size: 13px;" onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])">⬅️ ওয়ালেটে ফিরে যান</button>
-</div>
-
 <!-- লাইভ চ্যাট পেজ -->
 <div id="page-live-chat" class="page" style="padding: 5px;">
     <div style="background: linear-gradient(135deg, #065f46, #0284c7); border-radius: 20px; padding: 16px 14px; margin-bottom: 10px; text-align: center; box-shadow: 0 8px 25px rgba(16,185,129,0.3); border: 1.5px solid rgba(255,255,255,0.18);">
@@ -792,7 +763,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         </div>
     </div>
 
-    <button class="btn-withdraw-action" onclick="processWithdraw()">💲 শর্ত মানলে এখনই উইথড্র করুন</button>
+    <button class="btn-withdraw-action" onclick="processWithdraw()">💲 পেমেন্ট অনুরোধ পাঠান</button>
 
     <a href="#" class="wallet-menu-card" onclick="openPaymentReviewModal()">
         <div class="wallet-menu-left">
@@ -956,105 +927,14 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<div id="refer-modal" class="custom-modal-overlay">
-    <div class="custom-modal-box" style="border: 1.5px solid #10b981; background: linear-gradient(145deg, #063822, #0f172a);">
-        <div class="custom-modal-title" style="color: #34d399;">🧑‍💼 রেফারেল সাপোর্ট সেন্টার</div>
-        <div class="custom-modal-desc" style="font-size: 12px; line-height: 1.5;">
-            💎 <b>「দারাজ প্লে ইনকাম সেন্টার」</b> 💎<br>
-            🎉 <b>রেফারেল সাপোর্ট টিমে স্বাগতম!</b><br><br>
-            ⚠️ রিডিম করতে হলে অন্তত **১১টি রেফার** প্রয়োজন!<br>
-            আপনার বর্তমান রেফার: <span id="modal-current-ref" style="font-weight:700; color:#34d399;">0</span>টি<br>
-            ঘাটতি রেফার: <span id="modal-deficit-ref" style="font-weight:700; color:#ef4444;">0</span>টি<br><br>
-            ✅ প্রতি সফল রেফারে <b>১১১ টাকা</b> পাবেন。<br>
-            ✅ ১১টি সফল রেফারে মোট <b>১,২২১ টাকা</b> আপনার ব্যালেন্সে যোগ হবে。<br>
-            ✅ সার্ভিস চার্জ: <b>প্রতি রেফার ১৫ টাকা</b> (১১টি রেফারের জন্য ১৬৫ টাকা)।<br>
-            ⏱️ পেমেন্ট নিশ্চিত হওয়ার ৩০ মিনিট থেকে ১ ঘণ্টার মধ্যে রেফার সম্পন্ন হবে。<br><br>
-            📌 বিস্তারিত নিয়মাবলী দেখে সরাসরি কথা বলতে নিচের বাটনে ক্লিক করুন।
-        </div>
-        <button class="btn-action btn-success" style="padding: 12px; font-size: 13px; border-radius: 12px;" onclick="startBuyReferLiveChatFromWithdraw()">💬 রেফার কিনতে লাইভ চ্যাট শুরু করুন</button>
-        <button class="custom-modal-btn-cancel" style="margin-top: 6px;" onclick="closeReferModal()">বাতিল</button>
-    </div>
-</div>
-
-<div id="mandatory-task-modal" class="custom-modal-overlay">
-    <div class="custom-modal-box">
-        <div class="custom-modal-title"><span>🎬</span> স্পেশাল টাস্ক প্রয়োজন!</div>
-        <div class="custom-modal-desc">
-            আপনার ১১টি রেফার সফলভাবে পূরণ হয়েছে! এখন পেমেন্ট উত্তোলনের পরবর্তী ধাপে যেতে আলাদা টাস্ক পেজ থেকে <b>স্পেশাল ১৫০টি ভিডিও</b> দেখে কমপ্লিট করতে হবে。<br><br>
-            বর্তমান দেখা ভিডিও: <span id="modal-mandatory-watched" style="font-weight:700; color:#34d399;">0</span> / 150টি
-        </div>
-        <button class="btn-action btn-success" style="padding: 10px; font-size: 13px;" onclick="goToMandatoryTaskPage()">🎥 ভিডিও টাস্ক পেজে যান</button>
-        <button class="custom-modal-btn-cancel" style="margin-top: 6px;" onclick="closeMandatoryTaskModal()">বাতিল</button>
-    </div>
-</div>
-
 <div id="activation-modal" class="custom-modal-overlay">
     <div class="activation-modal-box">
         <div class="activation-badge">⚠️ ভেরিফিকেশন ও অ্যাক্টিভেশন প্রয়োজন</div>
-        <div style="font-size: 17px; font-weight: 800; color: #ef4444; margin-bottom: 6px;">ভিডিও দেখার রুলস-এ সমস্যা পাওয়া গেছে!</div>
+        <div style="font-size: 17px; font-weight: 800; color: #ef4444; margin-bottom: 6px;">অ্যাকাউন্ট এখনও ভেরিফাই বা অ্যাক্টিভ হয়নি!</div>
         <p style="font-size: 12px; color: #cbd5e1; line-height: 1.5; margin-bottom: 10px; font-weight: 600;">
-            আপনার ভিডিও দেখার কার্যক্রমে রুলস অনুযায়ী ত্রুটি পাওয়া গেছে। অ্যাকাউন্টটি অ্যাক্টিভ করতে নিচের লাইভ চ্যাটে যোগাযোগ করে <b>১১১ টাকা</b> দিয়ে সক্রিয় করুন।
+            এডমিন কর্তৃক আপনার অ্যাকাউন্টটি এখনও অ্যাক্টিভ (`is_active: true`) করা হয়নি। এডমিন প্যানেল থেকে অ্যাকাউন্ট অ্যাক্টিভ করার পর আপনি পেমেন্ট অনুরোধ পাঠাতে পারবেন।
         </p>
-        
-        <div class="activation-benefits">
-            <div style="font-size: 11px; font-weight: 700; color: #34d399; margin-bottom: 6px; text-transform: uppercase;">🌟 বিশেষ সুবিধাসমূহ:</div>
-            <div class="activation-benefit-item"><span style="font-size: 14px;">⚡</span> <span>দ্রুত ও ঝামেলাহীন উইথড্র সুবিধা</span></div>
-            <div class="activation-benefit-item"><span style="font-size: 14px;">🚀</span> <span>এক্সক্লুসিভ প্রিমিয়াম ইনকাম ফিচার</span></div>
-        </div>
-
-        <div class="activation-btn-group">
-            <button class="btn-act-contact" onclick="openActivationIntroPopup()">💬 অ্যাক্টিভেশন লাইভ চ্যাট</button>
-            <button class="btn-act-cancel" onclick="closeActivationModal()">বাতিল</button>
-        </div>
-    </div>
-</div>
-
-<div id="activation-intro-popup" class="custom-modal-overlay">
-    <div class="custom-modal-box" style="border: 1.5px solid #38bdf8; background: linear-gradient(145deg, #0f172a, #1e293b);">
-        <div class="custom-modal-title" style="color: #38bdf8;">🔰 একাউন্ট ভেরিফাই টিম 🔰</div>
-        <div class="custom-modal-desc" style="font-size: 12px; line-height: 1.55;">
-            💎 <b>「দারাজ প্লে ইনকাম সেন্টার」</b> 💎<br>
-            🎉 <b>কাস্টমার সাপোর্ট টিমে স্বাগতম</b> 🎉<br><br>
-            🎁 <b>অ্যাকাউন্ট অ্যাক্টিভেশনের সুবিধাসমূহ:</b><br>
-            ✅ VIP সদস্য হিসেবে কাজ করার সুযোগ<br>
-            ✅ নিয়মিত আয়ের সুবিধা<br>
-            ✅ সহজ ও দ্রুত টাকা উত্তোলন<br>
-            ✅ রেফার বোনাস ও বিশেষ অফার<br>
-            ━━━━━━━━━━━━━━━<br>
-            💳 <b>অ্যাকাউন্ট অ্যাক্টিভ করতে ১১১ টাকা পেমেন্ট করতে হবে।</b><br>
-            📱 <b>পেমেন্ট মাধ্যম:</b> বিকাশ / নগদ<br>
-            📌 পেমেন্ট করতে আগ্রহী হলে নিচের বাটনে ক্লিক করুন।<br><br>
-            🌹 ধন্যবাদ।
-        </div>
-        <button class="btn-action btn-success" style="padding: 12px; font-size: 13px; border-radius: 12px;" onclick="showActivationFormNotice()">✅ বুঝতে পেরেছি / তথ্য ফরম দেখুন</button>
-        <button class="custom-modal-btn-cancel" style="margin-top: 6px;" onclick="closeActivationIntroPopup()">বাতিল</button>
-    </div>
-</div>
-
-<div id="activation-form-modal" class="custom-modal-overlay">
-    <div class="custom-modal-box" style="border: 1.5px solid #10b981; background: #0f172a; max-width: 350px;">
-        <div class="custom-modal-title" style="color: #34d399; font-size: 15px;">🎉 দারাজ প্লে কাস্টমার সাপোর্ট টিম</div>
-        <div class="custom-modal-desc" style="font-size: 11.5px; line-height: 1.5; max-height: 310px; overflow-y: auto;">
-            🌸 <b>আসসালামু আলাইকুম।</b><br>
-            কাজ, রেফার, অ্যাকাউন্ট অ্যাক্টিভেশন অথবা পেমেন্ট সংক্রান্ত সহায়তার জন্য অনুগ্রহ করে নিচের তথ্যগুলো পূরণ করে লাইভ চ্যাটে পাঠান।<br>
-            ━━━━━━━━━━━━━━━<br>
-            📋 <b>তথ্য ফরম</b><br>
-            👤 পূর্ণ নাম:<br>
-            🆔 ইউজারনেম / ইউজার আইডি:<br>
-            📱 মোবাইল নম্বর:<br>
-            💰 এমাউন্ট (৳):<br>
-            📸 পেমেন্ট / ট্রানজেকশনের স্ক্রিনশট:<br>
-            🖼️ নিজের একটি স্পষ্ট ছবি:<br>
-            🎥 নিজের একটি সংক্ষিপ্ত ভিডিও:<br>
-            📝 সমস্যা বা অনুরোধের বিবরণ:<br>
-            ━━━━━━━━━━━━━━━<br>
-            📌 <b>গুরুত্বপূর্ণ নির্দেশনা</b><br>
-            ⚠️ সকল তথ্য সঠিকভাবে প্রদান করুন।<br>
-            📩 তথ্য জমা দেওয়ার পর আমাদের কাস্টমার সাপোর্ট টিম যাচাই করবে।<br><br>
-            🌹 ধন্যবাদ।
-        </div>
-        <button class="btn-action btn-success" style="padding: 12px; font-size: 13px; border-radius: 12px;" onclick="startActivationLiveChat()">💬 লাইভ চ্যাট শুরু করুন</button>
-        <button class="custom-modal-btn-cancel" style="margin-top: 6px;" onclick="closeActivationFormModal()">বাতিল</button>
+        <button class="btn-action btn-success" style="padding: 10px; font-size: 13px;" onclick="closeActivationModal()">বুঝেছি</button>
     </div>
 </div>
 
@@ -1069,7 +949,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- আকর্ষণীয় প্রিমিয়াম উইথড্র ফরম ও সাকসেস মডাল -->
+<!-- আকর্ষণীয় প্রিমিয়াম উইথড্র ফরম মডাল -->
 <div id="withdraw-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="border: 2px solid #38bdf8; background: linear-gradient(145deg, #0f172a, #1e293b); max-width: 360px;">
         <div class="custom-modal-title" style="color: #38bdf8;">💳 পেমেন্ট উত্তোলনের তথ্য ফরম</div>
@@ -1096,7 +976,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <input type="text" class="input-field" id="wd-phone-number" placeholder="০১৭xxxxxxxx">
 
             <label class="wallet-label" style="text-align: left;">উত্তোলন করার কয়েনের পরিমাণ:</label>
-            <input type="number" class="input-field" id="wd-coin-amount" placeholder="যেমন: ১০০০ (প্রতি ১০০০ = ২০৳)">
+            <input type="number" class="input-field" id="wd-coin-amount" placeholder="যেমন: ১০০০">
 
             <div class="quick-amounts" style="margin-bottom: 12px;">
                 <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(1000)">১০০০</button>
@@ -1108,20 +988,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 
         <button class="btn-action btn-success" style="padding: 12px; border-radius: 12px; font-size: 14px;" onclick="submitWithdrawFormToAdmin()">অনুরোধ পাঠান 🚀</button>
         <button class="custom-modal-btn-cancel" style="margin-top: 8px;" onclick="closeWithdrawModal()">বাতিল</button>
-    </div>
-</div>
-
-<!-- উইথড্র সাবমিট হওয়ার পর অভিনন্দন ও হিস্টরি চেক করার মডাল -->
-<div id="withdraw-success-modal" class="custom-modal-overlay">
-    <div class="custom-modal-box" style="border: 2px solid #10b981; background: linear-gradient(145deg, #063822, #0f172a); text-align: center;">
-        <div style="font-size: 36px; margin-bottom: 6px;">🎉</div>
-        <div class="custom-modal-title" style="color: #34d399; justify-content: center; font-size: 18px;">অভিনন্দন!</div>
-        <div class="custom-modal-desc" style="text-align: center; font-size: 13px; line-height: 1.6; background: transparent; border: none;">
-            আপনার পেমেন্ট সাবমিট সফল হয়েছে! 🚀<br>
-            অনুগ্রহ করে আপনার **উত্তোলন হিস্টরি** চেক করুন অথবা নিচের বাটনে ক্লিক করে আপনার পেমেন্টের স্ট্যাটাস (পেন্ডিং বা সফল) সময় ও তারিখ অনুযায়ী দেখে নিন।
-        </div>
-        <button class="btn-action btn-success" style="padding: 12px; border-radius: 12px; font-size: 14px; font-weight: 800;" onclick="goToWithdrawHistoryPage()">🕒 উইথড্র হিস্টরি দেখুন ✅</button>
-        <button class="custom-modal-btn-cancel" style="margin-top: 8px;" onclick="closeWithdrawSuccessModal()">বন্ধ করুন</button>
     </div>
 </div>
 
@@ -1172,7 +1038,7 @@ const ADMIN_SECRET_PIN = "16269";
 
 let currentUserPhone = localStorage.getItem('logged_user_phone') || null;
 let userId = "", userName = "", userPhotoUrl = "";
-let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, mandatoryWatched = 0, isActive = false, formattedJoinDate = "---", userSerial = "---";
+let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, isActive = false, formattedJoinDate = "---", userSerial = "---";
 let claimedBonuses = {};
 let historyDates = {};
 let rawWithdrawRequests = [];
@@ -1488,8 +1354,6 @@ async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFil
             processed_refers: 0,
             dailyWatched: 0,
             totalWatched: 0,
-            specialWatched: 0,
-            mandatoryWatched: 0,
             is_active: false,
             last_reset_date: today,
             last_active_time: Date.now(),
@@ -1641,8 +1505,6 @@ async function initDashboard(phone) {
     userBalance = data.balance || 0;
     dailyWatched = data.dailyWatched || 0;
     lifetimeWatched = data.totalWatched || 0;
-    specialWatched = data.specialWatched || 0;
-    mandatoryWatched = data.mandatoryWatched || 0;
     totalRefers = data.refers || 0;
     claimedBonuses = data.claimedBonuses || {};
     historyDates = data.history_dates || {};
@@ -1661,8 +1523,6 @@ async function initDashboard(phone) {
             totalRefers = freshData.refers || 0;
             userSerial = freshData.serial || userSerial;
             isActive = freshData.is_active || false;
-            specialWatched = freshData.specialWatched || 0;
-            mandatoryWatched = freshData.mandatoryWatched || 0;
             claimedBonuses = freshData.claimedBonuses || {};
             historyDates = freshData.history_dates || {};
             updateUI();
@@ -1789,14 +1649,7 @@ function updateUI() {
     if(document.getElementById('history-total-watched')) document.getElementById('history-total-watched').innerText = lifetimeWatched + " টি";
     if(document.getElementById('history-total-income')) document.getElementById('history-total-income').innerText = (lifetimeWatched * 20) + " পয়েন্ট";
 
-    document.getElementById('special-task-count').innerText = specialWatched;
-    if(document.getElementById('special-btn-count')) document.getElementById('special-btn-count').innerText = specialWatched;
-    document.getElementById('mandatory-task-count').innerText = mandatoryWatched;
-    if(document.getElementById('mandatory-btn-count')) document.getElementById('mandatory-btn-count').innerText = mandatoryWatched;
-
     if(document.getElementById('progress-bar')) document.getElementById('progress-bar').style.width = (dailyWatched / 100 * 100) + "%";
-    if(document.getElementById('special-progress-bar')) document.getElementById('special-progress-bar').style.width = (specialWatched / 500 * 100) + "%";
-    if(document.getElementById('mandatory-progress-bar')) document.getElementById('mandatory-progress-bar').style.width = (mandatoryWatched / 150 * 100) + "%";
 }
 
 function loadReferralsList() {
@@ -1996,49 +1849,12 @@ async function watchRealAd() {
     alert("🎉 ২০ কয়েন সফলভাবে যোগ হয়েছে!");
 }
 
-async function watchSpecialAd() {
-    if(specialWatched >= 500) { alert("আপনার ৫০০টি স্পেশাল ভিডিও দেখা সম্পন্ন হয়েছে!"); return; }
-    if (typeof show_11149595 === 'function') { try { await show_11149595(); } catch (e) {} }
-    specialWatched++;
-    await db.collection('users').doc(currentUserPhone).update({ specialWatched: specialWatched });
-    updateUI();
-    alert("🎉 ১টি স্পেশাল ভিডিও দেখা সম্পন্ন হয়েছে! (" + specialWatched + "/500)");
-}
-
-async function watchMandatoryAd() {
-    if(mandatoryWatched >= 150) { alert("আপনার ১৫০টি ভিডিও দেখা সম্পন্ন হয়েছে!"); return; }
-    if (typeof show_11149595 === 'function') { try { await show_11149595(); } catch (e) {} }
-    mandatoryWatched++;
-    await db.collection('users').doc(currentUserPhone).update({ mandatoryWatched: mandatoryWatched });
-    updateUI();
-    alert("🎉 ১টি স্পেশাল ভিডিও দেখা সম্পন্ন হয়েছে! (" + mandatoryWatched + "/150)");
-}
-
-// ওয়ালেট পেজে শর্ত চেক করে উইথড্র ফর্ম ওপেন করার ফাংশন
+// ওয়ালেট পেজে is_active চেক করে সরাসরি উইথড্র ফর্ম ওপেন করার ফাংশন
 function processWithdraw() {
     if (userBalance < 1000) { alert("⚠️ ন্যূনতম ১০০০ কয়েন প্রয়োজন!"); return; }
     
-    if (totalRefers < 11) {
-        document.getElementById('modal-current-ref').innerText = totalRefers;
-        document.getElementById('modal-deficit-ref').innerText = 11 - totalRefers;
-        document.getElementById('refer-modal').classList.add('active');
-        return; 
-    }
-
-    if (mandatoryWatched < 150) {
-        document.getElementById('modal-mandatory-watched').innerText = mandatoryWatched;
-        document.getElementById('mandatory-task-modal').classList.add('active');
-        return;
-    }
-
     if (!isActive) {
         document.getElementById('activation-modal').classList.add('active');
-        return;
-    }
-
-    if (specialWatched < 500) {
-        document.getElementById('modal-special-watched').innerText = specialWatched;
-        document.getElementById('special-task-modal').classList.add('active');
         return;
     }
 
@@ -2050,16 +1866,6 @@ function processWithdraw() {
 
 function closeWithdrawModal() {
     document.getElementById('withdraw-modal').classList.remove('active');
-}
-
-function closeWithdrawSuccessModal() {
-    document.getElementById('withdraw-success-modal').classList.remove('active');
-}
-
-function goToWithdrawHistoryPage() {
-    closeWithdrawSuccessModal();
-    loadPaymentHistory();
-    switchPage('payment-history', null);
 }
 
 // পেমেন্ট সাবমিট এবং টেলিগ্রাম বটে নোটিফিকেশন পাঠানোর ফাংশন
@@ -2160,8 +1966,9 @@ async function processWithdrawSubmission(name, number, amount, taka, method, pho
             });
         }
 
-        // সফলভাবে সাবমিট হওয়ার পর অভিনন্দন ও উইথড্র হিস্টরি চেক করার মডাল ওপেন হবে
-        document.getElementById('withdraw-success-modal').classList.add('active');
+        // সফলভাবে সাবমিট হওয়ার পর সরাসরি উইথড্র হিস্টরি পেজে নিয়ে যাওয়া হবে
+        loadPaymentHistory();
+        switchPage('payment-history', null);
     } catch (e) {
         console.error("Withdraw notification error:", e);
         alert("পেমেন্ট অনুরোধ পাঠাতে সমস্যা হয়েছে।");
@@ -2233,13 +2040,7 @@ function openLiveChat(contextType = 'general') {
     document.getElementById('chat-user-phone-label').innerText = "ইউজার নাম্বার: " + maskPhoneNumber(chatPhone);
 
     const badgeEl = document.getElementById('chat-channel-badge');
-    if (contextType === 'buy_refer') {
-        badgeEl.innerText = "🧑‍💼 রেফারেল সাপোর্ট সেন্টার - দারাজ প্লে ইনকাম সেন্টার";
-    } else if (contextType === 'activation') {
-        badgeEl.innerText = "🔰 অ্যাকাউন্ট ভেরিফিকেশন টিম - দারাজ প্লে ইনকাম সেন্টার";
-    } else {
-        badgeEl.innerText = "দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট";
-    }
+    badgeEl.innerText = "দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট";
 
     listenToLiveChatMessages(chatPhone, contextType);
 }
@@ -2260,522 +2061,6 @@ function openGuestLiveChat() {
     }
 }
 
-function startBuyReferLiveChatFromWithdraw() {
-    closeReferModal();
-    openLiveChat('buy_refer');
-}
-
-function openActivationIntroPopup() {
-    closeActivationModal();
-    document.getElementById('activation-intro-popup').classList.add('active');
-}
-function closeActivationIntroPopup() {
-    document.getElementById('activation-intro-popup').classList.remove('active');
-}
-function showActivationFormNotice() {
-    closeActivationIntroPopup();
-    document.getElementById('activation-form-modal').classList.add('active');
-}
-function closeActivationFormModal() {
-    document.getElementById('activation-form-modal').classList.remove('active');
-}
-function startActivationLiveChat() {
-    closeActivationFormModal();
-    openLiveChat('activation');
-}
-
-function goBackFromChat() {
-    if (chatUnsubscribe) { chatUnsubscribe(); chatUnsubscribe = null; }
-    if (localStorage.getItem('logged_user_phone')) {
-        switchPage('home', document.querySelectorAll('.nav-item')[0]);
-        document.getElementById('bottom-nav-bar').style.display = 'flex';
-    } else {
-        showLoginPage();
-    }
-}
-
-function onUserFileSelected(input, type) {
-    if (input.files && input.files[0]) {
-        const file = input.files[0];
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            selectedUserMedia = {
-                dataUrl: e.target.result,
-                type: type
-            };
-            document.getElementById('chat-file-name').innerText = (type === 'image' ? '📸 ছবি: ' : '🎥 ভিডিও: ') + file.name;
-            document.getElementById('chat-file-preview-box').style.display = 'flex';
-        };
-        reader.readAsDataURL(file);
-    }
-}
-
-function clearChatFile() {
-    selectedUserMedia = null;
-    document.getElementById('user-chat-image').value = '';
-    document.getElementById('user-chat-video').value = '';
-    document.getElementById('chat-file-preview-box').style.display = 'none';
-}
-
-function onAdminFileSelected(input) {
-    if (input.files && input.files[0]) {
-        const file = input.files[0];
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            selectedAdminMedia = {
-                dataUrl: e.target.result,
-                type: file.type.startsWith('video') ? 'video' : 'image'
-            };
-            document.getElementById('admin-file-name').innerText = file.name;
-            document.getElementById('admin-file-preview-box').style.display = 'flex';
-        };
-        reader.readAsDataURL(file);
-    }
-}
-
-function clearAdminFile() {
-    selectedAdminMedia = null;
-    document.getElementById('admin-chat-file').value = '';
-    document.getElementById('admin-file-preview-box').style.display = 'none';
-}
-
-function formatMessageTime(timestamp) {
-    if (!timestamp) return new Date().toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' });
-    let dateObj = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
-    return dateObj.toLocaleDateString('bn-BD', { day: 'numeric', month: 'short' }) + ', ' + dateObj.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' });
-}
-
-function getContextWelcomeHtml(contextType) {
-    if (contextType === 'buy_refer') {
-        return `
-            <div style="background: linear-gradient(145deg, #063822, #1e293b); border: 1.5px solid #10b981; padding: 14px; border-radius: 16px; max-width: 92%; align-self: flex-start; color: #f8fafc; font-size: 12px; font-weight: 600; line-height: 1.55;">
-                🧑‍💼 <b>রেফারেল সাপোর্ট সেন্টার</b> 🧑‍💼<br>
-                🌺 <b>স্বাগতম ও শুভেচ্ছা</b> 🌺<br><br>
-                আসসালামু আলাইকুম। 😊<br>
-                <b>দারাজ প্লে ইনকাম সেন্টার</b> রেফারেল সাপোর্ট সেন্টারে আপনাকে আন্তরিক স্বাগতম। এখানে রেফারেল সংক্রান্ত সকল ধরনের সহযোগিতা দ্রুত ও নির্ভরযোগ্যভাবে প্রদান করা হয়।<br><br>
-                🎁 <b>রেফারেল সুবিধাসমূহ:</b><br>
-                ✅ প্রতি সফল রেফারে ১১১ টাকা পাবেন。<br>
-                ✅ ১১টি সফল রেফারে মোট ১,২২১ টাকা পাবেন, যা আপনার বর্তমান ব্যালেন্সের সাথে যোগ হয়ে উত্তোলন করতে পারবেন।<br>
-                ✅ একবার রেফার সম্পন্ন হলে পুনরায় রেফারের কোনো ঝামেলা থাকবে না।<br>
-                ✅ এরপর আপনার সুবিধামতো যেকোনো সময় টাকা উত্তোলন করতে পারবেন।<br><br>
-                💰 <b>সার্ভিস চার্জ:</b> প্রতি রেফার ১৫ টাকা<br>
-                📊 <b>উদাহরণ:</b> ১১টি রেফারের জন্য মোট চার্জ ১৬৫ টাকা<br><br>
-                ⏱️ <b>সময়সীমা:</b> পেমেন্ট নিশ্চিত হওয়ার ৩০ মিনিট থেকে ১ ঘণ্টার মধ্যে রেফার সম্পন্ন করা হবে।<br><br>
-                ⚠️ <b>গুরুত্বপূর্ণ:</b><br>
-                🔸 নির্ধারিত সার্ভিস চার্জ অগ্রিম প্রদান করতে হবে।<br>
-                🔸 পেমেন্ট নিশ্চিত হওয়ার পরই রেফারেল কাজ শুরু হবে।<br>
-                🔸 আপনি যদি সার্ভিস চার্জ প্রদান করতে সক্ষম হন, তাহলেই ইনবক্সে যোগাযোগ করুন। অযথা মেসেজ দিয়ে নিজের ও আমাদের মূল্যবান সময় নষ্ট করবেন না।<br><br>
-                📩 <b>রেফার করতে চাইলে ইনবক্সে নিচের তথ্যগুলো পাঠান—</b><br>
-                👤 আপনার নাম<br>
-                📊 কতটি রেফার প্রয়োজন<br>
-                🆔 আপনার আইডির একটি পরিষ্কার স্ক্রিনশট<br><br>
-                🙏 ধন্যবাদ আমাদের সাথে থাকার জন্য। ❤️
-            </div>
-        `;
-    } else if (contextType === 'activation') {
-        return `
-            <div style="background: linear-gradient(145deg, #1e293b, #0f172a); border: 1.5px solid #38bdf8; padding: 14px; border-radius: 16px; max-width: 92%; align-self: flex-start; color: #f8fafc; font-size: 12px; font-weight: 600; line-height: 1.55;">
-                🎉 <b>দারাজ প্লে ইনকাম সেন্টার কাস্টমার সাপোর্ট টিমে স্বাগতম</b> 🎉<br><br>
-                🌸 আসসালামু আলাইকুম।<br>
-                কাজ, রেফার, অ্যাকাউন্ট অ্যাক্টিভেশন অথবা পেমেন্ট সংক্রান্ত সহায়তার জন্য অনুগ্রহ করে নিচের তথ্যগুলো পূরণ করে পাঠান।<br>
-                ━━━━━━━━━━━━━━━<br>
-                📋 <b>তথ্য ফরম</b><br>
-                👤 পূর্ণ নাম:<br>
-                🆔 ইউজারনেম / ইউজার আইডি:<br>
-                📱 মোবাইল নম্বর:<br>
-                💰 এমাউন্ট (৳):<br>
-                📸 পেমেন্ট / ট্রানজেকশনের স্ক্রিনশট:<br>
-                🖼️ নিজের একটি স্পষ্ট ছবি:<br>
-                🎥 নিজের একটি সংক্ষিপ্ত ভিডিও:<br>
-                📝 সমস্যা বা অনুরোধের বিবরণ:<br>
-                ━━━━━━━━━━━━━━━<br>
-                📌 <b>গুরুত্বপূর্ণ নির্দেশনা</b><br>
-                ⚠️ সকল তথ্য সঠিকভাবে প্রদান করুন।<br>
-                ⚠️ ভুল তথ্য বা ভুয়া স্ক্রিনশট প্রদান করলে আবেদন বাতিল করা হবে।<br>
-                📩 তথ্য জমা দেওয়ার পর আমাদের কাস্টমার সাপোর্ট টিম দ্রুত যাচাই করে আপনার সাথে যোগাযোগ করবে।<br><br>
-                🌹 ধন্যবাদ। <b>দারাজ প্লে ইনকাম সেন্টারের</b> সাথে থাকার জন্য।
-            </div>
-        `;
-    } else {
-        return `
-            <div style="background: linear-gradient(145deg, #062822, #1e293b); border: 1.5px solid #34d399; padding: 14px; border-radius: 16px; max-width: 92%; align-self: flex-start; color: #f8fafc; font-size: 12px; font-weight: 600; line-height: 1.55;">
-                🎧 <b>দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট</b> 🎧<br><br>
-                🌸 <b>আসসালামু আলাইকুম!</b> আমাদের কাস্টমার সাপোর্ট সেন্টারে আপনাকে স্বাগতম।<br><br>
-                📌 এখানে অ্যাকাউন্ট সংক্রান্ত যেকোনো তথ্য ও সমস্যার সমাধান দ্রুত দেওয়া হয়:<br>
-                ✅ লগইন বা পাসওয়ার্ড সংক্রান্ত সমস্যা<br>
-                ✅ ডেইলি টাস্ক ও বিজ্ঞাপন দেখার নিয়মাবলী<br>
-                ✅ ওয়ালেট ও ব্যালেন্স আপডেট সংক্রান্ত জিজ্ঞাসা<br>
-                ✅ পেমেন্ট বা উইথড্র সংক্রান্ত সাধারণ সাহায্য<br><br>
-                📩 আপনার যেকোনো সমস্যা বা প্রশ্ন নিচে বিস্তারিত লিখে পাঠান (প্রয়োজনে ছবি বা ভিডিও যুক্ত করুন)। আমাদের সাপোর্ট টিম দ্রুত আপনার সাথে যোগাযোগ করবে।<br><br>
-                🌹 ধন্যবাদ আমাদের সাথে থাকার জন্য।
-            </div>
-        `;
-    }
-}
-
-function listenToLiveChatMessages(phone, contextType = 'general') {
-    const container = document.getElementById('chat-messages-container');
-    if (!container) return;
-
-    if (chatUnsubscribe) { chatUnsubscribe(); }
-
-    const uniqueChatDocId = phone + "_" + contextType;
-
-    db.collection('chats').doc(uniqueChatDocId).onSnapshot((docSnap) => {
-        if (docSnap.exists) {
-            const chatData = docSnap.data();
-            const activeCall = chatData.activeCall;
-            const callBox = document.getElementById('user-incoming-call-box');
-            const callAlertText = document.getElementById('user-call-alert-text');
-            
-            if (activeCall && activeCall.status === 'ringing') {
-                userCurrentCallUrl = activeCall.url;
-                if (callBox) {
-                    callBox.style.display = 'block';
-                    callAlertText.innerText = activeCall.type === 'video' ? "📹 এডমিন আপনাকে ভিডিও কল দিয়েছেন!" : "📞 এডমিন আপনাকে অডিও কল দিয়েছেন!";
-                }
-            } else {
-                if (callBox) { callBox.style.display = 'none'; }
-                userCurrentCallUrl = null;
-            }
-        }
-    });
-
-    chatUnsubscribe = db.collection('chats').doc(uniqueChatDocId).collection('messages')
-        .orderBy('timestamp', 'asc')
-        .onSnapshot((snapshot) => {
-            container.innerHTML = getContextWelcomeHtml(contextType);
-            snapshot.forEach((docSnap) => {
-                const msg = docSnap.data();
-                const isUser = msg.sender === 'user';
-                const timeStr = formatMessageTime(msg.timestamp);
-                
-                let mediaHtml = '';
-                if (msg.mediaUrl) {
-                    if (msg.mediaType === 'video') {
-                        mediaHtml = `<video src="${msg.mediaUrl}" controls controlsList="nodownload" oncontextmenu="return false;" onclick="openMediaLightbox('${msg.mediaUrl}', 'video', false)" class="chat-media-preview"></video>`;
-                    } else {
-                        mediaHtml = `<img src="${msg.mediaUrl}" oncontextmenu="return false;" onclick="openMediaLightbox('${msg.mediaUrl}', 'image', false)" class="chat-media-preview" alt="Attachment">`;
-                    }
-                }
-
-                const bubble = document.createElement('div');
-                bubble.style.cssText = isUser ?
-                    "background: linear-gradient(135deg, #0284c7, #0369a1); color: white; padding: 12px 14px; border-radius: 14px; max-width: 85%; align-self: flex-end; font-size: 13px; font-weight: 600; line-height: 1.4; word-break: break-word; box-shadow: 0 4px 12px rgba(2,132,199,0.3);" :
-                    "background: #10b981; color: #0f172a; padding: 12px 14px; border-radius: 14px; max-width: 85%; align-self: flex-start; font-size: 13px; font-weight: 700; line-height: 1.4; word-break: break-word; box-shadow: 0 4px 12px rgba(16,185,129,0.3);";
-                
-                bubble.innerHTML = `${mediaHtml} ${msg.text ? `<div>${msg.text}</div>` : ''} <div class="chat-msg-time" style="${isUser ? 'color:#e0f2fe;' : 'color:#064e3b;'}">${timeStr}</div>`;
-                container.appendChild(bubble);
-            });
-            container.scrollTop = container.scrollHeight;
-        });
-}
-
-function joinIncomingCall() {
-    if (userCurrentCallUrl) {
-        window.open(userCurrentCallUrl, '_blank');
-    } else {
-        alert("কল লিঙ্ক পাওয়া যায়নি!");
-    }
-}
-
-async function sendLiveChatMessage() {
-    const input = document.getElementById('chat-input-message');
-    const text = input.value.trim();
-    let phone = currentUserPhone || normalizePhoneNumber(document.getElementById('login-phone')?.value || document.getElementById('reg-phone')?.value);
-
-    if (!text && !selectedUserMedia) return;
-    if (!phone) {
-        let promptPhone = prompt("মেসেজ পাঠানোর জন্য আপনার ফোন নাম্বারটি লিখুন:");
-        if (!promptPhone) return;
-        phone = normalizePhoneNumber(promptPhone);
-        currentUserPhone = phone;
-    }
-
-    let mediaUrl = selectedUserMedia ? selectedUserMedia.dataUrl : null;
-    let mediaType = selectedUserMedia ? selectedUserMedia.type : null;
-
-    input.value = '';
-    clearChatFile();
-
-    const senderDisplayName = userName || "অতিথি ইউজার";
-    let topicTag = currentChatContextType === 'buy_refer' ? '[রেফার ক্রয়]' : (currentChatContextType === 'activation' ? '[অ্যাক্টিভেশন]' : '[কাস্টমার সাপোর্ট]');
-    const uniqueChatDocId = phone + "_" + currentChatContextType;
-
-    try {
-        await db.collection('chats').doc(uniqueChatDocId).set({
-            phone: phone,
-            context: currentChatContextType,
-            userName: senderDisplayName,
-            lastMessage: `${topicTag} ` + (text || (mediaType === 'video' ? '[ভিডিও ফাইল]' : '[ছবি ফাইল]')),
-            unreadByAdmin: true,
-            last_active_time: Date.now(),
-            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-        }, { merge: true });
-
-        await db.collection('chats').doc(uniqueChatDocId).collection('messages').add({
-            text: text,
-            mediaUrl: mediaUrl,
-            mediaType: mediaType,
-            sender: 'user',
-            context: currentChatContextType,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-
-        const notifText = `💎 <b>নতুন লাইভ সাপোর্ট মেসেজ! ${topicTag}</b> 💎\n\n` +
-                          `👤 <b>নাম:</b> ${senderDisplayName}\n` +
-                          `📞 <b>ফোন:</b> <code>${maskPhoneNumber(phone)}</code>\n` +
-                          `📝 <b>মেসেজ:</b> ${text || '[ফাইল সংযুক্তি]'}\n\n` +
-                          `⚡ উত্তর দিতে দারাজ প্লে ইনকাম সেন্টারের এডমিন প্যানেলে প্রবেশ করুন।`;
-        fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: adminChatId, text: notifText, parse_mode: "HTML" })
-        }).catch(() => {});
-
-    } catch (e) {
-        alert("মেসেজ পাঠাতে সমস্যা হয়েছে।");
-    }
-}
-
-function openAdminChatPanel() {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById('page-admin-chat-panel').classList.add('active');
-    document.getElementById('bottom-nav-bar').style.display = 'none';
-    document.getElementById('admin-active-chat-box').style.display = 'none';
-    document.getElementById('admin-chat-users-list').style.display = 'block';
-    loadAdminChatUsersList();
-}
-
-function exitAdminPanel() {
-    if (adminChatUnsubscribe) { adminChatUnsubscribe(); adminChatUnsubscribe = null; }
-    if (localStorage.getItem('logged_user_phone')) {
-        switchPage('home', document.querySelectorAll('.nav-item')[0]);
-        document.getElementById('bottom-nav-bar').style.display = 'flex';
-    } else {
-        showLoginPage();
-    }
-}
-
-function loadAdminChatUsersList() {
-    const listContainer = document.getElementById('admin-chat-users-list');
-    listContainer.innerHTML = '<p style="text-align:center; color: #94a3b8; padding: 20px 0;">মেসেজ তালিকা লোড হচ্ছে...</p>';
-
-    db.collection('chats').orderBy('updatedAt', 'desc').onSnapshot((snapshot) => {
-        if (snapshot.empty) {
-            listContainer.innerHTML = '<p style="text-align:center; color: #94a3b8; padding: 20px 0;">এখনো কোনো ইউজার মেসেজ পাঠায়নি।</p>';
-            return;
-        }
-        listContainer.innerHTML = '';
-        snapshot.forEach((docSnap) => {
-            const chatData = docSnap.data();
-            const docId = docSnap.id;
-            const phone = chatData.phone || docId;
-            const uName = chatData.userName || "ইউজার";
-            const lastMsg = chatData.lastMessage || "";
-            const isUnread = chatData.unreadByAdmin;
-            const onlineNow = isUserCurrentlyOnline(chatData.last_active_time);
-
-            let contextName = "সাধারণ সাপোর্ট";
-            if (chatData.context === 'buy_refer') contextName = "রেফার ক্রয় চ্যাট";
-            else if (chatData.context === 'activation') contextName = "অ্যাক্টিভেশন চ্যাট";
-
-            const statusBadge = onlineNow ? 
-                `<span class="online-badge is-online"><span class="status-dot-green"></span> অনলাইন</span>` :
-                `<span class="online-badge is-offline"><span class="status-dot-gray"></span> অফলাইন</span>`;
-
-            const card = document.createElement('div');
-            card.className = 'admin-user-card';
-            card.onclick = () => openAdminSingleChat(docId, uName, phone, contextName);
-            card.innerHTML = `
-                <div style="text-align: left; overflow: hidden; flex: 1; padding-right: 8px;">
-                    <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
-                        <span style="font-size: 14px; font-weight: 800; color: #f8fafc;">👤 ${uName}</span>
-                        <span style="font-size:10px; background:#0284c7; color:white; padding:2px 6px; border-radius:6px; font-weight:700;">${contextName}</span>
-                        ${statusBadge}
-                    </div>
-                    <div style="font-size: 11px; color: #38bdf8; font-weight: 700; margin-top: 2px;">📞 ${maskPhoneNumber(phone)}</div>
-                    <div style="font-size: 12px; color: #cbd5e1; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">💬 ${lastMsg}</div>
-                </div>
-                <div>
-                    ${isUnread ? '<span class="unread-dot">নতুন মেসেজ</span>' : '<span style="color: #64748b; font-size: 12px;">দেখা হয়েছে ›</span>'}
-                </div>
-            `;
-            listContainer.appendChild(card);
-        });
-    });
-}
-
-function openAdminSingleChat(docId, uName, phone, contextName) {
-    adminCurrentChatPhone = docId;
-    document.getElementById('admin-chat-users-list').style.display = 'none';
-    document.getElementById('admin-active-chat-box').style.display = 'block';
-    document.getElementById('admin-chatting-user-name').innerText = uName + " (" + contextName + ")";
-    document.getElementById('admin-chatting-user-phone').innerText = "ফোন: " + maskPhoneNumber(phone);
-
-    db.collection('chats').doc(docId).update({ unreadByAdmin: false }).catch(() => {});
-
-    db.collection('chats').doc(docId).onSnapshot((docSnap) => {
-        if (docSnap.exists) {
-            const onlineNow = isUserCurrentlyOnline(docSnap.data().last_active_time);
-            const badge = document.getElementById('admin-single-user-online-badge');
-            if (badge) {
-                badge.className = onlineNow ? 'online-badge is-online' : 'online-badge is-offline';
-                badge.innerHTML = onlineNow ? '<span class="status-dot-green"></span> অনলাইন' : '<span class="status-dot-gray"></span> অফলাইন';
-            }
-        }
-    });
-
-    const container = document.getElementById('admin-messages-container');
-    if (adminChatUnsubscribe) { adminChatUnsubscribe(); }
-
-    adminChatUnsubscribe = db.collection('chats').doc(docId).collection('messages')
-        .orderBy('timestamp', 'asc')
-        .onSnapshot((snapshot) => {
-            container.innerHTML = '';
-            snapshot.forEach((docSnap) => {
-                const msg = docSnap.data();
-                const msgId = docSnap.id;
-                const isAdmin = msg.sender === 'admin';
-                const timeStr = formatMessageTime(msg.timestamp);
-
-                let mediaHtml = '';
-                if (msg.mediaUrl) {
-                    if (msg.mediaType === 'video') {
-                        mediaHtml = `
-                            <video src="${msg.mediaUrl}" controls onclick="openMediaLightbox('${msg.mediaUrl}', 'video', true)" class="chat-media-preview"></video>
-                            <div style="display:flex; gap:6px; margin-bottom:4px;">
-                                <button onclick="openMediaLightbox('${msg.mediaUrl}', 'video', true)" style="background:#0f172a; color:#38bdf8; border:1px solid #38bdf8; border-radius:6px; font-size:10px; padding:2px 6px; cursor:pointer;">🔍 বড় করুন</button>
-                                <a href="${msg.mediaUrl}" download="video_${msgId}.mp4" style="background:#10b981; color:#0f172a; border-radius:6px; font-size:10px; font-weight:800; padding:2px 6px; text-decoration:none;">⬇️ ডাউনলোড</a>
-                            </div>
-                        `;
-                    } else {
-                        mediaHtml = `
-                            <img src="${msg.mediaUrl}" onclick="openMediaLightbox('${msg.mediaUrl}', 'image', true)" class="chat-media-preview" alt="Attachment">
-                            <div style="display:flex; gap:6px; margin-bottom:4px;">
-                                <button onclick="openMediaLightbox('${msg.mediaUrl}', 'image', true)" style="background:#0f172a; color:#38bdf8; border:1px solid #38bdf8; border-radius:6px; font-size:10px; padding:2px 6px; cursor:pointer;">🔍 জুম/বড় করুন</button>
-                                <a href="${msg.mediaUrl}" download="image_${msgId}.png" style="background:#10b981; color:#0f172a; border-radius:6px; font-size:10px; font-weight:800; padding:2px 6px; text-decoration:none;">⬇️ ডাউনলোড</a>
-                            </div>
-                        `;
-                    }
-                }
-
-                const bubble = document.createElement('div');
-                bubble.style.cssText = isAdmin ?
-                    "background: linear-gradient(135deg, #0284c7, #0369a1); color: white; padding: 10px 14px; border-radius: 14px; max-width: 85%; align-self: flex-end; font-size: 13px; font-weight: 600; line-height: 1.4; word-break: break-word;" :
-                    "background: #1e293b; border: 1px solid rgba(255,255,255,0.1); color: #f8fafc; padding: 10px 14px; border-radius: 14px; max-width: 85%; align-self: flex-start; font-size: 13px; font-weight: 600; line-height: 1.4; word-break: break-word;";
-                
-                bubble.innerHTML = `
-                    ${mediaHtml} 
-                    ${msg.text ? `<div>${msg.text}</div>` : ''} 
-                    <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:4px;">
-                        <span onclick="adminDeleteMessage('${docId}', '${msgId}')" style="color:#fca5a5; font-size:10px; cursor:pointer; font-weight:700;">🗑️ ডিলিট</span>
-                        <span class="chat-msg-time" style="margin-top:0;">${timeStr}</span>
-                    </div>
-                `;
-                container.appendChild(bubble);
-            });
-            container.scrollTop = container.scrollHeight;
-        });
-}
-
-async function adminDeleteMessage(docId, msgId) {
-    if (!confirm("আপনি কি নিশ্চিত এই মেসেজটি ডিলিট করতে চান?")) return;
-    try {
-        await db.collection('chats').doc(docId).collection('messages').doc(msgId).delete();
-    } catch (e) {
-        alert("মেসেজ ডিলিট করতে সমস্যা হয়েছে।");
-    }
-}
-
-function closeAdminSingleChat() {
-    if (adminChatUnsubscribe) { adminChatUnsubscribe(); adminChatUnsubscribe = null; }
-    adminCurrentChatPhone = null;
-    document.getElementById('admin-active-chat-box').style.display = 'none';
-    document.getElementById('admin-chat-users-list').style.display = 'block';
-}
-
-async function adminStartAudioCall() {
-    if (!adminCurrentChatPhone) return;
-    let callRoomId = "daraz_support_call_" + adminCurrentChatPhone;
-    let callUrl = "https://meet.jit.si/" + callRoomId + "#config.disableDeepLinking=true&config.startWithAudioMuted=false&config.startWithVideoMuted=true";
-    
-    await db.collection('chats').doc(adminCurrentChatPhone).set({
-        activeCall: {
-            type: 'audio',
-            status: 'ringing',
-            url: callUrl
-        }
-    }, { merge: true });
-
-    window.open(callUrl, '_blank');
-    alert("✅ অডিও কল শুরু হয়েছে এবং ইউজারের কাছে কল রিং হচ্ছে!");
-}
-
-async function adminStartVideoCall() {
-    if (!adminCurrentChatPhone) return;
-    let callRoomId = "daraz_support_call_" + adminCurrentChatPhone;
-    let callUrl = "https://meet.jit.si/" + callRoomId + "#config.disableDeepLinking=true&config.startWithAudioMuted=false&config.startWithVideoMuted=false";
-    
-    await db.collection('chats').doc(adminCurrentChatPhone).set({
-        activeCall: {
-            type: 'video',
-            status: 'ringing',
-            url: callUrl
-        }
-    }, { merge: true });
-
-    window.open(callUrl, '_blank');
-    alert("✅ ভিডিও কল শুরু হয়েছে এবং ইউজারের কাছে কল রিং হচ্ছে!");
-}
-
-async function sendAdminReplyMessage() {
-    const input = document.getElementById('admin-reply-input');
-    const text = input.value.trim();
-    if (!text && !selectedAdminMedia) return;
-    if (!adminCurrentChatPhone) return;
-
-    let mediaUrl = selectedAdminMedia ? selectedAdminMedia.dataUrl : null;
-    let mediaType = selectedAdminMedia ? selectedAdminMedia.type : null;
-
-    input.value = '';
-    clearAdminFile();
-
-    try {
-        await db.collection('chats').doc(adminCurrentChatPhone).collection('messages').add({
-            text: text,
-            mediaUrl: mediaUrl,
-            mediaType: mediaType,
-            sender: 'admin',
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-
-        await db.collection('chats').doc(adminCurrentChatPhone).update({
-            lastMessage: "এডমিন: " + (text || '[ফাইল সংযুক্তি]'),
-            unreadByAdmin: false,
-            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
-    } catch (e) {
-        alert("রিপ্লাই পাঠাতে সমস্যা হয়েছে।");
-    }
-}
-
-function copyRefer() {
-    const link = window.location.origin + window.location.pathname + "?start=" + userId;
-    navigator.clipboard.writeText(link);
-    alert("📋 রেফার লিংক কপি সফল হয়েছে!");
-}
-
-function shareRefer() {
-    const link = window.location.origin + window.location.pathname + "?start=" + userId;
-    window.open("https://t.me/share/url?url=" + encodeURIComponent(link), '_blank');
-}
-
-function closeReferModal() { document.getElementById('refer-modal').classList.remove('active'); }
-function closeMandatoryTaskModal() { document.getElementById('mandatory-task-modal').classList.remove('active'); }
-function goToMandatoryTaskPage() { closeMandatoryTaskModal(); switchPage('mandatory-task', null); }
-function closeSpecialTaskModal() { document.getElementById('special-task-modal').classList.remove('active'); }
-function goToSpecialTaskPage() { closeSpecialTaskModal(); switchPage('special-task', null); }
 function closeActivationModal() { document.getElementById('activation-modal').classList.remove('active'); }
 function setWithdrawAmount(amt) { document.getElementById('wd-coin-amount').value = amt; }
 </script>
