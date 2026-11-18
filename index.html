@@ -395,7 +395,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <!-- হোম পেজ -->
 <div id="page-home" class="page">
     <div class="live-date-banner">
-        <div class="live-date-title">📅 আজকের রিয়েল-টাইম তারিখ[span_0](start_span)[span_0](end_span)</div>
+        <div class="live-date-title">📅 আজকের রিয়েল-টাইম তারিখ[span_3](start_span)[span_3](end_span)</div>
         <div class="live-date-value" id="live-current-date-time">লোড হচ্ছে...</div>
     </div>
 
@@ -465,7 +465,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         </button>
     </div>
     
-    <!-- স্পেশাল ভিডিও টাস্ক সেকশন (ডাইনামিকালি ট্রিগার হবে) -->
+    <!-- স্পেশাল ভিডিও টাস্ক সেকশন -->
     <div id="special-task-container" style="display:none; background: linear-gradient(135deg, #1e1b4b, #312e81); border: 2px solid #6366f1; border-radius: 18px; padding: 16px; margin-bottom: 12px; text-align: center; color: white;">
         <h3 id="special-task-title" style="margin-top: 0; font-size: 16px; color: #818cf8;">⭐ স্পেশাল ভিডিও টাস্ক</h3>
         <p id="special-task-desc" style="font-size: 12px; color: #c7d2fe; margin-bottom: 10px;"></p>
@@ -499,7 +499,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- স্বতন্ত্র ইউনিক লাইভ চ্যাট পেজ (রেফার, অ্যাক্টিভেশন এবং জেনারেল চ্যাট আলাদা) -->
+<!-- স্বতন্ত্র ইউনিক লাইভ চ্যাট পেজ -->
 <div id="page-live-chat" class="page" style="padding: 5px;">
     <div style="background: linear-gradient(135deg, #065f46, #0284c7); border-radius: 20px; padding: 16px 14px; margin-bottom: 10px; text-align: center; box-shadow: 0 8px 25px rgba(16,185,129,0.3); border: 1.5px solid rgba(255,255,255,0.18);">
         <div style="font-size: 20px; font-weight: 900; color: #ffffff; letter-spacing: 1px; text-shadow: 0 2px 8px rgba(0,0,0,0.4);" id="chat-page-header-title">
@@ -511,13 +511,12 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <div style="font-size: 11px; color: #e0f2fe; font-weight: 600; margin-top: 3px;" id="chat-user-phone-label">ইউজার সাপোর্ট লাইন</div>
     </div>
 
-    <!-- চ্যাটের ওপর নির্দিষ্ট ব্যানার বা নোটিশ দেখানোর জায়গা -->
+    <!-- চ্যাটের ওপর নির্দিষ্ট ব্যানার বা নোটিশ দেখানোর জায়গা (কোনো এক্সট্রা বাটন বা জগাখিচুড়ি ছাড়াই শুধু ব্যানার) -->
     <div id="chat-banner-notice-box" style="background: #1e293b; border: 1.5px solid rgba(16,185,129,0.4); border-radius: 16px; padding: 14px; margin-bottom: 10px; font-size: 12px; color: #cbd5e1; line-height: 1.5; text-align: left; display: none;">
         <div id="chat-banner-content"></div>
-        <button onclick="dismissChatBanner()" class="btn-action btn-success" style="padding: 8px; font-size: 12px; margin-top: 10px;">বুঝেছি ও অ্যাকাউন্ট অ্যাক্টিভ করতে চাচ্ছি ✅</button>
     </div>
 
-    <div id="chat-messages-container" style="background: #121824; border: 1.5px solid rgba(16,185,129,0.35); border-radius: 18px; padding: 14px; height: 280px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; box-shadow: inset 0 4px 15px rgba(0,0,0,0.6);">
+    <div id="chat-messages-container" style="background: #121824; border: 1.5px solid rgba(16,185,129,0.35); border-radius: 18px; padding: 14px; height: 320px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; box-shadow: inset 0 4px 15px rgba(0,0,0,0.6);">
     </div>
 
     <div id="chat-file-preview-box" style="display: none; background: rgba(16,185,129,0.15); border: 1px dashed #10b981; padding: 8px 12px; border-radius: 10px; margin-bottom: 8px; font-size: 12px; color: #34d399; justify-content: space-between; align-items: center;">
@@ -1013,6 +1012,7 @@ let claimedBonuses = {};
 let historyDates = {};
 let rawWithdrawRequests = [];
 let currentChatContextType = 'general';
+let chatUnsubscribe = null;
 
 let selectedUserMedia = null;
 let currentLightboxZoom = 1;
@@ -1617,7 +1617,6 @@ function updateUI() {
 
     if(document.getElementById('progress-bar')) document.getElementById('progress-bar').style.width = (dailyWatched / 100 * 100) + "%";
 
-    // স্পেশাল টাস্ক উইজেট আপডেট
     const specialContainer = document.getElementById('special-task-container');
     if (totalRefers >= 11 && special150Watched < 150) {
         specialContainer.style.display = 'block';
@@ -1861,9 +1860,12 @@ async function watchSpecialTaskAd() {
     }
 }
 
-// মাল্টি-স্টেপ উইথড্র গেটওয়ে লজিক
+// মাল্টি-স্টেপ উইথড্র গেটওয়ে লজিক (ব্যালেন্স ১০০০ এর কম হলে সরাসরি অপর্যাপ্ত ব্যালেন্স দেখাবে)
 function processWithdraw() {
-    if (userBalance < 1000) { alert("⚠️ ন্যূনতম ১০০০ কয়েন প্রয়োজন!"); return; }
+    if (userBalance < 1000) { 
+        alert("⚠️ পর্যাপ্ত ব্যালেন্স নেই! ন্যূনতম ১০০০ কয়েন হলে উত্তোলন করতে পারবেন।"); 
+        return; 
+    }
     
     // ধাপ ১: ১১টি রেফার চেক
     if (totalRefers < 11) {
@@ -2008,7 +2010,6 @@ async function processWithdrawSubmission(name, number, amount, taka, method, pho
             });
         }
 
-        // সফলভাবে সাবমিট হওয়ার পর সরাসরি উইথড্র হিস্টরি পেজে নিয়ে যাওয়া হবে
         loadPaymentHistory();
         switchPage('payment-history', null);
     } catch (e) {
@@ -2028,9 +2029,9 @@ function switchPage(pageId, element) {
     else if (pageId === 'payment-history') loadPaymentHistory();
 }
 
-// ৪টি সম্পূর্ণ স্বাধীন ইউনিক লাইভ চ্যাট সিস্টেম
+// ৪টি সম্পূর্ণ স্বাধীন ইউনিক লাইভ চ্যাট সিস্টেম (ব্যানারে অতিরিক্ত বাটন ছাড়াই শুধু নোটিশ থাকবে)
 function openLiveChat(contextType = 'general') {
-    currentChatContextType = contextType; // 'general', 'refer', 'activation' ইত্যাদি স্বাধীন কন্টেক্সট
+    currentChatContextType = contextType; 
     let chatPhone = currentUserPhone || normalizePhoneNumber(document.getElementById('login-phone')?.value || document.getElementById('reg-phone')?.value);
     if (!chatPhone || chatPhone.length < 10) {
         let promptPhone = prompt("লাইভ চ্যাট শুরু করতে আপনার সঠিক ফোন নাম্বারটি লিখুন:");
@@ -2052,7 +2053,6 @@ function openLiveChat(contextType = 'general') {
     const bannerContent = document.getElementById('chat-banner-content');
     const headerTitle = document.getElementById('chat-page-header-title');
 
-    // সম্পূর্ণ পৃথক ও ইউনিক কনটেন্ট এবং ব্যানার সেটআপ
     if (contextType === 'refer') {
         headerTitle.innerText = "🧑‍💼 রেফারেল সাপোর্ট টিম 🧑‍💼";
         badgeEl.innerText = "রেফারেল সাপোর্ট সেন্টার";
@@ -2112,10 +2112,6 @@ function openLiveChat(contextType = 'general') {
     }
 
     listenToLiveChatMessages(chatPhone, contextType);
-}
-
-function dismissChatBanner() {
-    document.getElementById('chat-banner-notice-box').style.display = 'none';
 }
 
 function openReferLiveChat() {
