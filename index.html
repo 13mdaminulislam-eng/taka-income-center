@@ -1368,6 +1368,18 @@ function normalizePhoneNumber(inputStr) {
     return converted.replace(/\D/g, '');
 }
 
+async function checkExistingPhoneAccount(phone) {
+    const querySnap = await db.collection('users').where('phone', '==', phone).limit(1).get();
+    if (!querySnap.empty) {
+        return true;
+    }
+    const directDoc = await db.collection('users').doc(phone).get();
+    if (directDoc.exists) {
+        return true;
+    }
+    return false;
+}
+
 async function getNextSerial() {
     const counterRef = db.collection('settings').doc('user_counter');
     let assignedSerial = 1;
@@ -1435,6 +1447,24 @@ async function sendRegisterOTP() {
         return;
     }
 
+    try {
+        const alreadyExists = await checkExistingPhoneAccount(phone);
+        if (alreadyExists) {
+            document.getElementById('login-phone').value = phone;
+            alert(
+                "🌟 দারুণ! এই ফোন নাম্বার দিয়ে ইতিমধ্যে আপনার একটি অ্যাকাউন্ট খোলা আছে!\n\n" +
+                "💪 নতুন অ্যাকাউন্ট খোলার প্রয়োজন নেই—একটি অ্যাকাউন্টেই নিয়মিত কাজ করে এগিয়ে যান! আপনার আগের কয়েন, টাস্ক ও রেফার সব ওই অ্যাকাউন্টেই সুরক্ষিত আছে।\n\n" +
+                "👉 এখনই 'লগইন করুন' পেজে গিয়ে পাসওয়ার্ড দিয়ে প্রবেশ করুন। পাসওয়ার্ড ভুলে গিয়ে থাকলে 'পাসওয়ার্ড ভুলে গেছেন?' চাপুন!"
+            );
+            showLoginPage();
+            return;
+        }
+    } catch (err) {
+        console.error(err);
+        alert("নাম্বার যাচাই করতে সমস্যা হয়েছে। দয়া করে আবার চেষ্টা করুন।");
+        return;
+    }
+
     let photoUrl = "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png";
 
     if (photoFile) {
@@ -1474,6 +1504,17 @@ async function verifyAndCompleteRegister() {
 
 async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFile) {
     try {
+        const alreadyExists = await checkExistingPhoneAccount(phone);
+        if (alreadyExists) {
+            document.getElementById('login-phone').value = phone;
+            alert(
+                "🌟 এই ফোন নাম্বার দিয়ে ইতিমধ্যে একটি অ্যাকাউন্ট রয়েছে!\n\n" +
+                "💪 নতুন অ্যাকাউন্ট না খুলে আপনার পুরনো অ্যাকাউন্টেই লগইন করে নিয়মিত কাজ চালিয়ে যান। পাসওয়ার্ড ভুলে গেলে 'পাসওয়ার্ড ভুলে গেছেন?' ব্যবহার করুন।"
+            );
+            showLoginPage();
+            return;
+        }
+
         const uid = generateUniqueUserId();
         const userSerial = await getNextSerial();
         const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp();
