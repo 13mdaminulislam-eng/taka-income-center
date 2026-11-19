@@ -39,7 +39,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 .page.active { display: block; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-/* প্রিমিয়াম ও আকর্ষণীয় লগইন/সাইন-আপ ডিজাইন */
 .auth-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 82vh; padding: 10px; }
 .auth-card { 
     background: linear-gradient(145deg, rgba(16, 185, 129, 0.16), rgba(15, 23, 42, 0.98)); 
@@ -71,9 +70,8 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
     border-radius: 20px;
     margin-bottom: 10px;
     letter-spacing: 0.5px;
-    box-shadow: 0 0 10px rgba(16,185,129,0.15);
 }
-.auth-logo { font-size: 28px; font-weight: 800; color: #f8fafc; margin-bottom: 4px; letter-spacing: 0.5px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+.auth-logo { font-size: 28px; font-weight: 800; color: #f8fafc; margin-bottom: 4px; letter-spacing: 0.5px; }
 .auth-subtitle { font-size: 13px; color: #94a3b8; font-weight: 600; margin-bottom: 22px; }
 .auth-subtitle span { color: #34d399; font-weight: 800; text-decoration: underline; cursor: pointer; }
 
@@ -98,7 +96,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 .auth-input-box input { background: transparent; border: none; outline: none; color: white; width: 100%; font-size: 14px; font-family: 'Plus Jakarta Sans', sans-serif; }
 .auth-input-box input::placeholder { color: #64748b; }
 
-/* ফিচার ১: ইউনিক ও আকর্ষণীয় সেলফি/ছবি আপলোড বক্স */
 .unique-photo-upload-box {
     background: linear-gradient(145deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.08));
     border: 2px dashed rgba(52, 211, 153, 0.65);
@@ -108,55 +105,13 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    position: relative;
-    box-shadow: inset 0 0 18px rgba(16, 185, 129, 0.08);
 }
-.unique-photo-upload-box:hover {
-    border-color: #38bdf8;
-    box-shadow: 0 0 20px rgba(52, 211, 153, 0.25);
-    transform: translateY(-1px);
-}
-.unique-photo-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 8px;
-}
-.unique-photo-title {
-    font-size: 12px;
-    font-weight: 800;
-    color: #34d399;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-.unique-required-pill {
-    background: rgba(239, 68, 68, 0.2);
-    color: #fca5a5;
-    border: 1px solid rgba(239, 68, 68, 0.45);
-    font-size: 10px;
-    font-weight: 800;
-    padding: 2px 8px;
-    border-radius: 10px;
-}
-.unique-photo-dropzone {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(15, 23, 42, 0.85);
-    padding: 10px 12px;
-    border-radius: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
-.unique-photo-preview-img {
-    width: 50px;
-    height: 50px;
-    border-radius: 14px;
-    object-fit: cover;
-    border: 2px solid #34d399;
-    background: #0f172a;
-    flex-shrink: 0;
-}
+.unique-photo-upload-box:hover { border-color: #38bdf8; transform: translateY(-1px); }
+.unique-photo-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.unique-photo-title { font-size: 12px; font-weight: 800; color: #34d399; display: flex; align-items: center; gap: 6px; }
+.unique-required-pill { background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.45); font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 10px; }
+.unique-photo-dropzone { display: flex; align-items: center; gap: 12px; background: rgba(15, 23, 42, 0.85); padding: 10px 12px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.08); }
+.unique-photo-preview-img { width: 50px; height: 50px; border-radius: 14px; object-fit: cover; border: 2px solid #34d399; background: #0f172a; flex-shrink: 0; }
 
 .auth-btn { 
     background: linear-gradient(135deg, #10b981, #059669); 
@@ -170,193 +125,147 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
     cursor: pointer; 
     box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4); 
     margin-top: 6px; 
-    transition: transform 0.2s, box-shadow 0.2s; 
+    transition: transform 0.2s; 
 }
 .auth-btn:active { transform: scale(0.98); }
 
-.auth-quick-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    width: 100%;
-    max-width: 390px;
-    margin-top: 16px;
-}
-.auth-quick-btn {
-    background: rgba(30, 41, 59, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    border-radius: 14px;
-    padding: 11px 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    color: #f8fafc;
-    font-size: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    text-decoration: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-    transition: all 0.2s ease;
-}
-.auth-quick-btn:active { transform: scale(0.96); background: #26354d; }
+.auth-quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; max-width: 390px; margin-top: 16px; }
+.auth-quick-btn { background: rgba(30, 41, 59, 0.85); border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 14px; padding: 11px 10px; display: flex; align-items: center; justify-content: center; gap: 7px; color: #f8fafc; font-size: 12px; font-weight: 700; cursor: pointer; text-decoration: none; }
 
-.live-date-banner { background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(239, 68, 68, 0.15)); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 14px; padding: 10px 15px; margin-bottom: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); position: relative; overflow: hidden; backdrop-filter: blur(10px); }
+.live-date-banner { background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(239, 68, 68, 0.15)); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 14px; padding: 10px 15px; margin-bottom: 12px; text-align: center; }
 .live-date-title { font-size: 11px; font-weight: 700; color: #34d399; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; display: flex; align-items: center; justify-content: center; gap: 6px; }
-.live-date-value { font-size: 15px; font-weight: 800; color: #f8fafc; text-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+.live-date-value { font-size: 15px; font-weight: 800; color: #f8fafc; }
 
-.balance-card { background: linear-gradient(135deg, #ef4444, #991b1b, #065f46); color: white; border-radius: 20px; padding: 18px 20px; box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3); margin-bottom: 12px; text-align: left; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+.balance-card { background: linear-gradient(135deg, #ef4444, #991b1b, #065f46); color: white; border-radius: 20px; padding: 18px 20px; box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3); margin-bottom: 12px; text-align: left; }
 .balance-title { font-size: 12px; opacity: 0.85; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-.balance-amount { font-size: 30px; font-weight: 800; margin-top: 2px; text-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+.balance-amount { font-size: 30px; font-weight: 800; margin-top: 2px; }
 
-.notice-bar { background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.2)); backdrop-filter: blur(12px); padding: 10px 16px; border-radius: 16px; font-size: 13px; font-weight: 800; color: #34d399; box-shadow: 0 8px 25px rgba(16,185,129,0.25); margin-bottom: 14px; overflow: hidden; min-height: 42px; display: flex; align-items: center; position: relative; border: 1.5px solid rgba(16, 185, 129, 0.4); }
-.notice-content { display: inline-block; white-space: nowrap; position: absolute; will-change: transform; text-shadow: 0 2px 5px rgba(0,0,0,0.4); }
+.notice-bar { background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.2)); padding: 10px 16px; border-radius: 16px; font-size: 13px; font-weight: 800; color: #34d399; margin-bottom: 14px; overflow: hidden; min-height: 42px; display: flex; align-items: center; position: relative; border: 1.5px solid rgba(16, 185, 129, 0.4); }
+.notice-content { display: inline-block; white-space: nowrap; position: absolute; will-change: transform; }
 
-.info-notice-box { background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981; padding: 10px 14px; border-radius: 10px; font-size: 13px; font-weight: 700; color: #34d399; margin-bottom: 12px; text-align: center; border-top: 1px solid rgba(16,185,129,0.2); border-right: 1px solid rgba(16,185,129,0.2); border-bottom: 1px solid rgba(16,185,129,0.2); }
+.info-notice-box { background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981; padding: 10px 14px; border-radius: 10px; font-size: 13px; font-weight: 700; color: #34d399; margin-bottom: 12px; text-align: center; }
 .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
-.stat-card { background: #1e293b; padding: 12px 10px; border-radius: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); text-align: center; border: 1px solid rgba(255,255,255,0.05); }
+.stat-card { background: #1e293b; padding: 12px 10px; border-radius: 14px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
 .stat-title { font-size: 11px; color: #94a3b8; font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; justify-content: center; gap: 4px; }
 .stat-value { font-size: 20px; font-weight: 800; color: #f8fafc; }
 
-.card { background: #1e293b; padding: 16px; border-radius: 18px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); margin-bottom: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
-.btn-action { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 10px 20px; font-size: 14px; font-weight: 700; border-radius: 10px; cursor: pointer; width: 100%; margin-top: 8px; transition: all 0.2s; box-shadow: 0 4px 15px rgba(239,68,68,0.3); }
+.card { background: #1e293b; padding: 16px; border-radius: 18px; margin-bottom: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
+.btn-action { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 10px 20px; font-size: 14px; font-weight: 700; border-radius: 10px; cursor: pointer; width: 100%; margin-top: 8px; }
 .btn-action:active { transform: scale(0.98); }
-.btn-success { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 15px rgba(16,185,129,0.3); }
+.btn-success { background: linear-gradient(135deg, #10b981, #059669); }
 
-.input-field { width: 100%; padding: 10px 12px; margin: 6px 0; border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; font-size: 13px; background-color: #0f172a; color: white; text-align: center; outline: none; transition: border-color 0.2s; }
+.input-field { width: 100%; padding: 10px 12px; margin: 6px 0; border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; font-size: 13px; background-color: #0f172a; color: white; text-align: center; outline: none; }
 .input-field:focus { border-color: #10b981; }
 
-.nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(15px); display: flex; justify-content: space-around; padding: 6px 0; border-top: 1px solid rgba(255,255,255,0.08); box-shadow: 0 -10px 30px rgba(0,0,0,0.4); z-index: 1000; }
-.nav-item { font-size: 10px; color: #64748b; cursor: pointer; text-align: center; flex: 1; font-weight: 700; transition: color 0.2s; }
+.nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(15px); display: flex; justify-content: space-around; padding: 6px 0; border-top: 1px solid rgba(255,255,255,0.08); z-index: 1000; }
+.nav-item { font-size: 10px; color: #64748b; cursor: pointer; text-align: center; flex: 1; font-weight: 700; }
 .nav-item.active { color: #34d399; }
 .nav-icon { font-size: 18px; margin-bottom: 2px; }
 
-.refer-card { background: linear-gradient(145deg, #450a0a, #065f46, #1e293b); color: white; border-radius: 20px; padding: 16px; box-shadow: 0 10px 25px rgba(16,185,129,0.2); margin-bottom: 12px; border: 1.5px solid rgba(16,185,129,0.3); position: relative; overflow: hidden; }
-.refer-badge { display: inline-block; background: linear-gradient(135deg, #ef4444, #10b981); padding: 3px 10px; border-radius: 14px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; box-shadow: 0 4px 12px rgba(16,185,129,0.3); }
+.refer-card { background: linear-gradient(145deg, #450a0a, #065f46, #1e293b); color: white; border-radius: 20px; padding: 16px; margin-bottom: 12px; border: 1.5px solid rgba(16,185,129,0.3); }
+.refer-badge { display: inline-block; background: linear-gradient(135deg, #ef4444, #10b981); padding: 3px 10px; border-radius: 14px; font-size: 11px; font-weight: 800; margin-bottom: 8px; }
 .refer-benefits { background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 10px; margin: 10px 0; text-align: left; }
 .refer-benefit-item { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; margin-bottom: 6px; color: #e2e8f0; }
-.refer-benefit-item:last-child { margin-bottom: 0; }
-.refer-link-box { background: #0f172a; padding: 10px 12px; border-radius: 10px; margin: 10px 0; display: flex; align-items: center; justify-content: space-between; font-size: 12px; border: 1px solid rgba(255,255,255,0.08); }
-.btn-refer-action { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 10px; border-radius: 10px; width: 48%; font-weight: 800; font-size: 12px; cursor: pointer; box-shadow: 0 4px 12px rgba(16,185,129,0.3); transition: transform 0.2s; }
-.btn-refer-action:active { transform: scale(0.98); }
+.refer-link-box { background: #0f172a; padding: 10px 12px; border-radius: 10px; margin: 10px 0; display: flex; align-items: center; justify-content: space-between; font-size: 12px; }
+.btn-refer-action { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 10px; border-radius: 10px; width: 48%; font-weight: 800; font-size: 12px; cursor: pointer; }
 
-.list-card { background: #1e293b; padding: 10px 12px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); color: #f8fafc; font-weight: 700; border: 1px solid rgba(255,255,255,0.05); }
+.list-card { background: #1e293b; padding: 10px 12px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; color: #f8fafc; font-weight: 700; }
 .list-date { font-size: 11px; color: #94a3b8; font-weight: 500; }
-select.input-field { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 12px center; background-size: 14px; }
 
-.wallet-hero-card { background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(16, 185, 129, 0.15)); border: 1.5px solid rgba(6, 182, 212, 0.3); border-radius: 20px; padding: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); margin-bottom: 12px; position: relative; overflow: hidden; text-align: center; backdrop-filter: blur(10px); }
-.wallet-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #06b6d4, #10b981); color: white; padding: 4px 14px; border-radius: 14px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; box-shadow: 0 4px 12px rgba(6,182,212,0.3); }
-.wallet-id-box { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(10px); padding: 6px 14px; border-radius: 10px; display: inline-block; font-size: 12px; color: #38bdf8; font-weight: 700; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 12px; }
+.wallet-hero-card { background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(16, 185, 129, 0.15)); border: 1.5px solid rgba(6, 182, 212, 0.3); border-radius: 20px; padding: 16px; margin-bottom: 12px; text-align: center; }
+.wallet-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #06b6d4, #10b981); color: white; padding: 4px 14px; border-radius: 14px; font-size: 11px; font-weight: 800; margin-bottom: 8px; }
+.wallet-id-box { background: rgba(15, 23, 42, 0.7); padding: 6px 14px; border-radius: 10px; display: inline-block; font-size: 12px; color: #38bdf8; font-weight: 700; margin-bottom: 12px; }
 .wallet-balance-box { background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 12px; margin-bottom: 10px; }
-.wallet-balance-title { font-size: 11px; color: #cbd5e1; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
-.wallet-balance-num { font-size: 28px; font-weight: 800; color: #38bdf8; text-shadow: 0 2px 10px rgba(56,189,248,0.3); }
-.wallet-notice-box { background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.25); border-radius: 10px; padding: 8px 12px; font-size: 12px; font-weight: 700; color: #38bdf8; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.wallet-balance-title { font-size: 11px; color: #cbd5e1; font-weight: 600; margin-bottom: 3px; }
+.wallet-balance-num { font-size: 28px; font-weight: 800; color: #38bdf8; }
+.wallet-notice-box { background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.25); border-radius: 10px; padding: 8px 12px; font-size: 12px; font-weight: 700; color: #38bdf8; }
 
-.btn-withdraw-action { display: block; width: 100%; background: linear-gradient(135deg, #06b6d4, #3b82f6); color: #0f172a; border: none; padding: 14px; border-radius: 16px; font-size: 15px; font-weight: 800; text-align: center; cursor: pointer; box-shadow: 0 6px 20px rgba(6,182,212,0.4); margin-bottom: 14px; transition: transform 0.2s; text-decoration: none; }
-.btn-withdraw-action:active { transform: scale(0.98); }
-
-.wallet-menu-card { background: #1e293b; border-radius: 16px; padding: 12px 16px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; transition: background 0.2s; text-decoration: none; color: inherit; }
-.wallet-menu-card:active { background: #2a3950; }
+.btn-withdraw-action { display: block; width: 100%; background: linear-gradient(135deg, #06b6d4, #3b82f6); color: #0f172a; border: none; padding: 14px; border-radius: 16px; font-size: 15px; font-weight: 800; text-align: center; cursor: pointer; margin-bottom: 14px; }
+.wallet-menu-card { background: #1e293b; border-radius: 16px; padding: 12px 16px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.06); cursor: pointer; text-decoration: none; color: inherit; }
 .wallet-menu-left { display: flex; align-items: center; gap: 12px; }
 .wallet-menu-icon { width: 40px; height: 40px; background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #38bdf8; }
 .wallet-menu-title { font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 2px; }
 .wallet-menu-desc { font-size: 11px; color: #94a3b8; font-weight: 600; }
 .wallet-menu-arrow { font-size: 16px; color: #64748b; font-weight: 700; }
 
-.wallet-form-box { background: #1e293b; border-radius: 18px; padding: 16px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05); margin-bottom: 12px; text-align: left; display: none; }
+.wallet-form-box { background: #1e293b; border-radius: 18px; padding: 16px; margin-bottom: 12px; text-align: left; display: none; }
 .wallet-form-box.active { display: block; }
 .wallet-label { display: block; font-weight: 700; font-size: 12px; color: #94a3b8; margin-bottom: 4px; margin-top: 8px; }
-.wallet-label:first-of-type { margin-top: 0; }
-
 .quick-amounts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 8px 0 10px 0; }
-.quick-amount-btn { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399; padding: 8px 4px; font-size: 12px; font-weight: 700; border-radius: 8px; cursor: pointer; text-align: center; transition: all 0.2s; }
-.quick-amount-btn:active { background: #10b981; color: white; transform: scale(0.95); }
+.quick-amount-btn { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399; padding: 8px 4px; font-size: 12px; font-weight: 700; border-radius: 8px; cursor: pointer; text-align: center; }
 
-/* পেমেন্ট হিস্ট্রি নিয়ন ডিজাইন */
-.history-header-box { background: linear-gradient(135deg, #1e293b, #0f172a); border: 1.5px solid rgba(56, 189, 248, 0.25); border-radius: 20px; padding: 16px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+.history-header-box { background: linear-gradient(135deg, #1e293b, #0f172a); border: 1.5px solid rgba(56, 189, 248, 0.25); border-radius: 20px; padding: 16px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; }
 .history-header-title { font-size: 16px; font-weight: 800; color: #f8fafc; display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
 .history-header-desc { font-size: 11px; color: #94a3b8; font-weight: 600; }
+.history-filter-container { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 14px; }
+.history-filter-btn { background: #1e293b; border: 1px solid rgba(255,255,255,0.08); color: #94a3b8; padding: 8px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+.history-filter-btn.active { background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border-color: #38bdf8; }
 
-.history-filter-container { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 14px; scrollbar-width: none; }
-.history-filter-container::-webkit-scrollbar { display: none; }
-.history-filter-btn { background: #1e293b; border: 1px solid rgba(255,255,255,0.08); color: #94a3b8; padding: 8px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; display: flex; align-items: center; gap: 6px; transition: all 0.2s; }
-.history-filter-btn.active { background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border-color: #38bdf8; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4); }
-
-.payment-history-card { background: #121824; border-radius: 18px; padding: 14px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; border: 1.5px solid; box-shadow: 0 6px 20px rgba(0,0,0,0.3); position: relative; overflow: hidden; }
+.payment-history-card { background: #121824; border-radius: 18px; padding: 14px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; border: 1.5px solid; }
 .payment-history-card.success { border-color: #059669; background: linear-gradient(145deg, #062318, #121824); }
 .payment-history-card.pending { border-color: #d97706; background: linear-gradient(145deg, #271c08, #121824); }
-.payment-history-card.failed { border-color: #dc2626; background: linear-gradient(145deg, #2a0c0c, #121824); }
-
 .ph-left { display: flex; align-items: center; gap: 12px; }
-.ph-logo { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
-.ph-logo.bkash { background: #e11d48; color: white; border: 1px solid rgba(255,255,255,0.2); }
-.ph-logo.nagad { background: #ea580c; color: white; border: 1px solid rgba(255,255,255,0.2); }
-
+.ph-logo { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; }
+.ph-logo.bkash { background: #e11d48; color: white; }
+.ph-logo.nagad { background: #ea580c; color: white; }
 .ph-info { text-align: left; }
 .ph-amount { font-size: 18px; font-weight: 800; color: #f8fafc; margin-bottom: 2px; }
-.ph-details { font-size: 11px; color: #94a3b8; font-weight: 600; line-height: 1.3; }
+.ph-details { font-size: 11px; color: #94a3b8; font-weight: 600; }
+.ph-status-badge { padding: 6px 12px; border-radius: 14px; font-size: 11px; font-weight: 800; text-align: center; }
+.ph-status-badge.success { background: rgba(5, 150, 105, 0.2); color: #34d399; }
+.ph-status-badge.pending { background: rgba(217, 119, 6, 0.2); color: #fbbf24; }
 
-.ph-status-badge { padding: 6px 12px; border-radius: 14px; font-size: 11px; font-weight: 800; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 2px; box-shadow: 0 3px 10px rgba(0,0,0,0.2); }
-.ph-status-badge.success { background: rgba(5, 150, 105, 0.2); color: #34d399; border: 1px solid rgba(5, 150, 105, 0.4); }
-.ph-status-badge.pending { background: rgba(217, 119, 6, 0.2); color: #fbbf24; border: 1px solid rgba(217, 119, 6, 0.4); }
-.ph-status-badge.failed { background: rgba(220, 38, 38, 0.2); color: #f87171; border: 1px solid rgba(220, 38, 38, 0.4); }
-
-.leaderboard-hero { background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(16, 185, 129, 0.15)); border: 1.5px solid rgba(239, 68, 68, 0.3); border-radius: 20px; padding: 16px; margin-bottom: 12px; text-align: center; backdrop-filter: blur(10px); }
-.leaderboard-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #ef4444, #10b981); color: white; padding: 4px 14px; border-radius: 14px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; box-shadow: 0 4px 12px rgba(239,68,68,0.3); }
-.lb-item { background: #1e293b; border-radius: 14px; padding: 10px 14px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+.leaderboard-hero { background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(16, 185, 129, 0.15)); border: 1.5px solid rgba(239, 68, 68, 0.3); border-radius: 20px; padding: 16px; margin-bottom: 12px; text-align: center; }
+.leaderboard-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #ef4444, #10b981); color: white; padding: 4px 14px; border-radius: 14px; font-size: 11px; font-weight: 800; margin-bottom: 6px; }
+.lb-item { background: #1e293b; border-radius: 14px; padding: 10px 14px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.06); }
 .lb-left { display: flex; align-items: center; gap: 12px; }
 .lb-rank { width: 28px; height: 28px; background: rgba(255,255,255,0.08); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #38bdf8; }
-.lb-rank.top-1 { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; box-shadow: 0 0 10px rgba(245,158,11,0.5); }
+.lb-rank.top-1 { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; }
 .lb-rank.top-2 { background: linear-gradient(135deg, #94a3b8, #64748b); color: white; }
 .lb-rank.top-3 { background: linear-gradient(135deg, #b45309, #78350f); color: white; }
 .lb-avatar { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid #10b981; background: #0f172a; }
 .lb-info { text-align: left; }
-.lb-name { font-size: 13px; font-weight: 800; color: #f8fafc; margin-bottom: 1px; }
+.lb-name { font-size: 13px; font-weight: 800; color: #f8fafc; }
 .lb-id { font-size: 11px; color: #94a3b8; font-weight: 600; }
 .lb-amount-box { text-align: right; }
 .lb-amount { font-size: 14px; font-weight: 800; color: #34d399; }
 .lb-coins-label { font-size: 10px; color: #94a3b8; font-weight: 600; }
 
-.custom-modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 15px; animation: fadeInModal 0.25s ease; }
+.custom-modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 15px; }
 .custom-modal-overlay.active { display: flex; }
-@keyframes fadeInModal { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-.custom-modal-box { background: #1e293b; border: 1.5px solid rgba(255,255,255,0.12); border-radius: 22px; width: 100%; max-width: 340px; padding: 18px 16px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.6); color: #f8fafc; position: relative; max-height: 90vh; overflow-y: auto; }
+.custom-modal-box { background: #1e293b; border: 1.5px solid rgba(255,255,255,0.12); border-radius: 22px; width: 100%; max-width: 340px; padding: 18px 16px; text-align: center; color: #f8fafc; position: relative; max-height: 90vh; overflow-y: auto; }
 .custom-modal-title { font-size: 17px; font-weight: 800; color: #f8fafc; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 6px; }
 .custom-modal-desc { font-size: 13px; color: #cbd5e1; line-height: 1.5; margin-bottom: 14px; text-align: left; background: rgba(15, 23, 42, 0.6); padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); }
-.custom-modal-btn-primary { background: transparent; color: #10b981; border: none; font-size: 13px; font-weight: 700; width: 100%; padding: 6px; cursor: pointer; margin-bottom: 4px; }
-.custom-modal-btn-cancel { background: transparent; color: #94a3b8; border: none; font-size: 13px; font-weight: 700; width: 100%; padding: 6px; cursor: pointer; margin-bottom: 4px; }
+.custom-modal-btn-cancel { background: transparent; color: #94a3b8; border: none; font-size: 13px; font-weight: 700; width: 100%; padding: 6px; cursor: pointer; }
 
-.activation-modal-box { background: linear-gradient(145deg, #450a0a, #1e293b); border: 1.5px solid rgba(16,185,129,0.4); border-radius: 22px; width: 100%; max-width: 350px; padding: 18px 16px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.6); color: #f8fafc; position: relative; max-height: 90vh; overflow-y: auto; }
-.activation-badge { display: inline-block; background: linear-gradient(135deg, #ef4444, #10b981); color: white; padding: 3px 10px; border-radius: 14px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; box-shadow: 0 4px 12px rgba(16,185,129,0.3); }
+.activation-modal-box { background: linear-gradient(145deg, #450a0a, #1e293b); border: 1.5px solid rgba(16,185,129,0.4); border-radius: 22px; width: 100%; max-width: 350px; padding: 18px 16px; text-align: center; color: #f8fafc; max-height: 90vh; overflow-y: auto; }
+.activation-badge { display: inline-block; background: linear-gradient(135deg, #ef4444, #10b981); color: white; padding: 3px 10px; border-radius: 14px; font-size: 11px; font-weight: 800; margin-bottom: 8px; }
 .activation-benefits { background: rgba(15, 23, 42, 0.65); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 10px; margin: 10px 0; text-align: left; }
 .activation-benefit-item { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; margin-bottom: 6px; color: #e2e8f0; }
 .activation-btn-group { display: flex; gap: 8px; margin-top: 10px; }
-.btn-act-contact { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 10px; border-radius: 10px; flex: 1; font-weight: 800; font-size: 13px; cursor: pointer; box-shadow: 0 4px 12px rgba(16,185,129,0.3); transition: transform 0.2s; }
+.btn-act-contact { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 10px; border-radius: 10px; flex: 1; font-weight: 800; font-size: 13px; cursor: pointer; }
 .btn-act-cancel { background: rgba(255,255,255,0.08); color: #94a3b8; border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 10px; width: 80px; font-weight: 700; font-size: 13px; cursor: pointer; }
 
-/* পেমেন্ট রিভিউ মডাল ডিজাইন */
-.payment-review-modal-box { background: linear-gradient(145deg, #121a2c, #090d16); border: 2px solid rgba(56, 189, 248, 0.5); border-radius: 26px; width: 100%; max-width: 360px; padding: 22px 18px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.85), 0 0 30px rgba(56,189,248,0.25); color: #f8fafc; position: relative; }
-.payment-review-main-title { font-size: 17px; font-weight: 800; background: linear-gradient(135deg, #38bdf8, #34d399, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px; letter-spacing: 0.5px; }
+.payment-review-modal-box { background: linear-gradient(145deg, #121a2c, #090d16); border: 2px solid rgba(56, 189, 248, 0.5); border-radius: 26px; width: 100%; max-width: 360px; padding: 22px 18px; text-align: center; color: #f8fafc; }
+.payment-review-main-title { font-size: 17px; font-weight: 800; background: linear-gradient(135deg, #38bdf8, #34d399, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px; }
 .payment-review-sub-title { font-size: 11px; color: #cbd5e1; font-weight: 700; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); padding: 5px 12px; border-radius: 14px; margin-bottom: 14px; display: inline-block; }
-.live-feed-box { background: rgba(15, 23, 42, 0.95); border: 1.5px solid rgba(56, 189, 248, 0.4); padding: 18px 14px; border-radius: 18px; margin: 6px 0 16px 0; min-height: 125px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: inset 0 4px 15px rgba(0,0,0,0.7), 0 8px 25px rgba(0,0,0,0.4); animation: fadeInModal 0.4s ease-in-out; position: relative; overflow: hidden; }
-.live-feed-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3.5px; background: linear-gradient(90deg, #38bdf8, #10b981, #f59e0b, #ef4444); }
+.live-feed-box { background: rgba(15, 23, 42, 0.95); border: 1.5px solid rgba(56, 189, 248, 0.4); padding: 18px 14px; border-radius: 18px; margin: 6px 0 16px 0; min-height: 125px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
 .feed-user-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-.feed-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2.5px solid #38bdf8; background: #0f172a; box-shadow: 0 4px 10px rgba(56,189,248,0.3); }
-.feed-user { font-weight: 800; color: #f8fafc; font-size: 15px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+.feed-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2.5px solid #38bdf8; background: #0f172a; }
+.feed-user { font-weight: 800; color: #f8fafc; font-size: 15px; }
 .feed-details { color: #cbd5e1; font-size: 12px; font-weight: 700; line-height: 1.6; text-align: center; }
-.feed-amount { color: #34d399; font-weight: 800; font-size: 17px; text-shadow: 0 2px 8px rgba(16,185,129,0.4); }
+.feed-amount { color: #34d399; font-weight: 800; font-size: 17px; }
 
-/* এডমিন চ্যাট কার্ড ও অনলাইন স্ট্যাটাস স্টাইল */
-.admin-user-card { background: #1e293b; border: 1.5px solid rgba(56,189,248,0.25); border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s; }
+.admin-user-card { background: #1e293b; border: 1.5px solid rgba(56,189,248,0.25); border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
 .unread-dot { background: #ef4444; color: white; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 10px; }
 .online-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 10px; }
 .online-badge.is-online { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
 .online-badge.is-offline { background: rgba(148, 163, 184, 0.15); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.25); }
-.status-dot-green { width: 7px; height: 7px; background: #10b981; border-radius: 50%; display: inline-block; box-shadow: 0 0 6px #10b981; }
+.status-dot-green { width: 7px; height: 7px; background: #10b981; border-radius: 50%; display: inline-block; }
 .status-dot-gray { width: 7px; height: 7px; background: #64748b; border-radius: 50%; display: inline-block; }
 
 .chat-msg-time { font-size: 9px; color: #94a3b8; margin-top: 4px; text-align: right; font-weight: 600; }
-.chat-media-preview { max-width: 100%; max-height: 180px; border-radius: 10px; margin-bottom: 6px; object-fit: cover; display: block; cursor: pointer; border: 1px solid rgba(255,255,255,0.12); }
+.chat-media-preview { max-width: 100%; max-height: 180px; border-radius: 10px; margin-bottom: 6px; object-fit: cover; display: block; cursor: pointer; }
 
 .media-lightbox-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.94); z-index: 10000; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 15px; }
 .media-lightbox-overlay.active { display: flex; }
@@ -364,7 +273,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .media-lightbox-controls { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; justify-content: center; }
 .lb-ctrl-btn { background: #1e293b; color: white; border: 1px solid rgba(255,255,255,0.2); padding: 9px 16px; border-radius: 10px; font-size: 12px; font-weight: 800; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
 
-/* ফিচার ২: লাইভ নোটিফিকেশন ব্যানার / পপ-আপ */
 .admin-live-notify-banner {
     background: linear-gradient(135deg, rgba(2, 132, 199, 0.22), rgba(16, 185, 129, 0.22));
     border: 1.5px solid rgba(56, 189, 248, 0.55);
@@ -372,7 +280,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     padding: 12px 14px;
     margin-bottom: 12px;
     display: none;
-    box-shadow: 0 8px 25px rgba(2, 132, 199, 0.25);
 }
 .admin-live-notify-banner.active { display: block; }
 </style>
@@ -445,7 +352,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
                 <span id="reg-eye-icon" onclick="togglePasswordVisibility('reg-password', this)" style="cursor:pointer; font-size:16px;">👁️‍🗨️</span>
             </div>
             
-            <!-- ফিচার ১: ইউনিক ও আকর্ষণীয় ছবি আপলোড বক্স -->
             <div class="unique-photo-upload-box" onclick="document.getElementById('reg-photo').click()">
                 <div class="unique-photo-header">
                     <div class="unique-photo-title"><span>📸</span> ফেস ভেরিফিকেশন ছবি (সেলফি)</div>
@@ -488,7 +394,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <div class="live-date-value" id="live-current-date-time">লোড হচ্ছে...</div>
     </div>
 
-    <!-- ফিচার ২: অ্যাডমিন থেকে পাঠানো মেসেজ/কমান্ড লাইভ নোটিফিকেশন -->
     <div id="home-admin-message-banner" class="admin-live-notify-banner">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
             <span style="font-size:11px; font-weight:800; color:#38bdf8;">🔔 অ্যাডমিন ইনবক্স / কমান্ড নোটিফিকেশন</span>
@@ -501,7 +406,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         </div>
     </div>
 
-    <div style="background: #1e293b; padding: 12px 15px; border-radius: 14px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.05);">
+    <div style="background: #1e293b; padding: 12px 15px; border-radius: 14px; display: flex; align-items: center; gap: 12px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.05);">
         <div style="text-align: center;">
             <img id="user-profile-pic" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png" alt="Profile" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid #10b981; background: #0f172a;">
             <div id="display-user-serial" style="font-size: 10px; font-weight: 800; color: #ef4444; margin-top: 2px;">নং: #---</div>
@@ -545,33 +450,33 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 
 <!-- কাজ পেজ -->
 <div id="page-work" class="page" style="padding: 5px;">
-    <div style="background: linear-gradient(135deg, #065f46, #047857); border-radius: 20px; padding: 20px 16px; margin: 10px 0; color: white; text-align: center; box-shadow: 0 10px 25px rgba(16,185,129,0.3); border: 1.5px solid rgba(255,255,255,0.15);">
-        <h2 style="margin-top: 0; font-size: 18px; margin-bottom: 12px; font-weight: 800; letter-spacing: 0.5px;">🎥 কিভাবে কাজ করবেন?</h2>
-        <a href="https://youtube.com/shorts/7ljXq-ArTNw?si=92ieAqcu9ns5Lj-k" target="_blank" style="display: block; background: linear-gradient(135deg, #ffffff, #f1f5f9); color: #065f46; padding: 14px 20px; border-radius: 14px; text-decoration: none; font-weight: 800; font-size: 14px; margin-bottom: 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.15);">📺 কাজের ভিডিও দেখুন</a>
-        <a href="https://youtube.com/shorts/EZR9C_hEleU?si=9s6nyD1gTExfLxyC" target="_blank" style="display: block; background: linear-gradient(135deg, #ffffff, #f1f5f9); color: #065f46; padding: 14px 20px; border-radius: 14px; text-decoration: none; font-weight: 800; font-size: 14px; box-shadow: 0 6px 15px rgba(0,0,0,0.15);">🎁 বোনাস কিভাবে নিবেন দেখুন</a>
+    <div style="background: linear-gradient(135deg, #065f46, #047857); border-radius: 20px; padding: 20px 16px; margin: 10px 0; color: white; text-align: center;">
+        <h2 style="margin-top: 0; font-size: 18px; margin-bottom: 12px; font-weight: 800;">🎥 কিভাবে কাজ করবেন?</h2>
+        <a href="https://youtube.com/shorts/7ljXq-ArTNw?si=92ieAqcu9ns5Lj-k" target="_blank" style="display: block; background: linear-gradient(135deg, #ffffff, #f1f5f9); color: #065f46; padding: 14px 20px; border-radius: 14px; text-decoration: none; font-weight: 800; font-size: 14px; margin-bottom: 10px;">📺 কাজের ভিডিও দেখুন</a>
+        <a href="https://youtube.com/shorts/EZR9C_hEleU?si=9s6nyD1gTExfLxyC" target="_blank" style="display: block; background: linear-gradient(135deg, #ffffff, #f1f5f9); color: #065f46; padding: 14px 20px; border-radius: 14px; text-decoration: none; font-weight: 800; font-size: 14px;">🎁 বোনাস কিভাবে নিবেন দেখুন</a>
     </div>
 
-    <div style="background: linear-gradient(135deg, #450a0a, #065f46, #047857); padding: 16px; border-radius: 18px; box-shadow: 0 8px 20px rgba(16,185,129,0.2); text-align: center; border: 1.5px solid rgba(255,255,255,0.1); margin-bottom: 12px; color: white;">
+    <div style="background: linear-gradient(135deg, #450a0a, #065f46, #047857); padding: 16px; border-radius: 18px; text-align: center; margin-bottom: 12px; color: white;">
         <div style="font-size: 20px; margin-bottom: 2px;">📺</div>
-        <h3 style="margin: 0 0 4px 0; font-size: 16px; letter-spacing: 0.5px;">বিজ্ঞাপন দেখুন</h3>
+        <h3 style="margin: 0 0 4px 0; font-size: 16px;">বিজ্ঞাপন দেখুন</h3>
         <p style="font-size: 12px; opacity: 0.9; margin-bottom: 12px;">প্রতিটি বিজ্ঞাপন দেখে ২০ কয়েন ইনকাম করুন</p>
         
-        <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 8px 12px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 700; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.15);">
+        <div style="background: rgba(255,255,255,0.1); padding: 8px 12px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 700; margin-bottom: 10px;">
             <span>আজকের সম্পন্ন</span>
             <span style="background: #ffffff; color: #065f46; padding: 2px 8px; border-radius: 6px; font-size: 13px;"><span id="task-count">0</span> / 100</span>
         </div>
 
-        <div style="background: rgba(0,0,0,0.3); height: 8px; border-radius: 8px; margin-bottom: 14px; overflow: hidden; padding: 1px; border: 1px solid rgba(255,255,255,0.1);">
+        <div style="background: rgba(0,0,0,0.3); height: 8px; border-radius: 8px; margin-bottom: 14px; overflow: hidden; padding: 1px;">
             <div id="progress-bar" style="background: linear-gradient(90deg, #ef4444, #10b981, #34d399); height: 100%; width: 0%; border-radius: 6px; transition: width 0.4s ease;"></div>
         </div>
 
-        <button onclick="watchRealAd()" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 11px; font-size: 14px; font-weight: 800; border-radius: 12px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(239,68,68,0.4); display: flex; align-items: center; justify-content: center; gap: 6px;">
-            <span>🚀</span> এড দেখতে এখানে ক্লিক করুন
+        <button onclick="watchRealAd()" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 11px; font-size: 14px; font-weight: 800; border-radius: 12px; cursor: pointer; width: 100%;">
+            🚀 এড দেখতে এখানে ক্লিক করুন
         </button>
     </div>
     
-    <div style="background: rgba(6, 95, 70, 0.4); border: 1.5px solid #10b981; padding: 10px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; color: #34d399; margin-bottom: 12px; text-align: center; box-shadow: 0 4px 10px rgba(16,185,129,0.1); display: flex; align-items: center; justify-content: center; gap: 6px;">
-        <span style="font-size: 14px;">🔔</span> ২০০ টাকা বোনাস নিতে আমাদের চ্যানেলগুলো ফলো করুন
+    <div style="background: rgba(6, 95, 70, 0.4); border: 1.5px solid #10b981; padding: 10px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; color: #34d399; margin-bottom: 12px; text-align: center;">
+        🔔 ২০০ টাকা বোনাস নিতে আমাদের চ্যানেলগুলো ফলো করুন
     </div>
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
@@ -587,7 +492,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; margin: 0 auto 4px auto;">✔</span> 
             <span>ফেসবুক পেজ (৫০ কয়েন)</span>
         </button>
-        <button id="btn-yt" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 10px 8px; font-size: 11px; font-weight: 700; border-radius: 12px; cursor: pointer; width: 100%; box-shadow: 0 4px 15px rgba(239,68,68,0.4); text-align: center;">
+        <button id="btn-yt" onclick="claimChannelBonus('yt', 'https://youtube.com/@ad16269a?si=a2G48AqOuEGBjj5v')" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 10px 8px; font-size: 11px; font-weight: 700; border-radius: 12px; cursor: pointer; width: 100%; text-align: center;">
             <span style="background: rgba(255,255,255,0.2); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; margin: 0 auto 4px auto;">▶️</span> 
             <span>ইউটিউব বোনাস (৫০ কয়েন)</span>
         </button>
@@ -600,7 +505,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <h3 style="margin-top: 0; color: #34d399; font-size: 16px;">🎯 উইথড্র স্পেশাল টাস্ক (৫০০ ভিডিও)</h3>
         <p style="font-size: 12px; color: #94a3b8; margin-bottom: 10px;">টাকা উত্তোলনের অনুরোধ পাঠানোর শেষ ধাপে এই পেজ থেকে স্পেশাল ৫০০টি ভিডিও কমপ্লিট করুন।</p>
         <div style="text-align: left; font-size: 12px; font-weight: 700; margin-bottom: 6px;">সম্পন্ন টাস্ক <span style="float: right;" id="special-task-count">0</span> / 500</div>
-        <div style="background: #0f172a; height: 10px; border-radius: 8px; margin-bottom: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08);"><div id="special-progress-bar" style="background: #10b981; height: 100%; width: 0%; border-radius: 8px;"></div></div>
+        <div style="background: #0f172a; height: 10px; border-radius: 8px; margin-bottom: 16px; overflow: hidden;"><div id="special-progress-bar" style="background: #10b981; height: 100%; width: 0%; border-radius: 8px;"></div></div>
         <button class="btn-action" style="padding: 11px; border-radius: 12px; font-size: 13px;" onclick="watchSpecialAd()">🎥 স্পেশাল ভিডিও দেখুন (<span id="special-btn-count">0</span>/500)</button>
     </div>
     <button class="btn-action" style="background: #475569; padding: 10px; font-size: 13px;" onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])">⬅️ ওয়ালেটে ফিরে যান</button>
@@ -614,7 +519,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <p style="font-size: 12px; color: #cbd5e1; line-height: 1.4; margin-bottom: 12px;">পেমেন্ট উত্তোলন সম্পন্ন করার পরবর্তী ধাপে যেতে আপনাকে বাধ্যতামূলকভাবে স্পেশাল মোট <b>১৫০টি ভিডিও</b> দেখতে হবে।</p>
         
         <div style="text-align: left; font-size: 12px; font-weight: 700; margin-bottom: 6px;">দেখা ভিডিও: <span style="float: right; color: #34d399;" id="mandatory-task-count">0</span> / 150</div>
-        <div style="background: #0f172a; height: 10px; border-radius: 8px; margin-bottom: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08);">
+        <div style="background: #0f172a; height: 10px; border-radius: 8px; margin-bottom: 16px; overflow: hidden;">
             <div id="mandatory-progress-bar" style="background: linear-gradient(90deg, #ef4444, #10b981); height: 100%; width: 0%; border-radius: 8px; transition: width 0.3s ease;"></div>
         </div>
         
@@ -625,22 +530,18 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 
 <!-- লাইভ চ্যাট পেজ -->
 <div id="page-live-chat" class="page" style="padding: 5px;">
-    <div style="background: linear-gradient(135deg, #065f46, #0284c7); border-radius: 20px; padding: 16px 14px; margin-bottom: 10px; text-align: center; box-shadow: 0 8px 25px rgba(16,185,129,0.3); border: 1.5px solid rgba(255,255,255,0.18);">
-        <div style="font-size: 24px; font-weight: 900; color: #ffffff; letter-spacing: 1px; text-shadow: 0 2px 8px rgba(0,0,0,0.4);">
-            🎧 সাপোর্ট ও ইনবক্স
-        </div>
-        <div style="font-size: 13px; font-weight: 800; color: #a7f3d0; margin-top: 2px;" id="chat-channel-badge">
-            দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট
-        </div>
+    <div style="background: linear-gradient(135deg, #065f46, #0284c7); border-radius: 20px; padding: 16px 14px; margin-bottom: 10px; text-align: center;">
+        <div style="font-size: 24px; font-weight: 900; color: #ffffff;">🎧 সাপোর্ট ও ইনবক্স</div>
+        <div style="font-size: 13px; font-weight: 800; color: #a7f3d0; margin-top: 2px;" id="chat-channel-badge">দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট</div>
         <div style="font-size: 11px; color: #e0f2fe; font-weight: 600; margin-top: 3px;" id="chat-user-phone-label">ইউজার সাপোর্ট লাইন</div>
     </div>
 
-    <div id="user-incoming-call-box" style="display: none; background: linear-gradient(135deg, #0284c7, #10b981); border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; text-align: center; box-shadow: 0 4px 15px rgba(2,132,199,0.4);">
+    <div id="user-incoming-call-box" style="display: none; background: linear-gradient(135deg, #0284c7, #10b981); border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; text-align: center;">
         <div style="font-size: 14px; font-weight: 800; color: white; margin-bottom: 8px;" id="user-call-alert-text">📞 এডমিন আপনাকে লাইভ কল দিয়েছেন!</div>
-        <button id="user-join-call-btn" onclick="joinIncomingCall()" style="background: white; color: #0f172a; border: none; padding: 8px 18px; border-radius: 10px; font-weight: 800; font-size: 13px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">কল রিসিভ করুন</button>
+        <button id="user-join-call-btn" onclick="joinIncomingCall()" style="background: white; color: #0f172a; border: none; padding: 8px 18px; border-radius: 10px; font-weight: 800; font-size: 13px; cursor: pointer;">কল রিসিভ করুন</button>
     </div>
 
-    <div id="chat-messages-container" style="background: #121824; border: 1.5px solid rgba(16,185,129,0.35); border-radius: 18px; padding: 14px; height: 320px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; box-shadow: inset 0 4px 15px rgba(0,0,0,0.6);">
+    <div id="chat-messages-container" style="background: #121824; border: 1.5px solid rgba(16,185,129,0.35); border-radius: 18px; padding: 14px; height: 320px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px;">
     </div>
 
     <div id="chat-file-preview-box" style="display: none; background: rgba(16,185,129,0.15); border: 1px dashed #10b981; padding: 8px 12px; border-radius: 10px; margin-bottom: 8px; font-size: 12px; color: #34d399; justify-content: space-between; align-items: center;">
@@ -656,7 +557,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <button onclick="document.getElementById('user-chat-video').click()" style="background: #1e293b; border: 1.5px solid rgba(239,68,68,0.3); color: #f87171; padding: 9px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; cursor: pointer; flex-shrink: 0;">🎥 ভিডিও</button>
 
         <input type="text" id="chat-input-message" placeholder="আপনার মেসেজ লিখুন..." style="flex: 1; min-width: 0; background: #1e293b; border: 1px solid rgba(255,255,255,0.12); padding: 11px 12px; border-radius: 12px; color: white; font-size: 13px; outline: none;">
-        <button onclick="sendLiveChatMessage()" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 11px 16px; font-weight: 800; border-radius: 12px; cursor: pointer; flex-shrink: 0; box-shadow: 0 4px 15px rgba(16,185,129,0.3);">পাঠান</button>
+        <button onclick="sendLiveChatMessage()" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 11px 16px; font-weight: 800; border-radius: 12px; cursor: pointer; flex-shrink: 0;">পাঠান</button>
     </div>
 
     <button class="btn-action" style="background: #475569; padding: 11px; border-radius: 14px; font-size: 13px;" onclick="goBackFromChat()">⬅️ ফিরে যান</button>
@@ -664,11 +565,9 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 
 <!-- সিক্রেট এডমিন লাইভ চ্যাট ড্যাশবোর্ড -->
 <div id="page-admin-chat-panel" class="page" style="padding: 5px;">
-    <div style="background: linear-gradient(135deg, #7f1d1d, #991b1b); border-radius: 18px; padding: 14px; margin-bottom: 12px; text-align: center; box-shadow: 0 6px 20px rgba(239,68,68,0.3); border: 1.5px solid rgba(255,255,255,0.15);">
-        <div style="font-size: 18px; font-weight: 800; color: white; display: flex; align-items: center; justify-content: center; gap: 8px;">
-            <span>🛡️</span> এডমিন লাইভ সাপোর্ট ও ইউজার ইনবক্স প্যানেল
-        </div>
-        <div style="font-size: 11px; color: #fecaca; font-weight: 600; margin-top: 2px;">সব ইউজারের মেসেজ, ইনবক্স কমান্ড ও সরাসরি যোগাযোগ করুন</div>
+    <div style="background: linear-gradient(135deg, #7f1d1d, #991b1b); border-radius: 18px; padding: 14px; margin-bottom: 12px; text-align: center;">
+        <div style="font-size: 18px; font-weight: 800; color: white;">🛡️ এডমিন লাইভ সাপোর্ট ও ইউজার ইনবক্স প্যানেল</div>
+        <div style="font-size: 11px; color: #fecaca; font-weight: 600; margin-top: 2px;">কমান্ড: <code>/addcoin 100</code>, <code>/activate</code>, <code>/resetdaily</code> অথবা সাধারণ মেসেজ</div>
     </div>
 
     <div id="admin-chat-users-list">
@@ -703,7 +602,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <input type="file" id="admin-chat-file" accept="image/*,video/*" style="display:none;" onchange="onAdminFileSelected(this)">
             <button onclick="document.getElementById('admin-chat-file').click()" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.15); color: #38bdf8; padding: 10px 14px; border-radius: 14px; font-size: 18px; cursor: pointer;">📎</button>
 
-            <input type="text" id="admin-reply-input" placeholder="ইউজারের ইনবক্স/নোটিফিকেশনে মেসেজ বা কমান্ড লিখুন..." style="flex: 1; background: #1e293b; border: 1px solid rgba(255,255,255,0.12); padding: 12px 14px; border-radius: 14px; color: white; font-size: 13px; outline: none;">
+            <input type="text" id="admin-reply-input" placeholder="মেসেজ বা কমান্ড (/addcoin 100, /activate) লিখুন..." style="flex: 1; background: #1e293b; border: 1px solid rgba(255,255,255,0.12); padding: 12px 14px; border-radius: 14px; color: white; font-size: 13px; outline: none;">
             <button onclick="sendAdminReplyMessage()" style="background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border: none; padding: 12px 20px; font-weight: 800; border-radius: 14px; cursor: pointer;">পাঠান</button>
         </div>
     </div>
@@ -718,10 +617,10 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <p style="font-size: 11px; color: #94a3b8; font-weight: 600;">কিভাবে অ্যাপটি ব্যবহার করবেন—টিউটোরিয়াল ভিডিও দেখে নিন এবং সহজেই আয় শুরু করুন।</p>
     </div>
 
-    <a href="https://youtube.com/shorts/7ljXq-ArTNw?si=92ieAqcu9ns5Lj-k" target="_blank" style="display: block; background: linear-gradient(145deg, #1e293b, #0f172a); border: 1.5px solid rgba(16,185,129,0.3); border-radius: 20px; padding: 12px; margin-bottom: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-decoration: none; position: relative; overflow: hidden;">
+    <a href="https://youtube.com/shorts/7ljXq-ArTNw?si=92ieAqcu9ns5Lj-k" target="_blank" style="display: block; background: linear-gradient(145deg, #1e293b, #0f172a); border: 1.5px solid rgba(16,185,129,0.3); border-radius: 20px; padding: 12px; margin-bottom: 16px; text-decoration: none; overflow: hidden;">
         <div style="position: relative; width: 100%; height: 160px; border-radius: 14px; overflow: hidden; background: #000; display: flex; align-items: center; justify-content: center;">
             <img src="https://img.youtube.com/vi/7ljXq-ArTNw/hqdefault.jpg" alt="Tutorial Video" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.85;">
-            <div style="position: absolute; width: 50px; height: 36px; background: #ff0000; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(255,0,0,0.5);">
+            <div style="position: absolute; width: 50px; height: 36px; background: #ff0000; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
                 <div style="width: 0; height: 0; border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-left: 12px solid white; margin-left: 2px;"></div>
             </div>
         </div>
@@ -730,33 +629,29 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         </div>
     </a>
 
-    <div style="text-align: left; font-size: 15px; font-weight: 800; color: #f8fafc; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-        <span>🎧</span> অন্যান্য সাহায্য
-    </div>
-
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px;">
         <a href="https://t.me/KA16269bot" target="_blank" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 16px 12px; text-align: center; text-decoration: none; display: flex; flex-direction: column; align-items: center;">
-            <div style="width: 44px; height: 44px; background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.2); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #38bdf8; margin-bottom: 8px;">✈️</div>
-            <div style="font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 2px;">টেলিগ্রাম</div>
-            <div style="font-size: 10px; color: #94a3b8; font-weight: 600;">সরাসরি মেসেজ করুন</div>
+            <div style="font-size: 20px; color: #38bdf8; margin-bottom: 8px;">✈️</div>
+            <div style="font-size: 14px; font-weight: 800; color: #f8fafc;">টেলিগ্রাম</div>
+            <div style="font-size: 10px; color: #94a3b8;">সরাসরি মেসেজ করুন</div>
         </a>
 
         <a href="https://www.facebook.com/ami16269" target="_blank" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 16px 12px; text-align: center; text-decoration: none; display: flex; flex-direction: column; align-items: center;">
-            <div style="width: 44px; height: 44px; background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #3b82f6; margin-bottom: 8px;">👥</div>
-            <div style="font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 2px;">ফেসবুক</div>
-            <div style="font-size: 10px; color: #94a3b8; font-weight: 600;">ফেসবুকে যোগাযোগ</div>
+            <div style="font-size: 20px; color: #3b82f6; margin-bottom: 8px;">👥</div>
+            <div style="font-size: 14px; font-weight: 800; color: #f8fafc;">ফেসবুক</div>
+            <div style="font-size: 10px; color: #94a3b8;">ফেসবুকে যোগাযোগ</div>
         </a>
 
         <div onclick="openSiteDetailsModal()" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 16px 12px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center;">
-            <div style="width: 44px; height: 44px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #ef4444; margin-bottom: 8px;">❓</div>
-            <div style="font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 2px;">বিস্তারিত নিয়ম</div>
-            <div style="font-size: 10px; color: #94a3b8; font-weight: 600;">সাধারণ প্রশ্নোত্তর</div>
+            <div style="font-size: 20px; color: #ef4444; margin-bottom: 8px;">❓</div>
+            <div style="font-size: 14px; font-weight: 800; color: #f8fafc;">বিস্তারিত নিয়ম</div>
+            <div style="font-size: 10px; color: #94a3b8;">সাধারণ প্রশ্নোত্তর</div>
         </div>
 
         <div onclick="openLiveChat('general')" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 16px 12px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center;">
-            <div style="width: 44px; height: 44px; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #f59e0b; margin-bottom: 8px;">💬</div>
-            <div style="font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 2px;">কাস্টমার সাপোর্ট</div>
-            <div style="font-size: 10px; color: #94a3b8; font-weight: 600;">তাৎক্ষণিক সাহায্য</div>
+            <div style="font-size: 20px; color: #f59e0b; margin-bottom: 8px;">💬</div>
+            <div style="font-size: 14px; font-weight: 800; color: #f8fafc;">কাস্টমার সাপোর্ট</div>
+            <div style="font-size: 10px; color: #94a3b8;">তাৎক্ষণিক সাহায্য</div>
         </div>
     </div>
 </div>
@@ -769,24 +664,24 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <p style="font-size: 12px; opacity: 0.85; line-height: 1.4; margin-bottom: 10px;">আপনার পার্সোনাল রেফার লিংকটি শেয়ার করুন। বন্ধু জয়েন করলেই পাবেন আকর্ষণীয় ক্যাশ বোনাস!</p>
         
         <div class="refer-benefits">
-            <div class="refer-benefit-item"><span style="font-size: 14px;">🎁</span> <span>প্রতি সফল রেফারে পাবেন ইনস্ট্যান্ট <b>১১১ কয়েন বোনাস!</b></span></div>
-            <div class="refer-benefit-item"><span style="font-size: 14px;">⚡</span> <span>আপনার বন্ধুর ইনকাম থেকে লাইফটাইম গ্রোথ সুবিধা।</span></div>
-            <div class="refer-benefit-item"><span style="font-size: 14px;">🚀</span> <span>যত বেশি রেফার করবেন, উইথড্র করার সুযোগ তত দ্রুত পাবেন।</span></div>
+            <div class="refer-benefit-item"><span>🎁</span> <span>প্রতি সফল রেফারে পাবেন ইনস্ট্যান্ট <b>১১১ কয়েন বোনাস!</b></span></div>
+            <div class="refer-benefit-item"><span>⚡</span> <span>আপনার বন্ধুর ইনকাম থেকে লাইফটাইম গ্রোথ সুবিধা।</span></div>
+            <div class="refer-benefit-item"><span>🚀</span> <span>যত বেশি রেফার করবেন, উইথড্র করার সুযোগ তত দ্রুত পাবেন।</span></div>
         </div>
 
         <div class="refer-link-box">
             <span id="refer-link" style="font-size: 11px; color: #34d399; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 200px;">লিংক তৈরি হচ্ছে...</span>
-            <span onclick="copyRefer()" style="cursor:pointer; font-size: 16px; padding-left: 4px;" title="কপি করুন">📋</span>
+            <span onclick="copyRefer()" style="cursor:pointer; font-size: 16px;" title="কপি করুন">📋</span>
         </div>
-        <div style="display: flex; justify-content: space-between; gap: 8px; margin-bottom: 4px;">
+        <div style="display: flex; justify-content: space-between; gap: 8px;">
             <button class="btn-refer-action" onclick="copyRefer()">📋 লিংক কপি করুন</button>
-            <button class="btn-refer-action" style="background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 4px 12px rgba(239,68,68,0.3);" onclick="shareRefer()">🚀 শেয়ার করুন</button>
+            <button class="btn-refer-action" style="background: linear-gradient(135deg, #ef4444, #dc2626);" onclick="shareRefer()">🚀 শেয়ার করুন</button>
         </div>
     </div>
     
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 0 2px;">
         <h3 style="margin:0; font-size: 14px;">রেফার করা বন্ধুদের তালিকা</h3>
-        <span style="background: #1e293b; color: #34d399; border: 1px solid rgba(255,255,255,0.08); padding: 4px 12px; border-radius: 14px; font-weight: 700; font-size: 12px;">মোট: <span id="dash-refer-count">0</span></span>
+        <span style="background: #1e293b; color: #34d399; padding: 4px 12px; border-radius: 14px; font-weight: 700; font-size: 12px;">মোট: <span id="dash-refer-count">0</span></span>
     </div>
     <div id="referrals-list-container"></div>
 </div>
@@ -806,35 +701,26 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <!-- ইনকাম হিস্টোরি পেজ -->
 <div id="page-income-history" class="page">
     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding: 0 4px;">
-        <div onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])" style="font-size: 20px; cursor: pointer; color: #f8fafc;">←</div>
-        <div style="display: flex; align-items: center; gap: 8px;">
-            <span style="font-size: 20px;">📈</span>
-            <h2 style="margin: 0; font-size: 18px; font-weight: 800; color: #f8fafc;">ইনকাম হিস্টোরি</h2>
-        </div>
+        <div onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])" style="font-size: 20px; cursor: pointer;">←</div>
+        <h2 style="margin: 0; font-size: 18px; font-weight: 800;">📈 ইনকাম হিস্টোরি</h2>
         <div style="width: 20px;"></div>
     </div>
 
-    <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 12px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
-        <div style="font-size: 12px; color: #94a3b8; line-height: 1.4; font-weight: 600;">আপনি কত ভিডিও দেখে কত পয়েন্ট ইনকাম করেছেন তার সম্পূর্ণ রেকর্ড এখানে দেখুন</div>
-        <div style="font-size: 28px; margin-left: 8px;">🎬</div>
-    </div>
-
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 12px;">
-        <div style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 10px 4px; text-align: center;">
-            <div style="font-size: 9px; color: #94a3b8; font-weight: 700; margin-bottom: 2px;">মোট ভিডিও দেখা</div>
+        <div style="background: #1e293b; border-radius: 12px; padding: 10px 4px; text-align: center;">
+            <div style="font-size: 9px; color: #94a3b8; font-weight: 700;">মোট ভিডিও দেখা</div>
             <div style="font-size: 15px; font-weight: 800; color: #38bdf8;" id="history-total-watched">0 টি</div>
         </div>
-        <div style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 10px 4px; text-align: center;">
-            <div style="font-size: 9px; color: #94a3b8; font-weight: 700; margin-bottom: 2px;">প্রতি ভিডিও রেট</div>
+        <div style="background: #1e293b; border-radius: 12px; padding: 10px 4px; text-align: center;">
+            <div style="font-size: 9px; color: #94a3b8; font-weight: 700;">প্রতি ভিডিও রেট</div>
             <div style="font-size: 15px; font-weight: 800; color: #facc15;">20 পয়েন্ট</div>
         </div>
-        <div style="background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 10px 4px; text-align: center;">
-            <div style="font-size: 9px; color: #94a3b8; font-weight: 700; margin-bottom: 2px;">মোট ইনকাম</div>
+        <div style="background: #1e293b; border-radius: 12px; padding: 10px 4px; text-align: center;">
+            <div style="font-size: 9px; color: #94a3b8; font-weight: 700;">মোট ইনকাম</div>
             <div style="font-size: 13px; font-weight: 800; color: #34d399;" id="history-total-income">0 পয়েন্ট</div>
         </div>
     </div>
 
-    <div style="font-size: 13px; font-weight: 800; color: #f8fafc; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;"><span>🕒</span> দৈনিক কাজের রেকর্ড</div>
     <div id="recent-income-list-container"></div>
 </div>
 
@@ -842,12 +728,8 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <div id="page-payment-history" class="page">
     <div class="history-header-box">
         <div>
-            <div class="history-header-title"><span style="font-size: 20px;">💳</span> পেমেন্ট হিস্ট্রি</div>
+            <div class="history-header-title">💳 পেমেন্ট হিস্ট্রি</div>
             <div class="history-header-desc">আপনার সকল পেমেন্টের সম্পূর্ণ হিস্ট্রি এখানে দেখুন</div>
-        </div>
-        <div style="display: flex; gap: 4px; align-items: center;">
-            <div style="background: #e11d48; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; border: 2px solid #fff;">💸</div>
-            <div style="background: #ea580c; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; border: 2px solid #fff; margin-left: -12px;">🪙</div>
         </div>
     </div>
 
@@ -855,7 +737,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <button class="history-filter-btn active" onclick="filterPaymentHistory('all', this)">⚡ সবগুলো</button>
         <button class="history-filter-btn" onclick="filterPaymentHistory('success', this)">✅ সফল</button>
         <button class="history-filter-btn" onclick="filterPaymentHistory('pending', this)">⏳ পেন্ডিং</button>
-        <button class="history-filter-btn" onclick="filterPaymentHistory('failed', this)">❌ ব্যর্থ</button>
     </div>
 
     <div id="payment-history-list-container">
@@ -869,18 +750,13 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <div id="page-wallet" class="page">
     <div class="wallet-hero-card">
         <div class="wallet-badge">💳 রিডিম সেন্টার (Redeem)</div>
-        <div style="font-size: 16px; font-weight: 800; color: #f8fafc; margin-bottom: 6px;">আপনার ওয়ালেট ব্যালেন্স</div>
-        
-        <div class="wallet-id-box">ইউজার আইডি: <span id="display-user-id" style="color: #38bdf8;">---</span></div>
-
+        <div style="font-size: 16px; font-weight: 800; margin-bottom: 6px;">আপনার ওয়ালেট ব্যালেন্স</div>
+        <div class="wallet-id-box">ইউজার আইডি: <span id="display-user-id">---</span></div>
         <div class="wallet-balance-box">
             <div class="wallet-balance-title">উপলব্ধ ব্যালেন্স</div>
             <div class="wallet-balance-num"><span id="wallet-balance">0</span> <span style="font-size: 16px; color: #cbd5e1;">কয়েন</span></div>
         </div>
-
-        <div class="wallet-notice-box">
-            <span style="font-size: 14px;">⚡</span> ন্যূনতম ১০০০ কয়েন হলে উত্তোলন করতে পারবেন।
-        </div>
+        <div class="wallet-notice-box">⚡ ন্যূনতম ১০০০ কয়েন হলে উত্তোলন করতে পারবেন।</div>
     </div>
 
     <button class="btn-withdraw-action" onclick="toggleWithdrawForm()">💲 এখনই উইথড্র করুন</button>
@@ -905,77 +781,59 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(10000)">১০০০০</button>
         </div>
 
-        <button class="btn-action btn-success" style="margin-top: 10px; padding: 12px; border-radius: 12px; font-size: 14px;" onclick="processWithdraw()">🚀 পেমেন্ট অনুরোধ পাঠান</button>
+        <button class="btn-action btn-success" onclick="processWithdraw()">🚀 পেমেন্ট অনুরোধ পাঠান</button>
     </div>
 
-    <a href="#" class="wallet-menu-card" onclick="openPaymentReviewModal()">
+    <div class="wallet-menu-card" onclick="openPaymentReviewModal()">
         <div class="wallet-menu-left">
-            <div class="wallet-menu-icon" style="background: rgba(56,189,248,0.1); border-color: rgba(56,189,248,0.2); color: #38bdf8;">💳</div>
-            <div>
-                <div class="wallet-menu-title">পেমেন্টের রিভিউ</div>
-                <div class="wallet-menu-desc">লাইভ পেমেন্ট প্রুফ ও রেকর্ড দেখুন</div>
-            </div>
+            <div class="wallet-menu-icon">💳</div>
+            <div><div class="wallet-menu-title">পেমেন্টের রিভিউ</div><div class="wallet-menu-desc">লাইভ পেমেন্ট প্রুফ ও রেকর্ড দেখুন</div></div>
         </div>
         <div class="wallet-menu-arrow">›</div>
-    </a>
+    </div>
 
-    <a href="#" class="wallet-menu-card" onclick="switchPage('income-history', null)">
+    <div class="wallet-menu-card" onclick="switchPage('income-history', null)">
         <div class="wallet-menu-left">
             <div class="wallet-menu-icon">📈</div>
-            <div>
-                <div class="wallet-menu-title">ইনকাম হিস্টোরি</div>
-                <div class="wallet-menu-desc">আপনার সব ইনকাম রেকর্ড দেখুন</div>
-            </div>
+            <div><div class="wallet-menu-title">ইনকাম হিস্টোরি</div><div class="wallet-menu-desc">আপনার সব ইনকাম রেকর্ড দেখুন</div></div>
         </div>
         <div class="wallet-menu-arrow">›</div>
-    </a>
+    </div>
 
-    <a href="#" class="wallet-menu-card" onclick="switchPage('payment-history', null)">
+    <div class="wallet-menu-card" onclick="switchPage('payment-history', null)">
         <div class="wallet-menu-left">
             <div class="wallet-menu-icon">🕒</div>
-            <div>
-                <div class="wallet-menu-title">উইথড্র হিস্ট্রি</div>
-                <div class="wallet-menu-desc">আপনার উইথড্র রেকর্ড দেখুন</div>
-            </div>
+            <div><div class="wallet-menu-title">উইথড্র হিস্ট্রি</div><div class="wallet-menu-desc">আপনার উইথড্র রেকর্ড দেখুন</div></div>
         </div>
         <div class="wallet-menu-arrow">›</div>
-    </a>
+    </div>
 
-    <a href="#" class="wallet-menu-card" onclick="switchPage('support', document.querySelectorAll('.nav-item')[2])">
+    <div class="wallet-menu-card" onclick="switchPage('support', document.querySelectorAll('.nav-item')[2])">
         <div class="wallet-menu-left">
             <div class="wallet-menu-icon">ℹ️</div>
-            <div>
-                <div class="wallet-menu-title">সাপোর্ট</div>
-                <div class="wallet-menu-desc">আমাদের সাথে যোগাযোগ করুন</div>
-            </div>
+            <div><div class="wallet-menu-title">সাপোর্ট</div><div class="wallet-menu-desc">আমাদের সাথে যোগাযোগ করুন</div></div>
         </div>
         <div class="wallet-menu-arrow">›</div>
-    </a>
+    </div>
 
-    <a href="#" class="wallet-menu-card" onclick="switchPage('leaderboard', null)">
+    <div class="wallet-menu-card" onclick="switchPage('leaderboard', null)">
         <div class="wallet-menu-left">
             <div class="wallet-menu-icon">📊</div>
-            <div>
-                <div class="wallet-menu-title">লিডারবোর্ড</div>
-                <div class="wallet-menu-desc">সেরা ১০০ ইনকামার দেখুন</div>
-            </div>
+            <div><div class="wallet-menu-title">লিডারবোর্ড</div><div class="wallet-menu-desc">সেরা ১০০ ইনকামার দেখুন</div></div>
         </div>
         <div class="wallet-menu-arrow">›</div>
-    </a>
+    </div>
 
-    <a href="#" class="wallet-menu-card" onclick="handleLogout()">
+    <div class="wallet-menu-card" onclick="handleLogout()">
         <div class="wallet-menu-left" style="color: #ef4444;">
-            <div class="wallet-menu-icon" style="background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.2); color: #ef4444;">🚪</div>
-            <div>
-                <div class="wallet-menu-title" style="color: #ef4444;">লগআউট</div>
-                <div class="wallet-menu-desc">অ্যাকাউন্ট থেকে বের হয়ে যান</div>
-            </div>
+            <div class="wallet-menu-icon" style="color: #ef4444;">🚪</div>
+            <div><div class="wallet-menu-title" style="color: #ef4444;">লগআউট</div><div class="wallet-menu-desc">অ্যাকাউন্ট থেকে বের হয়ে যান</div></div>
         </div>
         <div class="wallet-menu-arrow">›</div>
-    </a>
+    </div>
 </div>
 
-<!-- মিডিয়া লাইটবক্স ও জুম -->
+<!-- মিডিয়া লাইটবক্স -->
 <div id="media-lightbox" class="media-lightbox-overlay">
     <div id="media-lightbox-container" style="display:flex; align-items:center; justify-content:center; width:100%; overflow:auto;"></div>
     <div class="media-lightbox-controls">
@@ -990,21 +848,11 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <div id="site-details-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="border: 1.5px solid #10b981;">
         <div class="custom-modal-title">📖 দারাজ প্লে ইনকাম সেন্টার - বিস্তারিত</div>
-        <div class="custom-modal-desc" style="font-size: 12px; line-height: 1.55; text-align: left;">
-            💰 <b>দারাজ প্লে ইনকাম সেন্টার</b> একটি সম্পূর্ণ বিশ্বস্ত ও আধুনিক অনলাইন আয়ের মাধ্যম।<br><br>
-            🎬 <b>প্রতিদিন কয়টি ভিডিও দেখতে পারবেন?</b><br>
-            ✅ প্রতিদিন আপনি নিয়ম মেনে সর্বোচ্চ <b>১০০টি বিজ্ঞাপন (ভিডিও)</b> দেখতে পারবেন।<br><br>
-            💵 <b>প্রতি ভিডিওর রেট কত?</b><br>
-            ✅ প্রতিটি সফল বিজ্ঞাপন দেখার জন্য আপনি পাবেন <b>২০ কয়েন (বা নির্ধারিত টাকা)</b>।<br><br>
-            💳 <b>উইথড্র বা টাকা তোলার নিয়ম:</b><br>
-            ✅ ন্যূনতম <b>১০০০ কয়েন</b> হলে আপনি বিকাশ বা নগদের মাধ্যমে পেমেন্ট উত্তোলনের অনুরোধ পাঠাতে পারবেন।<br>
-            ✅ দৈনিক আপনি আপনার ব্যালেন্স অনুযায়ী সর্বোচ্চ পরিমাণ টাকা উইথড্র করতে পারবেন।<br><br>
-            🚀 <b>বিজ্ঞাপন দেখার স্টেপ-বাই-স্টেপ গাইড:</b><br>
-            ১. প্রথমে অ্যাপের <b>'কাজ'</b> অপশনে প্রবেশ করুন।<br>
-            ২. এরপর <b>'এড দেখতে এখানে ক্লিক করুন'</b> বাটনে চাপ দিন।<br>
-            ৩. বিজ্ঞাপনটি সম্পূর্ণ লোড হওয়া পর্যন্ত অপেক্ষা করুন এবং নিয়ম মেনে ভিডিওটি দেখুন।<br>
-            ৪. ভিডিও দেখা শেষ হলে আপনার মেইন ব্যালেন্সে স্বয়ংক্রিয়ভাবে কয়েন যোগ হয়ে যাবে।<br><br>
-            যেকোনো প্রয়োজনে আমাদের ২৪/৭ কাস্টমার সাপোর্ট চ্যাটে যোগাযোগ করুন।
+        <div class="custom-modal-desc" style="font-size: 12px;">
+            💰 <b>দারাজ প্লে ইনকাম সেন্টার</b> একটি অনলাইন আয়ের মাধ্যম।<br><br>
+            ✅ প্রতিদিন সর্বোচ্চ <b>১০০টি বিজ্ঞাপন</b> দেখতে পারবেন।<br>
+            ✅ প্রতি সফল বিজ্ঞাপনে <b>২০ কয়েন</b> পাবেন।<br>
+            ✅ ন্যূনতম <b>১০০০ কয়েন</b> হলে উত্তোলনের অনুরোধ পাঠাতে পারবেন।
         </div>
         <button class="btn-action btn-success" onclick="closeSiteDetailsModal()">বুঝেছি ✅</button>
     </div>
@@ -1014,246 +862,131 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <div id="payment-review-modal" class="custom-modal-overlay">
     <div class="payment-review-modal-box">
         <div class="payment-review-main-title">💰 「দারাজ প্লে ইনকাম সেন্টার」 💰</div>
-        <div class="payment-review-sub-title">✨ আজকের পেমেন্ট রিভিউ • প্রতিদিনের পেমেন্ট প্রতিদিন দেওয়া হয়</div>
-        
-        <div class="live-feed-box" id="live-payment-feed-container">
-            <div class="feed-user">লোড হচ্ছে...</div>
-        </div>
-
-        <button class="btn-action btn-success" style="padding: 10px; border-radius: 12px; font-size: 13px; margin-top: 0;" onclick="closePaymentReviewModal()">বন্ধ করুন</button>
+        <div class="payment-review-sub-title">✨ আজকের পেমেন্ট রিভিউ</div>
+        <div class="live-feed-box" id="live-payment-feed-container"><div class="feed-user">লোড হচ্ছে...</div></div>
+        <button class="btn-action btn-success" onclick="closePaymentReviewModal()">বন্ধ করুন</button>
     </div>
 </div>
 
 <!-- রেজিস্ট্রেশন OTP ভেরিফিকেশন মডাল -->
 <div id="reg-otp-modal" class="custom-modal-overlay">
-    <div class="custom-modal-box" style="border: 2px solid #10b981; background: linear-gradient(145deg, #063822, #0f172a);">
+    <div class="custom-modal-box" style="border: 2px solid #10b981;">
         <div class="custom-modal-title" style="color: #34d399;">📱 ফোন নাম্বার ভেরিফিকেশন</div>
         <div class="custom-modal-desc" style="text-align: center; font-size: 12px; background: transparent; border: none;">
-            আপনার নাম্বারে একটি ৪-ডিজিটের ওটিপি (OTP) কোড পাঠানো হয়েছে।<br>
-            (ডেমো কোডটি নিচে দেখানো হলো: <b id="display-reg-otp" style="color: #facc15; font-size: 15px;">----</b>)
+            আপনার নাম্বারে ওটিপি (OTP) কোড পাঠানো হয়েছে।<br>
+            (ডেমো কোড: <b id="display-reg-otp" style="color: #facc15; font-size: 15px;">----</b>)
         </div>
-        <div class="auth-input-box" style="margin-top: 10px;">
+        <div class="auth-input-box">
             <span>🔑</span>
-            <input type="text" id="entered-reg-otp" placeholder="৪ ডিজিটের ওটিপি কোড দিন" maxlength="4" style="text-align:center; font-size:16px; letter-spacing:2px;">
+            <input type="text" id="entered-reg-otp" placeholder="৪ ডিজিটের ওটিপি কোড দিন" maxlength="4" style="text-align:center; font-size:16px;">
         </div>
-        <button class="btn-action btn-success" style="padding: 12px; border-radius: 12px; font-size: 14px;" onclick="verifyAndCompleteRegister()">ওটিপি ভেরিফাই করুন ✅</button>
-        <button class="custom-modal-btn-cancel" style="margin-top: 8px;" onclick="closeRegOtpModal()">বাতিল</button>
+        <button class="btn-action btn-success" onclick="verifyAndCompleteRegister()">ওটিপি ভেরিফাই করুন ✅</button>
+        <button class="custom-modal-btn-cancel" onclick="closeRegOtpModal()">বাতিল</button>
     </div>
 </div>
 
-<!-- পাসওয়ার্ড ভুলে গেছেন (Forgot Password) ওটিপি মডাল -->
+<!-- পাসওয়ার্ড ভুলে গেছেন মডাল -->
 <div id="forgot-password-modal" class="custom-modal-overlay">
-    <div class="custom-modal-box" style="border: 2px solid #38bdf8; background: linear-gradient(145deg, #0f172a, #1e293b);">
+    <div class="custom-modal-box" style="border: 2px solid #38bdf8;">
         <div class="custom-modal-title" style="color: #38bdf8;">🔄 পাসওয়ার্ড রিকভারি</div>
-        
         <div id="forgot-step-1">
-            <div class="custom-modal-desc" style="text-align: center; font-size: 12px; background: transparent; border: none;">
-                আপনার রেজিস্টার্ড ফোন নাম্বারটি দিন। ওটিপি কোডের মাধ্যমে আপনি নতুন পাসওয়ার্ড সেট করতে পারবেন।
-            </div>
-            <div class="auth-input-box">
-                <span>📞</span>
-                <input type="text" id="forgot-phone" placeholder="আপনার ফোন নাম্বার">
-            </div>
-            <button class="btn-action btn-success" style="padding: 12px; border-radius: 12px; font-size: 14px;" onclick="sendForgotOTP()">ওটিপি পাঠান 📩</button>
+            <div class="auth-input-box"><span>📞</span><input type="text" id="forgot-phone" placeholder="আপনার ফোন নাম্বার"></div>
+            <button class="btn-action btn-success" onclick="sendForgotOTP()">ওটিপি পাঠান 📩</button>
         </div>
-
         <div id="forgot-step-2" style="display: none;">
-            <div class="custom-modal-desc" style="text-align: center; font-size: 12px; background: transparent; border: none;">
-                ওটিপি কোড দিন এবং নতুন পাসওয়ার্ড সেট করুন।<br>(কোড: <b id="display-forgot-otp" style="color: #facc15;">----</b>)
-            </div>
-            <div class="auth-input-box">
-                <span>🔑</span>
-                <input type="text" id="entered-forgot-otp" placeholder="ওটিপি কোড" maxlength="4" style="text-align:center;">
-            </div>
-            <div class="auth-input-box">
-                <span>🔒</span>
-                <input type="password" id="new-password-input" placeholder="নতুন পাসওয়ার্ড দিন">
-            </div>
-            <button class="btn-action btn-success" style="padding: 12px; border-radius: 12px; font-size: 14px;" onclick="verifyAndResetPassword()">পাসওয়ার্ড পরিবর্তন করুন ✅</button>
+            <div class="custom-modal-desc" style="text-align: center; font-size: 12px; background: transparent; border: none;">কোড: <b id="display-forgot-otp" style="color: #facc15;">----</b></div>
+            <div class="auth-input-box"><span>🔑</span><input type="text" id="entered-forgot-otp" placeholder="ওটিপি কোড" maxlength="4" style="text-align:center;"></div>
+            <div class="auth-input-box"><span>🔒</span><input type="password" id="new-password-input" placeholder="নতুন পাসওয়ার্ড দিন"></div>
+            <button class="btn-action btn-success" onclick="verifyAndResetPassword()">পাসওয়ার্ড পরিবর্তন করুন ✅</button>
         </div>
-
-        <button class="custom-modal-btn-cancel" style="margin-top: 8px;" onclick="closeForgotPasswordModal()">বাতিল</button>
+        <button class="custom-modal-btn-cancel" onclick="closeForgotPasswordModal()">বাতিল</button>
     </div>
 </div>
 
-<!-- মডাল ১: ১১ রেফার চেক -->
+<!-- রেফার চেক মডাল -->
 <div id="refer-modal" class="custom-modal-overlay">
-    <div class="custom-modal-box" style="border: 1.5px solid #10b981; background: linear-gradient(145deg, #063822, #0f172a);">
+    <div class="custom-modal-box" style="border: 1.5px solid #10b981;">
         <div class="custom-modal-title" style="color: #34d399;">🧑‍💼 রেফারেল সাপোর্ট সেন্টার</div>
-        <div class="custom-modal-desc" style="font-size: 12px; line-height: 1.5;">
-            💰 <b>「দারাজ প্লে ইনকাম সেন্টার」</b> 💰<br>
-            🎉 <b>রেফারেল সাপোর্ট টিমে স্বাগতম!</b><br><br>
-            ⚠️ রিডিম করতে হলে অন্তত **১১টি রেফার** প্রয়োজন!<br>
+        <div class="custom-modal-desc" style="font-size: 12px;">
+            ⚠️ রিডিম করতে অন্তত <b>১১টি রেফার</b> প্রয়োজন!<br>
             আপনার বর্তমান রেফার: <span id="modal-current-ref" style="font-weight:700; color:#34d399;">0</span>টি<br>
-            ঘাটতি রেফার: <span id="modal-deficit-ref" style="font-weight:700; color:#ef4444;">0</span>টি<br><br>
-            ✅ প্রতি সফল রেফারে <b>১১১ টাকা</b> পাবেন।<br>
-            ✅ ১১টি সফল রেফারে মোট <b>১,২২১ টাকা</b> আপনার ব্যালেন্সে যোগ হবে।<br>
-            ✅ সার্ভিস চার্জ: <b>প্রতি রেফার ১৫ টাকা</b> (১১টি রেফারের জন্য ১৬৫ টাকা)।<br>
-            ⏱️ পেমেন্ট নিশ্চিত হওয়ার ৩০ মিনিট থেকে ১ ঘণ্টার মধ্যে রেফার সম্পন্ন হবে।<br><br>
-            📌 বিস্তারিত নিয়মাবলী দেখে সরাসরি কথা বলতে নিচের বাটনে ক্লিক করুন।
+            ঘাটতি রেফার: <span id="modal-deficit-ref" style="font-weight:700; color:#ef4444;">0</span>টি
         </div>
-        <button class="btn-action btn-success" style="padding: 12px; font-size: 13px; border-radius: 12px;" onclick="startBuyReferLiveChatFromWithdraw()">💬 রেফার কিনতে লাইভ চ্যাট শুরু করুন</button>
-        <button class="custom-modal-btn-cancel" style="margin-top: 6px;" onclick="closeReferModal()">বাতিল</button>
+        <button class="btn-action btn-success" onclick="startBuyReferLiveChatFromWithdraw()">💬 রেফার সাপোর্টে লাইভ চ্যাট শুরু করুন</button>
+        <button class="custom-modal-btn-cancel" onclick="closeReferModal()">বাতিল</button>
     </div>
 </div>
 
-<!-- মডাল ২: ১৫০টি স্পেশাল ভিডিও টাস্ক -->
+<!-- ১৫০ টাস্ক মডাল -->
 <div id="mandatory-task-modal" class="custom-modal-overlay">
-    <div class="custom-modal-box" style="border: 1.5px solid #ef4444; background: linear-gradient(145deg, #450a0a, #1e293b);">
-        <div class="custom-modal-title" style="color: #ef4444;"><span>🎬</span> স্পেশাল টাস্ক প্রয়োজন!</div>
-        <div class="custom-modal-desc" style="background: rgba(15,23,42,0.7);">
-            আপনার ১১টি রেফার সফলভাবে পূরণ হয়েছে! এখন পেমেন্ট উত্তোলনের পরবর্তী ধাপে যেতে আলাদা টাস্ক পেজ থেকে বাধ্যতামূলকভাবে <b>স্পেশাল ১৫০টি ভিডিও</b> দেখে কমপ্লিট করতে হবে।<br><br>
-            বর্তমান দেখা ভিডিও: <span id="modal-mandatory-watched" style="font-weight:700; color:#34d399;">0</span> / 150টি
+    <div class="custom-modal-box" style="border: 1.5px solid #ef4444;">
+        <div class="custom-modal-title" style="color: #ef4444;">🎬 স্পেশাল টাস্ক প্রয়োজন!</div>
+        <div class="custom-modal-desc">
+            দেখা ভিডিও: <span id="modal-mandatory-watched" style="font-weight:700; color:#34d399;">0</span> / 150টি
         </div>
-        <button class="btn-action" style="background: linear-gradient(135deg, #ef4444, #991b1b); padding: 11px; font-size: 13px; border-radius: 12px;" onclick="goToMandatoryTaskPage()">🎥 স্পেশাল ভিডিও টাস্ক পেজে যান</button>
-        <button class="custom-modal-btn-cancel" style="margin-top: 6px;" onclick="closeMandatoryTaskModal()">বাতিল</button>
+        <button class="btn-action" onclick="goToMandatoryTaskPage()">🎥 স্পেশাল ভিডিও টাস্ক পেজে যান</button>
+        <button class="custom-modal-btn-cancel" onclick="closeMandatoryTaskModal()">বাতিল</button>
     </div>
 </div>
 
-<!-- মডাল ৩: ১১১ টাকা অ্যাকাউন্ট অ্যাক্টিভেশন -->
+<!-- অ্যাক্টিভেশন মডাল -->
 <div id="activation-modal" class="custom-modal-overlay">
     <div class="activation-modal-box">
         <div class="activation-badge">⚠️ ভেরিফিকেশন ও অ্যাক্টিভেশন প্রয়োজন</div>
-        <div style="font-size: 17px; font-weight: 800; color: #ef4444; margin-bottom: 6px;">ভিডিও দেখার রুলস-এ সমস্যা পাওয়া গেছে!</div>
-        <p style="font-size: 12px; color: #cbd5e1; line-height: 1.5; margin-bottom: 10px; font-weight: 600;">
-            আপনার ভিডিও দেখার কার্যক্রমে রুলস অনুযায়ী ত্রুটি পাওয়া গেছে। অ্যাকাউন্টটি অ্যাক্টিভ করতে নিচের লাইভ চ্যাটে যোগাযোগ করে <b>১১১ টাকা</b> দিয়ে সক্রিয় করুন।
-        </p>
-        
-        <div class="activation-benefits">
-            <div style="font-size: 11px; font-weight: 700; color: #34d399; margin-bottom: 6px; text-transform: uppercase;">🌟 বিশেষ সুবিধাসমূহ:</div>
-            <div class="activation-benefit-item"><span style="font-size: 14px;">⚡</span> <span>দ্রুত ও ঝামেলাহীন উইথড্র সুবিধা</span></div>
-            <div class="activation-benefit-item"><span style="font-size: 14px;">🚀</span> <span>এক্সক্লুসিভ প্রিমিয়াম ইনকাম ফিচার</span></div>
-        </div>
-
+        <div style="font-size: 16px; font-weight: 800; color: #ef4444; margin-bottom: 6px;">অ্যাকাউন্ট অ্যাক্টিভেশন প্রয়োজন</div>
+        <p style="font-size: 12px; color: #cbd5e1;">সহায়তার জন্য লাইভ চ্যাটে যোগাযোগ করুন।</p>
         <div class="activation-btn-group">
-            <button class="btn-act-contact" onclick="openActivationIntroPopup()">💬 অ্যাক্টিভেশন লাইভ চ্যাট</button>
+            <button class="btn-act-contact" onclick="openLiveChat('activation')">💬 লাইভ চ্যাট</button>
             <button class="btn-act-cancel" onclick="closeActivationModal()">বাতিল</button>
         </div>
     </div>
 </div>
 
-<!-- মডাল ৩.৫: অ্যাকাউন্ট ভেরিফাই টিম পপ-আপ -->
-<div id="activation-intro-popup" class="custom-modal-overlay">
-    <div class="custom-modal-box" style="border: 1.5px solid #38bdf8; background: linear-gradient(145deg, #0f172a, #1e293b);">
-        <div class="custom-modal-title" style="color: #38bdf8;">🔰 একাউন্ট ভেরিফাই টিম 🔰</div>
-        <div class="custom-modal-desc" style="font-size: 12px; line-height: 1.55;">
-            💰 <b>「দারাজ প্লে ইনকাম সেন্টার」</b> 💰<br>
-            🎉 <b>কাস্টমার সাপোর্ট টিমে স্বাগতম</b> 🎉<br><br>
-            🎁 <b>অ্যাকাউন্ট অ্যাক্টিভেশনের সুবিধাসমূহ:</b><br>
-            ✅ VIP সদস্য হিসেবে কাজ করার সুযোগ<br>
-            ✅ নিয়মিত আয়ের সুবিধা<br>
-            ✅ সহজ ও দ্রুত টাকা উত্তোলন<br>
-            ✅ রেফার বোনাস ও বিশেষ অফার<br>
-            ━━━━━━━━━━━━━━━<br>
-            💳 <b>অ্যাকাউন্ট অ্যাক্টিভ করতে ১১১ টাকা পেমেন্ট করতে হবে।</b><br>
-            📱 <b>পেমেন্ট মাধ্যম:</b> বিকাশ / নগদ<br>
-            📌 পেমেন্ট করতে আগ্রহী হলে নিচের বাটনে ক্লিক করুন।<br><br>
-            🌹 ধন্যবাদ।
-        </div>
-        <button class="btn-action btn-success" style="padding: 12px; font-size: 13px; border-radius: 12px;" onclick="showActivationFormNotice()">✅ বুঝতে পেরেছি / তথ্য ফরম দেখুন</button>
-        <button class="custom-modal-btn-cancel" style="margin-top: 6px;" onclick="closeActivationIntroPopup()">বাতিল</button>
-    </div>
-</div>
-
-<!-- মডাল ৩.৮: তথ্য ফরম ও লাইভ চ্যাট শুরু করুন -->
-<div id="activation-form-modal" class="custom-modal-overlay">
-    <div class="custom-modal-box" style="border: 1.5px solid #10b981; background: #0f172a; max-width: 350px;">
-        <div class="custom-modal-title" style="color: #34d399; font-size: 15px;">🎉 দারাজ প্লে কাস্টমার সাপোর্ট টিম</div>
-        <div class="custom-modal-desc" style="font-size: 11.5px; line-height: 1.5; max-height: 310px; overflow-y: auto;">
-            🌸 <b>আসসালামু আলাইকুম।</b><br>
-            কাজ, রেফার, অ্যাকাউন্ট অ্যাক্টিভেশন অথবা পেমেন্ট সংক্রান্ত সহায়তার জন্য অনুগ্রহ করে নিচের তথ্যগুলো পূরণ করে লাইভ চ্যাটে পাঠান।<br>
-            ━━━━━━━━━━━━━━━<br>
-            📋 <b>তথ্য ফরম</b><br>
-            👤 পূর্ণ নাম:<br>
-            🆔 ইউজারনেম / ইউজার আইডি:<br>
-            📱 মোবাইল নম্বর:<br>
-            💰 এমাউন্ট (৳):<br>
-            📸 পেমেন্ট / ট্রানজেকশনের স্ক্রিনশট:<br>
-            🖼️ নিজের একটি স্পষ্ট ছবি:<br>
-            🎥 নিজের একটি সংক্ষিপ্ত ভিডিও:<br>
-            📝 সমস্যা বা অনুরোধের বিবরণ:<br>
-            ━━━━━━━━━━━━━━━<br>
-            📌 <b>গুরুত্বপূর্ণ নির্দেশনা</b><br>
-            ⚠️ সকল তথ্য সঠিকভাবে প্রদান করুন।<br>
-            📩 তথ্য জমা দেওয়ার পর আমাদের কাস্টমার সাপোর্ট টিম যাচাই করবে।<br><br>
-            🌹 ধন্যবাদ।
-        </div>
-        <button class="btn-action btn-success" style="padding: 12px; font-size: 13px; border-radius: 12px;" onclick="startActivationLiveChat()">💬 লাইভ চ্যাট শুরু করুন</button>
-        <button class="custom-modal-btn-cancel" style="margin-top: 6px;" onclick="closeActivationFormModal()">বাতিল</button>
-    </div>
-</div>
-
-<!-- মডাল ৪: ৫০০টি স্পেশাল ভিডিও টাস্ক -->
+<!-- ৫০০ টাস্ক মডাল -->
 <div id="special-task-modal" class="custom-modal-overlay">
-    <div class="custom-modal-box" style="border: 1.5px solid #34d399; background: linear-gradient(145deg, #063822, #0f172a);">
-        <div class="custom-modal-title" style="color: #34d399;"><span>🎯</span> স্পেশাল ৫০০ ভিডিও টাস্ক!</div>
-        <div class="custom-modal-desc" style="background: rgba(15,23,42,0.7);">
-            আপনার অ্যাকাউন্ট সফলভাবে অ্যাক্টিভ হয়েছে! এখন পেমেন্ট তোলার শেষ ধাপে যেতে আলাদা টাস্ক পেজ থেকে বাধ্যতামূলকভাবে <b>স্পেশাল ৫০০টি ভিডিও</b> দেখে কমপ্লিট করতে হবে।<br><br>
+    <div class="custom-modal-box" style="border: 1.5px solid #34d399;">
+        <div class="custom-modal-title" style="color: #34d399;">🎯 স্পেশাল ৫০০ ভিডিও টাস্ক!</div>
+        <div class="custom-modal-desc">
             বর্তমান দেখা ভিডিও: <span id="modal-special-watched" style="font-weight:700; color:#34d399;">0</span> / 500টি
         </div>
-        <button class="btn-action btn-success" style="padding: 11px; font-size: 13px; border-radius: 12px;" onclick="goToSpecialTaskPage()">🎥 স্পেশাল ভিডিও টাস্ক পেজে যান</button>
-        <button class="custom-modal-btn-cancel" style="margin-top: 6px;" onclick="closeSpecialTaskModal()">বাতিল</button>
+        <button class="btn-action btn-success" onclick="goToSpecialTaskPage()">🎥 স্পেশাল ভিডিও টাস্ক পেজে যান</button>
+        <button class="custom-modal-btn-cancel" onclick="closeSpecialTaskModal()">বাতিল</button>
     </div>
 </div>
 
-<!-- মডাল ৫: চূড়ান্ত উইথড্র সাবমিশন ফর্ম ও সিকিউরিটি পাসওয়ার্ড -->
+<!-- চূড়ান্ত উইথড্র সাবমিশন ফর্ম -->
 <div id="final-withdraw-form-modal" class="custom-modal-overlay">
-    <div class="custom-modal-box" style="border: 2px solid #38bdf8; background: linear-gradient(145deg, #0f172a, #1e293b); max-width: 360px; text-align: left;">
-        <div class="custom-modal-title" style="color: #38bdf8; justify-content: center;">💳 চূড়ান্ত পেমেন্ট সাবমিশন ফর্ম</div>
-        <div style="font-size: 11px; color: #94a3b8; font-weight: 600; text-align: center; margin-bottom: 12px;">নিচের তথ্যগুলো সঠিকভাবে পূরণ করে আপনার উইথড্র অনুরোধ নিশ্চিত করুন</div>
-
+    <div class="custom-modal-box" style="border: 2px solid #38bdf8; max-width: 360px; text-align: left;">
+        <div class="custom-modal-title" style="color: #38bdf8;">💳 চূড়ান্ত পেমেন্ট সাবমিশন ফর্ম</div>
         <label class="wallet-label">পূর্ণ নাম:</label>
-        <input type="text" class="input-field" id="final-form-name" placeholder="আপনার পূর্ণ নাম">
-
+        <input type="text" class="input-field" id="final-form-name">
         <label class="wallet-label">মোবাইল নাম্বার (বিকাশ/নগদ):</label>
-        <input type="text" class="input-field" id="final-form-phone" placeholder="০১৭xxxxxxxx">
-
+        <input type="text" class="input-field" id="final-form-phone">
         <label class="wallet-label">পেমেন্ট মাধ্যম:</label>
         <select class="input-field" id="final-form-method">
             <option value="bkash">বিকাশ (bKash)</option>
             <option value="nagad">নগদ (Nagad)</option>
         </select>
-
         <label class="wallet-label">আপনার একটি ছবি (সেলফি):</label>
         <input type="file" id="final-form-photo" accept="image/*" style="font-size: 11px; color: #94a3b8; width: 100%; margin: 6px 0;">
-
         <label class="wallet-label">লেনদেনের সিকিউরিটি পাসওয়ার্ড / পিন:</label>
         <input type="password" class="input-field" id="final-form-pin" placeholder="৪ বা ৬ ডিজিটের পাসওয়ার্ড">
-
-        <button class="btn-action btn-success" style="padding: 12px; border-radius: 12px; font-size: 14px; margin-top: 10px;" onclick="submitFinalWithdrawForm()">🚀 পেমেন্ট অনুরোধ সাবমিট করুন</button>
-        <button class="custom-modal-btn-cancel" style="margin-top: 6px; text-align: center;" onclick="closeFinalWithdrawFormModal()">বাতিল</button>
+        <button class="btn-action btn-success" onclick="submitFinalWithdrawForm()">🚀 পেমেন্ট অনুরোধ সাবমিট করুন</button>
+        <button class="custom-modal-btn-cancel" onclick="closeFinalWithdrawFormModal()">বাতিল</button>
     </div>
 </div>
 
-<!-- সাইন-আপ সফল অভিনন্দন পপআপ -->
-<div id="register-success-modal" class="custom-modal-overlay">
-    <div class="custom-modal-box" style="border: 2px solid #10b981; background: linear-gradient(145deg, #063822, #0f172a); text-align: center;">
-        <div style="font-size: 32px; margin-bottom: 6px;">🎉</div>
-        <div class="custom-modal-title" style="color: #34d399; justify-content: center;">অভিনন্দন!</div>
-        <div class="custom-modal-desc" style="text-align: center; font-size: 13px; line-height: 1.5; background: transparent; border: none;">
-            আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে! 🚀<br>
-            এখন আপনার ফোন নাম্বার ও পাসওয়ার্ড দিয়ে লগইন করে কাজ শুরু করুন।
-        </div>
-        <button class="btn-action btn-success" style="padding: 12px; border-radius: 12px; font-size: 14px;" onclick="closeRegisterSuccessModal()">লগইন পেজে যান ✅</button>
-    </div>
-</div>
-
-<!-- ওয়েলকাম অ্যালার্ট মডাল -->
+<!-- ওয়েলকাম অ্যালার্ট -->
 <div id="welcome-alert-modal" class="custom-modal-overlay">
-    <div class="custom-modal-box" style="max-width: 330px; background: linear-gradient(145deg, #1e293b, #0f172a); border: 2px solid #10b981; padding: 14px; text-align: left; display: flex; flex-direction: column;">
-        <div style="text-align: center; font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 1px;">🔥 দারাজ প্লে ইনকাম সেন্টার 🔥</div>
-        <div style="text-align: center; font-size: 9px; color: #34d399; font-weight: 700; margin-bottom: 8px; letter-spacing: 0.5px;">WELCOME TO OUR INCOME CENTER</div>
-        
-        <div style="font-size: 11px; color: #cbd5e1; line-height: 1.4; margin-bottom: 10px; background: rgba(15, 23, 42, 0.7); padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);">
+    <div class="custom-modal-box" style="max-width: 330px; border: 2px solid #10b981; padding: 14px; text-align: left;">
+        <div style="text-align: center; font-size: 14px; font-weight: 800; color: #f8fafc;">🔥 দারাজ প্লে ইনকাম সেন্টার 🔥</div>
+        <div style="font-size: 11px; color: #cbd5e1; line-height: 1.4; margin: 10px 0; background: rgba(15, 23, 42, 0.7); padding: 10px 12px; border-radius: 12px;">
             🌸 <b>আসসালামু আলাইকুম</b><br>
-            ✨ <b>ফ্রিতে অনলাইন ইনকামের সুযোগ!</b><br>
-            📌 কোনো ইনভেস্টমেন্ট ছাড়াই নিয়ম মেনে কাজ।<br><br>
-            🎥 <b>বিজ্ঞাপন টাস্ক:</b> প্রতি বিজ্ঞাপনে <b>৳২০</b><br>
+            🎥 <b>বিজ্ঞাপন টাস্ক:</b> প্রতি বিজ্ঞাপনে <b>২০ কয়েন</b><br>
             📊 <b>দৈনিক সুযোগ:</b> প্রতিদিন সর্বোচ্চ <b>১০০টি বিজ্ঞাপন</b><br>
             💳 <b>পেমেন্ট মাধ্যম:</b> বিকাশ, নগদ
         </div>
-        
-        <button class="btn-action btn-success" style="padding: 9px; border-radius: 10px; font-size: 13px; margin-top: 0; text-align: center;" onclick="closeWelcomeAlertModal()">বুঝেছি ✅</button>
+        <button class="btn-action btn-success" onclick="closeWelcomeAlertModal()">বুঝেছি ✅</button>
     </div>
 </div>
 
@@ -1330,7 +1063,6 @@ function togglePasswordVisibility(fieldId, iconEl) {
     }
 }
 
-/* ফিচার ১: রেজিস্ট্রেশন ছবির প্রিভিউ ও স্ট্যাটাস আপডেট */
 function handleRegPhotoChange(input) {
     const previewImg = document.getElementById('reg-photo-preview');
     const statusText = document.getElementById('reg-photo-status-text');
@@ -1398,33 +1130,13 @@ function maskPhoneNumber(phone) {
 }
 
 const masterPaymentReviewPool = [
-    { name: "সাদিয়া আক্তার", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ১,১৫০০ টাকা", method: "বিকাশ", number: "017****4318", serial: "#১৬১", telegramId: "...৬৬১৮" },
+    { name: "সাদিয়া আক্তার", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", amount: "৳ ১,৫০০ টাকা", method: "বিকাশ", number: "017****4318", serial: "#১৬১", telegramId: "...৬৬১৮" },
     { name: "নুসরাত জাহান", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৮০০ টাকা", method: "নগদ", number: "018****2954", serial: "#১৫২", telegramId: "...৫২৪১" },
     { name: "জান্নাতুল ফেরদৌস", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150", amount: "৳ ৩,০০০ টাকা", method: "বিকাশ", number: "019****8172", serial: "#১৮৩", telegramId: "...৯৮৭৫" },
-    { name: "মেহজাবিন চৌধুরী", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150", amount: "৳ ১,২০০ টাকা", method: "নগদ", number: "013****6493", serial: "#১৯৪", telegramId: "...৩১২০" },
-    { name: "তাবাসসুম মীম", avatar: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=150", amount: "৳ ৫,০০০ টাকা", method: "বিকাশ", number: "016****3821", serial: "#২০৫", telegramId: "...৭৬৫৪" },
-    { name: "আয়শা সিদ্দিকা", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150", amount: "৳ ৭৫০ টাকা", method: "নগদ", number: "015****9205", serial: "#২১৬", telegramId: "...৪০৮৯" },
-    { name: "পূজা সেন", avatar: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=150", amount: "৳ ২,৫০০ টাকা", method: "বিকাশ", number: "017****1586", serial: "#২২৭", telegramId: "...৫৫১২" },
-    { name: "প্রিয়াঙ্কা রায়", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150", amount: "৳ ১,৮০০ টাকা", method: "নগদ", number: "018****7340", serial: "#২৩৮", telegramId: "...১৯৩৩" },
-    { name: "রিতু মনি", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150", amount: "৳ ২,২০০ টাকা", method: "বিকাশ", number: "019****4619", serial: "#২৪৯", telegramId: "...৮৪৪৫" },
-    { name: "পায়েল ঘোষ", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150", amount: "৳ ৪,৫০০ টাকা", method: "নগদ", number: "013****2984", serial: "#২৫০", telegramId: "...৩৭৮৯" }
+    { name: "মেহজাবিন চৌধুরী", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150", amount: "৳ ১,২০০ টাকা", method: "নগদ", number: "013****6493", serial: "#১৯৪", telegramId: "...৩১২০" }
 ];
 
 let reviewInterval = null;
-
-function getDailyUniqueReviewPool() {
-    const nowTime = new Date().getTime();
-    const seventyTwoHoursMs = 72 * 60 * 60 * 1000;
-    let savedDataStr = localStorage.getItem('master_review_pool_72h_v3');
-    let poolData = savedDataStr ? JSON.parse(savedDataStr) : null;
-
-    if (!poolData || (nowTime - poolData.lastResetTime > seventyTwoHoursMs)) {
-        let shuffled = [...masterPaymentReviewPool].sort(() => 0.5 - Math.random());
-        poolData = { lastResetTime: nowTime, available: shuffled, shown: [] };
-        localStorage.setItem('master_review_pool_72h_v3', JSON.stringify(poolData));
-    }
-    return poolData;
-}
 
 function openPaymentReviewModal() {
     document.getElementById('payment-review-modal').classList.add('active');
@@ -1440,13 +1152,7 @@ function closePaymentReviewModal() {
 function showNextReviewPayment() {
     const container = document.getElementById('live-payment-feed-container');
     if (!container) return;
-    let poolData = getDailyUniqueReviewPool();
-    if (poolData.available.length === 0) {
-        container.innerHTML = `<div class="feed-details" style="color: #94a3b8;">সকল পেমেন্ট রিভিউ দেখানো সম্পন্ন হয়েছে!</div>`;
-        return;
-    }
-    const record = poolData.available.shift();
-    localStorage.setItem('master_review_pool_72h_v3', JSON.stringify(poolData));
+    const record = masterPaymentReviewPool[Math.floor(Math.random() * masterPaymentReviewPool.length)];
     const now = new Date();
     const dateFormatted = now.toLocaleDateString('bn-BD', { day: 'numeric', month: 'long', year: 'numeric' });
     const timeFormatted = now.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' });
@@ -1473,9 +1179,8 @@ function closeSiteDetailsModal() { document.getElementById('site-details-modal')
 function updateLiveDateTime() {
     const now = new Date();
     const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
-    let dateStr = now.toLocaleDateString('bn-BD', options);
     const dateTimeElement = document.getElementById('live-current-date-time');
-    if (dateTimeElement) { dateTimeElement.innerText = dateStr; }
+    if (dateTimeElement) { dateTimeElement.innerText = now.toLocaleDateString('bn-BD', options); }
 }
 updateLiveDateTime();
 
@@ -1498,14 +1203,9 @@ function normalizePhoneNumber(inputStr) {
 
 async function checkExistingPhoneAccount(phone) {
     const querySnap = await db.collection('users').where('phone', '==', phone).limit(1).get();
-    if (!querySnap.empty) {
-        return true;
-    }
+    if (!querySnap.empty) return true;
     const directDoc = await db.collection('users').doc(phone).get();
-    if (directDoc.exists) {
-        return true;
-    }
-    return false;
+    return directDoc.exists;
 }
 
 async function getNextSerial() {
@@ -1523,7 +1223,6 @@ async function getNextSerial() {
     return assignedSerial;
 }
 
-/* ফিচার ২: টেলিগ্রাম অ্যালার্টে ইউজারের সব তথ্যসহ সরাসরি কন্টাক্ট/মেসেজ লিঙ্ক */
 async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, photoFile, uid) {
     const directContactUrl = `${window.location.origin}${window.location.pathname}?adminContact=${encodeURIComponent(uid)}&pin=${ADMIN_SECRET_PIN}`;
     const welcomeMsg = `✨ <b>🚀 নতুন মেম্বার রেজিস্ট্রেশন অ্যালার্ট! 🚀</b> ✨\n\n` +
@@ -1549,19 +1248,14 @@ async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, 
             formData.append('parse_mode', 'HTML');
             formData.append('photo', photoFile);
             formData.append('reply_markup', JSON.stringify(replyMarkup));
-
-            await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
-                method: 'POST',
-                body: formData
-            });
+            await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, { method: 'POST', body: formData });
         } else {
-            await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+            await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     chat_id: adminChatId,
-                    photo: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png",
-                    caption: welcomeMsg,
+                    text: welcomeMsg,
                     parse_mode: "HTML",
                     reply_markup: replyMarkup
                 })
@@ -1570,7 +1264,6 @@ async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, 
     } catch (e) { console.log(e); }
 }
 
-/* ফিচার ১: নাম, ফোন নাম্বার, পাসওয়ার্ড ও ছবি বাধ্যতামূলক চেক এবং কোনটি বাকি তা দেখানো */
 async function sendRegisterOTP() {
     const name = document.getElementById('reg-name').value.trim();
     const rawPhone = document.getElementById('reg-phone').value;
@@ -1590,7 +1283,7 @@ async function sendRegisterOTP() {
     }
 
     if (phone.length < 10) {
-        alert("⚠️ সঠিক ফোন নাম্বার দিন (ফোন নাম্বার অপশনটি সঠিকভাবে পূর্ণ করুন)।");
+        alert("⚠️ সঠিক ফোন নাম্বার দিন।");
         return;
     }
 
@@ -1598,35 +1291,24 @@ async function sendRegisterOTP() {
         const alreadyExists = await checkExistingPhoneAccount(phone);
         if (alreadyExists) {
             document.getElementById('login-phone').value = phone;
-            alert(
-                "🌟 দারুণ! এই ফোন নাম্বার দিয়ে ইতিমধ্যে আপনার একটি অ্যাকাউন্ট খোলা আছে!\n\n" +
-                "💪 নতুন অ্যাকাউন্ট খোলার প্রয়োজন নেই—একটি অ্যাকাউন্টেই নিয়মিত কাজ করে এগিয়ে যান! আপনার আগের কয়েন, টাস্ক ও রেফার সব ওই অ্যাকাউন্টেই সুরক্ষিত আছে।\n\n" +
-                "👉 এখনই 'লগইন করুন' পেজে গিয়ে পাসওয়ার্ড দিয়ে প্রবেশ করুন। পাসওয়ার্ড ভুলে গিয়ে থাকলে 'পাসওয়ার্ড ভুলে গেছেন?' চাপুন!"
-            );
+            alert("🌟 এই ফোন নাম্বার দিয়ে ইতিমধ্যে একটি অ্যাকাউন্ট খোলা আছে! লগইন পেজে গিয়ে পাসওয়ার্ড দিয়ে প্রবেশ করুন।");
             showLoginPage();
             return;
         }
     } catch (err) {
-        console.error(err);
-        alert("নাম্বার যাচাই করতে সমস্যা হয়েছে। দয়া করে আবার চেষ্টা করুন।");
+        alert("নাম্বার যাচাই করতে সমস্যা হয়েছে।");
         return;
     }
 
     const reader = new FileReader();
     reader.readAsDataURL(photoFile);
-    reader.onload = async function () {
-        const photoUrl = reader.result;
-        processOtpGeneration(phone, name, password, photoUrl, photoFile);
+    reader.onload = function () {
+        generatedRegOTP = Math.floor(1000 + Math.random() * 9000).toString();
+        pendingRegisterData = { phone, name, password, photoUrl: reader.result, photoFile };
+        document.getElementById('display-reg-otp').innerText = generatedRegOTP;
+        document.getElementById('entered-reg-otp').value = '';
+        document.getElementById('reg-otp-modal').classList.add('active');
     };
-}
-
-function processOtpGeneration(phone, name, password, photoUrl, photoFile) {
-    generatedRegOTP = Math.floor(1000 + Math.random() * 9000).toString();
-    pendingRegisterData = { phone, name, password, photoUrl, photoFile };
-
-    document.getElementById('display-reg-otp').innerText = generatedRegOTP;
-    document.getElementById('entered-reg-otp').value = '';
-    document.getElementById('reg-otp-modal').classList.add('active');
 }
 
 function closeRegOtpModal() {
@@ -1645,25 +1327,14 @@ async function verifyAndCompleteRegister() {
 
 async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFile) {
     try {
-        const alreadyExists = await checkExistingPhoneAccount(phone);
-        if (alreadyExists) {
-            document.getElementById('login-phone').value = phone;
-            alert(
-                "🌟 এই ফোন নাম্বার দিয়ে ইতিমধ্যে একটি অ্যাকাউন্ট রয়েছে!\n\n" +
-                "💪 নতুন অ্যাকাউন্ট না খুলে আপনার পুরনো অ্যাকাউন্টেই লগইন করে নিয়মিত কাজ চালিয়ে যান। পাসওয়ার্ড ভুলে গেলে 'পাসওয়ার্ড ভুলে গেছেন?' ব্যবহার করুন।"
-            );
-            showLoginPage();
-            return;
-        }
-
         const uid = generateUniqueUserId();
-        const userSerial = await getNextSerial();
+        const userSerialNo = await getNextSerial();
         const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp();
         const joinDateFormatted = new Date().toLocaleString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
         const today = new Date().toDateString();
 
         const userData = {
-            serial: userSerial,
+            serial: userSerialNo,
             name: name,
             phone: phone,
             password: password,
@@ -1673,7 +1344,6 @@ async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFil
             photoUrl: photoUrl,
             balance: 0,
             refers: 0,
-            processed_refers: 0,
             dailyWatched: 0,
             totalWatched: 0,
             specialWatched: 0,
@@ -1688,7 +1358,6 @@ async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFil
 
         await db.collection('users').doc(uid).set(userData);
 
-        /* ইউজারের জন্য ডিফল্ট ইনবক্স ডকুমেন্ট তৈরি যাতে অ্যাডমিন সাথে সাথে মেসেজ পাঠাতে পারেন */
         await db.collection('chats').doc(uid + "_general").set({
             phone: uid,
             userId: uid,
@@ -1706,12 +1375,11 @@ async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFil
             const referrerRef = db.collection('users').doc(referrerId);
             const refDoc = await referrerRef.get();
             if (refDoc.exists) {
-                const currentRefers = refDoc.data().refers || 0;
-                await referrerRef.update({ refers: currentRefers + 1 });
+                await referrerRef.update({ refers: (refDoc.data().refers || 0) + 1 });
             }
         }
 
-        await notifyAdminNewUser(userSerial, name, phone, password, joinDateFormatted, photoFile, uid);
+        await notifyAdminNewUser(userSerialNo, name, phone, password, joinDateFormatted, photoFile, uid);
 
         localStorage.setItem('logged_user_phone', uid);
         currentUserPhone = uid;
@@ -1719,13 +1387,8 @@ async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFil
         initDashboard(uid);
     } catch (err) {
         console.error(err);
-        alert("রেজিস্ট্রেশন করার সময় সমস্যা হয়েছে। দয়া করে আবার চেষ্টা করুন।");
+        alert("রেজিস্ট্রেশন করার সময় সমস্যা হয়েছে।");
     }
-}
-
-function closeRegisterSuccessModal() {
-    document.getElementById('register-success-modal').classList.remove('active');
-    showLoginPage();
 }
 
 function openForgotPasswordModal() {
@@ -1742,8 +1405,7 @@ function closeForgotPasswordModal() {
 }
 
 async function sendForgotOTP() {
-    const rawPhone = document.getElementById('forgot-phone').value;
-    const phone = normalizePhoneNumber(rawPhone);
+    const phone = normalizePhoneNumber(document.getElementById('forgot-phone').value);
     if (!phone || phone.length < 10) {
         alert("সঠিক রেজিস্টার্ড ফোন নাম্বার দিন।");
         return;
@@ -1766,7 +1428,6 @@ async function sendForgotOTP() {
     verifiedForgotPhone = docIdFound;
     generatedForgotOTP = Math.floor(1000 + Math.random() * 9000).toString();
     document.getElementById('display-forgot-otp').innerText = generatedForgotOTP;
-
     document.getElementById('forgot-step-1').style.display = 'none';
     document.getElementById('forgot-step-2').style.display = 'block';
 }
@@ -1774,62 +1435,38 @@ async function sendForgotOTP() {
 async function verifyAndResetPassword() {
     const entered = document.getElementById('entered-forgot-otp').value.trim();
     const newPass = document.getElementById('new-password-input').value.trim();
-
-    if (entered !== generatedForgotOTP) {
-        alert("❌ ভুল ওটিপি কোড!");
-        return;
-    }
-    if (!newPass) {
-        alert("নতুন পাসওয়ার্ড দিন।");
-        return;
-    }
-
+    if (entered !== generatedForgotOTP) { alert("❌ ভুল ওটিপি কোড!"); return; }
+    if (!newPass) { alert("নতুন পাসওয়ার্ড দিন।"); return; }
     await db.collection('users').doc(verifiedForgotPhone).update({ password: newPass });
-    alert("✅ পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে! এখন নতুন পাসওয়ার্ড দিয়ে লগইন করুন।");
+    alert("✅ পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে!");
     closeForgotPasswordModal();
 }
 
 async function handleLogin() {
-    const rawPhone = document.getElementById('login-phone').value;
-    const phone = normalizePhoneNumber(rawPhone);
+    const phone = normalizePhoneNumber(document.getElementById('login-phone').value);
     const password = document.getElementById('login-password').value.trim();
-
-    if (!phone || !password) {
-        alert("ফোন নাম্বার এবং পাসওয়ার্ড দিন।");
-        return;
-    }
+    if (!phone || !password) { alert("ফোন নাম্বার এবং পাসওয়ার্ড দিন।"); return; }
 
     const docsList = [];
     const querySnap = await db.collection('users').where('phone', '==', phone).get();
     querySnap.forEach(docSnap => docsList.push(docSnap));
-
     const directDoc = await db.collection('users').doc(phone).get();
-    if (directDoc.exists && !docsList.some(d => d.id === directDoc.id)) {
-        docsList.push(directDoc);
-    }
+    if (directDoc.exists && !docsList.some(d => d.id === directDoc.id)) docsList.push(directDoc);
 
     if (docsList.length === 0) {
-        alert("এই নাম্বারে কোনো অ্যাকাউন্ট পাওয়া যায়নি! দয়া করে আগে নিবন্ধন করুন।");
+        alert("এই নাম্বারে কোনো অ্যাকাউন্ট পাওয়া যায়নি!");
         return;
     }
 
-    let matchedDoc = null;
-    for (const docSnap of docsList) {
-        if (docSnap.data().password === password) {
-            matchedDoc = docSnap;
-            break;
-        }
-    }
-
+    const matchedDoc = docsList.find(d => d.data().password === password);
     if (!matchedDoc) {
-        alert("ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিয়ে আবার চেষ্টা করুন।");
+        alert("ভুল পাসওয়ার্ড!");
         return;
     }
 
-    const docKey = matchedDoc.id;
-    localStorage.setItem('logged_user_phone', docKey);
-    currentUserPhone = docKey;
-    initDashboard(docKey);
+    localStorage.setItem('logged_user_phone', matchedDoc.id);
+    currentUserPhone = matchedDoc.id;
+    initDashboard(matchedDoc.id);
 }
 
 function handleLogout() {
@@ -1858,51 +1495,42 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-/* ফিচার ২: ইউজারের ইনবক্সে অ্যাডমিনের নতুন মেসেজ বা কমান্ড আসলে নোটিফিকেশন দেখানো */
 function listenToUserAdminInboxNotifications(targetPhoneOrId) {
-    if (userInboxNotifyUnsubscribe) {
-        userInboxNotifyUnsubscribe();
-    }
+    if (userInboxNotifyUnsubscribe) { userInboxNotifyUnsubscribe(); }
     const chatDocId = targetPhoneOrId + "_general";
     userInboxNotifyUnsubscribe = db.collection('chats').doc(chatDocId).collection('messages')
-        .where('sender', '==', 'admin')
         .orderBy('timestamp', 'desc')
-        .limit(1)
+        .limit(10)
         .onSnapshot((snapshot) => {
-            if (!snapshot.empty) {
-                const latestDoc = snapshot.docs[0];
-                const msgId = latestDoc.id;
-                const msgData = latestDoc.data();
-                const displayMsgText = msgData.text || (msgData.mediaType === 'video' ? '[অ্যাডমিন একটি ভিডিও পাঠিয়েছেন]' : '[অ্যাডমিন একটি ছবি/ফাইল পাঠিয়েছেন]');
-                const timeText = formatMessageTime(msgData.timestamp);
+            if (snapshot.empty) return;
+            const latestAdminDoc = snapshot.docs.find(d => d.data().sender === 'admin');
+            if (!latestAdminDoc) return;
 
-                const banner = document.getElementById('home-admin-message-banner');
-                const bannerText = document.getElementById('home-admin-msg-text');
-                const bannerTime = document.getElementById('home-admin-msg-time');
+            const msgId = latestAdminDoc.id;
+            const msgData = latestAdminDoc.data();
+            const displayMsgText = msgData.text || (msgData.mediaType === 'video' ? '[অ্যাডমিন একটি ভিডিও পাঠিয়েছেন]' : '[অ্যাডমিন একটি ছবি/ফাইল পাঠিয়েছেন]');
+            const timeText = formatMessageTime(msgData.timestamp);
 
-                if (banner && bannerText && bannerTime) {
-                    bannerText.innerText = displayMsgText;
-                    bannerTime.innerText = timeText;
-                    banner.classList.add('active');
-                }
+            const banner = document.getElementById('home-admin-message-banner');
+            const bannerText = document.getElementById('home-admin-msg-text');
+            const bannerTime = document.getElementById('home-admin-msg-time');
 
-                if (lastNotifiedAdminMsgId !== msgId) {
-                    lastNotifiedAdminMsgId = msgId;
-                    localStorage.setItem('last_seen_admin_msg_id', msgId);
-                    alert("📩 অ্যাডমিন থেকে নতুন মেসেজ/কমান্ড এসেছে:\n\n" + displayMsgText);
-                }
+            if (banner && bannerText && bannerTime) {
+                bannerText.innerText = displayMsgText;
+                bannerTime.innerText = timeText;
+                banner.classList.add('active');
+            }
+
+            if (lastNotifiedAdminMsgId !== msgId) {
+                lastNotifiedAdminMsgId = msgId;
+                localStorage.setItem('last_seen_admin_msg_id', msgId);
+                alert("📩 অ্যাডমিন থেকে নতুন মেসেজ/কমান্ড এসেছে:\n\n" + displayMsgText);
             }
         }, () => {});
 }
 
-function openUserInboxFromHome() {
-    openLiveChat('general');
-}
-
-function dismissHomeAdminBanner() {
-    const banner = document.getElementById('home-admin-message-banner');
-    if (banner) banner.classList.remove('active');
-}
+function openUserInboxFromHome() { openLiveChat('general'); }
+function dismissHomeAdminBanner() { document.getElementById('home-admin-message-banner')?.classList.remove('active'); }
 
 async function initDashboard(phone) {
     document.getElementById('page-login').classList.remove('active');
@@ -1933,11 +1561,9 @@ async function initDashboard(phone) {
 
     listenToUserAdminInboxNotifications(phone);
 
-    if (data.created_at && data.created_at.toDate) {
-        formattedJoinDate = data.created_at.toDate().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
-    } else {
-        formattedJoinDate = new Date().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
-    }
+    formattedJoinDate = data.created_at?.toDate
+        ? data.created_at.toDate().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' })
+        : new Date().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
 
     userRef.onSnapshot((docSnap) => {
         if (docSnap.exists) {
@@ -1958,8 +1584,7 @@ async function initDashboard(phone) {
         }
     });
 
-    const currentBaseUrl = window.location.origin + window.location.pathname;
-    document.getElementById('refer-link').innerText = currentBaseUrl + "?start=" + userId;
+    document.getElementById('refer-link').innerText = window.location.origin + window.location.pathname + "?start=" + userId;
     updateUI();
     loadReferralsList();
     loadPaymentHistory();
@@ -1971,27 +1596,20 @@ async function initDashboard(phone) {
 }
 
 function updateBonusButtonsUI() {
-    const buttons = {
-        'chan1': { id: 'btn-chan1' },
-        'chan2': { id: 'btn-chan2' },
-        'chan3': { id: 'btn-chan3' },
-        'yt': { id: 'btn-yt' }
-    };
-    for (let key in buttons) {
-        const btn = document.getElementById(buttons[key].id);
+    const ids = ['btn-chan1', 'btn-chan2', 'btn-chan3', 'btn-yt'];
+    const keys = ['chan1', 'chan2', 'chan3', 'yt'];
+    keys.forEach((key, idx) => {
+        const btn = document.getElementById(ids[idx]);
         if (btn && claimedBonuses[key]) {
             btn.innerHTML = `<span style="background: #10b981; color: white; width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; margin: 0 auto 4px auto;">✔</span> <span>ইতিমধ্যে নেওয়া হয়েছে</span>`;
             btn.style.background = "#1e293b";
             btn.style.color = "#94a3b8";
         }
-    }
+    });
 }
 
 async function claimChannelBonus(bonusKey, url) {
-    if (claimedBonuses[bonusKey]) {
-        alert("⚠️ আপনি ইতিমধ্যে এই বোনাসটি গ্রহণ করেছেন!");
-        return;
-    }
+    if (claimedBonuses[bonusKey]) { alert("⚠️ আপনি ইতিমধ্যে এই বোনাসটি গ্রহণ করেছেন!"); return; }
     window.open(url, '_blank');
     alert("⏳ চ্যানেল/পেজ ভিজিট করার পর অ্যাপে ফিরে আসুন। ১০ সেকেন্ড পর আপনার বোনাস ক্লেম হয়ে যাবে!");
 
@@ -2010,21 +1628,19 @@ async function claimChannelBonus(bonusKey, url) {
     }, 10000);
 }
 
-async function startDynamicPaymentNotifications() {
-    let paymentMessages = [];
+function startDynamicPaymentNotifications() {
     const firstNames = ["সাদিয়া", "নুসরাত", "জান্নাতুল", "মেহজাবিন", "তাবাসসুম", "আয়শা", "পূজা", "প্রিয়াঙ্কা", "রিতু", "পায়েল"];
     const lastNames = ["আক্তার", "জাহান", "ফেরদৌস", "চৌধুরী", "মীম", "সিদ্দিকা", "সেন", "রায়", "মনি", "ঘোষ"];
     const methods = ["বিকাশ", "নগদ"];
     const amounts = ["৳ ১,০০০ টাকা", "৳ ১,৫০০ টাকা", "৳ ২,০০০ টাকা", "৳ ২,৫০০ টাকা", "৳ ৩,০০০ টাকা"];
-
-    while (paymentMessages.length < 50) {
-        let fName = firstNames[Math.floor(Math.random() * firstNames.length)];
-        let lName = lastNames[Math.floor(Math.random() * lastNames.length)];
-        let method = methods[Math.floor(Math.random() * methods.length)];
-        let amount = amounts[Math.floor(Math.random() * amounts.length)];
-        let rndId = Math.floor(1000 + Math.random() * 9000);
-        paymentMessages.push(`🔥 পেমেন্ট সফল: ${fName} ${lName} (ID: ...${rndId}) ${method}-এর মাধ্যমে ${amount} পেমেন্ট পেয়েছেন! 💰`);
-    }
+    const paymentMessages = Array.from({ length: 30 }, () => {
+        const fName = firstNames[Math.floor(Math.random() * firstNames.length)];
+        const lName = lastNames[Math.floor(Math.random() * lastNames.length)];
+        const method = methods[Math.floor(Math.random() * methods.length)];
+        const amount = amounts[Math.floor(Math.random() * amounts.length)];
+        const rndId = Math.floor(1000 + Math.random() * 9000);
+        return `🔥 পেমেন্ট সফল: ${fName} ${lName} (ID: ...${rndId}) ${method}-এর মাধ্যমে ${amount} পেমেন্ট পেয়েছেন! 💰`;
+    });
 
     const noticeBar = document.querySelector('.notice-bar');
     const noticeEl = document.getElementById('live-payment-notice');
@@ -2034,12 +1650,9 @@ async function startDynamicPaymentNotifications() {
     function runMarquee() {
         noticeEl.innerText = paymentMessages[currentIndex];
         currentIndex = (currentIndex + 1) % paymentMessages.length;
-        let containerWidth = noticeBar.offsetWidth;
-        let textWidth = noticeEl.offsetWidth;
-        let startX = containerWidth;
-        let endX = -textWidth;
-        let distance = startX - endX;
-        let duration = distance / 75;
+        const startX = noticeBar.offsetWidth;
+        const endX = -noticeEl.offsetWidth;
+        const duration = (startX - endX) / 75;
 
         noticeEl.style.transition = 'none';
         noticeEl.style.transform = `translateX(${startX}px)`;
@@ -2061,10 +1674,7 @@ function updateUI() {
     document.getElementById('display-user-id').innerText = userId;
     document.getElementById('display-join-date').innerText = formattedJoinDate;
     document.getElementById('display-user-serial').innerText = "নং: #" + userSerial;
-    
-    if(userPhotoUrl) {
-        document.getElementById('user-profile-pic').src = userPhotoUrl;
-    }
+    if (userPhotoUrl) document.getElementById('user-profile-pic').src = userPhotoUrl;
 
     document.getElementById('main-balance').innerText = Math.floor(userBalance);
     document.getElementById('wallet-balance').innerText = Math.floor(userBalance);
@@ -2075,18 +1685,18 @@ function updateUI() {
     document.getElementById('total-watched-count').innerText = lifetimeWatched;
     document.getElementById('dash-watched').innerText = dailyWatched;
     document.getElementById('dash-remaining').innerText = (100 - dailyWatched);
-    
-    if(document.getElementById('history-total-watched')) document.getElementById('history-total-watched').innerText = lifetimeWatched + " টি";
-    if(document.getElementById('history-total-income')) document.getElementById('history-total-income').innerText = (lifetimeWatched * 20) + " পয়েন্ট";
+
+    if (document.getElementById('history-total-watched')) document.getElementById('history-total-watched').innerText = lifetimeWatched + " টি";
+    if (document.getElementById('history-total-income')) document.getElementById('history-total-income').innerText = (lifetimeWatched * 20) + " পয়েন্ট";
 
     document.getElementById('special-task-count').innerText = specialWatched;
-    if(document.getElementById('special-btn-count')) document.getElementById('special-btn-count').innerText = specialWatched;
+    if (document.getElementById('special-btn-count')) document.getElementById('special-btn-count').innerText = specialWatched;
     document.getElementById('mandatory-task-count').innerText = mandatoryWatched;
-    if(document.getElementById('mandatory-btn-count')) document.getElementById('mandatory-btn-count').innerText = mandatoryWatched;
+    if (document.getElementById('mandatory-btn-count')) document.getElementById('mandatory-btn-count').innerText = mandatoryWatched;
 
-    if(document.getElementById('progress-bar')) document.getElementById('progress-bar').style.width = (dailyWatched / 100 * 100) + "%";
-    if(document.getElementById('special-progress-bar')) document.getElementById('special-progress-bar').style.width = (specialWatched / 500 * 100) + "%";
-    if(document.getElementById('mandatory-progress-bar')) document.getElementById('mandatory-progress-bar').style.width = (mandatoryWatched / 150 * 100) + "%";
+    if (document.getElementById('progress-bar')) document.getElementById('progress-bar').style.width = (dailyWatched / 100 * 100) + "%";
+    if (document.getElementById('special-progress-bar')) document.getElementById('special-progress-bar').style.width = (specialWatched / 500 * 100) + "%";
+    if (document.getElementById('mandatory-progress-bar')) document.getElementById('mandatory-progress-bar').style.width = (mandatoryWatched / 150 * 100) + "%";
 }
 
 function loadReferralsList() {
@@ -2094,7 +1704,7 @@ function loadReferralsList() {
     if (!listContainer) return;
     listContainer.innerHTML = '';
     if (totalRefers <= 0) {
-        listContainer.innerHTML = '<div style="text-align:center; padding:15px; color:#94a3b8; font-weight:700; background: #1e293b; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">এখনো কোনো রেফার করা হয়নি</div>';
+        listContainer.innerHTML = '<div style="text-align:center; padding:15px; color:#94a3b8; font-weight:700; background: #1e293b; border-radius: 12px;">এখনো কোনো রেফার করা হয়নি</div>';
         return;
     }
     for (let i = 1; i <= totalRefers; i++) {
@@ -2107,11 +1717,11 @@ function loadReferralsList() {
 
 function loadRecentIncomeHistoryList() {
     const container = document.getElementById('recent-income-list-container');
-    if(!container) return;
+    if (!container) return;
     container.innerHTML = '';
     const datesKeys = Object.keys(historyDates).sort().reverse();
     if (datesKeys.length === 0) {
-        container.innerHTML = '<div style="text-align:center; padding:15px; color:#94a3b8; font-weight:700; background: #1e293b; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">এখনো কোনো ইনকাম হিস্টোরি নেই</div>';
+        container.innerHTML = '<div style="text-align:center; padding:15px; color:#94a3b8; font-weight:700; background: #1e293b; border-radius: 12px;">এখনো কোনো ইনকাম হিস্টোরি নেই</div>';
         return;
     }
     datesKeys.forEach(dateStr => {
@@ -2119,28 +1729,13 @@ function loadRecentIncomeHistoryList() {
         if (watchedCount > 0) {
             const pointsEarned = watchedCount * 20;
             const card = document.createElement('div');
-            card.style.background = "#1e293b";
-            card.style.border = "1px solid rgba(255,255,255,0.06)";
-            card.style.borderRadius = "14px";
-            card.style.padding = "12px 14px";
-            card.style.marginBottom = "8px";
-            card.style.display = "flex";
-            card.style.alignItems = "center";
-            card.style.justifyContent = "space-between";
+            card.style.cssText = "background:#1e293b; border:1px solid rgba(255,255,255,0.06); border-radius:14px; padding:12px 14px; margin-bottom:8px; display:flex; align-items:center; justify-content:space-between;";
             card.innerHTML = `
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <div style="background: linear-gradient(135deg, #3b82f6, #6366f1); border-radius: 10px; padding: 8px 10px; text-align: center; min-width: 48px;">
-                        <div style="font-size: 13px; font-weight: 800; color: white;">${dateStr}</div>
-                    </div>
-                    <div>
-                        <div style="font-size: 11px; color: #94a3b8; font-weight: 700;">ভিডিও দেখা</div>
-                        <div style="font-size: 14px; font-weight: 800; color: #f8fafc;">${watchedCount} টি</div>
-                    </div>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <div style="background:linear-gradient(135deg,#3b82f6,#6366f1); border-radius:10px; padding:8px 10px; font-size:13px; font-weight:800; color:white;">${dateStr}</div>
+                    <div><div style="font-size:11px; color:#94a3b8;">ভিডিও দেখা</div><div style="font-size:14px; font-weight:800;">${watchedCount} টি</div></div>
                 </div>
-                <div style="text-align: right;">
-                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700;">মোট ইনকাম</div>
-                    <div style="font-size: 14px; font-weight: 800; color: #34d399;">${pointsEarned} পয়েন্ট</div>
-                </div>
+                <div style="text-align:right;"><div style="font-size:11px; color:#94a3b8;">মোট ইনকাম</div><div style="font-size:14px; font-weight:800; color:#34d399;">${pointsEarned} পয়েন্ট</div></div>
             `;
             container.appendChild(card);
         }
@@ -2164,27 +1759,16 @@ async function loadLeaderboard() {
             const uId = data.userId || docSnap.id || "---";
             const balance = Math.floor(data.balance || 0);
             const photo = data.photoUrl || "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png";
-
-            let rankClass = "lb-rank";
-            if (rank === 1) rankClass += " top-1";
-            else if (rank === 2) rankClass += " top-2";
-            else if (rank === 3) rankClass += " top-3";
-
+            let rankClass = "lb-rank" + (rank === 1 ? " top-1" : rank === 2 ? " top-2" : rank === 3 ? " top-3" : "");
             const item = document.createElement('div');
             item.className = 'lb-item';
             item.innerHTML = `
                 <div class="lb-left">
                     <div class="${rankClass}">${rank}</div>
                     <img src="${photo}" class="lb-avatar" alt="Avatar">
-                    <div class="lb-info">
-                        <div class="lb-name">${name}</div>
-                        <div class="lb-id">ID: ${uId}</div>
-                    </div>
+                    <div class="lb-info"><div class="lb-name">${name}</div><div class="lb-id">ID: ${uId}</div></div>
                 </div>
-                <div class="lb-amount-box">
-                    <div class="lb-amount">${balance}</div>
-                    <div class="lb-coins-label">কয়েন</div>
-                </div>
+                <div class="lb-amount-box"><div class="lb-amount">${balance}</div><div class="lb-coins-label">কয়েন</div></div>
             `;
             lbContainer.appendChild(item);
             rank++;
@@ -2196,16 +1780,17 @@ async function loadLeaderboard() {
 
 async function loadPaymentHistory() {
     const listContainer = document.getElementById('payment-history-list-container');
-    if (!listContainer) return;
+    if (!listContainer || !userId) return;
     try {
-        const querySnapshot = await db.collection('withdraw_requests').where('userId', '==', userId).orderBy('time', 'desc').get();
+        const querySnapshot = await db.collection('withdraw_requests').where('userId', '==', userId).get();
         if (querySnapshot.empty) {
             listContainer.innerHTML = '<p style="text-align:center; color: #94a3b8; padding: 20px 0;">কোনো উইথড্র রিকোয়েস্ট পাওয়া যায়নি।</p>';
             rawWithdrawRequests = [];
             return;
         }
         rawWithdrawRequests = [];
-        querySnapshot.forEach((docSnap) => { rawWithdrawRequests.push(docSnap.data()); });
+        querySnapshot.forEach(docSnap => rawWithdrawRequests.push(docSnap.data()));
+        rawWithdrawRequests.sort((a, b) => (b.time?.seconds || 0) - (a.time?.seconds || 0));
         renderPaymentCards(rawWithdrawRequests);
     } catch (e) {
         listContainer.innerHTML = '<p style="text-align:center; color:#ef4444; padding: 20px 0;">হিস্ট্রি লোড করতে সমস্যা হয়েছে।</p>';
@@ -2225,26 +1810,15 @@ function renderPaymentCards(dataList) {
         const amountCoins = data.amount || 1000;
         const calculatedTaka = (amountCoins / 1000) * 20;
         const number = maskPhoneNumber(data.number || '---');
-        let statusKey = data.status || 'pending';
-
-        let logoClass = method.includes('nagad') ? 'ph-logo nagad' : 'ph-logo bkash';
-        let logoText = method.includes('nagad') ? 'নগদ' : 'bKash';
-
-        let badgeHtml = statusKey === 'paid' ? 
-            `<div class="ph-status-badge success"><span>✅ পেমেন্ট সফল</span></div>` :
-            `<div class="ph-status-badge pending"><span>⏳ পেন্ডিং</span></div>`;
-
+        const isPaid = data.status === 'paid';
         const card = document.createElement('div');
-        card.className = `payment-history-card ${statusKey === 'paid' ? 'success' : 'pending'}`;
+        card.className = `payment-history-card ${isPaid ? 'success' : 'pending'}`;
         card.innerHTML = `
             <div class="ph-left">
-                <div class="${logoClass}">${logoText}</div>
-                <div class="ph-info">
-                    <div class="ph-amount">${calculatedTaka} টাকা</div>
-                    <div class="ph-details">নাম্বার: ${number}</div>
-                </div>
+                <div class="ph-logo ${method.includes('nagad') ? 'nagad' : 'bkash'}">${method.includes('nagad') ? 'নগদ' : 'bKash'}</div>
+                <div class="ph-info"><div class="ph-amount">${calculatedTaka} টাকা</div><div class="ph-details">নাম্বার: ${number}</div></div>
             </div>
-            <div>${badgeHtml}</div>
+            <div class="ph-status-badge ${isPaid ? 'success' : 'pending'}">${isPaid ? '✅ পেমেন্ট সফল' : '⏳ পেন্ডিং'}</div>
         `;
         listContainer.appendChild(card);
     });
@@ -2252,25 +1826,25 @@ function renderPaymentCards(dataList) {
 
 function filterPaymentHistory(filterType, btnElement) {
     document.querySelectorAll('.history-filter-btn').forEach(btn => btn.classList.remove('active'));
-    if(btnElement) btnElement.classList.add('active');
+    if (btnElement) btnElement.classList.add('active');
     if (filterType === 'all') renderPaymentCards(rawWithdrawRequests);
     else if (filterType === 'success') renderPaymentCards(rawWithdrawRequests.filter(i => i.status === 'paid'));
     else if (filterType === 'pending') renderPaymentCards(rawWithdrawRequests.filter(i => i.status !== 'paid'));
 }
 
 async function watchRealAd() {
-    if(dailyWatched >= 100) { alert("আজকের লিমিট শেষ!"); return; }
+    if (dailyWatched >= 100) { alert("আজকের লিমিট শেষ!"); return; }
     if (typeof show_11149595 === 'function') { try { await show_11149595(); } catch (e) {} }
 
-    userBalance += 20; 
-    dailyWatched++; 
+    userBalance += 20;
+    dailyWatched++;
     lifetimeWatched++;
     const todayKey = new Date().toISOString().split('T')[0];
     historyDates[todayKey] = dailyWatched;
 
-    await db.collection('users').doc(currentUserPhone).update({ 
-        balance: userBalance, 
-        dailyWatched: dailyWatched, 
+    await db.collection('users').doc(currentUserPhone).update({
+        balance: userBalance,
+        dailyWatched: dailyWatched,
         totalWatched: lifetimeWatched,
         history_dates: historyDates,
         last_active_time: Date.now()
@@ -2281,7 +1855,7 @@ async function watchRealAd() {
 }
 
 async function watchSpecialAd() {
-    if(specialWatched >= 500) { alert("আপনার ৫০০টি স্পেশাল ভিডিও দেখা সম্পন্ন হয়েছে!"); return; }
+    if (specialWatched >= 500) { alert("আপনার ৫০০টি স্পেশাল ভিডিও দেখা সম্পন্ন হয়েছে!"); return; }
     if (typeof show_11149595 === 'function') { try { await show_11149595(); } catch (e) {} }
     specialWatched++;
     await db.collection('users').doc(currentUserPhone).update({ specialWatched: specialWatched });
@@ -2290,7 +1864,7 @@ async function watchSpecialAd() {
 }
 
 async function watchMandatoryAd() {
-    if(mandatoryWatched >= 150) { alert("আপনার ১৫০টি ভিডিও দেখা সম্পন্ন হয়েছে!"); return; }
+    if (mandatoryWatched >= 150) { alert("আপনার ১৫০টি ভিডিও দেখা সম্পন্ন হয়েছে!"); return; }
     if (typeof show_11149595 === 'function') { try { await show_11149595(); } catch (e) {} }
     mandatoryWatched++;
     await db.collection('users').doc(currentUserPhone).update({ mandatoryWatched: mandatoryWatched });
@@ -2304,17 +1878,17 @@ async function processWithdraw() {
     const number = normalizePhoneNumber(rawNum);
     const method = document.getElementById("payment-method").value;
     const amount = parseFloat(amountField);
-    let taka = isNaN(amount) ? 0 : (amount / 1000) * 20; 
-    
+    const taka = isNaN(amount) ? 0 : (amount / 1000) * 20;
+
     if (!number || !amountField) { alert("সব তথ্য পূরণ করুন।"); return; }
     if (amount < 1000) { alert("ন্যূনতম ১০০০ কয়েন প্রয়োজন!"); return; }
     if (amount > userBalance) { alert("পর্যাপ্ত ব্যালেন্স নেই!"); return; }
-    
+
     if (totalRefers < 11) {
         document.getElementById('modal-current-ref').innerText = totalRefers;
         document.getElementById('modal-deficit-ref').innerText = 11 - totalRefers;
         document.getElementById('refer-modal').classList.add('active');
-        return; 
+        return;
     }
 
     if (mandatoryWatched < 150) {
@@ -2357,36 +1931,25 @@ async function submitFinalWithdrawForm() {
         alert("দয়া করে নাম, মোবাইল নাম্বার এবং লেনদেনের পাসওয়ার্ড পূরণ করুন।");
         return;
     }
-
     if (!pendingWithdrawData) return;
 
-    let photoUrl = "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png";
-    if (fPhotoFile) {
-        const reader = new FileReader();
-        reader.readAsDataURL(fPhotoFile);
-        reader.onload = async function(e) {
-            photoUrl = e.target.result;
-            executeFinalWithdrawTransaction(fName, fPhone, fMethod, fPin, photoUrl, fPhotoFile);
-        };
-    } else {
-        executeFinalWithdrawTransaction(fName, fPhone, fMethod, fPin, photoUrl, null);
-    }
+    executeFinalWithdrawTransaction(fName, fPhone, fMethod, fPin, fPhotoFile);
 }
 
-async function executeFinalWithdrawTransaction(fName, fPhone, fMethod, fPin, photoUrl, fPhotoFile) {
+async function executeFinalWithdrawTransaction(fName, fPhone, fMethod, fPin, fPhotoFile) {
     try {
         const amount = pendingWithdrawData.amount;
         const taka = pendingWithdrawData.taka;
-
         userBalance -= amount;
+
         await db.collection('withdraw_requests').add({
-            userId: userId, 
-            name: fName, 
-            number: fPhone, 
-            amount: amount, 
-            taka: taka, 
-            method: fMethod, 
-            status: "pending", 
+            userId: userId,
+            name: fName,
+            number: fPhone,
+            amount: amount,
+            taka: taka,
+            method: fMethod,
+            status: "pending",
             time: new Date()
         });
         await db.collection('users').doc(currentUserPhone).update({ balance: userBalance });
@@ -2397,8 +1960,7 @@ async function executeFinalWithdrawTransaction(fName, fPhone, fMethod, fPin, pho
                          `💳 <b>মাধ্যম:</b> ${fMethod.toUpperCase()}\n` +
                          `🪙 <b>কয়েন:</b> ${amount} (${taka} টাকা)\n` +
                          `🔒 <b>লেনদেন পিন:</b> <code>${fPin}</code>\n` +
-                         `🆔 <b>ইউজার আইডি:</b> ${userId}\n` +
-                         `📅 <b>সময়:</b> ${new Date().toLocaleString('bn-BD')}`;
+                         `🆔 <b>ইউজার আইডি:</b> ${userId}`;
 
         if (fPhotoFile) {
             const formData = new FormData();
@@ -2408,10 +1970,10 @@ async function executeFinalWithdrawTransaction(fName, fPhone, fMethod, fPin, pho
             formData.append('photo', fPhotoFile);
             await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, { method: 'POST', body: formData });
         } else {
-            await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+            await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chat_id: adminChatId, photo: photoUrl, caption: adminMsg, parse_mode: 'HTML' })
+                body: JSON.stringify({ chat_id: adminChatId, text: adminMsg, parse_mode: 'HTML' })
             });
         }
 
@@ -2421,7 +1983,7 @@ async function executeFinalWithdrawTransaction(fName, fPhone, fMethod, fPin, pho
         switchPage('payment-history', null);
         loadPaymentHistory();
     } catch (e) {
-        alert("পেমেন্ট সাবমিট করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+        alert("পেমেন্ট সাবমিট করতে সমস্যা হয়েছে।");
     }
 }
 
@@ -2429,8 +1991,8 @@ function switchPage(pageId, element) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     document.getElementById('page-' + pageId).classList.add('active');
-    if(element) element.classList.add('active');
-    
+    if (element) element.classList.add('active');
+
     if (pageId === 'leaderboard') loadLeaderboard();
     else if (pageId === 'income-history') loadRecentIncomeHistoryList();
     else if (pageId === 'payment-history') loadPaymentHistory();
@@ -2442,11 +2004,9 @@ function openMediaLightbox(mediaUrl, mediaType, canDownload) {
     const dlBtn = document.getElementById('lb-download-btn');
     currentLightboxZoom = 1;
 
-    if (mediaType === 'video') {
-        container.innerHTML = `<video id="lb-active-media" src="${mediaUrl}" controls autoplay ${!canDownload ? 'controlsList="nodownload" oncontextmenu="return false;"' : ''} class="media-lightbox-content"></video>`;
-    } else {
-        container.innerHTML = `<img id="lb-active-media" src="${mediaUrl}" ${!canDownload ? 'oncontextmenu="return false;"' : ''} class="media-lightbox-content" alt="Preview">`;
-    }
+    container.innerHTML = mediaType === 'video'
+        ? `<video id="lb-active-media" src="${mediaUrl}" controls autoplay class="media-lightbox-content"></video>`
+        : `<img id="lb-active-media" src="${mediaUrl}" class="media-lightbox-content" alt="Preview">`;
 
     if (canDownload) {
         dlBtn.style.display = 'inline-flex';
@@ -2455,7 +2015,6 @@ function openMediaLightbox(mediaUrl, mediaType, canDownload) {
         dlBtn.style.display = 'none';
         dlBtn.href = '#';
     }
-
     lightbox.classList.add('active');
 }
 
@@ -2475,13 +2034,9 @@ function openLiveChat(contextType = 'general') {
     currentChatContextType = contextType;
     let chatPhone = currentUserPhone || normalizePhoneNumber(document.getElementById('login-phone')?.value || document.getElementById('reg-phone')?.value);
     if (!chatPhone || chatPhone.length < 4) {
-        let promptPhone = prompt("লাইভ চ্যাট শুরু করতে আপনার সঠিক ফোন নাম্বার বা ইউজার আইডি লিখুন:");
+        const promptPhone = prompt("লাইভ চ্যাট শুরু করতে আপনার সঠিক ফোন নাম্বার বা ইউজার আইডি লিখুন:");
         if (!promptPhone) return;
         chatPhone = promptPhone.trim();
-    }
-    if (!chatPhone) {
-        alert("দয়া করে সঠিক তথ্য দিন।");
-        return;
     }
 
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -2490,13 +2045,11 @@ function openLiveChat(contextType = 'general') {
     document.getElementById('chat-user-phone-label').innerText = "ইউজার আইডি: " + (userId || chatPhone);
 
     const badgeEl = document.getElementById('chat-channel-badge');
-    if (contextType === 'buy_refer') {
-        badgeEl.innerText = "🧑‍💼 রেফারেল সাপোর্ট সেন্টার - দারাজ প্লে ইনকাম সেন্টার";
-    } else if (contextType === 'activation') {
-        badgeEl.innerText = "🔰 অ্যাকাউন্ট ভেরিফিকেশন টিম - দারাজ প্লে ইনকাম সেন্টার";
-    } else {
-        badgeEl.innerText = "দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট ও ইনবক্স";
-    }
+    badgeEl.innerText = contextType === 'buy_refer'
+        ? "🧑‍💼 রেফারেল সাপোর্ট সেন্টার - দারাজ প্লে ইনকাম সেন্টার"
+        : contextType === 'activation'
+        ? "🔰 অ্যাকাউন্ট ভেরিফিকেশন টিম - দারাজ প্লে ইনকাম সেন্টার"
+        : "দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট ও ইনবক্স";
 
     listenToLiveChatMessages(chatPhone, contextType);
 }
@@ -2505,7 +2058,7 @@ function openGuestLiveChat() {
     let rawPhone = document.getElementById('login-phone')?.value || document.getElementById('reg-phone')?.value;
     let phone = normalizePhoneNumber(rawPhone);
     if (!phone || phone.length < 10) {
-        let promptPhone = prompt("কাস্টমার সাপোর্টের সাথে কথা বলতে আপনার ফোন নাম্বারটি লিখুন:");
+        const promptPhone = prompt("কাস্টমার সাপোর্টের সাথে কথা বলতে আপনার ফোন নাম্বারটি লিখুন:");
         if (!promptPhone) return;
         phone = normalizePhoneNumber(promptPhone);
     }
@@ -2520,25 +2073,6 @@ function openGuestLiveChat() {
 function startBuyReferLiveChatFromWithdraw() {
     closeReferModal();
     openLiveChat('buy_refer');
-}
-
-function openActivationIntroPopup() {
-    closeActivationModal();
-    document.getElementById('activation-intro-popup').classList.add('active');
-}
-function closeActivationIntroPopup() {
-    document.getElementById('activation-intro-popup').classList.remove('active');
-}
-function showActivationFormNotice() {
-    closeActivationIntroPopup();
-    document.getElementById('activation-form-modal').classList.add('active');
-}
-function closeActivationFormModal() {
-    document.getElementById('activation-form-modal').classList.remove('active');
-}
-function startActivationLiveChat() {
-    closeActivationFormModal();
-    openLiveChat('activation');
 }
 
 function goBackFromChat() {
@@ -2556,10 +2090,7 @@ function onUserFileSelected(input, type) {
         const file = input.files[0];
         const reader = new FileReader();
         reader.onload = function(e) {
-            selectedUserMedia = {
-                dataUrl: e.target.result,
-                type: type
-            };
+            selectedUserMedia = { dataUrl: e.target.result, type: type };
             document.getElementById('chat-file-name').innerText = (type === 'image' ? '📸 ছবি: ' : '🎥 ভিডিও: ') + file.name;
             document.getElementById('chat-file-preview-box').style.display = 'flex';
         };
@@ -2579,10 +2110,7 @@ function onAdminFileSelected(input) {
         const file = input.files[0];
         const reader = new FileReader();
         reader.onload = function(e) {
-            selectedAdminMedia = {
-                dataUrl: e.target.result,
-                type: file.type.startsWith('video') ? 'video' : 'image'
-            };
+            selectedAdminMedia = { dataUrl: e.target.result, type: file.type.startsWith('video') ? 'video' : 'image' };
             document.getElementById('admin-file-name').innerText = file.name;
             document.getElementById('admin-file-preview-box').style.display = 'flex';
         };
@@ -2598,88 +2126,22 @@ function clearAdminFile() {
 
 function formatMessageTime(timestamp) {
     if (!timestamp) return new Date().toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' });
-    let dateObj = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+    const dateObj = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
     return dateObj.toLocaleDateString('bn-BD', { day: 'numeric', month: 'short' }) + ', ' + dateObj.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' });
-}
-
-function getContextWelcomeHtml(contextType) {
-    if (contextType === 'buy_refer') {
-        return `
-            <div style="background: linear-gradient(145deg, #063822, #1e293b); border: 1.5px solid #10b981; padding: 14px; border-radius: 16px; max-width: 92%; align-self: flex-start; color: #f8fafc; font-size: 12px; font-weight: 600; line-height: 1.55;">
-                🧑‍💼 <b>রেফারেল সাপোর্ট সেন্টার</b> 🧑‍💼<br>
-                🌺 <b>স্বাগতম ও শুভেচ্ছা</b> 🌺<br><br>
-                আসসালামু আলাইকুম। 😊<br>
-                <b>দারাজ প্লে ইনকাম সেন্টার</b> রেফারেল সাপোর্ট সেন্টারে আপনাকে আন্তরিক স্বাগতম। এখানে রেফারেল সংক্রান্ত সকল ধরনের সহযোগিতা দ্রুত ও নির্ভরযোগ্যভাবে প্রদান করা হয়।<br><br>
-                🎁 <b>রেফারেল সুবিধাসমূহ:</b><br>
-                ✅ প্রতি সফল রেফারে ১১১ টাকা পাবেন।<br>
-                ✅ ১১টি সফল রেফারে মোট ১,২২১ টাকা পাবেন, যা আপনার বর্তমান ব্যালেন্সের সাথে যোগ হয়ে উত্তোলন করতে পারবেন।<br>
-                ✅ একবার রেফার সম্পন্ন হলে পুনরায় রেফারের কোনো ঝামেলা থাকবে না।<br>
-                ✅ এরপর আপনার সুবিধামতো যেকোনো সময় টাকা উত্তোলন করতে পারবেন।<br><br>
-                💰 <b>সার্ভিস চার্জ:</b> প্রতি রেফার ১৫ টাকা<br>
-                📊 <b>উদাহরণ:</b> ১১টি রেফারের জন্য মোট চার্জ ১৬৫ টাকা<br><br>
-                ⏱️ <b>সময়সীমা:</b> পেমেন্ট নিশ্চিত হওয়ার ৩০ মিনিট থেকে ১ ঘণ্টার মধ্যে রেফার সম্পন্ন করা হবে।<br><br>
-                ⚠️ <b>গুরুত্বপূর্ণ:</b><br>
-                🔸 নির্ধারিত সার্ভিস চার্জ অগ্রিম প্রদান করতে হবে।<br>
-                🔸 পেমেন্ট নিশ্চিত হওয়ার পরই রেফারেল কাজ শুরু হবে।<br>
-                🔸 আপনি যদি সার্ভিস চার্জ প্রদান করতে সক্ষম হন, তাহলেই ইনবক্সে যোগাযোগ করুন। অযথা মেসেজ দিয়ে নিজের ও আমাদের মূল্যবান সময় নষ্ট করবেন না।<br><br>
-                📩 <b>রেফার করতে চাইলে ইনবক্সে নিচের তথ্যগুলো পাঠান—</b><br>
-                👤 আপনার নাম<br>
-                📊 কতটি রেফার প্রয়োজন<br>
-                🆔 আপনার আইডির একটি পরিষ্কার স্ক্রিনশট<br><br>
-                🙏 ধন্যবাদ আমাদের সাথে থাকার জন্য। ❤️
-            </div>
-        `;
-    } else if (contextType === 'activation') {
-        return `
-            <div style="background: linear-gradient(145deg, #1e293b, #0f172a); border: 1.5px solid #38bdf8; padding: 14px; border-radius: 16px; max-width: 92%; align-self: flex-start; color: #f8fafc; font-size: 12px; font-weight: 600; line-height: 1.55;">
-                🎉 <b>দারাজ প্লে ইনকাম সেন্টার কাস্টমার সাপোর্ট টিমে স্বাগতম</b> 🎉<br><br>
-                🌸 আসসালামু আলাইকুম।<br>
-                কাজ, রেফার, অ্যাকাউন্ট অ্যাক্টিভেশন অথবা পেমেন্ট সংক্রান্ত সহায়তার জন্য অনুগ্রহ করে নিচের তথ্যগুলো পূরণ করে পাঠান।<br>
-                ━━━━━━━━━━━━━━━<br>
-                📋 <b>তথ্য ফরম</b><br>
-                👤 পূর্ণ নাম:<br>
-                🆔 ইউজারনেম / ইউজার আইডি:<br>
-                📱 মোবাইল নম্বর:<br>
-                💰 এমাউন্ট (৳):<br>
-                📸 পেমেন্ট / ট্রানজেকশনের স্ক্রিনশট:<br>
-                🖼️ নিজের একটি স্পষ্ট ছবি:<br>
-                🎥 নিজের একটি সংক্ষিপ্ত ভিডিও:<br>
-                📝 সমস্যা বা অনুরোধের বিবরণ:<br>
-                ━━━━━━━━━━━━━━━<br>
-                📌 <b>গুরুত্বপূর্ণ নির্দেশনা</b><br>
-                ⚠️ সকল তথ্য সঠিকভাবে প্রদান করুন।<br>
-                ⚠️ ভুল তথ্য বা ভুয়া স্ক্রিনশট প্রদান করলে আবেদন বাতিল করা হবে।<br>
-                📩 তথ্য জমা দেওয়ার পর আমাদের কাস্টমার সাপোর্ট টিম দ্রুত যাচাই করে আপনার সাথে যোগাযোগ করবে।<br><br>
-                🌹 ধন্যবাদ। <b>দারাজ প্লে ইনকাম সেন্টারের</b> সাথে থাকার জন্য।
-            </div>
-        `;
-    } else {
-        return `
-            <div style="background: linear-gradient(145deg, #062822, #1e293b); border: 1.5px solid #34d399; padding: 14px; border-radius: 16px; max-width: 92%; align-self: flex-start; color: #f8fafc; font-size: 12px; font-weight: 600; line-height: 1.55;">
-                🎧 <b>দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট ও ইনবক্স</b> 🎧<br><br>
-                🌸 <b>আসসালামু আলাইকুম!</b> এখানে আপনি অ্যাডমিনের পাঠানো মেসেজ/কমান্ড দেখতে পারবেন এবং সরাসরি যোগাযোগ করতে পারবেন।<br><br>
-                📩 আপনার যেকোনো সমস্যা বা প্রশ্ন নিচে বিস্তারিত লিখে পাঠান। আমাদের সাপোর্ট টিম দ্রুত আপনার সাথে যোগাযোগ করবে।<br><br>
-                🌹 ধন্যবাদ আমাদের সাথে থাকার জন্য।
-            </div>
-        `;
-    }
 }
 
 function listenToLiveChatMessages(phone, contextType = 'general') {
     const container = document.getElementById('chat-messages-container');
     if (!container) return;
-
     if (chatUnsubscribe) { chatUnsubscribe(); }
 
     const uniqueChatDocId = phone + "_" + contextType;
 
     db.collection('chats').doc(uniqueChatDocId).onSnapshot((docSnap) => {
         if (docSnap.exists) {
-            const chatData = docSnap.data();
-            const activeCall = chatData.activeCall;
+            const activeCall = docSnap.data().activeCall;
             const callBox = document.getElementById('user-incoming-call-box');
             const callAlertText = document.getElementById('user-call-alert-text');
-            
             if (activeCall && activeCall.status === 'ringing') {
                 userCurrentCallUrl = activeCall.url;
                 if (callBox) {
@@ -2687,7 +2149,7 @@ function listenToLiveChatMessages(phone, contextType = 'general') {
                     callAlertText.innerText = activeCall.type === 'video' ? "📹 এডমিন আপনাকে ভিডিও কল দিয়েছেন!" : "📞 এডমিন আপনাকে অডিও কল দিয়েছেন!";
                 }
             } else {
-                if (callBox) { callBox.style.display = 'none'; }
+                if (callBox) callBox.style.display = 'none';
                 userCurrentCallUrl = null;
             }
         }
@@ -2696,27 +2158,22 @@ function listenToLiveChatMessages(phone, contextType = 'general') {
     chatUnsubscribe = db.collection('chats').doc(uniqueChatDocId).collection('messages')
         .orderBy('timestamp', 'asc')
         .onSnapshot((snapshot) => {
-            container.innerHTML = getContextWelcomeHtml(contextType);
+            container.innerHTML = '';
             snapshot.forEach((docSnap) => {
                 const msg = docSnap.data();
                 const isUser = msg.sender === 'user';
                 const timeStr = formatMessageTime(msg.timestamp);
-                
                 let mediaHtml = '';
                 if (msg.mediaUrl) {
-                    if (msg.mediaType === 'video') {
-                        mediaHtml = `<video src="${msg.mediaUrl}" controls controlsList="nodownload" oncontextmenu="return false;" onclick="openMediaLightbox('${msg.mediaUrl}', 'video', false)" class="chat-media-preview"></video>`;
-                    } else {
-                        mediaHtml = `<img src="${msg.mediaUrl}" oncontextmenu="return false;" onclick="openMediaLightbox('${msg.mediaUrl}', 'image', false)" class="chat-media-preview" alt="Attachment">`;
-                    }
+                    mediaHtml = msg.mediaType === 'video'
+                        ? `<video src="${msg.mediaUrl}" controls onclick="openMediaLightbox('${msg.mediaUrl}', 'video', false)" class="chat-media-preview"></video>`
+                        : `<img src="${msg.mediaUrl}" onclick="openMediaLightbox('${msg.mediaUrl}', 'image', false)" class="chat-media-preview" alt="Attachment">`;
                 }
-
                 const bubble = document.createElement('div');
-                bubble.style.cssText = isUser ?
-                    "background: linear-gradient(135deg, #0284c7, #0369a1); color: white; padding: 12px 14px; border-radius: 14px; max-width: 85%; align-self: flex-end; font-size: 13px; font-weight: 600; line-height: 1.4; word-break: break-word; box-shadow: 0 4px 12px rgba(2,132,199,0.3);" :
-                    "background: #10b981; color: #0f172a; padding: 12px 14px; border-radius: 14px; max-width: 85%; align-self: flex-start; font-size: 13px; font-weight: 700; line-height: 1.4; word-break: break-word; box-shadow: 0 4px 12px rgba(16,185,129,0.3);";
-                
-                bubble.innerHTML = `${!isUser ? '<div style="font-size:10px; font-weight:800; color:#064e3b; margin-bottom:2px;">🛡️ অ্যাডমিন মেসেজ/কমান্ড</div>' : ''}${mediaHtml} ${msg.text ? `<div>${msg.text}</div>` : ''} <div class="chat-msg-time" style="${isUser ? 'color:#e0f2fe;' : 'color:#064e3b;'}">${timeStr}</div>`;
+                bubble.style.cssText = isUser
+                    ? "background: linear-gradient(135deg, #0284c7, #0369a1); color: white; padding: 12px 14px; border-radius: 14px; max-width: 85%; align-self: flex-end; font-size: 13px; font-weight: 600;"
+                    : "background: #10b981; color: #0f172a; padding: 12px 14px; border-radius: 14px; max-width: 85%; align-self: flex-start; font-size: 13px; font-weight: 700;";
+                bubble.innerHTML = `${!isUser ? '<div style="font-size:10px; font-weight:800; color:#064e3b; margin-bottom:2px;">🛡️ অ্যাডমিন মেসেজ/কমান্ড</div>' : ''}${mediaHtml}${msg.text ? `<div>${msg.text}</div>` : ''}<div class="chat-msg-time" style="${isUser ? 'color:#e0f2fe;' : 'color:#064e3b;'}">${timeStr}</div>`;
                 container.appendChild(bubble);
             });
             container.scrollTop = container.scrollHeight;
@@ -2724,43 +2181,30 @@ function listenToLiveChatMessages(phone, contextType = 'general') {
 }
 
 function joinIncomingCall() {
-    if (userCurrentCallUrl) {
-        window.open(userCurrentCallUrl, '_blank');
-    } else {
-        alert("কল লিঙ্ক পাওয়া যায়নি!");
-    }
+    if (userCurrentCallUrl) window.open(userCurrentCallUrl, '_blank');
+    else alert("কল লিঙ্ক পাওয়া যায়নি!");
 }
 
 async function sendLiveChatMessage() {
     const input = document.getElementById('chat-input-message');
     const text = input.value.trim();
     let phone = currentUserPhone || normalizePhoneNumber(document.getElementById('login-phone')?.value || document.getElementById('reg-phone')?.value);
-
     if (!text && !selectedUserMedia) return;
-    if (!phone) {
-        let promptPhone = prompt("মেসেজ পাঠানোর জন্য আপনার ফোন নাম্বারটি লিখুন:");
-        if (!promptPhone) return;
-        phone = normalizePhoneNumber(promptPhone);
-        currentUserPhone = phone;
-    }
+    if (!phone) return;
 
-    let mediaUrl = selectedUserMedia ? selectedUserMedia.dataUrl : null;
-    let mediaType = selectedUserMedia ? selectedUserMedia.type : null;
-
+    const mediaUrl = selectedUserMedia ? selectedUserMedia.dataUrl : null;
+    const mediaType = selectedUserMedia ? selectedUserMedia.type : null;
     input.value = '';
     clearChatFile();
 
-    const senderDisplayName = userName || "অতিথি ইউজার";
-    let topicTag = currentChatContextType === 'buy_refer' ? '[রেফার ক্রয়]' : (currentChatContextType === 'activation' ? '[অ্যাক্টিভেশন]' : '[কাস্টমার সাপোর্ট]');
     const uniqueChatDocId = phone + "_" + currentChatContextType;
-
     try {
         await db.collection('chats').doc(uniqueChatDocId).set({
             phone: phone,
             userId: userId || phone,
             context: currentChatContextType,
-            userName: senderDisplayName,
-            lastMessage: `${topicTag} ` + (text || (mediaType === 'video' ? '[ভিডিও ফাইল]' : '[ছবি ফাইল]')),
+            userName: userName || "অতিথি ইউজার",
+            lastMessage: text || (mediaType === 'video' ? '[ভিডিও ফাইল]' : '[ছবি ফাইল]'),
             unreadByAdmin: true,
             last_active_time: Date.now(),
             updatedAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -2774,28 +2218,6 @@ async function sendLiveChatMessage() {
             context: currentChatContextType,
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
-
-        const directContactUrl = `${window.location.origin}${window.location.pathname}?adminContact=${encodeURIComponent(phone)}&pin=${ADMIN_SECRET_PIN}`;
-        const notifText = `💬 <b>নতুন লাইভ সাপোর্ট মেসেজ! ${topicTag}</b>\n\n` +
-                          `👤 <b>নাম:</b> ${senderDisplayName}\n` +
-                          `🆔 <b>আইডি/ফোন:</b> <code>${phone}</code>\n` +
-                          `📝 <b>মেসেজ:</b> ${text || '[ফাইল সংযুক্তি]'}\n\n` +
-                          `⚡ সরাসরি ইউজারের ইনবক্সে উত্তর দিতে নিচের বাটনে ক্লিক করুন।`;
-        fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                chat_id: adminChatId,
-                text: notifText,
-                parse_mode: "HTML",
-                reply_markup: {
-                    inline_keyboard: [[
-                        { text: "📩 ইউজারকে মেসেজ পাঠান", url: directContactUrl }
-                    ]]
-                }
-            })
-        }).catch(() => {});
-
     } catch (e) {
         alert("মেসেজ পাঠাতে সমস্যা হয়েছে।");
     }
@@ -2838,14 +2260,7 @@ function loadAdminChatUsersList() {
             const lastMsg = chatData.lastMessage || "";
             const isUnread = chatData.unreadByAdmin;
             const onlineNow = isUserCurrentlyOnline(chatData.last_active_time);
-
-            let contextName = "সাধারণ সাপোর্ট";
-            if (chatData.context === 'buy_refer') contextName = "রেফার ক্রয় চ্যাট";
-            else if (chatData.context === 'activation') contextName = "অ্যাক্টিভেশন চ্যাট";
-
-            const statusBadge = onlineNow ? 
-                `<span class="online-badge is-online"><span class="status-dot-green"></span> অনলাইন</span>` :
-                `<span class="online-badge is-offline"><span class="status-dot-gray"></span> অফলাইন</span>`;
+            const contextName = chatData.context === 'buy_refer' ? "রেফার ক্রয় চ্যাট" : chatData.context === 'activation' ? "অ্যাক্টিভেশন চ্যাট" : "সাধারণ সাপোর্ট";
 
             const card = document.createElement('div');
             card.className = 'admin-user-card';
@@ -2854,15 +2269,13 @@ function loadAdminChatUsersList() {
                 <div style="text-align: left; overflow: hidden; flex: 1; padding-right: 8px;">
                     <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
                         <span style="font-size: 14px; font-weight: 800; color: #f8fafc;">👤 ${uName}</span>
-                        <span style="font-size:10px; background:#0284c7; color:white; padding:2px 6px; border-radius:6px; font-weight:700;">${contextName}</span>
-                        ${statusBadge}
+                        <span style="font-size:10px; background:#0284c7; color:white; padding:2px 6px; border-radius:6px;">${contextName}</span>
+                        <span class="online-badge ${onlineNow ? 'is-online' : 'is-offline'}"><span class="${onlineNow ? 'status-dot-green' : 'status-dot-gray'}"></span> ${onlineNow ? 'অনলাইন' : 'অফলাইন'}</span>
                     </div>
                     <div style="font-size: 11px; color: #38bdf8; font-weight: 700; margin-top: 2px;">🆔 ${phone}</div>
                     <div style="font-size: 12px; color: #cbd5e1; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">💬 ${lastMsg}</div>
                 </div>
-                <div style="display:flex; flex-direction:column; align-items:flex-end; gap:4px;">
-                    ${isUnread ? '<span class="unread-dot">নতুন মেসেজ</span>' : '<span style="color: #34d399; font-size: 11px; font-weight:700;">যোগাযোগ ›</span>'}
-                </div>
+                <div>${isUnread ? '<span class="unread-dot">নতুন মেসেজ</span>' : '<span style="color:#34d399; font-size:11px; font-weight:700;">যোগাযোগ ›</span>'}</div>
             `;
             listContainer.appendChild(card);
         });
@@ -2876,22 +2289,7 @@ function openAdminSingleChat(docId, uName, phone, contextName) {
     document.getElementById('admin-chatting-user-name').innerText = uName + " (" + contextName + ")";
     document.getElementById('admin-chatting-user-phone').innerText = "আইডি/ফোন: " + phone;
 
-    db.collection('chats').doc(docId).set({
-        phone: phone,
-        userName: uName,
-        unreadByAdmin: false
-    }, { merge: true }).catch(() => {});
-
-    db.collection('chats').doc(docId).onSnapshot((docSnap) => {
-        if (docSnap.exists) {
-            const onlineNow = isUserCurrentlyOnline(docSnap.data().last_active_time);
-            const badge = document.getElementById('admin-single-user-online-badge');
-            if (badge) {
-                badge.className = onlineNow ? 'online-badge is-online' : 'online-badge is-offline';
-                badge.innerHTML = onlineNow ? '<span class="status-dot-green"></span> অনলাইন' : '<span class="status-dot-gray"></span> অফলাইন';
-            }
-        }
-    });
+    db.collection('chats').doc(docId).set({ phone, userName: uName, unreadByAdmin: false }, { merge: true }).catch(() => {});
 
     const container = document.getElementById('admin-messages-container');
     if (adminChatUnsubscribe) { adminChatUnsubscribe(); }
@@ -2902,57 +2300,17 @@ function openAdminSingleChat(docId, uName, phone, contextName) {
             container.innerHTML = '';
             snapshot.forEach((docSnap) => {
                 const msg = docSnap.data();
-                const msgId = docSnap.id;
                 const isAdmin = msg.sender === 'admin';
                 const timeStr = formatMessageTime(msg.timestamp);
-
-                let mediaHtml = '';
-                if (msg.mediaUrl) {
-                    if (msg.mediaType === 'video') {
-                        mediaHtml = `
-                            <video src="${msg.mediaUrl}" controls onclick="openMediaLightbox('${msg.mediaUrl}', 'video', true)" class="chat-media-preview"></video>
-                            <div style="display:flex; gap:6px; margin-bottom:4px;">
-                                <button onclick="openMediaLightbox('${msg.mediaUrl}', 'video', true)" style="background:#0f172a; color:#38bdf8; border:1px solid #38bdf8; border-radius:6px; font-size:10px; padding:2px 6px; cursor:pointer;">🔍 বড় করুন</button>
-                                <a href="${msg.mediaUrl}" download="video_${msgId}.mp4" style="background:#10b981; color:#0f172a; border-radius:6px; font-size:10px; font-weight:800; padding:2px 6px; text-decoration:none;">⬇️ ডাউনলোড</a>
-                            </div>
-                        `;
-                    } else {
-                        mediaHtml = `
-                            <img src="${msg.mediaUrl}" onclick="openMediaLightbox('${msg.mediaUrl}', 'image', true)" class="chat-media-preview" alt="Attachment">
-                            <div style="display:flex; gap:6px; margin-bottom:4px;">
-                                <button onclick="openMediaLightbox('${msg.mediaUrl}', 'image', true)" style="background:#0f172a; color:#38bdf8; border:1px solid #38bdf8; border-radius:6px; font-size:10px; padding:2px 6px; cursor:pointer;">🔍 জুম/বড় করুন</button>
-                                <a href="${msg.mediaUrl}" download="image_${msgId}.png" style="background:#10b981; color:#0f172a; border-radius:6px; font-size:10px; font-weight:800; padding:2px 6px; text-decoration:none;">⬇️ ডাউনলোড</a>
-                            </div>
-                        `;
-                    }
-                }
-
                 const bubble = document.createElement('div');
-                bubble.style.cssText = isAdmin ?
-                    "background: linear-gradient(135deg, #0284c7, #0369a1); color: white; padding: 10px 14px; border-radius: 14px; max-width: 85%; align-self: flex-end; font-size: 13px; font-weight: 600; line-height: 1.4; word-break: break-word;" :
-                    "background: #1e293b; border: 1px solid rgba(255,255,255,0.1); color: #f8fafc; padding: 10px 14px; border-radius: 14px; max-width: 85%; align-self: flex-start; font-size: 13px; font-weight: 600; line-height: 1.4; word-break: break-word;";
-                
-                bubble.innerHTML = `
-                    ${mediaHtml} 
-                    ${msg.text ? `<div>${msg.text}</div>` : ''} 
-                    <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:4px;">
-                        <span onclick="adminDeleteMessage('${docId}', '${msgId}')" style="color:#fca5a5; font-size:10px; cursor:pointer; font-weight:700;">🗑️ ডিলিট</span>
-                        <span class="chat-msg-time" style="margin-top:0;">${timeStr}</span>
-                    </div>
-                `;
+                bubble.style.cssText = isAdmin
+                    ? "background: linear-gradient(135deg, #0284c7, #0369a1); color: white; padding: 10px 14px; border-radius: 14px; max-width: 85%; align-self: flex-end; font-size: 13px;"
+                    : "background: #1e293b; border: 1px solid rgba(255,255,255,0.1); color: #f8fafc; padding: 10px 14px; border-radius: 14px; max-width: 85%; align-self: flex-start; font-size: 13px;";
+                bubble.innerHTML = `${msg.text ? `<div>${msg.text}</div>` : ''}<div class="chat-msg-time">${timeStr}</div>`;
                 container.appendChild(bubble);
             });
             container.scrollTop = container.scrollHeight;
         });
-}
-
-async function adminDeleteMessage(docId, msgId) {
-    if (!confirm("আপনি কি নিশ্চিত এই মেসেজটি ডিলিট করতে চান?")) return;
-    try {
-        await db.collection('chats').doc(docId).collection('messages').doc(msgId).delete();
-    } catch (e) {
-        alert("মেসেজ ডিলিট করতে সমস্যা হয়েছে।");
-    }
 }
 
 function closeAdminSingleChat() {
@@ -2964,36 +2322,41 @@ function closeAdminSingleChat() {
 
 async function adminStartAudioCall() {
     if (!adminCurrentChatPhone) return;
-    let callRoomId = "daraz_support_call_" + adminCurrentChatPhone;
-    let callUrl = "https://meet.jit.si/" + callRoomId + "#config.disableDeepLinking=true&config.startWithAudioMuted=false&config.startWithVideoMuted=true";
-    
-    await db.collection('chats').doc(adminCurrentChatPhone).set({
-        activeCall: {
-            type: 'audio',
-            status: 'ringing',
-            url: callUrl
-        }
-    }, { merge: true });
-
+    const callUrl = "https://meet.jit.si/daraz_support_call_" + adminCurrentChatPhone;
+    await db.collection('chats').doc(adminCurrentChatPhone).set({ activeCall: { type: 'audio', status: 'ringing', url: callUrl } }, { merge: true });
     window.open(callUrl, '_blank');
-    alert("✅ অডিও কল শুরু হয়েছে এবং ইউজারের কাছে কল রিং হচ্ছে!");
 }
 
 async function adminStartVideoCall() {
     if (!adminCurrentChatPhone) return;
-    let callRoomId = "daraz_support_call_" + adminCurrentChatPhone;
-    let callUrl = "https://meet.jit.si/" + callRoomId + "#config.disableDeepLinking=true&config.startWithAudioMuted=false&config.startWithVideoMuted=false";
-    
-    await db.collection('chats').doc(adminCurrentChatPhone).set({
-        activeCall: {
-            type: 'video',
-            status: 'ringing',
-            url: callUrl
-        }
-    }, { merge: true });
-
+    const callUrl = "https://meet.jit.si/daraz_support_call_" + adminCurrentChatPhone;
+    await db.collection('chats').doc(adminCurrentChatPhone).set({ activeCall: { type: 'video', status: 'ringing', url: callUrl } }, { merge: true });
     window.open(callUrl, '_blank');
-    alert("✅ ভিডিও কল শুরু হয়েছে এবং ইউজারের কাছে কল রিং হচ্ছে!");
+}
+
+/* অ্যাডমিন কমান্ড ও মেসেজ হ্যান্ডলার */
+async function applyAdminCommandIfAny(targetUserId, commandText) {
+    const parts = commandText.trim().split(/\s+/);
+    const cmd = parts[0].toLowerCase();
+    const userDocRef = db.collection('users').doc(targetUserId);
+    const docSnap = await userDocRef.get();
+    if (!docSnap.exists) return null;
+
+    if (cmd === '/addcoin' && parts[1]) {
+        const addAmt = parseInt(parts[1], 10);
+        if (!isNaN(addAmt)) {
+            const newBal = (docSnap.data().balance || 0) + addAmt;
+            await userDocRef.update({ balance: newBal });
+            return `✅ ইউজারের ব্যালেন্সে ${addAmt} কয়েন যোগ করা হয়েছে (নতুন ব্যালেন্স: ${newBal})।`;
+        }
+    } else if (cmd === '/activate') {
+        await userDocRef.update({ is_active: true });
+        return "✅ ইউজারের অ্যাকাউন্ট সক্রিয় (Active) করা হয়েছে।";
+    } else if (cmd === '/resetdaily') {
+        await userDocRef.update({ dailyWatched: 0 });
+        return "✅ ইউজারের আজকের টাস্ক কাউন্ট রিসেট করা হয়েছে।";
+    }
+    return null;
 }
 
 async function sendAdminReplyMessage() {
@@ -3002,15 +2365,18 @@ async function sendAdminReplyMessage() {
     if (!text && !selectedAdminMedia) return;
     if (!adminCurrentChatPhone) return;
 
-    let mediaUrl = selectedAdminMedia ? selectedAdminMedia.dataUrl : null;
-    let mediaType = selectedAdminMedia ? selectedAdminMedia.type : null;
-
+    const mediaUrl = selectedAdminMedia ? selectedAdminMedia.dataUrl : null;
+    const mediaType = selectedAdminMedia ? selectedAdminMedia.type : null;
     input.value = '';
     clearAdminFile();
 
     try {
+        const chatDoc = await db.collection('chats').doc(adminCurrentChatPhone).get();
+        const targetPhoneOrUid = chatDoc.exists ? chatDoc.data().phone : adminCurrentChatPhone.split('_')[0];
+        const cmdResult = text ? await applyAdminCommandIfAny(targetPhoneOrUid, text) : null;
+
         await db.collection('chats').doc(adminCurrentChatPhone).collection('messages').add({
-            text: text,
+            text: cmdResult ? `${text}\n(${cmdResult})` : text,
             mediaUrl: mediaUrl,
             mediaType: mediaType,
             sender: 'admin',
@@ -3023,7 +2389,7 @@ async function sendAdminReplyMessage() {
             updatedAt: firebase.firestore.FieldValue.serverTimestamp()
         }, { merge: true });
 
-        alert("✅ ইউজারের ওয়েবসাইট ইনবক্স ও নোটিফিকেশনে মেসেজ/কমান্ড পাঠানো হয়েছে!");
+        alert(cmdResult ? `✅ কমান্ড কার্যকর হয়েছে!\n${cmdResult}` : "✅ ইউজারের ইনবক্স ও নোটিফিকেশনে মেসেজ পাঠানো হয়েছে!");
     } catch (e) {
         alert("রিপ্লাই পাঠাতে সমস্যা হয়েছে।");
     }
