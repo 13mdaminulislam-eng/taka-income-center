@@ -242,7 +242,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 
 .list-card { background: #1e293b; padding: 10px 12px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); color: #f8fafc; font-weight: 700; border: 1px solid rgba(255,255,255,0.05); }
 .list-date { font-size: 11px; color: #94a3b8; font-weight: 500; }
-select.input-field { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 12px center; background-size: 14px; }
+select.input-field { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 12px center; background-size: 14px; }
 
 .wallet-hero-card { background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(16, 185, 129, 0.15)); border: 1.5px solid rgba(6, 182, 212, 0.3); border-radius: 20px; padding: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); margin-bottom: 12px; position: relative; overflow: hidden; text-align: center; backdrop-filter: blur(10px); }
 .wallet-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #06b6d4, #10b981); color: white; padding: 4px 14px; border-radius: 14px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; box-shadow: 0 4px 12px rgba(6,182,212,0.3); }
@@ -364,21 +364,131 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .media-lightbox-controls { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; justify-content: center; }
 .lb-ctrl-btn { background: #1e293b; color: white; border: 1px solid rgba(255,255,255,0.2); padding: 9px 16px; border-radius: 10px; font-size: 12px; font-weight: 800; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
 
-/* ফিচার ২: লাইভ নোটিফিকেশন ব্যানার / পপ-আপ */
-.admin-live-notify-banner {
-    background: linear-gradient(135deg, rgba(2, 132, 199, 0.22), rgba(16, 185, 129, 0.22));
-    border: 1.5px solid rgba(56, 189, 248, 0.55);
-    border-radius: 16px;
-    padding: 12px 14px;
-    margin-bottom: 12px;
+/* নতুন ফিচার: হোম পেজের ইন্টারফেসের ওপর ভেসে থাকা ফ্লোটিং অ্যাডমিন মেসেজ ও ডিরেক্ট রিপ্লাই স্টাইল */
+.home-floating-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(2, 6, 23, 0.86);
+    backdrop-filter: blur(8px);
+    z-index: 9500;
     display: none;
-    box-shadow: 0 8px 25px rgba(2, 132, 199, 0.25);
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
 }
-.admin-live-notify-banner.active { display: block; }
+.home-floating-overlay.active {
+    display: flex;
+}
+.home-floating-card {
+    background: linear-gradient(145deg, #063822, #0f172a 55%, #1e293b);
+    border: 2px solid #34d399;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 370px;
+    padding: 20px 18px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 28px rgba(52, 211, 153, 0.35);
+    color: #f8fafc;
+    position: relative;
+    animation: floatPopIn 0.3s ease;
+}
+@keyframes floatPopIn {
+    from { opacity: 0; transform: scale(0.92) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.home-floating-badge {
+    display: inline-block;
+    background: rgba(52, 211, 153, 0.18);
+    border: 1px solid rgba(52, 211, 153, 0.5);
+    color: #6ee7b7;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 14px;
+    margin-bottom: 8px;
+}
+.home-floating-msg-box {
+    background: rgba(15, 23, 42, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    padding: 14px;
+    font-size: 13.5px;
+    font-weight: 700;
+    line-height: 1.55;
+    color: #f8fafc;
+    margin: 10px 0 12px 0;
+    max-height: 220px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+.home-floating-reply-box {
+    display: none;
+    margin-top: 10px;
+    background: rgba(15, 23, 42, 0.92);
+    border: 1.5px solid #38bdf8;
+    border-radius: 16px;
+    padding: 12px;
+}
+.home-floating-reply-box.active {
+    display: block;
+}
+.home-floating-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+.btn-home-skip {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 11px 12px;
+    border-radius: 14px;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+}
+.btn-home-reply-toggle {
+    flex: 1.3;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #ffffff;
+    border: none;
+    padding: 11px 12px;
+    border-radius: 14px;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(16, 185, 129, 0.35);
+}
 </style>
 </head>
 <body>
 <div class="top-app-title" onclick="handleSecretAdminTrigger()">💰 「দারাজ প্লে ইনকাম সেন্টার」 💰</div>
+
+<!-- নতুন ফিচার: হোম পেজের ইন্টারফেসের ওপর ভেসে থাকা ফ্লোটিং অ্যাডমিন মেসেজ ও ডিরেক্ট রিপ্লাই ওভারলে -->
+<div id="home-floating-message-overlay" class="home-floating-overlay">
+    <div class="home-floating-card">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span class="home-floating-badge">📩 অ্যাডমিন ডিরেক্ট মেসেজ</span>
+            <span id="home-floating-msg-time" style="font-size:10px; color:#94a3b8; font-weight:700;">---</span>
+        </div>
+        <div style="font-size:12px; color:#34d399; font-weight:800; margin-top:2px;">
+            নতুন বার্তা — পড়া শেষ না করা পর্যন্ত এটি ভেসে থাকবে
+        </div>
+        <div id="home-floating-msg-body" class="home-floating-msg-box">লোড হচ্ছে...</div>
+
+        <div id="home-floating-reply-box" class="home-floating-reply-box">
+            <div style="font-size:11px; color:#38bdf8; font-weight:800; margin-bottom:6px;">✍️ অ্যাডমিনকে সরাসরি নতুন রিপ্লাই লিখুন:</div>
+            <textarea id="home-floating-reply-input" rows="3" placeholder="আপনার উত্তর বা মেসেজ লিখুন..." style="width:100%; background:#0f172a; border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:10px; color:#fff; font-size:13px; outline:none; resize:none;"></textarea>
+            <button onclick="submitHomeFloatingReply()" style="width:100%; margin-top:8px; background:linear-gradient(135deg,#0284c7,#0369a1); color:#fff; border:none; padding:10px; border-radius:12px; font-size:13px; font-weight:800; cursor:pointer;">🚀 রিপ্লাই পাঠান ও সম্পন্ন করুন</button>
+        </div>
+
+        <div class="home-floating-actions" id="home-floating-main-buttons">
+            <button class="btn-home-skip" onclick="skipHomeFloatingMessage()">⏭️ স্কিপ করুন</button>
+            <button class="btn-home-reply-toggle" onclick="openHomeFloatingReplyBox()">💬 রিপ্লাই দিন</button>
+        </div>
+    </div>
+</div>
 
 <!-- লগইন পেজ -->
 <div id="page-login" class="page active">
@@ -486,19 +596,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <div class="live-date-banner">
         <div class="live-date-title">📅 আজকের রিয়েল-টাইম তারিখ</div>
         <div class="live-date-value" id="live-current-date-time">লোড হচ্ছে...</div>
-    </div>
-
-    <!-- ফিচার ২: অ্যাডমিন থেকে পাঠানো মেসেজ/কমান্ড লাইভ নোটিফিকেশন -->
-    <div id="home-admin-message-banner" class="admin-live-notify-banner">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-            <span style="font-size:11px; font-weight:800; color:#38bdf8;">🔔 অ্যাডমিন ইনবক্স / কমান্ড নোটিফিকেশন</span>
-            <span id="home-admin-msg-time" style="font-size:10px; color:#94a3b8;">---</span>
-        </div>
-        <div id="home-admin-msg-text" style="font-size:12px; font-weight:700; color:#f8fafc; line-height:1.45; margin-bottom:8px;">---</div>
-        <div style="display:flex; gap:8px;">
-            <button onclick="openUserInboxFromHome()" style="background:linear-gradient(135deg,#10b981,#059669); color:white; border:none; padding:6px 12px; border-radius:8px; font-size:11px; font-weight:800; cursor:pointer;">💬 ইনবক্সে গিয়ে উত্তর দিন</button>
-            <button onclick="dismissHomeAdminBanner()" style="background:rgba(255,255,255,0.08); color:#cbd5e1; border:none; padding:6px 10px; border-radius:8px; font-size:11px; font-weight:700; cursor:pointer;">ঠিক আছে</button>
-        </div>
     </div>
 
     <div style="background: #1e293b; padding: 12px 15px; border-radius: 14px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.05);">
@@ -627,7 +724,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <div id="page-live-chat" class="page" style="padding: 5px;">
     <div style="background: linear-gradient(135deg, #065f46, #0284c7); border-radius: 20px; padding: 16px 14px; margin-bottom: 10px; text-align: center; box-shadow: 0 8px 25px rgba(16,185,129,0.3); border: 1.5px solid rgba(255,255,255,0.18);">
         <div style="font-size: 24px; font-weight: 900; color: #ffffff; letter-spacing: 1px; text-shadow: 0 2px 8px rgba(0,0,0,0.4);">
-            🎧 সাপোর্ট ও ইনবক্স
+            🎧 সাপোর্ট চ্যাট
         </div>
         <div style="font-size: 13px; font-weight: 800; color: #a7f3d0; margin-top: 2px;" id="chat-channel-badge">
             দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট
@@ -666,9 +763,9 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <div id="page-admin-chat-panel" class="page" style="padding: 5px;">
     <div style="background: linear-gradient(135deg, #7f1d1d, #991b1b); border-radius: 18px; padding: 14px; margin-bottom: 12px; text-align: center; box-shadow: 0 6px 20px rgba(239,68,68,0.3); border: 1.5px solid rgba(255,255,255,0.15);">
         <div style="font-size: 18px; font-weight: 800; color: white; display: flex; align-items: center; justify-content: center; gap: 8px;">
-            <span>🛡️</span> এডমিন লাইভ সাপোর্ট ও ইউজার ইনবক্স প্যানেল
+            <span>🛡️</span> এডমিন লাইভ সাপোর্ট ও হোম-ফ্লোটিং প্যানেল
         </div>
-        <div style="font-size: 11px; color: #fecaca; font-weight: 600; margin-top: 2px;">সব ইউজারের মেসেজ, ইনবক্স কমান্ড ও সরাসরি যোগাযোগ করুন</div>
+        <div style="font-size: 11px; color: #fecaca; font-weight: 600; margin-top: 2px;">সব ইউজারের মেসেজ ও ইউজারের হোম স্ক্রিনে ভেসে থাকা মেসেজ পাঠান</div>
     </div>
 
     <div id="admin-chat-users-list">
@@ -699,13 +796,17 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <span onclick="clearAdminFile()" style="cursor:pointer; color:#ef4444; font-weight:bold;">✖</span>
         </div>
 
-        <div style="display: flex; gap: 8px; margin-bottom: 10px; align-items: center;">
+        <div style="display: flex; gap: 8px; margin-bottom: 8px; align-items: center;">
             <input type="file" id="admin-chat-file" accept="image/*,video/*" style="display:none;" onchange="onAdminFileSelected(this)">
             <button onclick="document.getElementById('admin-chat-file').click()" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.15); color: #38bdf8; padding: 10px 14px; border-radius: 14px; font-size: 18px; cursor: pointer;">📎</button>
 
-            <input type="text" id="admin-reply-input" placeholder="ইউজারের ইনবক্স/নোটিফিকেশনে মেসেজ বা কমান্ড লিখুন..." style="flex: 1; background: #1e293b; border: 1px solid rgba(255,255,255,0.12); padding: 12px 14px; border-radius: 14px; color: white; font-size: 13px; outline: none;">
-            <button onclick="sendAdminReplyMessage()" style="background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border: none; padding: 12px 20px; font-weight: 800; border-radius: 14px; cursor: pointer;">পাঠান</button>
+            <input type="text" id="admin-reply-input" placeholder="মেসেজ লিখুন..." style="flex: 1; background: #1e293b; border: 1px solid rgba(255,255,255,0.12); padding: 12px 14px; border-radius: 14px; color: white; font-size: 13px; outline: none;">
+            <button onclick="sendAdminReplyMessage()" style="background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border: none; padding: 12px 14px; font-weight: 800; border-radius: 14px; cursor: pointer;">চ্যাট রিপ্লাই</button>
         </div>
+
+        <button onclick="sendAdminHomeFloatingMessage()" style="width:100%; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 11px; font-weight: 800; border-radius: 14px; cursor: pointer; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(16,185,129,0.35);">
+            📌 ইউজারের হোম পেজে ফ্লোটিং মেসেজ পাঠান
+        </button>
     </div>
 
     <button class="btn-action" style="background: #475569; padding: 11px; border-radius: 14px; font-size: 13px;" onclick="exitAdminPanel()">🚪 এডমিন প্যানেল বন্ধ করুন</button>
@@ -1294,8 +1395,11 @@ let chatUnsubscribe = null;
 let adminChatUnsubscribe = null;
 let adminCurrentChatPhone = null;
 let currentChatContextType = 'general';
-let userInboxNotifyUnsubscribe = null;
-let lastNotifiedAdminMsgId = localStorage.getItem('last_seen_admin_msg_id') || null;
+
+/* নতুন ফিচারের জন্য আলাদা স্টেট */
+let homeFloatingUnsubscribe = null;
+let activeFloatingMsgDocId = null;
+let activeFloatingMsgText = "";
 
 let selectedUserMedia = null;
 let selectedAdminMedia = null;
@@ -1523,9 +1627,8 @@ async function getNextSerial() {
     return assignedSerial;
 }
 
-/* ফিচার ২: টেলিগ্রাম অ্যালার্টে ইউজারের সব তথ্যসহ সরাসরি কন্টাক্ট/মেসেজ লিঙ্ক */
 async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, photoFile, uid) {
-    const directContactUrl = `${window.location.origin}${window.location.pathname}?adminContact=${encodeURIComponent(uid)}&pin=${ADMIN_SECRET_PIN}`;
+    const directHomeFloatUrl = `${window.location.origin}${window.location.pathname}?homeFloatUser=${encodeURIComponent(uid)}&pin=${ADMIN_SECRET_PIN}`;
     const welcomeMsg = `✨ <b>🚀 নতুন মেম্বার রেজিস্ট্রেশন অ্যালার্ট! 🚀</b> ✨\n\n` +
                        `👤 <b>ইউজার নাম:</b> <code>${name}</code>\n` +
                        `🆔 <b>ইউজার আইডি:</b> <code>${uid}</code>\n` +
@@ -1537,7 +1640,7 @@ async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, 
 
     const replyMarkup = {
         inline_keyboard: [[
-            { text: "📩 ইউজারের ইনবক্সে মেসেজ পাঠান", url: directContactUrl }
+            { text: "📩 ইউজারের হোম স্ক্রিনে মেসেজ পাঠান", url: directHomeFloatUrl }
         ]]
     };
 
@@ -1688,18 +1791,6 @@ async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFil
 
         await db.collection('users').doc(uid).set(userData);
 
-        /* ইউজারের জন্য ডিফল্ট ইনবক্স ডকুমেন্ট তৈরি যাতে অ্যাডমিন সাথে সাথে মেসেজ পাঠাতে পারেন */
-        await db.collection('chats').doc(uid + "_general").set({
-            phone: uid,
-            userId: uid,
-            userName: name,
-            context: 'general',
-            lastMessage: 'অ্যাকাউন্ট নিবন্ধিত হয়েছে',
-            unreadByAdmin: false,
-            last_active_time: Date.now(),
-            updatedAt: serverTimestamp
-        }, { merge: true });
-
         const urlParams = new URLSearchParams(window.location.search);
         const referrerId = urlParams.get('start');
         if (referrerId && referrerId !== uid && referrerId !== phone) {
@@ -1839,13 +1930,17 @@ function handleLogout() {
 
 window.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
-    const adminContactTarget = urlParams.get('adminContact');
+    const homeFloatTarget = urlParams.get('homeFloatUser');
     const adminPinParam = urlParams.get('pin');
 
-    if (adminContactTarget && adminPinParam === ADMIN_SECRET_PIN) {
+    if (homeFloatTarget && adminPinParam === ADMIN_SECRET_PIN) {
         openAdminChatPanel();
         setTimeout(() => {
-            openAdminSingleChat(adminContactTarget + "_general", "নতুন ইউজার", adminContactTarget, "সাধারণ সাপোর্ট / ইনবক্স");
+            openAdminSingleChat(homeFloatTarget, "নতুন ইউজার", homeFloatTarget, "হোম-ফ্লোটিং মেসেজ");
+            const msgText = prompt("📩 এই ইউজারের হোম পেজে ভেসে থাকার মতো কী মেসেজ পাঠাতে চান?");
+            if (msgText && msgText.trim()) {
+                sendAdminHomeFloatingMessageDirect(homeFloatTarget, msgText.trim());
+            }
         }, 600);
         return;
     }
@@ -1858,50 +1953,163 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-/* ফিচার ২: ইউজারের ইনবক্সে অ্যাডমিনের নতুন মেসেজ বা কমান্ড আসলে নোটিফিকেশন দেখানো */
-function listenToUserAdminInboxNotifications(targetPhoneOrId) {
-    if (userInboxNotifyUnsubscribe) {
-        userInboxNotifyUnsubscribe();
+/* নতুন ফিচার: ইউজারের হোম পেজের ইন্টারফেসের ওপর ভেসে থাকা ফ্লোটিং মেসেজ লিসেনার */
+function listenToHomeFloatingMessage(targetUserKey) {
+    if (homeFloatingUnsubscribe) {
+        homeFloatingUnsubscribe();
+        homeFloatingUnsubscribe = null;
     }
-    const chatDocId = targetPhoneOrId + "_general";
-    userInboxNotifyUnsubscribe = db.collection('chats').doc(chatDocId).collection('messages')
-        .where('sender', '==', 'admin')
-        .orderBy('timestamp', 'desc')
-        .limit(1)
+    homeFloatingUnsubscribe = db.collection('home_direct_messages')
+        .where('targetUser', '==', targetUserKey)
+        .where('dismissed', '==', false)
         .onSnapshot((snapshot) => {
-            if (!snapshot.empty) {
-                const latestDoc = snapshot.docs[0];
-                const msgId = latestDoc.id;
-                const msgData = latestDoc.data();
-                const displayMsgText = msgData.text || (msgData.mediaType === 'video' ? '[অ্যাডমিন একটি ভিডিও পাঠিয়েছেন]' : '[অ্যাডমিন একটি ছবি/ফাইল পাঠিয়েছেন]');
-                const timeText = formatMessageTime(msgData.timestamp);
-
-                const banner = document.getElementById('home-admin-message-banner');
-                const bannerText = document.getElementById('home-admin-msg-text');
-                const bannerTime = document.getElementById('home-admin-msg-time');
-
-                if (banner && bannerText && bannerTime) {
-                    bannerText.innerText = displayMsgText;
-                    bannerTime.innerText = timeText;
-                    banner.classList.add('active');
-                }
-
-                if (lastNotifiedAdminMsgId !== msgId) {
-                    lastNotifiedAdminMsgId = msgId;
-                    localStorage.setItem('last_seen_admin_msg_id', msgId);
-                    alert("📩 অ্যাডমিন থেকে নতুন মেসেজ/কমান্ড এসেছে:\n\n" + displayMsgText);
-                }
+            if (snapshot.empty) {
+                activeFloatingMsgDocId = null;
+                activeFloatingMsgText = "";
+                const overlay = document.getElementById('home-floating-message-overlay');
+                if (overlay) overlay.classList.remove('active');
+                return;
             }
+
+            let latestDoc = snapshot.docs[0];
+            let latestTime = 0;
+            snapshot.docs.forEach(d => {
+                const t = d.data().createdAtMillis || 0;
+                if (t >= latestTime) {
+                    latestTime = t;
+                    latestDoc = d;
+                }
+            });
+
+            const data = latestDoc.data();
+            activeFloatingMsgDocId = latestDoc.id;
+            activeFloatingMsgText = data.message || "";
+
+            const bodyEl = document.getElementById('home-floating-msg-body');
+            const timeEl = document.getElementById('home-floating-msg-time');
+            const replyBox = document.getElementById('home-floating-reply-box');
+            const mainBtns = document.getElementById('home-floating-main-buttons');
+            const overlay = document.getElementById('home-floating-message-overlay');
+
+            if (bodyEl) bodyEl.innerText = activeFloatingMsgText;
+            if (timeEl) timeEl.innerText = formatMessageTime(data.createdAt || data.createdAtMillis);
+            if (replyBox) replyBox.classList.remove('active');
+            if (mainBtns) mainBtns.style.display = 'flex';
+            if (overlay) overlay.classList.add('active');
         }, () => {});
 }
 
-function openUserInboxFromHome() {
-    openLiveChat('general');
+async function skipHomeFloatingMessage() {
+    if (!activeFloatingMsgDocId) {
+        document.getElementById('home-floating-message-overlay').classList.remove('active');
+        return;
+    }
+    const docIdToDismiss = activeFloatingMsgDocId;
+    document.getElementById('home-floating-message-overlay').classList.remove('active');
+    try {
+        await db.collection('home_direct_messages').doc(docIdToDismiss).update({
+            dismissed: true,
+            actionTaken: 'skipped',
+            dismissedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+    } catch (e) { console.log(e); }
 }
 
-function dismissHomeAdminBanner() {
-    const banner = document.getElementById('home-admin-message-banner');
-    if (banner) banner.classList.remove('active');
+function openHomeFloatingReplyBox() {
+    document.getElementById('home-floating-main-buttons').style.display = 'none';
+    document.getElementById('home-floating-reply-box').classList.add('active');
+    document.getElementById('home-floating-reply-input').value = '';
+    document.getElementById('home-floating-reply-input').focus();
+}
+
+async function submitHomeFloatingReply() {
+    const replyInput = document.getElementById('home-floating-reply-input');
+    const replyText = replyInput.value.trim();
+    if (!replyText) {
+        alert("দয়া করে রিপ্লাই মেসেজ লিখুন।");
+        return;
+    }
+
+    const docIdToDismiss = activeFloatingMsgDocId;
+    const senderKey = currentUserPhone || userId;
+    const senderName = userName || "ইউজার";
+
+    try {
+        await db.collection('home_direct_replies').add({
+            targetUser: senderKey,
+            userId: userId || senderKey,
+            userName: senderName,
+            adminMessage: activeFloatingMsgText,
+            replyText: replyText,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            createdAtMillis: Date.now()
+        });
+
+        if (docIdToDismiss) {
+            await db.collection('home_direct_messages').doc(docIdToDismiss).update({
+                dismissed: true,
+                actionTaken: 'replied',
+                lastReply: replyText,
+                dismissedAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+        }
+
+        const tgNotify = `💬 <b>হোম-ফ্লোটিং মেসেজের নতুন রিপ্লাই!</b>\n\n` +
+                         `👤 <b>নাম:</b> ${senderName}\n` +
+                         `🆔 <b>আইডি:</b> <code>${userId || senderKey}</code>\n` +
+                         `📩 <b>আপনার মেসেজ:</b> ${activeFloatingMsgText || '---'}\n` +
+                         `✍️ <b>ইউজারের রিপ্লাই:</b> ${replyText}`;
+
+        fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: adminChatId,
+                text: tgNotify,
+                parse_mode: "HTML"
+            })
+        }).catch(() => {});
+
+        replyInput.value = '';
+        document.getElementById('home-floating-message-overlay').classList.remove('active');
+        alert("✅ আপনার রিপ্লাই অ্যাডমিনের কাছে সফলভাবে পাঠানো হয়েছে!");
+    } catch (e) {
+        alert("রিপ্লাই পাঠাতে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+    }
+}
+
+async function sendAdminHomeFloatingMessageDirect(targetKey, msgText) {
+    try {
+        await db.collection('home_direct_messages').add({
+            targetUser: targetKey,
+            message: msgText,
+            dismissed: false,
+            actionTaken: null,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            createdAtMillis: Date.now()
+        });
+        alert("✅ ইউজারের হোম পেজের ইন্টারফেসে ফ্লোটিং মেসেজ পাঠানো হয়েছে! ইউজার না পড়া বা স্কিপ/রিপ্লাই না করা পর্যন্ত এটি ভেসে থাকবে।");
+    } catch (e) {
+        alert("হোম ফ্লোটিং মেসেজ পাঠাতে সমস্যা হয়েছে।");
+    }
+}
+
+async function sendAdminHomeFloatingMessage() {
+    if (!adminCurrentChatPhone) {
+        alert("আগে একটি ইউজার সিলেক্ট করুন।");
+        return;
+    }
+    const cleanTargetKey = adminCurrentChatPhone.replace(/_(general|buy_refer|activation)$/, '');
+    const inputEl = document.getElementById('admin-reply-input');
+    let msgText = inputEl ? inputEl.value.trim() : "";
+    if (!msgText) {
+        msgText = prompt("ইউজারের হোম পেজে ভেসে থাকার মতো কী মেসেজ পাঠাতে চান?");
+        if (!msgText || !msgText.trim()) return;
+        msgText = msgText.trim();
+    } else {
+        inputEl.value = '';
+    }
+    await sendAdminHomeFloatingMessageDirect(cleanTargetKey, msgText);
 }
 
 async function initDashboard(phone) {
@@ -1931,7 +2139,7 @@ async function initDashboard(phone) {
     historyDates = data.history_dates || {};
     isActive = data.is_active || false;
 
-    listenToUserAdminInboxNotifications(phone);
+    listenToHomeFloatingMessage(phone);
 
     if (data.created_at && data.created_at.toDate) {
         formattedJoinDate = data.created_at.toDate().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -2495,7 +2703,7 @@ function openLiveChat(contextType = 'general') {
     } else if (contextType === 'activation') {
         badgeEl.innerText = "🔰 অ্যাকাউন্ট ভেরিফিকেশন টিম - দারাজ প্লে ইনকাম সেন্টার";
     } else {
-        badgeEl.innerText = "দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট ও ইনবক্স";
+        badgeEl.innerText = "দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট";
     }
 
     listenToLiveChatMessages(chatPhone, contextType);
@@ -2655,11 +2863,26 @@ function getContextWelcomeHtml(contextType) {
         `;
     } else {
         return `
-            <div style="background: linear-gradient(145deg, #062822, #1e293b); border: 1.5px solid #34d399; padding: 14px; border-radius: 16px; max-width: 92%; align-self: flex-start; color: #f8fafc; font-size: 12px; font-weight: 600; line-height: 1.55;">
-                🎧 <b>দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট ও ইনবক্স</b> 🎧<br><br>
-                🌸 <b>আসসালামু আলাইকুম!</b> এখানে আপনি অ্যাডমিনের পাঠানো মেসেজ/কমান্ড দেখতে পারবেন এবং সরাসরি যোগাযোগ করতে পারবেন।<br><br>
-                📩 আপনার যেকোনো সমস্যা বা প্রশ্ন নিচে বিস্তারিত লিখে পাঠান। আমাদের সাপোর্ট টিম দ্রুত আপনার সাথে যোগাযোগ করবে।<br><br>
-                🌹 ধন্যবাদ আমাদের সাথে থাকার জন্য।
+            <div style="background: linear-gradient(145deg, #1e293b, #0f172a); border: 1.5px solid #10b981; padding: 14px; border-radius: 16px; max-width: 92%; align-self: flex-start; color: #f8fafc; font-size: 12px; font-weight: 600; line-height: 1.55;">
+                🎉 <b>দারাজ প্লে ইনকাম সেন্টার কাস্টমার সাপোর্ট টিমে স্বাগতম</b> 🎉<br><br>
+                🌸 আসসালামু আলাইকুম।<br>
+                কাজ, রেফার, অ্যাকাউন্ট অ্যাক্টিভেশন অথবা পেমেন্ট সংক্রান্ত সহায়তার জন্য অনুগ্রহ করে নিচের তথ্যগুলো পূরণ করে পাঠান।<br>
+                ━━━━━━━━━━━━━━━<br>
+                📋 <b>তথ্য ফরম</b><br>
+                👤 পূর্ণ নাম:<br>
+                🆔 ইউজারনেম / ইউজার আইডি:<br>
+                📱 মোবাইল নম্বর:<br>
+                💰 এমাউন্ট (৳):<br>
+                📸 পেমেন্ট / ট্রানজেকশনের স্ক্রিনশট:<br>
+                🖼️ নিজের একটি স্পষ্ট ছবি:<br>
+                🎥 নিজের একটি সংক্ষিপ্ত ভিডিও:<br>
+                📝 সমস্যা বা অনুরোধের বিবরণ:<br>
+                ━━━━━━━━━━━━━━━<br>
+                📌 <b>গুরুত্বপূর্ণ নির্দেশনা</b><br>
+                ⚠️ সকল তথ্য সঠিকভাবে প্রদান করুন।<br>
+                ⚠️ ভুল তথ্য বা ভুয়া স্ক্রিনশট প্রদান করলে আবেদন বাতিল করা হবে।<br>
+                📩 তথ্য জমা দেওয়ার পর আমাদের কাস্টমার সাপোর্ট টিম দ্রুত যাচাই করে আপনার সাথে যোগাযোগ করবে।<br><br>
+                🌹 ধন্যবাদ। <b>দারাজ প্লে ইনকাম সেন্টারের</b> সাথে থাকার জন্য।
             </div>
         `;
     }
@@ -2716,7 +2939,7 @@ function listenToLiveChatMessages(phone, contextType = 'general') {
                     "background: linear-gradient(135deg, #0284c7, #0369a1); color: white; padding: 12px 14px; border-radius: 14px; max-width: 85%; align-self: flex-end; font-size: 13px; font-weight: 600; line-height: 1.4; word-break: break-word; box-shadow: 0 4px 12px rgba(2,132,199,0.3);" :
                     "background: #10b981; color: #0f172a; padding: 12px 14px; border-radius: 14px; max-width: 85%; align-self: flex-start; font-size: 13px; font-weight: 700; line-height: 1.4; word-break: break-word; box-shadow: 0 4px 12px rgba(16,185,129,0.3);";
                 
-                bubble.innerHTML = `${!isUser ? '<div style="font-size:10px; font-weight:800; color:#064e3b; margin-bottom:2px;">🛡️ অ্যাডমিন মেসেজ/কমান্ড</div>' : ''}${mediaHtml} ${msg.text ? `<div>${msg.text}</div>` : ''} <div class="chat-msg-time" style="${isUser ? 'color:#e0f2fe;' : 'color:#064e3b;'}">${timeStr}</div>`;
+                bubble.innerHTML = `${mediaHtml} ${msg.text ? `<div>${msg.text}</div>` : ''} <div class="chat-msg-time" style="${isUser ? 'color:#e0f2fe;' : 'color:#064e3b;'}">${timeStr}</div>`;
                 container.appendChild(bubble);
             });
             container.scrollTop = container.scrollHeight;
@@ -2775,24 +2998,18 @@ async function sendLiveChatMessage() {
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
 
-        const directContactUrl = `${window.location.origin}${window.location.pathname}?adminContact=${encodeURIComponent(phone)}&pin=${ADMIN_SECRET_PIN}`;
         const notifText = `💬 <b>নতুন লাইভ সাপোর্ট মেসেজ! ${topicTag}</b>\n\n` +
                           `👤 <b>নাম:</b> ${senderDisplayName}\n` +
                           `🆔 <b>আইডি/ফোন:</b> <code>${phone}</code>\n` +
                           `📝 <b>মেসেজ:</b> ${text || '[ফাইল সংযুক্তি]'}\n\n` +
-                          `⚡ সরাসরি ইউজারের ইনবক্সে উত্তর দিতে নিচের বাটনে ক্লিক করুন।`;
+                          `⚡ সরাসরি ওয়েবসাইটের এডমিন প্যানেল থেকে রিপ্লাই দিন।`;
         fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 chat_id: adminChatId,
                 text: notifText,
-                parse_mode: "HTML",
-                reply_markup: {
-                    inline_keyboard: [[
-                        { text: "📩 ইউজারকে মেসেজ পাঠান", url: directContactUrl }
-                    ]]
-                }
+                parse_mode: "HTML"
             })
         }).catch(() => {});
 
@@ -3023,7 +3240,7 @@ async function sendAdminReplyMessage() {
             updatedAt: firebase.firestore.FieldValue.serverTimestamp()
         }, { merge: true });
 
-        alert("✅ ইউজারের ওয়েবসাইট ইনবক্স ও নোটিফিকেশনে মেসেজ/কমান্ড পাঠানো হয়েছে!");
+        alert("✅ রিপ্লাই সফলভাবে পাঠানো হয়েছে!");
     } catch (e) {
         alert("রিপ্লাই পাঠাতে সমস্যা হয়েছে।");
     }
