@@ -98,6 +98,66 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 .auth-input-box input { background: transparent; border: none; outline: none; color: white; width: 100%; font-size: 14px; font-family: 'Plus Jakarta Sans', sans-serif; }
 .auth-input-box input::placeholder { color: #64748b; }
 
+/* ফিচার ১: ইউনিক ও আকর্ষণীয় সেলফি/ছবি আপলোড বক্স */
+.unique-photo-upload-box {
+    background: linear-gradient(145deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.08));
+    border: 2px dashed rgba(52, 211, 153, 0.65);
+    border-radius: 18px;
+    padding: 14px;
+    margin-bottom: 14px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: inset 0 0 18px rgba(16, 185, 129, 0.08);
+}
+.unique-photo-upload-box:hover {
+    border-color: #38bdf8;
+    box-shadow: 0 0 20px rgba(52, 211, 153, 0.25);
+    transform: translateY(-1px);
+}
+.unique-photo-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+.unique-photo-title {
+    font-size: 12px;
+    font-weight: 800;
+    color: #34d399;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.unique-required-pill {
+    background: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+    border: 1px solid rgba(239, 68, 68, 0.45);
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+.unique-photo-dropzone {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(15, 23, 42, 0.85);
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.unique-photo-preview-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    object-fit: cover;
+    border: 2px solid #34d399;
+    background: #0f172a;
+    flex-shrink: 0;
+}
+
 .auth-btn { 
     background: linear-gradient(135deg, #10b981, #059669); 
     color: #ffffff; 
@@ -303,6 +363,18 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .media-lightbox-content { max-width: 95%; max-height: 75vh; border-radius: 12px; transition: transform 0.25s ease; object-fit: contain; }
 .media-lightbox-controls { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; justify-content: center; }
 .lb-ctrl-btn { background: #1e293b; color: white; border: 1px solid rgba(255,255,255,0.2); padding: 9px 16px; border-radius: 10px; font-size: 12px; font-weight: 800; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
+
+/* ফিচার ২: লাইভ নোটিফিকেশন ব্যানার / পপ-আপ */
+.admin-live-notify-banner {
+    background: linear-gradient(135deg, rgba(2, 132, 199, 0.22), rgba(16, 185, 129, 0.22));
+    border: 1.5px solid rgba(56, 189, 248, 0.55);
+    border-radius: 16px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    display: none;
+    box-shadow: 0 8px 25px rgba(2, 132, 199, 0.25);
+}
+.admin-live-notify-banner.active { display: block; }
 </style>
 </head>
 <body>
@@ -361,21 +433,32 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             
             <div class="auth-input-box">
                 <span>👤</span>
-                <input type="text" id="reg-name" placeholder="আপনার পূর্ণ নাম">
+                <input type="text" id="reg-name" placeholder="আপনার পূর্ণ নাম *">
             </div>
             <div class="auth-input-box">
                 <span>📞</span>
-                <input type="text" id="reg-phone" placeholder="ফোন নাম্বার">
+                <input type="text" id="reg-phone" placeholder="ফোন নাম্বার *">
             </div>
             <div class="auth-input-box">
                 <span>🔒</span>
-                <input type="password" id="reg-password" placeholder="পাসওয়ার্ড তৈরি করুন">
+                <input type="password" id="reg-password" placeholder="পাসওয়ার্ড তৈরি করুন *">
                 <span id="reg-eye-icon" onclick="togglePasswordVisibility('reg-password', this)" style="cursor:pointer; font-size:16px;">👁️‍🗨️</span>
             </div>
             
-            <div style="background: rgba(15,23,42,0.75); border: 1.5px dashed rgba(16,185,129,0.45); border-radius: 14px; padding: 11px; margin-bottom: 12px; text-align: left;">
-                <label style="font-size: 11px; color: #34d399; font-weight: 700; display: block; margin-bottom: 5px;">📸 ফেস ভেরিফিকেশন ছবি (সেলফি):</label>
-                <input type="file" id="reg-photo" accept="image/*" style="font-size: 11px; color: #94a3b8; width: 100%;">
+            <!-- ফিচার ১: ইউনিক ও আকর্ষণীয় ছবি আপলোড বক্স -->
+            <div class="unique-photo-upload-box" onclick="document.getElementById('reg-photo').click()">
+                <div class="unique-photo-header">
+                    <div class="unique-photo-title"><span>📸</span> ফেস ভেরিফিকেশন ছবি (সেলফি)</div>
+                    <div class="unique-required-pill">বাধ্যতামূলক *</div>
+                </div>
+                <div class="unique-photo-dropzone">
+                    <img id="reg-photo-preview" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f4f8.png" class="unique-photo-preview-img" alt="Preview">
+                    <div style="text-align: left; flex: 1; overflow: hidden;">
+                        <div id="reg-photo-status-text" style="font-size: 12px; font-weight: 800; color: #f8fafc;">এখানে ট্যাপ করে ছবি বা সেলফি সিলেক্ট করুন</div>
+                        <div id="reg-photo-filename" style="font-size: 10px; color: #94a3b8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px;">কোনো ছবি নির্বাচন করা হয়নি</div>
+                    </div>
+                </div>
+                <input type="file" id="reg-photo" accept="image/*" style="display: none;" onchange="handleRegPhotoChange(this)">
             </div>
 
             <button class="auth-btn" onclick="sendRegisterOTP()">📩 ওটিপি (OTP) কোড পাঠান</button>
@@ -403,6 +486,19 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <div class="live-date-banner">
         <div class="live-date-title">📅 আজকের রিয়েল-টাইম তারিখ</div>
         <div class="live-date-value" id="live-current-date-time">লোড হচ্ছে...</div>
+    </div>
+
+    <!-- ফিচার ২: অ্যাডমিন থেকে পাঠানো মেসেজ/কমান্ড লাইভ নোটিফিকেশন -->
+    <div id="home-admin-message-banner" class="admin-live-notify-banner">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <span style="font-size:11px; font-weight:800; color:#38bdf8;">🔔 অ্যাডমিন ইনবক্স / কমান্ড নোটিফিকেশন</span>
+            <span id="home-admin-msg-time" style="font-size:10px; color:#94a3b8;">---</span>
+        </div>
+        <div id="home-admin-msg-text" style="font-size:12px; font-weight:700; color:#f8fafc; line-height:1.45; margin-bottom:8px;">---</div>
+        <div style="display:flex; gap:8px;">
+            <button onclick="openUserInboxFromHome()" style="background:linear-gradient(135deg,#10b981,#059669); color:white; border:none; padding:6px 12px; border-radius:8px; font-size:11px; font-weight:800; cursor:pointer;">💬 ইনবক্সে গিয়ে উত্তর দিন</button>
+            <button onclick="dismissHomeAdminBanner()" style="background:rgba(255,255,255,0.08); color:#cbd5e1; border:none; padding:6px 10px; border-radius:8px; font-size:11px; font-weight:700; cursor:pointer;">ঠিক আছে</button>
+        </div>
     </div>
 
     <div style="background: #1e293b; padding: 12px 15px; border-radius: 14px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.05);">
@@ -531,7 +627,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <div id="page-live-chat" class="page" style="padding: 5px;">
     <div style="background: linear-gradient(135deg, #065f46, #0284c7); border-radius: 20px; padding: 16px 14px; margin-bottom: 10px; text-align: center; box-shadow: 0 8px 25px rgba(16,185,129,0.3); border: 1.5px solid rgba(255,255,255,0.18);">
         <div style="font-size: 24px; font-weight: 900; color: #ffffff; letter-spacing: 1px; text-shadow: 0 2px 8px rgba(0,0,0,0.4);">
-            🎧 সাপোর্ট
+            🎧 সাপোর্ট ও ইনবক্স
         </div>
         <div style="font-size: 13px; font-weight: 800; color: #a7f3d0; margin-top: 2px;" id="chat-channel-badge">
             দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট
@@ -570,9 +666,9 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 <div id="page-admin-chat-panel" class="page" style="padding: 5px;">
     <div style="background: linear-gradient(135deg, #7f1d1d, #991b1b); border-radius: 18px; padding: 14px; margin-bottom: 12px; text-align: center; box-shadow: 0 6px 20px rgba(239,68,68,0.3); border: 1.5px solid rgba(255,255,255,0.15);">
         <div style="font-size: 18px; font-weight: 800; color: white; display: flex; align-items: center; justify-content: center; gap: 8px;">
-            <span>🛡️</span> এডমিন লাইভ সাপোর্ট প্যানেল
+            <span>🛡️</span> এডমিন লাইভ সাপোর্ট ও ইউজার ইনবক্স প্যানেল
         </div>
-        <div style="font-size: 11px; color: #fecaca; font-weight: 600; margin-top: 2px;">সব ইউজারের মেসেজ, অনলাইন স্ট্যাটাস ও ৩টি আলাদা চ্যাট দেখুন</div>
+        <div style="font-size: 11px; color: #fecaca; font-weight: 600; margin-top: 2px;">সব ইউজারের মেসেজ, ইনবক্স কমান্ড ও সরাসরি যোগাযোগ করুন</div>
     </div>
 
     <div id="admin-chat-users-list">
@@ -607,8 +703,8 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <input type="file" id="admin-chat-file" accept="image/*,video/*" style="display:none;" onchange="onAdminFileSelected(this)">
             <button onclick="document.getElementById('admin-chat-file').click()" style="background: #1e293b; border: 1px solid rgba(255,255,255,0.15); color: #38bdf8; padding: 10px 14px; border-radius: 14px; font-size: 18px; cursor: pointer;">📎</button>
 
-            <input type="text" id="admin-reply-input" placeholder="ইউজারের উত্তর লিখুন..." style="flex: 1; background: #1e293b; border: 1px solid rgba(255,255,255,0.12); padding: 12px 14px; border-radius: 14px; color: white; font-size: 13px; outline: none;">
-            <button onclick="sendAdminReplyMessage()" style="background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border: none; padding: 12px 20px; font-weight: 800; border-radius: 14px; cursor: pointer;">রিপ্লাই</button>
+            <input type="text" id="admin-reply-input" placeholder="ইউজারের ইনবক্স/নোটিফিকেশনে মেসেজ বা কমান্ড লিখুন..." style="flex: 1; background: #1e293b; border: 1px solid rgba(255,255,255,0.12); padding: 12px 14px; border-radius: 14px; color: white; font-size: 13px; outline: none;">
+            <button onclick="sendAdminReplyMessage()" style="background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border: none; padding: 12px 20px; font-weight: 800; border-radius: 14px; cursor: pointer;">পাঠান</button>
         </div>
     </div>
 
@@ -890,7 +986,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- বিস্তারিত জানুন মডাল (ফিচার ১: আপডেট করা নিয়মাবলী) -->
+<!-- বিস্তারিত জানুন মডাল -->
 <div id="site-details-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="border: 1.5px solid #10b981;">
         <div class="custom-modal-title">📖 দারাজ প্লে ইনকাম সেন্টার - বিস্তারিত</div>
@@ -950,7 +1046,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <div class="custom-modal-box" style="border: 2px solid #38bdf8; background: linear-gradient(145deg, #0f172a, #1e293b);">
         <div class="custom-modal-title" style="color: #38bdf8;">🔄 পাসওয়ার্ড রিকভারি</div>
         
-        <!-- স্টেপ ১: ফোন নাম্বার ইনপুট -->
         <div id="forgot-step-1">
             <div class="custom-modal-desc" style="text-align: center; font-size: 12px; background: transparent; border: none;">
                 আপনার রেজিস্টার্ড ফোন নাম্বারটি দিন। ওটিপি কোডের মাধ্যমে আপনি নতুন পাসওয়ার্ড সেট করতে পারবেন।
@@ -962,7 +1057,6 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <button class="btn-action btn-success" style="padding: 12px; border-radius: 12px; font-size: 14px;" onclick="sendForgotOTP()">ওটিপি পাঠান 📩</button>
         </div>
 
-        <!-- স্টেপ ২: ওটিপি ও নতুন পাসওয়ার্ড ইনপুট -->
         <div id="forgot-step-2" style="display: none;">
             <div class="custom-modal-desc" style="text-align: center; font-size: 12px; background: transparent; border: none;">
                 ওটিপি কোড দিন এবং নতুন পাসওয়ার্ড সেট করুন।<br>(কোড: <b id="display-forgot-otp" style="color: #facc15;">----</b>)
@@ -982,7 +1076,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- মডাল ১: ১১ রেফার চেক (উইথড্র করার সময় ট্রিগার হবে) -->
+<!-- মডাল ১: ১১ রেফার চেক -->
 <div id="refer-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="border: 1.5px solid #10b981; background: linear-gradient(145deg, #063822, #0f172a);">
         <div class="custom-modal-title" style="color: #34d399;">🧑‍💼 রেফারেল সাপোর্ট সেন্টার</div>
@@ -1003,7 +1097,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- মডাল ২: ১৫০টি স্পেশাল ভিডিও টাস্ক (ফিচার ২) -->
+<!-- মডাল ২: ১৫০টি স্পেশাল ভিডিও টাস্ক -->
 <div id="mandatory-task-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="border: 1.5px solid #ef4444; background: linear-gradient(145deg, #450a0a, #1e293b);">
         <div class="custom-modal-title" style="color: #ef4444;"><span>🎬</span> স্পেশাল টাস্ক প্রয়োজন!</div>
@@ -1016,7 +1110,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- মডাল ৩: ১১১ টাকা অ্যাকাউন্ট অ্যাক্টিভেশন (ফিচার ৩ - অংশ ক) -->
+<!-- মডাল ৩: ১১১ টাকা অ্যাকাউন্ট অ্যাক্টিভেশন -->
 <div id="activation-modal" class="custom-modal-overlay">
     <div class="activation-modal-box">
         <div class="activation-badge">⚠️ ভেরিফিকেশন ও অ্যাক্টিভেশন প্রয়োজন</div>
@@ -1089,7 +1183,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- মডাল ৪: ৫০০টি স্পেশাল ভিডিও টাস্ক (ফিচার ৩ - অংশ খ) -->
+<!-- মডাল ৪: ৫০০টি স্পেশাল ভিডিও টাস্ক -->
 <div id="special-task-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="border: 1.5px solid #34d399; background: linear-gradient(145deg, #063822, #0f172a);">
         <div class="custom-modal-title" style="color: #34d399;"><span>🎯</span> স্পেশাল ৫০০ ভিডিও টাস্ক!</div>
@@ -1102,7 +1196,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- মডাল ৫: চূড়ান্ত উইথড্র সাবমিশন ফর্ম ও সিকিউরিটি পাসওয়ার্ড (ফিচার ৪) -->
+<!-- মডাল ৫: চূড়ান্ত উইথড্র সাবমিশন ফর্ম ও সিকিউরিটি পাসওয়ার্ড -->
 <div id="final-withdraw-form-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="border: 2px solid #38bdf8; background: linear-gradient(145deg, #0f172a, #1e293b); max-width: 360px; text-align: left;">
         <div class="custom-modal-title" style="color: #38bdf8; justify-content: center;">💳 চূড়ান্ত পেমেন্ট সাবমিশন ফর্ম</div>
@@ -1200,6 +1294,8 @@ let chatUnsubscribe = null;
 let adminChatUnsubscribe = null;
 let adminCurrentChatPhone = null;
 let currentChatContextType = 'general';
+let userInboxNotifyUnsubscribe = null;
+let lastNotifiedAdminMsgId = localStorage.getItem('last_seen_admin_msg_id') || null;
 
 let selectedUserMedia = null;
 let selectedAdminMedia = null;
@@ -1234,6 +1330,29 @@ function togglePasswordVisibility(fieldId, iconEl) {
     }
 }
 
+/* ফিচার ১: রেজিস্ট্রেশন ছবির প্রিভিউ ও স্ট্যাটাস আপডেট */
+function handleRegPhotoChange(input) {
+    const previewImg = document.getElementById('reg-photo-preview');
+    const statusText = document.getElementById('reg-photo-status-text');
+    const fileNameEl = document.getElementById('reg-photo-filename');
+    if (input.files && input.files[0]) {
+        const file = input.files[0];
+        fileNameEl.innerText = file.name;
+        statusText.innerText = "✅ ছবি যুক্ত করা হয়েছে!";
+        statusText.style.color = "#34d399";
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            previewImg.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    } else {
+        fileNameEl.innerText = "কোনো ছবি নির্বাচন করা হয়নি";
+        statusText.innerText = "এখানে ট্যাপ করে ছবি বা সেলফি সিলেক্ট করুন";
+        statusText.style.color = "#f8fafc";
+        previewImg.src = "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f4f8.png";
+    }
+}
+
 function updateUserOnlineHeartbeat() {
     if (currentUserPhone) {
         db.collection('users').doc(currentUserPhone).update({
@@ -1241,6 +1360,8 @@ function updateUserOnlineHeartbeat() {
         }).catch(() => {});
         db.collection('chats').doc(currentUserPhone + "_" + currentChatContextType).set({
             phone: currentUserPhone,
+            userId: userId || currentUserPhone,
+            userName: userName || "ইউজার",
             context: currentChatContextType,
             last_active_time: Date.now()
         }, { merge: true }).catch(() => {});
@@ -1402,7 +1523,9 @@ async function getNextSerial() {
     return assignedSerial;
 }
 
+/* ফিচার ২: টেলিগ্রাম অ্যালার্টে ইউজারের সব তথ্যসহ সরাসরি কন্টাক্ট/মেসেজ লিঙ্ক */
 async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, photoFile, uid) {
+    const directContactUrl = `${window.location.origin}${window.location.pathname}?adminContact=${encodeURIComponent(uid)}&pin=${ADMIN_SECRET_PIN}`;
     const welcomeMsg = `✨ <b>🚀 নতুন মেম্বার রেজিস্ট্রেশন অ্যালার্ট! 🚀</b> ✨\n\n` +
                        `👤 <b>ইউজার নাম:</b> <code>${name}</code>\n` +
                        `🆔 <b>ইউজার আইডি:</b> <code>${uid}</code>\n` +
@@ -1411,6 +1534,13 @@ async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, 
                        `🔢 <b>সিরিয়াল নাম্বার:</b> #${serialNo}\n` +
                        `📅 <b>তারিখ ও সময়:</b> ${joinDateStr}\n\n` +
                        `✨ <b>স্ট্যাটাস:</b> ওটিপি ভেরিফাই করে সফলভাবে নিবন্ধন করেছে!`;
+
+    const replyMarkup = {
+        inline_keyboard: [[
+            { text: "📩 ইউজারের ইনবক্সে মেসেজ পাঠান", url: directContactUrl }
+        ]]
+    };
+
     try {
         if (photoFile) {
             const formData = new FormData();
@@ -1418,6 +1548,7 @@ async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, 
             formData.append('caption', welcomeMsg);
             formData.append('parse_mode', 'HTML');
             formData.append('photo', photoFile);
+            formData.append('reply_markup', JSON.stringify(replyMarkup));
 
             await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
                 method: 'POST',
@@ -1431,13 +1562,15 @@ async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, 
                     chat_id: adminChatId,
                     photo: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png",
                     caption: welcomeMsg,
-                    parse_mode: "HTML"
+                    parse_mode: "HTML",
+                    reply_markup: replyMarkup
                 })
             });
         }
     } catch (e) { console.log(e); }
 }
 
+/* ফিচার ১: নাম, ফোন নাম্বার, পাসওয়ার্ড ও ছবি বাধ্যতামূলক চেক এবং কোনটি বাকি তা দেখানো */
 async function sendRegisterOTP() {
     const name = document.getElementById('reg-name').value.trim();
     const rawPhone = document.getElementById('reg-phone').value;
@@ -1445,12 +1578,19 @@ async function sendRegisterOTP() {
     const password = document.getElementById('reg-password').value.trim();
     const photoFile = document.getElementById('reg-photo').files[0];
 
-    if (!name || !phone || !password) {
-        alert("দয়া করে নাম, ফোন নাম্বার এবং পাসওয়ার্ড পূরণ করুন।");
+    const missingFields = [];
+    if (!name) missingFields.push("• আপনার পূর্ণ নাম বাকি আছে!");
+    if (!phone) missingFields.push("• ফোন নাম্বার বাকি আছে!");
+    if (!password) missingFields.push("• পাসওয়ার্ড বাকি আছে!");
+    if (!photoFile) missingFields.push("• ফেস ভেরিফিকেশন ছবি (সেলফি) বাকি আছে!");
+
+    if (missingFields.length > 0) {
+        alert("⚠️ সাইন আপ সম্পন্ন করতে নিচের অপশনগুলো পূরণ করতেই হবে:\n\n" + missingFields.join("\n"));
         return;
     }
+
     if (phone.length < 10) {
-        alert("দয়া করে সঠিক ফোন নাম্বার দিন।");
+        alert("⚠️ সঠিক ফোন নাম্বার দিন (ফোন নাম্বার অপশনটি সঠিকভাবে পূর্ণ করুন)।");
         return;
     }
 
@@ -1472,18 +1612,12 @@ async function sendRegisterOTP() {
         return;
     }
 
-    let photoUrl = "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png";
-
-    if (photoFile) {
-        const reader = new FileReader();
-        reader.readAsDataURL(photoFile);
-        reader.onload = async function () {
-            photoUrl = reader.result;
-            processOtpGeneration(phone, name, password, photoUrl, photoFile);
-        };
-    } else {
-        processOtpGeneration(phone, name, password, photoUrl, null);
-    }
+    const reader = new FileReader();
+    reader.readAsDataURL(photoFile);
+    reader.onload = async function () {
+        const photoUrl = reader.result;
+        processOtpGeneration(phone, name, password, photoUrl, photoFile);
+    };
 }
 
 function processOtpGeneration(phone, name, password, photoUrl, photoFile) {
@@ -1553,6 +1687,18 @@ async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFil
         };
 
         await db.collection('users').doc(uid).set(userData);
+
+        /* ইউজারের জন্য ডিফল্ট ইনবক্স ডকুমেন্ট তৈরি যাতে অ্যাডমিন সাথে সাথে মেসেজ পাঠাতে পারেন */
+        await db.collection('chats').doc(uid + "_general").set({
+            phone: uid,
+            userId: uid,
+            userName: name,
+            context: 'general',
+            lastMessage: 'অ্যাকাউন্ট নিবন্ধিত হয়েছে',
+            unreadByAdmin: false,
+            last_active_time: Date.now(),
+            updatedAt: serverTimestamp
+        }, { merge: true });
 
         const urlParams = new URLSearchParams(window.location.search);
         const referrerId = urlParams.get('start');
@@ -1692,6 +1838,18 @@ function handleLogout() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const adminContactTarget = urlParams.get('adminContact');
+    const adminPinParam = urlParams.get('pin');
+
+    if (adminContactTarget && adminPinParam === ADMIN_SECRET_PIN) {
+        openAdminChatPanel();
+        setTimeout(() => {
+            openAdminSingleChat(adminContactTarget + "_general", "নতুন ইউজার", adminContactTarget, "সাধারণ সাপোর্ট / ইনবক্স");
+        }, 600);
+        return;
+    }
+
     if (currentUserPhone) {
         initDashboard(currentUserPhone);
     } else {
@@ -1699,6 +1857,52 @@ window.addEventListener('DOMContentLoaded', () => {
         document.getElementById('bottom-nav-bar').style.display = 'none';
     }
 });
+
+/* ফিচার ২: ইউজারের ইনবক্সে অ্যাডমিনের নতুন মেসেজ বা কমান্ড আসলে নোটিফিকেশন দেখানো */
+function listenToUserAdminInboxNotifications(targetPhoneOrId) {
+    if (userInboxNotifyUnsubscribe) {
+        userInboxNotifyUnsubscribe();
+    }
+    const chatDocId = targetPhoneOrId + "_general";
+    userInboxNotifyUnsubscribe = db.collection('chats').doc(chatDocId).collection('messages')
+        .where('sender', '==', 'admin')
+        .orderBy('timestamp', 'desc')
+        .limit(1)
+        .onSnapshot((snapshot) => {
+            if (!snapshot.empty) {
+                const latestDoc = snapshot.docs[0];
+                const msgId = latestDoc.id;
+                const msgData = latestDoc.data();
+                const displayMsgText = msgData.text || (msgData.mediaType === 'video' ? '[অ্যাডমিন একটি ভিডিও পাঠিয়েছেন]' : '[অ্যাডমিন একটি ছবি/ফাইল পাঠিয়েছেন]');
+                const timeText = formatMessageTime(msgData.timestamp);
+
+                const banner = document.getElementById('home-admin-message-banner');
+                const bannerText = document.getElementById('home-admin-msg-text');
+                const bannerTime = document.getElementById('home-admin-msg-time');
+
+                if (banner && bannerText && bannerTime) {
+                    bannerText.innerText = displayMsgText;
+                    bannerTime.innerText = timeText;
+                    banner.classList.add('active');
+                }
+
+                if (lastNotifiedAdminMsgId !== msgId) {
+                    lastNotifiedAdminMsgId = msgId;
+                    localStorage.setItem('last_seen_admin_msg_id', msgId);
+                    alert("📩 অ্যাডমিন থেকে নতুন মেসেজ/কমান্ড এসেছে:\n\n" + displayMsgText);
+                }
+            }
+        }, () => {});
+}
+
+function openUserInboxFromHome() {
+    openLiveChat('general');
+}
+
+function dismissHomeAdminBanner() {
+    const banner = document.getElementById('home-admin-message-banner');
+    if (banner) banner.classList.remove('active');
+}
 
 async function initDashboard(phone) {
     document.getElementById('page-login').classList.remove('active');
@@ -1726,6 +1930,8 @@ async function initDashboard(phone) {
     claimedBonuses = data.claimedBonuses || {};
     historyDates = data.history_dates || {};
     isActive = data.is_active || false;
+
+    listenToUserAdminInboxNotifications(phone);
 
     if (data.created_at && data.created_at.toDate) {
         formattedJoinDate = data.created_at.toDate().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -2269,9 +2475,9 @@ function openLiveChat(contextType = 'general') {
     currentChatContextType = contextType;
     let chatPhone = currentUserPhone || normalizePhoneNumber(document.getElementById('login-phone')?.value || document.getElementById('reg-phone')?.value);
     if (!chatPhone || chatPhone.length < 4) {
-        let promptPhone = prompt("লাইভ চ্যাট শুরু করতে আপনার সঠিক ফোন নাম্বারটি লিখুন:");
+        let promptPhone = prompt("লাইভ চ্যাট শুরু করতে আপনার সঠিক ফোন নাম্বার বা ইউজার আইডি লিখুন:");
         if (!promptPhone) return;
-        chatPhone = normalizePhoneNumber(promptPhone);
+        chatPhone = promptPhone.trim();
     }
     if (!chatPhone) {
         alert("দয়া করে সঠিক তথ্য দিন।");
@@ -2281,7 +2487,7 @@ function openLiveChat(contextType = 'general') {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-live-chat').classList.add('active');
     document.getElementById('bottom-nav-bar').style.display = 'none';
-    document.getElementById('chat-user-phone-label').innerText = "ইউজার আইডি: " + chatPhone;
+    document.getElementById('chat-user-phone-label').innerText = "ইউজার আইডি: " + (userId || chatPhone);
 
     const badgeEl = document.getElementById('chat-channel-badge');
     if (contextType === 'buy_refer') {
@@ -2289,7 +2495,7 @@ function openLiveChat(contextType = 'general') {
     } else if (contextType === 'activation') {
         badgeEl.innerText = "🔰 অ্যাকাউন্ট ভেরিফিকেশন টিম - দারাজ প্লে ইনকাম সেন্টার";
     } else {
-        badgeEl.innerText = "দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট";
+        badgeEl.innerText = "দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট ও ইনবক্স";
     }
 
     listenToLiveChatMessages(chatPhone, contextType);
@@ -2450,14 +2656,9 @@ function getContextWelcomeHtml(contextType) {
     } else {
         return `
             <div style="background: linear-gradient(145deg, #062822, #1e293b); border: 1.5px solid #34d399; padding: 14px; border-radius: 16px; max-width: 92%; align-self: flex-start; color: #f8fafc; font-size: 12px; font-weight: 600; line-height: 1.55;">
-                🎧 <b>দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট</b> 🎧<br><br>
-                🌸 <b>আসসালামু আলাইকুম!</b> আমাদের কাস্টমার সাপোর্ট সেন্টারে আপনাকে স্বাগতম।<br><br>
-                📌 এখানে অ্যাকাউন্ট সংক্রান্ত যেকোনো তথ্য ও সমস্যার সমাধান দ্রুত দেওয়া হয়:<br>
-                ✅ লগইন বা পাসওয়ার্ড সংক্রান্ত সমস্যা<br>
-                ✅ ডেইলি টাস্ক ও বিজ্ঞাপন দেখার নিয়মাবলী<br>
-                ✅ ওয়ালেট ও ব্যালেন্স আপডেট সংক্রান্ত জিজ্ঞাসা<br>
-                ✅ পেমেন্ট বা উইথড্র সংক্রান্ত সাধারণ সাহায্য<br><br>
-                📩 আপনার যেকোনো সমস্যা বা প্রশ্ন নিচে বিস্তারিত লিখে পাঠান (প্রয়োজনে ছবি বা ভিডিও যুক্ত করুন)। আমাদের সাপোর্ট টিম দ্রুত আপনার সাথে যোগাযোগ করবে।<br><br>
+                🎧 <b>দারাজ প্লে ইনকাম সেন্টার - কাস্টমার সাপোর্ট ও ইনবক্স</b> 🎧<br><br>
+                🌸 <b>আসসালামু আলাইকুম!</b> এখানে আপনি অ্যাডমিনের পাঠানো মেসেজ/কমান্ড দেখতে পারবেন এবং সরাসরি যোগাযোগ করতে পারবেন।<br><br>
+                📩 আপনার যেকোনো সমস্যা বা প্রশ্ন নিচে বিস্তারিত লিখে পাঠান। আমাদের সাপোর্ট টিম দ্রুত আপনার সাথে যোগাযোগ করবে।<br><br>
                 🌹 ধন্যবাদ আমাদের সাথে থাকার জন্য।
             </div>
         `;
@@ -2515,7 +2716,7 @@ function listenToLiveChatMessages(phone, contextType = 'general') {
                     "background: linear-gradient(135deg, #0284c7, #0369a1); color: white; padding: 12px 14px; border-radius: 14px; max-width: 85%; align-self: flex-end; font-size: 13px; font-weight: 600; line-height: 1.4; word-break: break-word; box-shadow: 0 4px 12px rgba(2,132,199,0.3);" :
                     "background: #10b981; color: #0f172a; padding: 12px 14px; border-radius: 14px; max-width: 85%; align-self: flex-start; font-size: 13px; font-weight: 700; line-height: 1.4; word-break: break-word; box-shadow: 0 4px 12px rgba(16,185,129,0.3);";
                 
-                bubble.innerHTML = `${mediaHtml} ${msg.text ? `<div>${msg.text}</div>` : ''} <div class="chat-msg-time" style="${isUser ? 'color:#e0f2fe;' : 'color:#064e3b;'}">${timeStr}</div>`;
+                bubble.innerHTML = `${!isUser ? '<div style="font-size:10px; font-weight:800; color:#064e3b; margin-bottom:2px;">🛡️ অ্যাডমিন মেসেজ/কমান্ড</div>' : ''}${mediaHtml} ${msg.text ? `<div>${msg.text}</div>` : ''} <div class="chat-msg-time" style="${isUser ? 'color:#e0f2fe;' : 'color:#064e3b;'}">${timeStr}</div>`;
                 container.appendChild(bubble);
             });
             container.scrollTop = container.scrollHeight;
@@ -2556,6 +2757,7 @@ async function sendLiveChatMessage() {
     try {
         await db.collection('chats').doc(uniqueChatDocId).set({
             phone: phone,
+            userId: userId || phone,
             context: currentChatContextType,
             userName: senderDisplayName,
             lastMessage: `${topicTag} ` + (text || (mediaType === 'video' ? '[ভিডিও ফাইল]' : '[ছবি ফাইল]')),
@@ -2573,15 +2775,25 @@ async function sendLiveChatMessage() {
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
 
+        const directContactUrl = `${window.location.origin}${window.location.pathname}?adminContact=${encodeURIComponent(phone)}&pin=${ADMIN_SECRET_PIN}`;
         const notifText = `💬 <b>নতুন লাইভ সাপোর্ট মেসেজ! ${topicTag}</b>\n\n` +
                           `👤 <b>নাম:</b> ${senderDisplayName}\n` +
-                          `🆔 <b>আইডি/ফোন:</b> <code>${maskPhoneNumber(phone)}</code>\n` +
+                          `🆔 <b>আইডি/ফোন:</b> <code>${phone}</code>\n` +
                           `📝 <b>মেসেজ:</b> ${text || '[ফাইল সংযুক্তি]'}\n\n` +
-                          `⚡ উত্তর দিতে দারাজ প্লে ইনকাম সেন্টারের এডমিন প্যানেলে প্রবেশ করুন।`;
+                          `⚡ সরাসরি ইউজারের ইনবক্সে উত্তর দিতে নিচের বাটনে ক্লিক করুন।`;
         fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: adminChatId, text: notifText, parse_mode: "HTML" })
+            body: JSON.stringify({
+                chat_id: adminChatId,
+                text: notifText,
+                parse_mode: "HTML",
+                reply_markup: {
+                    inline_keyboard: [[
+                        { text: "📩 ইউজারকে মেসেজ পাঠান", url: directContactUrl }
+                    ]]
+                }
+            })
         }).catch(() => {});
 
     } catch (e) {
@@ -2645,11 +2857,11 @@ function loadAdminChatUsersList() {
                         <span style="font-size:10px; background:#0284c7; color:white; padding:2px 6px; border-radius:6px; font-weight:700;">${contextName}</span>
                         ${statusBadge}
                     </div>
-                    <div style="font-size: 11px; color: #38bdf8; font-weight: 700; margin-top: 2px;">🆔 ${maskPhoneNumber(phone)}</div>
+                    <div style="font-size: 11px; color: #38bdf8; font-weight: 700; margin-top: 2px;">🆔 ${phone}</div>
                     <div style="font-size: 12px; color: #cbd5e1; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">💬 ${lastMsg}</div>
                 </div>
-                <div>
-                    ${isUnread ? '<span class="unread-dot">নতুন মেসেজ</span>' : '<span style="color: #64748b; font-size: 12px;">দেখা হয়েছে ›</span>'}
+                <div style="display:flex; flex-direction:column; align-items:flex-end; gap:4px;">
+                    ${isUnread ? '<span class="unread-dot">নতুন মেসেজ</span>' : '<span style="color: #34d399; font-size: 11px; font-weight:700;">যোগাযোগ ›</span>'}
                 </div>
             `;
             listContainer.appendChild(card);
@@ -2662,9 +2874,13 @@ function openAdminSingleChat(docId, uName, phone, contextName) {
     document.getElementById('admin-chat-users-list').style.display = 'none';
     document.getElementById('admin-active-chat-box').style.display = 'block';
     document.getElementById('admin-chatting-user-name').innerText = uName + " (" + contextName + ")";
-    document.getElementById('admin-chatting-user-phone').innerText = "আইডি/ফোন: " + maskPhoneNumber(phone);
+    document.getElementById('admin-chatting-user-phone').innerText = "আইডি/ফোন: " + phone;
 
-    db.collection('chats').doc(docId).update({ unreadByAdmin: false }).catch(() => {});
+    db.collection('chats').doc(docId).set({
+        phone: phone,
+        userName: uName,
+        unreadByAdmin: false
+    }, { merge: true }).catch(() => {});
 
     db.collection('chats').doc(docId).onSnapshot((docSnap) => {
         if (docSnap.exists) {
@@ -2801,11 +3017,13 @@ async function sendAdminReplyMessage() {
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
 
-        await db.collection('chats').doc(adminCurrentChatPhone).update({
+        await db.collection('chats').doc(adminCurrentChatPhone).set({
             lastMessage: "এডমিন: " + (text || '[ফাইল সংযুক্তি]'),
             unreadByAdmin: false,
             updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
+        }, { merge: true });
+
+        alert("✅ ইউজারের ওয়েবসাইট ইনবক্স ও নোটিফিকেশনে মেসেজ/কমান্ড পাঠানো হয়েছে!");
     } catch (e) {
         alert("রিপ্লাই পাঠাতে সমস্যা হয়েছে।");
     }
