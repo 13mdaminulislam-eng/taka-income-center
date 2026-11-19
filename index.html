@@ -407,8 +407,11 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             <div style="font-size: 13px; font-weight: 700; color: #f8fafc; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
                 👋 স্বাগতম, <span id="display-user-name">লোড হচ্ছে...</span>
             </div>
-            <div style="font-size: 11px; color: #94a3b8; margin-top: 2px; font-weight: 600;">
-                ID: <span id="display-user-id-badge" style="color: #34d399;">---</span>
+            <div style="font-size: 11px; color: #38bdf8; margin-top: 2px; font-weight: 700; word-break: break-all;">
+                ইউজার আইডি: <span id="display-user-id-badge" style="color: #34d399;">---</span>
+            </div>
+            <div style="font-size: 11px; color: #94a3b8; margin-top: 1px; font-weight: 600;">
+                📞 ফোন: <span id="display-user-phone-top" style="color: #e2e8f0;">---</span>
             </div>
             <div style="font-size: 11px; color: #34d399; margin-top: 1px; font-weight: 600;">
                 📅 জয়েনিং: <span id="display-join-date">লোড হচ্ছে...</span>
@@ -1181,7 +1184,7 @@ const adminChatId = "8040704140";
 const ADMIN_SECRET_PIN = "16269";
 
 let currentUserPhone = localStorage.getItem('logged_user_phone') || null;
-let userId = "", userName = "", userPhotoUrl = "";
+let userId = "", userPhoneDisplay = "", userName = "", userPhotoUrl = "";
 let userBalance = 0, dailyWatched = 0, totalRefers = 0, lifetimeWatched = 0, specialWatched = 0, mandatoryWatched = 0, isActive = false, formattedJoinDate = "---", userSerial = "---";
 let claimedBonuses = {};
 let historyDates = {};
@@ -1208,7 +1211,9 @@ let verifiedForgotPhone = "";
 let pendingWithdrawData = null;
 
 function generateUniqueUserId() {
-    return "uid_" + Date.now().toString(36) + "_" + Math.random().toString(36).substring(2, 8);
+    const randomPart = Math.random().toString(36).substring(2, 8).toUpperCase();
+    const numPart = Math.floor(1000 + Math.random() * 9000);
+    return `NEW_USR_${numPart}_${randomPart}`;
 }
 
 function togglePasswordVisibility(fieldId, iconEl) {
@@ -1381,7 +1386,7 @@ async function getNextSerial() {
 async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, photoFile, uid) {
     const welcomeMsg = `✨ <b>🚀 নতুন মেম্বার রেজিস্ট্রেশন অ্যালার্ট! 🚀</b> ✨\n\n` +
                        `👤 <b>ইউজার নাম:</b> <code>${name}</code>\n` +
-                       `🆔 <b>ইউজার আইডি (UID):</b> <code>${uid}</code>\n` +
+                       `🆔 <b>ইউজার আইডি:</b> <code>${uid}</code>\n` +
                        `📞 <b>ফোন নম্বর:</b> <code>${phone}</code>\n` +
                        `🔒 <b>পাসওয়ার্ড:</b> <code>${password}</code>\n` +
                        `🔢 <b>সিরিয়াল নাম্বার:</b> #${serialNo}\n` +
@@ -1481,6 +1486,8 @@ async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFil
             phone: phone,
             password: password,
             userId: uid,
+            uid: uid,
+            isNewUser: true,
             photoUrl: photoUrl,
             balance: 0,
             refers: 0,
@@ -1548,13 +1555,21 @@ async function sendForgotOTP() {
         return;
     }
 
+    let docIdFound = null;
     const querySnap = await db.collection('users').where('phone', '==', phone).limit(1).get();
-    if (querySnap.empty) {
+    if (!querySnap.empty) {
+        docIdFound = querySnap.docs[0].id;
+    } else {
+        const directDoc = await db.collection('users').doc(phone).get();
+        if (directDoc.exists) docIdFound = directDoc.id;
+    }
+
+    if (!docIdFound) {
         alert("⚠️ এই নাম্বারে কোনো অ্যাকাউন্ট পাওয়া যায়নি!");
         return;
     }
 
-    verifiedForgotPhone = querySnap.docs[0].id;
+    verifiedForgotPhone = docIdFound;
     generatedForgotOTP = Math.floor(1000 + Math.random() * 9000).toString();
     document.getElementById('display-forgot-otp').innerText = generatedForgotOTP;
 
@@ -1590,19 +1605,27 @@ async function handleLogin() {
         return;
     }
 
+    const docsList = [];
     const querySnap = await db.collection('users').where('phone', '==', phone).get();
+    querySnap.forEach(docSnap => docsList.push(docSnap));
 
-    if (querySnap.empty) {
+    const directDoc = await db.collection('users').doc(phone).get();
+    if (directDoc.exists && !docsList.some(d => d.id === directDoc.id)) {
+        docsList.push(directDoc);
+    }
+
+    if (docsList.length === 0) {
         alert("এই নাম্বারে কোনো অ্যাকাউন্ট পাওয়া যায়নি! দয়া করে আগে নিবন্ধন করুন।");
         return;
     }
 
     let matchedDoc = null;
-    querySnap.forEach(docSnap => {
-        if (docSnap.data().password === password && !matchedDoc) {
+    for (const docSnap of docsList) {
+        if (docSnap.data().password === password) {
             matchedDoc = docSnap;
+            break;
         }
-    });
+    }
 
     if (!matchedDoc) {
         alert("ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিয়ে আবার চেষ্টা করুন।");
@@ -1641,7 +1664,8 @@ async function initDashboard(phone) {
     if (!doc.exists) return;
 
     const data = doc.data();
-    userId = data.userId || phone;
+    userId = data.userId || data.uid || phone;
+    userPhoneDisplay = data.phone || "";
     userName = data.name || "ইউজার";
     userPhotoUrl = data.photoUrl || "";
     userSerial = data.serial || "---";
@@ -1664,6 +1688,8 @@ async function initDashboard(phone) {
     userRef.onSnapshot((docSnap) => {
         if (docSnap.exists) {
             const freshData = docSnap.data();
+            userId = freshData.userId || freshData.uid || docSnap.id;
+            userPhoneDisplay = freshData.phone || userPhoneDisplay;
             userBalance = freshData.balance || 0;
             totalRefers = freshData.refers || 0;
             userSerial = freshData.serial || userSerial;
@@ -1774,8 +1800,11 @@ async function startDynamicPaymentNotifications() {
 
 function updateUI() {
     document.getElementById('display-user-name').innerText = userName;
-    document.getElementById('display-user-id-badge').innerText = maskPhoneNumber(userId);
-    document.getElementById('display-user-id').innerText = maskPhoneNumber(userId);
+    document.getElementById('display-user-id-badge').innerText = userId;
+    if (document.getElementById('display-user-phone-top')) {
+        document.getElementById('display-user-phone-top').innerText = userPhoneDisplay ? maskPhoneNumber(userPhoneDisplay) : "---";
+    }
+    document.getElementById('display-user-id').innerText = userId;
     document.getElementById('display-join-date').innerText = formattedJoinDate;
     document.getElementById('display-user-serial').innerText = "নং: #" + userSerial;
     
@@ -1878,7 +1907,7 @@ async function loadLeaderboard() {
         snapshot.forEach(docSnap => {
             const data = docSnap.data();
             const name = data.name || "ইউজার";
-            const uId = maskPhoneNumber(data.userId || "---");
+            const uId = data.userId || docSnap.id || "---";
             const balance = Math.floor(data.balance || 0);
             const photo = data.photoUrl || "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png";
 
@@ -2191,20 +2220,20 @@ function closeMediaLightbox() {
 function openLiveChat(contextType = 'general') {
     currentChatContextType = contextType;
     let chatPhone = currentUserPhone || normalizePhoneNumber(document.getElementById('login-phone')?.value || document.getElementById('reg-phone')?.value);
-    if (!chatPhone || chatPhone.length < 10) {
+    if (!chatPhone || chatPhone.length < 4) {
         let promptPhone = prompt("লাইভ চ্যাট শুরু করতে আপনার সঠিক ফোন নাম্বারটি লিখুন:");
         if (!promptPhone) return;
         chatPhone = normalizePhoneNumber(promptPhone);
     }
-    if (chatPhone.length < 10) {
-        alert("দয়া করে সঠিক ফোন নাম্বার দিন।");
+    if (!chatPhone) {
+        alert("দয়া করে সঠিক তথ্য দিন।");
         return;
     }
 
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-live-chat').classList.add('active');
     document.getElementById('bottom-nav-bar').style.display = 'none';
-    document.getElementById('chat-user-phone-label').innerText = "ইউজার নাম্বার: " + maskPhoneNumber(chatPhone);
+    document.getElementById('chat-user-phone-label').innerText = "ইউজার আইডি: " + chatPhone;
 
     const badgeEl = document.getElementById('chat-channel-badge');
     if (contextType === 'buy_refer') {
@@ -2498,7 +2527,7 @@ async function sendLiveChatMessage() {
 
         const notifText = `💬 <b>নতুন লাইভ সাপোর্ট মেসেজ! ${topicTag}</b>\n\n` +
                           `👤 <b>নাম:</b> ${senderDisplayName}\n` +
-                          `📞 <b>ফোন:</b> <code>${maskPhoneNumber(phone)}</code>\n` +
+                          `🆔 <b>আইডি/ফোন:</b> <code>${maskPhoneNumber(phone)}</code>\n` +
                           `📝 <b>মেসেজ:</b> ${text || '[ফাইল সংযুক্তি]'}\n\n` +
                           `⚡ উত্তর দিতে দারাজ প্লে ইনকাম সেন্টারের এডমিন প্যানেলে প্রবেশ করুন।`;
         fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -2568,7 +2597,7 @@ function loadAdminChatUsersList() {
                         <span style="font-size:10px; background:#0284c7; color:white; padding:2px 6px; border-radius:6px; font-weight:700;">${contextName}</span>
                         ${statusBadge}
                     </div>
-                    <div style="font-size: 11px; color: #38bdf8; font-weight: 700; margin-top: 2px;">📞 ${maskPhoneNumber(phone)}</div>
+                    <div style="font-size: 11px; color: #38bdf8; font-weight: 700; margin-top: 2px;">🆔 ${maskPhoneNumber(phone)}</div>
                     <div style="font-size: 12px; color: #cbd5e1; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">💬 ${lastMsg}</div>
                 </div>
                 <div>
@@ -2585,7 +2614,7 @@ function openAdminSingleChat(docId, uName, phone, contextName) {
     document.getElementById('admin-chat-users-list').style.display = 'none';
     document.getElementById('admin-active-chat-box').style.display = 'block';
     document.getElementById('admin-chatting-user-name').innerText = uName + " (" + contextName + ")";
-    document.getElementById('admin-chatting-user-phone').innerText = "ফোন: " + maskPhoneNumber(phone);
+    document.getElementById('admin-chatting-user-phone').innerText = "আইডি/ফোন: " + maskPhoneNumber(phone);
 
     db.collection('chats').doc(docId).update({ unreadByAdmin: false }).catch(() => {});
 
