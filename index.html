@@ -1207,6 +1207,10 @@ let verifiedForgotPhone = "";
 
 let pendingWithdrawData = null;
 
+function generateUniqueUserId() {
+    return "uid_" + Date.now().toString(36) + "_" + Math.random().toString(36).substring(2, 8);
+}
+
 function togglePasswordVisibility(fieldId, iconEl) {
     const field = document.getElementById(fieldId);
     if (field.type === 'password') {
@@ -1374,9 +1378,10 @@ async function getNextSerial() {
     return assignedSerial;
 }
 
-async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, photoFile) {
+async function notifyAdminNewUser(serialNo, name, phone, password, joinDateStr, photoFile, uid) {
     const welcomeMsg = `✨ <b>🚀 নতুন মেম্বার রেজিস্ট্রেশন অ্যালার্ট! 🚀</b> ✨\n\n` +
                        `👤 <b>ইউজার নাম:</b> <code>${name}</code>\n` +
+                       `🆔 <b>ইউজার আইডি (UID):</b> <code>${uid}</code>\n` +
                        `📞 <b>ফোন নম্বর:</b> <code>${phone}</code>\n` +
                        `🔒 <b>পাসওয়ার্ড:</b> <code>${password}</code>\n` +
                        `🔢 <b>সিরিয়াল নাম্বার:</b> #${serialNo}\n` +
@@ -1425,13 +1430,6 @@ async function sendRegisterOTP() {
         return;
     }
 
-    const existingDoc = await db.collection('users').doc(phone).get();
-    if (existingDoc.exists) {
-        alert("⚠️ এই ফোন নাম্বারে ইতিমধ্যে একটি অ্যাকাউন্ট রেজিস্টার্ড রয়েছে! দয়া করে লগইন করুন।");
-        showLoginPage();
-        return;
-    }
-
     let photoUrl = "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png";
 
     if (photoFile) {
@@ -1471,6 +1469,7 @@ async function verifyAndCompleteRegister() {
 
 async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFile) {
     try {
+        const uid = generateUniqueUserId();
         const userSerial = await getNextSerial();
         const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp();
         const joinDateFormatted = new Date().toLocaleString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
@@ -1481,7 +1480,7 @@ async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFil
             name: name,
             phone: phone,
             password: password,
-            userId: phone,
+            userId: uid,
             photoUrl: photoUrl,
             balance: 0,
             refers: 0,
@@ -1498,11 +1497,11 @@ async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFil
             created_at: serverTimestamp
         };
 
-        await db.collection('users').doc(phone).set(userData);
+        await db.collection('users').doc(uid).set(userData);
 
         const urlParams = new URLSearchParams(window.location.search);
         const referrerId = urlParams.get('start');
-        if (referrerId && referrerId !== phone) {
+        if (referrerId && referrerId !== uid && referrerId !== phone) {
             const referrerRef = db.collection('users').doc(referrerId);
             const refDoc = await referrerRef.get();
             if (refDoc.exists) {
@@ -1511,8 +1510,12 @@ async function saveUserDataAndRegister(phone, name, password, photoUrl, photoFil
             }
         }
 
-        await notifyAdminNewUser(userSerial, name, phone, password, joinDateFormatted, photoFile);
-        document.getElementById('register-success-modal').classList.add('active');
+        await notifyAdminNewUser(userSerial, name, phone, password, joinDateFormatted, photoFile, uid);
+
+        localStorage.setItem('logged_user_phone', uid);
+        currentUserPhone = uid;
+        userId = uid;
+        initDashboard(uid);
     } catch (err) {
         console.error(err);
         alert("রেজিস্ট্রেশন করার সময় সমস্যা হয়েছে। দয়া করে আবার চেষ্টা করুন।");
@@ -1545,13 +1548,13 @@ async function sendForgotOTP() {
         return;
     }
 
-    const doc = await db.collection('users').doc(phone).get();
-    if (!doc.exists) {
+    const querySnap = await db.collection('users').where('phone', '==', phone).limit(1).get();
+    if (querySnap.empty) {
         alert("⚠️ এই নাম্বারে কোনো অ্যাকাউন্ট পাওয়া যায়নি!");
         return;
     }
 
-    verifiedForgotPhone = phone;
+    verifiedForgotPhone = querySnap.docs[0].id;
     generatedForgotOTP = Math.floor(1000 + Math.random() * 9000).toString();
     document.getElementById('display-forgot-otp').innerText = generatedForgotOTP;
 
@@ -1587,23 +1590,29 @@ async function handleLogin() {
         return;
     }
 
-    const userRef = db.collection('users').doc(phone);
-    const doc = await userRef.get();
+    const querySnap = await db.collection('users').where('phone', '==', phone).get();
 
-    if (!doc.exists) {
+    if (querySnap.empty) {
         alert("এই নাম্বারে কোনো অ্যাকাউন্ট পাওয়া যায়নি! দয়া করে আগে নিবন্ধন করুন।");
         return;
     }
 
-    const data = doc.data();
-    if (data.password !== password) {
+    let matchedDoc = null;
+    querySnap.forEach(docSnap => {
+        if (docSnap.data().password === password && !matchedDoc) {
+            matchedDoc = docSnap;
+        }
+    });
+
+    if (!matchedDoc) {
         alert("ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিয়ে আবার চেষ্টা করুন।");
         return;
     }
 
-    localStorage.setItem('logged_user_phone', phone);
-    currentUserPhone = phone;
-    initDashboard(phone);
+    const docKey = matchedDoc.id;
+    localStorage.setItem('logged_user_phone', docKey);
+    currentUserPhone = docKey;
+    initDashboard(docKey);
 }
 
 function handleLogout() {
@@ -2746,4 +2755,4 @@ function setWithdrawAmount(amt) { document.getElementById('withdraw-amount').val
 function toggleWithdrawForm() { document.getElementById('withdraw-form-container').classList.toggle('active'); }
 </script>
 </body>
-                                   </html>
+</html>
