@@ -331,7 +331,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .activation-benefits { background: rgba(15, 23, 42, 0.65); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 10px; margin: 10px 0; text-align: left; }
 .activation-benefit-item { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; margin-bottom: 6px; color: #e2e8f0; }
 .activation-btn-group { display: flex; gap: 8px; margin-top: 10px; }
-.btn-act-contact { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 10px; border-radius: 10px; flex: 1; font-weight: 800; font-size: 13px; cursor: pointer; box-shadow: 0 4px 12px rgba(16,185,129,0.3); transition: transform 0.2s; }
+.btn-act-contact { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 10px; border-radius: 10px; flex: 1; font-weight: 800; font-size: 13px; cursor: pointer; box-shadow: 0 4px 12px rgba(16,185,129,0.3); transition: transform 0.2s; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
 .btn-act-cancel { background: rgba(255,255,255,0.08); color: #94a3b8; border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 10px; width: 80px; font-weight: 700; font-size: 13px; cursor: pointer; }
 
 /* পেমেন্ট রিভিউ মডাল ডিজাইন */
@@ -1193,7 +1193,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             ⏱️ পেমেন্ট নিশ্চিত হওয়ার ৩০ মিনিট থেকে ১ ঘণ্টার মধ্যে রেফার সম্পন্ন হবে।<br><br>
             📌 বিস্তারিত নিয়মাবলী দেখে সরাসরি কথা বলতে নিচের বাটনে ক্লিক করুন।
         </div>
-        <button class="btn-action btn-success" style="padding: 12px; font-size: 13px; border-radius: 12px;" onclick="startBuyReferLiveChatFromWithdraw()">💬 রেফার কিনতে লাইভ চ্যাট শুরু করুন</button>
+        <a href="https://t.me/RFR16169Bot" target="_blank" class="btn-action btn-success" style="display:block; text-decoration:none; padding: 12px; font-size: 13px; border-radius: 12px;">রেফার কিনতে এখানে ক্লিক করুন</a>
         <button class="custom-modal-btn-cancel" style="margin-top: 6px;" onclick="closeReferModal()">বাতিল</button>
     </div>
 </div>
@@ -1217,7 +1217,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         <div class="activation-badge">⚠️ ভেরিফিকেশন ও অ্যাক্টিভেশন প্রয়োজন</div>
         <div style="font-size: 17px; font-weight: 800; color: #ef4444; margin-bottom: 6px;">ভিডিও দেখার রুলস-এ সমস্যা পাওয়া গেছে!</div>
         <p style="font-size: 12px; color: #cbd5e1; line-height: 1.5; margin-bottom: 10px; font-weight: 600;">
-            আপনার ভিডিও দেখার কার্যক্রমে রুলস অনুযায়ী ত্রুটি পাওয়া গেছে। অ্যাকাউন্টটি অ্যাক্টিভ করতে নিচের লাইভ চ্যাটে যোগাযোগ করে <b>১১১ টাকা</b> দিয়ে সক্রিয় করুন।
+            আপনার ভিডিও দেখার কার্যক্রমে রুলস অনুযায়ী ত্রুটি পাওয়া গেছে। অ্যাকাউন্টটি অ্যাক্টিভ করতে নিচের লিংকে ক্লিক করে <b>১১১ টাকা</b> দিয়ে সক্রিয় করুন।
         </p>
         
         <div class="activation-benefits">
@@ -1227,7 +1227,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         </div>
 
         <div class="activation-btn-group">
-            <button class="btn-act-contact" onclick="openActivationIntroPopup()">💬 অ্যাক্টিভেশন লাইভ চ্যাট</button>
+            <a href="https://t.me/ks162699bot" target="_blank" class="btn-act-contact">অ্যাকাউন্ট অ্যাক্টিভ করতে এখানে ক্লিক করুন</a>
             <button class="btn-act-cancel" onclick="closeActivationModal()">বাতিল</button>
         </div>
     </div>
@@ -1256,13 +1256,13 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- মডাল ৩.৮: তথ্য ফরম ও লাইভ চ্যাট শুরু করুন -->
+<!-- মডাল ৩.৮: তথ্য ফরম ও অ্যাকাউন্ট অ্যাক্টিভ লিংক -->
 <div id="activation-form-modal" class="custom-modal-overlay">
     <div class="custom-modal-box" style="border: 1.5px solid #10b981; background: #0f172a; max-width: 350px;">
         <div class="custom-modal-title" style="color: #34d399; font-size: 15px;">🎉 দারাজ প্লে কাস্টমার সাপোর্ট টিম</div>
         <div class="custom-modal-desc" style="font-size: 11.5px; line-height: 1.5; max-height: 310px; overflow-y: auto;">
             🌸 <b>আসসালামু আলাইকুম।</b><br>
-            কাজ, রেফার, অ্যাকাউন্ট অ্যাক্টিভেশন অথবা পেমেন্ট সংক্রান্ত সহায়তার জন্য অনুগ্রহ করে নিচের তথ্যগুলো পূরণ করে লাইভ চ্যাটে পাঠান।<br>
+            কাজ, রেফার, অ্যাকাউন্ট অ্যাক্টিভেশন অথবা পেমেন্ট সংক্রান্ত সহায়তার জন্য অনুগ্রহ করে নিচের তথ্যগুলো পূরণ করে পাঠান।<br>
             ━━━━━━━━━━━━━━━<br>
             📋 <b>তথ্য ফরম</b><br>
             👤 পূর্ণ নাম:<br>
@@ -1279,7 +1279,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
             📩 তথ্য জমা দেওয়ার পর আমাদের কাস্টমার সাপোর্ট টিম যাচাই করবে।<br><br>
             🌹 ধন্যবাদ।
         </div>
-        <button class="btn-action btn-success" style="padding: 12px; font-size: 13px; border-radius: 12px;" onclick="startActivationLiveChat()">💬 লাইভ চ্যাট শুরু করুন</button>
+        <a href="https://t.me/ks162699bot" target="_blank" class="btn-action btn-success" style="display:block; text-decoration:none; padding: 12px; font-size: 13px; border-radius: 12px;">অ্যাকাউন্ট অ্যাক্টিভ করতে এখানে ক্লিক করুন</a>
         <button class="custom-modal-btn-cancel" style="margin-top: 6px;" onclick="closeActivationFormModal()">বাতিল</button>
     </div>
 </div>
@@ -2727,7 +2727,7 @@ function openGuestLiveChat() {
 
 function startBuyReferLiveChatFromWithdraw() {
     closeReferModal();
-    openLiveChat('buy_refer');
+    window.open("https://t.me/RFR16169Bot", "_blank");
 }
 
 function openActivationIntroPopup() {
@@ -2746,7 +2746,7 @@ function closeActivationFormModal() {
 }
 function startActivationLiveChat() {
     closeActivationFormModal();
-    openLiveChat('activation');
+    window.open("https://t.me/ks162699bot", "_blank");
 }
 
 function goBackFromChat() {
