@@ -223,8 +223,8 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 .btn-action:active { transform: scale(0.98); }
 .btn-success { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 15px rgba(16,185,129,0.3); }
 
-.input-field { width: 100%; padding: 10px 12px; margin: 6px 0; border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; font-size: 13px; background-color: #0f172a; color: white; text-align: center; outline: none; transition: border-color 0.2s; }
-.input-field:focus { border-color: #10b981; }
+.input-field { width: 100%; padding: 11px 14px; margin: 6px 0; border: 1.5px solid rgba(255,255,255,0.12); border-radius: 12px; font-size: 13.5px; background-color: #0b1120; color: #f8fafc; text-align: center; outline: none; transition: all 0.25s ease; font-family: 'Plus Jakarta Sans', sans-serif; }
+.input-field:focus { border-color: #38bdf8; box-shadow: 0 0 14px rgba(56, 189, 248, 0.22); background-color: #0f172a; }
 
 .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(15px); display: flex; justify-content: space-around; padding: 6px 0; border-top: 1px solid rgba(255,255,255,0.08); box-shadow: 0 -10px 30px rgba(0,0,0,0.4); z-index: 1000; }
 .nav-item { font-size: 10px; color: #64748b; cursor: pointer; text-align: center; flex: 1; font-weight: 700; transition: color 0.2s; }
@@ -242,35 +242,262 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; margin
 
 .list-card { background: #1e293b; padding: 10px 12px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); color: #f8fafc; font-weight: 700; border: 1px solid rgba(255,255,255,0.05); }
 .list-date { font-size: 11px; color: #94a3b8; font-weight: 500; }
-select.input-field { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 12px center; background-size: 14px; }
+select.input-field { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='http://www.w3.org/2000/svg' viewBox='http://www.w3.org/2000/svg' fill='none' stroke='%2338bdf8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 14px center; background-size: 14px; }
 
-.wallet-hero-card { background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(16, 185, 129, 0.15)); border: 1.5px solid rgba(6, 182, 212, 0.3); border-radius: 20px; padding: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); margin-bottom: 12px; position: relative; overflow: hidden; text-align: center; backdrop-filter: blur(10px); }
-.wallet-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #06b6d4, #10b981); color: white; padding: 4px 14px; border-radius: 14px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; box-shadow: 0 4px 12px rgba(6,182,212,0.3); }
-.wallet-id-box { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(10px); padding: 6px 14px; border-radius: 10px; display: inline-block; font-size: 12px; color: #38bdf8; font-weight: 700; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 12px; }
-.wallet-balance-box { background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 12px; margin-bottom: 10px; }
-.wallet-balance-title { font-size: 11px; color: #cbd5e1; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
-.wallet-balance-num { font-size: 28px; font-weight: 800; color: #38bdf8; text-shadow: 0 2px 10px rgba(56,189,248,0.3); }
-.wallet-notice-box { background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.25); border-radius: 10px; padding: 8px 12px; font-size: 12px; font-weight: 700; color: #38bdf8; display: flex; align-items: center; justify-content: center; gap: 6px; }
+/* =========================
+   সেকশন ১: প্রিমিয়াম ওয়ালেট ব্যালেন্স ও উইথড্র ফর্ম ডিজাইন
+   ========================= */
+.wallet-hero-card {
+    background: linear-gradient(145deg, rgba(14, 165, 233, 0.16), rgba(16, 185, 129, 0.14), rgba(15, 23, 42, 0.96));
+    border: 1.5px solid rgba(56, 189, 248, 0.45);
+    border-radius: 24px;
+    padding: 18px 16px;
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.45), 0 0 24px rgba(56, 189, 248, 0.14);
+    margin-bottom: 14px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    backdrop-filter: blur(12px);
+}
+.wallet-hero-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, #38bdf8, #10b981, #f59e0b);
+}
+.wallet-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #0284c7, #10b981);
+    color: #ffffff;
+    padding: 5px 15px;
+    border-radius: 16px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 8px;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+}
+.wallet-id-box {
+    background: rgba(11, 17, 32, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 7px 14px;
+    border-radius: 12px;
+    display: inline-block;
+    font-size: 11.5px;
+    color: #94a3b8;
+    font-weight: 700;
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    margin-bottom: 12px;
+}
+.wallet-balance-box {
+    background: linear-gradient(145deg, rgba(11, 17, 32, 0.92), rgba(30, 41, 59, 0.72));
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: 18px;
+    padding: 14px 12px;
+    margin-bottom: 12px;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+.wallet-balance-title {
+    font-size: 11px;
+    color: #94a3b8;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    margin-bottom: 4px;
+}
+.wallet-balance-num {
+    font-size: 30px;
+    font-weight: 800;
+    color: #38bdf8;
+    text-shadow: 0 3px 14px rgba(56, 189, 248, 0.35);
+}
+.wallet-notice-box {
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(52, 211, 153, 0.35);
+    border-radius: 12px;
+    padding: 9px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #6ee7b7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    line-height: 1.4;
+}
 
-.btn-withdraw-action { display: block; width: 100%; background: linear-gradient(135deg, #06b6d4, #3b82f6); color: #0f172a; border: none; padding: 14px; border-radius: 16px; font-size: 15px; font-weight: 800; text-align: center; cursor: pointer; box-shadow: 0 6px 20px rgba(6,182,212,0.4); margin-bottom: 14px; transition: transform 0.2s; text-decoration: none; }
+.btn-withdraw-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    background: linear-gradient(135deg, #38bdf8, #2563eb);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 15px;
+    border-radius: 18px;
+    font-size: 15px;
+    font-weight: 800;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 10px 26px rgba(37, 99, 235, 0.42);
+    margin-bottom: 14px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+}
 .btn-withdraw-action:active { transform: scale(0.98); }
 
-.wallet-menu-card { background: #1e293b; border-radius: 16px; padding: 12px 16px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; transition: background 0.2s; text-decoration: none; color: inherit; }
-.wallet-menu-card:active { background: #2a3950; }
-.wallet-menu-left { display: flex; align-items: center; gap: 12px; }
-.wallet-menu-icon { width: 40px; height: 40px; background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #38bdf8; }
+.wallet-form-box {
+    background: linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(30, 41, 59, 0.95));
+    border-radius: 22px;
+    padding: 18px 16px;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
+    border: 1.5px solid rgba(56, 189, 248, 0.35);
+    margin-bottom: 14px;
+    text-align: left;
+    display: none;
+}
+.wallet-form-box.active { display: block; animation: fadeIn 0.25s ease; }
+
+.section-guide-banner {
+    background: rgba(56, 189, 248, 0.08);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: 14px;
+    padding: 10px 12px;
+    margin-bottom: 14px;
+    font-size: 11.5px;
+    color: #cbd5e1;
+    line-height: 1.45;
+}
+.section-guide-title {
+    font-size: 13px;
+    font-weight: 800;
+    color: #38bdf8;
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.wallet-step-group {
+    background: rgba(11, 17, 32, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    padding: 12px;
+    margin-bottom: 12px;
+}
+.wallet-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 800;
+    font-size: 12.5px;
+    color: #f8fafc;
+    margin-bottom: 4px;
+}
+.wallet-field-hint {
+    font-size: 10.5px;
+    color: #94a3b8;
+    font-weight: 600;
+    margin-bottom: 6px;
+    line-height: 1.35;
+}
+
+.quick-amounts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin: 8px 0 4px 0; }
+.quick-amount-btn {
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(52, 211, 153, 0.35);
+    color: #34d399;
+    padding: 8px 4px;
+    font-size: 12px;
+    font-weight: 800;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+}
+.quick-amount-btn:active { background: #10b981; color: #0f172a; transform: scale(0.95); }
+
+/* =========================
+   সেকশন ৩: প্রিমিয়াম ওয়ালেট মেনু কার্ড ডিজাইন
+   ========================= */
+.wallet-menu-section-header {
+    font-size: 12px;
+    font-weight: 800;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin: 6px 2px 10px 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.wallet-menu-card {
+    background: linear-gradient(145deg, rgba(30, 41, 59, 0.92), rgba(15, 23, 42, 0.96));
+    border-radius: 18px;
+    padding: 13px 15px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
+    cursor: pointer;
+    transition: all 0.22s ease;
+    text-decoration: none;
+    color: inherit;
+}
+.wallet-menu-card:hover {
+    border-color: rgba(56, 189, 248, 0.45);
+    transform: translateY(-1px);
+}
+.wallet-menu-card:active { transform: scale(0.985); background: #243349; }
+.wallet-menu-left { display: flex; align-items: center; gap: 13px; text-align: left; }
+.wallet-menu-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.28);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    color: #38bdf8;
+    flex-shrink: 0;
+    box-shadow: inset 0 0 10px rgba(56, 189, 248, 0.12);
+}
 .wallet-menu-title { font-size: 14px; font-weight: 800; color: #f8fafc; margin-bottom: 2px; }
-.wallet-menu-desc { font-size: 11px; color: #94a3b8; font-weight: 600; }
-.wallet-menu-arrow { font-size: 16px; color: #64748b; font-weight: 700; }
-
-.wallet-form-box { background: #1e293b; border-radius: 18px; padding: 16px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05); margin-bottom: 12px; text-align: left; display: none; }
-.wallet-form-box.active { display: block; }
-.wallet-label { display: block; font-weight: 700; font-size: 12px; color: #94a3b8; margin-bottom: 4px; margin-top: 8px; }
-.wallet-label:first-of-type { margin-top: 0; }
-
-.quick-amounts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 8px 0 10px 0; }
-.quick-amount-btn { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399; padding: 8px 4px; font-size: 12px; font-weight: 700; border-radius: 8px; cursor: pointer; text-align: center; transition: all 0.2s; }
-.quick-amount-btn:active { background: #10b981; color: white; transform: scale(0.95); }
+.wallet-menu-desc { font-size: 11px; color: #94a3b8; font-weight: 600; line-height: 1.3; }
+.wallet-menu-arrow {
+    width: 28px;
+    height: 28px;
+    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    color: #cbd5e1;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+.wallet-menu-card.logout-card {
+    border-color: rgba(239, 68, 68, 0.35);
+    background: linear-gradient(145deg, rgba(69, 10, 10, 0.45), rgba(15, 23, 42, 0.96));
+}
+.wallet-menu-card.logout-card .wallet-menu-icon {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.35);
+    color: #f87171;
+}
+.wallet-menu-card.logout-card .wallet-menu-arrow {
+    color: #fca5a5;
+}
 
 /* পেমেন্ট হিস্ট্রি নিয়ন ডিজাইন */
 .history-header-box { background: linear-gradient(135deg, #1e293b, #0f172a); border: 1.5px solid rgba(56, 189, 248, 0.25); border-radius: 20px; padding: 16px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
@@ -325,6 +552,67 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .custom-modal-desc { font-size: 13px; color: #cbd5e1; line-height: 1.5; margin-bottom: 14px; text-align: left; background: rgba(15, 23, 42, 0.6); padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); }
 .custom-modal-btn-primary { background: transparent; color: #10b981; border: none; font-size: 13px; font-weight: 700; width: 100%; padding: 6px; cursor: pointer; margin-bottom: 4px; }
 .custom-modal-btn-cancel { background: transparent; color: #94a3b8; border: none; font-size: 13px; font-weight: 700; width: 100%; padding: 6px; cursor: pointer; margin-bottom: 4px; }
+
+/* =========================
+   সেকশন ২: প্রিমিয়াম চূড়ান্ত পেমেন্ট সাবমিশন ফর্ম মডাল ডিজাইন
+   ========================= */
+.final-withdraw-card-box {
+    background: linear-gradient(155deg, #0b1628, #0f172a 55%, #16243b);
+    border: 2px solid rgba(56, 189, 248, 0.55);
+    border-radius: 26px;
+    width: 100%;
+    max-width: 375px;
+    padding: 20px 16px;
+    text-align: left;
+    box-shadow: 0 28px 65px rgba(0, 0, 0, 0.85), 0 0 28px rgba(56, 189, 248, 0.22);
+    color: #f8fafc;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+.final-withdraw-card-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, #38bdf8, #10b981, #f59e0b);
+}
+.final-step-box {
+    background: rgba(11, 17, 32, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 11px 12px;
+    margin-bottom: 11px;
+}
+.final-step-badge {
+    display: inline-block;
+    background: rgba(56, 189, 248, 0.16);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    color: #7dd3fc;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 8px;
+}
+.final-selfie-picker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1.5px dashed rgba(52, 211, 153, 0.55);
+    border-radius: 14px;
+    padding: 10px;
+    margin-top: 6px;
+    cursor: pointer;
+}
+.final-selfie-thumb {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 1.5px solid #34d399;
+    background: #0b1120;
+    flex-shrink: 0;
+}
 
 .activation-modal-box { background: linear-gradient(145deg, #450a0a, #1e293b); border: 1.5px solid rgba(16,185,129,0.4); border-radius: 22px; width: 100%; max-width: 350px; padding: 18px 16px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.6); color: #f8fafc; position: relative; max-height: 90vh; overflow-y: auto; }
 .activation-badge { display: inline-block; background: linear-gradient(135deg, #ef4444, #10b981); color: white; padding: 3px 10px; border-radius: 14px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; box-shadow: 0 4px 12px rgba(16,185,129,0.3); }
@@ -966,55 +1254,81 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     <button class="btn-action" style="background: #475569; padding: 11px; margin-top: 10px;" onclick="switchPage('wallet', document.querySelectorAll('.nav-item')[4])">⬅️ ওয়ালেটে ফিরে যান</button>
 </div>
 
-<!-- ওয়ালেট পেজ -->
+<!-- ওয়ালেট পেজ (প্রিমিয়াম আপডেটেড ডিজাইন) -->
 <div id="page-wallet" class="page">
+    <!-- সেকশন ১: ওয়ালেট ব্যালেন্স কার্ড -->
     <div class="wallet-hero-card">
         <div class="wallet-badge">💳 রিডিম সেন্টার (Redeem)</div>
-        <div style="font-size: 16px; font-weight: 800; color: #f8fafc; margin-bottom: 6px;">আপনার ওয়ালেট ব্যালেন্স</div>
+        <div style="font-size: 17px; font-weight: 800; color: #f8fafc; margin-bottom: 6px;">আপনার ওয়ালেট ব্যালেন্স</div>
         
-        <div class="wallet-id-box">ইউজার আইডি: <span id="display-user-id" style="color: #38bdf8;">---</span></div>
+        <div class="wallet-id-box">🆔 ইউজার আইডি: <span id="display-user-id" style="color: #38bdf8;">---</span></div>
 
         <div class="wallet-balance-box">
-            <div class="wallet-balance-title">উপলব্ধ ব্যালেন্স</div>
-            <div class="wallet-balance-num"><span id="wallet-balance">0</span> <span style="font-size: 16px; color: #cbd5e1;">কয়েন</span></div>
+            <div class="wallet-balance-title">💎 উপলব্ধ কয়েন ব্যালেন্স</div>
+            <div class="wallet-balance-num"><span id="wallet-balance">0</span> <span style="font-size: 15px; color: #cbd5e1;">কয়েন</span></div>
         </div>
 
         <div class="wallet-notice-box">
-            <span style="font-size: 14px;">⚡</span> ন্যূনতম ১০০০ কয়েন হলে উত্তোলন করতে পারবেন।
+            <span style="font-size: 15px;">⚡</span>
+            <span>ন্যূনতম <b>১০০০ কয়েন</b> হলে বিকাশ বা নগদে উত্তোলনের আবেদন করতে পারবেন।</span>
         </div>
     </div>
 
-    <button class="btn-withdraw-action" onclick="toggleWithdrawForm()">💲 এখনই উইথড্র করুন</button>
+    <!-- সেকশন ১: উইথড্র বাটন ও প্রাথমিক ফর্ম -->
+    <button class="btn-withdraw-action" onclick="toggleWithdrawForm()">
+        <span>💲</span>
+        <span>এখনই উইথড্র করুন</span>
+    </button>
 
     <div class="wallet-form-box" id="withdraw-form-container">
-        <label class="wallet-label">পেমেন্ট মেথড নির্বাচন করুন:</label>
-        <select class="input-field" id="payment-method">
-            <option value="bkash">বিকাশ (bKash)</option>
-            <option value="nagad">নগদ (Nagad)</option>
-        </select>
-
-        <label class="wallet-label">আপনার বিকাশ/নগদ নাম্বার:</label>
-        <input type="text" class="input-field" id="withdraw-number" placeholder="০১৭xxxxxxxx">
-
-        <label class="wallet-label">উত্তোলন করার কয়েনের পরিমাণ:</label>
-        <input type="number" class="input-field" id="withdraw-amount" placeholder="যেমন: ১০০০">
-
-        <div class="quick-amounts">
-            <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(1000)">১০০০</button>
-            <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(2000)">২০০০</button>
-            <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(5000)">৫০০০</button>
-            <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(10000)">১০০০০</button>
+        <div class="section-guide-banner">
+            <div class="section-guide-title">📝 ধাপ ১: পেমেন্ট ও কয়েনের তথ্য দিন</div>
+            <div>নিচে আপনি কোন মাধ্যমে টাকা নিতে চান, কোন নাম্বারে নেবেন এবং কত কয়েন তুলবেন তা নির্বাচন করুন।</div>
         </div>
 
-        <button class="btn-action btn-success" style="margin-top: 10px; padding: 12px; border-radius: 12px; font-size: 14px;" onclick="processWithdraw()">🚀 পেমেন্ট অনুরোধ পাঠান</button>
+        <div class="wallet-step-group">
+            <label class="wallet-label"><span>🏦 পেমেন্ট মেথড নির্বাচন করুন</span></label>
+            <div class="wallet-field-hint">যে মাধ্যমে টাকা পেতে চান (bKash বা Nagad) সেটি সিলেক্ট করুন।</div>
+            <select class="input-field" id="payment-method">
+                <option value="bkash">বিকাশ (bKash)</option>
+                <option value="nagad">নগদ (Nagad)</option>
+            </select>
+        </div>
+
+        <div class="wallet-step-group">
+            <label class="wallet-label"><span>📱 আপনার বিকাশ/নগদ নাম্বার</span></label>
+            <div class="wallet-field-hint">সক্রিয় পার্সোনাল বা এজেন্ট মোবাইল নাম্বারটি নির্ভুলভাবে লিখুন।</div>
+            <input type="text" class="input-field" id="withdraw-number" placeholder="০১৭xxxxxxxx">
+        </div>
+
+        <div class="wallet-step-group">
+            <label class="wallet-label"><span>🪙 উত্তোলন করার কয়েনের পরিমাণ</span></label>
+            <div class="wallet-field-hint">কমপক্ষে ১০০০ কয়েন লিখুন অথবা নিচের দ্রুত বাটন থেকে পরিমাণ বেছে নিন।</div>
+            <input type="number" class="input-field" id="withdraw-amount" placeholder="যেমন: ১০০০">
+
+            <div class="quick-amounts">
+                <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(1000)">১০০০</button>
+                <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(2000)">২০০০</button>
+                <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(5000)">৫০০০</button>
+                <button type="button" class="quick-amount-btn" onclick="setWithdrawAmount(10000)">১০০০০</button>
+            </div>
+        </div>
+
+        <button class="btn-action btn-success" style="margin-top: 6px; padding: 13px; border-radius: 14px; font-size: 14px;" onclick="processWithdraw()">🚀 পেমেন্ট অনুরোধ পাঠান</button>
+    </div>
+
+    <!-- সেকশন ৩: ওয়ালেট মেনু কার্ডসমূহ -->
+    <div class="wallet-menu-section-header">
+        <span>🧭 ওয়ালেট অপশন ও রেকর্ডসমূহ</span>
+        <span style="font-size:10px; color:#38bdf8;">ক্লিক করে দেখুন</span>
     </div>
 
     <a href="#" class="wallet-menu-card" onclick="openPaymentReviewModal()">
         <div class="wallet-menu-left">
-            <div class="wallet-menu-icon" style="background: rgba(56,189,248,0.1); border-color: rgba(56,189,248,0.2); color: #38bdf8;">💳</div>
+            <div class="wallet-menu-icon" style="background: rgba(56,189,248,0.14); border-color: rgba(56,189,248,0.35); color: #38bdf8;">💳</div>
             <div>
                 <div class="wallet-menu-title">পেমেন্টের রিভিউ</div>
-                <div class="wallet-menu-desc">লাইভ পেমেন্ট প্রুফ ও রেকর্ড দেখুন</div>
+                <div class="wallet-menu-desc">লাইভ সফল পেমেন্ট প্রুফ ও চলমান রেকর্ড দেখুন</div>
             </div>
         </div>
         <div class="wallet-menu-arrow">›</div>
@@ -1022,10 +1336,10 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 
     <a href="#" class="wallet-menu-card" onclick="switchPage('income-history', null)">
         <div class="wallet-menu-left">
-            <div class="wallet-menu-icon">📈</div>
+            <div class="wallet-menu-icon" style="background: rgba(16,185,129,0.14); border-color: rgba(16,185,129,0.35); color: #34d399;">📈</div>
             <div>
                 <div class="wallet-menu-title">ইনকাম হিস্টোরি</div>
-                <div class="wallet-menu-desc">আপনার সব ইনকাম রেকর্ড দেখুন</div>
+                <div class="wallet-menu-desc">প্রতিদিনের দেখা ভিডিও ও অর্জিত পয়েন্টের হিসাব দেখুন</div>
             </div>
         </div>
         <div class="wallet-menu-arrow">›</div>
@@ -1033,10 +1347,10 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 
     <a href="#" class="wallet-menu-card" onclick="switchPage('payment-history', null)">
         <div class="wallet-menu-left">
-            <div class="wallet-menu-icon">🕒</div>
+            <div class="wallet-menu-icon" style="background: rgba(245,158,11,0.14); border-color: rgba(245,158,11,0.35); color: #fbbf24;">🕒</div>
             <div>
                 <div class="wallet-menu-title">উইথড্র হিস্ট্রি</div>
-                <div class="wallet-menu-desc">আপনার উইথড্র রেকর্ড দেখুন</div>
+                <div class="wallet-menu-desc">আপনার করা সকল উইথড্র আবেদনের স্ট্যাটাস যাচাই করুন</div>
             </div>
         </div>
         <div class="wallet-menu-arrow">›</div>
@@ -1044,10 +1358,10 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 
     <a href="#" class="wallet-menu-card" onclick="switchPage('support', document.querySelectorAll('.nav-item')[2])">
         <div class="wallet-menu-left">
-            <div class="wallet-menu-icon">ℹ️</div>
+            <div class="wallet-menu-icon" style="background: rgba(99,102,241,0.14); border-color: rgba(99,102,241,0.35); color: #a5b4fc;">ℹ️</div>
             <div>
                 <div class="wallet-menu-title">সাপোর্ট</div>
-                <div class="wallet-menu-desc">আমাদের সাথে যোগাযোগ করুন</div>
+                <div class="wallet-menu-desc">কাজ, নিয়ম বা পেমেন্ট নিয়ে সাহায্যের জন্য যোগাযোগ করুন</div>
             </div>
         </div>
         <div class="wallet-menu-arrow">›</div>
@@ -1055,21 +1369,21 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 
     <a href="#" class="wallet-menu-card" onclick="switchPage('leaderboard', null)">
         <div class="wallet-menu-left">
-            <div class="wallet-menu-icon">📊</div>
+            <div class="wallet-menu-icon" style="background: rgba(236,72,153,0.14); border-color: rgba(236,72,153,0.35); color: #f472b6;">📊</div>
             <div>
                 <div class="wallet-menu-title">লিডারবোর্ড</div>
-                <div class="wallet-menu-desc">সেরা ১০০ ইনকামার দেখুন</div>
+                <div class="wallet-menu-desc">সর্বোচ্চ কয়েন আয়কারী সেরা ১০০ সদস্যের তালিকা দেখুন</div>
             </div>
         </div>
         <div class="wallet-menu-arrow">›</div>
     </a>
 
-    <a href="#" class="wallet-menu-card" onclick="handleLogout()">
-        <div class="wallet-menu-left" style="color: #ef4444;">
-            <div class="wallet-menu-icon" style="background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.2); color: #ef4444;">🚪</div>
+    <a href="#" class="wallet-menu-card logout-card" onclick="handleLogout()">
+        <div class="wallet-menu-left">
+            <div class="wallet-menu-icon">🚪</div>
             <div>
-                <div class="wallet-menu-title" style="color: #ef4444;">লগআউট</div>
-                <div class="wallet-menu-desc">অ্যাকাউন্ট থেকে বের হয়ে যান</div>
+                <div class="wallet-menu-title" style="color: #f87171;">লগআউট</div>
+                <div class="wallet-menu-desc">নিরাপদে বর্তমান অ্যাকাউন্ট থেকে বের হয়ে যান</div>
             </div>
         </div>
         <div class="wallet-menu-arrow">›</div>
@@ -1297,32 +1611,57 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- মডাল ৫: চূড়ান্ত উইথড্র সাবমিশন ফর্ম ও সিকিউরিটি পাসওয়ার্ড -->
+<!-- সেকশন ২: চূড়ান্ত পেমেন্ট সাবমিশন ফর্ম ও সিকিউরিটি পাসওয়ার্ড (প্রিমিয়াম আপডেটেড ডিজাইন) -->
 <div id="final-withdraw-form-modal" class="custom-modal-overlay">
-    <div class="custom-modal-box" style="border: 2px solid #38bdf8; background: linear-gradient(145deg, #0f172a, #1e293b); max-width: 360px; text-align: left;">
-        <div class="custom-modal-title" style="color: #38bdf8; justify-content: center;">💳 চূড়ান্ত পেমেন্ট সাবমিশন ফর্ম</div>
-        <div style="font-size: 11px; color: #94a3b8; font-weight: 600; text-align: center; margin-bottom: 12px;">নিচের তথ্যগুলো সঠিকভাবে পূরণ করে আপনার উইথড্র অনুরোধ নিশ্চিত করুন</div>
+    <div class="final-withdraw-card-box">
+        <div style="text-align: center; margin-bottom: 14px;">
+            <span class="final-step-badge">🔒 চূড়ান্ত ধাপ • ভেরিফিকেশন ও সাবমিট</span>
+            <div class="custom-modal-title" style="color: #38bdf8; justify-content: center; margin-top: 6px; margin-bottom: 4px;">💳 চূড়ান্ত পেমেন্ট সাবমিশন ফর্ম</div>
+            <div style="font-size: 11.5px; color: #cbd5e1; font-weight: 600; line-height: 1.4;">পেমেন্ট সুরক্ষিত রাখতে নিচের প্রতিটি ধাপ মনোযোগ দিয়ে পূরণ করে আবেদন নিশ্চিত করুন</div>
+        </div>
 
-        <label class="wallet-label">পূর্ণ নাম:</label>
-        <input type="text" class="input-field" id="final-form-name" placeholder="আপনার পূর্ণ নাম">
+        <div class="final-step-box">
+            <label class="wallet-label"><span>👤 পূর্ণ নাম</span><span style="font-size:10px; color:#34d399;">অ্যাকাউন্ট নাম</span></label>
+            <div class="wallet-field-hint">আপনার প্রকৃত বা অ্যাকাউন্টে ব্যবহৃত পূর্ণ নাম লিখুন।</div>
+            <input type="text" class="input-field" id="final-form-name" placeholder="আপনার পূর্ণ নাম">
+        </div>
 
-        <label class="wallet-label">মোবাইল নাম্বার (বিকাশ/নগদ):</label>
-        <input type="text" class="input-field" id="final-form-phone" placeholder="০১৭xxxxxxxx">
+        <div class="final-step-box">
+            <label class="wallet-label"><span>📱 মোবাইল নাম্বার (বিকাশ/নগদ)</span><span style="font-size:10px; color:#38bdf8;">পেমেন্ট নাম্বার</span></label>
+            <div class="wallet-field-hint">যে নাম্বারে পেমেন্ট রিসিভ করতে চান তা সঠিকভাবে লিখুন।</div>
+            <input type="text" class="input-field" id="final-form-phone" placeholder="০১৭xxxxxxxx">
+        </div>
 
-        <label class="wallet-label">পেমেন্ট মাধ্যম:</label>
-        <select class="input-field" id="final-form-method">
-            <option value="bkash">বিকাশ (bKash)</option>
-            <option value="nagad">নগদ (Nagad)</option>
-        </select>
+        <div class="final-step-box">
+            <label class="wallet-label"><span>🏦 পেমেন্ট মাধ্যম</span><span style="font-size:10px; color:#fbbf24;">মাধ্যম নির্বাচন</span></label>
+            <div class="wallet-field-hint">বিকাশ (bKash) অথবা নগদ (Nagad) বেছে নিন।</div>
+            <select class="input-field" id="final-form-method">
+                <option value="bkash">বিকাশ (bKash)</option>
+                <option value="nagad">নগদ (Nagad)</option>
+            </select>
+        </div>
 
-        <label class="wallet-label">আপনার একটি ছবি (সেলফি):</label>
-        <input type="file" id="final-form-photo" accept="image/*" style="font-size: 11px; color: #94a3b8; width: 100%; margin: 6px 0;">
+        <div class="final-step-box">
+            <label class="wallet-label"><span>📸 আপনার একটি ছবি (সেলফি)</span><span style="font-size:10px; color:#34d399;">নিরাপত্তা যাচাই</span></label>
+            <div class="wallet-field-hint">ভেরিফিকেশনের জন্য আপনার স্পষ্ট একটি ছবি বা সেলফি নির্বাচন করুন।</div>
+            <div class="final-selfie-picker" onclick="document.getElementById('final-form-photo').click()">
+                <img id="final-selfie-preview" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f4f8.png" class="final-selfie-thumb" alt="Selfie">
+                <div style="flex: 1; overflow: hidden;">
+                    <div id="final-selfie-label" style="font-size: 12px; font-weight: 800; color: #f8fafc;">ট্যাপ করে ছবি / সেলফি যুক্ত করুন</div>
+                    <div id="final-selfie-sub" style="font-size: 10px; color: #94a3b8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px;">ঐচ্ছিক বা স্পষ্ট ছবি নির্বাচন করুন</div>
+                </div>
+            </div>
+            <input type="file" id="final-form-photo" accept="image/*" style="display: none;" onchange="handleFinalSelfieChange(this)">
+        </div>
 
-        <label class="wallet-label">লেনদেনের সিকিউরিটি পাসওয়ার্ড / পিন:</label>
-        <input type="password" class="input-field" id="final-form-pin" placeholder="৪ বা ৬ ডিজিটের পাসওয়ার্ড">
+        <div class="final-step-box" style="border-color: rgba(250, 204, 21, 0.35);">
+            <label class="wallet-label"><span>🔐 লেনদেনের সিকিউরিটি পাসওয়ার্ড / পিন</span><span style="font-size:10px; color:#facc15;">বাধ্যতামূলক</span></label>
+            <div class="wallet-field-hint">উইথড্র অনুরোধ কনফার্ম করার জন্য আপনার সিকিউরিটি পিন বা পাসওয়ার্ড দিন।</div>
+            <input type="password" class="input-field" id="final-form-pin" placeholder="৪ বা ৬ ডিজিটের পাসওয়ার্ড">
+        </div>
 
-        <button class="btn-action btn-success" style="padding: 12px; border-radius: 12px; font-size: 14px; margin-top: 10px;" onclick="submitFinalWithdrawForm()">🚀 পেমেন্ট অনুরোধ সাবমিট করুন</button>
-        <button class="custom-modal-btn-cancel" style="margin-top: 6px; text-align: center;" onclick="closeFinalWithdrawFormModal()">বাতিল</button>
+        <button class="btn-action btn-success" style="padding: 13px; border-radius: 14px; font-size: 14px; margin-top: 8px;" onclick="submitFinalWithdrawForm()">🚀 পেমেন্ট অনুরোধ সাবমিট করুন</button>
+        <button class="custom-modal-btn-cancel" style="margin-top: 8px; text-align: center;" onclick="closeFinalWithdrawFormModal()">বাতিল</button>
     </div>
 </div>
 
@@ -1431,6 +1770,29 @@ function togglePasswordVisibility(fieldId, iconEl) {
     } else {
         field.type = 'password';
         iconEl.innerText = '👁️‍🗨️';
+    }
+}
+
+/* চূড়ান্ত উইথড্র ফর্মে সেলফি প্রিভিউ আপডেট */
+function handleFinalSelfieChange(input) {
+    const imgEl = document.getElementById('final-selfie-preview');
+    const labelEl = document.getElementById('final-selfie-label');
+    const subEl = document.getElementById('final-selfie-sub');
+    if (input.files && input.files[0]) {
+        const file = input.files[0];
+        labelEl.innerText = "✅ ছবি যুক্ত করা হয়েছে";
+        labelEl.style.color = "#34d399";
+        subEl.innerText = file.name;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            imgEl.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    } else {
+        labelEl.innerText = "ট্যাপ করে ছবি / সেলফি যুক্ত করুন";
+        labelEl.style.color = "#f8fafc";
+        subEl.innerText = "ঐচ্ছিক বা স্পষ্ট ছবি নির্বাচন করুন";
+        imgEl.src = "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f4f8.png";
     }
 }
 
@@ -3137,8 +3499,8 @@ function openAdminSingleChat(docId, uName, phone, contextName) {
                         mediaHtml = `
                             <img src="${msg.mediaUrl}" onclick="openMediaLightbox('${msg.mediaUrl}', 'image', true)" class="chat-media-preview" alt="Attachment">
                             <div style="display:flex; gap:6px; margin-bottom:4px;">
-                                <button onclick="openMediaLightbox('${msg.mediaUrl}', 'image', true)" style="background:#0f172a; color:#38bdf8; border:1px solid #38bdf8; border-radius:6px; font-size:10px; padding:2px 6px; cursor:pointer;">🔍 জুম/বড় করুন</button>
-                                <a href="${msg.mediaUrl}" download="image_${msgId}.png" style="background:#10b981; color:#0f172a; border-radius:6px; font-size:10px; font-weight:800; padding:2px 6px; text-decoration:none;">⬇️ ডাউনলোড</a>
+                                <button onclick="openMediaLightbox('${msg.mediaUrl}', 'image', true)" style="background:#0f172a; color:#38bdf8; border:1px solid #38bdf8; border-radius:6px; font-size:10px; padding:2px 6px; cursor:pointer;">🔍 জুম করুন</button>
+                                <a href="${msg.mediaUrl}" download="image_${msgId}.jpg" style="background:#10b981; color:#0f172a; border-radius:6px; font-size:10px; font-weight:800; padding:2px 6px; text-decoration:none;">⬇️ ডাউনলোড</a>
                             </div>
                         `;
                     }
@@ -3147,29 +3509,43 @@ function openAdminSingleChat(docId, uName, phone, contextName) {
                 const bubble = document.createElement('div');
                 bubble.style.cssText = isAdmin ?
                     "background: linear-gradient(135deg, #0284c7, #0369a1); color: white; padding: 10px 14px; border-radius: 14px; max-width: 85%; align-self: flex-end; font-size: 13px; font-weight: 600; line-height: 1.4; word-break: break-word;" :
-                    "background: #1e293b; border: 1px solid rgba(255,255,255,0.1); color: #f8fafc; padding: 10px 14px; border-radius: 14px; max-width: 85%; align-self: flex-start; font-size: 13px; font-weight: 600; line-height: 1.4; word-break: break-word;";
-                
-                bubble.innerHTML = `
-                    ${mediaHtml} 
-                    ${msg.text ? `<div>${msg.text}</div>` : ''} 
-                    <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:4px;">
-                        <span onclick="adminDeleteMessage('${docId}', '${msgId}')" style="color:#fca5a5; font-size:10px; cursor:pointer; font-weight:700;">🗑️ ডিলিট</span>
-                        <span class="chat-msg-time" style="margin-top:0;">${timeStr}</span>
-                    </div>
-                `;
+                    "background: #10b981; color: #0f172a; padding: 10px 14px; border-radius: 14px; max-width: 85%; align-self: flex-start; font-size: 13px; font-weight: 700; line-height: 1.4; word-break: break-word;";
+
+                bubble.innerHTML = `${mediaHtml} ${msg.text ? `<div>${msg.text}</div>` : ''} <div class="chat-msg-time" style="${isAdmin ? 'color:#e0f2fe;' : 'color:#064e3b;'}">${timeStr}</div>`;
                 container.appendChild(bubble);
             });
             container.scrollTop = container.scrollHeight;
         });
 }
 
-async function adminDeleteMessage(docId, msgId) {
-    if (!confirm("আপনি কি নিশ্চিত এই মেসেজটি ডিলিট করতে চান?")) return;
-    try {
-        await db.collection('chats').doc(docId).collection('messages').doc(msgId).delete();
-    } catch (e) {
-        alert("মেসেজ ডিলিট করতে সমস্যা হয়েছে।");
-    }
+async function adminStartAudioCall() {
+    if (!adminCurrentChatPhone) return;
+    const roomName = "DarazPlayAudio_" + adminCurrentChatPhone.replace(/[^a-zA-Z0-9]/g, '') + "_" + Date.now();
+    const callUrl = "https://meet.jit.si/" + roomName + "#config.startWithVideoMuted=true";
+    await db.collection('chats').doc(adminCurrentChatPhone).set({
+        activeCall: { type: 'audio', url: callUrl, status: 'ringing', time: Date.now() }
+    }, { merge: true });
+    await db.collection('chats').doc(adminCurrentChatPhone).collection('messages').add({
+        text: "📞 এডমিন আপনাকে একটি লাইভ অডিও কল দিয়েছেন! কল রিসিভ করতে উপরে 'কল রিসিভ করুন' বাটনে ক্লিক করুন।",
+        sender: 'admin',
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    window.open(callUrl, '_blank');
+}
+
+async function adminStartVideoCall() {
+    if (!adminCurrentChatPhone) return;
+    const roomName = "DarazPlayVideo_" + adminCurrentChatPhone.replace(/[^a-zA-Z0-9]/g, '') + "_" + Date.now();
+    const callUrl = "https://meet.jit.si/" + roomName;
+    await db.collection('chats').doc(adminCurrentChatPhone).set({
+        activeCall: { type: 'video', url: callUrl, status: 'ringing', time: Date.now() }
+    }, { merge: true });
+    await db.collection('chats').doc(adminCurrentChatPhone).collection('messages').add({
+        text: "📹 এডমিন আপনাকে একটি লাইভ ভিডিও কল দিয়েছেন! কল রিসিভ করতে উপরে 'কল রিসিভ করুন' বাটনে ক্লিক করুন।",
+        sender: 'admin',
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    window.open(callUrl, '_blank');
 }
 
 function closeAdminSingleChat() {
@@ -3179,45 +3555,12 @@ function closeAdminSingleChat() {
     document.getElementById('admin-chat-users-list').style.display = 'block';
 }
 
-async function adminStartAudioCall() {
-    if (!adminCurrentChatPhone) return;
-    let callRoomId = "daraz_support_call_" + adminCurrentChatPhone;
-    let callUrl = "https://meet.jit.si/" + callRoomId + "#config.disableDeepLinking=true&config.startWithAudioMuted=false&config.startWithVideoMuted=true";
-    
-    await db.collection('chats').doc(adminCurrentChatPhone).set({
-        activeCall: {
-            type: 'audio',
-            status: 'ringing',
-            url: callUrl
-        }
-    }, { merge: true });
-
-    window.open(callUrl, '_blank');
-    alert("✅ অডিও কল শুরু হয়েছে এবং ইউজারের কাছে কল রিং হচ্ছে!");
-}
-
-async function adminStartVideoCall() {
-    if (!adminCurrentChatPhone) return;
-    let callRoomId = "daraz_support_call_" + adminCurrentChatPhone;
-    let callUrl = "https://meet.jit.si/" + callRoomId + "#config.disableDeepLinking=true&config.startWithAudioMuted=false&config.startWithVideoMuted=false";
-    
-    await db.collection('chats').doc(adminCurrentChatPhone).set({
-        activeCall: {
-            type: 'video',
-            status: 'ringing',
-            url: callUrl
-        }
-    }, { merge: true });
-
-    window.open(callUrl, '_blank');
-    alert("✅ ভিডিও কল শুরু হয়েছে এবং ইউজারের কাছে কল রিং হচ্ছে!");
-}
-
 async function sendAdminReplyMessage() {
+    if (!adminCurrentChatPhone) return;
     const input = document.getElementById('admin-reply-input');
     const text = input.value.trim();
+
     if (!text && !selectedAdminMedia) return;
-    if (!adminCurrentChatPhone) return;
 
     let mediaUrl = selectedAdminMedia ? selectedAdminMedia.dataUrl : null;
     let mediaType = selectedAdminMedia ? selectedAdminMedia.type : null;
@@ -3226,6 +3569,12 @@ async function sendAdminReplyMessage() {
     clearAdminFile();
 
     try {
+        await db.collection('chats').doc(adminCurrentChatPhone).set({
+            lastMessage: "এডমিন: " + (text || (mediaType === 'video' ? '[ভিডিও ফাইল]' : '[ছবি ফাইল]')),
+            unreadByAdmin: false,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+
         await db.collection('chats').doc(adminCurrentChatPhone).collection('messages').add({
             text: text,
             mediaUrl: mediaUrl,
@@ -3233,38 +3582,21 @@ async function sendAdminReplyMessage() {
             sender: 'admin',
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
-
-        await db.collection('chats').doc(adminCurrentChatPhone).set({
-            lastMessage: "এডমিন: " + (text || '[ফাইল সংযুক্তি]'),
-            unreadByAdmin: false,
-            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-        }, { merge: true });
-
-        alert("✅ রিপ্লাই সফলভাবে পাঠানো হয়েছে!");
     } catch (e) {
         alert("রিপ্লাই পাঠাতে সমস্যা হয়েছে।");
     }
 }
 
-function copyRefer() {
-    const link = window.location.origin + window.location.pathname + "?start=" + userId;
-    navigator.clipboard.writeText(link);
-    alert("📋 রেফার লিংক কপি সফল হয়েছে!");
-}
-
-function shareRefer() {
-    const link = window.location.origin + window.location.pathname + "?start=" + userId;
-    window.open("https://t.me/share/url?url=" + encodeURIComponent(link), '_blank');
-}
-
+function toggleWithdrawForm() { document.getElementById('withdraw-form-container').classList.toggle('active'); }
+function setWithdrawAmount(val) { document.getElementById('withdraw-amount').value = val; }
 function closeReferModal() { document.getElementById('refer-modal').classList.remove('active'); }
 function closeMandatoryTaskModal() { document.getElementById('mandatory-task-modal').classList.remove('active'); }
 function goToMandatoryTaskPage() { closeMandatoryTaskModal(); switchPage('mandatory-task', null); }
+function closeActivationModal() { document.getElementById('activation-modal').classList.remove('active'); }
 function closeSpecialTaskModal() { document.getElementById('special-task-modal').classList.remove('active'); }
 function goToSpecialTaskPage() { closeSpecialTaskModal(); switchPage('special-task', null); }
-function closeActivationModal() { document.getElementById('activation-modal').classList.remove('active'); }
-function setWithdrawAmount(amt) { document.getElementById('withdraw-amount').value = amt; }
-function toggleWithdrawForm() { document.getElementById('withdraw-form-container').classList.toggle('active'); }
+function copyRefer() { const txt = document.getElementById('refer-link').innerText; navigator.clipboard.writeText(txt).then(() => alert("✅ রেফার লিংক কপি করা হয়েছে!")); }
+function shareRefer() { const txt = document.getElementById('refer-link').innerText; if (navigator.share) { navigator.share({ title: 'দারাজ প্লে ইনকাম সেন্টার', text: 'আমার রেফার লিংকে জয়েন করুন!', url: txt }); } else { copyRefer(); } }
 </script>
 </body>
 </html>
