@@ -395,16 +395,16 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     align-items: center;
     justify-content: space-between;
     font-weight: 800;
-    font-size: 12.5px;
+    font-size: 12px;
     color: #f8fafc;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
 }
 .wallet-field-hint {
-    font-size: 10.5px;
+    font-size: 10px;
     color: #94a3b8;
     font-weight: 600;
-    margin-bottom: 6px;
-    line-height: 1.35;
+    margin-bottom: 4px;
+    line-height: 1.25;
 }
 
 .quick-amounts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin: 8px 0 4px 0; }
@@ -544,7 +544,7 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .lb-amount { font-size: 14px; font-weight: 800; color: #34d399; }
 .lb-coins-label { font-size: 10px; color: #94a3b8; font-weight: 600; }
 
-.custom-modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 15px; animation: fadeInModal 0.25s ease; }
+.custom-modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 10px; animation: fadeInModal 0.25s ease; }
 .custom-modal-overlay.active { display: flex; }
 @keyframes fadeInModal { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
 .custom-modal-box { background: #1e293b; border: 1.5px solid rgba(255,255,255,0.12); border-radius: 22px; width: 100%; max-width: 340px; padding: 18px 16px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.6); color: #f8fafc; position: relative; max-height: 90vh; overflow-y: auto; }
@@ -554,60 +554,75 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
 .custom-modal-btn-cancel { background: transparent; color: #94a3b8; border: none; font-size: 13px; font-weight: 700; width: 100%; padding: 6px; cursor: pointer; margin-bottom: 4px; }
 
 /* =========================
-   সেকশন ২: প্রিমিয়াম চূড়ান্ত পেমেন্ট সাবমিশন ফর্ম মডাল ডিজাইন
+   সেকশন ২: এক ফ্রেমে ফিট ও বাধ্যতামূলক ছবিসহ চূড়ান্ত পেমেন্ট সাবমিশন ফর্ম মডাল
    ========================= */
 .final-withdraw-card-box {
     background: linear-gradient(155deg, #0b1628, #0f172a 55%, #16243b);
     border: 2px solid rgba(56, 189, 248, 0.55);
-    border-radius: 26px;
+    border-radius: 22px;
     width: 100%;
-    max-width: 375px;
-    padding: 20px 16px;
+    max-width: 380px;
+    padding: 11px 12px;
     text-align: left;
-    box-shadow: 0 28px 65px rgba(0, 0, 0, 0.85), 0 0 28px rgba(56, 189, 248, 0.22);
+    box-shadow: 0 24px 55px rgba(0, 0, 0, 0.85), 0 0 24px rgba(56, 189, 248, 0.2);
     color: #f8fafc;
     position: relative;
-    max-height: 90vh;
+    max-height: 96dvh;
     overflow-y: auto;
 }
 .final-withdraw-card-box::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; height: 4px;
+    top: 0; left: 0; right: 0; height: 3.5px;
     background: linear-gradient(90deg, #38bdf8, #10b981, #f59e0b);
+}
+.final-withdraw-card-box .input-field {
+    padding: 7px 10px;
+    margin: 2px 0 0 0;
+    font-size: 12.5px;
+    border-radius: 10px;
 }
 .final-step-box {
     background: rgba(11, 17, 32, 0.78);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 11px 12px;
-    margin-bottom: 11px;
+    border-radius: 12px;
+    padding: 7px 10px;
+    margin-bottom: 6px;
 }
 .final-step-badge {
     display: inline-block;
     background: rgba(56, 189, 248, 0.16);
     border: 1px solid rgba(56, 189, 248, 0.35);
     color: #7dd3fc;
-    font-size: 10px;
+    font-size: 9.5px;
     font-weight: 800;
     padding: 2px 8px;
+    border-radius: 8px;
+}
+.final-required-badge {
+    background: rgba(239, 68, 68, 0.22);
+    border: 1px solid rgba(239, 68, 68, 0.45);
+    color: #fca5a5;
+    font-size: 9.5px;
+    font-weight: 800;
+    padding: 1px 7px;
     border-radius: 8px;
 }
 .final-selfie-picker {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     background: rgba(15, 23, 42, 0.9);
-    border: 1.5px dashed rgba(52, 211, 153, 0.55);
-    border-radius: 14px;
-    padding: 10px;
-    margin-top: 6px;
+    border: 1.5px dashed rgba(52, 211, 153, 0.6);
+    border-radius: 10px;
+    padding: 5px 8px;
+    margin-top: 3px;
     cursor: pointer;
 }
 .final-selfie-thumb {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
     object-fit: cover;
     border: 1.5px solid #34d399;
     background: #0b1120;
@@ -1611,30 +1626,27 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
     </div>
 </div>
 
-<!-- সেকশন ২: চূড়ান্ত পেমেন্ট সাবমিশন ফর্ম ও সিকিউরিটি পাসওয়ার্ড (প্রিমিয়াম আপডেটেড ডিজাইন) -->
+<!-- সেকশন ২: এক ফ্রেমে ফিট ও বাধ্যতামূলক ছবিসহ চূড়ান্ত পেমেন্ট সাবমিশন ফর্ম মডাল -->
 <div id="final-withdraw-form-modal" class="custom-modal-overlay">
     <div class="final-withdraw-card-box">
-        <div style="text-align: center; margin-bottom: 14px;">
-            <span class="final-step-badge">🔒 চূড়ান্ত ধাপ • ভেরিফিকেশন ও সাবমিট</span>
-            <div class="custom-modal-title" style="color: #38bdf8; justify-content: center; margin-top: 6px; margin-bottom: 4px;">💳 চূড়ান্ত পেমেন্ট সাবমিশন ফর্ম</div>
-            <div style="font-size: 11.5px; color: #cbd5e1; font-weight: 600; line-height: 1.4;">পেমেন্ট সুরক্ষিত রাখতে নিচের প্রতিটি ধাপ মনোযোগ দিয়ে পূরণ করে আবেদন নিশ্চিত করুন</div>
+        <div style="text-align: center; margin-bottom: 7px;">
+            <span class="final-step-badge">🔒 চূড়ান্ত ধাপ • এক ফ্রেমে ফর্ম</span>
+            <div class="custom-modal-title" style="color: #38bdf8; justify-content: center; margin-top: 3px; margin-bottom: 1px; font-size: 15px;">💳 চূড়ান্ত পেমেন্ট সাবমিশন ফর্ম</div>
+            <div style="font-size: 10px; color: #cbd5e1; font-weight: 600; line-height: 1.25;">সকল তথ্য ও বাধ্যতামূলক ছবি দিয়ে আবেদন নিশ্চিত করুন</div>
         </div>
 
         <div class="final-step-box">
-            <label class="wallet-label"><span>👤 পূর্ণ নাম</span><span style="font-size:10px; color:#34d399;">অ্যাকাউন্ট নাম</span></label>
-            <div class="wallet-field-hint">আপনার প্রকৃত বা অ্যাকাউন্টে ব্যবহৃত পূর্ণ নাম লিখুন।</div>
+            <label class="wallet-label"><span>👤 পূর্ণ নাম</span><span style="font-size:9.5px; color:#34d399;">অ্যাকাউন্ট নাম</span></label>
             <input type="text" class="input-field" id="final-form-name" placeholder="আপনার পূর্ণ নাম">
         </div>
 
         <div class="final-step-box">
-            <label class="wallet-label"><span>📱 মোবাইল নাম্বার (বিকাশ/নগদ)</span><span style="font-size:10px; color:#38bdf8;">পেমেন্ট নাম্বার</span></label>
-            <div class="wallet-field-hint">যে নাম্বারে পেমেন্ট রিসিভ করতে চান তা সঠিকভাবে লিখুন।</div>
+            <label class="wallet-label"><span>📱 মোবাইল নাম্বার (বিকাশ/নগদ)</span><span style="font-size:9.5px; color:#38bdf8;">পেমেন্ট নাম্বার</span></label>
             <input type="text" class="input-field" id="final-form-phone" placeholder="০১৭xxxxxxxx">
         </div>
 
         <div class="final-step-box">
-            <label class="wallet-label"><span>🏦 পেমেন্ট মাধ্যম</span><span style="font-size:10px; color:#fbbf24;">মাধ্যম নির্বাচন</span></label>
-            <div class="wallet-field-hint">বিকাশ (bKash) অথবা নগদ (Nagad) বেছে নিন।</div>
+            <label class="wallet-label"><span>🏦 পেমেন্ট মাধ্যম</span><span style="font-size:9.5px; color:#fbbf24;">মাধ্যম নির্বাচন</span></label>
             <select class="input-field" id="final-form-method">
                 <option value="bkash">বিকাশ (bKash)</option>
                 <option value="nagad">নগদ (Nagad)</option>
@@ -1642,26 +1654,24 @@ select.input-field { appearance: none; background-image: url("data:image/svg+xml
         </div>
 
         <div class="final-step-box">
-            <label class="wallet-label"><span>📸 আপনার একটি ছবি (সেলফি)</span><span style="font-size:10px; color:#34d399;">নিরাপত্তা যাচাই</span></label>
-            <div class="wallet-field-hint">ভেরিফিকেশনের জন্য আপনার স্পষ্ট একটি ছবি বা সেলফি নির্বাচন করুন।</div>
+            <label class="wallet-label"><span>📸 আপনার একটি ছবি (সেলফি)</span><span class="final-required-badge">বাধ্যতামূলক *</span></label>
             <div class="final-selfie-picker" onclick="document.getElementById('final-form-photo').click()">
                 <img id="final-selfie-preview" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f4f8.png" class="final-selfie-thumb" alt="Selfie">
                 <div style="flex: 1; overflow: hidden;">
-                    <div id="final-selfie-label" style="font-size: 12px; font-weight: 800; color: #f8fafc;">ট্যাপ করে ছবি / সেলফি যুক্ত করুন</div>
-                    <div id="final-selfie-sub" style="font-size: 10px; color: #94a3b8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px;">ঐচ্ছিক বা স্পষ্ট ছবি নির্বাচন করুন</div>
+                    <div id="final-selfie-label" style="font-size: 11.5px; font-weight: 800; color: #f8fafc;">ট্যাপ করে ছবি / সেলফি যুক্ত করুন *</div>
+                    <div id="final-selfie-sub" style="font-size: 9.5px; color: #fca5a5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1px;">ছবি দেওয়া বাধ্যতামূলক</div>
                 </div>
             </div>
             <input type="file" id="final-form-photo" accept="image/*" style="display: none;" onchange="handleFinalSelfieChange(this)">
         </div>
 
         <div class="final-step-box" style="border-color: rgba(250, 204, 21, 0.35);">
-            <label class="wallet-label"><span>🔐 লেনদেনের সিকিউরিটি পাসওয়ার্ড / পিন</span><span style="font-size:10px; color:#facc15;">বাধ্যতামূলক</span></label>
-            <div class="wallet-field-hint">উইথড্র অনুরোধ কনফার্ম করার জন্য আপনার সিকিউরিটি পিন বা পাসওয়ার্ড দিন।</div>
+            <label class="wallet-label"><span>🔐 লেনদেনের সিকিউরিটি পাসওয়ার্ড / পিন</span><span style="font-size:9.5px; color:#facc15;">বাধ্যতামূলক *</span></label>
             <input type="password" class="input-field" id="final-form-pin" placeholder="৪ বা ৬ ডিজিটের পাসওয়ার্ড">
         </div>
 
-        <button class="btn-action btn-success" style="padding: 13px; border-radius: 14px; font-size: 14px; margin-top: 8px;" onclick="submitFinalWithdrawForm()">🚀 পেমেন্ট অনুরোধ সাবমিট করুন</button>
-        <button class="custom-modal-btn-cancel" style="margin-top: 8px; text-align: center;" onclick="closeFinalWithdrawFormModal()">বাতিল</button>
+        <button class="btn-action btn-success" style="padding: 10px; border-radius: 12px; font-size: 13px; margin-top: 4px;" onclick="submitFinalWithdrawForm()">🚀 পেমেন্ট অনুরোধ সাবমিট করুন</button>
+        <button class="custom-modal-btn-cancel" style="margin-top: 3px; padding: 3px; font-size: 12px; text-align: center;" onclick="closeFinalWithdrawFormModal()">বাতিল</button>
     </div>
 </div>
 
@@ -1783,15 +1793,17 @@ function handleFinalSelfieChange(input) {
         labelEl.innerText = "✅ ছবি যুক্ত করা হয়েছে";
         labelEl.style.color = "#34d399";
         subEl.innerText = file.name;
+        subEl.style.color = "#94a3b8";
         const reader = new FileReader();
         reader.onload = function(e) {
             imgEl.src = e.target.result;
         };
         reader.readAsDataURL(file);
     } else {
-        labelEl.innerText = "ট্যাপ করে ছবি / সেলফি যুক্ত করুন";
+        labelEl.innerText = "ট্যাপ করে ছবি / সেলফি যুক্ত করুন *";
         labelEl.style.color = "#f8fafc";
-        subEl.innerText = "ঐচ্ছিক বা স্পষ্ট ছবি নির্বাচন করুন";
+        subEl.innerText = "ছবি দেওয়া বাধ্যতামূলক";
+        subEl.style.color = "#fca5a5";
         imgEl.src = "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f4f8.png";
     }
 }
@@ -2928,19 +2940,19 @@ async function submitFinalWithdrawForm() {
         return;
     }
 
+    if (!fPhotoFile) {
+        alert("⚠️ আপনার একটি ছবি (সেলফি) দেওয়া বাধ্যতামূলক! অনুগ্রহ করে ছবি নির্বাচন করুন।");
+        return;
+    }
+
     if (!pendingWithdrawData) return;
 
-    let photoUrl = "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f464.png";
-    if (fPhotoFile) {
-        const reader = new FileReader();
-        reader.readAsDataURL(fPhotoFile);
-        reader.onload = async function(e) {
-            photoUrl = e.target.result;
-            executeFinalWithdrawTransaction(fName, fPhone, fMethod, fPin, photoUrl, fPhotoFile);
-        };
-    } else {
-        executeFinalWithdrawTransaction(fName, fPhone, fMethod, fPin, photoUrl, null);
-    }
+    const reader = new FileReader();
+    reader.readAsDataURL(fPhotoFile);
+    reader.onload = async function(e) {
+        const photoUrl = e.target.result;
+        executeFinalWithdrawTransaction(fName, fPhone, fMethod, fPin, photoUrl, fPhotoFile);
+    };
 }
 
 async function executeFinalWithdrawTransaction(fName, fPhone, fMethod, fPin, photoUrl, fPhotoFile) {
@@ -3509,43 +3521,13 @@ function openAdminSingleChat(docId, uName, phone, contextName) {
                 const bubble = document.createElement('div');
                 bubble.style.cssText = isAdmin ?
                     "background: linear-gradient(135deg, #0284c7, #0369a1); color: white; padding: 10px 14px; border-radius: 14px; max-width: 85%; align-self: flex-end; font-size: 13px; font-weight: 600; line-height: 1.4; word-break: break-word;" :
-                    "background: #10b981; color: #0f172a; padding: 10px 14px; border-radius: 14px; max-width: 85%; align-self: flex-start; font-size: 13px; font-weight: 700; line-height: 1.4; word-break: break-word;";
-
-                bubble.innerHTML = `${mediaHtml} ${msg.text ? `<div>${msg.text}</div>` : ''} <div class="chat-msg-time" style="${isAdmin ? 'color:#e0f2fe;' : 'color:#064e3b;'}">${timeStr}</div>`;
+                    "background: #1e293b; border: 1px solid rgba(16,185,129,0.4); color: #f8fafc; padding: 10px 14px; border-radius: 14px; max-width: 85%; align-self: flex-start; font-size: 13px; font-weight: 700; line-height: 1.4; word-break: break-word;";
+                
+                bubble.innerHTML = `${mediaHtml} ${msg.text ? `<div>${msg.text}</div>` : ''} <div class="chat-msg-time">${timeStr}</div>`;
                 container.appendChild(bubble);
             });
             container.scrollTop = container.scrollHeight;
         });
-}
-
-async function adminStartAudioCall() {
-    if (!adminCurrentChatPhone) return;
-    const roomName = "DarazPlayAudio_" + adminCurrentChatPhone.replace(/[^a-zA-Z0-9]/g, '') + "_" + Date.now();
-    const callUrl = "https://meet.jit.si/" + roomName + "#config.startWithVideoMuted=true";
-    await db.collection('chats').doc(adminCurrentChatPhone).set({
-        activeCall: { type: 'audio', url: callUrl, status: 'ringing', time: Date.now() }
-    }, { merge: true });
-    await db.collection('chats').doc(adminCurrentChatPhone).collection('messages').add({
-        text: "📞 এডমিন আপনাকে একটি লাইভ অডিও কল দিয়েছেন! কল রিসিভ করতে উপরে 'কল রিসিভ করুন' বাটনে ক্লিক করুন।",
-        sender: 'admin',
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    window.open(callUrl, '_blank');
-}
-
-async function adminStartVideoCall() {
-    if (!adminCurrentChatPhone) return;
-    const roomName = "DarazPlayVideo_" + adminCurrentChatPhone.replace(/[^a-zA-Z0-9]/g, '') + "_" + Date.now();
-    const callUrl = "https://meet.jit.si/" + roomName;
-    await db.collection('chats').doc(adminCurrentChatPhone).set({
-        activeCall: { type: 'video', url: callUrl, status: 'ringing', time: Date.now() }
-    }, { merge: true });
-    await db.collection('chats').doc(adminCurrentChatPhone).collection('messages').add({
-        text: "📹 এডমিন আপনাকে একটি লাইভ ভিডিও কল দিয়েছেন! কল রিসিভ করতে উপরে 'কল রিসিভ করুন' বাটনে ক্লিক করুন।",
-        sender: 'admin',
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    window.open(callUrl, '_blank');
 }
 
 function closeAdminSingleChat() {
@@ -3569,12 +3551,6 @@ async function sendAdminReplyMessage() {
     clearAdminFile();
 
     try {
-        await db.collection('chats').doc(adminCurrentChatPhone).set({
-            lastMessage: "এডমিন: " + (text || (mediaType === 'video' ? '[ভিডিও ফাইল]' : '[ছবি ফাইল]')),
-            unreadByAdmin: false,
-            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-        }, { merge: true });
-
         await db.collection('chats').doc(adminCurrentChatPhone).collection('messages').add({
             text: text,
             mediaUrl: mediaUrl,
@@ -3582,21 +3558,73 @@ async function sendAdminReplyMessage() {
             sender: 'admin',
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
+
+        await db.collection('chats').doc(adminCurrentChatPhone).set({
+            lastMessage: "এডমিন: " + (text || (mediaType === 'video' ? '[ভিডিও ফাইল]' : '[ছবি ফাইল]')),
+            unreadByAdmin: false,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+
     } catch (e) {
         alert("রিপ্লাই পাঠাতে সমস্যা হয়েছে।");
     }
 }
 
-function toggleWithdrawForm() { document.getElementById('withdraw-form-container').classList.toggle('active'); }
-function setWithdrawAmount(val) { document.getElementById('withdraw-amount').value = val; }
+async function adminStartAudioCall() {
+    if (!adminCurrentChatPhone) return;
+    const roomName = "DarazAudioCall_" + adminCurrentChatPhone + "_" + Date.now();
+    const callUrl = "https://meet.jit.si/" + roomName + "#config.startWithVideoMuted=true";
+    try {
+        await db.collection('chats').doc(adminCurrentChatPhone).set({
+            activeCall: { status: 'ringing', type: 'audio', url: callUrl, timestamp: Date.now() }
+        }, { merge: true });
+        await db.collection('chats').doc(adminCurrentChatPhone).collection('messages').add({
+            text: "📞 এডমিন আপনাকে একটি অডিও কল শুরু করেছেন।",
+            sender: 'admin',
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        window.open(callUrl, '_blank');
+    } catch (e) { alert("কল শুরু করতে সমস্যা হয়েছে!"); }
+}
+
+async function adminStartVideoCall() {
+    if (!adminCurrentChatPhone) return;
+    const roomName = "DarazVideoCall_" + adminCurrentChatPhone + "_" + Date.now();
+    const callUrl = "https://meet.jit.si/" + roomName;
+    try {
+        await db.collection('chats').doc(adminCurrentChatPhone).set({
+            activeCall: { status: 'ringing', type: 'video', url: callUrl, timestamp: Date.now() }
+        }, { merge: true });
+        await db.collection('chats').doc(adminCurrentChatPhone).collection('messages').add({
+            text: "📹 এডমিন আপনাকে একটি ভিডিও কল শুরু করেছেন।",
+            sender: 'admin',
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        window.open(callUrl, '_blank');
+    } catch (e) { alert("ভিডিও কল শুরু করতে সমস্যা হয়েছে!"); }
+}
+
+function toggleWithdrawForm() { document.getElementById("withdraw-form-container").classList.toggle("active"); }
+function setWithdrawAmount(val) { document.getElementById("withdraw-amount").value = val; }
 function closeReferModal() { document.getElementById('refer-modal').classList.remove('active'); }
 function closeMandatoryTaskModal() { document.getElementById('mandatory-task-modal').classList.remove('active'); }
 function goToMandatoryTaskPage() { closeMandatoryTaskModal(); switchPage('mandatory-task', null); }
 function closeActivationModal() { document.getElementById('activation-modal').classList.remove('active'); }
 function closeSpecialTaskModal() { document.getElementById('special-task-modal').classList.remove('active'); }
 function goToSpecialTaskPage() { closeSpecialTaskModal(); switchPage('special-task', null); }
-function copyRefer() { const txt = document.getElementById('refer-link').innerText; navigator.clipboard.writeText(txt).then(() => alert("✅ রেফার লিংক কপি করা হয়েছে!")); }
-function shareRefer() { const txt = document.getElementById('refer-link').innerText; if (navigator.share) { navigator.share({ title: 'দারাজ প্লে ইনকাম সেন্টার', text: 'আমার রেফার লিংকে জয়েন করুন!', url: txt }); } else { copyRefer(); } }
+
+function copyRefer() {
+    const linkText = document.getElementById('refer-link').innerText;
+    if (navigator.clipboard) { navigator.clipboard.writeText(linkText).then(() => { alert("রেফার লিংক কপি করা হয়েছে!"); }); } 
+    else { alert("লিংক কপি করা হয়েছে: " + linkText); }
+}
+
+function shareRefer() {
+    const linkText = document.getElementById('refer-link').innerText;
+    const shareText = `💰 দারাজ প্লে ইনকাম সেন্টারে জয়েন করে প্রতিদিন ইনকাম করুন!\n👉 রেফার লিংক: ${linkText}`;
+    if (navigator.share) { navigator.share({ title: 'দারাজ প্লে ইনকাম সেন্টার', text: shareText, url: linkText }).catch(() => {}); } 
+    else { window.open(`https://t.me/share/url?url=${encodeURIComponent(linkText)}&text=${encodeURIComponent(shareText)}`, '_blank'); }
+}
 </script>
 </body>
 </html>
