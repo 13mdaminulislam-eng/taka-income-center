@@ -2498,6 +2498,8 @@ async function initDashboard(phone) {
     if (!doc.exists) return;
 
     const data = doc.data();
+    const today = new Date().toDateString();
+
     userId = data.userId || data.uid || phone;
     userPhoneDisplay = data.phone || "";
     userName = data.name || "ইউজার";
@@ -2513,6 +2515,15 @@ async function initDashboard(phone) {
     historyDates = data.history_dates || {};
     isActive = data.is_active || false;
 
+    /* প্রতিদিন নতুন দিন শুরু হলে ১০০ ভিডিও লিমিট অটো-রিসেট হবে */
+    if (data.last_reset_date !== today) {
+        dailyWatched = 0;
+        await userRef.update({
+            dailyWatched: 0,
+            last_reset_date: today
+        });
+    }
+
     listenToHomeFloatingMessage(phone);
 
     if (data.created_at && data.created_at.toDate) {
@@ -2524,9 +2535,12 @@ async function initDashboard(phone) {
     userRef.onSnapshot((docSnap) => {
         if (docSnap.exists) {
             const freshData = docSnap.data();
+            const currentDay = new Date().toDateString();
             userId = freshData.userId || freshData.uid || docSnap.id;
             userPhoneDisplay = freshData.phone || userPhoneDisplay;
             userBalance = freshData.balance || 0;
+            dailyWatched = (freshData.last_reset_date && freshData.last_reset_date !== currentDay) ? 0 : (freshData.dailyWatched || 0);
+            lifetimeWatched = freshData.totalWatched || lifetimeWatched;
             totalRefers = freshData.refers || 0;
             userSerial = freshData.serial || userSerial;
             isActive = freshData.is_active || false;
@@ -2841,6 +2855,16 @@ function filterPaymentHistory(filterType, btnElement) {
 }
 
 async function watchRealAd() {
+    const today = new Date().toDateString();
+    const userDoc = await db.collection('users').doc(currentUserPhone).get();
+    if (userDoc.exists && userDoc.data().last_reset_date !== today) {
+        dailyWatched = 0;
+        await db.collection('users').doc(currentUserPhone).update({
+            dailyWatched: 0,
+            last_reset_date: today
+        });
+    }
+
     if(dailyWatched >= 100) { alert("আজকের লিমিট শেষ!"); return; }
     if (typeof show_11149595 === 'function') { try { await show_11149595(); } catch (e) {} }
 
@@ -2854,6 +2878,7 @@ async function watchRealAd() {
         balance: userBalance, 
         dailyWatched: dailyWatched, 
         totalWatched: lifetimeWatched,
+        last_reset_date: today,
         history_dates: historyDates,
         last_active_time: Date.now()
     });
@@ -3504,15 +3529,15 @@ function openAdminSingleChat(docId, uName, phone, contextName) {
                             <video src="${msg.mediaUrl}" controls onclick="openMediaLightbox('${msg.mediaUrl}', 'video', true)" class="chat-media-preview"></video>
                             <div style="display:flex; gap:6px; margin-bottom:4px;">
                                 <button onclick="openMediaLightbox('${msg.mediaUrl}', 'video', true)" style="background:#0f172a; color:#38bdf8; border:1px solid #38bdf8; border-radius:6px; font-size:10px; padding:2px 6px; cursor:pointer;">🔍 বড় করুন</button>
-                                <a href="${msg.mediaUrl}" download="video_${msgId}.mp4" style="background:#10b981; color:#0f172a; border-radius:6px; font-size:10px; font-weight:800; padding:2px 6px; text-decoration:none;">⬇️ ডাউনলোড</a>
+                                <a href="${msg.mediaUrl}" download="chat_video.mp4" style="background:#10b981; color:#0f172a; border-radius:6px; font-size:10px; padding:2px 6px; text-decoration:none; font-weight:800;">⬇️ ডাউনলোড</a>
                             </div>
                         `;
                     } else {
                         mediaHtml = `
                             <img src="${msg.mediaUrl}" onclick="openMediaLightbox('${msg.mediaUrl}', 'image', true)" class="chat-media-preview" alt="Attachment">
                             <div style="display:flex; gap:6px; margin-bottom:4px;">
-                                <button onclick="openMediaLightbox('${msg.mediaUrl}', 'image', true)" style="background:#0f172a; color:#38bdf8; border:1px solid #38bdf8; border-radius:6px; font-size:10px; padding:2px 6px; cursor:pointer;">🔍 জুম করুন</button>
-                                <a href="${msg.mediaUrl}" download="image_${msgId}.jpg" style="background:#10b981; color:#0f172a; border-radius:6px; font-size:10px; font-weight:800; padding:2px 6px; text-decoration:none;">⬇️ ডাউনলোড</a>
+                                <button onclick="openMediaLightbox('${msg.mediaUrl}', 'image', true)" style="background:#0f172a; color:#38bdf8; border:1px solid #38bdf8; border-radius:6px; font-size:10px; padding:2px 6px; cursor:pointer;">🔍 জুম করে দেখুন</button>
+                                <a href="${msg.mediaUrl}" download="chat_image.png" style="background:#10b981; color:#0f172a; border-radius:6px; font-size:10px; padding:2px 6px; text-decoration:none; font-weight:800;">⬇️ ডাউনলোড</a>
                             </div>
                         `;
                     }
@@ -3520,8 +3545,8 @@ function openAdminSingleChat(docId, uName, phone, contextName) {
 
                 const bubble = document.createElement('div');
                 bubble.style.cssText = isAdmin ?
-                    "background: linear-gradient(135deg, #0284c7, #0369a1); color: white; padding: 10px 14px; border-radius: 14px; max-width: 85%; align-self: flex-end; font-size: 13px; font-weight: 600; line-height: 1.4; word-break: break-word;" :
-                    "background: #1e293b; border: 1px solid rgba(16,185,129,0.4); color: #f8fafc; padding: 10px 14px; border-radius: 14px; max-width: 85%; align-self: flex-start; font-size: 13px; font-weight: 700; line-height: 1.4; word-break: break-word;";
+                    "background: linear-gradient(135deg, #0284c7, #0369a1); color: white; padding: 11px 13px; border-radius: 14px; max-width: 85%; align-self: flex-end; font-size: 13px; font-weight: 600; line-height: 1.4; word-break: break-word;" :
+                    "background: #1e293b; color: #f8fafc; border: 1px solid rgba(255,255,255,0.1); padding: 11px 13px; border-radius: 14px; max-width: 85%; align-self: flex-start; font-size: 13px; font-weight: 600; line-height: 1.4; word-break: break-word;";
                 
                 bubble.innerHTML = `${mediaHtml} ${msg.text ? `<div>${msg.text}</div>` : ''} <div class="chat-msg-time">${timeStr}</div>`;
                 container.appendChild(bubble);
@@ -3535,13 +3560,13 @@ function closeAdminSingleChat() {
     adminCurrentChatPhone = null;
     document.getElementById('admin-active-chat-box').style.display = 'none';
     document.getElementById('admin-chat-users-list').style.display = 'block';
+    clearAdminFile();
 }
 
 async function sendAdminReplyMessage() {
     if (!adminCurrentChatPhone) return;
     const input = document.getElementById('admin-reply-input');
     const text = input.value.trim();
-
     if (!text && !selectedAdminMedia) return;
 
     let mediaUrl = selectedAdminMedia ? selectedAdminMedia.dataUrl : null;
@@ -3564,7 +3589,6 @@ async function sendAdminReplyMessage() {
             unreadByAdmin: false,
             updatedAt: firebase.firestore.FieldValue.serverTimestamp()
         }, { merge: true });
-
     } catch (e) {
         alert("রিপ্লাই পাঠাতে সমস্যা হয়েছে।");
     }
@@ -3572,58 +3596,61 @@ async function sendAdminReplyMessage() {
 
 async function adminStartAudioCall() {
     if (!adminCurrentChatPhone) return;
-    const roomName = "DarazAudioCall_" + adminCurrentChatPhone + "_" + Date.now();
-    const callUrl = "https://meet.jit.si/" + roomName + "#config.startWithVideoMuted=true";
-    try {
-        await db.collection('chats').doc(adminCurrentChatPhone).set({
-            activeCall: { status: 'ringing', type: 'audio', url: callUrl, timestamp: Date.now() }
-        }, { merge: true });
-        await db.collection('chats').doc(adminCurrentChatPhone).collection('messages').add({
-            text: "📞 এডমিন আপনাকে একটি অডিও কল শুরু করেছেন।",
-            sender: 'admin',
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        window.open(callUrl, '_blank');
-    } catch (e) { alert("কল শুরু করতে সমস্যা হয়েছে!"); }
+    const roomUrl = "https://meet.jit.si/DarazPlayAudio_" + adminCurrentChatPhone.replace(/[^a-zA-Z0-9]/g, '') + "_" + Date.now();
+    await db.collection('chats').doc(adminCurrentChatPhone).set({
+        activeCall: { type: 'audio', url: roomUrl, status: 'ringing', startedAt: Date.now() },
+        lastMessage: "📞 এডমিন আপনাকে লাইভ অডিও কল দিয়েছেন!",
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+    window.open(roomUrl, '_blank');
 }
 
 async function adminStartVideoCall() {
     if (!adminCurrentChatPhone) return;
-    const roomName = "DarazVideoCall_" + adminCurrentChatPhone + "_" + Date.now();
-    const callUrl = "https://meet.jit.si/" + roomName;
-    try {
-        await db.collection('chats').doc(adminCurrentChatPhone).set({
-            activeCall: { status: 'ringing', type: 'video', url: callUrl, timestamp: Date.now() }
-        }, { merge: true });
-        await db.collection('chats').doc(adminCurrentChatPhone).collection('messages').add({
-            text: "📹 এডমিন আপনাকে একটি ভিডিও কল শুরু করেছেন।",
-            sender: 'admin',
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        window.open(callUrl, '_blank');
-    } catch (e) { alert("ভিডিও কল শুরু করতে সমস্যা হয়েছে!"); }
+    const roomUrl = "https://meet.jit.si/DarazPlayVideo_" + adminCurrentChatPhone.replace(/[^a-zA-Z0-9]/g, '') + "_" + Date.now();
+    await db.collection('chats').doc(adminCurrentChatPhone).set({
+        activeCall: { type: 'video', url: roomUrl, status: 'ringing', startedAt: Date.now() },
+        lastMessage: "📹 এডমিন আপনাকে লাইভ ভিডিও কল দিয়েছেন!",
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+    window.open(roomUrl, '_blank');
 }
 
-function toggleWithdrawForm() { document.getElementById("withdraw-form-container").classList.toggle("active"); }
-function setWithdrawAmount(val) { document.getElementById("withdraw-amount").value = val; }
-function closeReferModal() { document.getElementById('refer-modal').classList.remove('active'); }
-function closeMandatoryTaskModal() { document.getElementById('mandatory-task-modal').classList.remove('active'); }
-function goToMandatoryTaskPage() { closeMandatoryTaskModal(); switchPage('mandatory-task', null); }
-function closeActivationModal() { document.getElementById('activation-modal').classList.remove('active'); }
-function closeSpecialTaskModal() { document.getElementById('special-task-modal').classList.remove('active'); }
-function goToSpecialTaskPage() { closeSpecialTaskModal(); switchPage('special-task', null); }
+function setWithdrawAmount(val) {
+    document.getElementById('withdraw-amount').value = val;
+}
+
+function toggleWithdrawForm() {
+    document.getElementById('withdraw-form-container').classList.toggle('active');
+}
 
 function copyRefer() {
-    const linkText = document.getElementById('refer-link').innerText;
-    if (navigator.clipboard) { navigator.clipboard.writeText(linkText).then(() => { alert("রেফার লিংক কপি করা হয়েছে!"); }); } 
-    else { alert("লিংক কপি করা হয়েছে: " + linkText); }
+    const refLink = document.getElementById("refer-link").innerText;
+    navigator.clipboard.writeText(refLink);
+    alert("✅ পার্সোনাল রেফার লিংকটি কপি করা হয়েছে!");
 }
 
 function shareRefer() {
-    const linkText = document.getElementById('refer-link').innerText;
-    const shareText = `💰 দারাজ প্লে ইনকাম সেন্টারে জয়েন করে প্রতিদিন ইনকাম করুন!\n👉 রেফার লিংক: ${linkText}`;
-    if (navigator.share) { navigator.share({ title: 'দারাজ প্লে ইনকাম সেন্টার', text: shareText, url: linkText }).catch(() => {}); } 
-    else { window.open(`https://t.me/share/url?url=${encodeURIComponent(linkText)}&text=${encodeURIComponent(shareText)}`, '_blank'); }
+    const refLink = document.getElementById("refer-link").innerText;
+    const shareText = "💰 「দারাজ প্লে ইনকাম সেন্টার」 - ফ্রিতে অনলাইন ইনকামের সুযোগ! এখনই জয়েন করুন এবং আয় শুরু করুন:\n" + refLink;
+    if (navigator.share) {
+        navigator.share({ title: 'দারাজ প্লে ইনকাম সেন্টার', text: shareText, url: refLink }).catch(() => {});
+    } else {
+        copyRefer();
+    }
+}
+
+function closeReferModal() { document.getElementById('refer-modal').classList.remove('active'); }
+function closeMandatoryTaskModal() { document.getElementById('mandatory-task-modal').classList.remove('active'); }
+function goToMandatoryTaskPage() {
+    closeMandatoryTaskModal();
+    switchPage('mandatory-task', null);
+}
+function closeActivationModal() { document.getElementById('activation-modal').classList.remove('active'); }
+function closeSpecialTaskModal() { document.getElementById('special-task-modal').classList.remove('active'); }
+function goToSpecialTaskPage() {
+    closeSpecialTaskModal();
+    switchPage('special-task', null);
 }
 </script>
 </body>
